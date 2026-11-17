@@ -59,7 +59,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.0
 .scena video,.scena>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:var(--luce,.5)}
 .scena[data-scena=spot]{--luce:.82}
 .scena[data-scena=showreel]{--luce:.6}
-.scena[data-scena=va]{--luce:.34}
+.scena[data-scena=va]{--luce:.3}
 .scena[data-scena=sito]{--luce:.4}
 .scena .intero{object-fit:contain}
 .scena[data-scena=jue],.scena[data-scena=elena],.scena[data-scena=gb]{--luce:.5}
@@ -82,7 +82,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.0
 .tre img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tre .scorre{opacity:1;height:auto;inset:auto;left:0;top:0;animation-duration:36s}
 /* segnaposti: materiale che non c'è ancora */
-.segnaposto{position:absolute;inset:calc(var(--testa) + 14px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));border:1.5px dashed rgba(245,244,239,.26);border-radius:20px;
+.segnaposto{position:absolute;inset:calc(var(--testa) + 14px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom)) calc(var(--filo) + 14px);border:1.5px dashed rgba(245,244,239,.26);border-radius:20px;
   background:repeating-linear-gradient(135deg,rgba(245,244,239,.03) 0 14px,transparent 14px 28px)}
 .nota-segnaposto{margin-top:26px;border:1.5px dashed var(--riga2);border-radius:14px;padding:14px 16px;font-family:var(--mono);font-size:11.5px;line-height:1.55;letter-spacing:.03em;color:var(--t2);word-spacing:0}
 .nota-segnaposto b{color:var(--testo);font-weight:500}
@@ -113,22 +113,24 @@ main{position:relative;display:block}
 
 /* nodi del filo: uno per tappa */
 .tappa{position:relative;display:flex;align-items:center;gap:12px;min-height:22px;font-family:var(--mono);font-size:11.5px;font-weight:500;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);word-spacing:0;transition:color .5s var(--dolce)}
-.tappa .nodo{position:absolute;left:calc(var(--filo) - var(--col));top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--riga2);z-index:3}
-.tappa .nodo::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--rec);transform:scale(0);transition:transform .45s var(--dolce)}
-.tappa.sub .nodo{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;box-shadow:inset 0 0 0 1px var(--riga2)}
+.tappa .nodo{position:absolute;left:calc(var(--filo) - var(--col));top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--riga2);z-index:3;transition:box-shadow .45s var(--dolce)}
+.tappa.sub .nodo{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;box-shadow:inset 0 0 0 1.2px var(--riga2)}
 .tappa.passato{color:var(--testo)}
+/* le tappe passate restano anelli vuoti: l'unico punto pieno è il puntino */
 .tappa.passato .nodo{box-shadow:inset 0 0 0 1.5px var(--rec)}
-.tappa.passato .nodo::after{transform:scale(.55)}
-.tappa.sub.passato .nodo::after{transform:scale(1)}
+.tappa.sub.passato .nodo{box-shadow:inset 0 0 0 1.2px var(--rec)}
 .tappa .nota{color:var(--t3);letter-spacing:.1em}
 .tappa .n{color:inherit}
 
 /* ---------- impaginazione ---------- */
 .col{padding:0 var(--dx) 0 var(--col)}
 .blocco{position:relative}
-/* velo che segue il testo: scurisce lo sfondo solo dove c'è da leggere */
+/* velo che segue il testo: scurisce lo sfondo solo dove c'è da leggere (più scuro quando si apre una tendina) */
 .blocco::before{content:"";position:absolute;z-index:-1;left:calc(-1 * var(--col));right:calc(-1 * var(--dx));top:-90px;bottom:-90px;pointer-events:none;
   background:linear-gradient(180deg,rgba(16,15,9,0) 0,rgba(16,15,9,.84) 90px,rgba(16,15,9,.84) calc(100% - 90px),rgba(16,15,9,0) 100%)}
+.blocco::after{content:"";position:absolute;z-index:-1;left:calc(-1 * var(--col));right:calc(-1 * var(--dx));top:-60px;bottom:-60px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(16,15,9,0) 0,rgba(16,15,9,.6) 60px,rgba(16,15,9,.6) calc(100% - 60px),rgba(16,15,9,0) 100%);opacity:0;transition:opacity .6s var(--dolce)}
+.blocco:has(.tenda.aperta)::after{opacity:1}
 .etichetta-mono{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);word-spacing:0}
 h1{font-size:clamp(40px,13.2vw,54px);line-height:1.02;font-weight:720;letter-spacing:-.045em;word-spacing:.07em}
 h2{font-size:clamp(31px,8.8vw,37px);line-height:1.08;font-weight:660;letter-spacing:-.038em;word-spacing:.07em;text-wrap:balance}
@@ -256,7 +258,7 @@ h1,h2,h3,.lead{text-shadow:0 1px 24px rgba(16,15,9,.45)}
 .fermo .scena{transition:none}
 .fermo .deriva,.fermo .scorre,.fermo .reel img{animation:none}
 .fermo .reel img:first-child{opacity:.5}
-.fermo .tenda,.fermo .tenda>div,.fermo .tappa,.fermo .tappa .nodo::after,.fermo .puntino,.fermo .testata::before,.fermo .apri .piu::after{transition:none}
+.fermo .tenda,.fermo .tenda>div,.fermo .tappa,.fermo .tappa .nodo,.fermo .puntino,.fermo .testata::before,.fermo .apri .piu::after{transition:none}
 .fermo .arrivo.acceso-fine{animation:none}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 @media (min-width:481px){html{background:#0B0A06}body{background:var(--bg);box-shadow:0 0 0 1px rgba(245,244,239,.06)}}
@@ -525,8 +527,10 @@ function ioq(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 function pezzo(svg,ox,oy,w,h,d){svg.style.cssText='left:'+ox+'px;top:'+oy+'px;width:'+w+'px;height:'+h+'px';
   [].forEach.call(svg.children,function(q){q.setAttribute('d',d)});var l=svg.lastElementChild.getTotalLength();
   svg.lastElementChild.style.strokeDasharray=l+' '+(l+10);return l}
+// altezza «piccola» dello schermo (con le barre di Safari aperte): la testa del puntino non salta quando le barre si chiudono
+var sonda=document.createElement('div');sonda.style.cssText='position:fixed;left:0;top:0;width:0;height:100vh;height:100svh;visibility:hidden;pointer-events:none';document.body.appendChild(sonda);
 function misura(){
-  var sy=scrollY,vh=innerHeight,mr=main.getBoundingClientRect(),mx=mr.left,my=mr.top+sy;
+  var sy=scrollY,vh=sonda.offsetHeight||innerHeight,mr=main.getBoundingClientRect(),mx=mr.left,my=mr.top+sy;
   var a=presa0.getBoundingClientRect(),t1=titolo.getBoundingClientRect(),b=presa1.getBoundingClientRect(),n0=tappe[0].querySelector('.nodo').getBoundingClientRect();
   var x=n0.left+n0.width/2,x0=a.left+a.width/2,y0=a.top+sy+a.height/2,yS=Math.round(t1.bottom+sy+8),V0=yS+RC;
   var x1=b.left+b.width/2,y1=b.top+sy+b.height/2,Lv=Math.max(0,y1-RC-V0);
@@ -540,11 +544,12 @@ function misura(){
   var Le=pezzo(curva,cx-mx,cy-my,w,RC+4,'M2 0 L2 2 Q2 '+(RC+2)+' '+(RC+2)+' '+(RC+2)+' L'+(w-2)+' '+(RC+2));
   var ys=tappe.map(function(t){var r=t.querySelector('.nodo').getBoundingClientRect();return r.top+sy+r.height/2});
   var pr=[];tappe.forEach(function(t,i){if(t.getAttribute('data-nodo')==='tappa')pr.push(ys[i])});
-  var head=Math.round(vh*TESTA),smax=Math.max(0,doc.scrollHeight-vh);
+  var head=Math.round(vh*TESTA),smax=Math.max(0,doc.scrollHeight-innerHeight);
   L={x:x,ox:ox,oy:oy,cx:cx,cy:cy,V0:V0,Ls:Ls,Lv:Lv,Le:Le,P:Ls+Lv+Le,ys:ys,pr:pr,head:head,smax:smax,sv:Math.max(90,V0-head)};
-  // se la pagina finisce prima che la testa arrivi al pulsante, l'ultimo tratto si allunga quanto serve
-  L.extra=null;var sNat=L.P-Ls+V0-head;
-  if(sNat>smax){L.extra={s1:smax,s0:Math.max(L.sv,smax-vh*.7),d:0};L.extra.d=L.P-naturale(smax)}
+  // l'arrivo: il puntino entra nel pulsante quando il pulsante è a poco più di metà schermo (o in fondo alla pagina,
+  // se finisce prima), allungando con dolcezza l'ultimo tratto
+  L.extra=null;var s1=Math.min(smax,Math.round(y1-vh*.62)),s0=Math.max(L.sv+1,s1-vh*.55);
+  if(s1>s0){var dd=L.P-naturale(s1);if(dd>0)L.extra={s0:s0,s1:s1,d:dd}}
   ultimo=-2;disegna()}
 function posa(H){if(fermo)return H;var best=0,bd=1e9;
   for(var i=0;i<L.pr.length;i++){var d=H-L.pr[i];if(Math.abs(d)<Math.abs(bd)){bd=d;best=L.pr[i]}}
@@ -567,7 +572,7 @@ function disegna(){raf=0;if(!L)return;
   inizioLuce.style.strokeDashoffset=(L.Ls-Math.min(p,L.Ls)).toFixed(1);
   curvaLuce.style.strokeDashoffset=(L.Le-Math.max(0,p-L.Ls-L.Lv)).toFixed(1);
   // tappe passate e sfondo
-  var pos=p>L.Ls?L.V0+v+.5:-1e9,k=-1;for(var i=0;i<L.ys.length;i++)if(L.ys[i]<=pos)k=i;
+  var pos=p>L.Ls?L.V0+v+4:-1e9,k=-1;for(var i=0;i<L.ys.length;i++)if(L.ys[i]<=pos)k=i;
   if(k!==ultimo){ultimo=k;var nome='spot';
     for(var j=0;j<tappe.length;j++){tappe[j].classList.toggle('passato',j<=k);if(j<=k&&tappe[j].getAttribute('data-scena'))nome=tappe[j].getAttribute('data-scena')}
     scena(nome)}
