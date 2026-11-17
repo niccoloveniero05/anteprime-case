@@ -92,7 +92,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .pt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--rec);margin-left:.05em;vertical-align:baseline}
 html.viaggio .pt{background:transparent}
 html.viaggio .pt.qui{background:var(--rec)}
-.punto{position:fixed;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--rec);transform-origin:0 0;z-index:60;pointer-events:none;opacity:0;will-change:transform}
+.punto{position:fixed;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--rec);transform-origin:0 0;z-index:-1;pointer-events:none;opacity:0;will-change:transform}
+body{z-index:0}
+.punto.sopra{z-index:60}
 html.viaggio .punto.su{opacity:1}
 
 /* ── Pannelli alla Linear: scuri, arrotondati, bordo sottilissimo, un riflesso; dentro, la cosa vera ── */
@@ -125,9 +127,9 @@ html.viaggio .punto.su{opacity:1}
 html.viaggio .marchio-grande{position:absolute}
 /* apertura (18/11, Niccolò): tinta unita scura con una trama di puntini appena visibile; scorrendo
    «Veniello studio» → il puntino parte con una curva → la V diventa grande → il logo (V + puntino) → la V va nella testata */
-html.viaggio .apertura{height:250vh;height:250svh;overflow:visible}
+html.viaggio .apertura{height:250vh;height:250svh;overflow:visible;background:transparent}
 .ap-palco{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;background:#0D0C07}
-html.viaggio .ap-palco{position:sticky;top:0}
+html.viaggio .ap-palco{position:sticky;top:0;z-index:-2} /* sotto il puntino, che sta dietro al sito */
 .ap-trama{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(245,244,239,.11) 1px,transparent 1.6px);background-size:22px 22px;background-position:center center;
   -webkit-mask-image:radial-gradient(ellipse 78% 52% at 50% 46%,#000 0%,rgba(0,0,0,.55) 42%,transparent 78%);mask-image:radial-gradient(ellipse 78% 52% at 50% 46%,#000 0%,rgba(0,0,0,.55) 42%,transparent 78%)}
 .ap-palco::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 38% at 50% 46%,rgba(255,90,31,.045),transparent 70%)}
@@ -153,7 +155,7 @@ html.viaggio .marchio-grande .pl{visibility:hidden}
 .pannello-eroe video{object-position:50% 46%}
 /* il posto del puntino dentro lo showreel: invisibile, il puntino ci passa sotto (18/11) */
 .posto-video{position:absolute;left:50%;top:44%;width:12px;height:12px;margin:-6px 0 0 -6px;pointer-events:none}
-.punto.sotto{z-index:1}
+.punto.sotto{z-index:-1}
 html.viaggio .eroe .nuovo{margin-top:28px}
 
 /* ── 2 · Loghi e paragrafo a due toni ── */
@@ -971,6 +973,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
       var t = (y - g.a) / Math.max(1, g.b - g.a);
       if (g.k === 'seduto') return g.s.el ? siedi(g.s) : metti(g.s.x, sy(g.s, y), g.s.d);
       if (g.k === 'fermo') return metti(g.s.x, sy(g.s, y), g.s.d);
+      punto.classList.toggle('sopra', g.k === 'apertura');
       if (g.k === 'apertura') return apertura(y);
       if (g.k === 'diretto') {
         /* dentro e fuori dallo showreel sempre al centro: entra dall'alto, esce dal basso */
