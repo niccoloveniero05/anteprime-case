@@ -92,7 +92,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .pt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--rec);margin-left:.05em;vertical-align:baseline}
 html.viaggio .pt{background:transparent}
 html.viaggio .pt.qui{background:var(--rec)}
-.punto{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--rec);transform-origin:0 0;z-index:60;pointer-events:none;opacity:0;will-change:transform}
+.punto{position:fixed;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--rec);transform-origin:0 0;z-index:60;pointer-events:none;opacity:0;will-change:transform}
 html.viaggio .punto.su{opacity:1}
 
 /* ── Pannelli alla Linear: scuri, arrotondati, bordo sottilissimo, un riflesso; dentro, la cosa vera ── */
@@ -122,7 +122,23 @@ html.viaggio .punto.su{opacity:1}
   radial-gradient(ellipse 92% 30% at 50% 46%,var(--bg) 0%,rgba(16,15,9,.9) 40%,rgba(16,15,9,.5) 74%,rgba(16,15,9,.18) 100%),
   linear-gradient(180deg,rgba(16,15,9,.6) 0%,rgba(16,15,9,0) 22%,rgba(16,15,9,0) 60%,rgba(16,15,9,.85) 88%,var(--bg) 100%)}
 .marchio-grande{position:absolute;left:0;right:0;top:46%;margin:-.6em auto 0;width:max-content;transform-origin:0 0;font-size:clamp(38px,12.4vw,54px);z-index:55}
-html.viaggio .marchio-grande{position:fixed;will-change:transform}
+html.viaggio .marchio-grande{position:absolute}
+/* apertura (18/11, Niccolò): tinta unita scura con una trama di puntini appena visibile; scorrendo
+   «Veniello studio» → il puntino parte con una curva → la V diventa grande → il logo (V + puntino) → la V va nella testata */
+html.viaggio .apertura{height:250vh;height:250svh;overflow:visible}
+.ap-palco{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;background:#0D0C07}
+html.viaggio .ap-palco{position:sticky;top:0}
+.ap-trama{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(245,244,239,.11) 1px,transparent 1.6px);background-size:22px 22px;background-position:center center;
+  -webkit-mask-image:radial-gradient(ellipse 78% 52% at 50% 46%,#000 0%,rgba(0,0,0,.55) 42%,transparent 78%);mask-image:radial-gradient(ellipse 78% 52% at 50% 46%,#000 0%,rgba(0,0,0,.55) 42%,transparent 78%)}
+.ap-palco::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 38% at 50% 46%,rgba(255,90,31,.045),transparent 70%)}
+.marchio-grande .vv{display:inline-block}
+html.viaggio .marchio-grande .vv{visibility:hidden}
+.ap-v-box{position:absolute;left:0;top:0;display:none;font-size:clamp(38px,12.4vw,54px);z-index:56;pointer-events:none}
+html.viaggio .ap-v-box{display:block}
+.ap-v{display:block;transform-origin:50% 50%;will-change:transform}
+/* il titolo sale sopra il palco mentre il logo va nella testata */
+html.viaggio .eroe{position:relative;z-index:2;margin-top:-42vh;margin-top:-42svh}
+.marchio-grande .ap-via{display:inline-block;will-change:transform,opacity}
 html.viaggio .marchio-grande .pl{visibility:hidden}
 .apertura-piede{position:absolute;left:var(--lato);right:var(--lato);bottom:calc(26px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center}
 .apertura-piede .scorri{display:inline-flex;align-items:center;gap:10px}
@@ -426,13 +442,12 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <!-- 0 · Apertura: il marchio e basta -->
   <section class="apertura" id="inizio" aria-label="Veniello Studio">
-    <div class="muro" data-anima aria-hidden="true">
-      <div class="col"><video data-video muted playsinline loop preload="none" poster="../comune/img/spot.jpg" src="../comune/video/spot.mp4"></video><img src="../comune/img/jue-locale.jpg" alt="" width="600" height="765"><img src="../comune/img/jue-neon.jpg" alt="" width="600" height="600"><img src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067"><img src="../comune/img/spot.jpg" alt="" width="540" height="960"><img src="../comune/img/jue-locale.jpg" alt="" width="600" height="765"><img src="../comune/img/jue-neon.jpg" alt="" width="600" height="600"><img src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067"></div>
-      <div class="col"><img src="../comune/img/jue-oldfashioned.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-parete.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-luci.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-dj-pioneer.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-oldfashioned.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-parete.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-luci.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-dj-pioneer.jpg" alt="" width="600" height="600"></div>
+    <div class="ap-palco" id="ap-palco">
+      <div class="ap-trama" aria-hidden="true"></div>
+      <span class="marchio ap-v-box" aria-hidden="true"><span class="vv ap-v" id="ap-v">V</span></span>
+      <p class="marchio marchio-grande" id="marchio-grande" aria-label="Veniello Studio"><span class="vv" id="vv-grande" aria-hidden="true">V</span><span class="ap-via" aria-hidden="true">eniello</span><i class="pl" id="pl-grande" aria-hidden="true"></i><span class="ap-via" aria-hidden="true">studio</span></p>
+      <p class="apertura-piede micro" id="apertura-piede" aria-hidden="true"><span>Montecatini Terme</span><span class="scorri">Scorri<i></i></span></p>
     </div>
-    <div class="apertura-velo" aria-hidden="true"></div>
-    <p class="marchio marchio-grande" id="marchio-grande" aria-label="Veniello Studio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><i class="pl" id="pl-grande" aria-hidden="true"></i><span aria-hidden="true">studio</span></p>
-    <p class="apertura-piede micro" id="apertura-piede" aria-hidden="true"><span>Montecatini Terme</span><span class="scorri">Scorri<i></i></span></p>
   </section>
 
   <!-- 1 · Titolo alla Linear -->
@@ -748,14 +763,21 @@ details[open] > summary .piu::after{transform:rotate(0)}
   var posti = [].slice.call(document.querySelectorAll('[data-posto]'));
   var vh = innerHeight, Yin = 0, Yout = 0, Rm = 0, Lvia = 130, Larrivo = 190, xM = 0, maxS = 0, larghezza = 0;
   var DOT = 7, SEG = [], seduto, volo = { p: -1 };
-  var B0 = { x: 0, y: 0, d: 9 }, FLY = { dx: 0, dy: 0, s: 1 };
+  var AP = {}, ATTESA = null, apQ = -1;
+  var apSez = document.getElementById('inizio'), apPalco = document.getElementById('ap-palco'), vvG = document.getElementById('vv-grande');
+  var apVia = [].slice.call(apPalco.querySelectorAll('.ap-via')), apV = document.getElementById('ap-v'), apVbox = apV.parentNode;
 
   function easeIO(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
   function lerp(a, b, t){ return a + (b - a) * t; }
   function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
   function offsetIn(el, anc){ var x = 0, y = 0; while (el && el !== anc) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x: x, y: y }; }
   function stageTop(y){ return y < ST.T ? ST.T - y : (y <= ST.T + ST.R ? 0 : ST.T + ST.R - y); }
-  function sy(s, y){ return s.scena ? stageTop(y) + s.ly : s.ly - y; }
+  function sy(s, y){ return s.fisso ? s.vy : s.scena ? stageTop(y) + s.ly : s.ly - y; }
+  /* curve morbide per il puntino (18/11: «più fluidi e più rotondi, va troppo diritta») */
+  function liscio(t){ return .5 - .5 * Math.cos(Math.PI * t); }
+  function q2(a, c, b, t){ var u = 1 - t; return u*u*a + 2*u*t*c + t*t*b; }
+  function c3(a, b, c, d, t){ var u = 1 - t; return u*u*u*a + 3*u*u*t*b + 3*u*t*t*c + t*t*t*d; }
+  function arco(ax, ay, bx, by, t, k){ var cx = (ax + bx) / 2 - (by - ay) * k, cy = (ay + by) / 2 + (bx - ax) * k; return [q2(ax, cx, bx, t), q2(ay, cy, by, t)]; }
 
   function misura(){
     vh = innerHeight;
@@ -767,12 +789,25 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var y0 = scrollY, corpo = document.body.getBoundingClientRect();
     xM = corpo.right - 10;
     maxS = Math.max(0, doc.scrollHeight - vh);
-    /* il marchio grande: dove sta il suo puntino e come vola nella testata */
-    var t0 = grande.style.transform; grande.style.transform = 'none';
-    var g = grande.getBoundingClientRect(), pl = document.getElementById('pl-grande').getBoundingClientRect(), h = piccolo.getBoundingClientRect();
-    grande.style.transform = t0;
-    B0 = { x: pl.left + pl.width / 2, y: pl.top + pl.height / 2, d: pl.width };
-    FLY = { dx: h.left - g.left, dy: h.top - g.top + (h.height - g.height * (h.width / g.width)) / 2, s: h.width / g.width, fine: Math.max(160, vh * .5) };
+    /* l'apertura: misure a riposo, relative al palco fermo */
+    var vvT = vvG.style.transform; vvG.style.transform = 'none';
+    var pr0 = apPalco.getBoundingClientRect(), vr = vvG.getBoundingClientRect(), pl = document.getElementById('pl-grande').getBoundingClientRect();
+    vvG.style.transform = vvT;
+    var hv = piccolo.querySelector('.vv').getBoundingClientRect();
+    AP.top = apSez.getBoundingClientRect().top + y0; AP.len = Math.max(1, apSez.offsetHeight - vh); AP.fine = AP.top + AP.len;
+    AP.W = apPalco.offsetWidth; AP.H = apPalco.offsetHeight;
+    AP.vc = { x: vr.left + vr.width / 2, y: vr.top - pr0.top + vr.height / 2 };                 /* centro della V a riposo */
+    AP.S = Math.min(4.6, (AP.W * .40) / vr.width);                                                /* quanto diventa grande */
+    AP.tc = { x: pr0.left + AP.W / 2 - vr.width * AP.S * .06, y: AP.H * .45 };                     /* dove va il suo centro */
+    AP.pd = { x: vr.left + vr.width * 1.12, y: vr.top - pr0.top + vr.height * .21 };               /* il punto del logo, sulla V a riposo */
+    AP.dl = vr.height * .155;                                                                       /* misura del punto del logo a riposo */
+    AP.hc = { x: hv.left + hv.width / 2, y: hv.top + hv.height / 2 }; AP.hs = hv.width / vr.width; /* la V della testata */
+    AP.b0 = { x: pl.left + pl.width / 2, y: pl.top - pr0.top + pl.height / 2, d: pl.width };       /* il puntino nel nome */
+    /* la V grande: font a misura finale, messa col centro sul punto d'arrivo */
+    apVbox.style.fontSize = (parseFloat(getComputedStyle(grande).fontSize) * AP.S).toFixed(2) + 'px';
+    apV.style.transform = 'none';
+    var gw = apV.offsetWidth, gh = apV.offsetHeight;
+    apVbox.style.left = (AP.tc.x - pr0.left - gw / 2).toFixed(2) + 'px'; apVbox.style.top = (AP.tc.y - gh / 2).toFixed(2) + 'px';
     /* la scena */
     var r = scena.getBoundingClientRect();
     ST.T = r.top + y0; ST.R = Math.max(1, scena.offsetHeight - vh);
@@ -785,8 +820,6 @@ details[open] > summary .piu::after{transform:rotate(0)}
     /* i posti normali, in ordine di pagina */
     var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: q.width, alto: el.hasAttribute('data-dall-alto') }; });
     P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; });
-    /* il primo titolo «prende» il puntino quando il suo punto arriva all'altezza del puntino del marchio */
-    P[0].inY = P[0].ly - B0.y;
     var L1 = L[0], L3 = L[2], L4 = L[3];
     L1.inY = ST.T + L1.ly - Yin; L1.outY = ST.T + .22 * ST.R;
     L4.inY = ST.T + .9 * ST.R; L4.outY = ST.T + ST.R + Math.max(24, L4.ly - Yout);
@@ -797,8 +830,11 @@ details[open] > summary .piu::after{transform:rotate(0)}
     seq[n-1].inY = Math.min(seq[n-1].inY, maxS);
     for (i = n - 2; i >= 0; i--) if (seq[i] !== L1) seq[i].inY = Math.min(seq[i].inY, seq[i+1].inY - 120);
     for (i = 0; i < n - 1; i++) if (seq[i] !== L1) { seq[i].outY = Math.min(seq[i].outY, seq[i+1].inY - 80); if (seq[i].outY < seq[i].inY) seq[i].outY = seq[i].inY; }
+    if (seq[0].inY < AP.fine + 80) seq[0].inY = AP.fine + 80;
+    if (seq[0].outY < seq[0].inY) seq[0].outY = seq[0].inY;
     /* i tratti */
-    SEG = [{ a: -1e9, b: seq[0].inY, k: 'marchio', to: seq[0] }];
+    ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
+    SEG = [{ a: -1e9, b: AP.fine, k: 'apertura' }, { a: AP.fine, b: seq[0].inY, k: 'viaggio', da: ATTESA, a2: seq[0] }];
     for (i = 0; i < n; i++) {
       var s = seq[i], nx = seq[i+1];
       SEG.push({ a: s.inY, b: s.outY, k: 'seduto', s: s });
@@ -824,56 +860,76 @@ details[open] > summary .piu::after{transform:rotate(0)}
   }
   function metti(x, y, d){
     siedi(null);
-    punto.style.transform = 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (y - d/2).toFixed(2) + 'px,0) scale(' + (d/10).toFixed(4) + ')';
+    punto.style.transform = 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (y - d/2).toFixed(2) + 'px,0) scale(' + (d/40).toFixed(4) + ')';
   }
 
   function viaggio(a, b, y, gap, u){
-    var ax = a.x, ay = sy(a, y), bx = b.x, by = sy(b, y), x, yy, d, t, ex, ey;
+    var ax = a.x, ay = sy(a, y), bx = b.x, by = sy(b, y), x, yy, d, t, e;
     var k = Math.min(1, gap / (Lvia + Larrivo + 60)), Lv = Lvia * k, La = Larrivo * k;
-    if (u < Lv) {
-      t = u / Lv; ex = easeIO(Math.min(1, t / .6)); ey = easeIO(Math.max(0, (t - .35) / .65));
-      x = ax + (xM - ax) * ex; yy = ay + (Rm - ay) * ey; d = a.d + (DOT - a.d) * ex;
+    if (u < Lv && !a.fisso) {
+      /* parte verso destra e curva giù nel margine: un quarto di cerchio */
+      t = u / Lv; e = liscio(t);
+      x = q2(ax, xM, xM, e); yy = q2(ay, ay, Rm, e); d = lerp(a.d, DOT, e);
     } else if (u > gap - La) {
-      t = (u - (gap - La)) / La;
+      t = (u - (gap - La)) / La; e = liscio(t);
       if (b.alto) {
         var sopra = by - 58;
-        if (t < .45) { x = xM; yy = Rm + (sopra - Rm) * easeIO(t / .45); d = DOT; }
-        else { var t2 = (t - .45) / .55; x = xM + (bx - xM) * easeIO(t2); yy = sopra + (by - sopra) * t2 * t2 * t2; d = DOT + (b.d - DOT) * t2; }
+        x = c3(xM, xM, bx + (xM - bx) * .15, bx, e); yy = c3(Rm, sopra - 40, sopra - 30, by, e); d = lerp(DOT, b.d, e);
       } else {
-        ey = easeIO(Math.min(1, t / .6)); ex = easeIO(Math.max(0, (t - .4) / .6));
-        x = xM + (bx - xM) * ex; yy = Rm + (by - Rm) * ey; d = DOT + (b.d - DOT) * ex;
+        /* scende dal margine e curva dentro il punto del titolo */
+        x = q2(xM, xM, bx, e); yy = q2(Rm, by, by, e); d = lerp(DOT, b.d, e);
       }
     } else { x = xM; yy = Rm; d = DOT; }
     metti(x, yy, d);
   }
 
+  /* l'apertura: nome → il puntino parte con una curva → la V cresce → logo → la V va nella testata */
+  function apertura(y){
+    var q = clamp((y - AP.top) / AP.len, 0, 1), top = y <= AP.fine ? 0 : AP.fine - y;
+    var f = liscio(clamp(q / .26, 0, 1));                       /* «eniello» e «studio» se ne vanno */
+    var e = liscio(clamp((q - .10) / .40, 0, 1));               /* la V cresce e va al centro */
+    var x = liscio(clamp((q - .70) / .26, 0, 1));               /* il logo va nella testata */
+    if (q !== apQ) {
+      apQ = q;
+      apVia.forEach(function(el, i){ el.style.opacity = (1 - f).toFixed(3); el.style.transform = 'translate3d(' + ((i ? 22 : 10) * f).toFixed(1) + 'px,' + (-4 * f).toFixed(1) + 'px,0)'; });
+      var cx = lerp(AP.vc.x, AP.tc.x, e), cy = lerp(AP.vc.y, AP.tc.y, e), sc = lerp(1, AP.S, e);
+      cx = lerp(cx, AP.hc.x, x); cy = lerp(cy, AP.hc.y - top, x); sc = lerp(sc, AP.hs, x);
+      AP.cur = { cx: cx, cy: cy, sc: sc };
+      apV.style.transform = 'translate3d(' + (cx - AP.tc.x).toFixed(2) + 'px,' + (cy - AP.tc.y).toFixed(2) + 'px,0) scale(' + (sc / AP.S).toFixed(4) + ')';
+      var arrivato = q >= .985;
+      apV.style.opacity = arrivato ? 0 : 1;
+      piccolo.style.opacity = arrivato ? 1 : 0;
+      piccolo.querySelector('.pl').style.transform = arrivato ? 'none' : 'scale(0)';
+      testata.style.setProperty('--fondo', clamp((y - AP.fine) / 60, 0, 1).toFixed(3));
+      dxTestata.style.setProperty('--dx', clamp((q - .8) / .2, 0, 1).toFixed(3));
+      piedeAp.style.opacity = clamp(1 - q / .12, 0, 1).toFixed(3);
+    }
+    /* il puntino */
+    var c = AP.cur, lx = c.cx + (AP.pd.x - AP.vc.x) * c.sc, ly = c.cy + (AP.pd.y - AP.vc.y) * c.sc + top, ld = AP.dl * c.sc;
+    var b0x = AP.b0.x, b0y = AP.b0.y + top, t;
+    if (q < .04) return metti(b0x, b0y, AP.b0.d);
+    if (q < .50) {
+      t = liscio((q - .04) / .46);
+      /* sale a destra sopra «studio», gira e scende nell'angolo della V */
+      return metti(c3(b0x, b0x + 70, lx + 80, lx, t), c3(b0y, b0y - 150, ly - 110, ly, t), lerp(AP.b0.d, ld, t));
+    }
+    if (q < .70) return metti(lx, ly, ld);
+    t = liscio(clamp((q - .70) / .30, 0, 1));
+    /* lascia il logo con una curva e va ad aspettare nel margine destro */
+    return metti(c3(lx, lx + 60, xM, xM, t), c3(ly, ly - 70, Rm - 120, Rm, t), lerp(ld, DOT, t));
+  }
+
   function quadro(){
     pianificato = false;
     var y = scrollY;
-    /* il marchio grande sale e si rimpicciolisce nella testata */
-    var p = clamp(y / FLY.fine, 0, 1);
-    if (p !== volo.p) {
-      volo.p = p; var e = easeIO(p), s = 1 + (FLY.s - 1) * e;
-      grande.style.transform = 'translate3d(' + (FLY.dx * e).toFixed(2) + 'px,' + (FLY.dy * e).toFixed(2) + 'px,0) scale(' + s.toFixed(4) + ')';
-      var arrivato = p >= 1;
-      grande.style.opacity = arrivato ? 0 : 1;
-      piccolo.style.opacity = arrivato ? 1 : 0;
-      piccolo.querySelector('.pl').style.transform = arrivato ? 'none' : 'scale(0)';
-      testata.style.setProperty('--fondo', clamp((p - .7) / .3, 0, 1).toFixed(3));
-      dxTestata.style.setProperty('--dx', clamp(y / 140, 0, 1).toFixed(3));
-      piedeAp.style.opacity = clamp(1 - y / 160, 0, 1).toFixed(3);
-    }
     if (y > ST.T - 2 * vh && y < ST.T + ST.R + 2 * vh) aggiornaScena(y, vh);
     for (var i = 0; i < SEG.length; i++) {
       var g = SEG[i]; if (y < g.a || y >= g.b) continue;
       var t = (y - g.a) / Math.max(1, g.b - g.a);
       if (g.k === 'seduto') return g.s.el ? siedi(g.s) : metti(g.s.x, sy(g.s, y), g.s.d);
       if (g.k === 'fermo') return metti(g.s.x, sy(g.s, y), g.s.d);
-      if (g.k === 'marchio') {
-        var b = g.to, dist = sy(b, y) - B0.y, tt = easeIO(1 - clamp(dist / 280, 0, 1));
-        return metti(lerp(B0.x, b.x, tt), B0.y, lerp(B0.d, b.d, tt));
-      }
-      if (g.k === 'linea') { var e2 = easeIO(t); return metti(lerp(g.da.x, g.a2.x, e2), lerp(sy(g.da, y), sy(g.a2, y), e2), lerp(g.da.d, g.a2.d, e2)); }
+      if (g.k === 'apertura') return apertura(y);
+      if (g.k === 'linea') { var e2 = liscio(t), pa = arco(g.da.x, sy(g.da, y), g.a2.x, sy(g.a2, y), e2, .22); return metti(pa[0], pa[1], lerp(g.da.d, g.a2.d, e2)); }
       if (g.k === 'tendina') return metti(lerp(g.da.x, g.a2.x, t), sy(g.da, y), 10);
       if (g.k === 'viaggio') return viaggio(g.da, g.a2, y, g.b - g.a, y - g.a);
     }
@@ -881,8 +937,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   var pianificato = false;
   function chiedi(){ if (!pianificato) { pianificato = true; requestAnimationFrame(quadro); } }
-  function rimisura(){ scala(); misura(); volo.p = -1; ST.b = -1; ST.X = -1; chiedi(); }
-  misura(); quadro();
+  function rimisura(){ scala(); misura(); apQ = -1; ST.b = -1; ST.X = -1; chiedi(); }
+  misura(); apQ = -1; quadro();
   addEventListener('scroll', chiedi, { passive: true });
   addEventListener('resize', rimisura);
   if ('ResizeObserver' in window) new ResizeObserver(function(){ requestAnimationFrame(rimisura); }).observe(document.body);
