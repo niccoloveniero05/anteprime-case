@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100F09">
+<title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
+<meta name="description" content="Siti, scheda Google, social e video per le attività della Valdinievole. Ti prepariamo l’anteprima gratis: paghi solo se ti piace.">
+<link rel="icon" href="../comune/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../comune/img/apple-touch-icon.png">
+<style>
+/* ── Caratteri: Newsreader (titoli, serif variabile con taglio ottico) + Geist (testo, variabile vero) ── */
+@font-face{font-family:'News';src:url(../comune/fonts/Newsreader.woff2) format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:'News';src:url(../comune/fonts/Newsreader-italic.woff2) format('woff2');font-weight:200 800;font-style:italic;font-display:swap}
+@font-face{font-family:'Geist';src:url(../comune/fonts/Geist-var.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Geist Mono';src:url(../comune/fonts/GeistMono-400.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url(../comune/fonts/InstrumentSerif-italic.woff2) format('woff2');font-style:italic;font-weight:400;font-display:swap}
+
+:root{
+  --nero:#100F09; --nero2:#14130D; --nero3:#1A1913; --nero4:#22211A;
+  --avorio:#F5F4EF; --arancio:#FF5A1F;
+  --bg:var(--nero); --fg:var(--avorio);
+  --fg2:rgba(245,244,239,.66); --fg3:rgba(245,244,239,.42); --filo:rgba(245,244,239,.13);
+  --serif:'News','Iowan Old Style',Georgia,serif;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+  --mono:'Geist Mono',ui-monospace,Menlo,monospace;
+  --lato:clamp(20px,6.2vw,26px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --colonna:430px;
+}
+.chiaro{--bg:var(--avorio);--fg:var(--nero);--fg2:rgba(16,15,9,.68);--fg3:rgba(16,15,9,.45);--filo:rgba(16,15,9,.14);background:var(--bg);color:var(--fg)}
+
+*{box-sizing:border-box}
+html{background:#0A0906;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0 auto;max-width:var(--colonna);background:var(--nero);color:var(--fg);font:400 17px/1.62 var(--sans);letter-spacing:.002em;word-spacing:.03em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;position:relative}
+main{overflow-x:clip}
+img,video{display:block;max-width:100%}
+a{color:inherit;-webkit-tap-highlight-color:transparent}
+p,h1,h2,h3,dl,dd{margin:0}
+h1,h2,h3{font-weight:inherit}
+ul,ol{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--fg);outline-offset:4px;border-radius:6px}
+.i{width:20px;height:20px;flex:none}
+.nw{white-space:nowrap}
+.salta{position:absolute;left:16px;top:-80px;z-index:90;background:var(--avorio);color:var(--nero);padding:12px 16px;border-radius:10px;text-decoration:none}
+.salta:focus{top:12px}
+
+/* ── Testata: marchio + «Scrivici», sempre visibile ── */
+.testata{position:fixed;top:0;left:0;right:0;margin:0 auto;max-width:var(--colonna);z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:calc(env(safe-area-inset-top) + 8px) var(--lato) 8px}
+.testata::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(16,15,9,.9);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);opacity:0;transition:opacity .5s var(--ease);border-bottom:1px solid rgba(245,244,239,.07)}
+.testata.solida::before{opacity:1}
+.marchio{display:inline-flex;align-items:center;min-height:44px;font:700 20px/1 var(--sans);letter-spacing:-.05em;word-spacing:0;color:var(--avorio);text-decoration:none;white-space:nowrap}
+.marchio .vv{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.18em;letter-spacing:0;margin-right:.01em;-webkit-text-stroke:1px currentColor;paint-order:stroke fill}
+.marchio .pl{display:inline-block;width:.21em;height:.21em;border-radius:50%;background:var(--arancio);margin:0 .035em 0 .045em;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.marchio .pl.vuoto{transform:scale(0);transition:none}
+
+/* ── Pulsanti ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;font:500 16px/1 var(--sans);letter-spacing:.005em;word-spacing:0;text-decoration:none;white-space:nowrap;transition:transform .25s var(--ease),background-color .3s,border-color .3s}
+.btn:active{transform:scale(.97)}
+.btn-pieno{background:var(--fg);color:var(--bg)}
+.btn-linea{border:1px solid color-mix(in srgb,var(--fg) 30%,transparent);color:var(--fg)}
+.testata .btn{min-height:44px;padding:0 18px 0 15px;font-size:15px;gap:8px;border-color:rgba(245,244,239,.3)}
+.testata .btn .i{width:18px;height:18px}
+.freccia{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:500 16px/1 var(--sans);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--fg) 35%,transparent);padding-top:2px}
+.freccia .i{width:16px;height:16px}
+
+/* ── Tipografia ── */
+.occhiello{display:flex;align-items:center;gap:14px;font:400 12px/1 var(--mono);letter-spacing:.18em;word-spacing:0;text-transform:uppercase;color:var(--fg2);margin-bottom:30px}
+.occhiello.stretto{letter-spacing:.13em;gap:12px}
+.occhiello::before{content:"";width:22px;height:1px;background:currentColor;opacity:.7}
+.t1,.t2,.t3{font-family:var(--serif);font-optical-sizing:auto;letter-spacing:-.014em;word-spacing:.02em;text-wrap:balance}
+.t1{font-weight:330;font-size:clamp(48px,14.6vw,62px);line-height:1.01}
+.t2{font-weight:370;font-size:clamp(36px,10.4vw,44px);line-height:1.07}
+.t3{font-weight:380;font-size:clamp(34px,9.6vw,40px);line-height:1.06}
+.t1 em,.t2 em,.t3 em{font-style:italic;font-weight:inherit;letter-spacing:-.01em}
+.lead{font-size:19px;line-height:1.55;color:var(--fg2);margin-top:30px;max-width:17em}
+.lead b{color:var(--fg);font-weight:500}
+
+/* il punto finale di ogni titolo: senza JS (o con «Riduci movimento») è un punto arancio fermo;
+   con JS diventa il posto dove si posa l'unico puntino che viaggia */
+.pt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--arancio);margin-left:.05em;vertical-align:baseline}
+html.viaggio .pt{background:transparent}
+html.viaggio .pt.qui{background:var(--arancio)}
+.punto{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--arancio);transform-origin:0 0;z-index:60;pointer-events:none;opacity:0;will-change:transform}
+html.viaggio .punto.su{opacity:1}
+
+/* ── Sezioni ── */
+.sez{position:relative;padding:136px var(--lato) 120px;background:var(--bg)}
+
+/* ── Copertina ── */
+.copertina{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--lato) calc(44px + env(safe-area-inset-bottom));overflow:hidden;background:var(--nero)}
+.colonne{position:absolute;top:-24px;left:-34px;right:-34px;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);gap:9px;opacity:0;transition:opacity 1.6s var(--ease)}
+.pronta .colonne{opacity:.42}
+.colonna{display:flex;flex-direction:column;animation:sale 120s linear infinite;animation-play-state:paused}
+.colonna:nth-child(2){animation-name:scende;animation-duration:140s}
+.colonna:nth-child(3){animation-duration:105s}
+.va .colonna{animation-play-state:running}
+.colonna img{width:100%;height:auto;margin-bottom:9px;filter:saturate(.85)}
+@keyframes sale{to{transform:translate3d(0,-50%,0)}}
+@keyframes scende{from{transform:translate3d(0,-50%,0)}to{transform:translate3d(0,0,0)}}
+.copertina .velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,15,9,.78) 0%,rgba(16,15,9,.18) 16%,rgba(16,15,9,.22) 30%,rgba(16,15,9,.86) 50%,var(--nero) 64%)}
+.cop-testo{position:relative}
+.cop-testo .lead{margin-top:26px;color:rgba(245,244,239,.78);max-width:19em}
+.azioni{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.fiducia{margin-top:26px;font:400 13px/1.9 var(--mono);letter-spacing:.06em;word-spacing:0;color:var(--fg2)}
+.fiducia span{display:block}
+
+/* ── Perché serve ── */
+.tre{margin-top:64px;border-top:1px solid var(--filo)}
+.tre li{display:flex;flex-direction:column;gap:12px;padding:30px 0 32px;border-bottom:1px solid var(--filo)}
+.tre .n{font:400 12px/1 var(--mono);letter-spacing:.16em;word-spacing:0;text-transform:uppercase;color:var(--fg3)}
+.tre .frase{font:360 30px/1.12 var(--serif);letter-spacing:-.01em}
+.tre .frase em{font-style:italic}
+
+/* ── Partner ── */
+.partner{padding-bottom:72px}
+.voci{background:var(--nero)}
+.voce{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:540px;padding:0 var(--lato) 48px;overflow:hidden;text-decoration:none}
+.voce + .voce{border-top:1px solid var(--filo)}
+.voce-foto{position:absolute;left:0;right:0;top:-8%;height:116%;width:100%;object-fit:cover;opacity:.56;will-change:transform}
+.voce::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,15,9,.55) 0%,rgba(16,15,9,.05) 26%,rgba(16,15,9,.35) 48%,rgba(16,15,9,.93) 72%,var(--nero) 100%)}
+.voce > :not(.voce-foto){position:relative;z-index:1}
+.voce-tipo{font:400 12px/1.5 var(--mono);letter-spacing:.14em;word-spacing:0;text-transform:uppercase;color:var(--fg2)}
+.voce-nome{font:360 40px/1.04 var(--serif);letter-spacing:-.015em;margin-top:14px}
+.voce-nome em{font-style:italic}
+.voce-lavori{margin-top:16px;color:rgba(245,244,239,.8)}
+.voce .freccia{margin-top:24px;align-self:flex-start}
+.voce-tu{min-height:0;padding-top:72px;padding-bottom:80px;background:var(--nero)}
+.voce-tu::after{display:none}
+.voce-tu .piu-grande{font:300 56px/1 var(--serif);color:var(--fg3);margin-bottom:22px}
+.voce-tu p{color:var(--fg2);margin-top:16px;max-width:19em}
+
+/* ── Come funziona (avorio) ── */
+.passi{margin-top:72px}
+.passi li{display:grid;grid-template-columns:64px 1fr;gap:0 4px;padding:34px 0 36px;border-top:1px solid var(--filo)}
+.passi li:last-child{border-bottom:1px solid var(--filo)}
+.passi .num{font:300 italic 40px/1 var(--serif);color:var(--fg3);letter-spacing:-.02em;padding-top:2px}
+.passi h3{font:420 24px/1.2 var(--serif);letter-spacing:-.008em}
+.passi p{color:var(--fg2);margin-top:10px;max-width:16em}
+.gratis{display:table;margin-top:12px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:6px 8px 5px;border:1px solid var(--fg);border-radius:999px}
+.nota{margin-top:44px;font:400 italic 22px/1.4 var(--serif);color:var(--fg)}
+
+/* ── Servizi: un capitolo per pacchetto, con il suo sfondo vivo ── */
+.servizi-testa{padding-bottom:8px}
+.capitolo{position:relative;padding:57svh var(--lato) 84px;overflow:hidden;background:var(--bg)}
+.cap-fondo{position:absolute;left:0;right:0;top:0;height:100svh;overflow:hidden;pointer-events:none}
+.cap-media{position:absolute;inset:0;opacity:.55}
+.cap-media img,.cap-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cap-velo{position:absolute;inset:0;background:linear-gradient(180deg,var(--nero) 0%,rgba(16,15,9,.1) 13%,rgba(16,15,9,.2) 30%,rgba(16,15,9,.88) 47%,var(--nero) 55%)}
+.chiaro .cap-media{opacity:.6}
+.cap-media.intero{opacity:.5}
+.cap-media.intero img,.cap-media.intero video{object-fit:contain;object-position:50% 0}
+.chiaro .cap-velo{background:linear-gradient(180deg,var(--avorio) 0%,rgba(245,244,239,.08) 13%,rgba(245,244,239,.18) 30%,rgba(245,244,239,.9) 47%,var(--avorio) 55%)}
+.schermo{position:absolute;left:50%;top:8svh;width:78%;height:92svh;margin-left:-39%;border-radius:44px 44px 0 0;overflow:hidden;border:1px solid rgba(245,244,239,.2);border-bottom:0;opacity:.62}
+.cap-sito{width:100%;height:auto;animation:sito 60s ease-in-out -14s infinite alternate;animation-play-state:paused}
+.va .cap-sito{animation-play-state:running}
+@keyframes sito{to{transform:translate3d(0,calc(-100% + 92svh),0)}}
+.cap-testo{position:relative;z-index:1}
+.cap-n{font:400 12px/1 var(--mono);letter-spacing:.18em;word-spacing:0;color:var(--fg2);margin-bottom:26px;display:flex;gap:10px;align-items:center}
+.cap-n span{color:var(--fg3)}
+.cap-n b{font-weight:400;text-transform:uppercase;margin-left:auto;color:var(--fg)}
+.cap-riga{font-size:19px;line-height:1.5;color:var(--fg2);margin-top:22px;max-width:17em}
+.apri{display:flex;align-items:center;justify-content:flex-start;gap:14px;width:100%;min-height:60px;margin-top:36px;border-top:1px solid var(--filo);border-bottom:1px solid var(--filo);font:500 16px/1 var(--sans)}
+.piu{position:relative;width:16px;height:16px;flex:none}
+.piu::before,.piu::after{content:"";position:absolute;left:0;top:7.5px;width:16px;height:1px;background:currentColor;transition:transform .45s var(--ease)}
+.piu::after{transform:rotate(90deg)}
+[aria-expanded="true"] .piu::after{transform:rotate(0)}
+.tenda{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
+.tenda.aperta{grid-template-rows:1fr}
+.tenda-in{min-height:0;overflow:hidden}
+.tenda-in > *{opacity:0;transition:opacity .25s}
+.tenda.aperta .tenda-in > *{opacity:1;transition:opacity .5s .15s}
+.elenco{padding:26px 0 8px}
+.elenco li{position:relative;padding:11px 0 11px 26px;line-height:1.5}
+.elenco li::before{content:"";position:absolute;left:2px;top:22px;width:10px;height:1px;background:var(--fg3)}
+.elenco b{display:block;font-weight:500}
+.elenco small{display:block;font-size:16px;color:var(--fg2)}
+.tenda .btn{margin:24px 0 8px}
+.speciale-tag{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:7px 10px 6px;border:1px solid var(--fg2);border-radius:999px;margin-bottom:22px;color:var(--fg)}
+.comprende{margin-top:34px;border-top:1px solid var(--filo)}
+.comprende .titoletto{font:400 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);padding-top:26px}
+.comprende .elenco{padding-top:14px}
+.capitolo .azioni{margin-top:28px}
+.fonte{padding:8px var(--lato) 0;margin-bottom:-24px;font-size:16px;line-height:1.55;color:var(--fg3);position:relative;z-index:1}
+
+/* ── Domande ── */
+.domande-elenco{margin-top:60px;border-top:1px solid var(--filo)}
+.dom{border-bottom:1px solid var(--filo)}
+.dom-q{display:grid;grid-template-columns:34px 1fr;align-items:start;width:100%;min-height:76px;padding:22px 0;font:400 21px/1.3 var(--serif);letter-spacing:-.005em}
+.dom-q .piu{margin-top:.5em}
+.dom p{padding:0 8px 28px 34px;color:var(--fg2)}
+
+/* ── Contatti ── */
+.contatti{padding-top:0}
+.segnaposto{display:flex;align-items:center;justify-content:center;text-align:center;border:1.5px dashed rgba(245,244,239,.32);border-radius:14px;padding:24px;font:400 13px/1.55 var(--mono);letter-spacing:.02em;word-spacing:0;color:var(--fg2);background:repeating-linear-gradient(135deg,rgba(245,244,239,.025) 0 12px,transparent 12px 24px)}
+.contatti-media{position:relative;height:44svh;min-height:300px;margin:0 calc(-1 * var(--lato)) 0;padding:calc(env(safe-area-inset-top) + 76px) var(--lato) 0}
+.contatti-media .segnaposto{height:100%}
+.contatti-testo{position:relative;padding-top:56px}
+.contatti .azioni{flex-direction:column;align-items:stretch}
+.recapiti{margin-top:56px;border-top:1px solid var(--filo)}
+.recapiti > div{padding:22px 0;border-bottom:1px solid var(--filo)}
+.recapiti dt{font:400 12px/1.5 var(--mono);letter-spacing:.12em;word-spacing:0;text-transform:uppercase;color:var(--fg3)}
+.recapiti dd{margin-top:8px;font:400 22px/1.3 var(--serif);letter-spacing:-.005em}
+.recapiti dd a{text-decoration:none;display:inline-block;min-height:44px;padding-top:4px}
+.recapiti dd small{display:block;font:400 16px/1.5 var(--sans);color:var(--fg2);margin-top:2px}
+
+/* ── Piede: il puntino finisce il viaggio nel marchio ── */
+.piede{padding:96px var(--lato) calc(48px + env(safe-area-inset-bottom));border-top:1px solid var(--filo)}
+.piede .marchio{font-size:46px;min-height:0}
+.piede .marchio .vv{-webkit-text-stroke:1.6px currentColor}
+.piede .marchio .pt{width:.21em;height:.21em;margin:0 .035em 0 .045em}
+.piede p{margin-top:28px;font-size:16px;line-height:1.6;color:var(--fg3);max-width:22em}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .colonne{opacity:.42}
+}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4l1.2-4.1A8.6 8.6 0 1 1 8 19.4z"/><path d="M9.1 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5 0l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.6-.6.8-.6.3-1.6.4-2.9-.2a9.2 9.2 0 0 1-4.3-4.3c-.6-1.3-.5-2.3-.2-2.9z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+</svg>
+
+<header class="testata" id="testata">
+  <a class="marchio" href="#inizio" aria-label="Veniello Studio, torna all’inizio"><span aria-hidden="true"><span class="vv">V</span>eniello<span class="pl" id="logo-punto"></span>studio</span></a>
+  <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
+</header>
+
+<main id="contenuto">
+
+  <!-- Copertina: colonne di lavori veri che scorrono lente, molto velate, dietro al titolo -->
+  <section class="copertina" id="inizio" aria-labelledby="t-inizio">
+    <div class="colonne" data-anima aria-hidden="true">
+      <div class="colonna">
+        <img src="../comune/img/reel-1-2.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/jue-oldfashioned.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/sito-1.jpg" width="520" height="1125" alt="" decoding="async">
+        <img src="../comune/img/jue-luci.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/spot-6-2.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/reel-1-2.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/jue-oldfashioned.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/sito-1.jpg" width="520" height="1125" alt="" decoding="async">
+        <img src="../comune/img/jue-luci.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/spot-6-2.jpg" width="600" height="1067" alt="" decoding="async">
+      </div>
+      <div class="colonna">
+        <img src="../comune/img/jue-parete.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/reel-9-0.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/elena-dettagli.jpg" width="720" height="1080" alt="" decoding="async">
+        <img src="../comune/img/jue-dj-pioneer.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/sito-4.jpg" width="520" height="1125" alt="" decoding="async">
+        <img src="../comune/img/jue-parete.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/reel-9-0.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/elena-dettagli.jpg" width="720" height="1080" alt="" decoding="async">
+        <img src="../comune/img/jue-dj-pioneer.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/sito-4.jpg" width="520" height="1125" alt="" decoding="async">
+      </div>
+      <div class="colonna">
+        <img src="../comune/img/reel-14-0.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/jue-neon.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/gb-catenina.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/jue-locale.jpg" width="600" height="765" alt="" decoding="async">
+        <img src="../comune/img/spot-3-2.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/reel-14-0.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/jue-neon.jpg" width="600" height="600" alt="" decoding="async">
+        <img src="../comune/img/gb-catenina.jpg" width="600" height="1067" alt="" decoding="async">
+        <img src="../comune/img/jue-locale.jpg" width="600" height="765" alt="" decoding="async">
+        <img src="../comune/img/spot-3-2.jpg" width="600" height="1067" alt="" decoding="async">
+      </div>
+    </div>
+    <div class="velo" aria-hidden="true"></div>
+    <div class="cop-testo">
+      <p class="occhiello stretto">Social · Google · Video · Siti</p>
+      <h1 class="t1" id="t-inizio">Fatti trovare.<br>Fatti <span class="nw"><em>scegliere</em><span class="pt" aria-hidden="true"></span></span></h1>
+      <p class="lead">Siti, scheda Google, social e video per negozi, locali e studi della Valdinievole.</p>
+      <div class="azioni">
+        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Chiedi l’anteprima gratis</a>
+      </div>
+      <p class="fiducia"><span>Preventivo scritto prima</span><span>Paghi solo se ti piace</span></p>
+    </div>
+  </section>
+
+  <!-- Perché serve -->
+  <section class="sez perche" aria-labelledby="t-perche">
+    <p class="occhiello">Perché serve</p>
+    <h2 class="t2" id="t-perche">I clienti decidono dal <span class="nw"><em>telefono</em><span class="pt" aria-hidden="true"></span></span></h2>
+    <p class="lead">In pochi secondi guardano tre posti. Noi li sistemiamo tutti e tre, così la scelta cade su di te.</p>
+    <ol class="tre">
+      <li><span class="n">01 · Google e Maps</span><span class="frase">Su Google ti <em>trovano</em></span></li>
+      <li><span class="n">02 · Sito</span><span class="frase">Dal sito ti <em>scelgono</em></span></li>
+      <li><span class="n">03 · Instagram e TikTok</span><span class="frase">Sui social ti <em>ricordano</em></span></li>
+    </ol>
+  </section>
+
+  <!-- Partner: ogni voce ha la sua foto come sfondo velato -->
+  <section class="sez partner" id="partner" aria-labelledby="t-partner">
+    <p class="occhiello">Partner</p>
+    <h2 class="t2" id="t-partner">Chi ci ha già <span class="nw"><em>scelto</em><span class="pt" aria-hidden="true"></span></span></h2>
+    <p class="lead">Le attività con cui lavoriamo ogni mese.</p>
+  </section>
+  <div class="voci">
+    <article class="voce">
+      <img class="voce-foto" src="../comune/img/jue-parete.jpg" width="600" height="600" alt="La parete di fiori del Jué Club" loading="lazy" decoding="async">
+      <p class="voce-tipo">Cocktail bar · Montecatini Terme</p>
+      <h3 class="voce-nome">Jué Club</h3>
+      <p class="voce-lavori">Sito jueclub.it · Video delle serate · Social</p>
+      <a class="freccia" href="https://jueclub.it" target="_blank" rel="noopener">Visita jueclub.it<svg class="i" aria-hidden="true"><use href="#i-link"/></svg></a>
+    </article>
+    <article class="voce">
+      <img class="voce-foto" src="../comune/img/elena-dettagli.jpg" width="720" height="1080" alt="Fedi, partecipazioni e fiori di un matrimonio curato da Elena Baldi" loading="lazy" decoding="async" style="object-position:50% 34%">
+      <p class="voce-tipo">Wedding planner · Montecatini Terme</p>
+      <h3 class="voce-nome">Elena Baldi <em>Wedding Planner</em></h3>
+      <p class="voce-lavori">Social · Video</p>
+      <a class="freccia" href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener">Visita elenabaldiwp.it<svg class="i" aria-hidden="true"><use href="#i-link"/></svg></a>
+    </article>
+    <article class="voce">
+      <img class="voce-foto" src="../comune/img/gb-catenina.jpg" width="600" height="1067" alt="La catenina d’oro nell’astuccio blu, dal reel fatto per GB Oro" loading="lazy" decoding="async" style="object-position:50% 40%">
+      <p class="voce-tipo">Compro oro · Città di Castello · Umbertide</p>
+      <h3 class="voce-nome">GB Oro</h3>
+      <p class="voce-lavori">Instagram · TikTok e Facebook · Reel</p>
+      <a class="freccia" href="https://www.instagram.com/gb.oro/" target="_blank" rel="noopener">Guarda @gb.oro<svg class="i" aria-hidden="true"><use href="#i-link"/></svg></a>
+    </article>
+    <a class="voce voce-tu" href="#contatti">
+      <span class="piu-grande" aria-hidden="true">+</span>
+      <h3 class="voce-nome">La tua attività, <em>qui</em></h3>
+      <p>Ti prepariamo l’anteprima gratis: se ti piace, entri anche tu.</p>
+      <span class="freccia" style="margin-top:28px;align-self:flex-start">Scrivici</span>
+    </a>
+  </div>
+
+  <!-- Come funziona (avorio) -->
+  <section class="sez chiaro come" id="come" aria-labelledby="t-come">
+    <p class="occhiello">Come funziona</p>
+    <h2 class="t2" id="t-come">Prima lo vedi. Poi <span class="nw"><em>decidi</em><span class="pt" aria-hidden="true"></span></span></h2>
+    <ol class="passi">
+      <li><span class="num">01</span><div><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due minuti.</p></div></li>
+      <li><span class="num">02</span><div><h3>Ti prepariamo l’anteprima <span class="gratis">Gratis</span></h3><p>Con foto e informazioni vere. Ti arriva un link da aprire sul telefono.</p></div></li>
+      <li><span class="num">03</span><div><h3>Se ti piace, va online</h3><p>Sul tuo dominio, insieme a Google e ai social. Da lì in poi ti trovano.</p></div></li>
+    </ol>
+    <p class="nota">Il preventivo te lo scriviamo prima. Paghi solo se ti piace.</p>
+  </section>
+
+  <!-- Servizi -->
+  <section class="sez servizi-testa" id="servizi" aria-labelledby="t-servizi">
+    <p class="occhiello">Servizi</p>
+    <h2 class="t2" id="t-servizi">Tutto quello che <span class="nw"><em>serve</em><span class="pt" aria-hidden="true"></span></span></h2>
+    <p class="lead">Quattro pacchetti. Prendi quello che ti serve, oppure <b>tutto insieme</b>.</p>
+  </section>
+
+  <section class="capitolo" id="contenuti" aria-labelledby="t-contenuti">
+    <div class="cap-fondo" aria-hidden="true">
+      <div class="cap-media"><img src="../comune/img/spot.jpg" alt="" loading="lazy" decoding="async"><video data-sfondo muted playsinline loop preload="none" poster="../comune/img/spot.jpg"><source src="../comune/video/spot.mp4" type="video/mp4"></video></div>
+      <div class="cap-velo"></div>
+    </div>
+    <div class="cap-testo">
+      <p class="cap-n">01 <span>/ 04</span></p>
+      <h3 class="t3" id="t-contenuti">Creazione <span class="nw">Contenuti<span class="pt" aria-hidden="true"></span></span></h3>
+      <p class="cap-riga">Video, foto e stories per i tuoi social, anche con l’IA.</p>
+      <button class="apri" type="button" aria-expanded="false" aria-controls="d-contenuti" data-apri><i class="piu" aria-hidden="true"></i>Scopri i dettagli</button>
+      <div class="tenda" id="d-contenuti"><div class="tenda-in">
+        <ul class="elenco"><li>Creazione di contenuti con l’IA</li><li>Editing di foto e video</li><li>Scheda Google</li><li>Restyling dei profili Instagram e TikTok</li><li>Stories per novità ed eventi</li></ul>
+        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20pacchetto%20Creazione%20Contenuti" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="capitolo" id="sito" aria-labelledby="t-sito">
+    <div class="cap-fondo" data-anima aria-hidden="true">
+      <div class="schermo"><img class="cap-sito" src="../comune/img/sito-lungo.jpg" width="420" height="3400" alt="" loading="lazy" decoding="async"></div>
+      <div class="cap-velo"></div>
+    </div>
+    <div class="cap-testo">
+      <p class="cap-n">02 <span>/ 04</span></p>
+      <h3 class="t3" id="t-sito">Sito <span class="nw">Web<span class="pt" aria-hidden="true"></span></span></h3>
+      <p class="cap-riga">Chi sei, cosa fai e un tasto per chiamarti.</p>
+      <button class="apri" type="button" aria-expanded="false" aria-controls="d-sito" data-apri><i class="piu" aria-hidden="true"></i>Scopri i dettagli</button>
+      <div class="tenda" id="d-sito"><div class="tenda-in">
+        <ul class="elenco"><li>Creazione del sito sul tuo dominio</li><li>Gestione attiva e manutenzione</li><li>Scheda Google</li></ul>
+        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20pacchetto%20Sito%20Web" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="capitolo chiaro" id="assistente" aria-labelledby="t-va">
+    <div class="cap-fondo" aria-hidden="true">
+      <div class="cap-media"><img src="../comune/img/va-verticale.jpg" alt="" loading="lazy" decoding="async"><video data-sfondo muted playsinline loop preload="none" poster="../comune/img/va-verticale.jpg"><source src="../comune/video/va-verticale.mp4" type="video/mp4"></video></div>
+      <div class="cap-velo"></div>
+    </div>
+    <div class="cap-testo">
+      <p class="cap-n">03 <span>/ 04</span></p>
+      <h3 class="t3" id="t-va">Virtual <span class="nw">Assistant<span class="pt" aria-hidden="true"></span></span></h3>
+      <p class="cap-riga">Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.</p>
+      <button class="apri" type="button" aria-expanded="false" aria-controls="d-va" data-apri><i class="piu" aria-hidden="true"></i>Scopri i dettagli</button>
+      <div class="tenda" id="d-va"><div class="tenda-in">
+        <ul class="elenco"><li>Risposte in pochi secondi, a qualsiasi ora, anche di notte e la domenica</li><li>Dà orari, indirizzo, servizi e prezzi fissi della tua attività</li><li>Raccoglie appuntamenti e richieste, e te li manda riassunti</li><li>Risponde in tutte le lingue</li><li>Decidi tu i limiti e quando deve passarti la conversazione</li><li>Per le prime due settimane lo controlliamo noi</li></ul>
+        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20prenotare%20un%E2%80%99anteprima%20del%20Virtual%20Assistant%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Prenota un’anteprima</a>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="capitolo" id="campagna" aria-labelledby="t-360">
+    <div class="cap-fondo" aria-hidden="true">
+      <div class="cap-media intero"><img src="../comune/img/showreel-verticale.jpg" alt="" loading="lazy" decoding="async"><video data-sfondo muted playsinline loop preload="none" poster="../comune/img/showreel-verticale.jpg"><source src="../comune/video/showreel-verticale.mp4" type="video/mp4"></video></div>
+      <div class="cap-velo"></div>
+    </div>
+    <div class="cap-testo">
+      <p class="cap-n">04 <span>/ 04</span></p>
+      <span class="speciale-tag">Pacchetto speciale</span>
+      <h3 class="t3" id="t-360">Campagna Pubblicitaria <span class="nw">360°<span class="pt" aria-hidden="true"></span></span></h3>
+      <p class="cap-riga">Contenuti, sito e Virtual Assistant insieme, in una sola campagna.</p>
+      <div class="comprende">
+        <p class="titoletto">Cosa comprende</p>
+        <ul class="elenco">
+          <li><b>Creazione Contenuti</b><small>Video, foto, stories, Google, Instagram e TikTok</small></li>
+          <li><b>Sito Web</b><small>Sul tuo dominio, gestito e aggiornato</small></li>
+          <li><b>Virtual Assistant</b><small>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi</small></li>
+        </ul>
+      </div>
+      <div class="azioni"><a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
+    </div>
+  </section>
+  <p class="fonte">Siti, video e grafiche sono lavori veri per il Jué Club di Montecatini Terme. La scheda Google e il Virtual Assistant sono esempi.</p>
+
+  <!-- Domande -->
+  <section class="sez domande" id="domande" aria-labelledby="t-domande">
+    <p class="occhiello">Domande</p>
+    <h2 class="t2" id="t-domande">Le domande che ci fanno <span class="nw"><em>tutti</em><span class="pt" aria-hidden="true"></span></span></h2>
+    <div class="domande-elenco">
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q1" data-apri><i class="piu" aria-hidden="true"></i><span>L’anteprima è davvero gratis?</span></button>
+        <div class="tenda" id="q1"><div class="tenda-in"><p>Quella del sito e quella del Virtual Assistant sì: le guardi con calma sul telefono e decidi. Se non ti convince, non paghi niente. L’anteprima di un video invece è a pagamento: una prova di circa 12-13 secondi, con una qualità più bassa del video finito.</p></div></div></div>
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q2" data-apri><i class="piu" aria-hidden="true"></i><span>Ci sono altre spese?</span></button>
+        <div class="tenda" id="q2"><div class="tenda-in"><p>Se fai il sito, solo il dominio, cioè il nome del sito (per esempio latuaattivita.it). È intestato a te e costa circa 10-15 € l’anno.</p></div></div></div>
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q3" data-apri><i class="piu" aria-hidden="true"></i><span>Il sito resta mio?</span></button>
+        <div class="tenda" id="q3"><div class="tenda-in"><p>Sì. Una volta pagato è tuo e resta online anche senza abbonamento: paghi solo il dominio. Se vuoi, con la gestione attiva lo teniamo aggiornato noi.</p></div></div></div>
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q4" data-apri><i class="piu" aria-hidden="true"></i><span>Quanto costa?</span></button>
+        <div class="tenda" id="q4"><div class="tenda-in"><p>Dipende dal pacchetto e da quello che ti serve. Ti prepariamo l’anteprima e il prezzo te lo scriviamo prima che tu decida: niente sorprese.</p></div></div></div>
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q5" data-apri><i class="piu" aria-hidden="true"></i><span>Le foto da dove le prendete?</span></button>
+        <div class="tenda" id="q5"><div class="tenda-in"><p>Solo foto vere della tua attività: quelle che hai già sui social, quelle che ci mandi o quelle che facciamo noi quando veniamo a fare le riprese.</p></div></div></div>
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q6" data-apri><i class="piu" aria-hidden="true"></i><span>Venite voi a fare le riprese?</span></button>
+        <div class="tenda" id="q6"><div class="tenda-in"><p>Se serve sì, e lo decidiamo insieme prima. Altrimenti le fai tu con il telefono seguendo la nostra guida, oppure le creiamo con l’IA dalle tue foto. Montaggio, testi e pubblicazione li curiamo noi.</p></div></div></div>
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q7" data-apri><i class="piu" aria-hidden="true"></i><span>In che zona lavorate?</span></button>
+        <div class="tenda" id="q7"><div class="tenda-in"><p>Siamo a Montecatini Terme e lavoriamo con le attività di tutta la Valdinievole. Se vuoi, ci vediamo di persona.</p></div></div></div>
+      <div class="dom"><button class="dom-q" type="button" aria-expanded="false" aria-controls="q8" data-apri><i class="piu" aria-hidden="true"></i><span>Cosa devo fare io per il Virtual Assistant?</span></button>
+        <div class="tenda" id="q8"><div class="tenda-in"><p>Compili una scheda semplice, circa 30 minuti: orari, servizi, prezzi che non cambiano, le domande che ricevi di più e le cose che non deve mai dire. Lo vedi rispondere in anteprima; se ti convince lo attiviamo, e per le prime due settimane lo controlliamo noi.</p></div></div></div>
+    </div>
+  </section>
+
+  <!-- Contatti -->
+  <section class="sez contatti" id="contatti" aria-labelledby="t-contatti">
+    <div class="contatti-media">
+      <div class="segnaposto">Segnaposto: video verticale di Giuseppe in studio o da un cliente, muto, 6-8 secondi in loop. Qui, velato, sopra al titolo dei contatti.</div>
+    </div>
+    <div class="contatti-testo">
+      <p class="occhiello">Contatti</p>
+      <h2 class="t2" id="t-contatti">Vedi il tuo sito prima di <span class="nw"><em>pagare</em><span class="pt" aria-hidden="true"></span></span></h2>
+      <p class="lead">Scrivici su WhatsApp il nome della tua attività: ti prepariamo l’anteprima gratis, senza impegno.</p>
+      <div class="azioni">
+        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici su WhatsApp</a>
+        <a class="btn btn-linea" href="tel:+393520338377"><svg class="i" aria-hidden="true"><use href="#i-tel"/></svg>Chiama</a>
+      </div>
+      <dl class="recapiti">
+        <div><dt>Telefono e WhatsApp</dt><dd><a href="tel:+393520338377">+39 352 033 8377</a><small>Ti risponde Giuseppe Fusciello</small></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:giuseppe@veniellostudio.it">giuseppe@veniellostudio.it</a></dd></div>
+        <div><dt>Dove</dt><dd>Montecatini Terme, Valdinievole</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="piede">
+  <a class="marchio" href="#inizio" aria-label="Veniello Studio, torna all’inizio"><span aria-hidden="true"><span class="vv">V</span>eniello<span class="pt"></span>studio</span></a>
+  <p>Siti, Google, social e video · Montecatini Terme · © 2026 · Niente cookie, niente tracciamenti.</p>
+</footer>
+
+<i class="punto" id="punto" aria-hidden="true"></i>
+
+<script>
+(function(){
+  'use strict';
+  var doc = document.documentElement;
+  var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  /* Testata: diventa piena appena si scorre */
+  var testata = document.getElementById('testata');
+  function aggiornaTestata(){ testata.classList.toggle('solida', scrollY > 8); }
+
+  /* Tendine (Scopri i dettagli, Domande): si aprono in altezza, il resto della pagina segue */
+  [].forEach.call(document.querySelectorAll('[data-apri]'), function(b){
+    var t = document.getElementById(b.getAttribute('aria-controls'));
+    t.inert = true; t.setAttribute('inert', '');
+    b.addEventListener('click', function(){
+      var aperta = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', String(aperta));
+      t.classList.toggle('aperta', aperta);
+      t.inert = !aperta; if (aperta) t.removeAttribute('inert'); else t.setAttribute('inert', '');
+    });
+  });
+
+  /* Video e sfondi che scorrono: girano solo quando si vedono */
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var el = e.target;
+      if (el.tagName === 'VIDEO') {
+        if (ridotto) return;
+        if (e.isIntersecting) { el.preload = 'auto'; var p = el.play(); if (p && p.catch) p.catch(function(){}); }
+        else if (!el.paused) el.pause();
+      } else el.classList.toggle('va', e.isIntersecting);
+    });
+  }, { threshold: 0.01 }) : null;
+  if (io) [].forEach.call(document.querySelectorAll('video[data-sfondo],[data-anima]'), function(el){ io.observe(el); });
+  else [].forEach.call(document.querySelectorAll('[data-anima]'), function(el){ el.classList.add('va'); });
+
+  requestAnimationFrame(function(){ doc.classList.add('pronta'); });
+
+  /* ── Il puntino: uno solo, viaggia dal punto di un titolo a quello del titolo dopo ── */
+  if (ridotto || !('requestAnimationFrame' in window)) { aggiornaTestata(); addEventListener('scroll', aggiornaTestata, { passive: true }); return; }
+  doc.classList.add('viaggio');
+
+  var punto = document.getElementById('punto');
+  var posti = [].slice.call(document.querySelectorAll('.pt'));
+  var foto = [].slice.call(document.querySelectorAll('.voce-foto'));
+  var A = [], S = [], F = [];
+  var vh = innerHeight, R = 0, xMargine = 0, maxS = 0, Lvia = 140, Larrivo = 250;
+  var seduto = -2, inIntro = false, introAnim = null;
+  var DOT = 7; /* diametro in viaggio, nel margine */
+
+  function easeIO(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+
+  function misura(){
+    vh = innerHeight; R = Math.round(vh * .42);
+    Lvia = Math.round(vh * .17); Larrivo = Math.round(vh * .3);
+    var sy = scrollY, corpo = document.body.getBoundingClientRect();
+    var lato = parseFloat(getComputedStyle(testata).paddingRight) || 24;
+    xMargine = corpo.right - lato / 2;
+    maxS = Math.max(0, doc.scrollHeight - vh);
+    A = posti.map(function(el){ var r = el.getBoundingClientRect(); return { el: el, x: r.left + r.width/2, y: r.top + sy + r.height/2, d: r.width }; });
+    S = A.map(function(a){ return Math.min(a.y - R, maxS); });
+    for (var i = S.length - 2; i >= 0; i--) if (S[i] > S[i+1] - 160) S[i] = S[i+1] - 160;
+    F = foto.map(function(img){ var r = img.parentNode.getBoundingClientRect(); return { img: img, top: r.top + sy, h: r.height }; });
+  }
+
+  function siedi(k){
+    if (k === seduto) return;
+    if (seduto >= 0 && A[seduto]) A[seduto].el.classList.remove('qui');
+    seduto = k;
+    if (k >= 0) { A[k].el.classList.add('qui'); punto.classList.remove('su'); }
+    else punto.classList.add('su');
+  }
+  function metti(x, y, d){
+    punto.style.transform = 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (y - d/2).toFixed(2) + 'px,0) scale(' + (d/10).toFixed(4) + ')';
+  }
+
+  function quadro(){
+    pianificato = false;
+    aggiornaTestata();
+    var y = scrollY;
+    /* foto dei partner: si spostano piano mentre scorri */
+    for (var f = 0; f < F.length; f++) {
+      var q = F[f], p = (y + vh - q.top) / (vh + q.h);
+      if (p > -0.1 && p < 1.1) q.img.style.transform = 'translate3d(0,' + ((p - .5) * -56).toFixed(1) + 'px,0)';
+    }
+    if (inIntro || !A.length) return;
+    var n = A.length;
+    if (y <= S[0]) return siedi(0);
+    if (y >= S[n-1]) return siedi(n-1);
+    var i = 0; while (i < n - 1 && y >= S[i+1]) i++;
+    var a = A[i], b = A[i+1], gap = S[i+1] - S[i], u = y - S[i];
+    var ax = a.x, ay = a.y - y, bx = b.x, by = b.y - y, x, yy, d, t, ex, ey;
+    /* se due titoli sono vicini, le due mosse si accorciano in proporzione */
+    var k = Math.min(1, gap / (Lvia + Larrivo + 60)), Lv = Lvia * k, La = Larrivo * k;
+    if (u < Lv) {
+      t = u / Lv; if (t < .004) return siedi(i);
+      ex = easeIO(Math.min(1, t / .6)); ey = easeIO(Math.max(0, (t - .35) / .65));
+      x = ax + (xMargine - ax) * ex; yy = ay + (R - ay) * ey; d = a.d + (DOT - a.d) * ex;
+    } else if (u > gap - La) {
+      t = (u - (gap - La)) / La; if (t > .996) return siedi(i+1);
+      ey = easeIO(Math.min(1, t / .6)); ex = easeIO(Math.max(0, (t - .4) / .6));
+      x = xMargine + (bx - xMargine) * ex; yy = R + (by - R) * ey; d = DOT + (b.d - DOT) * ex;
+    } else { x = xMargine; yy = R; d = DOT; }
+    siedi(-1); metti(x, yy, d);
+  }
+
+  var pianificato = false;
+  function chiedi(){ if (!pianificato) { pianificato = true; requestAnimationFrame(quadro); } }
+  function rimisura(){ misura(); chiedi(); }
+
+  /* All'apertura il puntino si stacca dal marchio e cade nel punto di «scegliere» */
+  function intro(){
+    var lp = document.getElementById('logo-punto');
+    if (scrollY > 4 || !lp || !A.length) return chiedi();
+    var r = lp.getBoundingClientRect(), a = A[0];
+    var x0 = r.left + r.width/2, y0 = r.top + r.height/2, d0 = r.width;
+    var x1 = a.x, y1 = a.y - scrollY, d1 = a.d;
+    var cx = x0 + (x1 - x0) * .62, cy = y0 - 40;
+    var kf = [], N = 36;
+    for (var k = 0; k <= N; k++) {
+      var t = easeIO(k / N), mt = 1 - t;
+      var x = mt*mt*x0 + 2*mt*t*cx + t*t*x1, yy = mt*mt*y0 + 2*mt*t*cy + t*t*y1, d = d0 + (d1 - d0) * t;
+      kf.push({ transform: 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (yy - d/2).toFixed(2) + 'px,0) scale(' + (d/10).toFixed(4) + ')' });
+    }
+    inIntro = true; siedi(-1); lp.classList.add('vuoto');
+    metti(x0, y0, d0);
+    if (!punto.animate) { inIntro = false; lp.classList.remove('vuoto'); return chiedi(); }
+    introAnim = punto.animate(kf, { duration: 1050, delay: 380, easing: 'linear', fill: 'both' });
+    function fine(){
+      if (!inIntro) return;
+      inIntro = false; if (introAnim) { introAnim.cancel(); introAnim = null; }
+      lp.classList.remove('vuoto'); quadro();
+    }
+    introAnim.onfinish = fine;
+    addEventListener('scroll', function s(){ removeEventListener('scroll', s); fine(); }, { passive: true });
+    addEventListener('touchstart', function s(){ removeEventListener('touchstart', s); fine(); }, { passive: true });
+  }
+
+  misura();
+  addEventListener('scroll', chiedi, { passive: true });
+  addEventListener('resize', rimisura);
+  if ('ResizeObserver' in window) new ResizeObserver(function(){ requestAnimationFrame(rimisura); }).observe(document.body);
+  var avvia = function(){ misura(); intro(); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ requestAnimationFrame(avvia); });
+  else addEventListener('load', avvia);
+  addEventListener('load', rimisura);
+})();
+</script>
+</body>
+</html>

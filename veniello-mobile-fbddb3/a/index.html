@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
+<meta name="description" content="Fatti trovare. Fatti scegliere. Siti, scheda Google, social, video e Virtual Assistant per le attività della Valdinievole. L’anteprima è gratis.">
+<meta name="theme-color" content="#100F09">
+<link rel="icon" href="../comune/img/favicon-32.png" sizes="32x32" type="image/png">
+<style>
+/* ============================================================================================
+   Veniello Studio — sito da telefono, direzione A «Pellicola» (anteprima, 17/11/2026)
+   La pagina è un film: ogni capitolo è una scena a schermo pieno, con il suo sfondo (video o
+   immagine velata) su uno «schermo» fisso che cambia in dissolvenza. Il puntino arancio è la luce
+   REC: parte dal punto di «scegliere», scorre lungo la pellicola sul bordo destro fermandosi ai
+   capitoli e alla fine torna nel logo.
+   ============================================================================================ */
+@font-face{font-family:"Bricolage";src:url(../comune/fonts/BricolageGrotesque-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Geist";src:url(../comune/fonts/Geist-var.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(../comune/fonts/GeistMono-400.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url(../comune/fonts/InstrumentSerif-italic.woff2) format("woff2");font-style:italic;font-weight:400;font-display:swap}
+
+:root{
+  --bg:#100F09; --bg2:#14130D; --surf:#1A1913; --surf2:#22211A;
+  --av:#F5F4EF; --av2:rgba(245,244,239,.64); --av3:rgba(245,244,239,.4);
+  --filo:rgba(245,244,239,.14); --filo2:rgba(245,244,239,.26);
+  --rec:#FF5A1F;
+  --titolo:"Bricolage","Geist",system-ui,-apple-system,sans-serif;
+  --testo:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --testata:60px;
+  --sx:24px;            /* margine a sinistra */
+  --dx:52px;            /* margine a destra: lascia posto alla pellicola */
+  --binario:20px;       /* distanza della pellicola dal bordo destro */
+  --col:min(100vw,440px);               /* al computer: una colonna larga come un telefono */
+  --fuori:calc((100vw - var(--col)) / 2);
+  --morbido:cubic-bezier(.22,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:#0B0A06}
+body{font-family:var(--testo);font-size:17px;line-height:1.6;letter-spacing:.004em;word-spacing:.05em;color:var(--av);background:#0B0A06;-webkit-font-smoothing:antialiased;font-synthesis:none;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--av);outline-offset:3px;border-radius:6px}
+.salta{position:absolute;left:-999px;top:8px;z-index:99;background:var(--av);color:var(--bg);padding:10px 14px;border-radius:10px}
+.salta:focus{left:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.i{width:18px;height:18px;flex:none}
+
+/* ---------- lo schermo: sfondi fissi che cambiano in dissolvenza ---------- */
+.palco{position:fixed;top:0;left:var(--fuori);width:var(--col);height:100vh;height:100lvh;z-index:0;background:var(--bg);overflow:hidden;pointer-events:none}
+.sf{position:absolute;inset:0;opacity:0;transition:opacity 1.3s var(--morbido)}
+.sf.attivo{opacity:var(--luce,.5)}
+.sf video,.sf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* immagini ferme: si muovono appena, come una ripresa a mano lenta (solo transform) */
+.sf .deriva{animation:deriva 26s ease-in-out infinite alternate;animation-play-state:paused;transform-origin:50% 40%}
+.sf.attivo .deriva{animation-play-state:running}
+@keyframes deriva{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.13) translate3d(-2%,-1.5%,0)}}
+/* contenuti: le foto si danno il cambio piano */
+.sf .diapo{opacity:0;transition:opacity 1.6s var(--morbido)}
+.sf .diapo.su{opacity:1}
+/* sito: jueclub.it intero che scorre lento, come qualcuno che lo sfoglia */
+.sf .scorre{height:auto;bottom:auto;object-fit:initial;animation:sfoglia 46s linear infinite alternate;animation-play-state:paused}
+.sf.attivo .scorre{animation-play-state:running}
+@keyframes sfoglia{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,calc(-100% + 100lvh),0)}}
+/* velo dello schermo: solo in alto (testata) e un filo in basso; il resto lo fa l'ombra che viaggia con le parole (.cartello) */
+.velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,15,9,.72) 0,rgba(16,15,9,0) 17%,rgba(16,15,9,0) 72%,rgba(16,15,9,.42) 100%)}
+/* lo showreel ha il nostro puntino arancio dentro: in bianco e nero, così l'unico arancio resta la luce REC */
+.sf.grigio video{filter:grayscale(1) contrast(1.06)}
+/* la chat del Virtual Assistant: si taglia la cornice del telefono, resta la conversazione */
+.sf[data-strato="va"] video{transform:scale(1.16);transform-origin:50% 100%}
+/* «la tua attività, qui»: un mirino vuoto che aspetta */
+.mirino{position:absolute;top:calc(var(--testata) + 40px);left:20px;right:44px;bottom:56px}
+.mirino i{position:absolute;width:26px;height:26px;border:0 solid rgba(245,244,239,.55)}
+.mirino i:nth-child(1){top:0;left:0;border-top-width:1.5px;border-left-width:1.5px}
+.mirino i:nth-child(2){top:0;right:0;border-top-width:1.5px;border-right-width:1.5px}
+.mirino i:nth-child(3){bottom:0;left:0;border-bottom-width:1.5px;border-left-width:1.5px}
+.mirino i:nth-child(4){bottom:0;right:0;border-bottom-width:1.5px;border-right-width:1.5px}
+.mirino b{position:absolute;left:50%;top:38%;width:30px;height:30px;margin:-15px 0 0 -15px}
+.mirino b::before,.mirino b::after{content:"";position:absolute;background:rgba(245,244,239,.4)}
+.mirino b::before{left:14.25px;top:0;width:1.5px;height:30px}
+.mirino b::after{top:14.25px;left:0;height:1.5px;width:30px}
+/* segnaposto: materiale che non abbiamo ancora */
+.segnaposto{display:flex;align-items:flex-start;border:1.5px dashed rgba(245,244,239,.42);border-radius:14px;padding:14px 16px;font:500 11px/1.55 var(--mono);letter-spacing:.06em;color:rgba(245,244,239,.82);text-transform:none}
+.sf .segnaposto{position:absolute;top:calc(var(--testata) + 26px);left:12px;right:36px;bottom:20px;padding:0}
+.segnaposto.nota{margin-bottom:34px;max-width:34ch}
+
+/* ---------- testata ---------- */
+.testata{position:fixed;top:0;left:var(--fuori);width:var(--col);z-index:50;height:calc(var(--testata) + env(safe-area-inset-top));padding:env(safe-area-inset-top) 12px 0 var(--sx);display:flex;align-items:center;justify-content:space-between}
+/* la testata è una banda scura, come il bordo nero di un film: sotto le scene scorrono e si spengono */
+.testata::before{content:"";position:absolute;inset:0 0 -30px;background:linear-gradient(180deg,rgba(16,15,9,.97) 0,rgba(16,15,9,.95) calc(100% - 46px),rgba(16,15,9,.6) calc(100% - 22px),rgba(16,15,9,0));pointer-events:none;z-index:-1}
+.marchio{display:inline-flex;align-items:center;font-family:var(--testo);font-weight:700;font-size:19px;letter-spacing:-.05em;line-height:1;white-space:nowrap;word-spacing:0}
+.marchio .parola{display:inline}
+.marchio .vv{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-size:1.18em;letter-spacing:0;margin-right:.01em;-webkit-text-stroke:.045em currentColor;paint-order:stroke fill}
+.marchio .pt{display:inline-block;width:.21em;height:.21em;border-radius:50%;background:var(--rec);margin:0 .035em 0 .045em}
+.testata .marchio{min-height:44px;align-items:center}
+.scrivici{position:relative;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 16px 0 13px;border-radius:999px;background:var(--av);color:var(--bg);font-weight:600;font-size:14.5px;letter-spacing:0;word-spacing:0}
+.scrivici::after{content:"";position:absolute;inset:-4px -4px}
+.scrivici .i{width:16px;height:16px}
+
+/* ---------- la pellicola e la luce REC ---------- */
+.pellicola{position:fixed;z-index:40;top:calc(var(--testata) + env(safe-area-inset-top) + 22px);bottom:calc(30px + env(safe-area-inset-bottom));right:calc(var(--fuori) + var(--binario));width:1px;pointer-events:none;transition:opacity .4s ease}
+.pellicola .filo{position:absolute;inset:0;background:var(--filo)}
+.pellicola .fatto{position:absolute;left:0;top:0;width:1px;height:100%;background:rgba(245,244,239,.5);transform-origin:50% 0;transform:scaleY(0)}
+.pellicola .tacca{position:absolute;left:-3px;width:7px;height:1px;margin-top:-.5px;background:rgba(245,244,239,.3);transition:background .4s ease}
+.pellicola .tacca.passata{background:rgba(245,244,239,.75)}
+.pellicola .etichetta{position:absolute;right:11px;top:0;writing-mode:vertical-rl;font:500 10.5px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:rgba(245,244,239,.82);white-space:nowrap;word-spacing:0;opacity:0;transition:opacity .35s ease;text-shadow:0 0 12px rgba(16,15,9,.95),0 0 3px rgba(16,15,9,.8)}
+.pellicola .etichetta.su{opacity:1}
+.pellicola .etichetta b{font-weight:500;color:var(--av)}
+.rec{position:fixed;left:0;top:0;z-index:45;width:10px;height:10px;margin:-5px 0 0 -5px;pointer-events:none;will-change:transform;visibility:hidden}
+.js .rec{visibility:visible}
+.rec::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--rec)}
+.rec .alone{position:absolute;inset:-7px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,31,.55),rgba(255,90,31,0) 68%);opacity:0}
+.rec.sosta .alone::after{content:"";position:absolute;inset:-3px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,90,31,.45);animation:respiro 2.8s ease-in-out infinite}
+@keyframes respiro{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+/* i due punti «di casa» (in «scegliere» e nel logo finale): il puntino ci si posa sopra */
+.casa{display:inline-block;border-radius:50%;background:var(--rec)}
+.js:not(.fermo) .casa.via{background:transparent}
+/* nel logo finale il posto vuoto si vede appena: il puntino sta tornando */
+.js:not(.fermo) .coda .casa.via{box-shadow:inset 0 0 0 1px rgba(245,244,239,.34)}
+
+/* ---------- scene ---------- */
+main{position:relative;z-index:1;width:var(--col);margin:0 auto}
+.scena{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:var(--su,46svh) var(--dx) calc(64px + env(safe-area-inset-bottom)) var(--sx)}
+.micro{font-family:var(--mono);font-size:11.5px;line-height:1.5;letter-spacing:.18em;word-spacing:0;text-transform:uppercase;color:var(--av2)}
+/* l'ombra che viaggia con le parole: dietro a ogni cartello lo sfondo si scurisce, intorno resta pieno */
+.cartello{position:relative;isolation:isolate}
+.cartello::before{content:"";position:absolute;z-index:-1;pointer-events:none;left:calc(-1 * var(--sx));right:calc(-1 * var(--dx));top:-150px;bottom:-60px;
+  background:linear-gradient(180deg,rgba(16,15,9,0),rgba(16,15,9,var(--ombra,.6)) 150px,rgba(16,15,9,var(--ombra,.6)) calc(100% - 60px),rgba(16,15,9,0))}
+.parole{font-family:var(--titolo);font-weight:700;font-size:clamp(48px,15.6vw,68px);line-height:.98;letter-spacing:-.03em;word-spacing:0;margin-top:22px}
+.parole .l{display:block}
+.parole .lieve{font-weight:300;color:rgba(245,244,239,.66);letter-spacing:-.02em}
+.sotto{margin-top:26px;font-size:18px;line-height:1.55;color:rgba(245,244,239,.8);max-width:27ch;text-wrap:pretty}
+.didascalia{margin-top:30px;font-family:var(--mono);font-size:11px;line-height:1.5;letter-spacing:.12em;word-spacing:0;text-transform:uppercase;color:var(--av2);display:flex;align-items:center;gap:10px}
+.didascalia::before{content:"";width:16px;height:1px;background:currentColor;flex:none}
+
+/* pulsanti */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px 0 22px;border-radius:999px;font-weight:600;font-size:16px;letter-spacing:0;word-spacing:0;white-space:nowrap;transition:transform .2s ease,background-color .2s ease}
+.btn:active{transform:scale(.97)}
+.btn-pieno{background:var(--av);color:var(--bg)}
+.btn-linea{box-shadow:inset 0 0 0 1px rgba(245,244,239,.36);background:rgba(16,15,9,.3)}
+.link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:500;font-size:16px}
+.link span{border-bottom:1px solid var(--filo2);padding-bottom:2px}
+.link .i{width:16px;height:16px;color:var(--av2)}
+
+/* apertura */
+.apertura{--su:0;--ombra:.4;justify-content:flex-end;padding-bottom:calc(36px + env(safe-area-inset-bottom))}
+.apertura .parole{font-size:clamp(56px,18.4vw,80px);line-height:.94;margin-top:20px}
+.apertura .sotto{margin-top:24px}
+.apertura .azioni{margin-top:30px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.apertura .casa{width:.16em;height:.16em;margin-left:.04em}
+.js:not(.fermo) .apertura .casa{animation:accendi 1.1s .5s both}
+@keyframes accendi{0%{transform:scale(0)}35%{transform:scale(1.35)}50%{transform:scale(1)}62%{opacity:.25}74%{opacity:1}86%{opacity:.25}100%{opacity:1}}
+
+/* tendine (dettagli dei pacchetti e domande) */
+.dettagli{margin-top:30px;border-top:1px solid var(--filo2)}
+.dettagli summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:58px;font-weight:500;font-size:16.5px;cursor:pointer}
+.dettagli summary::-webkit-details-marker{display:none}
+.piu{position:relative;width:14px;height:14px;flex:none;transition:transform .35s var(--morbido)}
+.piu::before,.piu::after{content:"";position:absolute;background:currentColor}
+.piu::before{left:0;right:0;top:6.25px;height:1.5px}
+.piu::after{top:0;bottom:0;left:6.25px;width:1.5px}
+details[open]>summary .piu{transform:rotate(45deg)}
+.voci{list-style:none;padding-bottom:6px}
+.voci li{padding:13px 0;border-top:1px solid var(--filo);color:rgba(245,244,239,.78);font-size:16.5px;line-height:1.45}
+.voci li b{display:block;font-weight:600;color:var(--av);margin-bottom:2px}
+.dettagli .btn{margin:20px 0 6px}
+@media (prefers-reduced-motion:no-preference){
+  details[open] .corpo{animation:apri .55s var(--morbido) both}
+}
+@keyframes apri{from{opacity:0;transform:translate3d(0,-6px,0)}to{opacity:1;transform:none}}
+@supports (interpolate-size:allow-keywords){
+  @media (prefers-reduced-motion:no-preference){
+    :root{interpolate-size:allow-keywords}
+    details::details-content{block-size:0;overflow:clip;transition:block-size .5s var(--morbido),content-visibility .5s allow-discrete}
+    details[open]::details-content{block-size:auto}
+  }
+}
+
+/* pacchetti */
+.pacchetto{--su:44svh}
+.scena[data-sf="sito"]{--ombra:.76}
+.scena[data-sf="va"]{--ombra:.8}
+.scena[data-sf="campagna"]{--ombra:.84}
+.speciale{--su:34svh}
+.speciale .grande{font-size:1.72em;font-weight:700;line-height:.86;letter-spacing:-.045em;margin-top:.04em}
+.onesta{margin-top:34px;padding-top:20px;border-top:1px solid var(--filo);font-size:16px;line-height:1.55;color:var(--av2);max-width:30ch}
+
+/* partner */
+.partner{--su:52svh;min-height:88svh}
+.partner.primo{--su:calc(var(--testata) + 13svh);min-height:100svh}
+.partner.primo .scheda{margin-top:auto;padding-top:0}
+.partner.primo>.cartello:first-child{margin-bottom:150px}
+.scena[data-sf="elena"]{--ombra:.72}
+.partner h3{margin-top:20px}
+.logo-p{width:auto;height:64px}
+.logo-p.eb{height:78px}
+.logo-p.gb{height:84px}
+.partner .sotto{margin-top:18px}
+.partner .micro.lavori{margin-top:14px;color:rgba(245,244,239,.72);letter-spacing:.14em}
+.partner .link{margin-top:14px}
+.tua{--su:40svh;min-height:100svh;--ombra:0}
+.tua .btn{margin-top:30px;align-self:flex-start}
+
+/* come funziona */
+.come{--su:calc(var(--testata) + 12svh);--ombra:.3}
+.passi{list-style:none;margin-top:56px;display:grid;gap:44px}
+.passo{display:grid;grid-template-columns:46px 1fr}
+.passo .n{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--av2);padding-top:10px}
+.passo h3{font-family:var(--titolo);font-weight:600;font-size:27px;line-height:1.14;letter-spacing:-.02em;word-spacing:0}
+.passo p{margin-top:10px;color:rgba(245,244,239,.76);font-size:17px;line-height:1.55}
+.gratis{display:inline-block;vertical-align:middle;position:relative;top:-3px;margin-left:4px;padding:6px 10px 5px;border-radius:999px;background:var(--av);color:var(--bg);font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+
+/* domande */
+.domande{--su:calc(var(--testata) + 14svh);--ombra:0}
+.faq{margin-top:44px;border-top:1px solid var(--filo2)}
+.faq details{border-bottom:1px solid var(--filo)}
+.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:64px;padding:14px 0;font-weight:500;font-size:17px;line-height:1.35;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .piu{color:var(--av2)}
+.faq p{padding:0 0 22px;color:rgba(245,244,239,.74);font-size:16.5px;line-height:1.62}
+
+/* contatti */
+.contatti{--su:calc(var(--testata) + 16svh)}
+.contatti .azioni{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+.recapiti{margin-top:48px;border-top:1px solid var(--filo2)}
+.recapito{display:flex;align-items:center;gap:16px;min-height:72px;padding:14px 0;border-bottom:1px solid var(--filo)}
+.recapito small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;word-spacing:0;text-transform:uppercase;color:var(--av2);margin-bottom:4px}
+.recapito b{font-weight:500;font-size:17px}
+.recapito .i{color:var(--av2)}
+.ritratto{flex:none;width:76px;height:96px;padding:8px 9px;font-size:9.5px;line-height:1.4;letter-spacing:.04em;border-radius:10px}
+
+/* titoli di coda: il logo dove il puntino torna a casa */
+.coda{position:relative;z-index:1;isolation:isolate;width:var(--col);margin:0 auto;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px var(--dx) calc(36px + env(safe-area-inset-bottom)) var(--sx);text-align:center}
+.coda .marchio{font-size:clamp(38px,11.2vw,48px);margin-top:auto}
+.coda::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 30% at 50% 50%,rgba(16,15,9,.66),rgba(16,15,9,0))}
+.coda .marchio .casa{width:.21em;height:.21em;margin:0 .035em 0 .045em}
+.coda .piede{margin-top:auto;font-size:13.5px;line-height:1.7;color:var(--av2);max-width:30ch;word-spacing:.03em}
+
+/* ---------- «Riduci movimento»: niente video, niente spostamenti ---------- */
+html.fermo .sf{transition:none}
+html.fermo .sf .deriva,html.fermo .sf .scorre{animation:none}
+html.fermo .sf .diapo{transition:none}
+html.fermo .pellicola .etichetta{transition:none}
+html.fermo .rec.sosta .alone::after{animation:none}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.piu{transition:none}}
+
+/* senza script: lo sfondo d'apertura resta, il resto è testo */
+html:not(.js) .sf[data-strato="apertura"]{opacity:.55}
+html:not(.js) .pellicola{display:none}
+
+/* al computer: la colonna resta larga come un telefono, ai lati il nero */
+@media (min-width:700px){
+  body::before{content:"";position:fixed;inset:0 auto 0 0;width:var(--fuori);background:#0B0A06;z-index:60;pointer-events:none}
+  body::after{content:"";position:fixed;inset:0 0 0 auto;width:var(--fuori);background:#0B0A06;z-index:60;pointer-events:none}
+}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4l1.2-4.1A8.6 8.6 0 1 1 8 19.4z"/><path d="M9.1 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5 0l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.6-.6.8-.6.3-1.6.4-2.9-.2a9.2 9.2 0 0 1-4.3-4.3c-.6-1.3-.5-2.3-.2-2.9z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+</svg>
+
+<!-- lo schermo: uno sfondo per scena, cambia in dissolvenza; i video girano solo nella scena che si vede -->
+<div class="palco" aria-hidden="true">
+  <div class="sf" data-strato="apertura" style="--luce:.74"><video muted playsinline loop preload="none" poster="../comune/img/spot-una-volta.jpg" src="../comune/video/spot-una-volta.mp4"></video></div>
+  <div class="sf" data-strato="contenuti" style="--luce:.62">
+    <img class="diapo deriva su" data-src="../comune/img/jue-dj-pioneer.jpg" alt="">
+    <img class="diapo deriva" data-src="../comune/img/reel-5-5.jpg" alt="">
+    <img class="diapo deriva" data-src="../comune/img/jue-oldfashioned.jpg" alt="">
+    <img class="diapo deriva" data-src="../comune/img/jue-luci.jpg" alt="">
+  </div>
+  <div class="sf" data-strato="sito" style="--luce:.44"><img class="scorre" data-src="../comune/img/sito-lungo.jpg" alt="" width="420" height="3400"></div>
+  <div class="sf" data-strato="va" style="--luce:.42"><video muted playsinline loop preload="none" poster="../comune/img/va-verticale.jpg" src="../comune/video/va-verticale.mp4"></video></div>
+  <div class="sf grigio" data-strato="campagna" style="--luce:.52"><video muted playsinline loop preload="none" data-da="3.4" data-a="15.2" poster="../comune/img/showreel-verticale.jpg" src="../comune/video/showreel-verticale.mp4"></video></div>
+  <div class="sf" data-strato="jue" style="--luce:.66"><img class="deriva" data-src="../comune/img/jue-locale.jpg" alt=""></div>
+  <div class="sf" data-strato="elena" style="--luce:.6"><img class="deriva" data-src="../comune/img/elena-dettagli.jpg" alt="" style="object-position:50% 30%"></div>
+  <div class="sf" data-strato="gb" style="--luce:.7"><img class="deriva" data-src="../comune/img/gb-catenina.jpg" alt="" style="object-position:50% 70%"></div>
+  <div class="sf" data-strato="tua" style="--luce:1"><span class="mirino"><i></i><i></i><i></i><i></i><b></b></span></div>
+  <div class="sf" data-strato="come" style="--luce:1"><div class="segnaposto vuoto"></div></div>
+  <div class="sf" data-strato="domande" style="--luce:1"></div>
+  <div class="sf" data-strato="fine" style="--luce:.5"><video muted playsinline loop preload="none" poster="../comune/img/spot-una-volta.jpg" src="../comune/video/spot-una-volta.mp4"></video></div>
+  <div class="velo"></div>
+</div>
+
+<header class="testata">
+  <a class="marchio" href="#inizio" aria-label="Veniello Studio, torna all’inizio"><span class="parola" aria-hidden="true"><span class="vv">V</span>eniello<i class="pt"></i>studio</span></a>
+  <a class="scrivici" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
+</header>
+
+<!-- la pellicola: una riga sottile sul bordo, le tacche sono i capitoli -->
+<div class="pellicola" aria-hidden="true"><i class="filo"></i><i class="fatto"></i><span class="etichetta"></span></div>
+<i class="rec" id="rec" aria-hidden="true"><i class="alone"></i></i>
+
+<main id="contenuto">
+
+  <!-- 01 · Apertura -->
+  <section data-cap="Inizio" id="inizio" aria-labelledby="t-inizio">
+    <div class="scena apertura" data-sf="apertura">
+      <div class="cartello">
+      <p class="micro">Social · Google · Video · Siti</p>
+      <h1 class="parole" id="t-inizio"><span class="l lieve">Fatti</span><span class="l">trovare.</span><span class="l lieve">Fatti</span><span class="l">scegliere<i class="casa via" id="casa-inizio" aria-hidden="true"></i><span class="sr">.</span></span></h1>
+      <p class="sotto">Per bar, negozi, saloni, studi e artigiani della Valdinievole.</p>
+      <div class="azioni">
+        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Chiedi l’anteprima gratis</a>
+        <p class="micro">Paghi solo se ti piace</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · Creazione Contenuti -->
+  <section data-cap="Contenuti" id="servizi" aria-labelledby="t-contenuti">
+    <div class="scena pacchetto" data-sf="contenuti">
+      <div class="cartello">
+      <p class="micro">Pacchetto 1 di 4</p>
+      <h2 class="parole" id="t-contenuti"><span class="l lieve">Creazione</span><span class="l">Contenuti</span></h2>
+      <p class="sotto">Video, foto e stories per i tuoi social, anche con l’IA.</p>
+      <details class="dettagli">
+        <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
+        <div class="corpo">
+          <ul class="voci"><li>Creazione di contenuti con l’IA</li><li>Editing di foto e video</li><li>Scheda Google</li><li>Restyling dei profili Instagram e TikTok</li><li>Stories per novità ed eventi</li></ul>
+          <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20pacchetto%20Creazione%20Contenuti" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a>
+        </div>
+      </details>
+      <p class="didascalia">In sfondo: il Jué Club</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Sito Web -->
+  <section data-cap="Sito web" aria-labelledby="t-sito">
+    <div class="scena pacchetto" data-sf="sito">
+      <div class="cartello">
+      <p class="micro">Pacchetto 2 di 4</p>
+      <h2 class="parole" id="t-sito"><span class="l lieve">Sito</span><span class="l">Web</span></h2>
+      <p class="sotto">Chi sei, cosa fai e un tasto per chiamarti.</p>
+      <details class="dettagli">
+        <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
+        <div class="corpo">
+          <ul class="voci"><li>Creazione del sito sul tuo dominio</li><li>Gestione attiva e manutenzione</li><li>Scheda Google</li></ul>
+          <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20pacchetto%20Sito%20Web" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a>
+        </div>
+      </details>
+      <p class="didascalia">In sfondo: jueclub.it, fatto da noi</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Virtual Assistant -->
+  <section data-cap="Virtual Assistant" aria-labelledby="t-va">
+    <div class="scena pacchetto" data-sf="va">
+      <div class="cartello">
+      <p class="micro">Pacchetto 3 di 4</p>
+      <h2 class="parole" id="t-va"><span class="l lieve">Virtual</span><span class="l">Assistant</span></h2>
+      <p class="sotto">Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.</p>
+      <details class="dettagli">
+        <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
+        <div class="corpo">
+          <ul class="voci"><li>Risposte in pochi secondi, a qualsiasi ora, anche di notte e la domenica</li><li>Dà orari, indirizzo, servizi e prezzi fissi della tua attività</li><li>Raccoglie appuntamenti e richieste, e te li manda riassunti</li><li>Risponde in tutte le lingue</li><li>Decidi tu i limiti e quando deve passarti la conversazione</li><li>Per le prime due settimane lo controlliamo noi</li></ul>
+          <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20prenotare%20un%E2%80%99anteprima%20del%20Virtual%20Assistant%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Prenota un’anteprima</a>
+        </div>
+      </details>
+      <p class="didascalia">In sfondo: un esempio su WhatsApp</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Campagna Pubblicitaria 360° -->
+  <section data-cap="Campagna 360°" aria-labelledby="t-360">
+    <div class="scena pacchetto speciale" data-sf="campagna">
+      <div class="cartello">
+      <p class="micro">Pacchetto speciale</p>
+      <h2 class="parole" id="t-360"><span class="l lieve">Campagna</span><span class="l lieve">Pubblicitaria</span><span class="l grande">360°</span></h2>
+      <p class="sotto">Contenuti, sito e Virtual Assistant insieme, in una sola campagna.</p>
+      <details class="dettagli">
+        <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
+        <div class="corpo">
+          <ul class="voci"><li><b>Creazione Contenuti</b>Video, foto, stories, Google, Instagram e TikTok</li><li><b>Sito Web</b>Sul tuo dominio, gestito e aggiornato</li><li><b>Virtual Assistant</b>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi</li></ul>
+          <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a>
+        </div>
+      </details>
+      <p class="onesta">Siti, video e grafiche sono lavori veri per il Jué Club di Montecatini Terme. La scheda Google e il Virtual Assistant sono esempi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · Partner -->
+  <section data-cap="Partner" id="partner" aria-labelledby="t-partner">
+    <div class="scena partner primo" data-sf="jue">
+      <div class="cartello">
+      <p class="micro">Partner</p>
+      <h2 class="parole" id="t-partner"><span class="l lieve">Chi ci</span><span class="l">ha scelto.</span></h2>
+      </div>
+      <div class="cartello scheda">
+        <p class="micro">Montecatini Terme</p>
+        <h3><img class="logo-p" src="../comune/img/jue-logo.png" alt="Jué Club" width="480" height="184" loading="lazy"></h3>
+        <p class="sotto">Cocktail bar, bistrot e DJ set.</p>
+        <p class="micro lavori">Sito · Video delle serate · Social</p>
+        <a class="link" href="https://jueclub.it" target="_blank" rel="noopener"><span>Visita jueclub.it</span><svg class="i" aria-hidden="true"><use href="#i-link"/></svg></a>
+      </div>
+    </div>
+    <div class="scena partner" data-sf="elena">
+      <div class="cartello">
+      <p class="micro">Montecatini Terme</p>
+      <h3><img class="logo-p eb" src="../comune/img/elena-logo.png" alt="Elena Baldi Wedding Planner" width="619" height="376" loading="lazy"></h3>
+      <p class="sotto">Wedding planner: matrimoni curati in ogni dettaglio.</p>
+      <p class="micro lavori">Social · Video</p>
+      <a class="link" href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener"><span>Visita elenabaldiwp.it</span><svg class="i" aria-hidden="true"><use href="#i-link"/></svg></a>
+      </div>
+    </div>
+    <div class="scena partner" data-sf="gb">
+      <div class="cartello">
+      <p class="micro">Città di Castello · Umbertide</p>
+      <h3><img class="logo-p gb" src="../comune/img/gb-logo.png" alt="GB Oro, compro oro" width="136" height="184" loading="lazy"></h3>
+      <p class="sotto">Compro oro.</p>
+      <p class="micro lavori">Instagram · TikTok e Facebook · Reel</p>
+      <a class="link" href="https://www.instagram.com/gb.oro/" target="_blank" rel="noopener"><span>Guarda @gb.oro</span><svg class="i" aria-hidden="true"><use href="#i-link"/></svg></a>
+      </div>
+    </div>
+    <div class="scena tua" data-sf="tua">
+      <div class="cartello">
+      <h3 class="parole"><span class="l lieve">La tua</span><span class="l lieve">attività,</span><span class="l">qui.</span></h3>
+      <p class="sotto">Ti prepariamo l’anteprima gratis: se ti piace, entri anche tu.</p>
+      <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · Come funziona -->
+  <section data-cap="Come funziona" id="come" aria-labelledby="t-come">
+    <div class="scena come" data-sf="come">
+      <div class="cartello">
+      <p class="segnaposto nota">Segnaposto, sfondo di questa scena: video di noi al lavoro (riprese da un cliente, montaggio, telefono in mano). Verticale, muto, 10-15 secondi, in loop.</p>
+      <p class="micro">Come funziona</p>
+      <h2 class="parole" id="t-come"><span class="l lieve">Prima</span><span class="l">lo vedi.</span><span class="l lieve">Poi</span><span class="l">decidi.</span></h2>
+      <ol class="passi">
+        <li class="passo"><span class="n">01</span><div><h3>Ci scrivi.</h3><p>Su WhatsApp o per telefono: in due minuti ci racconti la tua attività.</p></div></li>
+        <li class="passo"><span class="n">02</span><div><h3>Ti prepariamo l’anteprima. <span class="gratis">Gratis</span></h3><p>Con foto e informazioni vere. Ti arriva un link da aprire sul telefono.</p></div></li>
+        <li class="passo"><span class="n">03</span><div><h3>Se ti piace, va online.</h3><p>Il preventivo è scritto prima. Paghi solo se ti piace.</p></div></li>
+      </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · Domande -->
+  <section data-cap="Domande" id="domande" aria-labelledby="t-domande">
+    <div class="scena domande" data-sf="domande">
+      <div class="cartello">
+      <p class="micro">Domande</p>
+      <h2 class="parole" id="t-domande"><span class="l lieve">Le domande</span><span class="l">di tutti.</span></h2>
+      <div class="faq">
+        <details><summary>L’anteprima è davvero gratis?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Quella del sito e quella del Virtual Assistant sì: le guardi con calma sul telefono e decidi. Se non ti convince, non paghi e non ti impegni. L’anteprima di un video invece è a pagamento: una prova di 12-13 secondi, in qualità più bassa del video finito.</p></div></details>
+        <details><summary>Ci sono altre spese?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Se fai il sito, solo il dominio, cioè il nome del sito (per esempio latuaattivita.it). È intestato a te e costa circa 10-15 € l’anno.</p></div></details>
+        <details><summary>Il sito resta mio?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Sì. Una volta pagato è tuo e resta online anche senza abbonamento: paghi solo il dominio. Se vuoi, con la gestione attiva lo teniamo aggiornato noi.</p></div></details>
+        <details><summary>Quanto costa?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Dipende dal pacchetto e da quello che ti serve. Ti prepariamo l’anteprima e il prezzo te lo scriviamo prima che tu decida: niente sorprese.</p></div></details>
+        <details><summary>Le foto da dove le prendete?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Solo foto vere della tua attività: quelle che hai già sui social, quelle che ci mandi o quelle che facciamo noi quando veniamo a fare le riprese.</p></div></details>
+        <details><summary>Venite voi a fare le riprese?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Se serve sì, e lo decidiamo insieme prima. Altrimenti li fai tu con il telefono, seguendo la nostra guida, oppure li creiamo con l’IA dalle tue foto. Montaggio, testi e pubblicazione li curiamo noi.</p></div></details>
+        <details><summary>In che zona lavorate?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Siamo a Montecatini Terme e lavoriamo con le attività di tutta la Valdinievole. Se vuoi, ci vediamo di persona.</p></div></details>
+        <details><summary>Cosa devo fare per avere il Virtual Assistant?<i class="piu" aria-hidden="true"></i></summary><div class="corpo"><p>Compili una scheda semplice, circa 30 minuti: orari, servizi, prezzi che non cambiano, le domande più frequenti e le cose che non deve mai dire. Lo vedi rispondere in anteprima; se ti convince lo attiviamo, e per le prime due settimane lo controlliamo noi.</p></div></details>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · Contatti -->
+  <section data-cap="Contatti" id="contatti" aria-labelledby="t-contatti">
+    <div class="scena contatti" data-sf="fine">
+      <div class="cartello">
+      <p class="micro">Contatti</p>
+      <h2 class="parole" id="t-contatti"><span class="l lieve">Vuoi vedere</span><span class="l">il tuo sito?</span></h2>
+      <p class="sotto">Scrivici il nome della tua attività: ti prepariamo l’anteprima gratis, senza impegno.</p>
+      <div class="azioni">
+        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici su WhatsApp</a>
+        <a class="btn btn-linea" href="tel:+393520338377"><svg class="i" aria-hidden="true"><use href="#i-tel"/></svg>Chiama</a>
+      </div>
+      <div class="recapiti">
+        <a class="recapito" href="tel:+393520338377"><span class="segnaposto ritratto">Segnaposto: foto di Giuseppe</span><span><small>Telefono e WhatsApp · Giuseppe Fusciello</small><b>+39 352 033 8377</b></span></a>
+        <a class="recapito" href="mailto:giuseppe@veniellostudio.it"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg><span><small>Email</small><b>giuseppe@veniellostudio.it</b></span></a>
+        <div class="recapito"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span><small>Dove</small><b>Montecatini Terme, Valdinievole</b></span></div>
+      </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="coda">
+  <a class="marchio" href="#inizio" aria-label="Veniello Studio, torna all’inizio"><span class="parola" aria-hidden="true"><span class="vv">V</span>eniello<i class="casa via" id="casa-fine"></i>studio</span></a>
+  <p class="piede">Siti, Google, social e video · Montecatini Terme · © 2026 · Niente cookie, niente tracciamenti.</p>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var H = document.documentElement;
+  H.classList.add('js');
+  var fermo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (fermo) H.classList.add('fermo');
+  function lim(v, a, b){ return v < a ? a : v > b ? b : v; }
+  function liscio(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  function fuori(t){ return 1 - Math.pow(1 - t, 3); }
+
+  /* ================= gli sfondi ================= */
+  var strati = {}, ordine = [];
+  [].forEach.call(document.querySelectorAll('.sf'), function(el){ strati[el.dataset.strato] = el; ordine.push(el.dataset.strato); });
+  var attivo = null;
+  function carica(el){
+    if (!el || el._carico) return; el._carico = 1;
+    [].forEach.call(el.querySelectorAll('[data-src]'), function(m){ m.src = m.dataset.src; m.removeAttribute('data-src'); });
+  }
+  function video(el, gira){
+    [].forEach.call(el.querySelectorAll('video'), function(v){
+      if (gira && !fermo && !document.hidden){
+        v.muted = true;
+        // alcuni video girano solo su un tratto (data-da / data-a): lo showreel salta il logo d'apertura e di chiusura
+        var da = parseFloat(v.dataset.da), a = parseFloat(v.dataset.a);
+        if (da && !v._tratto){ v._tratto = 1; v.addEventListener('timeupdate', function(){ if (v.currentTime >= a || v.currentTime < da - .5) v.currentTime = da; }); }
+        if (da && v.currentTime < da) { try { v.currentTime = da; } catch (e) {} }
+        var p = v.play(); if (p && p.catch) p.catch(function(){});
+      }
+      else if (!v.paused) v.pause();
+    });
+  }
+  function diapo(el, gira){
+    var tutte = el.querySelectorAll('.diapo'); clearInterval(el._giro);
+    if (!gira || fermo || tutte.length < 2) return;
+    el._giro = setInterval(function(){
+      var ora = el.querySelector('.diapo.su'), i = [].indexOf.call(tutte, ora), poi = tutte[(i + 1) % tutte.length];
+      ora.classList.remove('su'); poi.classList.add('su');
+    }, 4600);
+  }
+  function attiva(k){
+    if (k === attivo || !strati[k]) return;
+    var prima = strati[attivo], ora = strati[k];
+    attivo = k;
+    carica(ora); carica(strati[ordine[ordine.indexOf(k) + 1]]);
+    clearTimeout(ora._spegni);
+    ora.classList.add('attivo'); video(ora, true); diapo(ora, true);
+    if (prima){
+      prima.classList.remove('attivo');
+      clearTimeout(prima._spegni);
+      // il video uscente gira finché la dissolvenza non è finita, poi si ferma: al massimo due insieme
+      prima._spegni = setTimeout(function(){ if (!prima.classList.contains('attivo')){ video(prima, false); diapo(prima, false); } }, fermo ? 0 : 1350);
+    }
+  }
+  attiva('apertura');
+  // la scena che passa sulla riga al 35% dello schermo decide lo sfondo
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(voci){
+      voci.forEach(function(v){ if (v.isIntersecting) attiva(v.target.dataset.sf); });
+    }, { rootMargin: '-35% 0px -64% 0px' });
+    [].forEach.call(document.querySelectorAll('[data-sf]'), function(s){ io.observe(s); });
+  }
+  document.addEventListener('visibilitychange', function(){ if (strati[attivo]) video(strati[attivo], !document.hidden); });
+
+  /* ================= il puntino REC sulla pellicola ================= */
+  var rec = document.getElementById('rec'), alone = rec.querySelector('.alone');
+  var pell = document.querySelector('.pellicola'), fatto = pell.querySelector('.fatto'), etic = pell.querySelector('.etichetta');
+  var casaInizio = document.getElementById('casa-inizio'), casaFine = document.getElementById('casa-fine');
+  var capitoli = [].slice.call(document.querySelectorAll('[data-cap]')), N = capitoli.length;
+  var tacche = capitoli.map(function(c, i){
+    var t = document.createElement('i'); t.className = 'tacca'; t.style.top = (i / (N - 1) * 100) + '%'; pell.appendChild(t); return t;
+  });
+  var M = null, etichettaOra = -1, altEtic = 0;
+  function misura(){
+    var y = scrollY;
+    var p = pell.getBoundingClientRect();
+    M = { vh: innerHeight, x: p.left + p.width / 2, top: p.top, alto: p.height,
+      cap: capitoli.map(function(c){ var r = c.getBoundingClientRect(); return { a: r.top + y, b: r.bottom + y }; }) };
+    segna();
+  }
+  function scriviEtichetta(i){
+    if (i === etichettaOra) return; etichettaOra = i;
+    etic.innerHTML = '<b>' + String(i + 1).padStart(2, '0') + '</b> · ' + capitoli[i].dataset.cap;
+    altEtic = etic.offsetHeight;
+  }
+  function segna(){
+    if (!M) return;
+    var y = scrollY, vh = M.vh, c = y + vh * .35;
+    // in quale capitolo siamo e quanto ne abbiamo visto
+    var i = 0; while (i < N - 1 && c >= M.cap[i].b) i++;
+    var k = M.cap[i], u = lim((c - k.a) / Math.max(1, k.b - k.a), 0, 1), x = 2 * u - 1;
+    // dentro il capitolo il puntino resta quasi fermo sulla sua tacca; tra un capitolo e l'altro corre alla successiva
+    var f = fermo ? i : lim(i + .5 * (.12 * x + .88 * Math.pow(x, 5)), 0, N - 1);
+    var yBin = M.top + f / (N - 1) * M.alto;
+    var px = M.x, py = yBin, s = 1, luce = 1;
+    // partenza: il punto di «scegliere» si stacca e raggiunge la pellicola
+    var q = lim(y / (vh * .5), 0, 1);
+    var ri = casaInizio.getBoundingClientRect();
+    if (q < 1 && !fermo){
+      var cx = ri.left + ri.width / 2, cy = ri.top + ri.height / 2, k0 = ri.width / 10;
+      px = cx + (px - cx) * fuori(q); py = cy + (py - cy) * liscio(q); s = k0 + (1 - k0) * liscio(q); luce = q;
+    }
+    // arrivo: nei titoli di coda torna a essere il punto del logo
+    var rf = casaFine.getBoundingClientRect();
+    var r = lim((vh * .92 - rf.top) / (vh * .42), 0, 1);
+    if (r > 0 && !fermo){
+      var lx = rf.left + rf.width / 2, ly = rf.top + rf.height / 2, e = liscio(r), k1 = rf.width / 10;
+      px = px + (lx - px) * fuori(r); py = py + (ly - py) * e; s = s + (k1 - s) * e; luce = luce * (1 - e);
+    }
+    // ai due capi il puntino «posa»: lo disegna il punto vero nel testo, così scorre con la pagina senza tremare
+    var aCasa = fermo ? (q < .5 || r > 0) : (q <= .001 || r >= .999);
+    casaInizio.classList.toggle('via', !(aCasa && q < .5));
+    casaFine.classList.toggle('via', !(aCasa && r > 0));
+    rec.style.opacity = aCasa ? 0 : 1;
+    rec.style.transform = 'translate3d(' + px.toFixed(2) + 'px,' + py.toFixed(2) + 'px,0) scale(' + s.toFixed(3) + ')';
+    alone.style.opacity = luce.toFixed(3);
+    fatto.style.transform = 'scaleY(' + (f / (N - 1)).toFixed(4) + ')';
+    pell.style.opacity = (1 - .85 * r).toFixed(3);
+    for (var j = 0; j < N; j++) tacche[j].classList.toggle('passata', f >= j - .02);
+    // l'etichetta del capitolo compare quando il puntino è fermo sulla sua tacca
+    var vicino = Math.round(f), sosta = Math.abs(f - vicino) < .1 && q >= 1 && r === 0;
+    scriviEtichetta(vicino);
+    var et = lim(M.top + vicino / (N - 1) * M.alto - altEtic / 2, M.top, M.top + M.alto - altEtic) - M.top;
+    etic.style.transform = 'translate3d(0,' + et.toFixed(1) + 'px,0)';
+    etic.classList.toggle('su', sosta);
+    rec.classList.toggle('sosta', sosta);
+  }
+  var inCoda = false;
+  function chiedi(){ if (!inCoda){ inCoda = true; requestAnimationFrame(function(){ inCoda = false; segna(); }); } }
+  addEventListener('scroll', chiedi, { passive: true });
+  addEventListener('resize', function(){ requestAnimationFrame(misura); });
+  if ('ResizeObserver' in window) new ResizeObserver(function(){ requestAnimationFrame(misura); }).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(misura);
+  misura();
+
+  /* link interni: scorrimento morbido (con «Riduci movimento» salta e basta) */
+  [].forEach.call(document.querySelectorAll('a[href^="#"]'), function(a){
+    a.addEventListener('click', function(ev){
+      var id = a.getAttribute('href').slice(1), t = document.getElementById(id);
+      if (!t) return; ev.preventDefault();
+      if (id === 'inizio') scrollTo({ top: 0, behavior: fermo ? 'auto' : 'smooth' });
+      else t.scrollIntoView({ behavior: fermo ? 'auto' : 'smooth' });
+    });
+  });
+})();
+</script>
+</body>
+</html>
