@@ -172,6 +172,7 @@ html.viaggio .due-toni .pt.qui{background:var(--rec)}
 /* ── 3 · Pacchetti, ciascuno come una sezione di Linear: pannello, titolo, riga grigia, dettagli ── */
 .pacchetto{padding-top:56px;padding-bottom:76px}
 #servizi{padding-bottom:56px}
+#servizi{padding-top:120px;border-top:0}
 #contenuti{border-top:0;padding-top:0}
 .pacchetto .pannello{height:min(118vw,480px);margin-bottom:44px}
 .conta{margin-bottom:18px}
@@ -465,16 +466,6 @@ details[open] > summary .piu::after{transform:rotate(0)}
     </figure>
   </section>
 
-  <!-- 2 · Loghi e paragrafo a due toni -->
-  <section class="fiducia" aria-label="Perché serve">
-    <ul class="loghi" aria-label="Partner">
-      <li><img src="../comune/img/jue-logo.png" alt="Jué Club" width="480" height="184"></li>
-      <li><img class="eb" src="../comune/img/elena-logo.png" alt="Elena Baldi Wedding Planner" width="619" height="376"></li>
-      <li><img class="gb" src="../comune/img/gb-logo.png" alt="GB Gioielli" width="136" height="184"></li>
-    </ul>
-    <p class="micro">Le attività con cui lavoriamo ogni mese</p>
-    <p class="due-toni"><span>I clienti decidono dal telefono, in pochi secondi.</span> Cercano su Google, aprono il sito, guardano Instagram. Noi sistemiamo tutti e tre, così la scelta cade su di&nbsp;te<i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></p>
-  </section>
 
   <!-- 3 · Servizi -->
   <section class="sez" id="servizi" aria-labelledby="t-servizi">
@@ -934,6 +925,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
   function quadro(){
     pianificato = false;
     var y = scrollY;
+    var fondo = clamp((y - AP.fine) / 60, 0, 1);
+    if (fondo !== testata._fondo) { testata._fondo = fondo; testata.style.setProperty('--fondo', fondo.toFixed(3)); if (fondo > 0) { dxTestata.style.setProperty('--dx', 1); piccolo.style.opacity = 1; } }
     if (y > ST.T - 2 * vh && y < ST.T + ST.R + 2 * vh) aggiornaScena(y, vh);
     /* lo showreel gira solo mentre il puntino ci sta dentro */
     var dentro = false;
