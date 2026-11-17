@@ -825,8 +825,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var L = battute.map(function(b){ var pt = b.querySelector('.pt'); if (!pt) return null; var q = offsetIn(pt, palco); return { el: pt, x: pr.left + q.x + pt.offsetWidth / 2, ly: q.y + pt.offsetHeight / 2, d: pt.offsetWidth, scena: true }; });
     /* i posti normali, in ordine di pagina */
     var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: el.hasAttribute('data-video') ? DOT : q.width, alto: el.hasAttribute('data-dall-alto'), video: el.hasAttribute('data-video') }; });
-    P.forEach(function(s){ if (s.video) { if (srPosto && srPosto.uscito) s.uscito = true; srPosto = s; } });
-    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; });
+    P.forEach(function(s){ if (s.video) { if (srPosto && srPosto.uscito) s.uscito = true; srPosto = s; s.top = s.el.parentNode.getBoundingClientRect().top + y0; } });
+    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; if (s.video) { s.inY = s.ly - vh * .42; s.outY = s.ly - vh * .1; } });
     var L1 = L[0], L3 = L[2], L4 = L[3];
     L1.inY = ST.T + L1.ly - Yin; L1.outY = ST.T + .22 * ST.R;
     L4.inY = ST.T + .9 * ST.R; L4.outY = ST.T + ST.R + Math.max(24, L4.ly - Yout);
@@ -838,6 +838,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
     for (i = n - 2; i >= 0; i--) if (seq[i] !== L1) seq[i].inY = Math.min(seq[i].inY, seq[i+1].inY - 120);
     for (i = 0; i < n - 1; i++) if (seq[i] !== L1) { seq[i].outY = Math.min(seq[i].outY, seq[i+1].inY - 80); if (seq[i].outY < seq[i].inY) seq[i].outY = seq[i].inY; }
     seq[0].inY = AP.fine; AP.primo = seq[0];
+    seq[0].outY = AP.fine + 40; if (seq[1]) seq[0].outY = Math.min(seq[0].outY, seq[1].inY - 60);
     if (seq[0].outY < seq[0].inY + 40) seq[0].outY = seq[0].inY + 40;
     /* i tratti */
     ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
@@ -853,7 +854,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
         SEG.push({ a: T + .70*R, b: T + .78*R, k: 'linea', da: H1, a2: L3 });
         SEG.push({ a: T + .78*R, b: T + .86*R, k: 'seduto', s: L3 });
         SEG.push({ a: T + .86*R, b: T + .90*R, k: 'linea', da: L3, a2: L4 });
-      } else if (nx) SEG.push({ a: s.outY, b: nx.inY, k: 'viaggio', da: s, a2: nx });
+      } else if (nx) SEG.push({ a: s.outY, b: nx.inY, k: nx.video ? 'diretto' : 'viaggio', da: s, a2: nx });
     }
     SEG.push({ a: seq[n-1].outY, b: 1e9, k: 'seduto', s: seq[n-1] });
   }
@@ -961,6 +962,13 @@ details[open] > summary .piu::after{transform:rotate(0)}
       if (g.k === 'seduto') return g.s.el ? siedi(g.s) : metti(g.s.x, sy(g.s, y), g.s.d);
       if (g.k === 'fermo') return metti(g.s.x, sy(g.s, y), g.s.d);
       if (g.k === 'apertura') return apertura(y);
+      if (g.k === 'diretto') {
+        if (g.a2.uscito) return viaggio(g.da, g.a2, y, g.b - g.a, y - g.a);
+        var ed = liscio(t), dax = g.da.x, day = sy(g.da, y), dbx = g.a2.x, dby = sy(g.a2, y), ddy = dby - day;
+        var dx2 = c3(dax, dax, dbx, dbx, ed), dy2 = c3(day, day + ddy * .35, dby - ddy * .5, dby, ed);
+        punto.classList.toggle('sotto', dy2 > g.a2.top - y + 3);
+        return metti(dx2, dy2, lerp(g.da.d, g.a2.d, ed));
+      }
       if (g.k === 'linea') { var e2 = liscio(t), pa = arco(g.da.x, sy(g.da, y), g.a2.x, sy(g.a2, y), e2, .22); return metti(pa[0], pa[1], lerp(g.da.d, g.a2.d, e2)); }
       if (g.k === 'tendina') return metti(lerp(g.da.x, g.a2.x, t), sy(g.da, y), 10);
       if (g.k === 'viaggio') return viaggio(g.da, g.a2, y, g.b - g.a, y - g.a);
