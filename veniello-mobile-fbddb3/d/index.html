@@ -136,7 +136,7 @@ html.viaggio .ap-palco{position:sticky;top:0}
 html.viaggio .ap-v-box{display:block}
 .ap-v{display:block;transform-origin:50% 50%;will-change:transform;visibility:hidden}
 /* il titolo sale sopra il palco mentre il logo va nella testata */
-html.viaggio .eroe{position:relative;z-index:2;margin-top:-42vh;margin-top:-42svh}
+html.viaggio .eroe{position:relative;z-index:2;margin-top:calc(40px - 100vh);margin-top:calc(40px - 100svh)}
 .marchio-grande .ap-via{display:inline-block;will-change:transform,opacity}
 html.viaggio .marchio-grande .pl{visibility:hidden}
 .apertura-piede{position:absolute;left:var(--lato);right:var(--lato);bottom:calc(26px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center}
@@ -830,11 +830,10 @@ details[open] > summary .piu::after{transform:rotate(0)}
     seq[n-1].inY = Math.min(seq[n-1].inY, maxS);
     for (i = n - 2; i >= 0; i--) if (seq[i] !== L1) seq[i].inY = Math.min(seq[i].inY, seq[i+1].inY - 120);
     for (i = 0; i < n - 1; i++) if (seq[i] !== L1) { seq[i].outY = Math.min(seq[i].outY, seq[i+1].inY - 80); if (seq[i].outY < seq[i].inY) seq[i].outY = seq[i].inY; }
-    if (seq[0].inY < AP.fine + 80) seq[0].inY = AP.fine + 80;
-    if (seq[0].outY < seq[0].inY) seq[0].outY = seq[0].inY;
+    seq[0].inY = AP.fine; AP.primo = seq[0];
+    if (seq[0].outY < seq[0].inY + 40) seq[0].outY = seq[0].inY + 40;
     /* i tratti */
-    ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
-    SEG = [{ a: -1e9, b: AP.fine, k: 'apertura' }, { a: AP.fine, b: seq[0].inY, k: 'viaggio', da: ATTESA, a2: seq[0] }];
+    SEG = [{ a: -1e9, b: AP.fine, k: 'apertura' }];
     for (i = 0; i < n; i++) {
       var s = seq[i], nx = seq[i+1];
       SEG.push({ a: s.inY, b: s.outY, k: 'seduto', s: s });
@@ -887,8 +886,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
   function apertura(y){
     var q = clamp((y - AP.top) / AP.len, 0, 1), top = y <= AP.fine ? 0 : AP.fine - y;
     var f = liscio(clamp(q / .26, 0, 1));                       /* «eniello» e «studio» se ne vanno */
-    var e = liscio(clamp((q - .10) / .40, 0, 1));               /* la V cresce e va al centro */
-    var x = liscio(clamp((q - .70) / .26, 0, 1));               /* il logo va nella testata */
+    var e = liscio(clamp((q - .10) / .38, 0, 1));               /* la V cresce e va al centro */
+    var x = liscio(clamp((q - .60) / .30, 0, 1));               /* il logo va nella testata */
     if (q !== apQ) {
       apQ = q;
       apVia.forEach(function(el, i){ el.style.opacity = (1 - f).toFixed(3); el.style.transform = 'translate3d(' + ((i ? 22 : 10) * f).toFixed(1) + 'px,' + (-4 * f).toFixed(1) + 'px,0)'; });
@@ -896,7 +895,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
       cx = lerp(cx, AP.hc.x, x); cy = lerp(cy, AP.hc.y - top, x); sc = lerp(sc, AP.hs, x);
       AP.cur = { cx: cx, cy: cy, sc: sc };
       apV.style.transform = 'translate3d(' + (cx - AP.tc.x).toFixed(2) + 'px,' + (cy - AP.tc.y).toFixed(2) + 'px,0) scale(' + (sc / AP.S).toFixed(4) + ')';
-      var arrivato = q >= .985;
+      var arrivato = q >= .9;
       apV.style.opacity = arrivato ? 0 : 1;
       var aRiposo = q < .002;
       apV.style.visibility = aRiposo ? 'hidden' : 'visible'; vvG.style.visibility = aRiposo ? 'visible' : 'hidden';
@@ -910,15 +909,16 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var c = AP.cur, lx = c.cx + (AP.pd.x - AP.vc.x) * c.sc, ly = c.cy + (AP.pd.y - AP.vc.y) * c.sc + top, ld = AP.dl * c.sc;
     var b0x = AP.b0.x, b0y = AP.b0.y + top, t;
     if (q < .04) return metti(b0x, b0y, AP.b0.d);
-    if (q < .50) {
-      t = liscio((q - .04) / .46);
+    if (q < .46) {
+      t = liscio((q - .04) / .42);
       /* sale a destra sopra «studio», gira e scende nell'angolo della V */
       return metti(c3(b0x, b0x + 70, lx + 80, lx, t), c3(b0y, b0y - 150, ly - 110, ly, t), lerp(AP.b0.d, ld, t));
     }
-    if (q < .70) return metti(lx, ly, ld);
-    t = liscio(clamp((q - .70) / .30, 0, 1));
-    /* lascia il logo con una curva e va ad aspettare nel margine destro */
-    return metti(c3(lx, lx + 60, xM, xM, t), c3(ly, ly - 70, Rm - 120, Rm, t), lerp(ld, DOT, t));
+    if (q < .60) return metti(lx, ly, ld);
+    t = liscio(clamp((q - .60) / .40, 0, 1));
+    /* lascia il logo con una curva morbida e si posa nel punto di «scegliere», che intanto sale */
+    var pb = AP.primo, bx = pb.x, by = sy(pb, y);
+    return metti(c3(lx, lx + 70, bx + 90, bx, t), c3(ly, ly + 30, by - 70, by, t), lerp(ld, pb.d, t));
   }
 
   function quadro(){
