@@ -833,7 +833,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var L = battute.map(function(b){ var pt = b.querySelector('.pt'); if (!pt) return null; var q = offsetIn(pt, palco); return { el: pt, x: pr.left + q.x + pt.offsetWidth / 2, ly: q.y + pt.offsetHeight / 2, d: pt.offsetWidth, scena: true }; });
     /* i posti normali, in ordine di pagina */
     var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: el.hasAttribute('data-video') ? DOT : q.width, alto: el.hasAttribute('data-dall-alto'), video: el.hasAttribute('data-video') }; });
-    P.forEach(function(s){ if (s.video) { if (srPosto && srPosto.uscito) s.uscito = true; srPosto = s; s.top = s.el.parentNode.getBoundingClientRect().top + y0; } });
+    P.forEach(function(s){ if (s.video) { if (srPosto && srPosto.uscito) s.uscito = true; srPosto = s; var fr = s.el.parentNode.getBoundingClientRect(); s.top = fr.top + y0; s.bottom = fr.bottom + y0; s.E = { x: s.x, ly: s.bottom + 46, d: DOT }; } });
     P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; if (s.video) { s.inY = s.ly - vh * .42; s.outY = s.ly - vh * .1; } });
     var L1 = L[0], L3 = L[2], L4 = L[3];
     L1.inY = ST.T + L1.ly - Yin; L1.outY = ST.T + .22 * ST.R;
@@ -862,7 +862,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
         SEG.push({ a: T + .70*R, b: T + .78*R, k: 'linea', da: H1, a2: L3 });
         SEG.push({ a: T + .78*R, b: T + .86*R, k: 'seduto', s: L3 });
         SEG.push({ a: T + .86*R, b: T + .90*R, k: 'linea', da: L3, a2: L4 });
-      } else if (nx) SEG.push({ a: s.outY, b: nx.inY, k: nx.video ? 'diretto' : 'viaggio', da: s, a2: nx });
+      } else if (nx) SEG.push({ a: s.outY, b: nx.inY, k: (nx.video || s.video) ? 'diretto' : 'viaggio', da: s, a2: nx });
     }
     SEG.push({ a: seq[n-1].outY, b: 1e9, k: 'seduto', s: seq[n-1] });
   }
@@ -955,9 +955,9 @@ details[open] > summary .piu::after{transform:rotate(0)}
     if (srEsce && srPosto) {
       var te = (performance.now() - srEsce) / 1100;
       if (te < 1) {
-        var ev = liscio(te), px = srPosto.x, py = sy(srPosto, y);
-        punto.classList.add('sotto');
-        metti(c3(px, px + 90, xM + 10, xM, ev), c3(py, py - 40, Rm - 90, Rm, ev), DOT);
+        var ev = liscio(te), px = srPosto.x, py = sy(srPosto, y), ey = sy(srPosto.E, y), yy3 = lerp(py, ey, ev);
+        punto.classList.toggle('sotto', yy3 < srPosto.bottom - y - 3);
+        metti(px, yy3, DOT);
         requestAnimationFrame(quadro); pianificato = true; return;
       }
       srEsce = 0;
@@ -967,17 +967,20 @@ details[open] > summary .piu::after{transform:rotate(0)}
       var g = SEG[i]; if (y < g.a || y >= g.b) continue;
       sotto = (g.k === 'viaggio' && ((g.a2.video && !g.a2.uscito) || (g.da.video && !g.da.uscito))) || (g.k === 'seduto' && g.s.video);
       punto.classList.toggle('sotto', sotto);
-      if (g.k === 'seduto' && g.s.video && g.s.uscito) return metti(xM, Rm, DOT);
+      if (g.k === 'seduto' && g.s.video && g.s.uscito) { punto.classList.remove('sotto'); return metti(g.s.E.x, sy(g.s.E, y), DOT); }
       var t = (y - g.a) / Math.max(1, g.b - g.a);
       if (g.k === 'seduto') return g.s.el ? siedi(g.s) : metti(g.s.x, sy(g.s, y), g.s.d);
       if (g.k === 'fermo') return metti(g.s.x, sy(g.s, y), g.s.d);
       if (g.k === 'apertura') return apertura(y);
       if (g.k === 'diretto') {
-        if (g.a2.uscito) return viaggio(g.da, g.a2, y, g.b - g.a, y - g.a);
-        var ed = liscio(t), dax = g.da.x, day = sy(g.da, y), dbx = g.a2.x, dby = sy(g.a2, y), ddy = dby - day;
-        var dx2 = c3(dax, dax, dbx, dbx, ed), dy2 = c3(day, day + ddy * .35, dby - ddy * .5, dby, ed);
-        punto.classList.toggle('sotto', dy2 > g.a2.top - y + 3);
-        return metti(dx2, dy2, lerp(g.da.d, g.a2.d, ed));
+        /* dentro e fuori dallo showreel sempre al centro: entra dall'alto, esce dal basso */
+        var vid = g.da.video ? g.da : g.a2, dA = g.da, dB = g.a2;
+        if (dA.video && dA.uscito) dA = dA.E;
+        if (dB.video && dB.uscito) dB = dB.E;
+        var ed = liscio(t), dax = dA.x, day = sy(dA, y), dbx = dB.x, dby = sy(dB, y), ddy = dby - day;
+        var dx2 = c3(dax, dax, dbx, dbx, ed), dy2 = g.da.video ? c3(day, day + ddy * .5, dby - ddy * .35, dby, ed) : c3(day, day + ddy * .35, dby - ddy * .5, dby, ed);
+        punto.classList.toggle('sotto', !vid.uscito && dy2 > vid.top - y + 3 && dy2 < vid.bottom - y - 3);
+        return metti(dx2, dy2, lerp(dA.d, dB.d, ed));
       }
       if (g.k === 'linea') { var e2 = liscio(t), pa = arco(g.da.x, sy(g.da, y), g.a2.x, sy(g.a2, y), e2, .22); return metti(pa[0], pa[1], lerp(g.da.d, g.a2.d, e2)); }
       if (g.k === 'tendina') return metti(lerp(g.da.x, g.a2.x, t), sy(g.da, y), 10);
