@@ -151,6 +151,10 @@ html.viaggio .marchio-grande .pl{visibility:hidden}
 .nuovo .i{width:16px;height:16px;margin-left:-4px}
 .pannello-eroe{margin:64px calc(var(--pan) - var(--lato)) 0;height:min(132vw,560px)}
 .pannello-eroe video{object-position:50% 46%}
+/* il posto del puntino dentro lo showreel: invisibile, il puntino ci passa sotto (18/11) */
+.posto-video{position:absolute;left:50%;top:44%;width:12px;height:12px;margin:-6px 0 0 -6px;pointer-events:none}
+.punto.sotto{z-index:1}
+html.viaggio .eroe .nuovo{margin-top:28px}
 
 /* ── 2 · Loghi e paragrafo a due toni ── */
 .fiducia{padding:84px var(--lato) 96px;background:radial-gradient(90% 150px at 50% 0%,rgba(245,244,239,.055),rgba(245,244,239,0) 100%)}
@@ -453,13 +457,10 @@ details[open] > summary .piu::after{transform:rotate(0)}
   <section class="eroe" aria-labelledby="t-eroe">
     <h1 class="t1" id="t-eroe">Fatti trovare.<br>Fatti <em>scegliere</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h1>
     <p class="sotto">Siti, scheda Google, social e video per bar, negozi, saloni, studi e artigiani della Valdinievole.</p>
-    <div class="pillole">
-      <a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Anteprima gratis</a>
-      <a class="pill pill-scura" href="#servizi">I servizi</a>
-    </div>
     <a class="nuovo" href="#come"><b>Gratis</b><span>Paghi solo se ti piace</span><svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
     <figure class="pannello pannello-eroe sfuma-giu">
-      <video data-video muted playsinline loop preload="none" poster="../comune/img/showreel-verticale.jpg" src="../comune/video/showreel-verticale.mp4" aria-label="Showreel di Veniello Studio"></video>
+      <video id="showreel" muted playsinline preload="none" poster="../comune/img/showreel-verticale.jpg" src="../comune/video/showreel-verticale.mp4" aria-label="Showreel di Veniello Studio"></video>
+      <i class="posto-video" data-posto data-video aria-hidden="true"></i>
       <figcaption class="chip">Showreel · Veniello Studio</figcaption>
     </figure>
   </section>
@@ -763,6 +764,11 @@ details[open] > summary .piu::after{transform:rotate(0)}
   var vh = innerHeight, Yin = 0, Yout = 0, Rm = 0, Lvia = 130, Larrivo = 190, xM = 0, maxS = 0, larghezza = 0;
   var DOT = 7, SEG = [], seduto, volo = { p: -1 };
   var AP = {}, ATTESA = null, apQ = -1;
+  /* lo showreel: gira una volta quando il puntino ci entra, si ferma sulla scritta finale, poi il puntino esce */
+  var sr = document.getElementById('showreel'), SR_FINE = 18.6, srFinito = false, srEsce = 0, srPosto = null;
+  sr.addEventListener('timeupdate', function(){
+    if (!srFinito && sr.currentTime >= SR_FINE) { sr.pause(); srFinito = true; if (srPosto) srPosto.uscito = true; srEsce = performance.now(); chiedi(); }
+  });
   var apSez = document.getElementById('inizio'), apPalco = document.getElementById('ap-palco'), vvG = document.getElementById('vv-grande');
   var apVia = [].slice.call(apPalco.querySelectorAll('.ap-via')), apV = document.getElementById('ap-v'), apVbox = apV.parentNode;
 
@@ -818,7 +824,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var H0 = { x: hs.x, ly: hs.ly, d: 10, scena: true }, H1 = { x: hs.x + ST.sw, ly: hs.ly, d: 10, scena: true };
     var L = battute.map(function(b){ var pt = b.querySelector('.pt'); if (!pt) return null; var q = offsetIn(pt, palco); return { el: pt, x: pr.left + q.x + pt.offsetWidth / 2, ly: q.y + pt.offsetHeight / 2, d: pt.offsetWidth, scena: true }; });
     /* i posti normali, in ordine di pagina */
-    var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: q.width, alto: el.hasAttribute('data-dall-alto') }; });
+    var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: el.hasAttribute('data-video') ? DOT : q.width, alto: el.hasAttribute('data-dall-alto'), video: el.hasAttribute('data-video') }; });
+    P.forEach(function(s){ if (s.video) { if (srPosto && srPosto.uscito) s.uscito = true; srPosto = s; } });
     P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; });
     var L1 = L[0], L3 = L[2], L4 = L[3];
     L1.inY = ST.T + L1.ly - Yin; L1.outY = ST.T + .22 * ST.R;
@@ -833,6 +840,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
     seq[0].inY = AP.fine; AP.primo = seq[0];
     if (seq[0].outY < seq[0].inY + 40) seq[0].outY = seq[0].inY + 40;
     /* i tratti */
+    ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
     SEG = [{ a: -1e9, b: AP.fine, k: 'apertura' }];
     for (i = 0; i < n; i++) {
       var s = seq[i], nx = seq[i+1];
@@ -863,9 +871,10 @@ details[open] > summary .piu::after{transform:rotate(0)}
   }
 
   function viaggio(a, b, y, gap, u){
+    if (b.uscito) b = ATTESA;                   /* lo showreel è già finito: il puntino non ci rientra */
     var ax = a.x, ay = sy(a, y), bx = b.x, by = sy(b, y), x, yy, d, t, e;
     var k = Math.min(1, gap / (Lvia + Larrivo + 60)), Lv = Lvia * k, La = Larrivo * k;
-    if (u < Lv && !a.fisso) {
+    if (u < Lv && !a.fisso && !a.uscito) {
       /* parte verso destra e curva giù nel margine: un quarto di cerchio */
       t = u / Lv; e = liscio(t);
       x = q2(ax, xM, xM, e); yy = q2(ay, ay, Rm, e); d = lerp(a.d, DOT, e);
@@ -925,8 +934,29 @@ details[open] > summary .piu::after{transform:rotate(0)}
     pianificato = false;
     var y = scrollY;
     if (y > ST.T - 2 * vh && y < ST.T + ST.R + 2 * vh) aggiornaScena(y, vh);
+    /* lo showreel gira solo mentre il puntino ci sta dentro */
+    var dentro = false;
+    for (var i0 = 0; i0 < SEG.length; i0++) { var g0 = SEG[i0]; if (y >= g0.a && y < g0.b) { dentro = g0.k === 'seduto' && g0.s.video && !g0.s.uscito; break; } }
+    if (srPosto && y > srPosto.ly - 2 * vh && sr.preload !== 'auto') sr.preload = 'auto';
+    if (dentro && !srFinito && sr.paused) { var pp = sr.play(); if (pp && pp.catch) pp.catch(function(){}); }
+    else if (!dentro && !sr.paused) sr.pause();
+    /* lo showreel è finito: il puntino esce dal bordo del pannello e va ad aspettare nel margine */
+    if (srEsce && srPosto) {
+      var te = (performance.now() - srEsce) / 1100;
+      if (te < 1) {
+        var ev = liscio(te), px = srPosto.x, py = sy(srPosto, y);
+        punto.classList.add('sotto');
+        metti(c3(px, px + 90, xM + 10, xM, ev), c3(py, py - 40, Rm - 90, Rm, ev), DOT);
+        requestAnimationFrame(quadro); pianificato = true; return;
+      }
+      srEsce = 0;
+    }
+    var sotto = false;
     for (var i = 0; i < SEG.length; i++) {
       var g = SEG[i]; if (y < g.a || y >= g.b) continue;
+      sotto = (g.k === 'viaggio' && ((g.a2.video && !g.a2.uscito) || (g.da.video && !g.da.uscito))) || (g.k === 'seduto' && g.s.video);
+      punto.classList.toggle('sotto', sotto);
+      if (g.k === 'seduto' && g.s.video && g.s.uscito) return metti(xM, Rm, DOT);
       var t = (y - g.a) / Math.max(1, g.b - g.a);
       if (g.k === 'seduto') return g.s.el ? siedi(g.s) : metti(g.s.x, sy(g.s, y), g.s.d);
       if (g.k === 'fermo') return metti(g.s.x, sy(g.s, y), g.s.d);
