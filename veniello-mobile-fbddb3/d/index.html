@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100F09">
+<meta name="format-detection" content="telephone=no">
+<script>document.documentElement.classList.add('js')</script>
+<title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
+<meta name="description" content="Fatti trovare. Fatti scegliere. Siti, scheda Google, social, video e Virtual Assistant per le attività della Valdinievole. L’anteprima è gratis.">
+<link rel="icon" href="../comune/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../comune/img/apple-touch-icon.png">
+<style>
+/* =============================================================================================
+   Veniello Studio, sito da telefono. Versione D «Linear + Editoriale» (anteprima, 17/11/2026)
+   La calma della B (serif, respiro da rivista, il puntino che è il punto finale dei titoli) detta
+   con il linguaggio di Linear: testata sottile, titoli grandi a sinistra, paragrafo a due toni,
+   pannelli scuri arrotondati con dentro i video, card che scorrono di lato, chiusura centrata.
+   ============================================================================================= */
+@font-face{font-family:'News';src:url(../comune/fonts/Newsreader.woff2) format('woff2');font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:'News';src:url(../comune/fonts/Newsreader-italic.woff2) format('woff2');font-weight:200 800;font-style:italic;font-display:swap}
+@font-face{font-family:'Inter';src:url(../comune/fonts/inter.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Geist';src:url(../comune/fonts/Geist-var.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Geist Mono';src:url(../comune/fonts/GeistMono-400.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url(../comune/fonts/InstrumentSerif-italic.woff2) format('woff2');font-style:italic;font-weight:400;font-display:swap}
+@font-face{font-family:'Instrument Serif';src:url(../comune/fonts/InstrumentSerif-normal.woff2) format('woff2');font-style:normal;font-weight:400;font-display:swap}
+
+:root{
+  --bg:#100F09; --bg2:#14130D; --bg3:#1A1913; --bg4:#22211A;
+  --av:#F5F4EF; --av2:rgba(245,244,239,.62); --av3:rgba(245,244,239,.42);
+  --filo:rgba(245,244,239,.085); --filo2:rgba(245,244,239,.16);
+  --rec:#FF5A1F;
+  --serif:'News','Iowan Old Style',Georgia,serif;
+  --sans:'Inter',-apple-system,system-ui,sans-serif;
+  --mono:'Geist Mono',ui-monospace,Menlo,monospace;
+  --lato:24px; --pan:16px; --testata:60px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --colonna:430px;
+}
+*{box-sizing:border-box}
+html{background:#0A0906;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0 auto;max-width:var(--colonna);background:var(--bg);color:var(--av);font:400 17px/1.55 var(--sans);letter-spacing:-.006em;word-spacing:.02em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;position:relative}
+main{overflow-x:clip}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+p,h1,h2,h3,h4,ul,ol,figure{margin:0}
+h1,h2,h3,h4{font-weight:inherit}
+ul,ol{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--av);outline-offset:4px;border-radius:8px}
+.i{width:18px;height:18px;flex:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.salta{position:absolute;left:16px;top:-80px;z-index:90;background:var(--av);color:var(--bg);padding:12px 16px;border-radius:10px}
+.salta:focus{top:12px}
+.nw{white-space:nowrap}
+
+/* ── Il marchio: V in Instrument Serif corsivo + «eniello» + puntino + «studio» ── */
+.marchio{display:inline-flex;align-items:center;font:700 20px/1 'Geist',var(--sans);letter-spacing:-.05em;word-spacing:0;color:var(--av);white-space:nowrap}
+.marchio .vv{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.18em;letter-spacing:0;margin-right:.01em;-webkit-text-stroke:.05em currentColor;paint-order:stroke fill}
+.marchio .pl{display:inline-block;width:.21em;height:.21em;border-radius:50%;background:var(--rec);margin:0 .035em 0 .045em}
+
+/* ── Testata sottile alla Linear: marchio a sinistra, «Scrivici» chiaro e hamburger a destra ── */
+.testata{position:fixed;top:0;left:0;right:0;margin:0 auto;max-width:var(--colonna);z-index:50;height:calc(var(--testata) + env(safe-area-inset-top));padding:env(safe-area-inset-top) 12px 0 var(--lato);display:flex;align-items:center;justify-content:space-between}
+.testata::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(16,15,9,.95);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2);border-bottom:1px solid var(--filo);opacity:var(--fondo,1)}
+.testata .marchio{min-height:44px}
+.testata .marchio .pl{transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.testata-dx{display:flex;align-items:center;gap:2px;opacity:var(--dx,1)}
+.hamburger{width:44px;height:44px;display:grid;place-content:center;gap:6px}
+.hamburger i{display:block;width:18px;height:1.5px;border-radius:1px;background:var(--av)}
+
+/* ── Pillole ── */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 22px;border-radius:999px;font:500 16px/1 var(--sans);letter-spacing:-.01em;word-spacing:0;white-space:nowrap;transition:transform .2s var(--ease)}
+.pill:active{transform:scale(.97)}
+.pill-chiara{background:#ECEBE5;color:#100F09}
+.pill-scura{background:var(--bg3);color:var(--av);box-shadow:inset 0 0 0 1px rgba(245,244,239,.1)}
+.pill-piccola{height:34px;padding:0 15px;font-size:15px}
+.freccia{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:450 17px/1 var(--sans);color:var(--av)}
+.freccia .i{width:16px;height:16px;transition:transform .25s var(--ease)}
+.freccia:active .i{transform:translateX(3px)}
+
+/* ── Tipografia: titoli in Newsreader usati alla Linear (grandi, a sinistra, stretti), testo in Inter ── */
+.micro{font:400 11.5px/1.4 var(--mono);letter-spacing:.14em;word-spacing:0;text-transform:uppercase;color:var(--av3)}
+.t1,.t2{font-family:var(--serif);font-optical-sizing:auto;letter-spacing:-.022em;word-spacing:0;color:var(--av)}
+.t1{font-weight:430;font-size:clamp(42px,12vw,50px);line-height:1.02}
+.t2{font-weight:440;font-size:clamp(34px,10.2vw,41px);line-height:1.04}
+.t1 em,.t2 em{font-style:italic;font-weight:inherit;letter-spacing:-.012em}
+.sotto{color:var(--av2);font-size:17px;line-height:1.55;margin-top:18px;max-width:20em;text-wrap:pretty}
+
+/* il punto finale dei titoli: senza JS (o con «Riduci movimento») è un punto arancio fermo; con JS è il posto
+   dove si posa l'unico puntino che viaggia */
+.pt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--rec);margin-left:.05em;vertical-align:baseline}
+html.viaggio .pt{background:transparent}
+html.viaggio .pt.qui{background:var(--rec)}
+.punto{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;background:var(--rec);transform-origin:0 0;z-index:60;pointer-events:none;opacity:0;will-change:transform}
+html.viaggio .punto.su{opacity:1}
+
+/* ── Pannelli alla Linear: scuri, arrotondati, bordo sottilissimo, un riflesso; dentro, la cosa vera ── */
+.pannello{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#1A1912 0%,#13120C 60%);box-shadow:inset 0 0 0 1px rgba(245,244,239,.085);isolation:isolate}
+.pannello::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:3;
+  background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 22%);box-shadow:inset 0 0 0 1px rgba(245,244,239,.09),inset 0 1px 0 rgba(245,244,239,.08)}
+.pannello video,.pannello .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.chip{position:absolute;left:12px;top:12px;z-index:4;display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border-radius:999px;background:rgba(16,15,9,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(245,244,239,.1);font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.78);white-space:nowrap}
+.sfuma-giu::before{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(16,15,9,0),rgba(16,15,9,.7))}
+.segnaposto{display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;border-radius:14px;border:1px dashed rgba(245,244,239,.28);background:repeating-linear-gradient(135deg,rgba(245,244,239,.02) 0 10px,transparent 10px 20px);font:400 12px/1.6 var(--mono);letter-spacing:.04em;color:var(--av2)}
+
+/* ── Sezioni: tanta aria, un filo sottile tra una e l'altra ── */
+.sez{position:relative;padding:96px var(--lato) 96px;border-top:1px solid var(--filo)}
+.sez > .pannello,.largo{margin-left:calc(var(--pan) - var(--lato));margin-right:calc(var(--pan) - var(--lato))}
+
+/* ── 0 · Apertura: solo il marchio, grande ── */
+.apertura{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;background:var(--bg)}
+.muro{position:absolute;top:-40px;left:-34px;right:-34px;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:14px;opacity:.24}
+.muro .col{display:flex;flex-direction:column;gap:14px;animation:sale 170s linear infinite;animation-play-state:paused}
+.muro .col:nth-child(2){animation-name:scende;animation-duration:210s;padding-top:90px}
+.muro.va .col{animation-play-state:running}
+.muro img,.muro video{width:100%;height:auto;border-radius:16px;box-shadow:0 0 0 1px rgba(245,244,239,.16)}
+.muro video{aspect-ratio:9/16;object-fit:cover}
+@keyframes sale{to{transform:translate3d(0,-50%,0)}}
+@keyframes scende{from{transform:translate3d(0,-50%,0)}to{transform:translate3d(0,0,0)}}
+.apertura-velo{position:absolute;inset:0;background:
+  radial-gradient(ellipse 92% 30% at 50% 46%,var(--bg) 0%,rgba(16,15,9,.9) 40%,rgba(16,15,9,.5) 74%,rgba(16,15,9,.18) 100%),
+  linear-gradient(180deg,rgba(16,15,9,.6) 0%,rgba(16,15,9,0) 22%,rgba(16,15,9,0) 60%,rgba(16,15,9,.85) 88%,var(--bg) 100%)}
+.marchio-grande{position:absolute;left:0;right:0;top:46%;margin:-.6em auto 0;width:max-content;transform-origin:0 0;font-size:clamp(38px,12.4vw,54px);z-index:55}
+html.viaggio .marchio-grande{position:fixed;will-change:transform}
+html.viaggio .marchio-grande .pl{visibility:hidden}
+.apertura-piede{position:absolute;left:var(--lato);right:var(--lato);bottom:calc(26px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center}
+.apertura-piede .scorri{display:inline-flex;align-items:center;gap:10px}
+.apertura-piede .scorri i{display:block;width:1px;height:18px;background:linear-gradient(rgba(245,244,239,.5),rgba(245,244,239,0))}
+
+/* ── 1 · Titolo alla Linear ── */
+.eroe{padding:76px var(--lato) 0}
+.pillole{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.nuovo{display:inline-flex;min-height:44px;align-items:center;gap:12px;margin-top:26px;font-size:16px;color:var(--av2)}
+.nuovo b{font-weight:500;color:var(--av)}
+.nuovo .i{width:16px;height:16px;margin-left:-4px}
+.pannello-eroe{margin:64px calc(var(--pan) - var(--lato)) 0;height:min(132vw,560px)}
+.pannello-eroe video{object-position:50% 46%}
+
+/* ── 2 · Loghi e paragrafo a due toni ── */
+.fiducia{padding:84px var(--lato) 96px;background:radial-gradient(90% 150px at 50% 0%,rgba(245,244,239,.055),rgba(245,244,239,0) 100%)}
+.loghi{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 4px}
+.loghi img{height:34px;width:auto;filter:brightness(0) invert(1);opacity:.78}
+.loghi .eb{height:40px}
+.loghi .gb{height:40px}
+.fiducia .micro{margin-top:30px;letter-spacing:.11em;text-wrap:balance}
+.due-toni{margin-top:76px;font:420 27px/1.24 var(--serif);font-optical-sizing:auto;letter-spacing:-.016em;word-spacing:0;color:rgba(245,244,239,.46);text-wrap:pretty}
+.due-toni span{color:var(--av)}
+/* nel paragrafo il punto c'è sempre (grigio come il testo): il puntino che viaggia lo accende quando ci si posa */
+html.viaggio .due-toni .pt{background:rgba(245,244,239,.46)}
+html.viaggio .due-toni .pt.qui{background:var(--rec)}
+
+/* ── 3 · Pacchetti, ciascuno come una sezione di Linear: pannello, titolo, riga grigia, dettagli ── */
+.pacchetto{padding-top:56px;padding-bottom:76px}
+#servizi{padding-bottom:56px}
+#contenuti{border-top:0;padding-top:0}
+.pacchetto .pannello{height:min(118vw,480px);margin-bottom:44px}
+.conta{margin-bottom:18px}
+.dettagli{margin-top:30px}
+.dettagli summary{list-style:none;display:inline-flex;align-items:center;gap:12px;min-height:44px;cursor:pointer;font:450 17px/1 var(--sans);color:var(--av)}
+.dettagli summary::-webkit-details-marker{display:none}
+.piu{position:relative;width:14px;height:14px;flex:none}
+.piu::before,.piu::after{content:"";position:absolute;left:0;top:6.5px;width:14px;height:1.4px;border-radius:1px;background:currentColor;transition:transform .35s var(--ease)}
+.piu::after{transform:rotate(90deg)}
+details[open] > summary .piu::after{transform:rotate(0)}
+.voci{margin-top:18px;border-top:1px solid var(--filo)}
+.voci li{padding:14px 0 14px 22px;border-bottom:1px solid var(--filo);position:relative;color:var(--av2);font-size:16px;line-height:1.5}
+.voci li::before{content:"";position:absolute;left:2px;top:25px;width:9px;height:1px;background:var(--av3)}
+.voci b{display:block;color:var(--av);font-weight:500}
+.dettagli .freccia{margin-top:14px}
+.speciale{display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--filo2);margin-bottom:20px}
+.comprende{margin-top:34px}
+.comprende .micro{padding-bottom:4px}
+.onesta{margin-top:40px;padding-top:22px;border-top:1px solid var(--filo);font-size:15px;line-height:1.55;color:var(--av3)}
+.dopo-scena{border-top:0;padding-top:20px}
+
+/* il pannello del Virtual Assistant: il video riempie il pannello (una cornice sola), la chat si legge a misura vera;
+   l'etichetta «Esempio» sta in alto, sulla barra del telefono, dove non copre la chat */
+.pannello-va video{object-position:50% 0}
+
+/* il pannello della Campagna 360°: i tre pacchetti uno accanto all'altro */
+.trittico{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1.18fr 1fr;gap:12px;align-items:end;align-content:center;padding:44px 16px 34px}
+.tri{position:relative;aspect-ratio:9/17;border-radius:12px;overflow:hidden;background:var(--bg2);box-shadow:0 0 0 1px rgba(245,244,239,.1),0 24px 40px -18px rgba(0,0,0,.8)}
+.tri:nth-child(2){aspect-ratio:9/18.5;border-radius:16px}
+.tri img,.tri video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tri .scorre{height:auto;bottom:auto;animation:sito-scorre 46s ease-in-out infinite alternate;animation-play-state:paused}
+.va .tri .scorre,.tri.va .scorre{animation-play-state:running}
+@keyframes sito-scorre{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-72%,0)}}
+#campagna .pannello{height:min(94vw,390px)}
+.tri .deriva{animation:deriva 18s ease-in-out infinite alternate;animation-play-state:paused}
+.va .deriva{animation-play-state:running}
+@keyframes deriva{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-3%,-2%,0)}}
+.tri{overflow:visible}
+.tri-in{position:absolute;inset:0;border-radius:inherit;overflow:hidden}
+.trittico .tri-et{position:absolute;left:0;right:0;bottom:-24px;text-align:center;font:400 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
+
+/* ── La scena del Sito Web: un telefono fermo, le parole cambiano, il sito passa da ricco a semplice ── */
+.scena-sito{position:relative;height:340vh;height:340svh;border-top:1px solid var(--filo)}
+.palco{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;padding:calc(var(--testata) + env(safe-area-inset-top) + 26px) var(--pan) calc(14px + env(safe-area-inset-bottom));overflow:hidden}
+.palco-testa{padding:0 calc(var(--lato) - var(--pan))}
+.battute{display:grid;margin-top:14px}
+.battuta{grid-area:1/1;opacity:0;transform:translate3d(0,10px,0);transition:opacity .45s var(--ease),transform .55s var(--ease)}
+.battuta.su{opacity:1;transform:none}
+.palco-pannello{flex:1;min-height:0;margin-top:24px}
+.coppia{position:absolute;inset:0;container-type:size}
+.tel{position:absolute;inset:0;margin:auto;height:calc(100cqh - 44px);width:calc((100cqh - 44px) * .462);max-height:600px;max-width:277px;border-radius:38px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 6px #0D0C08,0 0 0 7px rgba(245,244,239,.07),0 40px 80px -30px rgba(0,0,0,.9)}
+.tel-schermo{position:absolute;inset:7px;border-radius:31px;overflow:hidden;background:var(--bg);isolation:isolate}
+.tel-ricco,.tel-ricco .tel-schermo{background:transparent}
+.tel-isola{position:absolute;top:9px;left:50%;width:30%;height:17px;margin-left:-15%;border-radius:999px;background:#000;z-index:9}
+.tel figcaption{display:none}
+.finestra,.finestra-in{position:absolute;inset:0;overflow:hidden;will-change:transform}
+.finestra-in{overflow:visible}
+.tendina{position:absolute;left:0;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--av);box-shadow:0 0 0 1px rgba(16,15,9,.35),0 0 18px rgba(245,244,239,.35);z-index:8;opacity:0;transition:opacity .3s;will-change:transform}
+.tendina.su{opacity:1}
+.coppia{transition:transform .8s var(--ease)}
+.palco.b4 .coppia{transform:translate3d(27%,12%,0) scale(.54)}
+.desk{position:absolute;left:4.5%;top:15%;width:88%;border-radius:10px;overflow:hidden;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.14),0 30px 60px -24px rgba(0,0,0,.9);opacity:0;transform:translate3d(0,14px,0) scale(.97);transition:opacity .6s var(--ease),transform .8s var(--ease);pointer-events:none}
+.palco.b4 .desk{opacity:1;transform:none}
+.desk-barra{height:16px;display:flex;align-items:center;gap:4px;padding:0 8px;border-bottom:1px solid rgba(245,244,239,.08)}
+.desk-barra i{width:5px;height:5px;border-radius:50%;background:rgba(245,244,239,.22)}
+.desk-schermo{position:relative;aspect-ratio:1280/780;overflow:hidden}
+
+/* «Riduci movimento»: niente scena ferma, le due versioni una accanto all'altra */
+@media (prefers-reduced-motion:reduce){
+  .scena-sito{height:auto}
+  .palco{position:relative;height:auto;padding-top:96px;padding-bottom:96px}
+  .battuta{transition:none;transform:none}
+  .battuta:not(:first-child){display:none}
+  .battuta:first-child{opacity:1}
+  .palco-pannello{flex:none;height:auto;padding:28px 12px 22px}
+  .coppia{position:relative;inset:auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;container-type:normal}
+  .tel{position:relative;inset:auto;margin:0;width:100%;height:auto;aspect-ratio:9/19.5;border-radius:26px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 4px #0D0C08}
+  .tel-schermo{inset:5px;border-radius:21px}
+  .tel figcaption{display:block;position:absolute;left:0;right:0;bottom:-30px;text-align:center}
+  .tel-ricco{grid-column:1;grid-row:1}
+  .tel-semplice{grid-column:2;grid-row:1}
+  .tel-ricco .tel-schermo{background:var(--bg)}
+  .coppia{padding-bottom:34px}
+  .tendina,.desk{display:none}
+}
+
+/* ── Il sito vero di Veniello in miniatura (disegnato a 390 px e rimpicciolito) ── */
+.ms-wrap{position:absolute;inset:0;overflow:hidden}
+.ms{position:absolute;left:0;top:0;width:390px;height:var(--msh,873px);transform-origin:0 0;transform:scale(var(--k,.6));background:#100F09;color:#F5F4EF;font-family:'Geist',var(--sans);display:flex;flex-direction:column;overflow:hidden;letter-spacing:0;word-spacing:0;line-height:1.4}
+.ms-testata{height:64px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:12px 20px 0 22px;position:relative;z-index:3}
+.ms-logo{display:inline-flex;align-items:center;font:700 20px/1 'Geist';letter-spacing:-.05em;white-space:nowrap}
+.ms-logo .vv{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-size:1.18em;letter-spacing:0;margin-right:.01em;-webkit-text-stroke:1px currentColor;paint-order:stroke fill}
+.ms-logo .e,.ms-logo .st{display:inline-block}
+.ms-logo .pt2{display:inline-block;width:.21em;height:.21em;border-radius:50%;background:#FF5A1F;margin:0 .035em 0 .045em}
+.ms-pill{height:36px;padding:0 15px;border-radius:999px;background:#F5F4EF;color:#100F09;font:500 14px/36px 'Geist'}
+.ms-cop{position:relative;flex:none;height:408px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 22px 6px;overflow:hidden}
+.ms-cop > :not(.ms-macchia):not(.ms-velo){position:relative;z-index:2}
+.ms-macchia{position:absolute;inset:-60px;z-index:0}
+.ms-macchia i{position:absolute;border-radius:50%}
+.ms-macchia i:nth-child(1){width:520px;height:520px;right:-180px;bottom:-230px;background:radial-gradient(closest-side,rgba(214,82,30,.9),rgba(170,52,16,.5) 45%,rgba(90,26,10,0) 100%)}
+.ms-macchia i:nth-child(2){width:420px;height:420px;left:-200px;top:40px;background:radial-gradient(closest-side,rgba(120,34,12,.85),rgba(74,23,10,.4) 50%,rgba(40,14,8,0) 100%)}
+.ms-macchia i:nth-child(3){width:340px;height:340px;right:-130px;top:-90px;background:radial-gradient(closest-side,rgba(200,96,28,.7),rgba(150,56,15,.3) 50%,rgba(60,20,8,0) 100%)}
+.ms-velo{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 62% 40% at 50% 50%,rgba(16,15,9,.86),rgba(16,15,9,.25) 70%,rgba(16,15,9,0) 100%)}
+.ms-mono{font:400 11px/1 'Geist Mono';letter-spacing:.16em;text-transform:uppercase;color:rgba(245,244,239,.62)}
+.ms-h{font:400 60px/.98 'Instrument Serif';letter-spacing:-.01em;margin-top:18px}
+.ms-h em{font-style:italic}
+.ms-h .r{display:block;overflow:hidden;padding:0 .1em .1em;margin:0 -.1em -.1em}
+.ms-h .r > span{display:inline-block}
+.ms-ptt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:#FF5A1F;margin-left:.045em}
+.ms-intro{font:400 15px/1.5 'Geist';color:rgba(245,244,239,.66);max-width:27ch;margin-top:18px}
+.ms-btn{margin-top:22px;height:50px;padding:0 24px;border-radius:999px;background:#F5F4EF;color:#100F09;font:500 15px/50px 'Geist'}
+.ms-fascia{flex:none;height:48px;overflow:hidden;display:flex;align-items:center;border-top:1px solid rgba(245,244,239,.12);border-bottom:1px solid rgba(245,244,239,.12)}
+.ms-fascia-in{display:flex;flex:none;white-space:nowrap;font:italic 400 24px/1 'Instrument Serif';color:rgba(245,244,239,.72)}
+.ms-fascia-in span{padding-right:14px}
+.ms-lavori{flex:1;min-height:0;display:flex;flex-direction:column;padding:20px 16px 18px}
+.ms-lab{display:flex;justify-content:space-between;align-items:baseline;padding:0 6px}
+.ms-lab b{font:400 30px/1 'Instrument Serif';letter-spacing:-.01em}
+.ms-lab b em{font-style:italic}
+.ms-mirino{flex:1;min-height:0;position:relative;margin-top:16px;border-radius:16px;overflow:hidden;background:#14130D}
+.ms-muro{position:absolute;inset:-8% -10%;display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.ms-col{display:flex;flex-direction:column;gap:9px}
+.ms-col img{width:100%;height:auto;border-radius:9px}
+.ms-ombra{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(16,15,9,.65) 0%,rgba(16,15,9,0) 22%,rgba(16,15,9,0) 76%,rgba(16,15,9,.7) 100%)}
+.ms-ang{position:absolute;z-index:3;width:16px;height:16px;border:0 solid rgba(245,244,239,.55)}
+.ms-ang.a1{top:12px;left:12px;border-top-width:1.5px;border-left-width:1.5px}
+.ms-ang.a2{top:12px;right:12px;border-top-width:1.5px;border-right-width:1.5px}
+.ms-ang.a3{bottom:12px;left:12px;border-bottom-width:1.5px;border-left-width:1.5px}
+.ms-ang.a4{bottom:12px;right:12px;border-bottom-width:1.5px;border-right-width:1.5px}
+.ms-et{position:absolute;z-index:3;display:flex;align-items:center;gap:7px;font:400 11px/1 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:rgba(245,244,239,.78);font-variant-numeric:tabular-nums}
+.ms-et.tl{top:17px;left:34px}.ms-et.tr{top:17px;right:34px}.ms-et.bl{bottom:17px;left:34px}
+.ms-rec{width:8px;height:8px;border-radius:50%;background:rgba(245,244,239,.32)}
+/* versione ricca: tutto si muove */
+.ricco .ms-macchia i:nth-child(1){animation:mm1 13s ease-in-out infinite alternate}
+.ricco .ms-macchia i:nth-child(2){animation:mm2 17s ease-in-out infinite alternate}
+.ricco .ms-macchia i:nth-child(3){animation:mm3 11s ease-in-out infinite alternate}
+@keyframes mm1{to{transform:translate3d(-90px,-70px,0) scale(1.15)}}
+@keyframes mm2{to{transform:translate3d(120px,60px,0) scale(.85)}}
+@keyframes mm3{to{transform:translate3d(-70px,90px,0) scale(1.2)}}
+.ricco .ms-logo .pt2{animation:logo-pt 8s cubic-bezier(.2,.8,.2,1) infinite}
+.ricco .ms-logo .e{animation:logo-e 8s cubic-bezier(.2,.8,.2,1) infinite}
+.ricco .ms-logo .st{animation:logo-st 8s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes logo-pt{0%,4%{transform:translate(var(--dx),var(--dy)) scale(1.3);opacity:0}7%{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1.3)}10%{opacity:.3}13%{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1.15)}21%,90%{transform:none;opacity:1}96%,100%{transform:translate(var(--dx),var(--dy)) scale(1.3);opacity:0}}
+@keyframes logo-e{0%,11%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.35em)}19%,90%{clip-path:inset(-20% 0 -20% 0);transform:none}96%,100%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.35em)}}
+@keyframes logo-st{0%,18%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.25em)}25%,90%{clip-path:inset(-20% 0 -20% 0);transform:none}96%,100%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.25em)}}
+.ricco .ms-h .r > span{animation:riga 8s cubic-bezier(.16,1,.3,1) infinite}
+.ricco .ms-h .r:nth-child(2) > span{animation-name:riga2}
+@keyframes riga{0%,5%{transform:translate3d(0,108%,0)}14%,92%{transform:none}98%,100%{transform:translate3d(0,-108%,0)}}
+@keyframes riga2{0%,9%{transform:translate3d(0,108%,0)}18%,92%{transform:none}98%,100%{transform:translate3d(0,-108%,0)}}
+.ricco .ms-ptt{animation:rec-luce 1.6s steps(1,end) infinite}
+@keyframes rec-luce{50%{opacity:.2}}
+.ricco .ms-btn{animation:bottone 8s var(--ease) infinite}
+@keyframes bottone{0%,20%{transform:translate3d(0,14px,0);opacity:0}28%,92%{transform:none;opacity:1}98%,100%{opacity:0}}
+.ricco .ms-fascia{background:#FF5A1F;border-color:#FF5A1F}
+.ricco .ms-fascia-in{color:#100F09;animation:fascia 14s linear infinite}
+@keyframes fascia{to{transform:translate3d(-50%,0,0)}}
+.ricco .ms-muro{transform:rotate(-9deg) scale(1.22)}
+.ricco .ms-col{animation:ms-sale 30s linear infinite}
+.ricco .ms-col:nth-child(2){animation:ms-scende 40s linear infinite}
+.ricco .ms-col:nth-child(3){animation-duration:23s}
+@keyframes ms-sale{to{transform:translate3d(0,-50%,0)}}
+@keyframes ms-scende{from{transform:translate3d(0,-50%,0)}to{transform:none}}
+.ricco .ms-rec{background:#FF5A1F;animation:rec-luce 1.6s steps(1,end) infinite}
+.scena-sito:not(.gira) .ricco *{animation-play-state:paused!important}
+/* versione semplice: lo stesso sito, fermo */
+.semplice .ms-macchia{display:none}
+.semplice .ms-velo{display:none}
+/* il desktop (quarta battuta): lo stesso sito semplice, impaginato largo */
+.md{position:absolute;left:0;top:0;width:1280px;height:780px;transform-origin:0 0;transform:scale(var(--k,.25));background:#100F09;color:#F5F4EF;font-family:'Geist',var(--sans);letter-spacing:0;word-spacing:0;line-height:1.4}
+.md-testata{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid rgba(245,244,239,.08)}
+.md-testata .ms-logo{font-size:24px}
+.md-nav{display:flex;gap:30px;font-size:16px;color:rgba(245,244,239,.62)}
+.md-cop{height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.md-cop .ms-h{font-size:92px;margin-top:20px}
+.md-cop .ms-btn{margin-top:26px}
+.md-fascia{height:52px;display:flex;align-items:center;justify-content:center;gap:28px;border-top:1px solid rgba(245,244,239,.1);border-bottom:1px solid rgba(245,244,239,.1);font:italic 400 26px/1 'Instrument Serif';color:rgba(245,244,239,.7)}
+.md-lavori{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:28px 48px 0}
+.md-lavori img{width:100%;height:220px;object-fit:cover;border-radius:12px}
+
+/* ── 4 · Chi ci ha già scelto: card squadrate che scorrono di lato, con dentro il video del cliente ── */
+.partner{padding-bottom:96px}
+.carosello{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 var(--pan);padding:0 var(--pan) 6px;margin:48px calc(-1 * var(--lato)) 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.carosello::-webkit-scrollbar{display:none}
+.card{position:relative;flex:0 0 min(80vw,330px);aspect-ratio:4/5;border-radius:14px;overflow:hidden;scroll-snap-align:start;background:var(--bg3);isolation:isolate;box-shadow:inset 0 0 0 1px rgba(245,244,239,.08)}
+.card > video,.card > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.card .lento{animation:lento 22s ease-in-out infinite alternate;animation-play-state:paused}
+.card.va .lento{animation-play-state:running}
+@keyframes lento{from{transform:scale(1.03) translate3d(0,0,0)}to{transform:scale(1.15) translate3d(-2.5%,2%,0)}}
+.card::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  radial-gradient(150% 66% at 100% 0%,rgba(8,7,4,.94) 0%,rgba(8,7,4,.8) 26%,rgba(8,7,4,.42) 52%,rgba(8,7,4,.1) 72%,rgba(8,7,4,0) 86%),
+  linear-gradient(0deg,rgba(8,7,4,.86) 0%,rgba(8,7,4,.5) 20%,rgba(8,7,4,0) 42%)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(245,244,239,.1)}
+.card-nome{position:absolute;right:20px;top:20px;left:20px;z-index:2;text-align:right}
+.card-nome h3{font:440 30px/1.02 var(--serif);font-optical-sizing:auto;letter-spacing:-.02em;text-shadow:0 1px 18px rgba(8,7,4,.5)}
+.card-nome h3 em{font-style:italic}
+.card-nome p{margin-top:10px;font:400 10.5px/1.5 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(245,244,239,.82);text-shadow:0 1px 10px rgba(8,7,4,.8)}
+.card-piede{position:absolute;left:20px;right:16px;bottom:18px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.card-lavori{font:450 15px/1.35 var(--sans);color:var(--av)}
+.card-lavori small{display:block;font:400 10.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.66);margin-bottom:4px}
+.card-seg{flex:none;font:400 9.5px/1 var(--mono);letter-spacing:.08em;color:rgba(245,244,239,.86);padding:6px 8px;border-radius:7px;border:1px dashed rgba(245,244,239,.5);background:rgba(16,15,9,.5)}
+.card-tua{background:var(--rec);color:#100F09;box-shadow:none;display:flex;flex-direction:column;justify-content:space-between;padding:24px 22px 18px}
+.card-tua::before,.card-tua::after{display:none}
+.card-tua h3{font:440 42px/1.02 var(--serif);font-optical-sizing:auto;letter-spacing:-.024em;max-width:6.4em}
+.card-tua h3 em{font-style:italic}
+.card-tua p{font-size:16px;line-height:1.45;color:rgba(16,15,9,.8);text-wrap:balance}
+.card-tua .freccia{color:#100F09;font-weight:500;margin-top:10px}
+
+/* ── 5 · Come funziona: l'unica sezione avorio, per il ritmo ── */
+.chiaro{background:var(--av);color:var(--bg);border-top:0}
+.chiaro .micro{color:rgba(16,15,9,.5)}
+.chiaro .t2{color:var(--bg)}
+.chiaro .sotto{color:rgba(16,15,9,.66)}
+.chiaro .segnaposto{border-color:rgba(16,15,9,.3);color:rgba(16,15,9,.62);background:repeating-linear-gradient(135deg,rgba(16,15,9,.035) 0 10px,transparent 10px 20px)}
+.chiaro .pannello-segnaposto{height:min(66vw,270px);margin-top:44px}
+.passi{margin-top:44px;border-top:1px solid rgba(16,15,9,.13)}
+.passo{display:grid;grid-template-columns:52px 1fr;padding:24px 0 26px;border-bottom:1px solid rgba(16,15,9,.13)}
+.passo .n{font:400 12px/1.9 var(--mono);letter-spacing:.1em;color:rgba(16,15,9,.45)}
+.passo h3{font:450 22px/1.25 var(--serif);font-optical-sizing:auto;letter-spacing:-.012em}
+.passo p{margin-top:6px;color:rgba(16,15,9,.66);font-size:16px;line-height:1.5}
+.gratis{display:table;margin:10px 0 2px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:5px 7px 4px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(16,15,9,.5)}
+
+/* ── 6 · Domande ── */
+.faq{margin-top:48px;border-top:1px solid var(--filo)}
+.faq details{border-bottom:1px solid var(--filo)}
+.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:64px;padding:16px 0;cursor:pointer;font:450 17px/1.35 var(--sans);color:var(--av)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .piu{color:var(--av3)}
+.faq details p{padding:0 30px 24px 0;color:var(--av2);font-size:16px;line-height:1.55}
+
+/* ── 7 · Chiusura centrata ── */
+.chiusura{text-align:center;padding:120px var(--lato) 116px}
+.chiusura .t1{font-size:clamp(38px,10.6vw,44px);line-height:1.04}
+.chiusura .sotto{margin:22px auto 0;max-width:19em}
+.chiusura .pillole{justify-content:center;margin-top:38px}
+
+/* ── 8 · Piede a colonne ── */
+.piede{padding:64px var(--lato) calc(44px + env(safe-area-inset-bottom));border-top:1px solid var(--filo)}
+.colonne{display:grid;grid-template-columns:1fr 1fr;gap:52px 18px}
+.colonne h4{font:500 15px/1.4 var(--sans);color:var(--av)}
+.colonne ul{margin-top:18px}
+.colonne li{font-size:15px;line-height:1.4;color:var(--av2);padding:5px 0}
+.colonne li a{display:inline-block}
+.ritratto{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px dashed rgba(245,244,239,.35);font:400 8.5px/1.15 var(--mono);text-align:center;color:var(--av3);margin-bottom:8px}
+.piede-marchio{margin-top:84px;font-size:clamp(36px,10.6vw,46px)}
+.piede-marchio .vv{-webkit-text-stroke:.04em currentColor}
+.piede-marchio .pt{width:.21em;height:.21em;margin:0 .035em 0 .045em}
+.piede-riga{margin-top:22px;font-size:14px;line-height:1.6;color:var(--av3);max-width:24em}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4l1.2-4.1A8.6 8.6 0 1 1 8 19.4z"/><path d="M9.1 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5 0l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.6-.6.8-.6.3-1.6.4-2.9-.2a9.2 9.2 0 0 1-4.3-4.3c-.6-1.3-.5-2.3-.2-2.9z"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-dx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<header class="testata" id="testata">
+  <a class="marchio" id="marchio-testata" href="#inizio" aria-label="Veniello Studio, torna all’inizio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><i class="pl" aria-hidden="true"></i><span aria-hidden="true">studio</span></a>
+  <div class="testata-dx" id="testata-dx">
+    <a class="pill pill-chiara pill-piccola" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener">Scrivici</a>
+    <a class="hamburger" href="#piede" aria-label="Menu"><i></i><i></i></a>
+  </div>
+</header>
+<i class="punto" id="punto" aria-hidden="true"></i>
+
+<main id="contenuto">
+
+  <!-- 0 · Apertura: il marchio e basta -->
+  <section class="apertura" id="inizio" aria-label="Veniello Studio">
+    <div class="muro" data-anima aria-hidden="true">
+      <div class="col"><video data-video muted playsinline loop preload="none" poster="../comune/img/spot.jpg" src="../comune/video/spot.mp4"></video><img src="../comune/img/jue-locale.jpg" alt="" width="600" height="765"><img src="../comune/img/jue-neon.jpg" alt="" width="600" height="600"><img src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067"><img src="../comune/img/spot.jpg" alt="" width="540" height="960"><img src="../comune/img/jue-locale.jpg" alt="" width="600" height="765"><img src="../comune/img/jue-neon.jpg" alt="" width="600" height="600"><img src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067"></div>
+      <div class="col"><img src="../comune/img/jue-oldfashioned.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-parete.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-luci.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-dj-pioneer.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-oldfashioned.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-parete.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-luci.jpg" alt="" width="600" height="600"><img src="../comune/img/jue-dj-pioneer.jpg" alt="" width="600" height="600"></div>
+    </div>
+    <div class="apertura-velo" aria-hidden="true"></div>
+    <p class="marchio marchio-grande" id="marchio-grande" aria-label="Veniello Studio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><i class="pl" id="pl-grande" aria-hidden="true"></i><span aria-hidden="true">studio</span></p>
+    <p class="apertura-piede micro" id="apertura-piede" aria-hidden="true"><span>Montecatini Terme</span><span class="scorri">Scorri<i></i></span></p>
+  </section>
+
+  <!-- 1 · Titolo alla Linear -->
+  <section class="eroe" aria-labelledby="t-eroe">
+    <h1 class="t1" id="t-eroe">Fatti trovare.<br>Fatti <em>scegliere</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h1>
+    <p class="sotto">Siti, scheda Google, social e video per bar, negozi, saloni, studi e artigiani della Valdinievole.</p>
+    <div class="pillole">
+      <a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Anteprima gratis</a>
+      <a class="pill pill-scura" href="#servizi">I servizi</a>
+    </div>
+    <a class="nuovo" href="#come"><b>Gratis</b><span>Paghi solo se ti piace</span><svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+    <figure class="pannello pannello-eroe sfuma-giu">
+      <video data-video muted playsinline loop preload="none" poster="../comune/img/showreel-verticale.jpg" src="../comune/video/showreel-verticale.mp4" aria-label="Showreel di Veniello Studio"></video>
+      <figcaption class="chip">Showreel · Veniello Studio</figcaption>
+    </figure>
+  </section>
+
+  <!-- 2 · Loghi e paragrafo a due toni -->
+  <section class="fiducia" aria-label="Perché serve">
+    <ul class="loghi" aria-label="Partner">
+      <li><img src="../comune/img/jue-logo.png" alt="Jué Club" width="480" height="184"></li>
+      <li><img class="eb" src="../comune/img/elena-logo.png" alt="Elena Baldi Wedding Planner" width="619" height="376"></li>
+      <li><img class="gb" src="../comune/img/gb-logo.png" alt="GB Gioielli" width="136" height="184"></li>
+    </ul>
+    <p class="micro">Le attività con cui lavoriamo ogni mese</p>
+    <p class="due-toni"><span>I clienti decidono dal telefono, in pochi secondi.</span> Cercano su Google, aprono il sito, guardano Instagram. Noi sistemiamo tutti e tre, così la scelta cade su di&nbsp;te<i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></p>
+  </section>
+
+  <!-- 3 · Servizi -->
+  <section class="sez" id="servizi" aria-labelledby="t-servizi">
+    <h2 class="t2" id="t-servizi">Tutto quello<br>che <em>serve</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <p class="sotto">Quattro pacchetti. Prendi quello che ti serve, oppure tutto insieme.</p>
+  </section>
+
+  <article class="sez pacchetto" id="contenuti" aria-labelledby="t-contenuti">
+    <figure class="pannello sfuma-giu">
+      <video data-video muted playsinline loop preload="none" poster="../comune/img/spot-una-volta.jpg" src="../comune/video/spot-una-volta.mp4" aria-label="Lo spot Jué × Bombay"></video>
+      <figcaption class="chip">Spot · Jué × Bombay</figcaption>
+    </figure>
+    <p class="micro conta">01 / 04</p>
+    <h3 class="t2" id="t-contenuti">Creazione<br>Contenuti<i class="pt" data-posto aria-hidden="true"></i></h3>
+    <p class="sotto">Video, foto e stories per i tuoi social, anche con l’IA.</p>
+    <details class="dettagli">
+      <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
+      <ul class="voci"><li>Creazione di contenuti con l’IA</li><li>Editing di foto e video</li><li>Scheda Google</li><li>Restyling dei profili Instagram e TikTok</li><li>Stories per novità ed eventi</li></ul>
+      <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20pacchetto%20Creazione%20Contenuti" target="_blank" rel="noopener">Parliamone<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+    </details>
+  </article>
+
+  <!-- 3b · Sito Web: la scena del telefono -->
+  <section class="scena-sito" id="sito" aria-label="Sito Web: completamente personalizzabile">
+    <div class="palco" id="palco">
+      <div class="palco-testa">
+        <p class="micro">02 / 04 · Sito Web</p>
+        <div class="battute">
+          <h3 class="t2 battuta su">Completamente<br><em>personalizzabile</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></h3>
+          <p class="t2 battuta" aria-hidden="true">Che tu lo voglia<br><em>così</em>…</p>
+          <p class="t2 battuta" aria-hidden="true">…o più<br><em>semplice</em><i class="pt" aria-hidden="true"></i></p>
+          <p class="t2 battuta" aria-hidden="true">E su ogni<br><em>schermo</em><i class="pt" aria-hidden="true"></i></p>
+        </div>
+      </div>
+      <div class="pannello palco-pannello">
+        <div class="desk" aria-hidden="true"><div class="desk-barra"><i></i><i></i><i></i></div><div class="desk-schermo" id="desk-schermo"></div></div>
+        <div class="coppia" aria-hidden="true">
+          <figure class="tel tel-semplice"><div class="tel-schermo" id="schermo-semplice"></div><i class="tel-isola"></i><figcaption class="micro">…o più semplice</figcaption></figure>
+          <figure class="tel tel-ricco"><div class="tel-schermo" id="schermo-ricco"><div class="finestra"><div class="finestra-in">
+            <div class="ms-wrap ricco">
+              <div class="ms">
+                <div class="ms-testata"><span class="ms-logo"><span class="vv">V</span><span class="e">eniello</span><span class="pt2"></span><span class="st">studio</span></span><span class="ms-pill">Scrivici</span></div>
+                <div class="ms-cop">
+                  <div class="ms-macchia"><i></i><i></i><i></i></div><div class="ms-velo"></div>
+                  <p class="ms-mono">Social · Google · Video · Siti</p>
+                  <p class="ms-h"><span class="r"><span>Fatti trovare.</span></span><span class="r"><span>Fatti <em>scegliere</em><i class="ms-ptt"></i></span></span></p>
+                  <p class="ms-intro">Instagram, TikTok, scheda Google e video, ogni mese.</p>
+                  <span class="ms-btn">Chiedi l’anteprima gratis</span>
+                </div>
+                <div class="ms-fascia"><div class="ms-fascia-in"><span>Siti · Google · Social · Video ·</span><span>Siti · Google · Social · Video ·</span><span>Siti · Google · Social · Video ·</span><span>Siti · Google · Social · Video ·</span></div></div>
+                <div class="ms-lavori">
+                  <p class="ms-lab"><b>Il nostro <em>lavoro</em>.</b><span class="ms-mono">Jué Club</span></p>
+                  <div class="ms-mirino">
+                    <div class="ms-muro">
+                      <div class="ms-col"><img src="../comune/img/sito-1.jpg" alt="" width="520" height="1125" loading="lazy"><img src="../comune/img/jue-neon.jpg" alt="" width="600" height="600" loading="lazy"><img src="../comune/img/reel-9-0.jpg" alt="" width="600" height="1067" loading="lazy"><img src="../comune/img/sito-1.jpg" alt="" width="520" height="1125" loading="lazy"><img src="../comune/img/jue-neon.jpg" alt="" width="600" height="600" loading="lazy"><img src="../comune/img/reel-9-0.jpg" alt="" width="600" height="1067" loading="lazy"></div>
+                      <div class="ms-col"><img src="../comune/img/jue-oldfashioned.jpg" alt="" width="600" height="600" loading="lazy"><img src="../comune/img/locandina.jpg" alt="" width="600" height="803" loading="lazy"><img src="../comune/img/jue-locale.jpg" alt="" width="600" height="765" loading="lazy"><img src="../comune/img/jue-oldfashioned.jpg" alt="" width="600" height="600" loading="lazy"><img src="../comune/img/locandina.jpg" alt="" width="600" height="803" loading="lazy"><img src="../comune/img/jue-locale.jpg" alt="" width="600" height="765" loading="lazy"></div>
+                      <div class="ms-col"><img src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy"><img src="../comune/img/jue-dj-pioneer.jpg" alt="" width="600" height="600" loading="lazy"><img src="../comune/img/sito-2.jpg" alt="" width="520" height="1125" loading="lazy"><img src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy"><img src="../comune/img/jue-dj-pioneer.jpg" alt="" width="600" height="600" loading="lazy"><img src="../comune/img/sito-2.jpg" alt="" width="520" height="1125" loading="lazy"></div>
+                    </div>
+                    <i class="ms-ombra"></i><i class="ms-ang a1"></i><i class="ms-ang a2"></i><i class="ms-ang a3"></i><i class="ms-ang a4"></i>
+                    <span class="ms-et tl"><i class="ms-rec"></i>Rec</span><span class="ms-et tr ms-tc">00:00:00:00</span><span class="ms-et bl">Cliente · Jué Club</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></div><i class="tendina" id="tendina"></i></div><i class="tel-isola"></i><figcaption class="micro">Così…</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="sez pacchetto dopo-scena" aria-labelledby="t-sito">
+    <h3 class="t2" id="t-sito">Sito<br>Web<i class="pt" data-posto aria-hidden="true"></i></h3>
+    <p class="sotto">Chi sei, cosa fai e un tasto per chiamarti. Ricco o semplice: lo decidi tu.</p>
+    <details class="dettagli">
+      <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
+      <ul class="voci"><li>Creazione del sito sul tuo dominio</li><li>Gestione attiva e manutenzione</li><li>Scheda Google</li></ul>
+      <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20pacchetto%20Sito%20Web" target="_blank" rel="noopener">Parliamone<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+    </details>
+  </article>
+
+  <article class="sez pacchetto" id="va" aria-labelledby="t-va">
+    <figure class="pannello pannello-va sfuma-giu">
+      <video data-video muted playsinline loop preload="none" poster="../comune/img/va-verticale.jpg" src="../comune/video/va-verticale.mp4" aria-label="Esempio di chat con il Virtual Assistant su WhatsApp"></video>
+      <figcaption class="chip">Esempio · WhatsApp</figcaption>
+    </figure>
+    <p class="micro conta">03 / 04</p>
+    <h3 class="t2" id="t-va">Virtual<br>Assistant<i class="pt" data-posto aria-hidden="true"></i></h3>
+    <p class="sotto">Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.</p>
+    <details class="dettagli">
+      <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
+      <ul class="voci"><li>Risposte in pochi secondi, a qualsiasi ora, anche di notte e la domenica</li><li>Dà orari, indirizzo, servizi e prezzi fissi della tua attività</li><li>Raccoglie appuntamenti e richieste, e te li manda riassunti</li><li>Risponde in tutte le lingue</li><li>Decidi tu i limiti e quando deve passarti la conversazione</li><li>Per le prime due settimane lo controlliamo noi</li></ul>
+      <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20prenotare%20un%E2%80%99anteprima%20del%20Virtual%20Assistant%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener">Prenota un’anteprima<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+    </details>
+  </article>
+
+  <article class="sez pacchetto" id="campagna" aria-labelledby="t-360">
+    <figure class="pannello" data-anima>
+      <div class="trittico" aria-hidden="true">
+        <div class="tri"><div class="tri-in"><img class="deriva" src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy"></div><span class="tri-et">Contenuti</span></div>
+        <div class="tri"><div class="tri-in"><img class="scorre" src="../comune/img/sito-lungo.jpg" alt="" width="420" height="3400" loading="lazy"></div><span class="tri-et">Sito</span></div>
+        <div class="tri"><div class="tri-in"><video data-video muted playsinline loop preload="none" poster="../comune/img/va-verticale.jpg" src="../comune/video/va-verticale.mp4"></video></div><span class="tri-et">Assistant</span></div>
+      </div>
+      <figcaption class="chip">Tutto insieme</figcaption>
+    </figure>
+    <p class="micro speciale">Pacchetto speciale</p>
+    <h3 class="t2" id="t-360">Campagna<br>Pubblicitaria 360°<i class="pt" data-posto aria-hidden="true"></i></h3>
+    <p class="sotto">Contenuti, sito e Virtual Assistant insieme, in una sola campagna.</p>
+    <details class="dettagli">
+      <summary>Cosa comprende<i class="piu" aria-hidden="true"></i></summary>
+      <ul class="voci"><li><b>Creazione Contenuti</b>Video, foto, stories, Google, Instagram e TikTok</li><li><b>Sito Web</b>Sul tuo dominio, gestito e aggiornato</li><li><b>Virtual Assistant</b>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi</li></ul>
+      <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener">Parliamone<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+    </details>
+    <p class="onesta">Siti, video e grafiche sono lavori veri per il Jué Club di Montecatini Terme. La scheda Google e il Virtual Assistant sono esempi.</p>
+  </article>
+
+  <!-- 4 · Partner -->
+  <section class="sez partner" id="partner" aria-labelledby="t-partner">
+    <h2 class="t2" id="t-partner">Chi ci ha già<br><em>scelto</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <div class="carosello" role="list">
+      <a class="card" role="listitem" data-anima href="https://jueclub.it" target="_blank" rel="noopener">
+        <video data-video muted playsinline loop preload="none" poster="../comune/img/spot-3-2.jpg" src="../comune/video/spot.mp4#t=3.2"></video>
+        <div class="card-nome"><h3>Jué Club</h3><p>Cocktail bar · Montecatini Terme</p></div>
+        <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Sito, video delle serate, social</p></div>
+      </a>
+      <a class="card" role="listitem" data-anima href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener">
+        <img class="lento" src="../comune/img/elena-dettagli.jpg" alt="" width="720" height="1080" loading="lazy" style="object-position:50% 35%">
+        <div class="card-nome"><h3>Elena Baldi<br><em>Wedding Planner</em></h3><p>Matrimoni · Montecatini Terme</p></div>
+        <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Social e video</p><span class="card-seg">Segnaposto: video</span></div>
+      </a>
+      <a class="card" role="listitem" data-anima href="https://www.instagram.com/gb.oro/" target="_blank" rel="noopener">
+        <img class="lento" src="../comune/img/gb-catenina.jpg" alt="" width="600" height="1067" loading="lazy" style="object-position:50% 62%">
+        <div class="card-nome"><h3>GB Gioielli</h3><p>Compro oro · Città di Castello, Umbertide</p></div>
+        <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Instagram, TikTok, reel</p><span class="card-seg">Segnaposto: video</span></div>
+      </a>
+      <a class="card card-tua" role="listitem" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener">
+        <h3>La tua attività, <em>qui</em>.</h3>
+        <div><p>Ti prepariamo l’anteprima gratis: se ti piace, entri anche tu.</p><span class="freccia">Scrivici<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 5 · Come funziona (avorio) -->
+  <section class="sez chiaro" id="come" aria-labelledby="t-come">
+    <h2 class="t2" id="t-come">Prima lo vedi.<br>Poi <em>decidi</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <div class="pannello-segnaposto segnaposto largo">Segnaposto: video di noi al lavoro<br>(riprese da un cliente, montaggio,<br>telefono in mano). Muto, in loop.</div>
+    <ol class="passi">
+      <li class="passo"><span class="n">01</span><div><h3>Ci scrivi.</h3><p>Su WhatsApp o per telefono: in due minuti ci racconti la tua attività.</p></div></li>
+      <li class="passo"><span class="n">02</span><div><h3>Ti prepariamo l’anteprima.<span class="gratis">Gratis</span></h3><p>Con foto e informazioni vere. Ti arriva un link da aprire sul telefono.</p></div></li>
+      <li class="passo"><span class="n">03</span><div><h3>Se ti piace, va online.</h3><p>Sul tuo dominio. Il preventivo lo hai scritto prima: niente sorprese.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- 6 · Domande -->
+  <section class="sez" id="domande" aria-labelledby="t-domande">
+    <h2 class="t2" id="t-domande">Le domande<br>di <em>tutti</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <div class="faq">
+      <details><summary>L’anteprima è davvero gratis?<i class="piu" aria-hidden="true"></i></summary><p>Quella del sito e quella del Virtual Assistant sì: le guardi con calma sul telefono e decidi. Se non ti convince, non paghi e non ti impegni. L’anteprima di un video invece è a pagamento: una prova di 12-13 secondi, in qualità più bassa del video finito.</p></details>
+      <details><summary>Ci sono altre spese?<i class="piu" aria-hidden="true"></i></summary><p>Se fai il sito, solo il dominio, cioè il nome del sito (per esempio latuaattivita.it). È intestato a te e costa circa 10-15 € l’anno.</p></details>
+      <details><summary>Il sito resta mio?<i class="piu" aria-hidden="true"></i></summary><p>Sì. Una volta pagato è tuo e resta online anche senza abbonamento: paghi solo il dominio. Se vuoi, con la gestione attiva lo teniamo aggiornato noi.</p></details>
+      <details><summary>Quanto costa?<i class="piu" aria-hidden="true"></i></summary><p>Dipende dal pacchetto e da quello che ti serve. Ti prepariamo l’anteprima e il prezzo te lo scriviamo prima che tu decida: niente sorprese.</p></details>
+      <details><summary>Le foto da dove le prendete?<i class="piu" aria-hidden="true"></i></summary><p>Solo foto vere della tua attività: quelle che hai già sui social, quelle che ci mandi o quelle che facciamo noi quando veniamo a fare le riprese.</p></details>
+      <details><summary>Venite voi a fare le riprese?<i class="piu" aria-hidden="true"></i></summary><p>Se serve sì, e lo decidiamo insieme prima. Altrimenti foto e video li fai tu con il telefono, seguendo la nostra guida, oppure li creiamo con l’IA dalle tue foto. Montaggio, testi e pubblicazione li curiamo noi.</p></details>
+      <details><summary>In che zona lavorate?<i class="piu" aria-hidden="true"></i></summary><p>Siamo a Montecatini Terme e lavoriamo con le attività di tutta la Valdinievole. Se vuoi, ci vediamo di persona.</p></details>
+      <details><summary>Cosa devo fare per avere il Virtual Assistant?<i class="piu" aria-hidden="true"></i></summary><p>Compili una scheda semplice, circa 30 minuti: orari, servizi, prezzi che non cambiano, le domande più frequenti e le cose che non deve mai dire. Lo vedi rispondere in anteprima; se ti convince lo attiviamo, e per le prime due settimane lo controlliamo noi.</p></details>
+    </div>
+  </section>
+
+  <!-- 7 · Chiusura centrata -->
+  <section class="sez chiusura" id="contatti" aria-labelledby="t-fine">
+    <h2 class="t1" id="t-fine">Vedi il tuo sito<br>prima di <em>pagare</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <p class="sotto">Scrivici il nome della tua attività: ti prepariamo l’anteprima gratis, senza impegno.</p>
+    <div class="pillole">
+      <a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
+      <a class="pill pill-scura" href="tel:+393520338377"><svg class="i" aria-hidden="true"><use href="#i-tel"/></svg>Chiama</a>
+    </div>
+  </section>
+</main>
+
+<!-- 8 · Piede a colonne -->
+<footer class="piede" id="piede">
+  <div class="colonne">
+    <div><h4>Servizi</h4><ul><li><a href="#contenuti">Creazione Contenuti</a></li><li><a href="#sito">Sito Web</a></li><li><a href="#va">Virtual Assistant</a></li><li><a href="#campagna">Campagna 360°</a></li></ul></div>
+    <div><h4>Studio</h4><ul><li><a href="#partner">Partner</a></li><li><a href="#come">Come funziona</a></li><li><a href="#domande">Domande</a></li></ul></div>
+    <div><h4>Contatti</h4><ul><li><span class="ritratto">foto<br>Giuseppe</span></li><li><a href="tel:+393520338377">+39 352 033 8377</a></li><li>Giuseppe Fusciello</li><li><a href="mailto:giuseppe@veniellostudio.it">Scrivi un’email</a></li></ul></div>
+    <div><h4>Dove</h4><ul><li>Montecatini Terme</li><li>Valdinievole</li><li><a href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener">WhatsApp</a></li></ul></div>
+  </div>
+  <p class="marchio piede-marchio" aria-label="Veniello Studio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><i class="pt pl-casa" data-posto data-dall-alto aria-hidden="true"></i><span aria-hidden="true">studio</span></p>
+  <p class="piede-riga">Siti, Google, social e video · Montecatini Terme · ©&nbsp;2026 · Niente cookie, niente tracciamenti.</p>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var doc = document.documentElement;
+  var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var testata = document.getElementById('testata');
+
+  /* ── Il sito in miniatura: la copia semplice è la stessa pagina, con le animazioni spente ── */
+  var scena = document.getElementById('sito');
+  var ricco = scena.querySelector('.ms-wrap.ricco');
+  var semplice = ricco.cloneNode(true);
+  semplice.classList.remove('ricco'); semplice.classList.add('semplice');
+  document.getElementById('schermo-semplice').appendChild(semplice);
+  [].forEach.call(semplice.querySelectorAll('.ms-col'), function(c){ var im = c.querySelectorAll('img'); for (var k = im.length / 2; k < im.length; k++) im[k].remove(); });
+  /* il desktop della quarta battuta: lo stesso sito semplice, largo */
+  var ds = document.getElementById('desk-schermo');
+  ds.innerHTML = '<div class="md"><div class="md-testata"><span class="ms-logo"><span class="vv">V</span><span class="e">eniello</span><span class="pt2"></span><span class="st">studio</span></span><span class="md-nav"><span>Partner</span><span>Come funziona</span><span>Servizi</span><span>Domande</span></span><span class="ms-pill">Scrivici</span></div>'
+    + '<div class="md-cop"><p class="ms-mono">Social · Google · Video · Siti</p><p class="ms-h"><span class="r"><span>Fatti trovare.</span></span><span class="r"><span>Fatti <em>scegliere</em><i class="ms-ptt"></i></span></span></p><span class="ms-btn">Chiedi l’anteprima gratis</span></div>'
+    + '<div class="md-fascia"><span>Siti</span><span>·</span><span>Google</span><span>·</span><span>Social</span><span>·</span><span>Video</span></div>'
+    + '<div class="md-lavori"><img src="../comune/img/sito-1.jpg" alt="" loading="lazy"><img src="../comune/img/jue-neon.jpg" alt="" loading="lazy"><img src="../comune/img/locandina.jpg" alt="" loading="lazy"><img src="../comune/img/jue-dj-pioneer.jpg" alt="" loading="lazy"></div></div>';
+
+  function scala(){
+    [].forEach.call(document.querySelectorAll('.ms-wrap'), function(w){
+      var k = w.clientWidth / 390; if (!k) return;
+      var m = w.querySelector('.ms'); m.style.setProperty('--k', k.toFixed(4)); m.style.setProperty('--msh', Math.round(w.clientHeight / k) + 'px');
+    });
+    var md = ds.querySelector('.md'); if (ds.clientWidth) md.style.setProperty('--k', (ds.clientWidth / 1280).toFixed(4));
+    /* il puntino del logo in miniatura parte dall'alto a destra della V */
+    var lg = ricco.querySelector('.ms-logo'), v = lg.querySelector('.vv'), p = lg.querySelector('.pt2');
+    var dx = (v.offsetLeft + v.offsetWidth * .86) - (p.offsetLeft + p.offsetWidth / 2), dy = (v.offsetTop + v.offsetHeight * .22) - (p.offsetTop + p.offsetHeight / 2);
+    lg.style.setProperty('--dx', dx.toFixed(1) + 'px'); lg.style.setProperty('--dy', dy.toFixed(1) + 'px');
+  }
+  scala();
+  addEventListener('resize', scala);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(scala);
+
+  /* il timecode del REC gira solo mentre il sito ricco si vede */
+  var tc = ricco.querySelector('.ms-tc'), fotogrammi = 0, tcTimer = null;
+  function due(n){ return (n < 10 ? '0' : '') + n; }
+  function giraTc(si){
+    if (si && !tcTimer && !ridotto) tcTimer = setInterval(function(){ fotogrammi++; var s = Math.floor(fotogrammi / 25); tc.textContent = '00:' + due(Math.floor(s / 60) % 60) + ':' + due(s % 60) + ':' + due(fotogrammi % 25); }, 40);
+    else if (!si && tcTimer) { clearInterval(tcTimer); tcTimer = null; }
+  }
+
+  /* ── Video e immagini che si muovono: solo quando si vedono ── */
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var el = e.target;
+      if (el.tagName === 'VIDEO') {
+        if (ridotto) return;
+        if (e.isIntersecting) { el.preload = 'auto'; var p = el.play(); if (p && p.catch) p.catch(function(){}); }
+        else if (!el.paused) el.pause();
+      } else el.classList.toggle('va', e.isIntersecting);
+    });
+  }, { threshold: 0.08 }) : null;
+  if (io) [].forEach.call(document.querySelectorAll('video[data-video],[data-anima]'), function(el){ io.observe(el); });
+  else [].forEach.call(document.querySelectorAll('[data-anima]'), function(el){ el.classList.add('va'); });
+  document.addEventListener('visibilitychange', function(){ if (document.hidden) [].forEach.call(document.querySelectorAll('video'), function(v){ v.pause(); }); });
+
+  var grande = document.getElementById('marchio-grande');
+  var piccolo = document.getElementById('marchio-testata');
+  var dxTestata = document.getElementById('testata-dx');
+  var piedeAp = document.getElementById('apertura-piede');
+
+  if (ridotto || !('requestAnimationFrame' in window)) {
+    /* fermo: il marchio resta grande nella prima schermata, quello della testata compare dopo */
+    var ap = document.getElementById('inizio');
+    function fermo(){ var su = ap.getBoundingClientRect().bottom > 90; piccolo.style.opacity = su ? 0 : 1; testata.style.setProperty('--fondo', su ? 0 : 1); }
+    fermo(); addEventListener('scroll', fermo, { passive: true });
+    return;
+  }
+  doc.classList.add('viaggio');
+
+  /* ── La scena del sito: battute, tendina, sito ricco che si spegne ── */
+  var palco = document.getElementById('palco');
+  var battute = [].slice.call(palco.querySelectorAll('.battuta'));
+  var finestra = palco.querySelector('.finestra'), finIn = palco.querySelector('.finestra-in');
+  var tendina = document.getElementById('tendina');
+  var schermoR = document.getElementById('schermo-ricco');
+  var ST = { T: 0, R: 1, b: -1, gira: null, X: -1 };
+  function aggiornaScena(y, vh){
+    var p = Math.max(0, Math.min(1, (y - ST.T) / ST.R));
+    var b = p < .24 ? 0 : p < .46 ? 1 : p < .86 ? 2 : 3;
+    if (b !== ST.b) { ST.b = b; battute.forEach(function(el, i){ el.classList.toggle('su', i === b); }); palco.classList.toggle('b4', b === 3); }
+    var w = Math.max(0, Math.min(1, (p - .46) / .24));
+    var X = Math.round(w * ST.sw * 10) / 10;
+    if (X !== ST.X) { ST.X = X; finestra.style.transform = 'translate3d(' + X + 'px,0,0)'; finIn.style.transform = 'translate3d(' + (-X) + 'px,0,0)'; tendina.style.transform = 'translate3d(' + X + 'px,0,0)'; }
+    tendina.classList.toggle('su', p > .4 && p < .7);
+    var vivo = y > ST.T - vh && y < ST.T + ST.R + vh && p < .72;
+    if (vivo !== ST.gira) { ST.gira = vivo; scena.classList.toggle('gira', vivo); giraTc(vivo); }
+  }
+
+  /* ── Il puntino: uno solo. Parte dal marchio, fa da punto finale ai titoli, nella scena tiene la tendina,
+        e alla fine torna nel marchio del piede ── */
+  var punto = document.getElementById('punto');
+  var posti = [].slice.call(document.querySelectorAll('[data-posto]'));
+  var vh = innerHeight, Yin = 0, Yout = 0, Rm = 0, Lvia = 130, Larrivo = 190, xM = 0, maxS = 0, larghezza = 0;
+  var DOT = 7, SEG = [], seduto, volo = { p: -1 };
+  var B0 = { x: 0, y: 0, d: 9 }, FLY = { dx: 0, dy: 0, s: 1 };
+
+  function easeIO(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
+  function offsetIn(el, anc){ var x = 0, y = 0; while (el && el !== anc) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x: x, y: y }; }
+  function stageTop(y){ return y < ST.T ? ST.T - y : (y <= ST.T + ST.R ? 0 : ST.T + ST.R - y); }
+  function sy(s, y){ return s.scena ? stageTop(y) + s.ly : s.ly - y; }
+
+  function misura(){
+    vh = innerHeight;
+    if (innerWidth !== larghezza || !Yin) {
+      larghezza = innerWidth;
+      Yin = Math.round(vh * .62); Yout = Math.round(vh * .24); Rm = Math.round(vh * .46);
+      Lvia = Math.round(vh * .15); Larrivo = Math.round(vh * .22);
+    }
+    var y0 = scrollY, corpo = document.body.getBoundingClientRect();
+    xM = corpo.right - 10;
+    maxS = Math.max(0, doc.scrollHeight - vh);
+    /* il marchio grande: dove sta il suo puntino e come vola nella testata */
+    var t0 = grande.style.transform; grande.style.transform = 'none';
+    var g = grande.getBoundingClientRect(), pl = document.getElementById('pl-grande').getBoundingClientRect(), h = piccolo.getBoundingClientRect();
+    grande.style.transform = t0;
+    B0 = { x: pl.left + pl.width / 2, y: pl.top + pl.height / 2, d: pl.width };
+    FLY = { dx: h.left - g.left, dy: h.top - g.top + (h.height - g.height * (h.width / g.width)) / 2, s: h.width / g.width, fine: Math.max(160, vh * .5) };
+    /* la scena */
+    var r = scena.getBoundingClientRect();
+    ST.T = r.top + y0; ST.R = Math.max(1, scena.offsetHeight - vh);
+    var pr = palco.getBoundingClientRect();
+    var o = offsetIn(schermoR, palco);
+    ST.sw = schermoR.offsetWidth;
+    var hs = { x: pr.left + o.x, ly: o.y + schermoR.offsetHeight / 2, d: 10, scena: true };
+    var H0 = { x: hs.x, ly: hs.ly, d: 10, scena: true }, H1 = { x: hs.x + ST.sw, ly: hs.ly, d: 10, scena: true };
+    var L = battute.map(function(b){ var pt = b.querySelector('.pt'); if (!pt) return null; var q = offsetIn(pt, palco); return { el: pt, x: pr.left + q.x + pt.offsetWidth / 2, ly: q.y + pt.offsetHeight / 2, d: pt.offsetWidth, scena: true }; });
+    /* i posti normali, in ordine di pagina */
+    var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: q.width, alto: el.hasAttribute('data-dall-alto') }; });
+    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; });
+    /* il primo titolo «prende» il puntino quando il suo punto arriva all'altezza del puntino del marchio */
+    P[0].inY = P[0].ly - B0.y;
+    var L1 = L[0], L3 = L[2], L4 = L[3];
+    L1.inY = ST.T + L1.ly - Yin; L1.outY = ST.T + .22 * ST.R;
+    L4.inY = ST.T + .9 * ST.R; L4.outY = ST.T + ST.R + Math.max(24, L4.ly - Yout);
+    /* la sequenza dei posti con la scena inserita al suo posto */
+    var seq = [], messa = false;
+    P.forEach(function(s){ if (!messa && s.ly > ST.T) { seq.push(L1, L4); messa = true; } seq.push(s); });
+    var n = seq.length, i;
+    seq[n-1].inY = Math.min(seq[n-1].inY, maxS);
+    for (i = n - 2; i >= 0; i--) if (seq[i] !== L1) seq[i].inY = Math.min(seq[i].inY, seq[i+1].inY - 120);
+    for (i = 0; i < n - 1; i++) if (seq[i] !== L1) { seq[i].outY = Math.min(seq[i].outY, seq[i+1].inY - 80); if (seq[i].outY < seq[i].inY) seq[i].outY = seq[i].inY; }
+    /* i tratti */
+    SEG = [{ a: -1e9, b: seq[0].inY, k: 'marchio', to: seq[0] }];
+    for (i = 0; i < n; i++) {
+      var s = seq[i], nx = seq[i+1];
+      SEG.push({ a: s.inY, b: s.outY, k: 'seduto', s: s });
+      if (s === L1) {
+        var R = ST.R, T = ST.T;
+        SEG.push({ a: T + .22*R, b: T + .36*R, k: 'linea', da: L1, a2: H0 });
+        SEG.push({ a: T + .36*R, b: T + .46*R, k: 'fermo', s: H0 });
+        SEG.push({ a: T + .46*R, b: T + .70*R, k: 'tendina', da: H0, a2: H1 });
+        SEG.push({ a: T + .70*R, b: T + .78*R, k: 'linea', da: H1, a2: L3 });
+        SEG.push({ a: T + .78*R, b: T + .86*R, k: 'seduto', s: L3 });
+        SEG.push({ a: T + .86*R, b: T + .90*R, k: 'linea', da: L3, a2: L4 });
+      } else if (nx) SEG.push({ a: s.outY, b: nx.inY, k: 'viaggio', da: s, a2: nx });
+    }
+    SEG.push({ a: seq[n-1].outY, b: 1e9, k: 'seduto', s: seq[n-1] });
+  }
+
+  function siedi(s){
+    if (s === seduto) return;
+    if (seduto && seduto.el) seduto.el.classList.remove('qui');
+    seduto = s;
+    if (s && s.el) { s.el.classList.add('qui'); punto.classList.remove('su'); }
+    else punto.classList.add('su');
+  }
+  function metti(x, y, d){
+    siedi(null);
+    punto.style.transform = 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (y - d/2).toFixed(2) + 'px,0) scale(' + (d/10).toFixed(4) + ')';
+  }
+
+  function viaggio(a, b, y, gap, u){
+    var ax = a.x, ay = sy(a, y), bx = b.x, by = sy(b, y), x, yy, d, t, ex, ey;
+    var k = Math.min(1, gap / (Lvia + Larrivo + 60)), Lv = Lvia * k, La = Larrivo * k;
+    if (u < Lv) {
+      t = u / Lv; ex = easeIO(Math.min(1, t / .6)); ey = easeIO(Math.max(0, (t - .35) / .65));
+      x = ax + (xM - ax) * ex; yy = ay + (Rm - ay) * ey; d = a.d + (DOT - a.d) * ex;
+    } else if (u > gap - La) {
+      t = (u - (gap - La)) / La;
+      if (b.alto) {
+        var sopra = by - 58;
+        if (t < .45) { x = xM; yy = Rm + (sopra - Rm) * easeIO(t / .45); d = DOT; }
+        else { var t2 = (t - .45) / .55; x = xM + (bx - xM) * easeIO(t2); yy = sopra + (by - sopra) * t2 * t2 * t2; d = DOT + (b.d - DOT) * t2; }
+      } else {
+        ey = easeIO(Math.min(1, t / .6)); ex = easeIO(Math.max(0, (t - .4) / .6));
+        x = xM + (bx - xM) * ex; yy = Rm + (by - Rm) * ey; d = DOT + (b.d - DOT) * ex;
+      }
+    } else { x = xM; yy = Rm; d = DOT; }
+    metti(x, yy, d);
+  }
+
+  function quadro(){
+    pianificato = false;
+    var y = scrollY;
+    /* il marchio grande sale e si rimpicciolisce nella testata */
+    var p = clamp(y / FLY.fine, 0, 1);
+    if (p !== volo.p) {
+      volo.p = p; var e = easeIO(p), s = 1 + (FLY.s - 1) * e;
+      grande.style.transform = 'translate3d(' + (FLY.dx * e).toFixed(2) + 'px,' + (FLY.dy * e).toFixed(2) + 'px,0) scale(' + s.toFixed(4) + ')';
+      var arrivato = p >= 1;
+      grande.style.opacity = arrivato ? 0 : 1;
+      piccolo.style.opacity = arrivato ? 1 : 0;
+      piccolo.querySelector('.pl').style.transform = arrivato ? 'none' : 'scale(0)';
+      testata.style.setProperty('--fondo', clamp((p - .7) / .3, 0, 1).toFixed(3));
+      dxTestata.style.setProperty('--dx', clamp(y / 140, 0, 1).toFixed(3));
+      piedeAp.style.opacity = clamp(1 - y / 160, 0, 1).toFixed(3);
+    }
+    if (y > ST.T - 2 * vh && y < ST.T + ST.R + 2 * vh) aggiornaScena(y, vh);
+    for (var i = 0; i < SEG.length; i++) {
+      var g = SEG[i]; if (y < g.a || y >= g.b) continue;
+      var t = (y - g.a) / Math.max(1, g.b - g.a);
+      if (g.k === 'seduto') return g.s.el ? siedi(g.s) : metti(g.s.x, sy(g.s, y), g.s.d);
+      if (g.k === 'fermo') return metti(g.s.x, sy(g.s, y), g.s.d);
+      if (g.k === 'marchio') {
+        var b = g.to, dist = sy(b, y) - B0.y, tt = easeIO(1 - clamp(dist / 280, 0, 1));
+        return metti(lerp(B0.x, b.x, tt), B0.y, lerp(B0.d, b.d, tt));
+      }
+      if (g.k === 'linea') { var e2 = easeIO(t); return metti(lerp(g.da.x, g.a2.x, e2), lerp(sy(g.da, y), sy(g.a2, y), e2), lerp(g.da.d, g.a2.d, e2)); }
+      if (g.k === 'tendina') return metti(lerp(g.da.x, g.a2.x, t), sy(g.da, y), 10);
+      if (g.k === 'viaggio') return viaggio(g.da, g.a2, y, g.b - g.a, y - g.a);
+    }
+  }
+
+  var pianificato = false;
+  function chiedi(){ if (!pianificato) { pianificato = true; requestAnimationFrame(quadro); } }
+  function rimisura(){ scala(); misura(); volo.p = -1; ST.b = -1; ST.X = -1; chiedi(); }
+  misura(); quadro();
+  addEventListener('scroll', chiedi, { passive: true });
+  addEventListener('resize', rimisura);
+  if ('ResizeObserver' in window) new ResizeObserver(function(){ requestAnimationFrame(rimisura); }).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ requestAnimationFrame(rimisura); });
+  addEventListener('load', rimisura);
+})();
+</script>
+</body>
+</html>
