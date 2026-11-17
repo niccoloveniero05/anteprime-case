@@ -132,10 +132,9 @@ html.viaggio .ap-palco{position:sticky;top:0}
   -webkit-mask-image:radial-gradient(ellipse 78% 52% at 50% 46%,#000 0%,rgba(0,0,0,.55) 42%,transparent 78%);mask-image:radial-gradient(ellipse 78% 52% at 50% 46%,#000 0%,rgba(0,0,0,.55) 42%,transparent 78%)}
 .ap-palco::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 38% at 50% 46%,rgba(255,90,31,.045),transparent 70%)}
 .marchio-grande .vv{display:inline-block}
-html.viaggio .marchio-grande .vv{visibility:hidden}
 .ap-v-box{position:absolute;left:0;top:0;display:none;font-size:clamp(38px,12.4vw,54px);z-index:56;pointer-events:none}
 html.viaggio .ap-v-box{display:block}
-.ap-v{display:block;transform-origin:50% 50%;will-change:transform}
+.ap-v{display:block;transform-origin:50% 50%;will-change:transform;visibility:hidden}
 /* il titolo sale sopra il palco mentre il logo va nella testata */
 html.viaggio .eroe{position:relative;z-index:2;margin-top:-42vh;margin-top:-42svh}
 .marchio-grande .ap-via{display:inline-block;will-change:transform,opacity}
@@ -805,8 +804,9 @@ details[open] > summary .piu::after{transform:rotate(0)}
     AP.b0 = { x: pl.left + pl.width / 2, y: pl.top - pr0.top + pl.height / 2, d: pl.width };       /* il puntino nel nome */
     /* la V grande: font a misura finale, messa col centro sul punto d'arrivo */
     apVbox.style.fontSize = (parseFloat(getComputedStyle(grande).fontSize) * AP.S).toFixed(2) + 'px';
-    apV.style.transform = 'none';
+    var avT = apV.style.transform; apV.style.transform = 'none';
     var gw = apV.offsetWidth, gh = apV.offsetHeight;
+    apV.style.transform = avT || 'scale(0.2)';
     apVbox.style.left = (AP.tc.x - pr0.left - gw / 2).toFixed(2) + 'px'; apVbox.style.top = (AP.tc.y - gh / 2).toFixed(2) + 'px';
     /* la scena */
     var r = scena.getBoundingClientRect();
@@ -898,6 +898,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
       apV.style.transform = 'translate3d(' + (cx - AP.tc.x).toFixed(2) + 'px,' + (cy - AP.tc.y).toFixed(2) + 'px,0) scale(' + (sc / AP.S).toFixed(4) + ')';
       var arrivato = q >= .985;
       apV.style.opacity = arrivato ? 0 : 1;
+      var aRiposo = q < .002;
+      apV.style.visibility = aRiposo ? 'hidden' : 'visible'; vvG.style.visibility = aRiposo ? 'visible' : 'hidden';
       piccolo.style.opacity = arrivato ? 1 : 0;
       piccolo.querySelector('.pl').style.transform = arrivato ? 'none' : 'scale(0)';
       testata.style.setProperty('--fondo', clamp((y - AP.fine) / 60, 0, 1).toFixed(3));
