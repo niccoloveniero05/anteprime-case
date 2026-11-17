@@ -429,14 +429,14 @@ details[open] > summary .piu::after{transform:rotate(0)}
 /* ── Pacchetti come scene (18/11, Niccolò): il video sta sotto la scritta, a tutta larghezza; in basso diventa scuro e da
    lì partono numero, titolo e descrizione; poi stacco netto e la scena dopo (video + titolo + descrizione) ── */
 .pacchetto{padding:0 var(--lato) 84px;border-top:0}
-.pacchetto > .pannello{height:84vh;height:84svh;min-height:540px;max-height:780px;margin:0 calc(-1 * var(--lato));border-radius:0;box-shadow:none;background:#000}
+.pacchetto > .pannello{height:84vh;height:84svh;min-height:540px;max-height:780px;margin:0 calc(var(--pan) - var(--lato));border-radius:14px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.085);background:#000}
 .pacchetto > .pannello::after{display:none}
 .pacchetto > .pannello::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;height:auto;z-index:2;pointer-events:none;
   background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,0) 34%,rgba(16,15,9,.5) 52%,rgba(16,15,9,.86) 68%,var(--bg) 88%)}
 .pacchetto > .pannello video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pacchetto > .pannello + *{margin-top:-32vh;margin-top:-32svh}
 .pacchetto > :not(.pannello){position:relative;z-index:3}
-.pacchetto .chip{top:16px;left:var(--lato)}
+.pacchetto .chip{top:12px;left:12px}
 .pacchetto .trittico{align-content:start;padding:76px 18px 0}
 #va > .pannello::before{background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,0) 24%,rgba(16,15,9,.78) 44%,rgba(16,15,9,.95) 58%,var(--bg) 78%)}
 #campagna > .pannello{height:62vh;height:62svh;min-height:460px}
@@ -775,7 +775,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
   var DOT = 7, SEG = [], seduto, volo = { p: -1 };
   var AP = {}, ATTESA = null, apQ = -1;
   /* lo showreel: gira una volta quando il puntino ci entra, si ferma sulla scritta finale, poi il puntino esce */
-  var sr = document.getElementById('showreel'), SR_FINE = 18.6, srFinito = false, srEsce = 0, srPosto = null;
+  var sr = document.getElementById('showreel'), SR_FINE = 18.6, srFinito = false, srEsce = 0, srPosto = null, srVisto = false;
   sr.addEventListener('timeupdate', function(){
     if (!srFinito && sr.currentTime >= SR_FINE) { sr.pause(); srFinito = true; if (srPosto) srPosto.uscito = true; srEsce = performance.now(); chiedi(); }
   });
@@ -836,7 +836,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
     /* i posti normali, in ordine di pagina */
     var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: el.hasAttribute('data-video') ? DOT : q.width, alto: el.hasAttribute('data-dall-alto'), video: el.hasAttribute('data-video') }; });
     P.forEach(function(s){ if (s.video) { if (srPosto && srPosto.uscito) s.uscito = true; srPosto = s; var fr = s.el.parentNode.getBoundingClientRect(); s.top = fr.top + y0; s.bottom = fr.bottom + y0; s.E = { x: s.x, ly: s.bottom + 46, d: DOT }; } });
-    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; if (s.video) { s.inY = s.ly - vh * .42; s.outY = s.ly - vh * .1; } });
+    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; if (s.video) { s.inY = s.ly - vh * .72; s.outY = s.ly - vh * .12; } });
     var L1 = L[0], L3 = L[2], L4 = L[3];
     L1.inY = ST.T + L1.ly - Yin; L1.outY = ST.T + .22 * ST.R;
     L4.inY = ST.T + .9 * ST.R; L4.outY = ST.T + ST.R + Math.max(24, L4.ly - Yout);
@@ -850,6 +850,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
     seq[0].inY = AP.fine; AP.primo = seq[0];
     seq[0].outY = AP.fine + 40; if (seq[1]) seq[0].outY = Math.min(seq[0].outY, seq[1].inY - 60);
     if (seq[0].outY < seq[0].inY + 40) seq[0].outY = seq[0].inY + 40;
+    /* il tragitto dal titolo allo showreel ha sempre il suo tratto di scorrimento, così il puntino si vede scendere */
+    if (seq[1] && seq[1].video) { seq[0].outY = AP.fine + 30; if (seq[1].inY < seq[0].outY + 230) seq[1].inY = seq[0].outY + 230; if (seq[1].outY < seq[1].inY + 200) seq[1].outY = seq[1].inY + 200; }
     /* i tratti */
     ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
     SEG = [{ a: -1e9, b: AP.fine, k: 'apertura' }];
@@ -951,8 +953,11 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var dentro = false;
     for (var i0 = 0; i0 < SEG.length; i0++) { var g0 = SEG[i0]; if (y >= g0.a && y < g0.b) { dentro = g0.k === 'seduto' && g0.s.video && !g0.s.uscito; break; } }
     if (srPosto && y > srPosto.ly - 2 * vh && sr.preload !== 'auto') sr.preload = 'auto';
-    if (dentro && !srFinito && sr.paused) { var pp = sr.play(); if (pp && pp.catch) pp.catch(function(){}); }
-    else if (!dentro && !sr.paused) sr.pause();
+    if (dentro) srVisto = true;
+    var srC = srPosto ? (srPosto.top + srPosto.bottom) / 2 - y : -1e9;
+    var gira = !srFinito && (dentro || (srVisto && srC > vh * .12 && srC < vh * .88));
+    if (gira && sr.paused) { var pp = sr.play(); if (pp && pp.catch) pp.catch(function(){}); }
+    else if (!gira && !sr.paused) sr.pause();
     /* lo showreel è finito: il puntino esce dal bordo del pannello e va ad aspettare nel margine */
     if (srEsce && srPosto) {
       var te = (performance.now() - srEsce) / 1100;
