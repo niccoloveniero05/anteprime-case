@@ -40,6 +40,11 @@
   --lato:24px; --pan:16px; --testata:60px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --colonna:430px;
+  /* la scala degli spazi (18/11 notte, controllo di coesione): ogni spazio verticale della pagina è uno di questi.
+     s1-s3 dentro un blocco (etichetta → frase, titolo → testo, testo → link), s4 dal titolo di sezione al suo
+     contenuto e tra due contenuti della stessa sezione, s6 sopra e sotto il filo che separa due blocchi (sezioni e
+     pacchetti: sempre 96 + filo + 96), s7 per i due momenti larghi (dopo lo showreel e la chiusura) */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px; --s7:128px;
 }
 *{box-sizing:border-box}
 html{background:#0A0906;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -79,17 +84,28 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .pill-chiara{background:#ECEBE5;color:#100F09}
 .pill-scura{background:var(--bg3);color:var(--av);box-shadow:inset 0 0 0 1px rgba(245,244,239,.1)}
 .pill-piccola{height:34px;padding:0 15px;font-size:15px}
-.freccia{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:450 17px/1 var(--sans);color:var(--av)}
+.freccia{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:500 17px/1 var(--sans);color:var(--av)}
 .freccia .i{width:16px;height:16px;transition:transform .25s var(--ease)}
 .freccia:active .i{transform:translateX(3px)}
 
-/* ── Tipografia: titoli in Newsreader usati alla Linear (grandi, a sinistra, stretti), testo in Inter ── */
-.micro{font:400 11.5px/1.4 var(--mono);letter-spacing:.14em;word-spacing:0;text-transform:uppercase;color:var(--av3)}
+/* ── Tipografia (18/11 notte, controllo di coesione): ogni testo della pagina appartiene a uno di questi livelli
+   (tabella completa in NOTE.md, «Gerarchia dei testi»).
+   · .t1  titolo del marchio (solo la copertina: «Fatti trovare. Fatti scegliere.»), Newsreader
+   · .t-sez  titolo d'ingresso di sezione (Tutto quello che serve, Chi ci ha già scelto, Prima lo vedi, Le domande di
+             tutti, la chiusura): Inter a due toni, grigio + la parola chiave avorio (decisione di Niccolò)
+   · .battuta  frase delle scene (social, sito): lo stesso stile, un gradino più piccola
+   · .t2  titolo di pacchetto (Creazione Contenuti, Sito Web, Virtual Assistant, Campagna Pubblicitaria 360°), Newsreader
+   · .micro / .chip  etichette in Geist Mono, sempre 11 px maiuscole
+   · .sotto descrizione 17 px, testo 16 px, nota 15 px, link e pulsanti in Inter 500 ── */
+.micro{font:400 11px/1.4 var(--mono);letter-spacing:.12em;word-spacing:0;text-transform:uppercase;color:var(--av3)}
 .t1,.t2{font-family:var(--serif);font-optical-sizing:auto;letter-spacing:-.022em;word-spacing:0;color:var(--av)}
 .t1{font-weight:430;font-size:clamp(42px,12vw,50px);line-height:1.02}
 .t2{font-weight:440;font-size:clamp(34px,10.2vw,41px);line-height:1.04}
 .t1 em,.t2 em{font-style:italic;font-weight:inherit;letter-spacing:-.012em}
-.sotto{color:var(--av2);font-size:17px;line-height:1.55;margin-top:18px;max-width:20em;text-wrap:pretty}
+.t-sez{font-family:var(--sans);font-weight:560;font-size:clamp(36px,10.4vw,44px);line-height:1.04;letter-spacing:-.04em;word-spacing:0;color:var(--av2)}
+.t-sez em{font-style:normal;font-weight:600;color:var(--av);letter-spacing:-.034em}
+.sotto{color:var(--av2);font-size:17px;line-height:1.55;margin-top:var(--s2);max-width:20em;text-wrap:pretty}
+.t-sez + .sotto{margin-top:var(--s3)}
 
 /* il punto finale dei titoli: senza JS (o con «Riduci movimento») è un punto arancio fermo; con JS è il posto
    dove si posa l'unico puntino che viaggia */
@@ -106,12 +122,14 @@ html.viaggio .punto.su{opacity:1}
 .pannello::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:3;
   background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 22%);box-shadow:inset 0 0 0 1px rgba(245,244,239,.09),inset 0 1px 0 rgba(245,244,239,.08)}
 .pannello video,.pannello .media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.chip{position:absolute;left:12px;top:12px;z-index:4;display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border-radius:999px;background:rgba(16,15,9,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(245,244,239,.1);font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.78);white-space:nowrap}
+/* le etichette messe da noi sui video e sui pannelli: sempre in basso a destra (decisione 4 di Niccolò), stesso carattere
+   delle altre etichette (Geist Mono 11 px) */
+.chip{position:absolute;right:var(--s2);bottom:var(--s2);z-index:4;display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:999px;background:rgba(16,15,9,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(245,244,239,.1);font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.78);white-space:nowrap}
 .sfuma-giu::before{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(16,15,9,0),rgba(16,15,9,.7))}
 .segnaposto{display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;border-radius:14px;border:1px dashed rgba(245,244,239,.28);background:repeating-linear-gradient(135deg,rgba(245,244,239,.02) 0 10px,transparent 10px 20px);font:400 12px/1.6 var(--mono);letter-spacing:.04em;color:var(--av2)}
 
 /* ── Sezioni: tanta aria, un filo sottile tra una e l'altra ── */
-.sez{position:relative;padding:96px var(--lato) 96px;border-top:1px solid var(--filo)}
+.sez{position:relative;padding:var(--s6) var(--lato);border-top:1px solid var(--filo)}
 .sez > .pannello,.largo{margin-left:calc(var(--pan) - var(--lato));margin-right:calc(var(--pan) - var(--lato))}
 
 /* ── 0 · Apertura, presa dal sito vero (17/11, Niccolò: «la parte iniziale del sito riprendiamola da quello vecchio:
@@ -204,7 +222,7 @@ html.fermo .fondo{opacity:1}
 .logo-in #marchio-testata .pl{opacity:0}
 
 /* ── 1 · Lo showreel, subito dopo la scena: comincia da un fotogramma tutto arancio (la sua copertina), come finisce la scena ── */
-.showreel{padding:16px var(--lato) 0}
+.showreel{padding:var(--s2) var(--lato) 0}
 .pannello-eroe{margin:0 calc(var(--pan) - var(--lato));height:min(132vw,560px);background:#FF5A1F}
 .pannello-eroe video{object-position:50% 46%}
 /* il posto del puntino dentro lo showreel: invisibile, il puntino ci sta sotto dall'inizio della pagina */
@@ -226,29 +244,25 @@ html.viaggio .due-toni .pt{background:rgba(245,244,239,.46)}
 html.viaggio .due-toni .pt.qui{background:var(--rec)}
 
 /* ── 3 · Pacchetti, ciascuno come una sezione di Linear: pannello, titolo, riga grigia, dettagli ── */
-.pacchetto{padding-top:56px;padding-bottom:76px}
-#servizi{padding-bottom:56px}
-#servizi{padding-top:120px;border-top:0}
+/* «Tutto quello che serve» arriva largo dopo lo showreel (s7) e introduce i pacchetti: niente filo e 96 px fino
+   all'etichetta della prima scena (il palco della scena ha già il suo spazio sopra) */
+#servizi{padding-top:var(--s7);padding-bottom:0;border-top:0}
 #contenuti{border-top:0;padding-top:0}
-.pacchetto .pannello{height:min(118vw,480px);margin-bottom:44px}
-.conta{margin-bottom:18px}
-.dettagli{margin-top:30px}
-.dettagli summary{list-style:none;display:inline-flex;align-items:center;gap:12px;min-height:44px;cursor:pointer;font:450 17px/1 var(--sans);color:var(--av)}
+.dettagli{margin-top:var(--s3)}
+.dettagli summary{list-style:none;display:inline-flex;align-items:center;gap:12px;min-height:44px;cursor:pointer;font:500 17px/1 var(--sans);color:var(--av)}
 .dettagli summary::-webkit-details-marker{display:none}
 .piu{position:relative;width:14px;height:14px;flex:none}
 .piu::before,.piu::after{content:"";position:absolute;left:0;top:6.5px;width:14px;height:1.4px;border-radius:1px;background:currentColor;transition:transform .35s var(--ease)}
 .piu::after{transform:rotate(90deg)}
 details[open] > summary .piu::after{transform:rotate(0)}
-.voci{margin-top:18px;border-top:1px solid var(--filo)}
-.voci li{padding:14px 0 14px 22px;border-bottom:1px solid var(--filo);position:relative;color:var(--av2);font-size:16px;line-height:1.5}
+.voci{margin-top:var(--s2);border-top:1px solid var(--filo)}
+.voci li{padding:14px 0 14px 22px;border-bottom:1px solid var(--filo);position:relative;color:var(--av2);font-size:16px;line-height:1.55}
 .voci li::before{content:"";position:absolute;left:2px;top:25px;width:9px;height:1px;background:var(--av3)}
 .voci b{display:block;color:var(--av);font-weight:500}
-.dettagli .freccia{margin-top:14px}
-.speciale{display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--filo2);margin-bottom:20px}
-.comprende{margin-top:34px}
-.comprende .micro{padding-bottom:4px}
-.onesta{margin-top:40px;padding-top:22px;border-top:1px solid var(--filo);font-size:15px;line-height:1.55;color:var(--av3)}
-.dopo-scena{border-top:0;padding-top:20px}
+.dettagli .freccia{margin-top:var(--s2)}
+/* la pillola «Pacchetto speciale» (e «Gratis» in Come funziona): un'etichetta in pillola, stessa misura dei chip */
+.speciale{display:flex;width:max-content;align-items:center;height:26px;padding:0 11px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--filo2);margin-bottom:var(--s2)}
+.onesta{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--filo);font-size:15px;line-height:1.55;color:var(--av3)}
 
 /* il pannello del Virtual Assistant: il video riempie il pannello (una cornice sola), la chat si legge a misura vera;
    l'etichetta «Esempio» sta in alto, sulla barra del telefono, dove non copre la chat */
@@ -268,16 +282,16 @@ details[open] > summary .piu::after{transform:rotate(0)}
 @keyframes deriva{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-3%,-2%,0)}}
 .tri{overflow:visible}
 .tri-in{position:absolute;inset:0;border-radius:inherit;overflow:hidden}
-.trittico .tri-et{position:absolute;left:0;right:0;bottom:-24px;text-align:center;font:400 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
+.trittico .tri-et{position:absolute;left:0;right:0;bottom:-26px;text-align:center;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
 
 /* ── La scena del Sito Web: un telefono fermo, le parole cambiano, il sito passa da ricco a semplice ── */
 .scena-sito{position:relative;height:340vh;height:340svh;border-top:1px solid var(--filo)}
-.palco{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;padding:calc(var(--testata) + env(safe-area-inset-top) + 26px) var(--pan) calc(14px + env(safe-area-inset-bottom));overflow:hidden}
+.palco{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;padding:calc(var(--testata) + env(safe-area-inset-top) + 36px) var(--pan) calc(var(--s2) + env(safe-area-inset-bottom));overflow:hidden}
 .palco-testa{padding:0 calc(var(--lato) - var(--pan))}
-.battute{display:grid;margin-top:14px}
+.battute{display:grid;margin-top:var(--s2)}
 .battuta{grid-area:1/1;opacity:0;transform:translate3d(0,10px,0);transition:opacity .45s var(--ease),transform .55s var(--ease)}
 .battuta.su{opacity:1;transform:none}
-.palco-pannello{flex:1;min-height:0;margin-top:24px}
+.palco-pannello{flex:1;min-height:0;margin-top:var(--s3)}
 .coppia{position:absolute;inset:0;container-type:size}
 .tel{position:absolute;inset:0;margin:auto;height:calc(100cqh - 44px);width:calc((100cqh - 44px) * .462);max-height:600px;max-width:277px;border-radius:38px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 6px #0D0C08,0 0 0 7px rgba(245,244,239,.07),0 40px 80px -30px rgba(0,0,0,.9)}
 .tel-schermo{position:absolute;inset:7px;border-radius:31px;overflow:hidden;background:var(--bg);isolation:isolate}
@@ -299,7 +313,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 /* «Riduci movimento»: niente scena ferma, le due versioni una accanto all'altra */
 @media (prefers-reduced-motion:reduce){
   .scena-sito{height:auto}
-  .palco{position:relative;height:auto;padding-top:96px;padding-bottom:96px}
+  .palco{position:relative;height:auto;padding-top:var(--s6);padding-bottom:var(--s2)}   /* sotto, come nella scena che si muove: il titolo del pacchetto arriva 40 px dopo */
   .battuta{transition:none;transform:none}
   .battuta:not(:first-child){display:none}
   .battuta:first-child{opacity:1}
@@ -360,38 +374,31 @@ details[open] > summary .piu::after{transform:rotate(0)}
 .ms-et{position:absolute;z-index:3;display:flex;align-items:center;gap:7px;font:400 11px/1 'Geist Mono';letter-spacing:.14em;text-transform:uppercase;color:rgba(245,244,239,.78);font-variant-numeric:tabular-nums}
 .ms-et.tl{top:17px;left:34px}.ms-et.tr{top:17px;right:34px}.ms-et.bl{bottom:17px;left:34px}
 .ms-rec{width:8px;height:8px;border-radius:50%;background:rgba(245,244,239,.32)}
-/* versione ricca: tutto si muove */
-.ricco .ms-macchia i:nth-child(1){animation:mm1 13s ease-in-out infinite alternate}
-.ricco .ms-macchia i:nth-child(2){animation:mm2 17s ease-in-out infinite alternate}
-.ricco .ms-macchia i:nth-child(3){animation:mm3 11s ease-in-out infinite alternate}
-@keyframes mm1{to{transform:translate3d(-90px,-70px,0) scale(1.15)}}
-@keyframes mm2{to{transform:translate3d(120px,60px,0) scale(.85)}}
-@keyframes mm3{to{transform:translate3d(-70px,90px,0) scale(1.2)}}
-.ricco .ms-logo .pt2{animation:logo-pt 8s cubic-bezier(.2,.8,.2,1) infinite}
-.ricco .ms-logo .e{animation:logo-e 8s cubic-bezier(.2,.8,.2,1) infinite}
-.ricco .ms-logo .st{animation:logo-st 8s cubic-bezier(.2,.8,.2,1) infinite}
-@keyframes logo-pt{0%,4%{transform:translate(var(--dx),var(--dy)) scale(1.3);opacity:0}7%{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1.3)}10%{opacity:.3}13%{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1.15)}21%,90%{transform:none;opacity:1}96%,100%{transform:translate(var(--dx),var(--dy)) scale(1.3);opacity:0}}
-@keyframes logo-e{0%,11%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.35em)}19%,90%{clip-path:inset(-20% 0 -20% 0);transform:none}96%,100%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.35em)}}
-@keyframes logo-st{0%,18%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.25em)}25%,90%{clip-path:inset(-20% 0 -20% 0);transform:none}96%,100%{clip-path:inset(-20% 100% -20% 0);transform:translateX(-.25em)}}
-.ricco .ms-h .r > span{animation:riga 8s cubic-bezier(.16,1,.3,1) infinite}
-.ricco .ms-h .r:nth-child(2) > span{animation-name:riga2}
-@keyframes riga{0%,5%{transform:translate3d(0,108%,0)}14%,92%{transform:none}98%,100%{transform:translate3d(0,-108%,0)}}
-@keyframes riga2{0%,9%{transform:translate3d(0,108%,0)}18%,92%{transform:none}98%,100%{transform:translate3d(0,-108%,0)}}
-.ricco .ms-ptt{animation:rec-luce 1.6s steps(1,end) infinite}
-@keyframes rec-luce{50%{opacity:.2}}
-.ricco .ms-btn{animation:bottone 8s var(--ease) infinite}
-@keyframes bottone{0%,20%{transform:translate3d(0,14px,0);opacity:0}28%,92%{transform:none;opacity:1}98%,100%{opacity:0}}
-.ricco .ms-fascia{background:#FF5A1F;border-color:#FF5A1F}
-.ricco .ms-fascia-in{color:#100F09;animation:fascia 14s linear infinite}
-@keyframes fascia{to{transform:translate3d(-50%,0,0)}}
-.ricco .ms-muro{transform:rotate(-9deg) scale(1.22)}
-.ricco .ms-col{animation:ms-sale 30s linear infinite}
-.ricco .ms-col:nth-child(2){animation:ms-scende 40s linear infinite}
-.ricco .ms-col:nth-child(3){animation-duration:23s}
-@keyframes ms-sale{to{transform:translate3d(0,-50%,0)}}
-@keyframes ms-scende{from{transform:translate3d(0,-50%,0)}to{transform:none}}
-.ricco .ms-rec{background:#FF5A1F;animation:rec-luce 1.6s steps(1,end) infinite}
-.scena-sito:not(.gira) .ricco *{animation-play-state:paused!important}
+/* ===== INIZIO SITO RICCO · CSS (18/11) =======================================================================================
+   Va nella D AL POSTO del blocco «versione ricca: tutto si muove» (da `.ricco .ms-macchia i:nth-child(1){…}` fino a
+   `.scena-sito:not(.gira) .ricco *{animation-play-state:paused!important}` compreso). Il sito ricco è la pagina del
+   semplice (stesso tema: niente macchia né velo) più UNA animazione: la nostra apertura in miniatura, disegnata in uno
+   strato sopra la pagina (.ms-anim) che lo script «SITO RICCO · JS» muove a tempo. Misure e movimenti del logo sono
+   quelli dell'apertura della D (logoMisura, logoDisegna), in coordinate del sito a 390 px. ── */
+.ms-wrap.ricco .ms-macchia,.ms-wrap.ricco .ms-velo{display:none}
+/* lo strato: sopra la pagina (anche sopra le etichette del mirino) e tagliato sotto la testata (64 px): come nel sito
+   vero, la testata scura resta sopra all'arancio, col suo logo e «Scrivici». I testi della copertina stanno sopra lo
+   strato (z-index 6): come nel sito vero il punto passa DIETRO ai testi e al pulsante, e quando l'arancio è grande i testi
+   svaniscono (lo script ne cambia l'opacità); a riposo è tutto identico al semplice */
+.ms-anim{position:absolute;inset:0;z-index:5;pointer-events:none;-webkit-clip-path:inset(64px 0 0 0);clip-path:inset(64px 0 0 0)}
+.ms-wrap.ricco .ms-cop > :not(.ms-macchia):not(.ms-velo){z-index:6}
+.semplice .ms-anim{display:none}
+/* il punto di «scegliere» che scende, lampeggia e si allarga (disegnato largo 240 px e scalato; da piccolo con la sua misura vera) */
+.ms-anim-disco{position:absolute;left:0;top:0;width:240px;height:240px;border-radius:50%;background:#FF5A1F;transform-origin:0 0;visibility:hidden;will-change:transform}
+/* il logo sull'arancio: V in Instrument Serif corsiva ingrossata, «eniello», il punto scuro, «studio» in Geist 700, bianco */
+.ms-lv{position:absolute;left:0;top:64px;right:0;bottom:0;color:#FFF;font-family:'Geist',var(--sans);word-spacing:0;visibility:hidden}
+.ms-lv-n{position:absolute;left:0;top:0;font-weight:700;letter-spacing:-.05em;line-height:1;white-space:nowrap}
+.ms-lv-n > *{display:inline-block}
+.ms-lv-v{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.18em;letter-spacing:0;-webkit-text-stroke:.036em currentColor;paint-order:stroke fill;transform-origin:50% 50%;padding:.14em .22em;margin:-.14em calc(.01em - .22em) -.14em -.22em}
+.ms-lv-p{width:.21em;height:.21em;margin:0 .035em 0 .045em;visibility:hidden}
+.ms-lv-d{position:absolute;left:0;top:0;width:100px;height:100px;margin:-50px 0 0 -50px;border-radius:50%;background:#100F09;transform-origin:50% 50%;visibility:hidden}
+.ms-lv-e,.ms-lv-s{-webkit-clip-path:inset(-20% 100% -20% 0);clip-path:inset(-20% 100% -20% 0)}
+/* ===== FINE SITO RICCO · CSS ================================================================================================ */
 /* versione semplice: lo stesso sito, fermo */
 .semplice .ms-macchia{display:none}
 .semplice .ms-velo{display:none}
@@ -408,8 +415,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 .md-lavori img{width:100%;height:220px;object-fit:cover;border-radius:12px}
 
 /* ── 4 · Chi ci ha già scelto: card squadrate che scorrono di lato, con dentro il video del cliente ── */
-.partner{padding-bottom:96px}
-.carosello{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 var(--pan);padding:0 var(--pan) 6px;margin:48px calc(-1 * var(--lato)) 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.carosello{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 var(--pan);padding:0 var(--pan) 6px;margin:var(--s4) calc(-1 * var(--lato)) 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .carosello::-webkit-scrollbar{display:none}
 .card{position:relative;flex:0 0 min(80vw,330px);aspect-ratio:4/5;border-radius:14px;overflow:hidden;scroll-snap-align:start;background:var(--bg3);isolation:isolate;box-shadow:inset 0 0 0 1px rgba(245,244,239,.08)}
 .card > video,.card > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
@@ -420,61 +426,62 @@ details[open] > summary .piu::after{transform:rotate(0)}
   radial-gradient(150% 66% at 100% 0%,rgba(8,7,4,.94) 0%,rgba(8,7,4,.8) 26%,rgba(8,7,4,.42) 52%,rgba(8,7,4,.1) 72%,rgba(8,7,4,0) 86%),
   linear-gradient(0deg,rgba(8,7,4,.86) 0%,rgba(8,7,4,.5) 20%,rgba(8,7,4,0) 42%)}
 .card::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(245,244,239,.1)}
-.card-nome{position:absolute;right:20px;top:20px;left:20px;z-index:2;text-align:right}
+.card-nome{position:absolute;right:var(--s3);top:var(--s3);left:var(--s3);z-index:2;text-align:right}
 .card-nome h3{font:440 30px/1.02 var(--serif);font-optical-sizing:auto;letter-spacing:-.02em;text-shadow:0 1px 18px rgba(8,7,4,.5)}
 .card-nome h3 em{font-style:italic}
-.card-nome p{margin-top:10px;font:400 10.5px/1.5 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:rgba(245,244,239,.82);text-shadow:0 1px 10px rgba(8,7,4,.8)}
-.card-piede{position:absolute;left:20px;right:16px;bottom:18px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
-.card-lavori{font:450 15px/1.35 var(--sans);color:var(--av)}
-.card-lavori small{display:block;font:400 10.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.66);margin-bottom:4px}
-.card-seg{flex:none;font:400 9.5px/1 var(--mono);letter-spacing:.08em;color:rgba(245,244,239,.86);padding:6px 8px;border-radius:7px;border:1px dashed rgba(245,244,239,.5);background:rgba(16,15,9,.5)}
-.card-tua{background:var(--rec);color:#100F09;box-shadow:none;display:flex;flex-direction:column;justify-content:space-between;padding:24px 22px 18px}
+.card-nome p{margin-top:10px;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.82);text-shadow:0 1px 10px rgba(8,7,4,.8)}
+.card-piede{position:absolute;left:var(--s3);right:var(--s3);bottom:var(--s3);z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.card-lavori{font:450 16px/1.4 var(--sans);color:var(--av)}
+.card-lavori small{display:block;font:400 11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.66);margin-bottom:6px}
+.card-seg{flex:none;font:400 11px/1 var(--mono);letter-spacing:.04em;color:rgba(245,244,239,.86);padding:6px 8px;border-radius:7px;border:1px dashed rgba(245,244,239,.5);background:rgba(16,15,9,.5)}
+.card-tua{background:var(--rec);color:#100F09;box-shadow:none;display:flex;flex-direction:column;justify-content:space-between;padding:var(--s3)}
 .card-tua::before,.card-tua::after{display:none}
 .card-tua h3{font:440 42px/1.02 var(--serif);font-optical-sizing:auto;letter-spacing:-.024em;max-width:6.4em}
 .card-tua h3 em{font-style:italic}
-.card-tua p{font-size:16px;line-height:1.45;color:rgba(16,15,9,.8);text-wrap:balance}
-.card-tua .freccia{color:#100F09;font-weight:500;margin-top:10px}
+.card-tua p{font-size:16px;line-height:1.55;color:rgba(16,15,9,.8);text-wrap:balance}
+.card-tua .freccia{color:#100F09;margin-top:var(--s1)}
 
 /* ── 5 · Come funziona: l'unica sezione avorio, per il ritmo ── */
 .chiaro{background:var(--av);color:var(--bg);border-top:0}
 .chiaro .micro{color:rgba(16,15,9,.5)}
-.chiaro .t2{color:var(--bg)}
+.chiaro .t-sez{color:rgba(16,15,9,.5)}
+.chiaro .t-sez em{color:var(--bg)}
+.chiaro + .sez{border-top:0}   /* dall'avorio allo scuro lo stacco c'è già: niente filo */
 .chiaro .sotto{color:rgba(16,15,9,.66)}
 .chiaro .segnaposto{border-color:rgba(16,15,9,.3);color:rgba(16,15,9,.62);background:repeating-linear-gradient(135deg,rgba(16,15,9,.035) 0 10px,transparent 10px 20px)}
-.chiaro .pannello-segnaposto{height:min(66vw,270px);margin-top:44px}
-.passi{margin-top:44px;border-top:1px solid rgba(16,15,9,.13)}
-.passo{display:grid;grid-template-columns:52px 1fr;padding:24px 0 26px;border-bottom:1px solid rgba(16,15,9,.13)}
-.passo .n{font:400 12px/1.9 var(--mono);letter-spacing:.1em;color:rgba(16,15,9,.45)}
+.chiaro .pannello-segnaposto{height:min(66vw,270px);margin-top:var(--s4)}
+.passi{margin-top:var(--s4);border-top:1px solid rgba(16,15,9,.13)}
+.passo{display:grid;grid-template-columns:48px 1fr;padding:var(--s3) 0;border-bottom:1px solid rgba(16,15,9,.13)}
+.passo .n{font:400 11px/27.5px var(--mono);letter-spacing:.12em;color:rgba(16,15,9,.45)}
 .passo h3{font:450 22px/1.25 var(--serif);font-optical-sizing:auto;letter-spacing:-.012em}
-.passo p{margin-top:6px;color:rgba(16,15,9,.66);font-size:16px;line-height:1.5}
-.gratis{display:table;margin:10px 0 2px;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:5px 7px 4px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(16,15,9,.5)}
+.passo p{margin-top:var(--s1);color:rgba(16,15,9,.66);font-size:16px;line-height:1.55}
+.gratis{display:flex;width:max-content;align-items:center;height:26px;margin:10px 0 2px;padding:0 11px;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(16,15,9,.7);border-radius:999px;box-shadow:inset 0 0 0 1px rgba(16,15,9,.3)}
 
 /* ── 6 · Domande ── */
-.faq{margin-top:48px;border-top:1px solid var(--filo)}
+.faq{margin-top:var(--s4);border-top:1px solid var(--filo)}
 .faq details{border-bottom:1px solid var(--filo)}
 .faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:64px;padding:16px 0;cursor:pointer;font:450 17px/1.35 var(--sans);color:var(--av)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary .piu{color:var(--av3)}
-.faq details p{padding:0 30px 24px 0;color:var(--av2);font-size:16px;line-height:1.55}
+.faq details p{padding:0 var(--s4) var(--s3) 0;color:var(--av2);font-size:16px;line-height:1.55}
 
 /* ── 7 · Chiusura centrata ── */
-.chiusura{text-align:center;padding:120px var(--lato) 116px}
-.chiusura .t1{font-size:clamp(38px,10.6vw,44px);line-height:1.04}
-.chiusura .sotto{margin:22px auto 0;max-width:19em}
-.chiusura .pillole{justify-content:center;margin-top:38px}
+.chiusura{text-align:center;padding:var(--s7) var(--lato)}
+.chiusura .sotto{margin:var(--s3) auto 0;max-width:19em}
+.chiusura .pillole{justify-content:center;margin-top:var(--s4)}
 
 /* ── 8 · Piede a colonne ── */
-.piede{padding:64px var(--lato) calc(44px + env(safe-area-inset-bottom));border-top:1px solid var(--filo)}
-.colonne{display:grid;grid-template-columns:1fr 1fr;gap:52px 18px}
+.piede{padding:var(--s5) var(--lato) calc(var(--s6) + env(safe-area-inset-bottom));border-top:1px solid var(--filo)}
+.colonne{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5) 18px}
 .colonne h4{font:500 15px/1.4 var(--sans);color:var(--av)}
-.colonne ul{margin-top:18px}
+.colonne ul{margin-top:var(--s2)}
 .colonne li{font-size:15px;line-height:1.4;color:var(--av2);padding:5px 0}
 .colonne li a{display:inline-block}
 .ritratto{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px dashed rgba(245,244,239,.35);font:400 8.5px/1.15 var(--mono);text-align:center;color:var(--av3);margin-bottom:8px}
-.piede-marchio{margin-top:84px;font-size:clamp(36px,10.6vw,46px)}
+.piede-marchio{margin-top:var(--s6);font-size:clamp(36px,10.6vw,46px)}
 .piede-marchio .vv{-webkit-text-stroke:.04em currentColor}
 .piede-marchio .pt{width:.21em;height:.21em;margin:0 .035em 0 .045em}
-.piede-riga{margin-top:22px;font-size:14px;line-height:1.6;color:var(--av3);max-width:24em}
+.piede-riga{margin-top:var(--s3);font-size:15px;line-height:1.55;color:var(--av3);max-width:24em}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -482,7 +489,9 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
 /* ── Pacchetti come scene (18/11, Niccolò): il video sta sotto la scritta, a tutta larghezza; in basso diventa scuro e da
    lì partono numero, titolo e descrizione; poi stacco netto e la scena dopo (video + titolo + descrizione) ── */
-.pacchetto{padding:0 var(--lato) 84px;border-top:0}
+.pacchetto{padding:var(--s6) var(--lato);border-top:1px solid var(--filo)}
+/* il titolo che segue una scena le appartiene: niente filo, 40 px dal telefono (16 del palco + 24) */
+.dopo-scena{border-top:0;padding-top:var(--s3)}
 .pacchetto > .pannello{height:84vh;height:84svh;min-height:540px;max-height:780px;margin:0 calc(var(--pan) - var(--lato));border-radius:14px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.085);background:#000}
 .pacchetto > .pannello::after{display:none}
 .pacchetto > .pannello::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;height:auto;z-index:2;pointer-events:none;
@@ -490,25 +499,302 @@ details[open] > summary .piu::after{transform:rotate(0)}
 .pacchetto > .pannello video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pacchetto > .pannello + *{margin-top:-32vh;margin-top:-32svh}
 .pacchetto > :not(.pannello){position:relative;z-index:3}
-.pacchetto .chip{top:12px;left:12px}
-.pacchetto .trittico{align-content:start;padding:76px 18px 0}
+.pacchetto .trittico{align-content:start;padding:var(--s5) 18px 0}
 #va > .pannello::before{background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,0) 24%,rgba(16,15,9,.78) 44%,rgba(16,15,9,.95) 58%,var(--bg) 78%)}
-#campagna > .pannello{height:62vh;height:62svh;min-height:460px}
+#campagna > .pannello{height:66vh;height:66svh;min-height:480px;background:linear-gradient(180deg,#1A1912 0%,#13120C 60%)}   /* i tre telefoni, le loro etichette e sotto, a destra, «Tutto insieme»: niente si tocca. Il fondo è quello dei pannelli coi telefoni delle due scene (non il nero dei video: qui il video non c’è) */
 #campagna > .pannello + *{margin-top:-18vh;margin-top:-18svh}
 #campagna > .pannello::before{background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,0) 52%,rgba(16,15,9,.8) 74%,var(--bg) 94%)}
-/* lo spot del Jué torna alla sua misura (17/11 sera, Niccolò: «lo spot del Jué rimettilo a grandezza, di modo che il
-   puntino non passi sul video»): il pannello di prima dei «pacchetti come scene» (alto min(118vw,480px), con la sua
-   cornice e la sfumatura leggera in basso), e numero, titolo e testo sotto, fuori dal video. Il puntino aspetta nel
-   margine destro mentre lo spot passa e poi entra nel punto di «Contenuti», sotto il video */
-#contenuti > .pannello{height:min(118vw,480px);min-height:0;max-height:none;margin-bottom:44px;background:linear-gradient(180deg,#1A1912 0%,#13120C 60%)}
-#contenuti > .pannello::after{display:block}
-#contenuti > .pannello::before{top:auto;height:34%;background:linear-gradient(180deg,rgba(16,15,9,0),rgba(16,15,9,.7))}
-#contenuti > .pannello + *{margin-top:0}
+/* 18/11 (decisioni 4 e 5 di Niccolò). Erano finite per sbaglio nel <noscript>, quindi con JS non valevano: spostate qui
+   la notte del 18/11. Le etichette messe da noi in basso a destra nel video; «Tutto quello che serve» e le frasi delle
+   scene interattive in sans (Inter) a due toni: grigio + parola chiave avorio pieno */
+/* in basso a destra della parte che si vede del video: subito sopra il titolo, che parte 32svh (18 nella Campagna)
+   sopra il fondo del pannello */
+.pacchetto > .pannello > .chip{bottom:calc(32vh + var(--s2));bottom:calc(32svh + var(--s2))}
+#campagna > .pannello > .chip{bottom:calc(18vh + var(--s2));bottom:calc(18svh + var(--s2))}
+/* (la regola di «Tutto quello che serve» è diventata .t-sez, il livello di tutti i titoli di sezione) */
+.palco-testa .battuta{font-family:var(--sans);font-weight:560;font-size:clamp(30px,8.6vw,36px);line-height:1.08;letter-spacing:-.036em;color:var(--av2)}.palco-testa .battuta em{font-style:normal;font-weight:600;color:var(--av);letter-spacing:-.03em}
+/* ===== INIZIO CSS SCENA SOCIAL (Creazione Contenuti) =========================================
+   Un telefono fermo al centro per ~2,3 schermi; sopra, le frasi che cambiano scorrendo (come la scena del Sito Web);
+   nel telefono quattro schermate di Instagram del Jué Club legate allo scorrimento: il feed che si ferma sul reel →
+   il reel che gira → le stories di Martedì Blu → il profilo. Tutto è lavoro vero per il Jué (@jueclubmontecatini).
+   Innestato nella D la notte del 18/11 (strumenti/innesta-social.mjs), percorsi già in ../comune/ ============== */
+.scena-social{position:relative;height:330vh;height:330svh}
+/* il telefono: stesse misure e stessa cornice del telefono della scena del Sito Web (.tel della D) */
+.so-coppia{position:absolute;inset:0;container-type:size}
+.so-tel{position:absolute;inset:0;margin:auto;height:calc(100cqh - 44px);width:calc((100cqh - 44px) * .462);max-height:600px;max-width:277px;border-radius:38px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 6px #0D0C08,0 0 0 7px rgba(245,244,239,.07),0 40px 80px -30px rgba(0,0,0,.9)}
+.so-schermo{position:absolute;inset:7px;border-radius:31px;overflow:hidden;background:#050504;isolation:isolate}
+.so-isola{position:absolute;top:9px;left:50%;width:30%;height:17px;margin-left:-15%;border-radius:999px;background:#000;z-index:9}
+/* le quattro schermate, una sopra l'altra: feed, reel, profilo, storia (la storia sta sopra al profilo: chiudendola
+   scivola giù e sotto c'è il profilo) */
+.so-s{position:absolute;inset:0;transform-origin:50% 50%}
+.so-s1{z-index:1}.so-s2{z-index:2;opacity:0}.so-s4{z-index:3;opacity:0}.so-s3{z-index:4;opacity:0}
+.scena-social.vivo .so-s{will-change:transform,opacity}
+.so-vetro{position:absolute;inset:0;overflow:hidden}
+.so-didascalia{display:none}
+/* una sola barra di stato sopra le quattro schermate (non scivola con loro); quelle delle schermate servono solo con
+   «Riduci movimento», quando ogni schermata ha il suo telefono */
+.so-sopra{z-index:8;pointer-events:none}
+.so-sopra .so-ui{background:transparent}
+.so-s .so-stato{display:none}
+.so-cielo{position:absolute;left:0;right:0;top:0;height:50px;background:#050504;z-index:5} /* 2 px sotto la barra: niente fessura tra le due */
+/* l'interfaccia è disegnata a 390 px (come un iPhone) e rimpicciolita dallo script (--k), alta --h */
+.so-ui{position:absolute;left:0;top:0;width:390px;height:var(--h,844px);transform-origin:0 0;transform:scale(var(--k,.64));background:#050504;color:#F5F5F5;font:400 14px/1.35 var(--sans);letter-spacing:-.006em;word-spacing:0;overflow:hidden}
+.so-ui b{font-weight:600}
+.so-ui img,.so-ui video{max-width:none}
+.so-i{width:26px;height:26px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.so-grigio{color:#A8A8A8}
+.so-av{display:block;flex:none;width:32px;height:32px;border-radius:50%;background:#000 url(../comune/img/jue-logo.png) 50% 54%/66% auto no-repeat;box-shadow:0 0 0 1px rgba(255,255,255,.16)}
+/* barra di stato (le 21:00: l'ora di Martedì Blu) */
+.so-stato{position:absolute;left:0;right:0;top:0;height:48px;display:flex;align-items:center;justify-content:space-between;padding:2px 32px 0 46px;font:600 16px/1 var(--sans);letter-spacing:-.01em;z-index:6;color:#FFF}
+.so-stato span{display:flex;align-items:center;gap:6px}
+.so-stato svg{fill:currentColor}
+/* barra in basso di Instagram + indicatore della home */
+.so-nav{position:absolute;left:0;right:0;bottom:0;height:84px;padding:10px 22px 0;display:flex;justify-content:space-between;align-items:flex-start;background:#050504;border-top:1px solid rgba(255,255,255,.08);z-index:6}
+.so-nav .so-i{width:27px;height:27px}
+.so-nav .so-av{width:27px;height:27px;background-size:62% auto}
+.so-nav .so-av.attivo{box-shadow:0 0 0 1.5px #050504,0 0 0 3px #F5F5F5}
+.so-home{position:absolute;left:50%;bottom:8px;width:136px;height:5px;margin-left:-68px;border-radius:3px;background:#F5F5F5;z-index:7}
+.so-barra{position:absolute;left:0;right:0;top:48px;height:46px;display:flex;align-items:center;padding:0 12px;z-index:5;background:#050504}
+.so-barra .so-titolo{position:absolute;left:0;right:0;text-align:center;line-height:1.2;pointer-events:none}
+.so-barra .so-titolo small{display:block;font-size:12px;color:#A8A8A8}
+.so-barra .so-titolo b{font-size:16px;font-weight:700}
+
+/* 1 · il feed dei post del Jué che scorre e si ferma sul reel */
+.so-finestra{position:absolute;left:0;right:0;top:94px;bottom:84px;overflow:hidden}
+.so-lista{position:absolute;left:0;right:0;top:0}
+.so-post{padding-bottom:14px}
+.so-post-testa{height:56px;display:flex;align-items:center;gap:10px;padding:0 12px 0 14px}
+.so-chi{flex:1;display:flex;flex-direction:column;line-height:1.25}
+.so-chi span{font-size:12px;color:#D8D8D8}
+.so-post-testa .so-i{width:22px;height:22px}
+.so-media{position:relative;width:390px;overflow:hidden;background:#111}
+.so-media img{width:100%;height:100%;object-fit:cover}
+.so-media .so-tipo{position:absolute;right:12px;top:12px;width:24px;height:24px;color:#FFF;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.so-azioni-riga{height:48px;display:flex;align-items:center;gap:16px;padding:0 14px}
+.so-azioni-riga span{flex:1}
+.so-didas{padding:0 14px;font-size:14px;line-height:1.4}
+
+/* 2 · il reel: lo spot del Jué che gira a tutto schermo */
+.so-s2 .so-ui{background:transparent}
+.so-video{position:absolute;left:0;top:0;width:100%;height:calc(100% - 84px);object-fit:cover;background:#0A0E1F;transform-origin:50% 0;z-index:1}
+.so-reel-ui{position:absolute;inset:0;z-index:3}
+.so-reel-ombra{position:absolute;left:0;right:0;top:0;bottom:84px;background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 56%,rgba(0,0,0,.62) 88%,rgba(0,0,0,.7) 100%);z-index:2}
+.so-reel-testa{position:absolute;left:0;right:0;top:48px;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:5;font-size:22px;font-weight:700}
+.so-reel-testa span{display:flex;align-items:center;gap:4px}
+.so-reel-testa span .so-i{width:18px;height:18px;stroke-width:2.4}
+.so-lato{position:absolute;right:10px;bottom:112px;display:flex;flex-direction:column;align-items:center;gap:26px;z-index:5}
+.so-lato .so-i{width:29px;height:29px}
+.so-disco{width:30px;height:30px;border-radius:7px;border:2px solid #F5F5F5;background:#000 url(../comune/img/jue-logo.png) 50% 54%/70% auto no-repeat}
+.so-info{position:absolute;left:14px;right:72px;bottom:104px;z-index:5}
+.so-info-chi{display:flex;align-items:center;gap:10px}
+.so-segui{height:30px;padding:0 12px;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.62);font:600 13.5px/30px var(--sans)}
+.so-info p{margin-top:12px;font-size:14px;line-height:1.4}
+.so-audio{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:13px}
+.so-audio .so-i{width:14px;height:14px}
+.so-avanza{position:absolute;left:0;right:0;bottom:84px;height:2px;background:rgba(255,255,255,.22);z-index:5}
+.so-avanza i{display:block;height:100%;background:#F5F5F5;transform-origin:0 50%;transform:scaleX(0)}
+.so-velo{position:absolute;inset:0;background:#000;opacity:0;z-index:8;pointer-events:none}
+
+/* 3 · le stories di Martedì Blu (tre fotogrammi veri, barre di avanzamento in alto) */
+.so-s3 .so-ui{background:transparent}
+.so-fondo{position:absolute;inset:0;background:#050504}
+.so-carta{position:absolute;left:0;right:0;top:48px;height:min(693px,calc(var(--h,844px) - 154px));border-radius:12px;overflow:hidden;background:#0B2C63}
+.so-f{position:absolute;inset:0}
+.so-f img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.so-f1{background:linear-gradient(180deg,#2A6CBC 0%,#195099 48%,#0C2F68 100%)}
+.so-f1 img{inset:auto 0;top:50%;height:auto;transform:translateY(-50%);object-fit:fill}
+.so-f2,.so-f3{opacity:0}
+.so-carta::after{content:"";position:absolute;left:0;right:0;top:0;height:130px;background:linear-gradient(180deg,rgba(0,0,0,.38),rgba(0,0,0,0));z-index:1}
+.so-barre{position:absolute;left:8px;right:8px;top:9px;display:flex;gap:4px;z-index:3}
+.so-barre > i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.36);overflow:hidden}
+.so-barre > i > i{display:block;height:100%;background:#FFF;transform-origin:0 50%;transform:scaleX(0)}
+.so-st-testa{position:absolute;left:12px;right:10px;top:22px;height:40px;display:flex;align-items:center;gap:9px;z-index:3;font-size:14px;text-shadow:0 1px 6px rgba(0,0,0,.3)}
+.so-st-testa .so-grigio{color:rgba(255,255,255,.72)}
+.so-st-testa span{flex:1}
+.so-st-testa .so-i{width:24px;height:24px}
+.so-risposta{position:absolute;left:12px;right:12px;top:calc(48px + min(693px,calc(var(--h,844px) - 154px)) + 12px);height:44px;display:flex;align-items:center;gap:16px}
+.so-risposta span{flex:1;height:44px;border-radius:22px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34);padding:0 18px;line-height:44px;color:rgba(255,255,255,.75);font-size:14.5px}
+
+/* 4 · il profilo: bio breve, il numero vero dei follower, la griglia a 3 colonne */
+.so-prof-in{position:absolute;left:0;right:0;top:94px}
+.so-prof-testa{display:flex;align-items:center;gap:22px;padding:6px 16px 0}
+.so-prof-testa .so-av{width:88px;height:88px;background-size:64% auto;box-shadow:0 0 0 3px #050504,0 0 0 4.5px rgba(255,255,255,.28)}
+.so-prof-nome{font-size:17px;font-weight:600}
+.so-prof-num{margin-top:6px;font-size:15px}
+.so-prof-num b{font-weight:700}
+.so-bio{padding:14px 16px 0;font-size:14px;line-height:1.42}
+.so-bio .so-grigio{display:block}
+.so-bio .so-link{display:flex;align-items:center;gap:5px;color:#E0EBFF;font-weight:600}
+.so-bio .so-link .so-i{width:15px;height:15px;stroke-width:2.2}
+.so-bottoni{display:flex;gap:6px;padding:16px 16px 0}
+.so-bottoni span{flex:1;height:34px;border-radius:9px;background:#26262A;font:600 14px/34px var(--sans);text-align:center}
+.so-bottoni .so-blu{background:#0A84F5}
+.so-bottoni .so-q{flex:none;width:34px;display:grid;place-content:center}
+.so-bottoni .so-q .so-i{width:18px;height:18px}
+.so-schede{display:flex;margin-top:20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.so-schede span{flex:1;height:44px;display:grid;place-content:center;color:#8E8E8E}
+.so-schede span:first-child{color:#F5F5F5;box-shadow:inset 0 -1.5px 0 #F5F5F5}
+.so-schede .so-i{width:24px;height:24px}
+.so-griglia{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px}
+.so-griglia > i{position:relative;aspect-ratio:3/4;background:#151515;display:block;overflow:hidden}
+.so-griglia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.so-griglia > i.r::after{content:"";position:absolute;z-index:1;right:8px;top:8px;width:18px;height:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='2.5' width='19' height='19' rx='5'/%3E%3Cpath d='M2.5 8h19M8.5 2.5l3 5.5M14.5 2.5l3 5.5'/%3E%3Cpath d='M10 11.5v6l5-3z' fill='white' stroke='none'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+
+/* «Riduci movimento»: niente scena ferma; le quattro schermate ferme, due per riga, una dopo l'altra, ognuna nel suo
+   telefono con sotto il suo nome (come i due telefoni della scena del Sito Web) */
+@media (prefers-reduced-motion:reduce){
+  .scena-social{height:auto}
+  .so-coppia{position:relative;inset:auto;container-type:normal;display:grid;grid-template-columns:1fr 1fr;gap:50px 14px;padding-bottom:34px}
+  .so-tel,.so-schermo{display:contents}
+  .so-isola{display:none}
+  .so-s{position:relative;inset:auto;opacity:1!important;transform:none!important;visibility:visible!important;aspect-ratio:9/19.5;border-radius:26px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 4px #0D0C08}
+  .so-s::after{content:"";position:absolute;top:8px;left:50%;width:30%;height:11px;margin-left:-15%;border-radius:999px;background:#000;z-index:9}
+  .so-vetro{inset:5px;border-radius:21px}
+  .so-didascalia{display:block;position:absolute;left:0;right:0;bottom:-30px;text-align:center}
+  .so-velo{display:none}
+  .so-sopra{display:none}
+  .so-s .so-stato{display:flex}
+}
+/* ===== FINE CSS SCENA SOCIAL ===== */
+/* =============================================================================================
+   INIZIO CHAT-VA · CSS  (da innestare nella D in fondo al foglio di stile principale, cioè prima della
+   sua chiusura; NON nello stile dentro il noscript, che vale solo senza JS)
+   La chat del Virtual Assistant disegnata dal vivo, a tema scuro, al posto di va-verticale.mp4
+   (18/11, Niccolò: «va cambiato con qualcosa con colori più sullo scuro e più corta come animazione»).
+   - È disegnata a una misura fissa (data-largo, in px: 360 nel pannello, 300 nel telefonino della
+     Campagna 360°) e rimpicciolita con --k dallo script, come il sito in miniatura della scena.
+   - Lo stato «di base» è l'ULTIMO (tutto scritto, riepilogo col puntino): così senza JS e con «Riduci
+     movimento» si vede la storia finita e ferma. Le animazioni, con i loro ritardi, creano l'inizio.
+   - Tempi in --t1…--t6 (ritmo: 5,4 s in tutto). Ombre, colori e caratteri della D:
+     testo in Inter, ore ed etichette in Geist Mono, l'arancio solo nel puntino (e nella pietra del logo).
+   ============================================================================================= */
+.chat{position:absolute;inset:0;overflow:hidden;background:#100F09;
+  --chat-barra:#191812;           /* barra dell'ora e testata della chat */
+  --chat-lui:#23221B;             /* fumetto dell'assistente */
+  --chat-io:#3A2117;              /* fumetto della cliente: un arancio bruciato, scuro */
+  --chat-io-filo:rgba(255,90,31,.16);
+  --chat-letto:rgba(245,244,239,.86);
+  --chat-e:cubic-bezier(.2,.8,.25,1);            /* entrata dei fumetti: parte svelta, si posa piano */
+  --t1:.3s;   /* la cliente scrive */
+  --t2:1s;    /* l'assistente legge e scrive (puntini) */
+  --t3:1.9s;  /* risposta */
+  --t4:3.3s;  /* «Perfetto, sono Giulia» (l'ora passa a 23:48) */
+  --t5:3.9s;  /* riepilogo per il titolare */
+  --t6:4.4s;  /* il puntino arancio; alle 5,5 s è tutto fermo */
+}
+.chat-tela{position:relative;width:100%;height:100%;display:flex;flex-direction:column;overflow:hidden;
+  background:linear-gradient(180deg,#15140E 0%,#100F09 72%);color:var(--av);
+  font:400 15px/1.36 var(--sans);letter-spacing:-.006em;word-spacing:0;text-align:left;-webkit-font-smoothing:antialiased}
+.chat.scala .chat-tela{position:absolute;left:0;top:0;width:var(--largo);height:var(--alto);transform:scale(var(--k));transform-origin:0 0}
+.chat svg{display:block;flex:none}
+
+/* barra del telefono: l'ora (23:47, poi 23:48), campo, wi-fi, batteria */
+.chat-stato{flex:none;height:44px;display:flex;align-items:center;justify-content:space-between;padding:6px 24px 0 32px;background:var(--chat-barra)}
+.chat-ora{display:flex;font:600 15.5px/1 var(--sans);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+/* l'ultima cifra rotola (7 → 8) come in un orologio: le due cifre salgono insieme, una esce e l'altra entra */
+.chat-cifra{display:grid;overflow:hidden;padding:2px 0;margin:-2px 0}
+.chat-cifra b{grid-area:1/1;font-weight:inherit}
+.chat-cifra b:first-child{opacity:0}
+.chat-icone{display:flex;align-items:center;gap:6px;color:var(--av)}
+
+/* testata della chat: indietro, logo dell'oreficeria (un anello con la pietra arancio), nome, stato, «Esempio» */
+.chat-testa{flex:none;display:flex;align-items:center;gap:9px;height:60px;padding:0 14px 2px 6px;background:var(--chat-barra);border-bottom:1px solid rgba(245,244,239,.07)}
+.chat-indietro{width:24px;height:24px;color:var(--av)}
+.chat-logo{position:relative;flex:none;width:38px;height:38px;border-radius:50%;background:#0B0A06;box-shadow:inset 0 0 0 1px rgba(245,244,239,.13)}
+.chat-logo::before{content:"";position:absolute;left:12px;top:14px;width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--av)}
+.chat-logo::after{content:"";position:absolute;left:16.5px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--rec)}
+.chat-chi{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.chat-chi b{font:600 16px/1.15 var(--sans);letter-spacing:-.012em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-sub{display:grid;font-size:12.5px;line-height:1.15;color:var(--av2)}
+.chat-sub span{grid-area:1/1}
+.chat-sub span + span{opacity:0}
+.chat-esempio{flex:none;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.16);font:400 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--av3)}
+
+/* i messaggi: dall'alto, come in una chat appena aperta */
+.chat-flusso{flex:1;min-height:0;display:flex;flex-direction:column;align-items:flex-start;padding:18px 12px 0}
+.chat-m{position:relative;max-width:82%;padding:7px 11px 8px 12px;border-radius:18px;font-size:15px;line-height:1.36;color:rgba(245,244,239,.93);text-wrap:pretty}
+.chat-m b{font-weight:600;color:var(--av)}
+/* lo spazio per l'ora in fondo all'ultima riga (se non c'è posto va a capo, come su WhatsApp) */
+.chat-m::after{content:"";display:inline-block;width:40px;height:1px}
+.chat-io::after{width:60px}
+.chat-lui{background:var(--chat-lui);border-top-left-radius:5px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.05)}
+.chat-io{align-self:flex-end;background:var(--chat-io);border-top-right-radius:5px;box-shadow:inset 0 0 0 1px var(--chat-io-filo)}
+.chat-ts{position:absolute;right:10px;bottom:7px;display:flex;align-items:center;gap:4px;font:400 10.5px/1 var(--mono);letter-spacing:.02em;color:var(--av3)}
+.chat-io .chat-ts{color:rgba(245,244,239,.5)}
+.chat-spunte{width:16px;height:10px;color:var(--chat-letto)}
+.chat-slot{position:relative;align-self:stretch;display:flex;flex-direction:column;align-items:flex-start;margin-top:10px}
+.chat-m3{margin-top:10px}
+/* l'assistente sta scrivendo: tre puntini nel posto dove poi arriva la risposta */
+.chat-scrive{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;gap:5px;width:62px;height:38px;border-radius:18px;border-top-left-radius:5px;background:var(--chat-lui);box-shadow:inset 0 0 0 1px rgba(245,244,239,.05);opacity:0}
+.chat-scrive i{width:7px;height:7px;border-radius:50%;background:rgba(245,244,239,.5)}
+
+/* il riepilogo che arriva al titolare: una scheda, non un fumetto; l'arancio solo nel puntino */
+.chat-rie{align-self:stretch;margin:18px 2px 0;padding:12px 14px 14px;border-radius:14px;background:#1B1A13;box-shadow:inset 0 0 0 1px rgba(245,244,239,.11),0 18px 34px -16px rgba(0,0,0,.9)}
+.chat-rie-testa{display:flex;justify-content:space-between;font:400 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--av3)}
+.chat-rie-cosa{display:flex;align-items:center;gap:9px;margin-top:11px;font:560 16px/1.25 var(--sans);letter-spacing:-.012em;color:var(--av)}
+.chat-rie-chi{margin:3px 0 0 18px;font-size:14px;line-height:1.35;color:var(--av2)}
+.chat-punto{position:relative;flex:none;width:9px;height:9px;border-radius:50%;background:var(--rec)}
+.chat-punto::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--rec);opacity:0}
+
+/* il campo per scrivere, in fondo (nel pannello grande sta sotto il titolo; nel telefonino si vede) */
+.chat-scrivi{flex:none;display:flex;align-items:center;gap:8px;padding:8px 10px 16px}
+.chat-campo{flex:1;height:40px;display:flex;align-items:center;padding:0 16px;border-radius:999px;background:#1B1A14;box-shadow:inset 0 0 0 1px rgba(245,244,239,.06);color:var(--av3)}
+.chat-mic{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:#26251E;color:var(--av2)}
+
+/* il telefonino della Campagna 360° (18/11, revisione): disegnata a 250 px invece di 330, così i fumetti si leggono
+   (circa 7 px veri invece di 4,5); la conversazione sta in basso, sopra il campo per scrivere, come una chat vera
+   scorsa fino all'ultimo messaggio: la domanda resta sopra, nascosta, e si vedono risposta, «Perfetto, sono Giulia» e il
+   riepilogo. Via la pillola «Esempio» (il nome dell'oreficeria non ci stava) e l'ora del riepilogo (andava a capo) */
+.tri .chat-flusso{justify-content:flex-end;overflow:hidden;padding-bottom:4px}
+.tri .chat-esempio,.tri .chat-rie-testa span + span{display:none}
+/* ── il movimento: solo con .anima (lo mette lo script); .ferma lo tiene fermo all'inizio o in pausa ── */
+@keyframes chat-qui{from{opacity:0}to{opacity:1}}
+@keyframes chat-via{from{opacity:1}to{opacity:0}}
+@keyframes chat-sale{from{opacity:0;transform:translate3d(0,12px,0) scale(.97)}to{opacity:1;transform:none}}
+@keyframes chat-cresce{from{opacity:0;transform:translate3d(0,3px,0) scale(.94)}to{opacity:1;transform:none}}
+@keyframes chat-arriva{from{opacity:0;transform:translate3d(0,14px,0) scale(.98)}to{opacity:1;transform:none}}
+@keyframes chat-salta{0%,100%{opacity:.45;transform:none}35%{opacity:1;transform:translate3d(0,-3px,0)}70%{opacity:.6;transform:none}}
+@keyframes chat-letto{from{color:rgba(245,244,239,.38)}to{color:var(--chat-letto)}}
+@keyframes chat-punto{0%{transform:scale(0)}65%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes chat-onda{from{opacity:.5;transform:scale(1)}to{opacity:0;transform:scale(3.4)}}
+@keyframes chat-ora-via{from{opacity:1;transform:none}to{opacity:0;transform:translate3d(0,-120%,0)}}
+@keyframes chat-ora-qui{from{opacity:0;transform:translate3d(0,120%,0)}to{opacity:1;transform:none}}
+/* la risposta si apre dalla nuvoletta dei puntini: stessa forma, stesso colore, poi si allarga fino alla sua misura */
+@keyframes chat-apre{from{clip-path:inset(0 calc(100% - 62px) calc(100% - 38px) 0 round 5px 18px 18px 18px)}to{clip-path:inset(0 0 0 0 round 5px 18px 18px 18px)}}
+.chat.anima .chat-cifra b:first-child{animation:chat-ora-via .42s cubic-bezier(.5,0,.2,1) var(--t4) both}
+.chat.anima .chat-cifra b + b{animation:chat-ora-qui .42s cubic-bezier(.5,0,.2,1) var(--t4) both}
+/* «online» ↔ «sta scrivendo…»: una esce, poi entra l'altra (mai una sopra l'altra) */
+.chat.anima .chat-sub span:first-child{animation:chat-via .12s ease var(--t2) forwards,chat-qui .2s ease calc(var(--t3) + .1s) forwards}
+.chat.anima .chat-sub span + span{animation:chat-qui .2s ease calc(var(--t2) + .1s) both,chat-via .12s ease var(--t3) forwards}
+.chat.anima .chat-m1{transform-origin:100% 100%;animation:chat-sale .44s var(--chat-e) var(--t1) both}
+.chat.anima .chat-m1 .chat-spunte{animation:chat-letto .3s ease var(--t2) both}
+.chat.anima .chat-scrive{transform-origin:0 0;animation:chat-cresce .28s var(--chat-e) var(--t2) both,chat-via .01s linear calc(var(--t3) + .02s) forwards}
+.chat.anima .chat-scrive i{animation:chat-salta .62s ease-in-out calc(var(--t2) + .2s) 2,chat-via .1s ease calc(var(--t3) - .1s) forwards}
+.chat.anima .chat-scrive i:nth-child(2){animation-delay:calc(var(--t2) + .32s),calc(var(--t3) - .1s)}
+.chat.anima .chat-scrive i:nth-child(3){animation-delay:calc(var(--t2) + .44s),calc(var(--t3) - .1s)}
+.chat.anima .chat-m2{animation:chat-qui .01s linear var(--t3) both,chat-apre .46s var(--chat-e) var(--t3) both}
+.chat.anima .chat-m2 .chat-dentro{animation:chat-qui .3s ease calc(var(--t3) + .16s) both}
+.chat.anima .chat-m3{transform-origin:100% 100%;animation:chat-sale .44s var(--chat-e) var(--t4) both}
+.chat.anima .chat-m3 .chat-spunte{animation:chat-letto .3s ease var(--t5) both}
+.chat.anima .chat-rie{animation:chat-arriva .56s var(--chat-e) var(--t5) both}
+.chat.anima .chat-punto{animation:chat-punto .5s cubic-bezier(.3,1.25,.5,1) var(--t6) both}
+.chat.anima .chat-punto::after{animation:chat-onda .95s cubic-bezier(.2,.7,.3,1) calc(var(--t6) + .12s) both}
+.chat.ferma *,.chat.ferma *::before,.chat.ferma *::after{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){.chat *,.chat *::before,.chat *::after{animation:none!important}}
+
+/* nel pannello del Virtual Assistant la chat è scura come la pagina: lo scuro del titolo può partire più in basso
+   (SOSTITUISCE nella D la regola «#va > .pannello::before» e la vecchia «.pannello-va video{object-position:50% 0}»):
+   così si legge tutta la conversazione, riepilogo compreso, e il titolo resta su fondo pieno */
+#va > .pannello{background:#100F09}
+/* l'etichetta «Esempio · WhatsApp» in basso a destra (decisione 4 di Niccolò): in alto a sinistra coprirebbe l'ora 23:47.
+   Nella D del 18/11 la regola generale «.pacchetto .chip» è finita per sbaglio nello stile del noscript: se la si
+   rimette nel foglio principale, questa riga diventa un doppione innocuo */
+#va > .pannello::before{background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,0) 58%,rgba(16,15,9,.9) 66%,var(--bg) 74%)}
+/* =============================================================================================
+   FINE CHAT-VA · CSS
+   ============================================================================================= */
 </style>
-<noscript><style>.scena{display:none}.macchia{display:none}.continua{display:none}.pacchetto .chip{top:auto;left:auto;bottom:14px;right:14px} /* in basso a destra nel video (18/11) */
-#t-servizi{font-family:var(--sans);font-weight:560;font-size:clamp(34px,9.6vw,40px);line-height:1.06;letter-spacing:-.038em;color:var(--av2)}#t-servizi em{font-style:normal;font-weight:600;color:var(--av)} /* titolo d'ingresso dei servizi (18/11) */
-.palco-testa .battuta{font-family:var(--sans);font-weight:560;font-size:clamp(32px,9vw,38px);line-height:1.06;letter-spacing:-.038em;color:var(--av2)}.palco-testa .battuta em{font-style:normal;font-weight:600;color:var(--av)} /* frasi delle scene (18/11) */
-</style></noscript>
+<noscript><style>.scena{display:none}.macchia{display:none}.continua{display:none}</style></noscript>
 </head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -516,6 +802,29 @@ details[open] > summary .piu::after{transform:rotate(0)}
   <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4l1.2-4.1A8.6 8.6 0 1 1 8 19.4z"/><path d="M9.1 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5 0l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.6-.6.8-.6.3-1.6.4-2.9-.2a9.2 9.2 0 0 1-4.3-4.3c-.6-1.3-.5-2.3-.2-2.9z"/></symbol>
   <symbol id="i-tel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
   <symbol id="i-dx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <!-- ===== INIZIO ICONE SCENA SOCIAL (simboli SVG: nella D vanno dentro lo <svg> nascosto delle icone, dopo i-dx) ===== -->
+  <symbol id="so-campo" viewBox="0 0 20 12"><rect x="0" y="8" width="3.4" height="4" rx="1"/><rect x="5.4" y="5.5" width="3.4" height="6.5" rx="1"/><rect x="10.8" y="3" width="3.4" height="9" rx="1"/><rect x="16.2" y="0" width="3.4" height="12" rx="1"/></symbol>
+  <symbol id="so-wifi" viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zM8 9.4 10.4 7A3.5 3.5 0 0 0 8 7.6 3.5 3.5 0 0 0 5.6 7z"/></symbol>
+  <symbol id="so-batteria" viewBox="0 0 28 13"><rect x=".6" y=".6" width="23.8" height="11.8" rx="3.6" fill="none" stroke="currentColor" stroke-opacity=".42" stroke-width="1.1"/><rect x="2.5" y="2.5" width="18" height="8" rx="2"/><rect x="25.6" y="4.3" width="1.8" height="4.4" rx=".9" fill-opacity=".42"/></symbol>
+  <symbol id="so-cuore" viewBox="0 0 24 24"><path d="M16.8 3.6c-1.9 0-3.6 1-4.8 2.6-1.2-1.6-2.9-2.6-4.8-2.6C4.1 3.6 1.9 6.1 1.9 9.2c0 4.9 6.5 9.5 10.1 11.7 3.6-2.2 10.1-6.8 10.1-11.7 0-3.1-2.2-5.6-5.3-5.6z"/></symbol>
+  <symbol id="so-commento" viewBox="0 0 24 24"><path d="M20.7 17.1A9.3 9.3 0 1 0 17.3 20.4l4.3 1.1z"/></symbol>
+  <symbol id="so-invia" viewBox="0 0 24 24"><path d="M22 3 9.2 10.1"/><path d="M11.7 20.3 22 3H2l7.2 7.1z"/></symbol>
+  <symbol id="so-segnalibro" viewBox="0 0 24 24"><path d="M19.5 21 12 14.6 4.5 21V3.5h15z"/></symbol>
+  <symbol id="so-altro" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.7" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="so-indietro" viewBox="0 0 24 24"><path d="M15.5 4.5 8 12l7.5 7.5"/></symbol>
+  <symbol id="so-giu" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+  <symbol id="so-camera" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="14" rx="3.5"/><circle cx="12" cy="13" r="3.8"/><path d="M8.5 6 10 3.5h4L15.5 6"/></symbol>
+  <symbol id="so-nota" viewBox="0 0 24 24"><path d="M9 18.5V5.5l10-2v12.5"/><circle cx="6.5" cy="18.5" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></symbol>
+  <symbol id="so-casa" viewBox="0 0 24 24"><path d="M3.5 10.2 12 3l8.5 7.2V21h-5.6v-6.2H9.1V21H3.5z"/></symbol>
+  <symbol id="so-cerca" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="M15.6 15.6 21 21"/></symbol>
+  <symbol id="so-crea" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 7.5v9M7.5 12h9"/></symbol>
+  <symbol id="so-reel" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M2.5 8h19M8.5 2.5l3 5.5M14.5 2.5l3 5.5"/><path d="M10 11.5v6l5-3z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="so-griglia" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></symbol>
+  <symbol id="so-tag" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="10" r="3"/><path d="M6.5 19c1-2.6 3-3.9 5.5-3.9s4.5 1.3 5.5 3.9"/></symbol>
+  <symbol id="so-segui" viewBox="0 0 24 24"><circle cx="9.5" cy="8" r="4"/><path d="M2.5 20.5c.8-3.6 3.5-5.5 7-5.5s6.2 1.9 7 5.5M19 8v6M16 11h6"/></symbol>
+  <symbol id="so-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></symbol>
+  <symbol id="so-chiudi" viewBox="0 0 24 24"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></symbol>
+  <!-- ===== FINE ICONE SCENA SOCIAL ===== -->
 </svg>
 
 <header class="testata" id="testata">
@@ -569,15 +878,122 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <!-- 3 · Servizi -->
   <section class="sez" id="servizi" aria-labelledby="t-servizi">
-    <h2 class="t2" id="t-servizi">Tutto quello<br>che <em>serve</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <h2 class="t-sez" id="t-servizi">Tutto quello<br>che <em>serve</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
     <p class="sotto">Quattro pacchetti. Prendi quello che ti serve, oppure tutto insieme.</p>
   </section>
 
-  <article class="sez pacchetto" id="contenuti" aria-labelledby="t-contenuti">
-    <figure class="pannello sfuma-giu">
-      <video data-video muted playsinline loop preload="none" poster="../comune/img/spot-una-volta.jpg" src="../comune/video/spot-una-volta.mp4" aria-label="Lo spot Jué × Bombay"></video>
-      <figcaption class="chip">Spot · Jué × Bombay</figcaption>
-    </figure>
+  <!-- ===== INIZIO HTML SCENA SOCIAL (sostituisce nella D l'<article class="sez pacchetto" id="contenuti"> con lo spot) ===== -->
+  <!-- 3a · Creazione Contenuti: la scena del telefono coi social del Jué (gemella della scena del Sito Web) -->
+  <section class="scena-social" id="contenuti" aria-label="Creazione Contenuti: contenuti che fermano il dito">
+    <div class="palco" id="palco-social">
+      <div class="palco-testa">
+        <p class="micro">Creazione Contenuti</p>
+        <div class="battute">
+          <h3 class="t2 battuta su">Contenuti che<br><em>fermano</em> il dito<i class="pt" aria-hidden="true"></i><span class="sr">.</span></h3>
+          <p class="t2 battuta" aria-hidden="true">Reel per le tue<br><em>serate</em>…</p>
+          <p class="t2 battuta" aria-hidden="true">…stories per<br>ogni <em>novità</em>…</p>
+          <p class="t2 battuta" aria-hidden="true">…e un profilo che<br>si fa <em>scegliere</em><i class="pt" aria-hidden="true"></i></p>
+        </div>
+      </div>
+      <div class="pannello palco-pannello">
+        <div class="so-coppia" aria-hidden="true">
+          <figure class="so-tel">
+            <div class="so-schermo">
+
+              <!-- 1 · il feed dei post del Jué: scorre e si ferma sul reel -->
+              <div class="so-s so-s1"><div class="so-vetro"><div class="so-ui">
+                <div class="so-stato"><span>21:00</span><span><svg width="19" height="12"><use href="#so-campo"/></svg><svg width="17" height="12"><use href="#so-wifi"/></svg><svg width="27" height="13"><use href="#so-batteria"/></svg></span></div>
+                <div class="so-barra"><svg class="so-i"><use href="#so-indietro"/></svg><p class="so-titolo"><small>jueclubmontecatini</small><b>Post</b></p></div>
+                <div class="so-finestra"><div class="so-lista">
+                  <article class="so-post">
+                    <div class="so-post-testa"><i class="so-av"></i><p class="so-chi"><b>jueclubmontecatini</b><span>Montecatini Terme</span></p><svg class="so-i"><use href="#so-altro"/></svg></div>
+                    <div class="so-media" style="height:390px"><img src="../comune/img/jue-neon.jpg" alt="" width="600" height="600" loading="lazy"></div>
+                    <div class="so-azioni-riga"><svg class="so-i"><use href="#so-cuore"/></svg><svg class="so-i"><use href="#so-commento"/></svg><svg class="so-i"><use href="#so-invia"/></svg><span></span><svg class="so-i"><use href="#so-segnalibro"/></svg></div>
+                    <p class="so-didas"><b>jueclubmontecatini</b> Good vibes.</p>
+                  </article>
+                  <article class="so-post so-fermata">
+                    <div class="so-post-testa"><i class="so-av"></i><p class="so-chi"><b>jueclubmontecatini</b><span>jueclubmontecatini · Audio originale</span></p><svg class="so-i"><use href="#so-altro"/></svg></div>
+                    <div class="so-media" style="height:488px"><img src="../comune/img/spot-inizio.jpg" alt="" width="540" height="960" loading="lazy" style="object-position:50% 46%"><svg class="so-i so-tipo"><use href="#so-reel"/></svg></div>
+                    <div class="so-azioni-riga"><svg class="so-i"><use href="#so-cuore"/></svg><svg class="so-i"><use href="#so-commento"/></svg><svg class="so-i"><use href="#so-invia"/></svg><span></span><svg class="so-i"><use href="#so-segnalibro"/></svg></div>
+                    <p class="so-didas"><b>jueclubmontecatini</b> MARTEDÌ SI TINGE DI BLU. <span class="so-grigio">… altro</span></p>
+                  </article>
+                  <article class="so-post">
+                    <div class="so-post-testa"><i class="so-av"></i><p class="so-chi"><b>jueclubmontecatini</b><span>Montecatini Terme</span></p><svg class="so-i"><use href="#so-altro"/></svg></div>
+                    <div class="so-media" style="height:390px"><img src="../comune/img/jue-oldfashioned.jpg" alt="" width="600" height="600" loading="lazy"></div>
+                  </article>
+                </div></div>
+                <div class="so-nav"><svg class="so-i"><use href="#so-casa"/></svg><svg class="so-i"><use href="#so-cerca"/></svg><svg class="so-i"><use href="#so-crea"/></svg><svg class="so-i"><use href="#so-reel"/></svg><i class="so-av"></i></div>
+                <i class="so-home"></i>
+              </div></div><p class="micro so-didascalia">Il feed</p></div>
+
+              <!-- 2 · il reel: lo spot del Jué che gira -->
+              <div class="so-s so-s2"><div class="so-vetro"><div class="so-ui">
+                <video class="so-video" muted playsinline loop preload="none" poster="../comune/img/spot-inizio.jpg" data-fermo="../comune/img/spot-3-2.jpg" src="../comune/video/spot.mp4"></video>
+                <div class="so-reel-ui">
+                <i class="so-reel-ombra"></i>
+                <div class="so-stato"><span>21:00</span><span><svg width="19" height="12"><use href="#so-campo"/></svg><svg width="17" height="12"><use href="#so-wifi"/></svg><svg width="27" height="13"><use href="#so-batteria"/></svg></span></div>
+                <div class="so-reel-testa"><span>Reel<svg class="so-i"><use href="#so-giu"/></svg></span><svg class="so-i"><use href="#so-camera"/></svg></div>
+                <div class="so-lato"><svg class="so-i"><use href="#so-cuore"/></svg><svg class="so-i"><use href="#so-commento"/></svg><svg class="so-i"><use href="#so-invia"/></svg><svg class="so-i"><use href="#so-altro"/></svg><i class="so-disco"></i></div>
+                <div class="so-info">
+                  <div class="so-info-chi"><i class="so-av"></i><b>jueclubmontecatini</b><span class="so-segui">Segui</span></div>
+                  <p>MARTEDÌ SI TINGE DI BLU. <span class="so-grigio">… altro</span></p>
+                  <p class="so-audio"><svg class="so-i"><use href="#so-nota"/></svg>jueclubmontecatini · Audio originale</p>
+                </div>
+                <div class="so-avanza"><i></i></div>
+                <div class="so-nav"><svg class="so-i"><use href="#so-casa"/></svg><svg class="so-i"><use href="#so-cerca"/></svg><svg class="so-i"><use href="#so-crea"/></svg><svg class="so-i" style="stroke-width:2.4"><use href="#so-reel"/></svg><i class="so-av"></i></div>
+                <i class="so-home"></i>
+                </div>
+                <i class="so-velo"></i>
+              </div></div><p class="micro so-didascalia">Il reel</p></div>
+
+              <!-- 3 · le stories di Martedì Blu -->
+              <div class="so-s so-s3"><div class="so-vetro"><div class="so-ui">
+                <i class="so-fondo"></i>
+                <div class="so-stato"><span>21:00</span><span><svg width="19" height="12"><use href="#so-campo"/></svg><svg width="17" height="12"><use href="#so-wifi"/></svg><svg width="27" height="13"><use href="#so-batteria"/></svg></span></div>
+                <div class="so-carta">
+                  <div class="so-f so-f1"><img src="../comune/img/locandina.jpg" alt="" width="600" height="803" loading="lazy"></div>
+                  <div class="so-f so-f2"><img src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy" style="object-position:50% 40%"></div>
+                  <div class="so-f so-f3"><img src="../comune/img/spot-13-6.jpg" alt="" width="600" height="1067" loading="lazy"></div>
+                  <div class="so-barre"><i><i></i></i><i><i></i></i><i><i></i></i></div>
+                  <div class="so-st-testa"><i class="so-av"></i><b>jueclubmontecatini</b><span class="so-grigio">2 h</span><svg class="so-i"><use href="#so-altro"/></svg><svg class="so-i"><use href="#so-chiudi"/></svg></div>
+                </div>
+                <div class="so-risposta"><span>Invia messaggio</span><svg class="so-i"><use href="#so-cuore"/></svg><svg class="so-i"><use href="#so-invia"/></svg></div>
+                <i class="so-home"></i>
+              </div></div><p class="micro so-didascalia">Le stories</p></div>
+
+              <!-- 4 · il profilo del Jué -->
+              <div class="so-s so-s4"><div class="so-vetro"><div class="so-ui">
+                <div class="so-prof-in">
+                  <div class="so-prof-testa"><i class="so-av"></i><div><p class="so-prof-nome">Jué Club</p><p class="so-prof-num"><b>2.100</b> follower</p></div></div>
+                  <p class="so-bio"><span class="so-grigio">Cocktail bar</span>Bistrot · Pizza · DJ set<br>Viale IV Novembre 3, Montecatini<span class="so-link"><svg class="so-i"><use href="#so-link"/></svg>jueclub.it</span></p>
+                  <div class="so-bottoni"><span class="so-blu">Segui</span><span>Messaggio</span><span class="so-q"><svg class="so-i"><use href="#so-segui"/></svg></span></div>
+                  <div class="so-schede"><span><svg class="so-i"><use href="#so-griglia"/></svg></span><span><svg class="so-i"><use href="#so-reel"/></svg></span><span><svg class="so-i"><use href="#so-tag"/></svg></span></div>
+                  <div class="so-griglia">
+                    <i class="r"><img src="../comune/img/muro/reel-1-2.jpg" alt="" width="400" height="711" loading="lazy"></i><i><img src="../comune/img/muro/locandina.jpg" alt="" width="400" height="711" loading="lazy"></i><i><img src="../comune/img/muro/jue-dj-pioneer.jpg" alt="" width="400" height="711" loading="lazy"></i>
+                    <i class="r"><img src="../comune/img/muro/spot-6-0.jpg" alt="" width="400" height="711" loading="lazy"></i><i><img src="../comune/img/muro/jue-oldfashioned.jpg" alt="" width="400" height="711" loading="lazy"></i><i class="r"><img src="../comune/img/muro/reel-23-0.jpg" alt="" width="400" height="711" loading="lazy"></i>
+                    <i><img src="../comune/img/muro/jue-neon.jpg" alt="" width="400" height="711" loading="lazy"></i><i class="r"><img src="../comune/img/muro/reel-9-0.jpg" alt="" width="400" height="711" loading="lazy"></i><i><img src="../comune/img/muro/jue-locale.jpg" alt="" width="400" height="711" loading="lazy"></i>
+                    <i class="r"><img src="../comune/img/muro/spot-0-3.jpg" alt="" width="400" height="711" loading="lazy"></i><i><img src="../comune/img/muro/jue-luci.jpg" alt="" width="400" height="711" loading="lazy"></i><i><img src="../comune/img/muro/jue-parete.jpg" alt="" width="400" height="711" loading="lazy"></i>
+                    <i class="r"><img src="../comune/img/muro/reel-19-5.jpg" alt="" width="400" height="711" loading="lazy"></i><i class="r"><img src="../comune/img/muro/spot-3-3.jpg" alt="" width="400" height="711" loading="lazy"></i><i class="r"><img src="../comune/img/muro/spot-7-3.jpg" alt="" width="400" height="711" loading="lazy"></i>
+                    <i class="r"><img src="../comune/img/muro/reel-5-5.jpg" alt="" width="400" height="711" loading="lazy"></i><i class="r"><img src="../comune/img/muro/spot-8-7.jpg" alt="" width="400" height="711" loading="lazy"></i><i class="r"><img src="../comune/img/muro/reel-14-0.jpg" alt="" width="400" height="711" loading="lazy"></i>
+                  </div>
+                </div>
+                <i class="so-cielo"></i><div class="so-stato"><span>21:00</span><span><svg width="19" height="12"><use href="#so-campo"/></svg><svg width="17" height="12"><use href="#so-wifi"/></svg><svg width="27" height="13"><use href="#so-batteria"/></svg></span></div>
+                <div class="so-barra"><svg class="so-i"><use href="#so-indietro"/></svg><p class="so-titolo"><b>jueclubmontecatini</b></p><span style="flex:1"></span><svg class="so-i"><use href="#so-altro"/></svg></div>
+                <div class="so-nav"><svg class="so-i"><use href="#so-casa"/></svg><svg class="so-i"><use href="#so-cerca"/></svg><svg class="so-i"><use href="#so-crea"/></svg><svg class="so-i"><use href="#so-reel"/></svg><i class="so-av"></i></div>
+                <i class="so-home"></i>
+              </div></div><p class="micro so-didascalia">Il profilo</p></div>
+
+              <!-- la barra di stato, una sola sopra tutte le schermate -->
+              <div class="so-vetro so-sopra"><div class="so-ui"><div class="so-stato"><span>21:00</span><span><svg width="19" height="12"><use href="#so-campo"/></svg><svg width="17" height="12"><use href="#so-wifi"/></svg><svg width="27" height="13"><use href="#so-batteria"/></svg></span></div></div></div>
+            </div>
+            <i class="so-isola"></i>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <article class="sez pacchetto dopo-scena" aria-labelledby="t-contenuti">
     <h3 class="t2" id="t-contenuti">Creazione<br>Contenuti<i class="pt" data-posto aria-hidden="true"></i></h3>
     <p class="sotto">Video, foto e stories per i tuoi social, anche con l’IA.</p>
     <details class="dettagli">
@@ -586,6 +1002,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
       <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20pacchetto%20Creazione%20Contenuti" target="_blank" rel="noopener">Parliamone<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
     </details>
   </article>
+  <!-- ===== FINE HTML SCENA SOCIAL ===== -->
 
   <!-- 3b · Sito Web: la scena del telefono -->
   <section class="scena-sito" id="sito" aria-label="Sito Web: completamente personalizzabile">
@@ -627,6 +1044,12 @@ details[open] > summary .piu::after{transform:rotate(0)}
                     <span class="ms-et tl"><i class="ms-rec"></i>Rec</span><span class="ms-et tr ms-tc">00:00:00:00</span><span class="ms-et bl">Cliente · Jué Club</span>
                   </div>
                 </div>
+                <!-- ===== INIZIO SITO RICCO · HTML: ultimo figlio di `.ms-wrap.ricco .ms` (subito dopo `.ms-lavori`) ===== -->
+                <div class="ms-anim" aria-hidden="true">
+                  <i class="ms-anim-disco"></i>
+                  <div class="ms-lv"><span class="ms-lv-n"><span class="ms-lv-v">V</span><span class="ms-lv-e">eniello</span><span class="ms-lv-p"></span><span class="ms-lv-s">studio</span></span><i class="ms-lv-d"></i></div>
+                </div>
+                <!-- ===== FINE SITO RICCO · HTML ===== -->
               </div>
             </div>
           </div></div><i class="tendina" id="tendina"></i></div><i class="tel-isola"></i><figcaption class="micro">Così…</figcaption></figure>
@@ -647,7 +1070,43 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <article class="sez pacchetto" id="va" aria-labelledby="t-va">
     <figure class="pannello pannello-va sfuma-giu">
-      <video data-video muted playsinline loop preload="none" poster="../comune/img/va-verticale.jpg" src="../comune/video/va-verticale.mp4" aria-label="Esempio di chat con il Virtual Assistant su WhatsApp"></video>
+      <!-- ============ INIZIO CHAT-VA · HTML 1 (pannello del Virtual Assistant: sostituisce il <video> di va-verticale.mp4) ============ -->
+      <div class="chat" data-largo="360" data-sopra="#t-va" data-margine="64" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede all’Oreficeria Bianchi se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
+        <div class="chat-tela" aria-hidden="true">
+          <div class="chat-stato">
+            <span class="chat-ora">23:4<span class="chat-cifra"><b>7</b><b>8</b></span></span>
+            <span class="chat-icone">
+              <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7.5" width="3" height="3.5" rx=".8"/><rect x="4.6" y="5" width="3" height="6" rx=".8"/><rect x="9.2" y="2.5" width="3" height="8.5" rx=".8"/><rect x="13.8" y="0" width="3" height="11" rx=".8"/></svg>
+              <svg width="15" height="11" viewBox="0 0 15 11" fill="currentColor"><path d="M7.5 2.1c2.2 0 4.2.8 5.8 2.2l1.1-1.1A9.8 9.8 0 0 0 7.5.5 9.8 9.8 0 0 0 .6 3.2l1.1 1.1a8.3 8.3 0 0 1 5.8-2.2zm0 3.3c1.3 0 2.5.5 3.4 1.3L12 5.6a6.5 6.5 0 0 0-9 0l1.1 1.1c.9-.8 2.1-1.3 3.4-1.3zm0 3.2c-.5 0-1 .2-1.3.5l1.3 1.4 1.3-1.4c-.3-.3-.8-.5-1.3-.5z"/></svg>
+              <svg width="25" height="12" viewBox="0 0 25 12" fill="currentColor"><rect x=".5" y=".5" width="21" height="11" rx="3.2" fill="none" stroke="currentColor" stroke-opacity=".4"/><rect x="2" y="2" width="14.5" height="8" rx="1.8"/><path d="M23 4v4c.8-.3 1.3-1.1 1.3-2S23.8 4.3 23 4z" fill-opacity=".4"/></svg>
+            </span>
+          </div>
+          <div class="chat-testa">
+            <svg class="chat-indietro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+            <span class="chat-logo"></span>
+            <span class="chat-chi"><b>Oreficeria Bianchi</b><span class="chat-sub"><span>online</span><span>sta scrivendo…</span></span></span>
+            <span class="chat-esempio">Esempio</span>
+          </div>
+          <div class="chat-flusso">
+            <p class="chat-m chat-io chat-m1">Siete aperti domenica? Vorrei vedere le fedi<span class="chat-ts">23:47<svg class="chat-spunte" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.4l2.9 2.9L10 1.6"/><path d="M6.9 7.7l.6.6L14 1.6"/></svg></span></p>
+            <div class="chat-slot">
+              <span class="chat-scrive"><i></i><i></i><i></i></span>
+              <p class="chat-m chat-lui chat-m2"><span class="chat-dentro">Domenica siamo chiusi. Le va bene <b>martedì alle 16</b> per le fedi?<span class="chat-ts">23:47</span></span></p>
+            </div>
+            <p class="chat-m chat-io chat-m3">Perfetto, sono Giulia<span class="chat-ts">23:48<svg class="chat-spunte" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.4l2.9 2.9L10 1.6"/><path d="M6.9 7.7l.6.6L14 1.6"/></svg></span></p>
+            <div class="chat-rie">
+              <p class="chat-rie-testa"><span>Riepilogo per il titolare</span><span>23:48</span></p>
+              <p class="chat-rie-cosa"><i class="chat-punto"></i>Appuntamento: martedì 16:00</p>
+              <p class="chat-rie-chi">Giulia · scelta delle fedi</p>
+            </div>
+          </div>
+          <div class="chat-scrivi">
+            <span class="chat-campo">Messaggio</span>
+            <span class="chat-mic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <!-- ============ FINE CHAT-VA · HTML 1 ============ -->
       <figcaption class="chip">Esempio · WhatsApp</figcaption>
     </figure>
     <h3 class="t2" id="t-va">Virtual<br>Assistant<i class="pt" data-posto aria-hidden="true"></i></h3>
@@ -664,7 +1123,9 @@ details[open] > summary .piu::after{transform:rotate(0)}
       <div class="trittico" aria-hidden="true">
         <div class="tri"><div class="tri-in"><img class="deriva" src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy"></div><span class="tri-et">Contenuti</span></div>
         <div class="tri"><div class="tri-in"><img class="scorre" src="../comune/img/sito-lungo.jpg" alt="" width="420" height="3400" loading="lazy"></div><span class="tri-et">Sito</span></div>
-        <div class="tri"><div class="tri-in"><video data-video muted playsinline loop preload="none" poster="../comune/img/va-verticale.jpg" src="../comune/video/va-verticale.mp4"></video></div><span class="tri-et">Assistant</span></div>
+        <!-- ============ INIZIO CHAT-VA · HTML 2 (terzo telefono della Campagna 360°: sostituisce il <video> dentro .tri-in) ============ -->
+        <div class="tri"><div class="tri-in"><div class="chat" data-largo="250" data-chat-copia></div></div><span class="tri-et">Assistant</span></div>
+        <!-- ============ FINE CHAT-VA · HTML 2 ============ -->
       </div>
       <figcaption class="chip">Tutto insieme</figcaption>
     </figure>
@@ -681,7 +1142,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <!-- 4 · Partner -->
   <section class="sez partner" id="partner" aria-labelledby="t-partner">
-    <h2 class="t2" id="t-partner">Chi ci ha già<br><em>scelto</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <h2 class="t-sez" id="t-partner">Chi ci ha già<br><em>scelto</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
     <div class="carosello" role="list">
       <a class="card" role="listitem" data-anima href="https://jueclub.it" target="_blank" rel="noopener">
         <img class="lento" src="../comune/img/jue-bancone.jpg" alt="Il bancone del Jué Club" width="900" height="1200" loading="lazy">
@@ -707,7 +1168,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <!-- 5 · Come funziona (avorio) -->
   <section class="sez chiaro" id="come" aria-labelledby="t-come">
-    <h2 class="t2" id="t-come">Prima lo vedi.<br>Poi <em>decidi</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <h2 class="t-sez" id="t-come">Prima lo vedi.<br>Poi <em>decidi</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
     <div class="pannello-segnaposto segnaposto largo">Segnaposto: video di noi al lavoro<br>(riprese da un cliente, montaggio,<br>telefono in mano). Muto, in loop.</div>
     <ol class="passi">
       <li class="passo"><span class="n">01</span><div><h3>Ci scrivi.</h3><p>Su WhatsApp o per telefono: in due minuti ci racconti la tua attività.</p></div></li>
@@ -718,7 +1179,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <!-- 6 · Domande -->
   <section class="sez" id="domande" aria-labelledby="t-domande">
-    <h2 class="t2" id="t-domande">Le domande<br>di <em>tutti</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <h2 class="t-sez" id="t-domande">Le domande<br>di <em>tutti</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
     <div class="faq">
       <details><summary>L’anteprima è davvero gratis?<i class="piu" aria-hidden="true"></i></summary><p>Quella del sito e quella del Virtual Assistant sì: le guardi con calma sul telefono e decidi. Se non ti convince, non paghi e non ti impegni. L’anteprima di un video invece è a pagamento: una prova di 12-13 secondi, in qualità più bassa del video finito.</p></details>
       <details><summary>Ci sono altre spese?<i class="piu" aria-hidden="true"></i></summary><p>Se fai il sito, solo il dominio, cioè il nome del sito (per esempio latuaattivita.it). È intestato a te e costa circa 10-15 € l’anno.</p></details>
@@ -733,7 +1194,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <!-- 7 · Chiusura centrata -->
   <section class="sez chiusura" id="contatti" aria-labelledby="t-fine">
-    <h2 class="t1" id="t-fine">Vedi il tuo sito<br>prima di <em>pagare</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+    <h2 class="t-sez" id="t-fine">Vedi il tuo sito<br>prima di <em>pagare</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
     <p class="sotto">Scrivici il nome della tua attività: ti prepariamo l’anteprima gratis, senza impegno.</p>
     <div class="pillole">
       <a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%27anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
@@ -1320,6 +1781,168 @@ addEventListener('DOMContentLoaded',function(){
 })();
 </script>
 <script>
+/* ===== INIZIO JS SCENA SOCIAL ==================================================================
+   Da innestare nella D come <script> a sé, PRIMA dello script principale (quello del puntino), così che
+   window.SCENA_SOCIAL esista quando il puntino misura i suoi posti. È autonomo: ha il suo ascolto dello
+   scorrimento (un solo requestAnimationFrame per fotogramma) e non tocca il resto della pagina.
+   ================================================================================================ */
+(function(){
+  'use strict';
+  var scena = document.getElementById('contenuti');
+  if (!scena || !scena.classList.contains('scena-social')) return;
+  var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var palco = document.getElementById('palco-social');
+  var battute = [].slice.call(palco.querySelectorAll('.battuta'));
+  var S1 = scena.querySelector('.so-s1'), S2 = scena.querySelector('.so-s2'), S3 = scena.querySelector('.so-s3'), S4 = scena.querySelector('.so-s4');
+  var lista = scena.querySelector('.so-lista'), finestra = scena.querySelector('.so-finestra'), fermata = scena.querySelector('.so-fermata .so-media');
+  var reelUi = scena.querySelector('.so-reel-ui'), video = scena.querySelector('.so-video'), avanza = scena.querySelector('.so-avanza i'), velo = scena.querySelector('.so-velo');
+  var barre = [].slice.call(scena.querySelectorAll('.so-barre > i > i'));
+  var foto = [].slice.call(scena.querySelectorAll('.so-f'));
+  var fondo3 = scena.querySelector('.so-fondo'), profIn = scena.querySelector('.so-prof-in'), bottoni = scena.querySelector('.so-bottoni');
+  /* S.T = inizio della scena (px di pagina), S.R = quanto scorre col telefono fermo; il resto è stato */
+  var S = { T: 0, R: 1, b: -1, ferma: 500, prof: 260, v0s: .88, v0y: 100, vivo: null, ultimo: {} };
+
+  function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
+  function tra(p, a, b){ return clamp((p - a) / (b - a), 0, 1); }
+  function liscio(t){ return .5 - .5 * Math.cos(Math.PI * t); }            /* parte e arriva piano */
+  function frena(t){ return 1 - Math.pow(1 - t, 3); }                        /* il dito che si ferma */
+  function offsetIn(el, anc){ var y = 0; while (el && el !== anc) { y += el.offsetTop; el = el.offsetParent; } return y; }
+  /* scrive uno stile solo se è cambiato (niente lavoro inutile a ogni fotogramma) */
+  function metti(el, chiave, prop, val){ if (S.ultimo[chiave] === val) return; S.ultimo[chiave] = val; el.style[prop] = val; }
+
+  /* l'interfaccia disegnata a 390 px si rimpicciolisce alla misura dello schermo del telefono */
+  function scala(){
+    [].forEach.call(scena.querySelectorAll('.so-vetro'), function(v){
+      var k = v.clientWidth / 390; if (!k) return;
+      var ui = v.firstElementChild; ui.style.setProperty('--k', k.toFixed(4)); ui.style.setProperty('--h', Math.round(v.clientHeight / k) + 'px');
+    });
+  }
+  function misura(){
+    scala();
+    var r = scena.getBoundingClientRect();
+    /* come la scena del Sito Web (18/11 notte): conta l'altezza del palco (100svh), non la finestra, così la barra di
+       Safari non sposta la scena */
+    S.T = r.top + scrollY; S.R = Math.max(1, scena.offsetHeight - (palco.offsetHeight || innerHeight));
+    /* dove si ferma il feed: il video del reel al centro della finestra del feed (misure a 390 px) */
+    var finH = finestra.offsetHeight;
+    if (finH) S.ferma = Math.max(0, offsetIn(fermata, lista) + fermata.offsetHeight / 2 - finH / 2);
+    /* il reel si apre dal post: il suo video (540×960, «cover») compare rimpicciolito proprio sopra la foto del post
+       (stesso fotogramma, ritagliato 4:5 con object-position 50% 46%), così la bottiglia resta dov'è e si allarga */
+    var mh = fermata.offsetHeight, mt = finestra.offsetTop + offsetIn(fermata, lista) - S.ferma, vH = video.offsetHeight;
+    if (mh && vH) {
+      var k1 = Math.max(390 / 540, mh / 960), sy0 = ((960 * k1 - mh) * .46 + mh / 2) / k1;
+      var k2 = Math.max(390 / 540, vH / 960), off2 = (960 * k2 - vH) / 2;
+      S.v0s = k1 / k2; S.v0y = mt + mh / 2 - S.v0s * (sy0 * k2 - off2);
+    }
+    /* quanto sale il profilo: fino a lasciare in alto i bottoni, poi le schede e la griglia */
+    S.prof = Math.max(0, bottoni.offsetTop + 6);   /* .so-bottoni ha 16 px di spazio sopra: i bottoni arrivano 10 px sotto la barra */
+    S.ultimo = {}; S.b = -1;
+  }
+
+  /* il video del reel: gira solo quando la sua schermata si vede */
+  var giro = 0;
+  function barraReel(){ giro = 0; if (video.paused) return; if (video.duration) avanza.style.transform = 'scaleX(' + (video.currentTime / video.duration).toFixed(4) + ')'; giro = requestAnimationFrame(barraReel); }
+  function videoGira(si){
+    if (si) { if (video.preload !== 'auto') video.preload = 'auto'; if (video.paused) { var pp = video.play(); if (pp && pp.catch) pp.catch(function(){}); } if (!giro) giro = requestAnimationFrame(barraReel); }
+    else if (!video.paused) video.pause();
+  }
+  video.addEventListener('playing', function(){ if (!giro) giro = requestAnimationFrame(barraReel); });
+
+  /* tutto legato allo scorrimento: p va da 0 (il telefono si ferma) a 1 (il telefono riparte) */
+  function aggiorna(){
+    pianificato = false;
+    var y = scrollY, vh = innerHeight;
+    var vivo = y > S.T - vh * 1.1 && y < S.T + S.R + vh;
+    if (vivo !== S.vivo) { S.vivo = vivo; scena.classList.toggle('vivo', vivo); if (!vivo) videoGira(false); }
+    if (!vivo) return;
+    var pr = (y - S.T) / S.R, p = clamp(pr, 0, 1);
+    /* le frasi sopra il telefono */
+    var b = p < .25 ? 0 : p < .5 ? 1 : p < .76 ? 2 : 3;
+    if (b !== S.b) { S.b = b; battute.forEach(function(el, i){ el.classList.toggle('su', i === b); }); }
+    /* 1 · il feed scorre mentre il telefono arriva e frena fino a fermarsi sul reel */
+    var f = frena(tra(pr, -.42, .17));
+    metti(lista, 'l', 'transform', 'translate3d(0,' + (-f * S.ferma).toFixed(1) + 'px,0)');
+    /* 1 → 2 · il reel si apre dal post: il suo video compare sopra la foto (stessa bottiglia, stesso posto), si allarga
+       a tutto schermo, poi arriva l'interfaccia del reel */
+    var a1 = liscio(tra(p, .195, .245)), e = liscio(tra(p, .215, .29)), a2 = liscio(tra(p, .255, .30));
+    metti(S2, 'o2', 'opacity', a1 > 0 ? '1' : '0');
+    metti(video, 'vo', 'opacity', a1.toFixed(3));
+    metti(video, 'vt', 'transform', e < 1 ? 'translate3d(0,' + (S.v0y * (1 - e)).toFixed(1) + 'px,0) scale(' + (S.v0s + (1 - S.v0s) * e).toFixed(4) + ')' : 'none');
+    metti(reelUi, 'ru', 'opacity', a2.toFixed(3));
+    metti(S1, 'v1', 'visibility', a1 < 1 || e < 1 || a2 < 1 ? 'visible' : 'hidden');
+    /* 2 → 3 · le stories entrano da destra e spingono il reel (si scurisce un poco) */
+    var c = liscio(tra(p, .46, .54));
+    metti(S3, 'o3', 'opacity', c > 0 ? '1' : '0');
+    metti(S2, 'x2', 'translate', c > 0 ? (-28 * c).toFixed(2) + '% 0' : '0 0');
+    metti(velo, 'vv', 'opacity', (c * .55).toFixed(3));
+    /* le tre stories avanzano con il dito: barre in alto e fotogrammi */
+    var st = tra(p, .53, .755) * 3;
+    barre.forEach(function(br, i){ metti(br, 'b' + i, 'transform', 'scaleX(' + clamp(st - i, 0, 1).toFixed(3) + ')'); });
+    foto.forEach(function(fo, i){ if (i) metti(fo, 'f' + i, 'opacity', liscio(clamp((st - i) / .14 + .5, 0, 1)).toFixed(3)); });
+    /* 3 → 4 · la storia si chiude scivolando giù: sotto c'è il profilo */
+    var d = liscio(tra(p, .72, .80));
+    metti(S4, 'o4', 'opacity', c >= 1 ? '1' : '0');
+    metti(S3, 't3', 'transform', c < 1 ? 'translate3d(' + (100 * (1 - c)).toFixed(2) + '%,0,0)' : (d > 0 ? 'translate3d(0,' + (100 * d).toFixed(2) + '%,0) scale(' + (1 - .08 * d).toFixed(4) + ')' : 'none'));
+    metti(fondo3, 'f3', 'opacity', (1 - d).toFixed(3));                /* il nero dietro la storia sfuma: resta solo la carta che scende */
+    metti(S3, 'v3', 'visibility', d < 1 ? 'visible' : 'hidden');
+    metti(S2, 'v2', 'visibility', c < 1 || p < .5 ? 'visible' : 'hidden');
+    /* 4 · il profilo sale piano fino alla griglia */
+    var g = liscio(tra(p, .80, .94));
+    metti(profIn, 'pi', 'transform', 'translate3d(0,' + (-g * S.prof).toFixed(1) + 'px,0)');
+    /* il video gira solo mentre il reel si vede a tutto schermo; tornando sul feed riparte dalla bottiglia (0,3 s, la
+       sua copertina), così combacia di nuovo con la foto del post */
+    var vuole = p > .285 && p < .545;
+    videoGira(vuole);
+    if (!vuole && p < .29 && video.paused && video.currentTime > .35) video.currentTime = .3;
+  }
+  var pianificato = false;
+  function chiedi(){ if (!pianificato) { pianificato = true; requestAnimationFrame(aggiorna); } }
+
+  /* «Riduci movimento»: le quattro schermate ferme, ognuna al suo momento migliore */
+  function fermo(){
+    lista.style.transform = 'translate3d(0,' + (-S.ferma) + 'px,0)';
+    barre[0].style.transform = 'scaleX(.6)';
+    /* il reel fermo mostra un altro momento dello spot (la bottiglia c'è già nel feed accanto) */
+    if (video.getAttribute('data-fermo')) video.poster = video.getAttribute('data-fermo');
+  }
+
+  misura();
+  if (ridotto) { fermo(); addEventListener('resize', function(){ misura(); fermo(); }); if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ misura(); fermo(); }); }
+  else {
+    aggiorna();
+    addEventListener('scroll', chiedi, { passive: true });
+    addEventListener('resize', function(){ misura(); chiedi(); });
+    addEventListener('load', function(){ misura(); chiedi(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ misura(); chiedi(); });
+    document.addEventListener('visibilitychange', function(){ if (document.hidden) videoGira(false); else chiedi(); });
+  }
+
+  /* per il puntino della D: i posti della scena (in coordinate del palco, come quelli della scena del Sito Web) e i
+     suoi tratti. Il puntino è il punto finale della prima frase («…il dito.»), quando la frase finisce scivola lungo la
+     riga fino al margine destro e lì aspetta, alla stessa altezza, mentre passano le due frasi coi puntini di
+     sospensione; quando arriva l'ultima («…si fa scegliere.») torna indietro lungo la riga e ne diventa il punto.
+     o = { xM: x del margine destro, Yin, Yout: come nella D }. Ritorna { L1, L4, interni: [tratti tra L1 e L4] } */
+  function punti(o){
+    misura();
+    var pr = palco.getBoundingClientRect();
+    function posto(b){ var pt = b.querySelector('.pt'); if (!pt) return null; var x = 0, yy = 0, el = pt;
+      while (el && el !== palco) { x += el.offsetLeft; yy += el.offsetTop; el = el.offsetParent; }
+      return { el: pt, x: pr.left + x + pt.offsetWidth / 2, ly: yy + pt.offsetHeight / 2, d: pt.offsetWidth, scena: S }; }
+    var L1 = posto(battute[0]), L4 = posto(battute[3]), T = S.T, R = S.R;
+    var W = { x: o.xM, ly: L1.ly, d: 7, scena: S };                      /* l'attesa: margine destro, stessa riga */
+    L1.inY = T + L1.ly - o.Yin; L1.outY = T + .17 * R;
+    L4.inY = T + .83 * R;       L4.outY = T + R + Math.max(24, L4.ly - o.Yout);
+    return { L1: L1, L4: L4, W: W, interni: [
+      { a: L1.outY,    b: T + .28 * R, k: 'linea', da: L1, a2: W, curva: .07 },   /* esce lungo la riga, piano */
+      { a: T + .28*R,  b: T + .755 * R, k: 'fermo', s: W },                        /* aspetta durante «serate…» e «novità…» */
+      { a: T + .755*R, b: L4.inY,      k: 'linea', da: W, a2: L4, curva: .07 }    /* rientra e diventa il punto di «scegliere» */
+    ] };
+  }
+  window.SCENA_SOCIAL = { S: S, misura: misura, punti: punti };
+})();
+/* ===== FINE JS SCENA SOCIAL ===== */
+</script>
+<script>
 (function(){
   'use strict';
   var doc = document.documentElement;
@@ -1355,13 +1978,6 @@ addEventListener('DOMContentLoaded',function(){
   addEventListener('resize', scala);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(scala);
 
-  /* il timecode del REC gira solo mentre il sito ricco si vede */
-  var tc = ricco.querySelector('.ms-tc'), fotogrammi = 0, tcTimer = null;
-  function due(n){ return (n < 10 ? '0' : '') + n; }
-  function giraTc(si){
-    if (si && !tcTimer && !ridotto) tcTimer = setInterval(function(){ fotogrammi++; var s = Math.floor(fotogrammi / 25); tc.textContent = '00:' + due(Math.floor(s / 60) % 60) + ':' + due(s % 60) + ':' + due(fotogrammi % 25); }, 40);
-    else if (!si && tcTimer) { clearInterval(tcTimer); tcTimer = null; }
-  }
 
   /* ── Video e immagini che si muovono: solo quando si vedono ── */
   var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
@@ -1407,51 +2023,81 @@ addEventListener('DOMContentLoaded',function(){
     if (X !== ST.X) { ST.X = X; finestra.style.transform = 'translate3d(' + X + 'px,0,0)'; finIn.style.transform = 'translate3d(' + (-X) + 'px,0,0)'; tendina.style.transform = 'translate3d(' + X + 'px,0,0)'; }
     tendina.classList.toggle('su', p > .4 && p < .7);
     var vivo = y > ST.T - vh && y < ST.T + ST.R + vh && p < .72;
-    if (vivo !== ST.gira) { ST.gira = vivo; scena.classList.toggle('gira', vivo); giraTc(vivo); }
+    if (vivo !== ST.gira) { ST.gira = vivo; scena.classList.toggle('gira', vivo); if (window.sitoRicco) sitoRicco.gira(vivo); }
   }
 
   /* ── Il puntino: uno solo. Parte dentro lo showreel (nascosto), ne esce dal basso, fa da punto finale ai titoli,
-        nella scena tiene la tendina, e alla fine torna nel marchio del piede ── */
+        nella scena tiene la tendina, e alla fine torna nel marchio del piede.
+        18/11 (Niccolò: «più fluide, meno scatti, e se deve curvare più lentamente»), misurato fotogramma per fotogramma
+        con strumenti/misura-puntino.mjs:
+        · il percorso non segue più lo scorrimento di colpo: lo segue uno scorrimento «morbido» (vedi quadro), così un
+          colpo di dito o uno scatto della rotella diventano un movimento continuo; i posti (titoli, telefono della
+          scena) restano attaccati alla pagina vera e, da seduto, il puntino è esattamente il punto del titolo;
+        · curve larghe e lente: partenza e arrivo durano quanto la strada che il puntino fa sullo schermo (mai molto più
+          veloce del dito), ogni viaggio ha fino a 2/3 di schermo di scorrimento (se due titoli sono vicini il puntino ci
+          resta seduto un po' meno), l'attesa nel margine è al 38% dello schermo;
+        · con un colpo di dito veloce il puntino si stacca e aspetta nel margine, poi rientra con una molla;
+        · il punto vero del titolo (.pt.qui) prende il posto del puntino solo quando quello disegnato è arrivato;
+        · ai ricalcoli (caratteri, misure, barra di Safari) la differenza passa alla molla invece di saltare ── */
   var punto = document.getElementById('punto');
   var posti = [].slice.call(document.querySelectorAll('[data-posto]'));
-  var vh = innerHeight, Yin = 0, Yout = 0, Rm = 0, Lvia = 130, Larrivo = 190, xM = 0, maxS = 0, larghezza = 0;
-  var DOT = 7, SEG = [], seduto, volo = { p: -1 };
-  var ATTESA = null;
-  /* lo showreel: gira una volta quando il puntino ci entra, si ferma sulla scritta finale, poi il puntino esce */
-  var sr = document.getElementById('showreel'), SR_FINE = 18.6, srFinito = false, srEsce = 0, srPosto = null, srVisto = false;
-  sr.addEventListener('timeupdate', function(){
-    if (!srFinito && sr.currentTime >= SR_FINE) { sr.pause(); srFinito = true; if (srPosto) srPosto.uscito = true; srEsce = performance.now(); chiedi(); }
-  });
+  var vh = innerHeight, V0 = vh, Yin = 0, Yout = 0, Rm = 0, Gmin = 0, Smin = 0, Lmin = 0, PASSO = 1;
+  var xM = 0, maxS = 0, larghezza = 0, hT = 60;
+  var DOT = 7, SEG = [], seduto = null, ATTESA = null;
+  /* lo showreel: gira una volta quando il puntino ci entra, si ferma sulla scritta finale, poi il puntino esce dal basso
+     (in SR_USCITA ms il suo posto scende dal centro del video a poco sotto il pannello; US va da 0 a 1) */
+  var sr = document.getElementById('showreel'), SR_FINE = 18.6, SR_USCITA = 1300, srFinito = false, srEsce = 0, srPosto = null, US = 0;
+  function srFine(){ if (!srFinito && sr.currentTime >= SR_FINE) { sr.pause(); srFinito = true; srEsce = performance.now(); chiedi(); } }
+  sr.addEventListener('timeupdate', srFine);
+  /* (18/11, revisione) timeupdate arriva ogni 250 ms circa: il video si fermava tra 18,6 e 18,9 s (dalle 19,0 la
+     scritta finale se ne va). Mentre gira, lo si guarda a ogni fotogramma, così si ferma proprio a 18,6 */
+  function srGuarda(){ if (srFinito || sr.paused) return; srFine(); if (srFinito) return;
+    if (sr.requestVideoFrameCallback) sr.requestVideoFrameCallback(srGuarda); else requestAnimationFrame(srGuarda); }
+  sr.addEventListener('playing', srGuarda);
+  function uscitaSr(){
+    if (!srFinito) return 0;
+    if (!srEsce) return 1;
+    var te = (performance.now() - srEsce) / SR_USCITA;
+    if (te >= 1) { srEsce = 0; return 1; }
+    return liscio(te);
+  }
 
-  function easeIO(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
   function lerp(a, b, t){ return a + (b - a) * t; }
   function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
   function offsetIn(el, anc){ var x = 0, y = 0; while (el && el !== anc) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x: x, y: y }; }
-  function stageTop(y){ return y < ST.T ? ST.T - y : (y <= ST.T + ST.R ? 0 : ST.T + ST.R - y); }
-  function sy(s, y){ return s.fisso ? s.vy : s.scena ? stageTop(y) + s.ly : s.ly - y; }
-  /* curve morbide per il puntino (18/11: «più fluidi e più rotondi, va troppo diritta») */
+  /* il bordo alto del palco di una scena sullo schermo (scena del Sito Web: ST; scena dei social: SCENA_SOCIAL.S) */
+  function stageTopDi(S, y){ return y < S.T ? S.T - y : (y <= S.T + S.R ? 0 : S.T + S.R - y); }
+  function stageTop(y){ return stageTopDi(ST, y); }
+  function scenaDi(s){ return s.scena === true ? ST : s.scena; }
+  /* dove sta un posto sullo schermo con lo scorrimento vero y (il posto dello showreel scende mentre il puntino esce) */
+  function sy(s, y){ return s.fisso ? s.vy : s.scena ? stageTopDi(scenaDi(s), y) + s.ly : (s.video ? lerp(s.ly, s.E.ly, US) : s.ly) - y; }
+  /* curve morbide: partono e arrivano ferme (rispetto a dove vanno), niente angoli */
   function liscio(t){ return .5 - .5 * Math.cos(Math.PI * t); }
+  function morbido(t){ return t * t * (3 - 2 * t); }
   function q2(a, c, b, t){ var u = 1 - t; return u*u*a + 2*u*t*c + t*t*b; }
   function c3(a, b, c, d, t){ var u = 1 - t; return u*u*u*a + 3*u*u*t*b + 3*u*t*t*c + t*t*t*d; }
   function arco(ax, ay, bx, by, t, k){ var cx = (ax + bx) / 2 - (by - ay) * k, cy = (ay + by) / 2 + (bx - ax) * k; return [q2(ax, cx, bx, t), q2(ay, cy, by, t)]; }
 
   function misura(){
     vh = innerHeight;
+    /* le misure del viaggio cambiano solo se cambia la larghezza (girando il telefono), non con la barra di Safari */
     if (innerWidth !== larghezza || !Yin) {
-      larghezza = innerWidth;
-      Yin = Math.round(vh * .62); Yout = Math.round(vh * .24); Rm = Math.round(vh * .46);
-      Lvia = Math.round(vh * .15); Larrivo = Math.round(vh * .22);
+      larghezza = innerWidth; V0 = vh;
+      Yin = Math.round(V0 * .60); Yout = Math.round(V0 * .32); Rm = Math.round(V0 * .38);   /* si siede col titolo al 60% dello schermo, riparte al 32%; aspetta al 38% (in alto: la partenza, dove titolo e puntino si allontanano, è corta; l'arrivo, dove si vengono incontro, è lungo) */
+      Gmin = Math.round(V0 * .5); Smin = Math.round(V0 * .19); Lmin = Math.round(V0 * .22);  /* dallo showreel almeno mezzo schermo; seduto almeno ~160 px; partenza e arrivo almeno ~185 px */
     }
     var y0 = scrollY, corpo = document.body.getBoundingClientRect();
     xM = corpo.right - 10;
     maxS = Math.max(0, doc.scrollHeight - vh);
-    /* la scena */
+    hT = testata.offsetHeight;
+    /* la scena: il palco resta fermo per l'altezza della scena meno la sua (con la barra di Safari conta il palco, che è
+       alto 100svh, non la finestra) */
     var r = scena.getBoundingClientRect();
-    ST.T = r.top + y0; ST.R = Math.max(1, scena.offsetHeight - vh);
+    ST.T = r.top + y0; ST.R = Math.max(1, scena.offsetHeight - (palco.offsetHeight || vh));
     var pr = palco.getBoundingClientRect();
     var o = offsetIn(schermoR, palco);
     ST.sw = schermoR.offsetWidth;
-    var hs = { x: pr.left + o.x, ly: o.y + schermoR.offsetHeight / 2, d: 10, scena: true };
+    var hs = { x: pr.left + o.x, ly: o.y + schermoR.offsetHeight / 2 };
     var H0 = { x: hs.x, ly: hs.ly, d: 10, scena: true }, H1 = { x: hs.x + ST.sw, ly: hs.ly, d: 10, scena: true };
     var L = battute.map(function(b){ var pt = b.querySelector('.pt'); if (!pt) return null; var q = offsetIn(pt, palco); return { el: pt, x: pr.left + q.x + pt.offsetWidth / 2, ly: q.y + pt.offsetHeight / 2, d: pt.offsetWidth, scena: true }; });
     /* i posti normali, in ordine di pagina */
@@ -1459,21 +2105,49 @@ addEventListener('DOMContentLoaded',function(){
     /* un titolo con il suo video sopra (lo spot del Jué, 17/11 sera): il puntino ci arriva senza passare sul video */
     P.forEach(function(s){ var pk = s.el.closest && s.el.closest('.pacchetto'), pn = pk && pk.querySelector(':scope > .pannello'); if (!pn) return;
       var q = pn.getBoundingClientRect(); if (q.bottom + y0 < s.ly - 20) s.pan = { bottom: q.bottom + y0, right: q.right }; });
-    P.forEach(function(s){ if (s.video) { if (srPosto && srPosto.uscito) s.uscito = true; srPosto = s; var fr = s.el.parentNode.getBoundingClientRect(); s.top = fr.top + y0; s.bottom = fr.bottom + y0; s.E = { x: s.x, ly: s.bottom + 46, d: DOT }; } });
-    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; if (s.video) { s.inY = s.ly - vh * .72; s.outY = s.ly - vh * .12; } });
-    var L1 = L[0], L3 = L[2], L4 = L[3];
-    L1.inY = ST.T + L1.ly - Yin; L1.outY = ST.T + .22 * ST.R;
-    L4.inY = ST.T + .9 * ST.R; L4.outY = ST.T + ST.R + Math.max(24, L4.ly - Yout);
-    /* la sequenza dei posti con la scena inserita al suo posto */
-    var seq = [], messa = false;
-    P.forEach(function(s){ if (!messa && s.ly > ST.T) { seq.push(L1, L4); messa = true; } seq.push(s); });
-    var n = seq.length, i;
-    seq[n-1].inY = Math.min(seq[n-1].inY, maxS);
-    for (i = n - 2; i >= 0; i--) if (seq[i] !== L1) seq[i].inY = Math.min(seq[i].inY, seq[i+1].inY - 120);
-    for (i = 0; i < n - 1; i++) if (seq[i] !== L1) { seq[i].outY = Math.min(seq[i].outY, seq[i+1].inY - 80); if (seq[i].outY < seq[i].inY) seq[i].outY = seq[i].inY; }
+    P.forEach(function(s){ if (s.video) { srPosto = s; var fr = s.el.parentNode.getBoundingClientRect(); s.top = fr.top + y0; s.bottom = fr.bottom + y0; s.E = { x: s.x, ly: s.bottom + 46 }; } });
     /* il primo posto è lo showreel (17/11, apertura del sito vero): il puntino ci sta dentro, nascosto, dall'inizio della
        pagina. Il punto di «scegliere» della copertina è un altro elemento: fa la sua animazione fino allo schermo arancio */
-    seq[0].inY = -1e9;
+    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; if (s.video) { s.inY = -1e9; s.outY = s.ly - V0 * .12; } });
+    var L1 = L[0], L3 = L[2], L4 = L[3], R = ST.R, T = ST.T;
+    L1.inY = T + L1.ly - Yin; L1.outY = T + .22 * R;
+    /* (18/11, revisione) il punto di «dispositivi» arriva a .885 e non più a .91: i 50 px liberati vanno al viaggio verso
+       «Sito Web», che era il tratto più veloce della pagina (2,6 volte il dito) */
+    L4.inY = T + .885 * R; L4.outY = T + R + Math.max(24, L4.ly - Yout);
+    /* la scena dei social (Creazione Contenuti, 18/11 notte): i suoi posti e i suoi tratti li dà SCENA_SOCIAL.punti */
+    var SC = window.SCENA_SOCIAL ? SCENA_SOCIAL.punti({ xM: xM, Yin: Yin, Yout: Yout }) : null;
+    /* la sequenza dei posti con la scena inserita al suo posto */
+    var seq = [], messa = false, messaS = !SC;
+    P.forEach(function(s){
+      if (!messaS && s.ly > SC.L1.scena.T) { seq.push(SC.L1, SC.L4); messaS = true; }
+      if (!messa && s.ly > T) { seq.push(L1, L4); messa = true; }
+      seq.push(s);
+    });
+    var n = seq.length, i, A, B;
+    seq[n-1].inY = Math.min(seq[n-1].inY, maxS - 1);
+    /* quanto scorrimento serve a ogni viaggio: partenza e arrivo durano quanto la strada che il puntino fa sullo schermo
+       (PASSO px di scorrimento per px di strada, mai meno di Lmin: così non va mai molto più veloce del dito), più un poco
+       di attesa nel margine, fino a 2/3 di schermo; dallo showreel almeno mezzo schermo. Se due posti sono vicini, il
+       puntino riparte un po' prima e arriva un po' dopo (seduto mai meno di Smin); dallo showreel riparte prima, mentre
+       il video si vede ancora tutto */
+    function strada(A, B){
+      var ay = A.scena ? stageTopDi(scenaDi(A), A.outY) + A.ly : A.ly - A.outY, by = B.scena ? stageTopDi(scenaDi(B), B.inY) + B.ly : B.ly - B.inY;
+      return { v: Math.max(Lmin, PASSO * (Math.abs(xM - A.x) + Math.abs(Rm - ay))), a: Math.max(Lmin, PASSO * (Math.abs(xM - B.x) + Math.abs(by - Rm))) };
+    }
+    for (i = 0; i < n - 1; i++) {
+      A = seq[i]; B = seq[i+1];
+      if (A === L1 || (SC && A === SC.L1)) continue;   /* tra L1 e L4 c'è la scena, coi suoi tratti */
+      var st = strada(A, B), G = B.inY - A.outY;
+      var serve = (A.video || B.video) ? Gmin : Math.min(V0 * .66, st.v + st.a + 40);
+      if (G >= serve) continue;
+      var manca = serve - G;
+      var stA = A.video ? 1e9 : Math.max(0, A.outY - A.inY - Smin);
+      var stB = Math.max(0, B.outY - B.inY - Smin); if (i + 1 === n - 1) stB = Math.max(0, Math.min(stB, maxS - 1 - B.inY));
+      var dA = A.video ? manca : Math.min(manca / 2, stA), dB = Math.min(manca - dA, stB);
+      dA = Math.min(stA, manca - dB);
+      A.outY -= dA; B.inY += dB;
+    }
+    for (i = 0; i < n - 1; i++) { A = seq[i]; B = seq[i+1]; if (A.outY < A.inY) A.outY = A.inY; if (B.inY < A.outY + 40 && A !== L1 && !(SC && A === SC.L1)) A.outY = Math.max(A.inY, B.inY - 40); }
     /* i tratti */
     ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
     SEG = [];
@@ -1481,16 +2155,80 @@ addEventListener('DOMContentLoaded',function(){
       var s = seq[i], nx = seq[i+1];
       SEG.push({ a: s.inY, b: s.outY, k: 'seduto', s: s });
       if (s === L1) {
-        var R = ST.R, T = ST.T;
-        SEG.push({ a: T + .22*R, b: T + .36*R, k: 'linea', da: L1, a2: H0 });
-        SEG.push({ a: T + .36*R, b: T + .46*R, k: 'fermo', s: H0 });
+        SEG.push({ a: T + .22*R, b: T + .37*R, k: 'linea', da: L1, a2: H0 });
+        SEG.push({ a: T + .37*R, b: T + .46*R, k: 'fermo', s: H0 });
         SEG.push({ a: T + .46*R, b: T + .70*R, k: 'tendina', da: H0, a2: H1 });
-        SEG.push({ a: T + .70*R, b: T + .78*R, k: 'linea', da: H1, a2: L3 });
-        SEG.push({ a: T + .78*R, b: T + .86*R, k: 'seduto', s: L3 });
-        SEG.push({ a: T + .86*R, b: T + .90*R, k: 'linea', da: L3, a2: L4 });
-      } else if (nx) SEG.push({ a: s.outY, b: nx.inY, k: (nx.video || s.video) ? 'diretto' : 'viaggio', da: s, a2: nx });
+        SEG.push({ a: T + .70*R, b: T + .82*R, k: 'linea', da: H1, a2: L3 });
+        SEG.push({ a: T + .82*R, b: T + .855*R, k: 'seduto', s: L3 });
+        SEG.push({ a: T + .855*R, b: T + .885*R, k: 'linea', da: L3, a2: L4 });
+      } else if (SC && s === SC.L1) SEG.push.apply(SEG, SC.interni);
+      else if (nx) {
+        var gv = { a: s.outY, b: nx.inY, k: (nx.video || s.video) ? 'diretto' : 'viaggio', da: s, a2: nx };
+        if (gv.k === 'viaggio') { var sd = strada(s, nx), kk = Math.min(1, (gv.b - gv.a - 30) / (sd.v + sd.a)); gv.Lv = Math.max(40, sd.v * kk); gv.La = Math.max(40, sd.a * kk); }
+        SEG.push(gv);
+      }
     }
     SEG.push({ a: seq[n-1].outY, b: 1e9, k: 'seduto', s: seq[n-1] });
+  }
+
+  /* dove deve stare il puntino: yp (lo scorrimento morbido) sceglie il punto del percorso, y (quello vero) dice dove
+     sono i posti sullo schermo. Restituisce { x, y, d } e, se è seduto in un titolo, s */
+  function bersaglio(yp, y){
+    for (var i = 0; i < SEG.length; i++) { var g = SEG[i]; if (yp >= g.a && yp < g.b) return punta(g, yp, y); }
+    return null;
+  }
+  function punta(g, yp, y){
+    var t = clamp((yp - g.a) / Math.max(1, g.b - g.a), 0, 1), s, e;
+    if (g.k === 'seduto' || g.k === 'fermo') {
+      s = g.s;
+      if (s.video && !US) return { s: s, nascosto: true, x: s.x, y: sy(s, y), d: DOT };
+      return { x: s.x, y: sy(s, y), d: s.video ? DOT : s.d, s: g.k === 'seduto' && s.el && !s.video ? s : null };
+    }
+    if (g.k === 'tendina') return { x: lerp(g.da.x, g.a2.x, t), y: sy(g.da, y), d: 10 };   /* stesso conto della tendina (aggiornaScena) */
+    if (g.k === 'linea') { e = liscio(t); var pa = arco(g.da.x, sy(g.da, y), g.a2.x, sy(g.a2, y), e, g.curva == null ? .2 : g.curva); return { x: pa[0], y: pa[1], d: lerp(g.da.d, g.a2.d, e) }; }
+    if (g.k === 'diretto') {
+      /* dentro e fuori dallo showreel sempre al centro: esce dal basso e scende nel punto del titolo (o il contrario) */
+      e = liscio(t);
+      var A = g.da, B = g.a2, ax = A.x, ay = sy(A, y), bx = B.x, by = sy(B, y), dy = by - ay;
+      return { x: c3(ax, ax, bx, bx, e), y: A.video ? c3(ay, ay + dy * .5, by - dy * .35, by, e) : c3(ay, ay + dy * .35, by - dy * .5, by, e), d: lerp(A.video ? DOT : A.d, B.video ? DOT : B.d, e) };
+    }
+    return viaggio(g, yp, y);
+  }
+  function viaggio(g, yp, y){
+    var a = g.da, b = g.a2, G = g.b - g.a, u = yp - g.a;
+    var Lv = Math.min(g.Lv, G / 2), La = Math.min(g.La, G - Lv);
+    var ax = a.x, ay = sy(a, y), bx = b.x, by = sy(b, y), x, yy, d, t, e, th;
+    if (u < Lv) {
+      /* parte verso destra e va nel margine: orizzontale e verticale con la stessa curva morbida; l'arco largo lo
+         disegna il titolo che intanto sale (verso un titolo col video sopra va un po' prima a destra, così non passa
+         sull'angolo del video) */
+      t = u / Lv; e = liscio(t);
+      var tx = b.pan ? liscio(Math.min(1, t * 1.3)) : e;
+      x = lerp(ax, xM, tx); yy = lerp(ay, Rm, e); d = lerp(a.d, DOT, e);
+    } else if (u > G - La) {
+      t = (u - (G - La)) / La; e = liscio(t); th = Math.PI / 2 * e;
+      if (b.alto) {
+        /* nel marchio del piede ci cade dentro dall'alto. La curva punta a dove il marchio sarà sullo schermo alla fine
+           del tratto (bF), non a dove è adesso (all'inizio è ancora sotto lo schermo e il puntino ci correva incontro a
+           quasi tre volte la velocità del dito); la differenza (by - bF, cioè lo scorrimento che manca) entra piano,
+           tutta solo all'arrivo, dove il puntino va già con la pagina (18/11, revisione) */
+        var bF = b.ly - g.b, sopra = bF - 46;
+        x = c3(xM, xM, bx + (xM - bx) * .12, bx, e);
+        yy = c3(Rm, Rm + (sopra - Rm) * .45, sopra, bF, e) + (by - bF) * e * e * e;
+      } else {
+        /* dal margine entra nel punto da destra: la verticale parte e arriva piano, l'orizzontale parte dopo (prima
+           scende, poi gira verso il punto); se sopra il titolo c'è il suo video, verso sinistra va solo quando è sotto */
+        var fx = 1 - Math.cos(th);
+        /* (18/11, revisione) se il punto è lontano dal margine (titoli corti: «Web», «scelto», «tutti») l'orizzontale
+           comincia un po' prima, così l'ultima curva non diventa uno strappo verso sinistra */
+        var mx = clamp((Math.abs(xM - bx) - 120) / 160, 0, .6); if (mx) fx = lerp(fx, e, mx);
+        yy = lerp(Rm, by, e);
+        if (b.pan) { var pb = b.pan.bottom - y + DOT, lim = by - pb; if (lim > 1) fx = Math.min(fx, morbido(clamp((yy - pb) / lim, 0, 1))); }
+        x = xM - (xM - bx) * fx;
+      }
+      d = lerp(DOT, b.d, e);
+    } else { x = xM; yy = Rm; d = DOT; }
+    return { x: x, y: yy, d: d };
   }
 
   function siedi(s){
@@ -1500,85 +2238,116 @@ addEventListener('DOMContentLoaded',function(){
     if (s && s.el) { s.el.classList.add('qui'); punto.classList.remove('su'); }
     else punto.classList.add('su');
   }
+  var TR = '';
   function metti(x, y, d){
     siedi(null);
-    punto.style.transform = 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (y - d/2).toFixed(2) + 'px,0) scale(' + (d/40).toFixed(4) + ')';
+    var tr = 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (y - d/2).toFixed(2) + 'px,0) scale(' + (d/40).toFixed(4) + ')';
+    if (tr !== TR) { punto.style.transform = tr; TR = tr; }
   }
 
-  function viaggio(a, b, y, gap, u){
-    if (b.uscito) b = ATTESA;                   /* lo showreel è già finito: il puntino non ci rientra */
-    var ax = a.x, ay = sy(a, y), bx = b.x, by = sy(b, y), x, yy, d, t, e;
-    var k = Math.min(1, gap / (Lvia + Larrivo + 60)), Lv = Lvia * k, La = Larrivo * k;
-    if (u < Lv && !a.fisso && !a.uscito) {
-      /* parte verso destra e curva giù nel margine: un quarto di cerchio */
-      t = u / Lv; e = liscio(t);
-      x = q2(ax, xM, xM, b.pan ? Math.min(1, 1.5 * e) : e); yy = q2(ay, ay, Rm, e); d = lerp(a.d, DOT, e); /* verso un titolo col video sopra: prima a destra, così non passa sull'angolo del video */
-    } else if (u > gap - La) {
-      t = (u - (gap - La)) / La; e = liscio(t);
-      if (b.alto) {
-        var sopra = by - 58;
-        x = c3(xM, xM, bx + (xM - bx) * .15, bx, e); yy = c3(Rm, sopra - 40, sopra - 30, by, e); d = lerp(DOT, b.d, e);
-      } else {
-        /* scende dal margine e curva dentro il punto del titolo */
-        x = q2(xM, xM, bx, e); yy = q2(Rm, by, by, e); d = lerp(DOT, b.d, e);
-        /* se sopra il titolo c'è il suo video, verso sinistra va solo quando è sotto il video: fino a lì resta nel margine */
-        if (b.pan) { var pb = b.pan.bottom - y + d / 2 + 2, lim = by - pb; if (lim > 1) x = xM - (xM - bx) * Math.min(e * e, clamp((yy - pb) / lim, 0, 1)); }
-      }
-    } else { x = xM; yy = Rm; d = DOT; }
-    metti(x, yy, d);
+  /* Il movimento, fotogramma per fotogramma.
+     · ys insegue lo scorrimento vero passando da ys1 (due inseguimenti esponenziali in fila, TAU ciascuno, ~90 ms in
+       tutto: la velocità non salta mai, nemmeno con la rotella) e non avanza più veloce di VMAX px al ms (limite
+       morbido, che si allarga se resta indietro più di 250 px). ys sceglie il punto del percorso; i posti restano dove
+       sono davvero.
+     · Colpo di dito veloce (pagina oltre 2 px al ms, o puntino indietro di oltre 300 px): il puntino si stacca e va ad
+       aspettare nel margine; quando la pagina rallenta (sotto 1 px al ms) torna sul percorso. Così non resta
+       attaccato a un titolo che corre via per poi doverlo rincorrere.
+     · Ogni cambio di bersaglio (staccarsi, tornare, un ricalcolo) passa per una molla smorzata (E: lo scarto tra dove
+       è disegnato e dove dovrebbe essere, con la sua velocità): posizione e velocità restano continue, e lo scarto si
+       scioglie in ~0,2 s senza rimbalzi. Il punto vero del titolo (.pt.qui) prende il posto del puntino solo quando la
+       molla si è fermata. */
+  var TAU = 45, VMAX = 2.2, OM = 1 / 65;   /* OM: rigidezza della molla (1/ms): 1/60 per staccarsi, 1/100 per tornare, 1/70 dopo un ricalcolo */
+  var ys = null, ys1 = 0, tPrima = 0, yPrima = 0, v1 = 0, v2 = 0;
+  var LIBERO = false, E = { x: 0, y: 0, d: 0, vx: 0, vy: 0, vd: 0 }, D = null, DV = { x: 0, y: 0, d: 0 }, Bp = null, Wp = null;
+  /* lo scarto si misura dal bersaglio com'era al fotogramma prima (a - av·dt): sciogli() poi lo fa avanzare di dt, così
+     al cambio il puntino continua esattamente con la sua velocità (18/11, revisione: prima il bersaglio contava due
+     volte e al rientro dal margine il puntino dava uno strappo di 10-17 px nella direzione sbagliata) */
+  function molla(da, dav, a, av, om, dt){ OM = om; dt = dt || 0; E.x = da.x - a.x + av.x * dt; E.y = da.y - a.y + av.y * dt; E.d = da.d - a.d + av.d * dt; E.vx = dav.x - av.x; E.vy = dav.y - av.y; E.vd = dav.d - av.d; }
+  function sciogli(dt){
+    /* molla critica a piccoli passi (al massimo 6 ms); la velocità con cui si avvicina al bersaglio non supera VS px al
+       ms, così il ritorno da lontano è un rientro calmo e non uno scatto (quella che ha già, per esempio quella della
+       pagina quando si stacca, la frena la molla) */
+    var n = Math.max(1, Math.ceil(dt / 6)), h = dt / n, VS = 1.8;
+    for (var i = 0; i < n; i++) {
+      E.vx += (-OM * OM * E.x - 2 * OM * E.vx) * h; E.vy += (-OM * OM * E.y - 2 * OM * E.vy) * h; E.vd += (-OM * OM * E.d - 2 * OM * E.vd) * h;
+      var l = Math.sqrt(E.x * E.x + E.y * E.y);
+      if (l > .5) { var ux = -E.x / l, uy = -E.y / l, va = E.vx * ux + E.vy * uy; if (va > VS) { E.vx -= ux * (va - VS); E.vy -= uy * (va - VS); } }
+      E.x += E.vx * h; E.y += E.vy * h; E.d += E.vd * h;
+    }
+    if (Math.abs(E.x) + Math.abs(E.y) + Math.abs(E.d) < .3 && Math.abs(E.vx) + Math.abs(E.vy) + Math.abs(E.vd) < .006) E.x = E.y = E.d = E.vx = E.vy = E.vd = 0;
   }
-
+  function fermaMolla(){ return !E.x && !E.y && !E.d; }
   function quadro(){
     pianificato = false;
-    var y = scrollY;
+    var y = scrollY, ora = performance.now(), dt = tPrima ? clamp(ora - tPrima, 1, 50) : 16.7;
+    if (ys === null) ys = ys1 = yPrima = y;
+    /* la velocità della pagina, filtrata due volte (uno scatto di rotella da solo non conta) */
+    var vNow = tPrima ? Math.abs(y - yPrima) / dt : 0, av = 1 - Math.exp(-dt / 30);
+    tPrima = ora; yPrima = y;
+    v1 += (vNow - v1) * av; v2 += (v1 - v2) * av; if (v1 < .002 && v2 < .002) v1 = v2 = 0;
+    /* un salto della pagina (non uno scorrimento): il puntino non ripercorre più di due schermi e mezzo */
+    var lag = y - ys, cap = V0 * 2.5;
+    if (lag > cap) { ys += lag - cap; ys1 += lag - cap; } else if (lag < -cap) { ys += lag + cap; ys1 += lag + cap; }
+    var a = 1 - Math.exp(-dt / TAU), lim = VMAX * dt * Math.max(1, Math.abs(y - ys) / 250);
+    ys1 += (y - ys1) * a;
+    ys += lim * Math.tanh((ys1 - ys) * a / lim);
+    if (Math.abs(y - ys) < .08 && Math.abs(y - ys1) < .08) ys = ys1 = y;
+    var ritardo = Math.abs(y - ys);
+    US = uscitaSr();
     testataPiena();
-    if (y > ST.T - 2 * vh && y < ST.T + ST.R + 2 * vh) aggiornaScena(y, vh);
+    /* la scena va con lo stesso scorrimento morbido: la tendina resta nella mano del puntino */
+    if (ys > ST.T - 2 * vh && ys < ST.T + ST.R + 2 * vh) aggiornaScena(ys, vh);
     /* lo showreel gira quando si vede bene (il puntino ci sta già dentro dall'inizio della pagina): parte quando se ne
        vedono i quattro quinti sotto la testata, si ferma quando se ne vede meno della metà */
     if (srPosto && y > srPosto.ly - 2 * vh && sr.preload !== 'auto') sr.preload = 'auto';
-    var srVis = srPosto ? (Math.min(srPosto.bottom - y, vh) - Math.max(srPosto.top - y, testata.offsetHeight)) / Math.max(1, srPosto.bottom - srPosto.top) : 0;
+    var srVis = srPosto ? (Math.min(srPosto.bottom - y, vh) - Math.max(srPosto.top - y, hT)) / Math.max(1, srPosto.bottom - srPosto.top) : 0;
     var gira = !srFinito && srVis >= (sr.paused ? .8 : .5);
     if (gira && sr.paused) { var pp = sr.play(); if (pp && pp.catch) pp.catch(function(){}); }
     else if (!gira && !sr.paused) sr.pause();
-    /* lo showreel è finito: il puntino esce dal bordo del pannello e va ad aspettare nel margine */
-    if (srEsce && srPosto) {
-      var te = (performance.now() - srEsce) / 1100;
-      if (te < 1) {
-        var ev = liscio(te), px = srPosto.x, py = sy(srPosto, y), ey = sy(srPosto.E, y), yy3 = lerp(py, ey, ev);
-        punto.classList.toggle('sotto', yy3 < srPosto.bottom - y - 3);
-        metti(px, yy3, DOT);
-        requestAnimationFrame(quadro); pianificato = true; return;
-      }
-      srEsce = 0;
+    /* il puntino */
+    var g = bersaglio(ys, y);
+    if (g) {
+      var B = { x: g.x, y: g.y, d: g.d }, BV = Bp ? { x: (B.x - Bp.x) / dt, y: (B.y - Bp.y) / dt, d: (B.d - Bp.d) / dt } : { x: 0, y: 0, d: 0 };
+      Bp = B;
+      var W = g.nascosto ? B : { x: xM, y: Rm, d: DOT }, ZERO = { x: 0, y: 0, d: 0 };   /* (se il percorso è dentro il video, staccato vuol dire dentro il video) */
+      if (!LIBERO && D && !(g.nascosto && fermaMolla()) && (v2 > 2 || ritardo > 300)) { LIBERO = true; Wp = null; molla(D, DV, W, g.nascosto ? BV : ZERO, 1 / 60, dt); }
+      else if (LIBERO && v2 < 1 && ritardo < 120) { LIBERO = false; Wp = null; molla(D, DV, B, BV, 1 / 100, dt); }
+      sciogli(dt);
+      var Q = LIBERO ? W : B;
+      if (LIBERO && Wp && Wp.n !== !!g.nascosto) { E.x += Wp.x - Q.x; E.y += Wp.y - Q.y; E.d += Wp.d - Q.d; }   /* staccato, il bersaglio passa dal margine al video (o il contrario): lo scarto lo prende la molla */
+      Wp = { x: Q.x, y: Q.y, d: Q.d, n: !!g.nascosto };
+      var nx = Q.x + E.x, ny = Q.y + E.y, nd = Math.max(1, Q.d + E.d);
+      if (D) { DV = { x: (nx - D.x) / dt, y: (ny - D.y) / dt, d: (nd - D.d) / dt }; }
+      D = { x: nx, y: ny, d: nd };
+      if (!LIBERO && fermaMolla() && (g.nascosto || g.s)) { siedi(g.s); }     /* nascosto nel video, o il punto vero del titolo */
+      else metti(nx, ny, nd);
     }
-    var sotto = false;
-    for (var i = 0; i < SEG.length; i++) {
-      var g = SEG[i]; if (y < g.a || y >= g.b) continue;
-      sotto = (g.k === 'viaggio' && ((g.a2.video && !g.a2.uscito) || (g.da.video && !g.da.uscito))) || (g.k === 'seduto' && g.s.video);
-      punto.classList.toggle('sotto', sotto);
-      if (g.k === 'seduto' && g.s.video && g.s.uscito) { punto.classList.remove('sotto'); return metti(g.s.E.x, sy(g.s.E, y), DOT); }
-      var t = (y - g.a) / Math.max(1, g.b - g.a);
-      if (g.k === 'seduto') return g.s.el ? siedi(g.s) : metti(g.s.x, sy(g.s, y), g.s.d);
-      if (g.k === 'fermo') return metti(g.s.x, sy(g.s, y), g.s.d);
-      if (g.k === 'diretto') {
-        /* dentro e fuori dallo showreel sempre al centro: entra dall'alto, esce dal basso */
-        var vid = g.da.video ? g.da : g.a2, dA = g.da, dB = g.a2;
-        if (dA.video && dA.uscito) dA = dA.E;
-        if (dB.video && dB.uscito) dB = dB.E;
-        var ed = liscio(t), dax = dA.x, day = sy(dA, y), dbx = dB.x, dby = sy(dB, y), ddy = dby - day;
-        var dx2 = c3(dax, dax, dbx, dbx, ed), dy2 = g.da.video ? c3(day, day + ddy * .5, dby - ddy * .35, dby, ed) : c3(day, day + ddy * .35, dby - ddy * .5, dby, ed);
-        punto.classList.toggle('sotto', !vid.uscito && dy2 > vid.top - y + 3 && dy2 < vid.bottom - y - 3);
-        return metti(dx2, dy2, lerp(dA.d, dB.d, ed));
-      }
-      if (g.k === 'linea') { var e2 = liscio(t), pa = arco(g.da.x, sy(g.da, y), g.a2.x, sy(g.a2, y), e2, .22); return metti(pa[0], pa[1], lerp(g.da.d, g.a2.d, e2)); }
-      if (g.k === 'tendina') return metti(lerp(g.da.x, g.a2.x, t), sy(g.da, y), 10);
-      if (g.k === 'viaggio') return viaggio(g.da, g.a2, y, g.b - g.a, y - g.a);
-    }
+    if (ys !== y || !fermaMolla() || srEsce || v2 || LIBERO) { pianificato = true; requestAnimationFrame(quadro); }
+    else tPrima = 0;
   }
 
   var pianificato = false;
   function chiedi(){ if (!pianificato) { pianificato = true; requestAnimationFrame(quadro); } }
-  function rimisura(){ scala(); misura(); ST.b = -1; ST.X = -1; chiedi(); }
+  /* ricalcolo (caratteri, misure, barra di Safari, telefono girato): niente salti, la differenza passa alla molla */
+  function rimisura(){
+    var visto = null;
+    if (D) {
+      if (seduto && seduto.el && !seduto.video) { var q = seduto.el.getBoundingClientRect(); visto = { x: q.left + q.width / 2, y: q.top + q.height / 2, d: D.d }; }
+      else visto = D;
+    }
+    scala(); misura(); ST.b = -1; ST.X = -1;
+    if (visto && ys !== null) {
+      var g = bersaglio(ys, scrollY);
+      if (g) {
+        var Q = LIBERO ? { x: xM, y: Rm, d: DOT } : g;
+        E.x = visto.x - Q.x; E.y = visto.y - Q.y; E.d = visto.d - Q.d; if (E.x || E.y) OM = 1 / 70;
+        if (Math.abs(E.x) + Math.abs(E.y) + Math.abs(E.d) < .3) E.x = E.y = E.d = 0;
+        Bp = null;
+      }
+    }
+    chiedi();
+  }
   misura(); quadro();
   addEventListener('scroll', chiedi, { passive: true });
   addEventListener('resize', rimisura);
@@ -1586,6 +2355,245 @@ addEventListener('DOMContentLoaded',function(){
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ requestAnimationFrame(rimisura); });
   addEventListener('load', rimisura);
 })();
+</script>
+<script>
+/* ===== INIZIO SITO RICCO · JS (18/11) ========================================================================================
+   Va nella D DOPO lo script principale (quello che clona il sito semplice e definisce scala()): per esempio come <script>
+   a sé subito prima di </body>. Disegna a tempo, in loop, la nostra apertura in miniatura dentro il telefono del sito
+   ricco. Tutte le misure sono in px del sito a 390 (quelli di `.ms`, prima della scala --k), così è identica a ogni
+   telefono. Gira solo quando il sito ricco si vede (IntersectionObserver) e la scena lo permette (sitoRicco.gira(vivo),
+   chiamata dalla D al posto di giraTc); a scheda nascosta si ferma da sé. Con «Riduci movimento» resta ferma sul
+   momento più chiaro: lo schermo arancio col logo composto.
+   Il giro (ms): pagina ferma · il punto lascia «scegliere» e scende, dietro al testo e al pulsante, su una curva sola e
+   lenta fino al vuoto sotto il pulsante · lampeggia una volta · cresce senza fermarsi fino a coprire lo schermo, mentre i
+   testi della copertina svaniscono · sull'arancio si apre il puntino scuro ed entra la V bianca · dalla V esce il nome ·
+   pausa · il nome rientra nella V · la V se ne va · l'arancio si richiude (tornano i testi), risale sulla stessa curva e
+   ridiventa il punto di «scegliere». ── */
+(function(){
+  'use strict';
+  var wrap = document.querySelector('.ms-wrap.ricco'); if (!wrap) return;
+  var ms = wrap.querySelector('.ms'), strato = ms.querySelector('.ms-anim'); if (!strato) return;
+  var disco = strato.querySelector('.ms-anim-disco'), lv = strato.querySelector('.ms-lv'), lvN = lv.querySelector('.ms-lv-n');
+  var lvV = lvN.children[0], lvE = lvN.children[1], lvS = lvN.children[3], lvD = lv.querySelector('.ms-lv-d');
+  var ptt = ms.querySelector('.ms-ptt');
+  var testi = [].slice.call(ms.querySelectorAll('.ms-cop > :not(.ms-macchia):not(.ms-velo)'));
+  var btn = ms.querySelector('.ms-btn'), fascia = ms.querySelector('.ms-fascia');
+  var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var HDR = 64;
+  /* i tempi del giro, in ms */
+  var T = { scende: [550, 1450], lampo: [1450, 1810], cresce: [1810, 2900], v: [3000, 3450], nome: [3630, 4680],
+            rientra: [5330, 5930], vvia: [5930, 6290], chiude: [6310, 7750], giro: 8000, fermo: 5000 };
+  var LVT = { V: 450, D0: 250, D1: 800, DY: 620, S0: 680, S1: 1050 }; // i tempi interni del logo, come nella D
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(u, a, b){ return u <= a ? 0 : u >= b ? 1 : (u - a) / (b - a); }
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function dolce(x){ x = clamp(x); return x * x * (3 - 2 * x); }
+  function ioc(t){ t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function liscio(t){ t = clamp(t); return .5 - .5 * Math.cos(Math.PI * t); }
+  function scrivi(el, k, v){ var c = el._st || (el._st = {}); if (c[k] !== v) { c[k] = v; el.style[k] = v; } }
+
+  /* ── le misure: il punto di «scegliere», il centro, il logo (logoMisura della D, riquadro = lo schermo sotto la testata) ── */
+  var M = null, L = null;
+  function misura(){
+    var mr = ms.getBoundingClientRect(), k = mr.width / 390;
+    if (!k || !ms.offsetHeight) return false;
+    var W = 390, H = ms.offsetHeight, bw = W, bh = H - HDR;
+    var pr = ptt.getBoundingClientRect();
+    var x0 = (pr.left + pr.width / 2 - mr.left) / k, y0 = (pr.top + pr.height / 2 - mr.top) / k, r0 = pr.width / 2 / k;
+    /* dove lampeggia e cresce: al centro, nel vuoto tra il pulsante e la fascia (così non tocca né l'uno né l'altra) */
+    var cx = W / 2, cy = HDR + bh / 2;
+    if (btn && fascia) cy = ((btn.getBoundingClientRect().bottom + fascia.getBoundingClientRect().top) / 2 - mr.top) / k;
+    /* la curva della discesa: una sola, lenta. Parte dritta in giù dal punto del titolo (come una goccia che si stacca) e
+       piega piano verso il centro; al ritorno la stessa curva al contrario */
+    M = { x0: x0, y0: y0, r0: r0, cx: cx, cy: cy, rM: 10, kx: x0, ky: y0 + .72 * (cy - y0),
+          R: Math.hypot(Math.max(cx, W - cx), Math.max(cy - HDR, H - cy)) * 1.03 };
+    var F = Math.min(.7 * W, .42 * bh), N = Math.min(.105 * W, .09 * bh), em = 1.18 * N;
+    lvN.style.fontSize = N.toFixed(3) + 'px';
+    var c = lvN.cloneNode(true); c.removeAttribute('style'); c.style.fontSize = lvN.style.fontSize; c.style.visibility = 'hidden';
+    [].forEach.call(c.children, function(x){ x.removeAttribute('style'); });
+    lv.appendChild(c);
+    var q0 = c.getBoundingClientRect(), wn = q0.width / k, hn = q0.height / k, nl = (bw - wn) / 2, nt = (bh - hn) / 2 - .04 * N;
+    function box(i){ var r = c.children[i].getBoundingClientRect(); return { x: nl + (r.left - q0.left) / k, y: nt + (r.top - q0.top) / k, w: r.width / k, h: r.height / k }; }
+    var v = box(0), e = box(1), p = box(2), st = box(3), S = F / em; lv.removeChild(c);
+    lvN.style.left = nl.toFixed(3) + 'px'; lvN.style.top = nt.toFixed(3) + 'px';
+    var sv = [bw / 2 - .04 * F, bh / 2 + .0533 * F], off = [.32 * em, -.2747 * em];
+    L = { S: S, em: em, N: N, v: v, e: e, p: p, st: st, cv: [v.x + v.w / 2, v.y + v.h / 2], sv: sv, off: off,
+          sp: [sv[0] + S * off[0], sv[1] + S * off[1]], cp: [p.x + p.w / 2, p.y + p.h / 2] };
+    return true;
+  }
+
+  /* ── il logo sull'arancio: logoDisegna della D. sp (0-1) l'entrata della V: il puntino scuro si apre come un buco
+        nell'arancio e intorno compare la V, che si posa da appena più grande; np (0-1) la V si fa piccola e va al suo
+        posto mentre il puntino corre a destra e scopre «eniello», poi esce «studio» ── */
+  function logoDisegna(sp, np){
+    var t = np * LVT.S1, ev = ioc(t / LVT.V), sc = Math.pow(L.S, 1 - ev), c = [lerp(L.sv[0], L.cv[0], ev), lerp(L.sv[1], L.cv[1], ev)], ov = 1, ap = 1, z = 1;
+    if (sp < 1) { z = 1 + .07 * (1 - dolce(seg(sp, .1, 1))); c = [L.sp[0] + z * (c[0] - L.sp[0]), L.sp[1] + z * (c[1] - L.sp[1])]; sc *= z; ov = dolce(seg(sp, .12, .72)); ap = 1 - Math.pow(1 - seg(sp, 0, .5), 3); }
+    scrivi(lvV, 'transform', 'translate(' + (c[0] - L.cv[0]).toFixed(2) + 'px,' + (c[1] - L.cv[1]).toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')');
+    scrivi(lvV, 'webkitTextStrokeWidth', lerp(.0467, .036, ev).toFixed(4) + 'em');
+    scrivi(lvV, 'opacity', ov < 1 ? ov.toFixed(3) : '');
+    var a = [c[0] + sc * L.off[0], c[1] + sc * L.off[1]], ex = ioc(seg(t, LVT.D0, LVT.D1)), ey = ioc(seg(t, LVT.D0, LVT.DY));
+    var dx = lerp(a[0], L.cp[0], ex), dy = lerp(a[1], L.cp[1], ey), dd = lerp(sc * .1733 * L.em / z, L.p.w, ex) * ap;
+    scrivi(lvD, 'transform', 'translate(' + dx.toFixed(3) + 'px,' + dy.toFixed(3) + 'px) scale(' + (dd / 100).toFixed(5) + ')');
+    scrivi(lvD, 'visibility', ap > 0 ? 'inherit' : 'hidden');
+    var re = Math.min(ex, clamp((dx - dd / 2 - L.e.x) / L.e.w)), q = 1 - Math.pow(1 - seg(t, LVT.S0, LVT.S1), 3);
+    var ce = re >= 1 ? 'none' : 'inset(-20% ' + (100 - 100 * re).toFixed(2) + '% -20% 0)', cs = q >= 1 ? 'none' : 'inset(-20% ' + (100 - 100 * q).toFixed(2) + '% -20% 0)';
+    scrivi(lvE, 'webkitClipPath', ce); scrivi(lvE, 'clipPath', ce); scrivi(lvS, 'webkitClipPath', cs); scrivi(lvS, 'clipPath', cs);
+    scrivi(lvS, 'transform', q < 1 ? 'translateX(' + (-(1 - q) * .25 * L.N).toFixed(2) + 'px)' : '');
+  }
+
+  /* ── il giro: dato il tempo t (ms) dice dov'è il punto (x, y, r, a) e a che punto è il logo (sp, np) ── */
+  /* la curva della discesa (Bézier quadratica: dal punto del titolo, piegando verso il centro); u da 0 (titolo) a 1 (centro) */
+  function curva(u){ var v = 1 - u; return [v * v * M.x0 + 2 * u * v * M.kx + u * u * M.cx, v * v * M.y0 + 2 * u * v * M.ky + u * u * M.cy]; }
+  /* i testi della copertina: ci sono finché l'arancio è piccolo, svaniscono mentre copre lo schermo (in base al raggio,
+     così all'andata e al ritorno vanno di pari passo con il cerchio) */
+  function opTesti(r){ return 1 - dolce(seg(Math.log(r), Math.log(.15 * M.R), Math.log(.85 * M.R))); }
+  function stato(t){
+    var s, x = M.x0, y = M.y0, r = M.r0, a = 1, sp = 0, np = 0, punto = true, logo = false, op = 1, c;
+    if (t < T.scende[0] || t >= T.chiude[1]) punto = false;                       // pagina ferma: c'è il punto vero del titolo
+    else if (t < T.scende[1]) {                                                   // scende lungo la curva, crescendo appena
+      s = seg(t, T.scende[0], T.scende[1]);
+      c = curva(liscio(s)); x = c[0]; y = c[1]; r = lerp(M.r0, M.rM, dolce(seg(s, .1, 1)));
+    } else if (t < T.lampo[1]) {                                                  // lampeggia una volta, come il REC
+      x = M.cx; y = M.cy; r = M.rM; a = 1 - .8 * Math.sin(Math.PI * seg(t, T.lampo[0], T.lampo[1]));
+    } else if (t < T.cresce[1]) {                                                 // cresce senza fermarsi: piano, poi sempre più svelto
+      s = seg(t, T.cresce[0], T.cresce[1]);
+      x = M.cx; y = M.cy; r = M.rM * Math.pow(M.R / M.rM, Math.pow(s, 1.9)); op = opTesti(r);
+    } else if (t < T.chiude[0]) {                                                 // tutto arancio: il logo
+      x = M.cx; y = M.cy; r = M.R; op = 0; logo = t >= T.v[0];
+      if (t < T.v[1]) sp = seg(t, T.v[0], T.v[1]);
+      else if (t < T.rientra[0]) { sp = 1; np = seg(t, T.nome[0], T.nome[1]); }
+      else if (t < T.rientra[1]) { sp = 1; np = 1 - seg(t, T.rientra[0], T.rientra[1]); }
+      else { sp = 1 - seg(t, T.vvia[0], T.vvia[1]); logo = sp > 0; }
+    } else {                                                                      // si richiude piano fino a una palla, poi risale sulla curva
+      s = seg(t, T.chiude[0], T.chiude[1]);
+      var A = Math.log(M.R / (1.4 * M.rM)) / Math.log(M.R / M.r0);               // la parte del rimpicciolimento fatta al centro
+      var f = A * dolce(seg(s, 0, .56)) + (1 - A) * dolce(seg(s, .4, 1));
+      r = M.R * Math.pow(M.r0 / M.R, f); op = opTesti(r);
+      c = curva(1 - liscio(seg(s, .38, 1))); x = c[0]; y = c[1];
+    }
+    return { punto: punto, x: x, y: y, r: r, a: a, logo: logo, sp: sp, np: np, op: op };
+  }
+  function quadro(t){
+    if (!M && !misura()) return;
+    var q = stato(t);
+    scrivi(ptt, 'visibility', q.punto ? 'hidden' : '');
+    if (q.punto) {
+      var pic = q.r < 40, w = pic ? (2 * q.r).toFixed(2) + 'px' : '';
+      scrivi(disco, 'width', w); scrivi(disco, 'height', w);
+      disco.style.transform = 'translate3d(' + (q.x - q.r).toFixed(2) + 'px,' + (q.y - q.r).toFixed(2) + 'px,0)' + (pic ? '' : ' scale(' + (q.r / 120).toFixed(5) + ')');
+      scrivi(disco, 'opacity', q.a < 1 ? q.a.toFixed(3) : '');
+    }
+    scrivi(disco, 'visibility', q.punto ? 'visible' : 'hidden');
+    var o = q.op < 1 ? q.op.toFixed(3) : '';
+    for (var i = 0; i < testi.length; i++) scrivi(testi[i], 'opacity', o);
+    scrivi(lv, 'visibility', q.logo ? 'visible' : 'hidden');
+    if (q.logo) logoDisegna(q.sp, q.np);
+  }
+
+  /* ── il motore: un orologio che avanza solo mentre si vede (salti di al massimo 50 ms: tornando non fa scatti) ── */
+  var tempo = 0, ultimo = 0, raf = 0, visto = false, permesso = true, bloccato = false;
+  function ciclo(ora){
+    raf = 0;
+    var dt = ultimo ? Math.min(50, ora - ultimo) : 0; ultimo = ora;
+    tempo = (tempo + dt) % T.giro; quadro(tempo);
+    if (serve()) raf = requestAnimationFrame(ciclo);
+  }
+  function serve(){ return visto && permesso && !bloccato && !ridotto && !document.hidden; }
+  function sveglia(){ if (serve()) { if (!raf) { ultimo = 0; raf = requestAnimationFrame(ciclo); } } else if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+  function rimisura(){ if (misura()) quadro(ridotto ? T.fermo : tempo); }
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ visto = es[es.length - 1].isIntersecting; sveglia(); }).observe(wrap);
+  else visto = true;
+  document.addEventListener('visibilitychange', sveglia);
+  addEventListener('resize', rimisura);
+  if ('ResizeObserver' in window) new ResizeObserver(rimisura).observe(ms);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(rimisura);
+  rimisura(); sveglia();
+
+  /* per la D (e per le prove): gira(si) la scena permette o no il loop; vai(t) ferma il loop e disegna l'istante t (ms) */
+  window.sitoRicco = {
+    gira: function(si){ permesso = !!si; sveglia(); },
+    vai: function(t){ bloccato = true; sveglia(); tempo = ((t % T.giro) + T.giro) % T.giro; if (!M) misura(); quadro(tempo); },
+    riparti: function(t){ bloccato = false; if (t != null) tempo = t; sveglia(); },
+    stato: function(t){ if (!M) misura(); return stato(t); },
+    ora: function(){ return { tempo: Math.round(tempo), gira: !!raf, visto: visto, permesso: permesso }; },
+    misura: rimisura, T: T
+  };
+})();
+/* ===== FINE SITO RICCO · JS ================================================================================================= */
+</script>
+<script>
+/* =============================================================================================
+   INIZIO CHAT-VA · JS  (da innestare nella D come script a sé, in fondo al body; non dipende da nient'altro)
+   1. copia la chat del pannello nel telefonino della Campagna 360° ([data-chat-copia]);
+   2. la disegna alla sua misura (data-largo) e la rimpicciolisce col contenitore (--k, --largo, --alto), anche quando
+      cambia; con data-sopra="#t-va" la conversazione finisce sempre sopra il titolo (schermi bassi compresi);
+   3. la fa partire quando la conversazione si vede quasi tutta (75 %), la mette in pausa quando esce
+      dallo schermo e la riporta all'inizio solo quando il pannello è uscito del tutto: chi torna la rivede da capo.
+      Finita, resta ferma sull'ultimo stato (il riepilogo col puntino): non riparte da sola.
+   4. con «Riduci movimento» (o senza IntersectionObserver) non fa nulla: resta l'ultimo stato, fermo.
+   ============================================================================================= */
+(function(){
+  var chat = [].slice.call(document.querySelectorAll('.chat'));
+  if (!chat.length) return;
+  var modello = null;
+  chat.forEach(function(c){ if (!modello && !c.hasAttribute('data-chat-copia')) modello = c; });
+  if (modello) chat.forEach(function(c){
+    if (!c.hasAttribute('data-chat-copia')) return;
+    var t = modello.querySelector('.chat-tela').cloneNode(true);
+    c.appendChild(t); c.setAttribute('aria-hidden', 'true');
+  });
+
+  /* --k = quanto è rimpicciolita. Se c'è data-sopra (il titolo che nella D sta sopra il pannello), la conversazione
+     fino al riepilogo deve finire data-margine px (di base 28; nella D 64, così tra chat e titolo sta l’etichetta «Esempio · WhatsApp») sopra di lui: sugli schermi bassi la chat si rimpicciolisce un po' di più e,
+     per riempire comunque tutta la larghezza, si disegna più larga (i fumetti vanno meno a capo) */
+  function scala(c){
+    var L = parseFloat(c.getAttribute('data-largo')) || 360, w = c.clientWidth, h = c.clientHeight;
+    if (!w || !h) return;
+    function metti(k, larg){ c.style.setProperty('--k', k.toFixed(4)); c.style.setProperty('--largo', larg.toFixed(1) + 'px'); c.style.setProperty('--alto', (h / k).toFixed(1) + 'px'); }
+    var k = w / L; metti(k, L); c.classList.add('scala');
+    var sel = c.getAttribute('data-sopra'), su = sel && document.querySelector(sel), rie = c.querySelector('.chat-rie');
+    if (!su || !rie) return;
+    var limite = su.getBoundingClientRect().top - c.getBoundingClientRect().top - (parseFloat(c.getAttribute('data-margine')) || 28), zona = rie.offsetTop + rie.offsetHeight;
+    if (limite > 120 && zona * k > limite) { k = limite / zona; metti(k, w / k); }
+  }
+  chat.forEach(scala);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ chat.forEach(scala); });
+  if (window.ResizeObserver) { var ro = new ResizeObserver(function(es){ es.forEach(function(e){ scala(e.target); }); }); chat.forEach(function(c){ ro.observe(c); }); }
+  else addEventListener('resize', function(){ chat.forEach(scala); });
+
+  var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if (ridotto || !('IntersectionObserver' in window)) return;
+
+  /* pronta = animazioni attaccate e ferme a 0 (si vede l'inizio: la chat vuota); gira; pausa */
+  function pronta(c){ c.classList.remove('anima'); void c.offsetWidth; c.classList.add('anima', 'ferma'); c._fase = 'pronta'; }
+  function gira(c){ c.classList.remove('ferma'); c._fase = 'gira'; }
+  function pausa(c){ c.classList.add('ferma'); c._fase = 'pausa'; }
+  /* quanta parte della conversazione (dall'alto fino al riepilogo) è dentro lo schermo, da 0 a 1 */
+  function vista(c){
+    var r = c.getBoundingClientRect(), rie = c.querySelector('.chat-rie');
+    var zona = rie ? Math.min(r.height, rie.getBoundingClientRect().bottom - r.top + 8) : r.height;
+    if (zona <= 0) return 0;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    return Math.max(0, Math.min(r.top + zona, vh) - Math.max(r.top, 0)) / zona;
+  }
+  function decidi(c, dentro){
+    if (document.hidden) { if (c._fase === 'gira') pausa(c); return; }
+    if (!dentro) { if (c._fase !== 'pronta') pronta(c); return; }
+    var v = vista(c);
+    if (c._fase === 'gira') { if (v === 0) pausa(c); }
+    else if (c._fase === 'pronta' ? v >= .75 : v >= .25) gira(c);
+  }
+  var soglie = []; for (var i = 0; i <= 20; i++) soglie.push(i / 20);
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target._dentro = e.isIntersecting; decidi(e.target, e.isIntersecting); }); }, { threshold: soglie });
+  chat.forEach(function(c){ pronta(c); io.observe(c); });
+  /* tra una soglia e l'altra (dito fermo a metà): un controllo leggero scorrendo, solo per le chat dentro lo schermo */
+  var attesa = 0;
+  addEventListener('scroll', function(){ if (attesa) return; attesa = requestAnimationFrame(function(){ attesa = 0; chat.forEach(function(c){ if (c._dentro && c._fase !== 'gira') decidi(c, true); }); }); }, { passive: true });
+  document.addEventListener('visibilitychange', function(){ chat.forEach(function(c){ decidi(c, !!c._dentro); }); });
+})();
+/* =============================================================================================
+   FINE CHAT-VA · JS
+   ============================================================================================= */
 </script>
 </body>
 </html>
