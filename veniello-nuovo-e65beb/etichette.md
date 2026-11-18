@@ -77,7 +77,7 @@ c messaggi, d riepilogo, e etichetta).
 ## 6 · Virtual Assistant (prima era 7)
 - 6 — il pacchetto
 - 6a — il riquadro con la chat di WhatsApp
-- 6b — la testa della chat «23:47 · Oreficeria Bianchi · online / sta scrivendo…» (nella D 5b); al telefono il puntino
+- 6b — la testa della chat «23:47 · Enomia Lab · online / sta scrivendo…» (nella D 5b); al telefono il puntino
   arancio della foto profilo è una tappa: compare quando ci entra la pallina
 - 6c — i messaggi della chat (nella D 5c)
 - 6d — il riquadro «Riepilogo per il titolare» (nella D 5d); al telefono il suo pallino è un anellino arancio: a chat
