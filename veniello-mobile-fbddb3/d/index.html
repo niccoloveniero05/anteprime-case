@@ -112,7 +112,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .pt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--rec);margin-left:.05em;vertical-align:baseline}
 html.viaggio .pt{background:transparent}
 html.viaggio .pt.qui{background:var(--rec)}
-.punto{position:fixed;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--rec);transform-origin:0 0;z-index:-1;pointer-events:none;opacity:0;will-change:transform}
+.punto{position:fixed;left:0;top:0;width:40px;height:40px;transform-origin:0 0;z-index:-1;pointer-events:none;opacity:0;will-change:transform}
+/* (19/11, puntino di pongo) la forma del puntino è un SVG dentro #punto (vettoriale: nitido a ogni misura). 40 unità =
+   il diametro; tondo da fermo, virgola quando corre, schiacciato quando arriva (motore del puntino, FORMA) */
+.punto svg{position:absolute;left:0;top:0;width:40px;height:40px;overflow:visible}
+.punto path{fill:var(--rec)}
 body{z-index:0}
 .punto.sopra{z-index:60}
 html.viaggio .punto.su{opacity:1}
@@ -625,6 +629,46 @@ details[open] > summary .piu::after{transform:rotate(0)}
   .so-s .so-stato{display:flex}
 }
 /* ===== FINE CSS SCENA SOCIAL ===== */
+/* ===== INIZIO RITOCCHI 19/11 B · CSS ==========================================================================
+   (strumenti/d-ritocchi-1911b.py) Il telefono della scena del Sito Web (4e) e i tre telefonini della Campagna 360°
+   (6b, 6c, 6d) come telefoni veri: barra di stato in cima, il contenuto comincia sotto l'isola della fotocamera, e i
+   telefonini con la scocca dei telefoni grandi. ── */
+/* la barra di stato: la stessa del telefono 3e (.so-stato: disegnata a 390 px, alta 48, ora 16 px, icone 19/17/27 px),
+   qui misurata in cqw dello schermo che la contiene (100cqw = la larghezza dello schermo; 1 px a 390 = .2564cqw) */
+.stato-tel{position:absolute;left:0;right:0;top:0;z-index:7;height:12.308cqw;display:flex;align-items:center;justify-content:space-between;padding:.513cqw 8.205cqw 0 11.795cqw;background:#100F09;color:#FFF;font:600 4.103cqw/1 var(--sans);letter-spacing:-.01em;word-spacing:0;white-space:nowrap;pointer-events:none}
+.stato-tel span{display:flex;align-items:center;gap:1.538cqw}
+.stato-tel svg{display:block;flex:none;fill:currentColor}
+.stato-tel .st-campo{width:4.872cqw;height:3.077cqw}
+.stato-tel .st-wifi{width:4.359cqw;height:3.077cqw}
+.stato-tel .st-batt{width:6.923cqw;height:3.333cqw}
+/* sopra una foto a tutto schermo (il reel del 6b, come il reel del telefono 3e): niente fondo, solo un'ombra leggera */
+.stato-tel.sopra{background:linear-gradient(180deg,rgba(5,5,4,.5),rgba(5,5,4,0))}
+
+/* 4e · il telefono della scena del Sito Web: in cima ai due schermi (ricco e semplice) la barra di stato, e il sito
+   comincia sotto (prima il logo del sito finiva sotto l'isola). Lo script del sito in miniatura rifà da solo le misure
+   (--k dalla larghezza, --msh dall'altezza che resta); la tendina parte sotto la barra. Il computer (4f) non cambia. */
+.tel-schermo{container-type:inline-size}
+.tel .ms-wrap{top:12.308cqw}
+.tel .tendina{top:12.308cqw}
+
+/* 6b · 6c · 6d · i telefonini della Campagna 360° con la scocca dei telefoni grandi (.tel e .so-tel: corpo #0A0906 col
+   filo chiaro, cornice #0D0C08, filo esterno, isola della fotocamera), in piccolo e nelle stesse proporzioni (angoli al
+   15,5 % della larghezza, schermo 4,8 % dentro, isola larga il 28,5 % e alta il 5,6 %). Il riquadro di fuori resta
+   quello di prima: le etichette sotto e gli spazi tra i tre non cambiano. */
+.tri{container-type:inline-size;background:#0A0906;border-radius:15.5% / 8.21%;box-shadow:inset 0 0 0 1px rgba(245,244,239,.08),inset 0 0 0 2.5px #0D0C08,inset 0 0 0 3.5px rgba(245,244,239,.16),0 24px 40px -18px rgba(0,0,0,.8)}
+.tri:nth-child(2){border-radius:15.5% / 7.54%}
+.tri-in{inset:4.8cqw;border-radius:10.7cqw;background:#050504;container-type:inline-size}
+.tri::after{content:"";position:absolute;z-index:2;left:35.75%;top:5.2cqw;width:28.5cqw;height:5.6cqw;border-radius:999px;background:#000;pointer-events:none}
+/* 6c · il sito del Jué comincia sotto la barra di stato (e scorrendo ci passa sotto, come in un telefono vero) */
+.tri .scorre{top:12.308cqw}
+.tri .stato-tel{z-index:3}
+
+@media (prefers-reduced-motion:reduce){
+  /* i due telefoni della scena uno accanto all'altro sono più piccoli: l'isola come nei telefoni fermi della scena dei
+     social (.so-s::after), così sta dentro la barra di stato */
+  .tel-isola{top:8px;height:11px}
+}
+/* ===== FINE RITOCCHI 19/11 B · CSS ===== */
 /* =============================================================================================
    INIZIO CHAT-VA · CSS  (da innestare nella D in fondo al foglio di stile principale, cioè prima della
    sua chiusura; NON nello stile dentro il noscript, che vale solo senza JS)
@@ -716,6 +760,9 @@ details[open] > summary .piu::after{transform:rotate(0)}
    riepilogo. Via la pillola «Esempio» (il nome dell'oreficeria non ci stava) e l'ora del riepilogo (andava a capo) */
 .tri .chat-flusso{justify-content:flex-end;overflow:hidden;padding-bottom:4px}
 .tri .chat-rie-testa span + span{display:none}
+/* (19/11 b) il telefonino ha l'isola della fotocamera: ora e icone un poco verso i lati, come in un telefono vero */
+.tri .chat-stato{padding:6px 17px 0 26px}
+.tri .chat-icone{gap:4px}
 /* ── il movimento: solo con .anima (lo mette lo script); .ferma lo tiene fermo all'inizio o in pausa ── */
 @keyframes chat-qui{from{opacity:0}to{opacity:1}}
 @keyframes chat-via{from{opacity:1}to{opacity:0}}
@@ -759,39 +806,54 @@ details[open] > summary .piu::after{transform:rotate(0)}
    Nella D del 18/11 la regola generale «.pacchetto .chip» è finita per sbaglio nello stile del noscript: se la si
    rimette nel foglio principale, questa riga diventa un doppione innocuo */
 #va > .pannello::before{background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,0) 58%,rgba(16,15,9,.9) 66%,var(--bg) 74%)}
-/* ── INIZIO FINALE RIEPILOGO (19/11) ──────────────────────────────────────────────────────────────────────────────
-   Niccolò: «nell'esempio WhatsApp fare che ingrandisce alla fine leggermente sul riepilogo, le altre chat scompaiono e
-   quel messaggio va al centro zoomato anche senza telefono». Solo nella chat con data-finale (il pannello del Virtual
-   Assistant); il telefonino della Campagna 360° resta com'è.
-   - A --t7 (5,6 s: 0,7 s dopo che il puntino del riepilogo si è posato) la «camera» si avvicina in un solo movimento
-     di 1 s, curva standard senza rimbalzi: il telefono (ora, intestazione, messaggi, campo per scrivere, fondo) si
-     ingrandisce un poco e svanisce nella prima metà; il riepilogo va da solo al centro della parte libera del pannello
-     (dall'alto fino all'etichetta «Esempio · WhatsApp»), ingrandito di data-finale (1,25; meno se non ci sta tra i
-     16 px dei due lati), largo quanto il pannello meno 16 px per parte (allineato all'etichetta).
+/* ── INIZIO FINALE RIEPILOGO (19/11 b) ────────────────────────────────────────────────────────────────────────────
+   Niccolò, 19/11: «nell'esempio WhatsApp fare che ingrandisce alla fine leggermente sul riepilogo, le altre chat
+   scompaiono e quel messaggio va al centro zoomato»; poi, guardato sul telefono: «5a - 5d va bene ma così sembra un
+   messaggio nel nulla. Quindi forse lascerei il telefono sotto». Solo nella chat con data-finale (il pannello del
+   Virtual Assistant); il telefonino della Campagna 360° resta com'è.
+   - A --t7 (5,6 s: 0,7 s dopo che il puntino del riepilogo si è posato), in un solo movimento di 1 s con la curva
+     standard senza rimbalzi (--chat-cam): il telefono RESTA dov'è (ora, intestazione «Oreficeria Bianchi», fondo,
+     campo per scrivere) e si abbassa appena di luce (un velo scuro leggero: .chat::after); gli altri messaggi
+     spariscono (.chat-flusso a 0: solo abbassati, si vedevano righe tagliate dal bordo della scheda); il riepilogo si
+     alza dalla chat e va al centro dello schermo della chat (tra l'intestazione e l'etichetta «Esempio · WhatsApp»),
+     ingrandito di data-finale (1,2; meno se non ci sta tra i 16 px dei due lati, allineato all'etichetta), sopra il
+     telefono, con un'ombra morbida che lo stacca.
+     Niente più «camera» che si avvicina e fa sparire il telefono (era il finale del 19/11 mattina).
    - Il riepilogo del finale è una copia (.chat-fine) che lo script mette FUORI dalla chat rimpicciolita, con tutte le
      misure in em: si ingrandisce cambiando la misura vera dei caratteri, quindi le scritte restano nitide. All'inizio
-     del movimento sta esattamente sopra quello della chat (che sparisce subito dopo); camera e copia usano la stessa
-     curva e lo stesso tempo, così il riepilogo non si stacca dal resto mentre si muove.
+     del movimento sta esattamente sopra quello della chat (che sparisce subito dopo, 0,06 s).
    - Posizioni e misure le calcola lo script (finale(), dentro CHAT-VA · JS): --fx0/--fy0/--fw0/--ff0 dove sta il
-     riepilogo nella chat, --fx1/--fy1/--fw1/--ff1 dove va, --cx/--cy/--ckz dove finisce la camera.
-   - Con .finale lo stato «di base» è quello finale: con «Riduci movimento» si vede subito il riepilogo al centro. Se
-     la chat si rigioca (pannello uscito del tutto e poi rientrato) si rigioca anche il finale. ── */
+     riepilogo nella chat, --fx1/--fy1/--fw1/--ff1 dove va.
+   - Con .finale lo stato «di base» è quello finale: con «Riduci movimento» si vede subito il telefono abbassato di luce
+     col riepilogo al centro. Se la chat si rigioca (pannello uscito del tutto e poi rientrato) si rigioca anche il
+     finale. ── */
 .chat{--t7:5.6s;--chat-cam:cubic-bezier(.45,0,.2,1)}
 .chat-fine{position:absolute;z-index:1;left:var(--fx1);top:var(--fy1);width:var(--fw1);font:400 var(--ff1)/1.36 var(--sans);letter-spacing:-.006em;word-spacing:0;text-align:left;color:var(--av);-webkit-font-smoothing:antialiased;pointer-events:none}
-/* le misure della scheda del riepilogo, in em (1em = 16 px della chat): stesse proporzioni, a qualsiasi grandezza */
-.chat-fine .chat-rie{margin:0;padding:.75em .875em .875em;border-radius:.875em;box-shadow:inset 0 0 0 .0625em rgba(245,244,239,.11),0 1.125em 2.125em -1em rgba(0,0,0,.9)}
+/* le misure della scheda del riepilogo, in em (1em = 16 px della chat): stesse proporzioni, a qualsiasi grandezza; il
+   filo un poco più chiaro di quello nella chat, così la scheda si legge staccata dal telefono */
+.chat-fine .chat-rie{margin:0;padding:.75em .875em .875em;border-radius:.875em;box-shadow:inset 0 0 0 .0625em rgba(245,244,239,.15)}
 .chat-fine .chat-rie-testa{gap:1.6em;font-size:.625em;white-space:nowrap}
 .chat-fine .chat-rie-cosa{gap:.5625em;margin-top:.6875em;font-size:1em;white-space:nowrap}
 .chat-fine .chat-rie-chi{margin:.2143em 0 0 1.2857em;font-size:.875em;white-space:nowrap}
 .chat-fine .chat-punto{width:.5625em;height:.5625em}
+/* l'ombra morbida che stacca la scheda dal telefono, in uno strato a parte (entra con l'opacità: niente ombra che si
+   ridisegna a ogni fotogramma) */
+.chat-fine::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:.875em;box-shadow:0 1.5em 3em -.5em rgba(0,0,0,.9),0 .35em 1em rgba(0,0,0,.5)}
 /* per misurarla (lo script la mette e la toglie nello stesso istante: non si vede mai) */
 .chat-fine.misura{left:0;top:0;width:max-content;font-size:16px;visibility:hidden;animation:none!important}
-.chat.finale .chat-tela{transform:translate(var(--cx),var(--cy)) scale(var(--ckz));opacity:0}
-@keyframes chat-camera{from{transform:translate(0px,0px) scale(var(--k))}to{transform:translate(var(--cx),var(--cy)) scale(var(--ckz))}}
+/* lo stato finale: il telefono resta, appena più scuro; gli altri messaggi spariscono; il riepilogo della chat lascia
+   il posto alla copia */
+.chat.finale::after{content:"";position:absolute;inset:0;background:rgba(16,15,9,.3);pointer-events:none}
+.chat.finale .chat-flusso{opacity:0}
+.chat.finale .chat-tela .chat-rie{opacity:0}
+@keyframes chat-cala{from{opacity:1}}
 @keyframes chat-fine-va{from{left:var(--fx0);top:var(--fy0);width:var(--fw0);font-size:var(--ff0)}}
-.chat.anima.finale .chat-tela{animation:chat-camera 1s var(--chat-cam) var(--t7) both,chat-via .5s ease var(--t7) both}
+.chat.anima.finale::after{animation:chat-qui .8s ease var(--t7) both}
+.chat.ferma::after{animation-play-state:paused!important}
+.chat.anima.finale .chat-flusso{animation:chat-cala .6s ease var(--t7) both}
 .chat.anima.finale .chat-tela .chat-rie{animation:chat-arriva .56s var(--chat-e) var(--t5) both,chat-via .01s linear calc(var(--t7) + .06s) forwards}
 .chat.anima .chat-fine{animation:chat-fine-va 1s var(--chat-cam) var(--t7) both,chat-qui .01s linear var(--t7) both}
+.chat.anima .chat-fine::before{animation:chat-qui .8s ease var(--t7) both}
 .chat.anima .chat-fine .chat-rie,.chat.anima .chat-fine .chat-punto,.chat.anima .chat-fine .chat-punto::after{animation:none}
 /* ── FINE FINALE RIEPILOGO ── */
 /* =============================================================================================
@@ -839,7 +901,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
     <a class="hamburger" href="#piede" aria-label="Menu"><i></i><i></i></a>
   </div>
 </header>
-<i class="punto" id="punto" aria-hidden="true"></i>
+<i class="punto" id="punto" aria-hidden="true"><svg viewBox="-20 -20 40 40" focusable="false"><path d="M20 0A20 20 0 1 1-20 0A20 20 0 1 1 20 0Z"/></svg></i>
 <div class="tinta-safari" aria-hidden="true"></div>
 
   <!-- 0 · Apertura in tre momenti (19/11): «Fatti trovare. Fatti scegliere.» → il punto di «scegliere» si allarga fino al
@@ -1002,8 +1064,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
       <div class="pannello palco-pannello">
         <div class="desk" aria-hidden="true"><div class="desk-barra"><i></i><i></i><i></i></div><div class="desk-schermo" id="desk-schermo"></div></div>
         <div class="coppia" aria-hidden="true">
-          <figure class="tel tel-semplice"><div class="tel-schermo" id="schermo-semplice"></div><i class="tel-isola"></i><figcaption class="micro">…o più semplice</figcaption></figure>
-          <figure class="tel tel-ricco"><div class="tel-schermo" id="schermo-ricco"><div class="finestra"><div class="finestra-in">
+          <figure class="tel tel-semplice"><div class="tel-schermo" id="schermo-semplice"><div class="stato-tel"><span>9:41</span><span><svg class="st-campo"><use href="#so-campo"/></svg><svg class="st-wifi"><use href="#so-wifi"/></svg><svg class="st-batt"><use href="#so-batteria"/></svg></span></div></div><i class="tel-isola"></i><figcaption class="micro">…o più semplice</figcaption></figure>
+          <figure class="tel tel-ricco"><div class="tel-schermo" id="schermo-ricco"><div class="stato-tel"><span>9:41</span><span><svg class="st-campo"><use href="#so-campo"/></svg><svg class="st-wifi"><use href="#so-wifi"/></svg><svg class="st-batt"><use href="#so-batteria"/></svg></span></div><div class="finestra"><div class="finestra-in">
             <div class="ms-wrap ricco">
               <div class="ms">
                 <div class="ms-testata"><span class="ms-logo"><span class="vv">V</span><span class="e">eniello</span><span class="pt2"></span><span class="st">studio</span></span><span class="ms-pill">Scrivici</span></div>
@@ -1054,7 +1116,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
   <article class="sez pacchetto" id="va" aria-labelledby="t-va">
     <figure class="pannello pannello-va sfuma-giu">
       <!-- ============ INIZIO CHAT-VA · HTML 1 (pannello del Virtual Assistant: sostituisce il <video> di va-verticale.mp4) ============ -->
-      <div class="chat" data-finale="1.25" data-largo="360" data-sopra="#t-va" data-margine="64" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede all’Oreficeria Bianchi se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
+      <div class="chat" data-finale="1.2" data-largo="360" data-sopra="#t-va" data-margine="64" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede all’Oreficeria Bianchi se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
         <div class="chat-tela" aria-hidden="true">
           <div class="chat-stato">
             <span class="chat-ora">23:4<span class="chat-cifra"><b>7</b><b>8</b></span></span>
@@ -1103,8 +1165,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
   <article class="sez pacchetto" id="campagna" aria-labelledby="t-360">
     <figure class="pannello" data-anima>
       <div class="trittico" aria-hidden="true">
-        <div class="tri"><div class="tri-in"><img class="deriva" src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy"></div><span class="tri-et">Contenuti</span></div>
-        <div class="tri"><div class="tri-in"><img class="scorre" src="../comune/img/sito-lungo.jpg" alt="" width="420" height="3400" loading="lazy"></div><span class="tri-et">Sito</span></div>
+        <div class="tri"><div class="tri-in"><img class="deriva" src="../comune/img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy"><div class="stato-tel sopra"><span>21:00</span><span><svg class="st-campo"><use href="#so-campo"/></svg><svg class="st-wifi"><use href="#so-wifi"/></svg><svg class="st-batt"><use href="#so-batteria"/></svg></span></div></div><span class="tri-et">Contenuti</span></div>
+        <div class="tri"><div class="tri-in"><img class="scorre" src="../comune/img/sito-lungo.jpg" alt="" width="420" height="3400" loading="lazy"><div class="stato-tel"><span>9:41</span><span><svg class="st-campo"><use href="#so-campo"/></svg><svg class="st-wifi"><use href="#so-wifi"/></svg><svg class="st-batt"><use href="#so-batteria"/></svg></span></div></div><span class="tri-et">Sito</span></div>
         <!-- ============ INIZIO CHAT-VA · HTML 2 (terzo telefono della Campagna 360°: sostituisce il <video> dentro .tri-in) ============ -->
         <div class="tri"><div class="tri-in"><div class="chat" data-largo="250" data-chat-copia></div></div><span class="tri-et">Assistant</span></div>
         <!-- ============ FINE CHAT-VA · HTML 2 ============ -->
@@ -1310,17 +1372,35 @@ details[open] > summary .piu::after{transform:rotate(0)}
     a.px = L.sp[0]; a.py = hdr + L.sp[1]; a.pr = L.rs;            /* il puntino del logo */
     a.vF = hdr + L.sv[1] + .3 * L.S * L.v.h;                      /* dove finisce in basso il disegno della V del logo (il suo riquadro è più alto: il disegno arriva al 78%) */
     a.R1 = Math.hypot(Math.max(a.nx, W - a.nx), Math.max(a.ny, H - a.ny)) * 1.03;   /* raggi che coprono tutto il palco */
+    /* (19/11, puntino di pongo) da dove arriva la goccia che torna nel puntino: dal centro della V verso il puntino */
+    var gx = a.px - L.sv[0], gy = a.py - (hdr + L.sv[1]), gl = Math.hypot(gx, gy) || 1; a.ax = gx / gl; a.ay = gy / gl;
     a.R2 = Math.hypot(Math.max(a.px, W - a.px), Math.max(a.py, H - a.py)) * 1.03;
     apt.style.left = (a.px - a.pr).toFixed(2) + 'px'; apt.style.top = (a.py - a.pr).toFixed(2) + 'px';
     apt.style.width = apt.style.height = (2 * a.pr).toFixed(2) + 'px';
     A = a; return true;
   }
-  function disc(x, y, r){
-    var pic = r < 40, w = pic ? (2 * r).toFixed(2) + 'px' : '';
-    scrivi(disco, 'width', w); scrivi(disco, 'height', w);
-    disco.style.transform = 'translate3d(' + (x - r).toFixed(2) + 'px,' + (y - r).toFixed(2) + 'px,0)' + (pic ? '' : ' scale(' + (r / 120).toFixed(5) + ')');
+  /* il disco: (x, y) il centro, r il raggio. fo (19/11, puntino di pongo): la forma quando non è tondo, { kx, ky: quanto è
+     allungato lungo il suo asse e di traverso (kx·ky = 1: l'area resta la stessa), rot: l'angolo dell'asse (radianti),
+     br: gli angoli (border-radius, per la goccia e per il pongo premuto) }. Senza fo è esattamente come prima */
+  function disc(x, y, r, fo){
+    var kx = fo ? fo.kx : 1, ky = fo ? fo.ky : 1, pic = r * Math.max(kx, ky) < 40;
+    var w = pic ? (2 * r * kx).toFixed(2) + 'px' : '', h = pic ? (2 * r * ky).toFixed(2) + 'px' : '';
+    scrivi(disco, 'width', w); scrivi(disco, 'height', h);
+    scrivi(disco, 'borderRadius', fo && fo.br ? fo.br : '');
+    if (!fo) disco.style.transform = 'translate3d(' + (x - r).toFixed(2) + 'px,' + (y - r).toFixed(2) + 'px,0)' + (pic ? '' : ' scale(' + (r / 120).toFixed(5) + ')');
+    else disco.style.transform = 'translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px,0) rotate(' + fo.rot.toFixed(4) + 'rad)' + (pic ? '' : ' scale(' + (kx * r / 120).toFixed(5) + ',' + (ky * r / 120).toFixed(5) + ')') + ' translate(-50%,-50%)';
     scrivi(disco, 'visibility', 'visible');
   }
+  /* (19/11, puntino di pongo) i due numeri dell'apertura: PREMUTO quanto si schiaccia e si alza il punto di «scegliere»
+     quando comincia ad allargarsi (0 = tondo come prima), GOCCIA quanto si allunga l'arancio che torna nel puntino della V
+     (0 = tondo come prima) */
+  var PONGO_AP = window.PONGO_APERTURA = { PREMUTO: .17, GOCCIA: .6 };
+  function p50(v){ return (50 + v).toFixed(1) + '%'; }
+  /* il pongo premuto: gli angoli non tutti uguali (le coppie sommano sempre 100%) */
+  function bozzo(e){ var a = 10 * e, b = 7 * e, c = 9 * e, d = 6 * e;
+    return p50(a) + ' ' + p50(-a) + ' ' + p50(b) + ' ' + p50(-b) + ' / ' + p50(-c) + ' ' + p50(d) + ' ' + p50(-d) + ' ' + p50(c); }
+  /* la goccia: testa tonda e piena verso il puntino (a destra, prima della rotazione), coda più stretta dietro */
+  function goccia(e){ var t = 16 * e; return p50(t) + ' ' + p50(-t) + ' ' + p50(-t) + ' ' + p50(t) + ' / 50%'; }
   var chiuso = false, tst = { f: -1, m: -1 };
   function rendi(ys){
     if (!A) return;
@@ -1328,10 +1408,24 @@ details[open] > summary .piu::after{transform:rotate(0)}
     /* il disco: cresce da dov'è il punto di «scegliere» (0 → m1: il raggio cresce sempre della stessa parte, come uno zoom, e
        il centro scivola dove nascerà il puntino del nome), copre tutto (m1 → c0), si stringe nel puntino del logo (c0 → c1) */
     if (y > .5 && y < A.c1) {
-      var r, cx, cy;
-      if (y < A.c0) { var g = seg(u1, 0, A.gF), k = liscio(seg(u1, .04, A.gF)); r = A.r0 * Math.pow(A.R1 / A.r0, Math.pow(g, 1.1)); cx = lerp(A.x0, A.nx, k); cy = lerp(A.y0, A.ny, k); }
-      else { var s = liscio(seg(y, A.c0, A.c1)); r = A.pr * Math.pow(A.R2 / A.pr, 1 - s); cx = A.px; cy = A.py; }
-      disc(cx, cy, r);
+      var r, cx, cy, fo = null;
+      if (y < A.c0) {
+        var g = seg(u1, 0, A.gF), k = liscio(seg(u1, .04, A.gF)); r = A.r0 * Math.pow(A.R1 / A.r0, Math.pow(g, 1.1)); cx = lerp(A.x0, A.nx, k); cy = lerp(A.y0, A.ny, k);
+        /* (19/11, puntino di pongo) come una pallina di pongo premuta: il punto comincia ad allargarsi un po' schiacciato e
+           storto (più largo che alto, gli angoli non uguali), poi si alza un poco e torna tondo mentre diventa grande e
+           riempie lo schermo. Parte e finisce tondo: all'inizio è il punto del titolo, alla fine il tutto arancio */
+        var en = dolce(seg(g, .03, .18)) * (1 - dolce(seg(g, .5, .85)));
+        if (en > .002 && PONGO_AP.PREMUTO) { var ka = 1 + PONGO_AP.PREMUTO * en * Math.cos(Math.PI * seg(g, .12, .72)); fo = { kx: ka, ky: 1 / ka, rot: -.2 * en, br: bozzo(en) }; }
+      }
+      else {
+        var s = liscio(seg(y, A.c0, A.c1)); r = A.pr * Math.pow(A.R2 / A.pr, 1 - s); cx = A.px; cy = A.py;
+        /* (19/11, puntino di pongo) l'arancio torna nel puntino della V come una goccia risucchiata: si allunga verso il
+           puntino (testa tonda verso il puntino, coda verso la V) e arriva tondo, della misura del puntino. Lo
+           schiacciamento dell'arrivo lo fa il puntino (#punto) a tempo, così si vede anche quando il dito va veloce */
+        var es = dolce(seg(s, .3, .7)) * (1 - dolce(seg(s, .78, 1)));
+        if (es > .002 && PONGO_AP.GOCCIA) { var kg = 1 + PONGO_AP.GOCCIA * es, sp = r * (kg - 1) * .7; cx -= A.ax * sp; cy -= A.ay * sp; fo = { kx: kg, ky: 1 / kg, rot: Math.atan2(A.ay, A.ax), br: goccia(es) }; }
+      }
+      disc(cx, cy, r, fo);
     } else scrivi(disco, 'visibility', 'hidden');
     scrivi(dot, 'visibility', y > .5 ? 'hidden' : '');               /* il punto del titolo diventa il disco, allo stesso posto */
     scrivi(wrap, 'visibility', u1 >= A.gF ? 'hidden' : '');          /* coperto dall'arancio, il titolo se ne va: all'uscita sotto c'è il nero */
@@ -1358,7 +1452,9 @@ details[open] > summary .piu::after{transform:rotate(0)}
     },
     rendi: function(ys){ ultimo = ys; rendi(ys); },
     /* per gli strumenti di prova: le misure e i quattro agganci */
-    misure: function(){ return A; }, momenti: function(){ return A ? momenti() : null; }
+    misure: function(){ return A; }, momenti: function(){ return A ? momenti() : null; },
+    /* (19/11, puntino di pongo) la direzione in cui l'arancio arriva nel puntino della V: lì il puntino si schiaccia */
+    risucchio: function(){ return A ? { x: A.ax, y: A.ay } : null; }
   };
   function rifai(){ if (misura()) rendi(ultimo === null ? scrollY : ultimo); }
   misura(); rendi(scrollY);
@@ -2073,7 +2169,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
   function arco(ax, ay, bx, by, t, k){ var cx = (ax + bx) / 2 - (by - ay) * k, cy = (ay + by) / 2 + (bx - ax) * k; return [q2(ax, cx, bx, t), q2(ay, cy, by, t)]; }
 
   function misura(){
-    vh = innerHeight;
+    vh = innerHeight; GENC++;
     /* le misure del viaggio cambiano solo se cambia la larghezza (girando il telefono), non con la barra di Safari */
     if (innerWidth !== larghezza || !Yin) {
       larghezza = innerWidth; V0 = vh;
@@ -2237,7 +2333,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   function siedi(s){
     if (s === seduto) return;
-    if (seduto && seduto.el) seduto.el.classList.remove('qui');
+    if (seduto && seduto.el) { seduto.el.classList.remove('qui'); if (seduto.el._pongo) { seduto.el.style.transform = ''; seduto.el._pongo = ''; } }
     seduto = s;
     if (s && s.el) { s.el.classList.add('qui'); punto.classList.remove('su'); }
     else punto.classList.add('su');
@@ -2247,6 +2343,164 @@ details[open] > summary .piu::after{transform:rotate(0)}
     siedi(null);
     var tr = 'translate3d(' + (x - d/2).toFixed(2) + 'px,' + (y - d/2).toFixed(2) + 'px,0) scale(' + (d/40).toFixed(4) + ')';
     if (tr !== TR) { punto.style.transform = tr; TR = tr; }
+  }
+
+  /* ── 19/11 · Il puntino di pongo (Niccolò: «se serve per farlo arrivare in più passaggi fallo pure trasformare in linette
+        o virgole, modellalo. Immaginalo come una pallina di pongo»).
+        La testa è dove il motore mette il puntino (x, y, d: niente cambia nel percorso). La sua massa, la «coda», segue
+        la testa legata a una molla morbida: correndo resta indietro e il puntino si allunga in una virgola (davanti tondo,
+        dietro più sottile, curva come la strada); fermandosi va un poco oltre e il puntino si schiaccia contro la
+        direzione d'arrivo, poi torna tondo con una piccola oscillazione. L'area resta la stessa (si allunga e si
+        assottiglia insieme).
+        · la velocità è quella che si vede: la più piccola, in modo continuo, tra quella sullo schermo e quella rispetto
+          alla pagina; così, seduto in un titolo che scorre o fermo nel margine, resta tondo;
+        · filtrata (25 ms) e con una zona morta (sotto V0 px/ms niente): scorrendo piano resta tondo e fermo di forma;
+        · la direzione si aggiorna solo sopra V0 (sotto resta quella di prima: niente rotazioni a scatti da quasi fermo);
+        · all'arrivo (la velocità che cade a zero dopo una corsa) la coda riceve una spinta in avanti (COLPO): il puntino si
+          schiaccia un attimo; anche quando l'arancio dell'apertura torna nel puntino della V (RISUCCHIO);
+        · disegnata in SVG dentro #punto, che resta com'era (40 px, translate3d + scale): vettoriale, nitida, niente filtri;
+        · il punto vero del titolo prende il posto del puntino solo quando anche la forma è ferma (tonda): nessun lampo.
+     I numeri da cambiare sono in PONGO (anche dalla console: window.PONGO). Con «Riduci movimento» il motore non parte. ── */
+  var PONGO = window.PONGO = {
+    KMAX: 2.8,       /* allungamento massimo: la lunghezza arriva al più a 2,8 volte il diametro */
+    SIGMA: 3,        /* quanto presto si allunga con la velocità (più piccolo = si allunga prima) */
+    V0: .15, V1: .6, /* zona morta, px/ms: sotto V0 resta tondo, da V1 conta tutta la velocità (scorrere piano ≈ 0,1-0,3) */
+    HZ: 6.5,         /* la molla della forma: oscillazioni al secondo (più alto = pongo più duro) */
+    ZETA: .55,       /* smorzamento: 1 = torna tondo senza oscillare, 0,55 = una piccola oscillazione */
+    SCHIACCIA: .24,  /* schiacciamento massimo: 0,24 = un quarto più corto (e più largo in proporzione) */
+    COLPO: 1,        /* forza dello schiacciamento all'arrivo (0 = niente) */
+    RISUCCHIO: 1.8,  /* forza dello schiacciamento quando l'arancio dell'apertura torna nel puntino della V */
+    CODA: .5,        /* la coda della virgola: 0 = goccia uguale davanti e dietro, 0,5 = la coda metà della testa */
+    CURVA: 1,        /* quanto la virgola segue la curva della strada (0 = sempre dritta) */
+    ANTICIPO: 0      /* piccolo schiacciamento alla partenza (0 = niente: con lo scorrimento arriva insieme alla partenza) */
+  };
+  var FO = { ox: 0, oy: 0, ux: 0, uy: 0, vx: 0, vy: 0, dx: 0, dy: 1, vr: 0, armato: false, fermoT: 0, ext: 0, d: '', tr: '' };
+  window.PONGO_FORMA = FO;   /* per gli strumenti di prova (in sola lettura) */
+  var fPath = punto.querySelector('path');
+  var CERCHIO = 'M20 0A20 20 0 1 1-20 0A20 20 0 1 1 20 0Z';
+  var COSTO = { n: 0, t: 0, max: 0 };   /* per gli strumenti di prova (window.PONGO_COSTO): tempo dello script della forma */
+  window.PONGO_COSTO = COSTO;
+  function gradino(x){ x = x < 0 ? 0 : x > 1 ? 1 : x; return x * x * (3 - 2 * x); }
+  /* un passo della forma: dt (ms), vs la velocità del puntino sullo schermo (px/ms), sv quella della pagina */
+  function formaPasso(dt, vs, sv){
+    var px = clamp(vs.x, -4, 4), py = clamp(vs.y, -4, 4), qy = clamp(vs.y + sv, -4, 4);
+    var a2 = px * px + py * py, b2 = px * px + qy * qy, den = a2 + b2, bx = 0, by = 0;
+    if (den > 1e-9) { bx = px; by = (py * b2 + qy * a2) / den; }
+    var f = 1 - Math.exp(-dt / 25);
+    FO.vx += (bx - FO.vx) * f; FO.vy += (by - FO.vy) * f;
+    var s = Math.sqrt(FO.vx * FO.vx + FO.vy * FO.vy), gn = gradino((s - PONGO.V0) / (PONGO.V1 - PONGO.V0));
+    var ex = FO.vx * gn, ey = FO.vy * gn, se = s * gn;
+    if (s > PONGO.V0) {
+      /* la direzione gira verso quella della velocità (morbida, 30 ms) */
+      var tx = FO.vx / s, ty = FO.vy / s, an = Math.atan2(FO.dx * ty - FO.dy * tx, FO.dx * tx + FO.dy * ty) * (1 - Math.exp(-dt / 30));
+      var c = Math.cos(an), sn = Math.sin(an), nx = FO.dx * c - FO.dy * sn; FO.dy = FO.dx * sn + FO.dy * c; FO.dx = nx;
+    }
+    /* arrivi e partenze: la velocità recente (140 ms) dice quanto forte arriva */
+    FO.vr += (se - FO.vr) * (1 - Math.exp(-dt / 140));
+    var dn = Math.max(8, D ? D.d : 8), kd = Math.sqrt(dn / 8);
+    if (se > .12) {
+      if (!FO.armato && FO.fermoT > 120 && PONGO.ANTICIPO) { FO.ux += FO.dx * PONGO.ANTICIPO * .4 * kd; FO.uy += FO.dy * PONGO.ANTICIPO * .4 * kd; }
+      FO.armato = true; FO.fermoT = 0;
+    } else if (se < .03) {
+      FO.fermoT += dt;
+      if (FO.armato) { FO.armato = false; var kc = PONGO.COLPO * FO.vr * kd; FO.ux += FO.dx * kc; FO.uy += FO.dy * kc; }
+    }
+    /* la coda: molla verso la testa più un attrito (così correndo resta indietro di 2·ZETA/ω per la velocità) */
+    var w = 2 * Math.PI * PONGO.HZ / 1000, cc = 2 * PONGO.ZETA * w, n = Math.max(1, Math.ceil(dt / 4)), h = dt / n;
+    for (var i = 0; i < n; i++) {
+      FO.ux += (-w * w * FO.ox - cc * FO.ux) * h; FO.uy += (-w * w * FO.oy - cc * FO.uy) * h;
+      FO.ox += (FO.ux - ex) * h; FO.oy += (FO.uy - ey) * h;
+    }
+    if (Math.abs(FO.ox) + Math.abs(FO.oy) < .04 && Math.abs(FO.ux - ex) + Math.abs(FO.uy - ey) < .002 && se < 1e-3) FO.ox = FO.oy = FO.ux = FO.uy = 0;
+  }
+  function formaFerma(){ return !FO.ox && !FO.oy && !FO.ux && !FO.uy; }
+  /* uno schiacciamento dato da fuori (l'arancio che torna nel puntino della V): (dx, dy) la direzione d'arrivo */
+  function formaColpo(dx, dy, forza){
+    var l = Math.sqrt(dx * dx + dy * dy) || 1, k = forza * .02 * Math.max(8, D ? D.d : 8);
+    FO.dx = dx / l; FO.dy = dy / l; FO.ux += FO.dx * k; FO.uy += FO.dy * k; FO.armato = false; FO.fermoT = 0;
+  }
+  function f2(x, y){ return x.toFixed(2) + ' ' + y.toFixed(2); }
+  /* la virgola, in unità del puntino (40 = il diametro): testa di raggio rh in (0, 0), coda di raggio rt in e·Lc; la linea
+     in mezzo esce dalla testa all'indietro (b) e piega verso la coda (curva di Bézier). Il contorno è l'inviluppo dei cerchi
+     lungo la linea (raggio da rh a rt), chiuso da due archi: liscio, senza spigoli */
+  function virgola(rh, rt, Lc, bx, by, ex, ey){
+    var N = 10, x1 = bx * Lc * .5, y1 = by * Lc * .5, x2 = ex * Lc, y2 = ey * Lc, dr = rt - rh, Ls = [], Rs = [], i;
+    for (i = 0; i <= N; i++) {
+      var t = i / N, u = 1 - t, X = 2 * u * t * x1 + t * t * x2, Y = 2 * u * t * y1 + t * t * y2;
+      var TX = 2 * u * x1 + 2 * t * (x2 - x1), TY = 2 * u * y1 + 2 * t * (y2 - y1), TL = Math.sqrt(TX * TX + TY * TY) || 1;
+      TX /= TL; TY /= TL;
+      var r = rh + dr * t, cs = clamp(-dr / TL, -.95, .95), sn = Math.sqrt(1 - cs * cs);
+      Ls.push([X + r * (cs * TX - sn * TY), Y + r * (cs * TY + sn * TX)]);
+      Rs.push([X + r * (cs * TX + sn * TY), Y + r * (cs * TY - sn * TX)]);
+    }
+    function lato(P){ var o = '', k; for (k = 1; k < N; k++) { var q = k < N - 1 ? [(P[k][0] + P[k + 1][0]) / 2, (P[k][1] + P[k + 1][1]) / 2] : P[N]; o += 'Q' + f2(P[k][0], P[k][1]) + ' ' + f2(q[0], q[1]); } return o; }
+    Rs.reverse();
+    return 'M' + f2(Ls[0][0], Ls[0][1]) + lato(Ls) + 'A' + rt.toFixed(2) + ' ' + rt.toFixed(2) + ' 0 0 0 ' + f2(Rs[0][0], Rs[0][1])
+      + lato(Rs) + 'A' + rh.toFixed(2) + ' ' + rh.toFixed(2) + ' 0 1 0 ' + f2(Ls[0][0], Ls[0][1]) + 'Z';
+  }
+  /* disegna la forma per il diametro d (px) */
+  function formaDisegna(d){
+    var t0 = window.PONGO_MISURA ? performance.now() : 0;
+    var al = FO.ox * FO.dx + FO.oy * FO.dy, sq = al > 0 ? al : 0, sx = FO.ox - sq * FO.dx, sy = FO.oy - sq * FO.dy, Ls = Math.sqrt(sx * sx + sy * sy);
+    var dn = Math.max(d, 8), k = 1 + (PONGO.KMAX - 1) * Math.tanh(Ls / (PONGO.SIGMA * dn)), sc = PONGO.SCHIACCIA * Math.tanh(sq / (.6 * dn));
+    var pd = CERCHIO, tr = '', ext = d / 2; FO.ex = Ls > 1e-6 ? sx / Ls : -FO.dx; FO.ey = Ls > 1e-6 ? sy / Ls : -FO.dy;
+    if (k > 1.004) {
+      /* raggi e lunghezza con la stessa area del cerchio (40 di diametro): testa rh, coda rt = tau·rh, lunghezza totale 40·k */
+      var tau = 1 - PONGO.CODA * gradino((k - 1.15) / 1.05), Lt = 40 * k, A0 = 400 * Math.PI;
+      var aa = Math.PI / 2 * (1 + tau * tau) - (1 + tau) * (1 + tau), bb = Lt * (1 + tau), D2 = bb * bb + 4 * aa * A0;
+      if (D2 > 0 && aa < 0) {
+        var rh = (-bb + Math.sqrt(D2)) / (2 * aa), Lc = Lt - rh * (1 + tau);
+        if (rh > 0 && Lc > .05) {
+          var rt = Math.max(tau * rh, rh - .85 * Lc), ex = sx / Ls, ey = sy / Ls, bx = -FO.dx, by = -FO.dy;
+          /* la coda segue la curva della strada, al più di 55° */
+          var da = Math.atan2(bx * ey - by * ex, bx * ex + by * ey), lim = .96 * PONGO.CURVA; da = clamp(da, -lim, lim);
+          var c = Math.cos(da), sn = Math.sin(da); ex = bx * c - by * sn; ey = bx * sn + by * c;
+          pd = virgola(rh, rt, Lc, bx, by, ex, ey); ext = (Lc + rt) * d / 40; FO.ex = ex; FO.ey = ey;
+        }
+      }
+    }
+    if (sc > .002) {
+      /* schiacciato lungo la direzione d'arrivo, allargato di traverso (l'area resta la stessa) */
+      var q1 = 1 - sc, q2 = 1 / q1, ux = FO.dx, uy = FO.dy, ma = q1 * ux * ux + q2 * uy * uy, mb = (q1 - q2) * ux * uy, md = q1 * uy * uy + q2 * ux * ux;
+      tr = 'matrix(' + ma.toFixed(4) + ' ' + mb.toFixed(4) + ' ' + mb.toFixed(4) + ' ' + md.toFixed(4) + ' 0 0)'; ext = Math.max(ext, d / 2 * q2);
+    }
+    if (pd !== FO.d) { fPath.setAttribute('d', pd); FO.d = pd; }
+    if (tr !== FO.tr) { if (tr) fPath.setAttribute('transform', tr); else fPath.removeAttribute('transform'); FO.tr = tr; }
+    FO.ext = ext; FO.k = k; FO.sc = sc;
+    if (t0) { var ct = performance.now() - t0; COSTO.n++; COSTO.t += ct; if (ct > COSTO.max) COSTO.max = ct; }
+  }
+  /* la forma come trasformazione (un'ellisse: allungata di k lungo la coda, schiacciata di sc lungo la direzione d'arrivo;
+     l'area resta la stessa), per il punto vero di un titolo coperto (vedi sotto) */
+  function formaMatrice(){
+    var k = FO.k || 1, ex = FO.ex || 0, ey = FO.ey || 0, q1 = 1 - (FO.sc || 0), q2 = 1 / q1, ux = FO.dx, uy = FO.dy;
+    var s11 = k * ex * ex + ey * ey / k, s12 = (k - 1 / k) * ex * ey, s22 = k * ey * ey + ex * ex / k;
+    var c11 = q1 * ux * ux + q2 * uy * uy, c12 = (q1 - q2) * ux * uy, c22 = q1 * uy * uy + q2 * ux * ux;
+    var a = c11 * s11 + c12 * s12, b = c12 * s11 + c22 * s12, c = c11 * s12 + c12 * s22, dd = c12 * s12 + c22 * s22;
+    return 'matrix(' + a.toFixed(4) + ',' + b.toFixed(4) + ',' + c.toFixed(4) + ',' + dd.toFixed(4) + ',0,0)';
+  }
+  /* Un posto è «coperto» quando il puntino, che sta sempre dietro al sito, lì non si vede: il titolo sta sopra un pannello
+     (Virtual Assistant, Campagna 360°) o in una sezione con il fondo pieno (Come funziona, avorio). Lì aspettare che la
+     forma sia ferma vorrebbe dire non vedere il punto per un terzo di secondo: il punto vero prende il posto del puntino
+     appena la molla è ferma, come prima, e finisce lui di schiacciarsi e tornare tondo (stessa forma, come trasformazione).
+     Dove il puntino si vede, lo scambio avviene solo a forma ferma. Si guarda una volta per posto (elementsFromPoint) */
+  var GENC = 0;
+  function coperto(s, x, y){
+    var el = s.el; if (!el || s.ap || !document.elementsFromPoint) return false;
+    if (el._cop && el._cop.g === GENC) return el._cop.v;
+    var v = false, L = document.elementsFromPoint(x, y);
+    for (var i = 0; i < L.length; i++) {
+      var e = L[i]; if (e === document.body || e === doc) break;
+      if (e === el || e === punto || punto.contains(e)) continue;
+      var t = e.tagName; if (t === 'IMG' || t === 'VIDEO' || t === 'CANVAS') { v = true; break; }
+      var cs = getComputedStyle(e), m = /rgba?\(([^)]*)\)/.exec(cs.backgroundColor || ''), pz = m ? m[1].split(',') : [], al = pz.length > 3 ? +pz[3] : pz.length ? 1 : 0;
+      if (al > .3 || (cs.backgroundImage && cs.backgroundImage !== 'none')) { v = true; break; }
+    }
+    el._cop = { g: GENC, v: v }; return v;
+  }
+  function formaSuPosto(s){
+    var el = s.el; if (!el) return;
+    var tr = formaFerma() ? '' : formaMatrice();
+    if (tr !== (el._pongo || '')) { el.style.transform = tr; el._pongo = tr; }
   }
 
   /* Il movimento, fotogramma per fotogramma.
@@ -2262,7 +2516,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
        scioglie in ~0,2 s senza rimbalzi. Il punto vero del titolo (.pt.qui) prende il posto del puntino solo quando la
        molla si è fermata. */
   var TAU = 45, VMAX = 2.2, OM = 1 / 65;   /* OM: rigidezza della molla (1/ms): 1/60 per staccarsi, 1/100 per tornare, 1/70 dopo un ricalcolo */
-  var ys = null, ys1 = 0, tPrima = 0, yPrima = 0, v1 = 0, v2 = 0;
+  var ys = null, ys1 = 0, tPrima = 0, yPrima = 0, v1 = 0, v2 = 0, chPrima = null;
   var LIBERO = false, E = { x: 0, y: 0, d: 0, vx: 0, vy: 0, vd: 0 }, D = null, DV = { x: 0, y: 0, d: 0 }, Bp = null, Wp = null;
   /* lo scarto si misura dal bersaglio com'era al fotogramma prima (a - av·dt): sciogli() poi lo fa avanzare di dt, così
      al cambio il puntino continua esattamente con la sua velocità (18/11, revisione: prima il bersaglio contava due
@@ -2289,7 +2543,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var y = scrollY, ora = performance.now(), dt = tPrima ? clamp(ora - tPrima, 1, 50) : 16.7;
     if (ys === null) ys = ys1 = yPrima = y;
     /* la velocità della pagina, filtrata due volte (uno scatto di rotella da solo non conta) */
-    var vNow = tPrima ? Math.abs(y - yPrima) / dt : 0, av = 1 - Math.exp(-dt / 30);
+    var vNow = tPrima ? Math.abs(y - yPrima) / dt : 0, sv = (y - yPrima) / dt, av = 1 - Math.exp(-dt / 30);
     tPrima = ora; yPrima = y;
     v1 += (vNow - v1) * av; v2 += (v1 - v2) * av; if (v1 < .002 && v2 < .002) v1 = v2 = 0;
     /* un salto della pagina (non uno scorrimento): il puntino non ripercorre più di due schermi e mezzo */
@@ -2306,6 +2560,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
     /* l'apertura si disegna con lo stesso scorrimento morbido del puntino (19/11): il disco dell'apertura e #punto non si
        vedono mai insieme. Nell'apertura e nella discesa in «serve» il puntino non si stacca mai (niente attesa nel margine) */
     if (AP) AP.rendi(ys);
+    /* (19/11, puntino di pongo) quando l'arancio è tornato nel puntino della V (scendendo) il puntino si schiaccia */
+    if (AP) { var ch = !!AP.chiuso; if (chPrima === null) chPrima = ch; else if (ch !== chPrima) { chPrima = ch; if (ch && D && AP.risucchio && PONGO.RISUCCHIO) { var rr = AP.risucchio(); if (rr) formaColpo(rr.x, rr.y, PONGO.RISUCCHIO); } } }
     var inAp = !!(APosto && ys < AP.arrivo);
     /* la scena va con lo stesso scorrimento morbido: la tendina resta nella mano del puntino */
     if (ys > ST.T - 2 * vh && ys < ST.T + ST.R + 2 * vh) aggiornaScena(ys, vh);
@@ -2322,13 +2578,18 @@ details[open] > summary .piu::after{transform:rotate(0)}
       var nx = Q.x + E.x, ny = Q.y + E.y, nd = Math.max(1, Q.d + E.d);
       if (D) { DV = { x: (nx - D.x) / dt, y: (ny - D.y) / dt, d: (nd - D.d) / dt }; }
       D = { x: nx, y: ny, d: nd };
+      var tf = window.PONGO_MISURA ? performance.now() : 0;
+      formaPasso(dt, DV, sv);
+      if (tf) { var cf = performance.now() - tf; COSTO.t += cf; if (cf > COSTO.max) COSTO.max = cf; }
       /* sopra il palco dell'apertura (opaco) il puntino sta davanti, ma solo da quando l'arancio è tornato nel puntino del
          logo: prima lo disegna l'apertura e #punto resta dietro, invisibile */
-      if (APosto) punto.classList.toggle('sopra', inAp && AP.chiuso && ny - nd / 2 < stageTopDi(APosto.scena, y) + APosto.alto);
-      if (!LIBERO && fermaMolla() && g.s) { siedi(g.s); }     /* il punto vero del titolo (o il puntino del logo) */
-      else metti(nx, ny, nd);
+      if (APosto) punto.classList.toggle('sopra', inAp && AP.chiuso && ny - Math.max(nd / 2, FO.ext) < stageTopDi(APosto.scena, y) + APosto.alto);
+      /* il punto vero del titolo (o il puntino del logo) prende il posto del puntino solo quando molla e forma sono ferme
+         (nei titoli coperti, dove il puntino non si vede, appena la molla è ferma: vedi coperto) */
+      if (!LIBERO && fermaMolla() && g.s && (formaFerma() || coperto(g.s, g.x, g.y))) { formaDisegna(nd); siedi(g.s); formaSuPosto(g.s); }
+      else { metti(nx, ny, nd); formaDisegna(nd); }
     }
-    if (corsa || ys !== y || !fermaMolla() || v2 || LIBERO) { pianificato = true; requestAnimationFrame(quadro); }
+    if (corsa || ys !== y || !fermaMolla() || v2 || LIBERO || !formaFerma()) { pianificato = true; requestAnimationFrame(quadro); }
     else tPrima = 0;
   }
 
@@ -2562,12 +2823,12 @@ details[open] > summary .piu::after{transform:rotate(0)}
     if (limite > 120 && zona * k > limite) { k = limite / zona; metti(k, w / k); }
     finale(c, k);
   }
-  /* il finale (19/11, solo con data-finale: il pannello del Virtual Assistant). Vedi «FINALE RIEPILOGO» nel CSS.
-     La copia del riepilogo (.chat-fine) sta fuori dalla chat rimpicciolita e ha le misure in em; qui si calcolano:
-     da dove parte (dove sta il riepilogo nella chat), dove arriva (al centro della parte libera del pannello: dall'alto
-     fino all'etichetta «Esempio · WhatsApp», comunque sopra il titolo e sopra lo scuro che parte al 58 %), quanto si
-     ingrandisce (data-finale, meno se non ci sta tra i 16 px dei due lati) e dove finisce la «camera» della chat, così
-     che il riepilogo della chat e la copia facciano lo stesso percorso nello stesso tempo */
+  /* il finale (19/11 b, solo con data-finale: il pannello del Virtual Assistant). Vedi «FINALE RIEPILOGO» nel CSS.
+     Il telefono resta dov'è (niente camera); la copia del riepilogo (.chat-fine) sta fuori dalla chat rimpicciolita e
+     ha le misure in em. Qui si calcolano: da dove parte (dove sta il riepilogo nella chat), dove arriva (al centro dello
+     schermo della chat: dal fondo dell'intestazione fino all'etichetta «Esempio · WhatsApp», comunque sopra il titolo e
+     sopra lo scuro che parte al 58 %) e quanto si ingrandisce (data-finale, meno se non ci sta tra i 16 px dei due lati
+     o tra l'intestazione e l'etichetta) */
   function finale(c, k){
     if (!c.hasAttribute('data-finale')) return;
     var rie = c.querySelector('.chat-tela .chat-rie');
@@ -2575,21 +2836,20 @@ details[open] > summary .piu::after{transform:rotate(0)}
     var fine = c.querySelector('.chat-fine');
     if (!fine) { fine = document.createElement('div'); fine.className = 'chat-fine'; fine.setAttribute('aria-hidden', 'true'); fine.appendChild(rie.cloneNode(true)); c.appendChild(fine); }
     var W = c.clientWidth, H = c.clientHeight, cr = c.getBoundingClientRect(), M = 16;
+    var testa = c.querySelector('.chat-tela .chat-testa'), alto = testa ? (testa.offsetTop + testa.offsetHeight) * k : 0;
     var basso = H * .58, pn = c.closest('.pannello'), et = pn && pn.querySelector(':scope > .chip');
     var sel = c.getAttribute('data-sopra'), su = sel && document.querySelector(sel);
     if (et) basso = Math.min(basso, et.getBoundingClientRect().top - cr.top);
     if (su) basso = Math.min(basso, su.getBoundingClientRect().top - cr.top - M);
     fine.classList.add('misura'); var lw = fine.offsetWidth, lh = fine.offsetHeight; fine.classList.remove('misura');   /* a 16 px: misure «della chat» */
     if (!lw || !lh) return;
-    var z = parseFloat(c.getAttribute('data-finale')) || 1.25;
-    z = Math.max(1, Math.min(z, (W - 2 * M) / (lw * k), (basso - 2 * M) / (lh * k)));
-    var w1 = Math.max(lw * k * z, W - 2 * M), h1 = lh * k * z, x1 = (W - w1) / 2, y1 = Math.max(M, (basso - h1) / 2);
-    var x0 = rie.offsetLeft * k, y0 = rie.offsetTop * k, w0 = rie.offsetWidth * k, h0 = rie.offsetHeight * k;
-    var cx = x1 + w1 / 2 - (x0 + w0 / 2) * z, cy = y1 + h1 / 2 - (y0 + h0 / 2) * z;   /* la camera porta il centro del riepilogo al centro d'arrivo */
+    var z = parseFloat(c.getAttribute('data-finale')) || 1.2;
+    z = Math.max(1, Math.min(z, (W - 2 * M) / (lw * k), (basso - alto - 2 * M) / (lh * k)));
+    var w1 = Math.max(lw * k * z, W - 2 * M), h1 = lh * k * z, x1 = (W - w1) / 2, y1 = Math.max(alto + M, alto + (basso - alto - h1) / 2);
+    var x0 = rie.offsetLeft * k, y0 = rie.offsetTop * k, w0 = rie.offsetWidth * k;
     var st = c.style, px = function(n){ return n.toFixed(2) + 'px'; };
     st.setProperty('--fx0', px(x0)); st.setProperty('--fy0', px(y0)); st.setProperty('--fw0', px(w0)); st.setProperty('--ff0', px(16 * k));
     st.setProperty('--fx1', px(x1)); st.setProperty('--fy1', px(y1)); st.setProperty('--fw1', px(w1)); st.setProperty('--ff1', px(16 * k * z));
-    st.setProperty('--cx', px(cx)); st.setProperty('--cy', px(cy)); st.setProperty('--ckz', (k * z).toFixed(4));
     c.classList.add('finale');
     /* se la chat aspetta di partire, riattacca le animazioni (così anche Safari legge le misure nuove) */
     if (c._fase === 'pronta') { c.classList.remove('anima'); void c.offsetWidth; c.classList.add('anima'); }
