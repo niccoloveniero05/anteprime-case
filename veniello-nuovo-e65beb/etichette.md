@@ -1,11 +1,17 @@
-# Etichette di prova dell'anteprima N: la mappa (18/11)
+# Etichette di prova dell'anteprima N: la mappa (18/11, rinumerata dopo i ritocchi della pallina)
 
-Solo per la fase di prova: Niccolò vede sul sito numeri e lettere verdi e dice, per esempio, «sposta la 7d».
+Solo per la fase di prova: Niccolò vede sul sito numeri e lettere verdi e dice, per esempio, «sposta la 6d».
 **Numero** = un blocco grande della pagina (nell'ordine in cui si scorre); **numero + lettera** = una parte di quel blocco.
 Lo script è quello della D (`d/prova-etichette.js`, stesso funzionamento) con una tabella nuova: `n/prova-etichette.js`.
 
-**Attenzione: i numeri non sono quelli della D** (qui l'ordine della pagina è quello del sito online). La chat del
-Virtual Assistant, che nella D era 5b-5e, qui è **7b-7e** (stesse lettere: b testa, c messaggi, d riepilogo, e etichetta).
+**18/11, ritocchi della pallina: i Partner sono andati in fondo ai servizi e i numeri seguono di nuovo l'ordine della
+pagina.** Vecchio → nuovo: **2 → 8** (Partner), **3 → 2** (Come funziona), **4 → 3** (Servizi, l'ingresso),
+**5 → 4** (Creazione Contenuti), **6 → 5** (Sito Web), **7 → 6** (Virtual Assistant), **8 → 7** (Campagna 360°);
+0, 1 e 9-12 restano uguali; le lettere dentro ogni blocco restano le stesse. Il titolo della Campagna era 8b, ora è **7b**.
+
+**Attenzione: i numeri non sono quelli della D** (qui l'ordine della pagina è quello del sito online, con i Partner in
+fondo ai servizi). La chat del Virtual Assistant, che nella D era 5b-5e, qui è **6b-6e** (stesse lettere: b testa,
+c messaggi, d riepilogo, e etichetta).
 
 - **Togliere le etichette**: cancellare da `n/index.html` le due righe in fondo, subito prima di `</body>`:
   `<!-- ETICHETTE DI PROVA … -->` e `<script src="prova-etichette.js"></script>`; poi cancellare `n/prova-etichette.js`
@@ -14,8 +20,8 @@ Virtual Assistant, che nella D era 5b-5e, qui è **7b-7e** (stesse lettere: b te
   `PYTHONIOENCODING=utf-8 python _lavoro/n/etichette-script.py` (dalla cartella `sito-mobile-2026`).
 - Le etichette stanno in uno strato fuori dal `<body>`: l'impaginazione del sito non cambia.
 - Il **puntino arancio** che viaggia (`#punto`) non ha un'etichetta: se Niccolò parla del «puntino» è lui.
-- **L'anteprima del Sito Web (6b, 6c, 6d)** è innestata (18/11): le classi **`.sa-frase`** (la frase), **`.sa-tel`** (il
-  telefono), **`.sa-pc`** (il computer, si vede solo alla fine) ci sono. `ETICHETTE.mancanti()` è vuoto.
+- **L'anteprima del Sito Web (5b, 5c, 5d)**: le classi **`.sa-frase`** (la frase), **`.sa-tel`** (il telefono),
+  **`.sa-pc`** (il computer, si vede solo alla fine). `ETICHETTE.mancanti()` è vuoto (controllato a 390 e 1280).
 - **Aspetto (18/11, «ancora meno invasive»)**: niente pillola scura e niente contorno, solo il testo verde acceso #39FF14 in
   Geist Mono, numeri 10 px e lettere 9 px, opacità 0,85, con un'ombra scura sottile per leggerle sul chiaro. Stanno appena
   sopra l'angolo in alto a sinistra della parte (le domande e i passi dentro la riga). Lo stile lo mette
@@ -24,7 +30,7 @@ Virtual Assistant, che nella D era 5b-5e, qui è **7b-7e** (stesse lettere: b te
 ## 0 · La testata (fissa in alto)
 - 0 — la testata
 - 0a — il marchio piccolo «Veniello·studio» (sparisce durante l'apertura, poi torna)
-- 0b — il menu Partner · Come funziona · Servizi · Domande (solo da computer)
+- 0b — il menu Come funziona · Servizi · Partner · Domande (solo da computer)
 - 0c — il pulsante «Scrivici»
 
 ## 1 · L'apertura (i tre momenti della D)
@@ -35,67 +41,67 @@ Virtual Assistant, che nella D era 5b-5e, qui è **7b-7e** (stesse lettere: b te
 - 1d — l'arancio: il punto di «scegliere» che si allarga e poi torna nel puntino del logo
 - 1e — lo sfondo con le luci (la macchia)
 
-## 2 · Partner (i blocchi pieni della D)
-- 2 — il blocco dei partner
-- 2a — l'etichetta «Partner»
-- 2b — il titolo «Chi ha scelto **Veniello Studio**.»
-- 2c — «Le attività con cui lavoriamo ogni mese.»
-- 2d — la card del Jué Club (foto del bancone)
-- 2e — la card di Elena Baldi Wedding Planner
-- 2f — la card di GB Gioielli
-- 2g — la card arancio «La tua attività, *qui*.»
+## 2 · Come funziona (dal sito online; prima era 3)
+- 2 — il blocco
+- 2a — l'etichetta «Come funziona»
+- 2b — il titolo «Prima lo vedi. **Poi decidi**.» (la prima tappa del puntino dopo l'apertura)
+- 2c — la carta 01 «Ci scrivi»
+- 2d — la carta 02 «Ti prepariamo l'anteprima» (con «Gratis»)
+- 2e — la carta 03 «Se ti piace, va online»
+- 2f — il binario con le tre stazioni (al telefono il treno è il puntino)
 
-## 3 · Come funziona (dal sito online)
-- 3 — il blocco
-- 3a — l'etichetta «Come funziona»
-- 3b — il titolo «Prima lo vedi. **Poi decidi**.»
-- 3c — la carta 01 «Ci scrivi»
-- 3d — la carta 02 «Ti prepariamo l'anteprima» (con «Gratis»)
-- 3e — la carta 03 «Se ti piace, va online»
-- 3f — il binario con le tre stazioni (al telefono il treno è il puntino)
+## 3 · Servizi: l'ingresso (prima era 4)
+- 3 — l'ingresso dei servizi
+- 3a — l'etichetta «Servizi»
+- 3b — il titolo «Tutto quello che serve per farti **scegliere**.»
+- 3c — «Quattro pacchetti. Prendi quello che ti serve…»
 
-## 4 · Servizi: l'ingresso
-- 4 — l'ingresso dei servizi
-- 4a — l'etichetta «Servizi»
-- 4b — il titolo «Tutto quello che serve per farti **scegliere**.»
-- 4c — «Quattro pacchetti. Prendi quello che ti serve…»
+## 4 · Creazione Contenuti (prima era 5)
+- 4 — il pacchetto
+- 4a — il riquadro col video dello spot (gira una volta quando si vede)
+- 4b — il titolo «Creazione Contenuti.»
+- 4c — «Video, foto e stories per i tuoi social, anche con l'IA.»
+- 4d — «Scopri i dettagli +» (e l'elenco che si apre)
 
-## 5 · Creazione Contenuti
+## 5 · Sito Web (prima era 6)
 - 5 — il pacchetto
-- 5a — il riquadro col video dello spot (gira una volta quando si vede)
-- 5b — il titolo «Creazione Contenuti.»
-- 5c — «Video, foto e stories per i tuoi social, anche con l'IA.»
-- 5d — «Scopri i dettagli +» (e l'elenco che si apre)
+- 5a — il riquadro dell'anteprima animata del sito (il telefono che cambia aspetto, poi anche il computer)
+- 5b — l'anteprima: la frase («Completamente personalizzabile» → «E su tutti i tuoi dispositivi») — classe `.sa-frase`
+- 5c — l'anteprima: il telefono — classe `.sa-tel`
+- 5d — l'anteprima: il computer (compare alla fine) — classe `.sa-pc`
+- 5e — il titolo «Sito Web.»
+- 5f — «Chi sei, cosa fai e un tasto per chiamarti.»
+- 5g — «Scopri i dettagli +»
 
-## 6 · Sito Web
+## 6 · Virtual Assistant (prima era 7)
 - 6 — il pacchetto
-- 6a — il riquadro dell'anteprima animata del sito (il telefono che cambia aspetto, poi anche il computer)
-- 6b — l'anteprima: la frase («Completamente personalizzabile» → «E su tutti i tuoi dispositivi») — classe `.sa-frase`
-- 6c — l'anteprima: il telefono — classe `.sa-tel`
-- 6d — l'anteprima: il computer (compare alla fine) — classe `.sa-pc`
-- 6e — il titolo «Sito Web.»
-- 6f — «Chi sei, cosa fai e un tasto per chiamarti.»
-- 6g — «Scopri i dettagli +»
+- 6a — il riquadro con la chat di WhatsApp
+- 6b — la testa della chat «23:47 · Oreficeria Bianchi · online / sta scrivendo…» (nella D 5b)
+- 6c — i messaggi della chat (nella D 5c)
+- 6d — il riquadro «Riepilogo per il titolare» (nella D 5d)
+- 6e — l'etichetta «Esempio · WhatsApp» (nella D 5e)
+- 6f — il titolo «Virtual Assistant.»
+- 6g — «Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.»
+- 6h — «Scopri i dettagli +» (con «Prenota un'anteprima»)
 
-## 7 · Virtual Assistant
-- 7 — il pacchetto
-- 7a — il riquadro con la chat di WhatsApp
-- 7b — la testa della chat «23:47 · Oreficeria Bianchi · online / sta scrivendo…» (nella D 5b)
-- 7c — i messaggi della chat (nella D 5c)
-- 7d — il riquadro «Riepilogo per il titolare» (nella D 5d)
-- 7e — l'etichetta «Esempio · WhatsApp» (nella D 5e)
-- 7f — il titolo «Virtual Assistant.»
-- 7g — «Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.»
-- 7h — «Scopri i dettagli +» (con «Prenota un'anteprima»)
+## 7 · Campagna Pubblicitaria 360° (prima era 8)
+- 7 — il pacchetto speciale
+- 7a — «Pacchetto speciale»
+- 7b — il titolo «Campagna Pubblicitaria 360°» (l'ultima tappa del puntino: si posa nel «°» e l'arancio dilaga sul «360»)
+- 7c — «Contenuti, sito e Virtual Assistant insieme…»
+- 7d — il pulsante «Parliamone»
+- 7e — «Cosa comprende» e le tre voci
+- 7f — la nota «Siti, video e grafiche: lavori veri…» (sotto la Campagna)
 
-## 8 · Campagna Pubblicitaria 360°
-- 8 — il pacchetto speciale
-- 8a — «Pacchetto speciale»
-- 8b — il titolo «Campagna Pubblicitaria 360°.»
-- 8c — «Contenuti, sito e Virtual Assistant insieme…»
-- 8d — il pulsante «Parliamone»
-- 8e — «Cosa comprende» e le tre voci
-- 8f — la nota «Siti, video e grafiche: lavori veri…» (sotto la Campagna)
+## 8 · Partner (i blocchi pieni della D; prima era 2, ora in fondo ai servizi come nella D)
+- 8 — il blocco dei partner
+- 8a — l'etichetta «Partner»
+- 8b — il titolo «Chi ha scelto **Veniello Studio**.»
+- 8c — «Le attività con cui lavoriamo ogni mese.»
+- 8d — la card del Jué Club (foto del bancone)
+- 8e — la card di Elena Baldi Wedding Planner
+- 8f — la card di GB Gioielli
+- 8g — la card arancio «La tua attività, *qui*.»
 
 ## 9 · Domande
 - 9 — il blocco
@@ -126,5 +132,5 @@ Virtual Assistant, che nella D era 5b-5e, qui è **7b-7e** (stesse lettere: b te
 
 ## 12 · Il piede
 - 12 — il piede
-- 12a — il marchio grande «Veniello·studio» (dove cade il puntino alla fine)
+- 12a — il marchio grande «Veniello·studio» (col suo puntino arancio fermo, come nella testata)
 - 12b — la riga «Siti, Google, social e video · … · Niente cookie, niente tracciamenti.»
