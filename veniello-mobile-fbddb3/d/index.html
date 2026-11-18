@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
-<script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('logo-in')}catch(e){}</script>
+<script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('logo-in');else document.documentElement.classList.add('fermo')}catch(e){}</script>
 <title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
 <meta name="description" content="Fatti trovare. Fatti scegliere. Siti, scheda Google, social, video e Virtual Assistant per le attività della Valdinievole. L’anteprima è gratis.">
 <link rel="icon" href="../comune/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -43,8 +43,8 @@
   /* la scala degli spazi (18/11 notte, controllo di coesione): ogni spazio verticale della pagina è uno di questi.
      s1-s3 dentro un blocco (etichetta → frase, titolo → testo, testo → link), s4 dal titolo di sezione al suo
      contenuto e tra due contenuti della stessa sezione, s6 sopra e sotto il filo che separa due blocchi (sezioni e
-     pacchetti: sempre 96 + filo + 96), s7 per i due momenti larghi (dopo lo showreel e la chiusura) */
-  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px; --s7:128px;
+     pacchetti: sempre 96 + filo + 96), s7 per i due momenti larghi (dopo l'apertura e la chiusura) */
+  --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:112px; --s7:144px;
 }
 *{box-sizing:border-box}
 html{background:#0A0906;-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -105,7 +105,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .t-sez{font-family:var(--sans);font-weight:560;font-size:clamp(36px,10.4vw,44px);line-height:1.04;letter-spacing:-.04em;word-spacing:0;color:var(--av2)}
 .t-sez em{font-style:normal;font-weight:600;color:var(--av);letter-spacing:-.034em}
 .sotto{color:var(--av2);font-size:17px;line-height:1.55;margin-top:var(--s2);max-width:20em;text-wrap:pretty}
-.t-sez + .sotto{margin-top:var(--s3)}
+.t-sez + .sotto{margin-top:var(--s4)}
 
 /* il punto finale dei titoli: senza JS (o con «Riduci movimento») è un punto arancio fermo; con JS è il posto
    dove si posa l'unico puntino che viaggia */
@@ -132,71 +132,47 @@ html.viaggio .punto.su{opacity:1}
 .sez{position:relative;padding:var(--s6) var(--lato);border-top:1px solid var(--filo)}
 .sez > .pannello,.largo{margin-left:calc(var(--pan) - var(--lato));margin-right:calc(var(--pan) - var(--lato))}
 
-/* ── 0 · Apertura, presa dal sito vero (17/11, Niccolò: «la parte iniziale del sito riprendiamola da quello vecchio:
-   l'animazione, sfondi e loghi fino al fullscreen arancione»). Stili, tempi e script sono quelli di
-   veniello-studio/sito/index.html (copertina, macchia, scena «Da uno a tutti»): il punto di «scegliere» scende al centro,
-   lampeggia e si allarga fino allo schermo tutto arancio, entra la V bianca col puntino nero e dalla V esce il nome, la
-   camera si allontana sul muro dei lavori veri del Jué e torna sul riquadro arancio fino al tutto arancio; subito dopo lo
-   showreel, che comincia arancio. Testi nei caratteri della D (titolo in Newsreader, testo in Inter), loghi identici al
-   sito vero. Niente «Chiedi l'anteprima gratis» e «Vedi i servizi»: Niccolò li ha tolti apposta (spezzano il flow). ── */
-.apertura{position:relative;background:var(--bg)} /* fondo pieno: dietro al palco ancora trasparente non si vedono i lati della colonna */
-/* sui telefoni più larghi della colonna (il telefono di Niccolò è largo 480 px) l'apertura prende tutto lo schermo, come nel
-   sito vero: il tutto arancio è davvero tutto, senza le due strisce scure ai lati; anche il fondo della testata va da bordo
-   a bordo (le scritte restano nella colonna). Solo sui telefoni (niente barra di scorrimento che allarghi i 100vw) */
+/* ── 0 · Apertura in tre momenti (19/11, Niccolò: «Fatti trovare fatti scegliere -swipe- veniello studio -swipe- logo V»,
+   con i colori e i movimenti di prima). Una sezione alta quanto lo scorrimento dell'apertura (la misura la mette lo script
+   «Apertura») con dentro un palco fermo (sticky) alto uno schermo:
+   1) «Fatti trovare. Fatti scegliere.» da solo, al centro, sulla macchia;
+   2) il punto di «scegliere» si allarga da dov'è fino al tutto arancio e sull'arancio nasce il nome «Veniello·studio»;
+   3) il nome diventa la V del logo (le lettere rientrano, il puntino scuro va in alto a destra della V, la V cresce);
+   poi l'arancio torna nel puntino del logo (V avorio e puntino arancio, come l'icona), la V se ne va con la pagina e il
+   puntino scende nel punto di «serve». Un colpo di dito = un momento (vedi lo script).
+   Senza JS e con «Riduci movimento»: la copertina ferma, alta uno schermo, e subito «Tutto quello che serve». ── */
+.apertura{position:relative;background:var(--bg)} /* fondo pieno: dietro al palco non si vedono i lati della colonna */
+/* sui telefoni più larghi della colonna (il telefono di Niccolò è largo 480 px) l'apertura prende tutto lo schermo: il tutto
+   arancio è davvero tutto, senza strisce scure ai lati; anche il fondo della testata va da bordo a bordo (le scritte restano
+   nella colonna). Solo sui telefoni (niente barra di scorrimento che allarghi i 100vw) */
 @media (min-width:431px) and (max-width:600px) and (hover:none){
   .apertura{width:100vw;margin-left:calc(50% - 50vw)}
   .testata::before{left:calc(50% - 50vw);right:calc(50% - 50vw)}
+  html{background:var(--bg)} /* 19/11: ai lati della colonna lo stesso nero, così dove finisce l'apertura non c'è un gradino */
 }
-/* il fondo in più (190 invece di 56) tiene il titolo alla stessa altezza del sito vero, dove sotto il testo c'erano i due
-   pulsanti tolti («Chiedi l'anteprima gratis», «Vedi i servizi»): il punto di «scegliere» parte dallo stesso posto */
-.copertina{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;text-align:center;padding:110px 0 190px}
-@media (max-height:760px){.copertina{padding-bottom:230px}}
-/* la copertina scorre con la pagina. A strati: la sua luce (.macchia) sotto il palco, i testi sopra: il puntino passa
-   davanti alla luce e dietro ai testi (per questo la copertina non ha z-index) */
-.cop-wrap{position:relative;z-index:3;width:100%;padding:0 20px;display:flex;flex-direction:column;align-items:center}
-.cop-mono{font:400 12px/1.6 var(--mono);letter-spacing:.14em;word-spacing:0;text-transform:uppercase;color:rgba(245,244,239,.4)}
-.copertina .t1{margin-top:22px}
-.cop-intro{margin-top:22px;max-width:44ch;font-size:16px;line-height:1.6;color:rgba(245,244,239,.64)}
-.cop-fiducia{margin-top:28px;max-width:30ch;font:400 11.5px/1.9 var(--mono);letter-spacing:.12em;word-spacing:0;text-transform:uppercase;color:rgba(245,244,239,.4)}
-.rec-punto{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:#FF5A1F;margin-left:.045em;vertical-align:baseline}
-/* «Scorri / Continua a scorrere»: fisso in basso dalla copertina alla fine della scena; un puntino arancio scende lungo la riga */
-.continua{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;line-height:1;letter-spacing:.18em;word-spacing:0;text-transform:uppercase;color:rgba(245,244,239,.64);background:rgba(16,15,9,.66);padding:9px 14px 9px 16px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.1);pointer-events:none;transition:opacity .45s ease;white-space:nowrap}
-.continua.via{opacity:0}
-.continua i{position:relative;display:block;width:1px;height:14px;background:linear-gradient(rgba(245,244,239,.4),rgba(245,244,239,.08))}
-.continua i::after{content:"";position:absolute;left:-2.5px;top:-2px;width:6px;height:6px;border-radius:50%;background:var(--rec);animation:continua-scende 1.6s cubic-bezier(.45,0,.2,1) infinite}
-@keyframes continua-scende{0%{transform:translateY(0);opacity:0}15%{opacity:1}75%{opacity:1}100%{transform:translateY(12px);opacity:0}}
-@media (prefers-reduced-motion:reduce){.continua i::after{animation:none;top:4px}}
+.ap{position:relative;height:100vh;height:100svh}
+html.js:not(.fermo) .ap{height:330vh;height:330svh}
+.ap-palco{position:relative;height:100%;overflow:hidden}
+/* il palco fermo è alto quanto lo schermo più grande (100lvh): quando la barra di Safari si chiude non resta una striscia
+   sotto. Titolo, nome e logo stanno invece nello schermo più piccolo (100svh), così si vedono sempre interi */
+html.js:not(.fermo) .ap-palco{position:sticky;top:0;height:100vh;height:100lvh}
+.cop-wrap{position:absolute;left:0;right:0;top:0;z-index:2;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:calc(var(--testata) + env(safe-area-inset-top)) 20px 5vh}
+.rec-punto{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--rec);margin-left:.045em;vertical-align:baseline}
 /* lo sfondo della copertina (shader WebGL nel canvas, script «Sfondo della copertina»); senza WebGL tre luci ferme in CSS */
 .macchia{position:absolute;left:0;top:0;width:100%;height:100%;z-index:1;display:block;pointer-events:none;opacity:0;transition:opacity 1.4s cubic-bezier(.2,.7,.2,1)}
 .macchia.pronto{opacity:1}
-.copertina.senza-gl .macchia{transition:none;background:
+.ap-palco.senza-gl .macchia{transition:none;background:
   radial-gradient(70vmax 52vmax at 86% 94%,rgba(207,75,27,.5),rgba(150,45,14,.26) 40%,rgba(74,23,10,.1) 64%,rgba(16,15,9,0) 82%),
   radial-gradient(48vmax 40vmax at 100% 0%,rgba(184,56,15,.34),rgba(16,15,9,0) 72%),
   radial-gradient(56vmax 46vmax at 0% 18%,rgba(74,23,10,.5),rgba(16,15,9,0) 74%),
   #100F09}
-.copertina.senza-gl .macchia,html.fermo .macchia{-webkit-mask-image:linear-gradient(to top,transparent,#000 var(--sfuma,0px));mask-image:linear-gradient(to top,transparent,#000 var(--sfuma,0px))}
+.ap-palco.senza-gl .macchia,html.fermo .macchia{-webkit-mask-image:linear-gradient(to top,transparent,#000 var(--sfuma,0px));mask-image:linear-gradient(to top,transparent,#000 var(--sfuma,0px))}
 @media (prefers-reduced-motion:reduce){.macchia{transition:none}}
-/* la scena: palco fermo (sticky) sopra la copertina; altezza e tempi esatti dallo script */
-.scena{position:relative;z-index:2;padding:0;height:304vh;height:304svh;margin-top:-100vh;margin-top:-100svh;pointer-events:none}
-.scena-stage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden}
-.fondo{position:absolute;inset:0;background:var(--bg);opacity:0}
-.fondo-v{position:absolute;inset:0;background:#FF5A1F;visibility:hidden}
-.scena-stage.aperto .fondo-v{visibility:visible}
-.plano{position:absolute;inset:0;visibility:hidden}
-.scena-stage.aperto .fondo{opacity:1}
-.scena-stage.aperto .plano{visibility:visible}
-.scena-stage.aperto.vivo .plano{will-change:transform}
-.scena-stage.aperto.vivo .tessere{will-change:opacity}
-.scena-stage.aperto.vivo .tv{will-change:transform}
-.scena-stage.aperto.vivo .lv{will-change:transform}
-.muro{position:absolute;left:0;top:0}
-.tessere{position:absolute;left:0;top:0;width:100%;height:100%}
-.muro img,.muro .tv{position:absolute;display:block;border-radius:var(--rt,10px);background:#1A1913}
-.muro img{height:auto;max-width:none}
-.muro .tv{overflow:hidden;background:#FF5A1F;box-shadow:0 0 0 1px rgba(245,244,239,var(--orlo,0))}
-/* il «momento V»: il logo disegnato dentro il riquadro arancio (V in Instrument Serif corsiva ingrossata, «eniello», il
-   punto tondo, «studio» in Geist 700: bianco, col punto nero). Misure e movimenti dallo script (logoMisura, logoDisegna) */
-.lv{position:absolute;left:0;top:0;width:100%;height:100%;color:#FFF;pointer-events:none;font-family:'Geist',var(--sans);word-spacing:0}
+/* il punto di «scegliere» che si allarga fino al tutto arancio (e all'uscita si stringe nel puntino del logo): dallo script */
+.ap-disco{position:absolute;left:0;top:0;z-index:3;width:240px;height:240px;border-radius:50%;background:var(--rec);transform-origin:0 0;visibility:hidden;pointer-events:none}
+/* il nome e il logo, gli stessi di prima: V in Instrument Serif corsiva ingrossata, «eniello», il puntino tondo, «studio» in
+   Geist 700; avorio, col puntino scuro. Misure e movimenti dallo script (logoMisura, logo) */
+.lv{position:absolute;left:0;top:0;z-index:4;width:100%;height:100%;color:var(--av);pointer-events:none;font-family:'Geist',var(--sans);word-spacing:0;visibility:hidden}
 .lv .n{position:absolute;left:0;top:0;font-weight:700;letter-spacing:-.05em;line-height:1;white-space:nowrap}
 .lv .n>*{display:inline-block}
 .lv .vv{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.18em;letter-spacing:0;margin-right:.01em;-webkit-text-stroke:.036em currentColor;paint-order:stroke fill;transform-origin:50% 50%}
@@ -204,30 +180,21 @@ html.viaggio .punto.su{opacity:1}
 .lv .lpt{width:.21em;height:.21em;margin:0 .035em 0 .045em;visibility:hidden}
 .lv .pd{position:absolute;left:0;top:0;width:100px;height:100px;margin:-50px 0 0 -50px;border-radius:50%;background:#100F09;transform-origin:50% 50%;visibility:hidden}
 .lv .e,.lv .st{-webkit-clip-path:inset(-20% 100% -20% 0);clip-path:inset(-20% 100% -20% 0)}
-.velo{position:absolute;inset:0;opacity:0;background:radial-gradient(ellipse 88% 46% at 50% 50%,rgba(16,15,9,.9) 0%,rgba(16,15,9,.72) 45%,rgba(16,15,9,.3) 82%,rgba(16,15,9,.18) 100%)}
-.bordi{position:absolute;inset:0;opacity:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(16,15,9,0) 26%,rgba(16,15,9,0) 78%,var(--bg) 100%)}
-/* il punto di «scegliere» che scende e si allarga (nel sito vero è .punto: qui ha un altro nome, .punto è il puntino della D) */
-.ap-disco{position:absolute;left:0;top:0;width:240px;height:240px;border-radius:50%;background:#FF5A1F;transform-origin:0 0;visibility:hidden}
+/* il posto del puntino (quello che viaggia, #punto) sul logo: invisibile finché l'arancio non è tornato nel puntino del logo,
+   poi è lui il puntino arancio (finché il puntino ci sta seduto, .qui) */
+.ap-pt{position:absolute;left:0;top:0;z-index:5;border-radius:50%;visibility:hidden;pointer-events:none}
+html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec)}
 /* Safari su iOS 26 colora la barra in basso con l'elemento fisso che tocca il bordo (lo schermo arancio la farebbe arancione):
    questa striscia scura, sotto la barra e invisibile, gli dà sempre il colore del sito */
 .tinta-safari{display:none;position:fixed;left:0;right:0;bottom:0;height:8px;background:var(--bg);pointer-events:none;z-index:60}
 @supports (-webkit-touch-callout:none){.tinta-safari{display:block}}
-/* «Riduci movimento» (o senza GSAP): copertina normale, poi un palco alto uno schermo, fermo: il muro con il riquadro
-   arancio del logo al suo posto (come nel punto più lontano della camera) */
-html.fermo .scena{height:auto!important;margin-top:0!important}
-html.fermo .scena-stage{position:relative;height:100vh;height:100svh}
-html.fermo .fondo{opacity:1}
 /* il logo della testata entra come nel sito vero: il puntino parte in alto a destra della V, «eniello» esce dalla V, poi «studio» */
 .logo-in #marchio-testata > span:nth-of-type(2),.logo-in #marchio-testata > span:nth-of-type(3){-webkit-clip-path:inset(-20% 100% -20% 0);clip-path:inset(-20% 100% -20% 0)}
 .logo-in #marchio-testata .pl{opacity:0}
-
-/* ── 1 · Lo showreel, subito dopo la scena: comincia da un fotogramma tutto arancio (la sua copertina), come finisce la scena ── */
-.showreel{padding:var(--s2) var(--lato) 0}
-.pannello-eroe{margin:0 calc(var(--pan) - var(--lato));height:min(132vw,560px);background:#FF5A1F}
-.pannello-eroe video{object-position:50% 46%}
-/* il posto del puntino dentro lo showreel: invisibile, il puntino ci sta sotto dall'inizio della pagina */
-.posto-video{position:absolute;left:50%;top:44%;width:12px;height:12px;margin:-6px 0 0 -6px;pointer-events:none}
-.punto.sotto{z-index:-1}
+/* il marchio piccolo della testata non fa il doppione del nome e del logo grandi: sparisce mentre sono a schermo e torna,
+   morbido, quando l'apertura se ne va (classe dallo script «Apertura») */
+.testata .marchio{transition:opacity .45s var(--ease)}
+.testata.senza-marchio .marchio{opacity:0;pointer-events:none}
 .pillole{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
 
 /* ── 2 · Loghi e paragrafo a due toni ── */
@@ -244,9 +211,11 @@ html.viaggio .due-toni .pt{background:rgba(245,244,239,.46)}
 html.viaggio .due-toni .pt.qui{background:var(--rec)}
 
 /* ── 3 · Pacchetti, ciascuno come una sezione di Linear: pannello, titolo, riga grigia, dettagli ── */
-/* «Tutto quello che serve» arriva largo dopo lo showreel (s7) e introduce i pacchetti: niente filo e 96 px fino
-   all'etichetta della prima scena (il palco della scena ha già il suo spazio sopra) */
+/* «Tutto quello che serve» arriva largo dopo l'apertura (s7) e introduce i pacchetti: niente filo e s6 fino alla
+   prima frase della scena (il palco della scena ha già sopra la testata + 36 px; qui si aggiunge solo quello che manca
+   per arrivare a s6, che dal 19/11 è 112. Con «Riduci movimento» il palco ha già s6 sopra) */
 #servizi{padding-top:var(--s7);padding-bottom:0;border-top:0}
+@media (prefers-reduced-motion:no-preference){#servizi{padding-bottom:max(0px,calc(var(--s6) - var(--testata) - 36px))}}
 #contenuti{border-top:0;padding-top:0}
 .dettagli{margin-top:var(--s3)}
 .dettagli summary{list-style:none;display:inline-flex;align-items:center;gap:12px;min-height:44px;cursor:pointer;font:500 17px/1 var(--sans);color:var(--av)}
@@ -288,7 +257,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 .scena-sito{position:relative;height:340vh;height:340svh;border-top:1px solid var(--filo)}
 .palco{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;padding:calc(var(--testata) + env(safe-area-inset-top) + 36px) var(--pan) calc(var(--s2) + env(safe-area-inset-bottom));overflow:hidden}
 .palco-testa{padding:0 calc(var(--lato) - var(--pan))}
-.battute{display:grid;margin-top:var(--s2)}
+.battute{display:grid;margin-top:0}
 .battuta{grid-area:1/1;opacity:0;transform:translate3d(0,10px,0);transition:opacity .45s var(--ease),transform .55s var(--ease)}
 .battuta.su{opacity:1;transform:none}
 .palco-pannello{flex:1;min-height:0;margin-top:var(--s3)}
@@ -467,7 +436,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
 /* ── 7 · Chiusura centrata ── */
 .chiusura{text-align:center;padding:var(--s7) var(--lato)}
-.chiusura .sotto{margin:var(--s3) auto 0;max-width:19em}
+.chiusura .sotto{margin:var(--s4) auto 0;max-width:19em}   /* come tutti i titoli di sezione: 40 px dal titolo alla descrizione (19/11) */
 .chiusura .pillole{justify-content:center;margin-top:var(--s4)}
 
 /* ── 8 · Piede a colonne ── */
@@ -697,7 +666,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
 .chat-cifra b:first-child{opacity:0}
 .chat-icone{display:flex;align-items:center;gap:6px;color:var(--av)}
 
-/* testata della chat: indietro, logo dell'oreficeria (un anello con la pietra arancio), nome, stato, «Esempio» */
+/* testata della chat: indietro, logo dell'oreficeria (un anello con la pietra arancio), nome, stato (la pillola
+   «Esempio» è stata tolta il 19/11: resta l'etichetta «Esempio · WhatsApp» in basso a destra del pannello) */
 .chat-testa{flex:none;display:flex;align-items:center;gap:9px;height:60px;padding:0 14px 2px 6px;background:var(--chat-barra);border-bottom:1px solid rgba(245,244,239,.07)}
 .chat-indietro{width:24px;height:24px;color:var(--av)}
 .chat-logo{position:relative;flex:none;width:38px;height:38px;border-radius:50%;background:#0B0A06;box-shadow:inset 0 0 0 1px rgba(245,244,239,.13)}
@@ -708,7 +678,6 @@ details[open] > summary .piu::after{transform:rotate(0)}
 .chat-sub{display:grid;font-size:12.5px;line-height:1.15;color:var(--av2)}
 .chat-sub span{grid-area:1/1}
 .chat-sub span + span{opacity:0}
-.chat-esempio{flex:none;display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.16);font:400 9.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--av3)}
 
 /* i messaggi: dall'alto, come in una chat appena aperta */
 .chat-flusso{flex:1;min-height:0;display:flex;flex-direction:column;align-items:flex-start;padding:18px 12px 0}
@@ -746,7 +715,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
    scorsa fino all'ultimo messaggio: la domanda resta sopra, nascosta, e si vedono risposta, «Perfetto, sono Giulia» e il
    riepilogo. Via la pillola «Esempio» (il nome dell'oreficeria non ci stava) e l'ora del riepilogo (andava a capo) */
 .tri .chat-flusso{justify-content:flex-end;overflow:hidden;padding-bottom:4px}
-.tri .chat-esempio,.tri .chat-rie-testa span + span{display:none}
+.tri .chat-rie-testa span + span{display:none}
 /* ── il movimento: solo con .anima (lo mette lo script); .ferma lo tiene fermo all'inizio o in pausa ── */
 @keyframes chat-qui{from{opacity:0}to{opacity:1}}
 @keyframes chat-via{from{opacity:1}to{opacity:0}}
@@ -790,11 +759,47 @@ details[open] > summary .piu::after{transform:rotate(0)}
    Nella D del 18/11 la regola generale «.pacchetto .chip» è finita per sbaglio nello stile del noscript: se la si
    rimette nel foglio principale, questa riga diventa un doppione innocuo */
 #va > .pannello::before{background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,0) 58%,rgba(16,15,9,.9) 66%,var(--bg) 74%)}
+/* ── INIZIO FINALE RIEPILOGO (19/11) ──────────────────────────────────────────────────────────────────────────────
+   Niccolò: «nell'esempio WhatsApp fare che ingrandisce alla fine leggermente sul riepilogo, le altre chat scompaiono e
+   quel messaggio va al centro zoomato anche senza telefono». Solo nella chat con data-finale (il pannello del Virtual
+   Assistant); il telefonino della Campagna 360° resta com'è.
+   - A --t7 (5,6 s: 0,7 s dopo che il puntino del riepilogo si è posato) la «camera» si avvicina in un solo movimento
+     di 1 s, curva standard senza rimbalzi: il telefono (ora, intestazione, messaggi, campo per scrivere, fondo) si
+     ingrandisce un poco e svanisce nella prima metà; il riepilogo va da solo al centro della parte libera del pannello
+     (dall'alto fino all'etichetta «Esempio · WhatsApp»), ingrandito di data-finale (1,25; meno se non ci sta tra i
+     16 px dei due lati), largo quanto il pannello meno 16 px per parte (allineato all'etichetta).
+   - Il riepilogo del finale è una copia (.chat-fine) che lo script mette FUORI dalla chat rimpicciolita, con tutte le
+     misure in em: si ingrandisce cambiando la misura vera dei caratteri, quindi le scritte restano nitide. All'inizio
+     del movimento sta esattamente sopra quello della chat (che sparisce subito dopo); camera e copia usano la stessa
+     curva e lo stesso tempo, così il riepilogo non si stacca dal resto mentre si muove.
+   - Posizioni e misure le calcola lo script (finale(), dentro CHAT-VA · JS): --fx0/--fy0/--fw0/--ff0 dove sta il
+     riepilogo nella chat, --fx1/--fy1/--fw1/--ff1 dove va, --cx/--cy/--ckz dove finisce la camera.
+   - Con .finale lo stato «di base» è quello finale: con «Riduci movimento» si vede subito il riepilogo al centro. Se
+     la chat si rigioca (pannello uscito del tutto e poi rientrato) si rigioca anche il finale. ── */
+.chat{--t7:5.6s;--chat-cam:cubic-bezier(.45,0,.2,1)}
+.chat-fine{position:absolute;z-index:1;left:var(--fx1);top:var(--fy1);width:var(--fw1);font:400 var(--ff1)/1.36 var(--sans);letter-spacing:-.006em;word-spacing:0;text-align:left;color:var(--av);-webkit-font-smoothing:antialiased;pointer-events:none}
+/* le misure della scheda del riepilogo, in em (1em = 16 px della chat): stesse proporzioni, a qualsiasi grandezza */
+.chat-fine .chat-rie{margin:0;padding:.75em .875em .875em;border-radius:.875em;box-shadow:inset 0 0 0 .0625em rgba(245,244,239,.11),0 1.125em 2.125em -1em rgba(0,0,0,.9)}
+.chat-fine .chat-rie-testa{gap:1.6em;font-size:.625em;white-space:nowrap}
+.chat-fine .chat-rie-cosa{gap:.5625em;margin-top:.6875em;font-size:1em;white-space:nowrap}
+.chat-fine .chat-rie-chi{margin:.2143em 0 0 1.2857em;font-size:.875em;white-space:nowrap}
+.chat-fine .chat-punto{width:.5625em;height:.5625em}
+/* per misurarla (lo script la mette e la toglie nello stesso istante: non si vede mai) */
+.chat-fine.misura{left:0;top:0;width:max-content;font-size:16px;visibility:hidden;animation:none!important}
+.chat.finale .chat-tela{transform:translate(var(--cx),var(--cy)) scale(var(--ckz));opacity:0}
+@keyframes chat-camera{from{transform:translate(0px,0px) scale(var(--k))}to{transform:translate(var(--cx),var(--cy)) scale(var(--ckz))}}
+@keyframes chat-fine-va{from{left:var(--fx0);top:var(--fy0);width:var(--fw0);font-size:var(--ff0)}}
+.chat.anima.finale .chat-tela{animation:chat-camera 1s var(--chat-cam) var(--t7) both,chat-via .5s ease var(--t7) both}
+.chat.anima.finale .chat-tela .chat-rie{animation:chat-arriva .56s var(--chat-e) var(--t5) both,chat-via .01s linear calc(var(--t7) + .06s) forwards}
+.chat.anima .chat-fine{animation:chat-fine-va 1s var(--chat-cam) var(--t7) both,chat-qui .01s linear var(--t7) both}
+.chat.anima .chat-fine .chat-rie,.chat.anima .chat-fine .chat-punto,.chat.anima .chat-fine .chat-punto::after{animation:none}
+/* ── FINE FINALE RIEPILOGO ── */
 /* =============================================================================================
    FINE CHAT-VA · CSS
    ============================================================================================= */
+.pacchetto .sotto{font-family:var(--serif);text-wrap:balance} /* descrizioni dei pacchetti nel carattere del titolo, stessa misura e spessore (19/11); righe bilanciate (19/11, verifica: a 390 «con l’IA.» restava da solo) */
 </style>
-<noscript><style>.scena{display:none}.macchia{display:none}.continua{display:none}</style></noscript>
+<noscript><style>.macchia{display:none}</style></noscript>
 </head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -835,51 +840,31 @@ details[open] > summary .piu::after{transform:rotate(0)}
   </div>
 </header>
 <i class="punto" id="punto" aria-hidden="true"></i>
-<div class="continua" id="continua" aria-hidden="true"><span>Scorri</span><i></i></div>
 <div class="tinta-safari" aria-hidden="true"></div>
 
-  <!-- 0 · Apertura dal sito vero (17/11), fuori da <main> perché sui telefoni larghi va da bordo a bordo (main taglia ai
-       lati): copertina con la macchia, poi la scena (il punto di «scegliere» → tutto arancio →
-       la V e il nome → il muro dei lavori del Jué → di nuovo tutto arancio) -->
+  <!-- 0 · Apertura in tre momenti (19/11): «Fatti trovare. Fatti scegliere.» → il punto di «scegliere» si allarga fino al
+       tutto arancio e nasce il nome → il nome diventa la V del logo → l'arancio torna nel puntino del logo e il puntino
+       scende nel punto di «serve». Fuori da <main> perché sui telefoni larghi va da bordo a bordo (main taglia ai lati) -->
   <div class="apertura">
-  <section class="copertina" id="inizio" aria-labelledby="t-eroe">
-    <canvas class="macchia" aria-hidden="true"></canvas>
-    <div class="cop-wrap" id="copertina-wrap">
-      <p class="cop-mono">Social · Google · Video · Siti</p>
-      <h1 class="t1" id="t-eroe">Fatti trovare.<br>Fatti <em>scegliere</em><span class="rec-punto" id="rec-punto" aria-hidden="true"></span><span class="sr">.</span></h1>
-      <p class="cop-intro">Instagram, TikTok, scheda Google e video, ogni mese. Per ogni attività della Valdinievole: negozi, ristoranti, saloni, studi, artigiani e strutture.</p>
-      <p class="cop-fiducia">Preventivo scritto prima · Paghi solo se ti piace · Risposta su WhatsApp</p>
-    </div>
-  </section>
-
-  <section class="scena" id="lavori" aria-label="Il nostro lavoro per il Jué Club">
-    <div class="scena-stage" id="scena-stage">
-      <div class="fondo"></div>
-      <div class="fondo-v" id="fondo-v"></div>
-      <div class="plano" id="plano"><div class="muro" id="muro" aria-hidden="true"></div></div>
-      <div class="velo" id="velo"></div>
-      <div class="bordi" id="bordi"></div>
+  <section class="ap" id="inizio" aria-labelledby="t-eroe">
+    <div class="ap-palco" id="ap-palco">
+      <canvas class="macchia" aria-hidden="true"></canvas>
+      <div class="cop-wrap" id="copertina-wrap">
+        <h1 class="t1" id="t-eroe">Fatti trovare.<br>Fatti <em>scegliere</em><span class="rec-punto" id="rec-punto" aria-hidden="true"></span><span class="sr">.</span></h1>
+      </div>
       <i class="ap-disco" id="ap-disco" aria-hidden="true"></i>
+      <div class="lv" id="ap-logo" aria-hidden="true"><span class="n"><span class="vv">V</span><span class="e">eniello</span><i class="lpt"></i><span class="st">studio</span></span><i class="pd"></i></div>
+      <i class="ap-pt" id="ap-pt" aria-hidden="true"></i>
     </div>
   </section>
   </div>
 
 <main id="contenuto">
 
-
-  <!-- 1 · Lo showreel: comincia arancio, come finisce la scena -->
-  <section class="showreel" id="showreel-sez" aria-label="Showreel di Veniello Studio">
-    <figure class="pannello pannello-eroe sfuma-giu">
-      <video id="showreel" muted playsinline preload="none" poster="../comune/img/showreel-verticale.jpg" data-inizio="../comune/img/showreel-inizio.jpg" src="../comune/video/showreel-verticale.mp4" aria-label="Showreel di Veniello Studio"></video>
-      <i class="posto-video" data-posto data-video aria-hidden="true"></i>
-      <figcaption class="chip">Showreel · Veniello Studio</figcaption>
-    </figure>
-  </section>
-
   <!-- 3 · Servizi -->
   <section class="sez" id="servizi" aria-labelledby="t-servizi">
     <h2 class="t-sez" id="t-servizi">Tutto quello<br>che <em>serve</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
-    <p class="sotto">Quattro pacchetti. Prendi quello che ti serve, oppure tutto insieme.</p>
+    <p class="sotto">In quattro pacchetti. Prendi quello che ti serve, oppure tutti e quattro insieme.</p>
   </section>
 
   <!-- ===== INIZIO HTML SCENA SOCIAL (sostituisce nella D l'<article class="sez pacchetto" id="contenuti"> con lo spot) ===== -->
@@ -887,11 +872,10 @@ details[open] > summary .piu::after{transform:rotate(0)}
   <section class="scena-social" id="contenuti" aria-label="Creazione Contenuti: contenuti che fermano il dito">
     <div class="palco" id="palco-social">
       <div class="palco-testa">
-        <p class="micro">Creazione Contenuti</p>
         <div class="battute">
           <h3 class="t2 battuta su">Contenuti che<br><em>fermano</em> il dito<i class="pt" aria-hidden="true"></i><span class="sr">.</span></h3>
           <p class="t2 battuta" aria-hidden="true">Reel per le tue<br><em>serate</em>…</p>
-          <p class="t2 battuta" aria-hidden="true">…stories per<br>ogni <em>novità</em>…</p>
+          <p class="t2 battuta" aria-hidden="true">…stories per<br><em>eventi</em>…</p>
           <p class="t2 battuta" aria-hidden="true">…e un profilo che<br>si fa <em>scegliere</em><i class="pt" aria-hidden="true"></i></p>
         </div>
       </div>
@@ -995,7 +979,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
 
   <article class="sez pacchetto dopo-scena" aria-labelledby="t-contenuti">
     <h3 class="t2" id="t-contenuti">Creazione<br>Contenuti<i class="pt" data-posto aria-hidden="true"></i></h3>
-    <p class="sotto">Video, foto e stories per i tuoi social, anche con l’IA.</p>
+    <p class="sotto">Video, foto e stories per i&nbsp;tuoi social, anche con l’IA.</p>
     <details class="dettagli">
       <summary>Scopri i dettagli<i class="piu" aria-hidden="true"></i></summary>
       <ul class="voci"><li>Creazione di contenuti con l’IA</li><li>Editing di foto e video</li><li>Scheda Google</li><li>Restyling dei profili Instagram e TikTok</li><li>Stories per novità ed eventi</li></ul>
@@ -1008,7 +992,6 @@ details[open] > summary .piu::after{transform:rotate(0)}
   <section class="scena-sito" id="sito" aria-label="Sito Web: completamente personalizzabile">
     <div class="palco" id="palco">
       <div class="palco-testa">
-        <p class="micro">Sito Web</p>
         <div class="battute">
           <h3 class="t2 battuta su">Completamente<br><em>personalizzabile</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></h3>
           <p class="t2 battuta" aria-hidden="true">Che tu lo voglia<br><em>così</em>…</p>
@@ -1071,7 +1054,7 @@ details[open] > summary .piu::after{transform:rotate(0)}
   <article class="sez pacchetto" id="va" aria-labelledby="t-va">
     <figure class="pannello pannello-va sfuma-giu">
       <!-- ============ INIZIO CHAT-VA · HTML 1 (pannello del Virtual Assistant: sostituisce il <video> di va-verticale.mp4) ============ -->
-      <div class="chat" data-largo="360" data-sopra="#t-va" data-margine="64" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede all’Oreficeria Bianchi se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
+      <div class="chat" data-finale="1.25" data-largo="360" data-sopra="#t-va" data-margine="64" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede all’Oreficeria Bianchi se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
         <div class="chat-tela" aria-hidden="true">
           <div class="chat-stato">
             <span class="chat-ora">23:4<span class="chat-cifra"><b>7</b><b>8</b></span></span>
@@ -1085,7 +1068,6 @@ details[open] > summary .piu::after{transform:rotate(0)}
             <svg class="chat-indietro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
             <span class="chat-logo"></span>
             <span class="chat-chi"><b>Oreficeria Bianchi</b><span class="chat-sub"><span>online</span><span>sta scrivendo…</span></span></span>
-            <span class="chat-esempio">Esempio</span>
           </div>
           <div class="chat-flusso">
             <p class="chat-m chat-io chat-m1">Siete aperti domenica? Vorrei vedere le fedi<span class="chat-ts">23:47<svg class="chat-spunte" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5.4l2.9 2.9L10 1.6"/><path d="M6.9 7.7l.6.6L14 1.6"/></svg></span></p>
@@ -1127,7 +1109,6 @@ details[open] > summary .piu::after{transform:rotate(0)}
         <div class="tri"><div class="tri-in"><div class="chat" data-largo="250" data-chat-copia></div></div><span class="tri-et">Assistant</span></div>
         <!-- ============ FINE CHAT-VA · HTML 2 ============ -->
       </div>
-      <figcaption class="chip">Tutto insieme</figcaption>
     </figure>
     <p class="micro speciale">Pacchetto speciale</p>
     <h3 class="t2" id="t-360">Campagna<br>Pubblicitaria 360°<i class="pt" data-posto aria-hidden="true"></i></h3>
@@ -1216,343 +1197,369 @@ details[open] > summary .piu::after{transform:rotate(0)}
 </footer>
 
 <script>
-/* ===== Apertura dal sito vero (17/11), prima parte: «Continua a scorrere», il muro dei lavori del Jué, il logo nel riquadro
-   arancio. Copiata da veniello-studio/sito/index.html (righe 866-1081) con queste differenze: immagini da
-   ../comune/img/muro/, la testata è quella della D, il riquadro del logo è sempre quello verticale del telefono (la D è una
-   colonna da telefono anche al computer) e i tempi UM, RZ, FINE (vedi TL). ===== */
-var apRidotto=false;try{apRidotto=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-if(apRidotto)document.documentElement.classList.add('fermo');
-// «Scorri» → «Continua a scorrere»: fisso in basso finché la scena non è finita (sparisce quando arriva lo showreel)
-(function(){var c=document.getElementById('continua'),t=c&&c.firstChild,d=document.getElementById('showreel-sez');if(!c||!d)return;
-  var ora=-1;function aggiorna(){var y=scrollY,fine=d.getBoundingClientRect().top+y-innerHeight*.9,st=y>fine?2:y>40?1:0;if(st===ora)return;ora=st;
-    clearTimeout(c._t);if(st===2){c.classList.add('via');c._t=setTimeout(function(){c.style.display='none'},500)}
-    else{c.style.display='';c.offsetWidth;c.classList.remove('via')}
-    t.textContent=st===0?'Scorri':'Continua a scorrere'}
-  addEventListener('scroll',aggiorna,{passive:true});addEventListener('resize',aggiorna);aggiorna()})();
-// un link interno (#…) non è un colpo di dito: la scena non frena il suo inizio (vedi frena())
-var saltoLink=-1e9;document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(a)saltoLink=performance.now()});
+/* ===== Apertura in tre momenti (19/11) ======================================================================================
+   Niccolò: «Fatti trovare fatti scegliere -swipe- veniello studio -swipe- logo V», con i colori e i movimenti di prima.
+   Un palco fermo (sticky, .ap-palco) alto uno schermo dentro la sezione #inizio, alta quanto lo scorrimento dell'apertura (P)
+   più il palco. Lo scorrimento, in px dalla cima della sezione (V = l'altezza dello schermo più piccolo, 100svh):
+     0          M1  «Fatti trovare. Fatti scegliere.» da solo, al centro, sulla macchia
+     0 → m1         il punto di «scegliere» si allarga da dov'è (il centro scivola piano dove nascerà il nome) fino a coprire
+                    lo schermo, inghiottendo il titolo; le luci della macchia si spengono; sull'arancio nasce il nome: si apre
+                    il puntino scuro, «eniello» e «studio» escono dal puntino, la V si posa da appena più grande
+     m1         M2  il nome sull'arancio
+     m1 → m2        il nome diventa il logo: i movimenti del «momento V» di prima, al contrario («studio» rientra, il puntino
+                    scuro va in alto a destra della V e «eniello» gli rientra dietro, la V cresce fino al logo grande)
+     m2         M3  il logo: la V grande col puntino scuro, sull'arancio
+     m2 → c1        il puntino scuro si richiude nell'arancio e l'arancio si stringe dentro il puntino del logo: V avorio e
+                    puntino arancio sul nero, come l'icona (da c1, «chiuso», il puntino è il posto del motore, .ap-pt)
+     via            il puntino (#punto, il motore del sito) parte e scende nel punto di «serve» (tratto 'scende')
+     P              il palco se ne va con la pagina (la V esce in alto) e la testata ritrova il suo marchio
+     fine           il puntino è seduto in «serve» (lo calcola il motore: APERTURA.fine): il quarto aggancio
+   Il disegno segue lo scorrimento «morbido» del motore del puntino: lo script principale chiama APERTURA.rendi(ys) a ogni
+   fotogramma, così disco, logo e #punto vanno con lo stesso orologio e il puntino non c'è mai due volte.
+   Con «Riduci movimento» (html.fermo, messa già in testa alla pagina) resta la copertina ferma, senza aggancio. ===== */
+(function(){
+  'use strict';
+  var html = document.documentElement;
+  var ridotto = false; try { ridotto = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  var sez = document.getElementById('inizio'), palco = document.getElementById('ap-palco'), wrap = document.getElementById('copertina-wrap');
+  var dot = document.getElementById('rec-punto'), disco = document.getElementById('ap-disco'), lv = document.getElementById('ap-logo'), apt = document.getElementById('ap-pt');
+  var testata = document.getElementById('testata');
+  if (ridotto || !sez || !palco || !wrap || !dot || !disco || !lv || !apt || !testata || !('requestAnimationFrame' in window)) { html.classList.add('fermo'); return; }
+  var lvN = lv.querySelector('.n'), lvV = lvN.children[0], lvE = lvN.children[1], lvS = lvN.children[3], lvD = lv.querySelector('.pd');
+  /* l'altezza dello schermo più piccolo (con la barra di Safari aperta): le misure non cambiano quando la barra si chiude */
+  var sonda = document.createElement('div');
+  sonda.style.cssText = 'position:absolute;left:0;top:0;width:1px;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
+  document.body.appendChild(sonda);
 
-// il muro dei lavori veri fatti per il Jué (miniature larghe 400 px in ../comune/img/muro/), già al loro posto intorno al
-// riquadro del logo: nome, altezza a 400 di larghezza, tono (s scuro, b blu, f foto, c chiaro), gruppo di lavori che si somigliano
-var LAVORI=[['sito-1',711,'s'],['reel-5-5',711,'b','bottiglia'],['jue-neon',400,'f'],['sito-cocktail',400,'s','oldfashioned'],['locandina',533,'b','martedi'],['jue-oldfashioned',400,'f','oldfashioned'],['sito-3',711,'c','galleria'],['spot-0-3',711,'b','bottiglia'],['jue-locale',533,'f'],['google-mappa',533,'c','google'],['reel-1-2',711,'f'],['jue-dj-pioneer',400,'f'],['sito-4',711,'c'],['reel-14-0',711,'b'],['jue-parete',400,'f'],['sito-salotto',533,'c'],['spot-6-0',711,'b'],['jue-luci',400,'f'],['sito-2',711,'b','martedi'],['reel-23-0',711,'b','drink'],['google',400,'c','google'],['reel-9-0',711,'b','ghiaccio'],['spot-2-0',711,'b','ghiaccio'],['sito-bistrot',400,'s'],['reel-19-5',711,'b','drink'],['spot-3-3',711,'b','ghiaccio'],['sito-dj',400,'s'],['spot-7-3',711,'b','drink'],['spot-8-7',711,'f','bottiglia']];
-// Tempi, in altezze di schermo scorse dalla cima della pagina (quelli del sito vero): il puntino si stacca, scende, lampeggia
-// e si allarga fino a riempire lo schermo (0-IR); da IR il «momento V» (fino a Z0; la camera non va oltre finché il nome non è
-// uscito); la camera si allontana (Z0-Z1) e compare il muro (WF0-WF1).
-// Nella D (17/11, dal video di Niccolò): la camera si allontana fino a UM (il punto più lontano del video, muro ancora
-// piatto), poi torna indietro sullo stesso percorso fino al riquadro a tutto schermo e allo schermo tutto arancio (RZ); la
-// scena resta lì fino a FINE e poi se ne va con la pagina, e sotto arriva lo showreel, che comincia arancio.
-// TV: fin dove il sito vero fa vedere il muro (serve solo a scegliere gli stessi lavori al loro posto).
-var TL={T:3.5,IR:.5,Z0:.72,Z1:1.5,W0:1.45,WF0:.92,WF1:1.2,T0:1.3,T1:1.85,P0:1.45,P1:3.5,VE0:1.3,VE1:1.6,AX:46,AZ:-16,SH:.32};
-['T','IR','Z0','Z1','WF0','WF1','T0','T1','P0','P1','VE0','VE1'].forEach(function(k){TL[k]+=TL.SH});
-TL.TV=TL.T;TL.UM=1.41;TL.RZ=2*TL.UM-TL.Z0;TL.FINE=TL.RZ+.3;
-var stage=document.getElementById('scena-stage'),plano=document.getElementById('plano'),muro=document.getElementById('muro');
-var tessere=document.createElement('div');tessere.className='tessere';muro.appendChild(tessere);
-var tv=document.createElement('div');tv.className='tv';muro.appendChild(tv);
-var lv=document.createElement('div');lv.className='lv';lv.setAttribute('aria-hidden','true');
-lv.innerHTML='<span class="n"><span class="vv">V</span><span class="e">eniello</span><i class="lpt"></i><span class="st">studio</span></span><i class="pd"></i>';tv.appendChild(lv);
-var lvN=lv.firstChild,lvV=lvN.children[0],lvE=lvN.children[1],lvP=lvN.children[2],lvS=lvN.children[3],lvD=lv.lastChild;
-var sonda=document.createElement('div');sonda.style.cssText='position:absolute;left:0;top:0;width:1px;height:100vh;height:100svh;visibility:hidden;pointer-events:none';document.body.appendChild(sonda);
-var G={};
-function seg(u,a,b){return u<=a?0:u>=b?1:(u-a)/(b-a)}
-function ioq(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
-function muroCostruisci(zone,fermo,soloMisure){ // zone: per ogni colonna il tratto che entra nello schermo (null = tutto); soloMisure: solo le misure
-  var Wd=stage.clientWidth,V=sonda.offsetHeight,hdr=64,pc=Wd>V*1.15; // hdr: la testata del sito vero (la D è alta 60 px: 2 px di differenza, ma così il muro è identico); schermo largo (telefono girato): riquadro orizzontale
-  var cw=Math.round(pc?.15*Math.min(Wd,1.75*V):.27*Math.min(Wd,.5*V));
-  if(fermo)while((Wd/(1.1*cw)+1)*(V/(1.47*cw)+1)>28)cw+=4;
-  var g=Math.max(6,Math.round(cw*(pc?.078:.082))),span=pc?3:1;
-  var C=Math.max(pc?11:9,2*Math.ceil(((pc?1.57:2.6)*Wd/(cw+g)-1)/2)+1);
-  var Hw=Math.round(V*2.4),W=C*cw+(C-1)*g,c0=(C-span)>>1,bw=span*cw+(span-1)*g;
-  var asp=pc?16/9:9/16,bh=Math.round(bw/asp),s0=Math.min(Wd/bw,(V-hdr)/bh);
-  var bx=c0*(cw+g),by=Math.round(Hw*.58-bh/2),fx=Wd/2,fy=(V+hdr)/2,ml=Math.round(fx-bx-bw/2),mt=Math.round(fy-by-bh/2),P=Math.round(V*(pc?1.67:1.125));
-  if(fermo)mt+=Math.round((V-hdr)/2+bh/2+2*g);
-  muro.style.cssText='width:'+W+'px;height:'+Hw+'px;left:'+ml+'px;top:'+mt+'px;--rt:'+(pc?12:8)+'px';
-  var ra=TL.AX*Math.PI/180,rz=TL.AZ*Math.PI/180,myR=-.16*V;
-  function vista(x,y){var X=ml+x-fx,Y=mt+y-fy,X2=1.12*X,Y2=1.12*(Y+myR),x3=X2*Math.cos(rz)-Y2*Math.sin(rz),y3=X2*Math.sin(rz)+Y2*Math.cos(rz),w=1-y3*Math.sin(ra)/P;
-    return [X,Y,x3/w,y3*Math.cos(ra)/w]}
-  function vicino(a,b){var d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(!fermo)d=Math.min(d,Math.hypot(a[2]-b[2],a[3]-b[3]));d/=cw;var q=d/4.5;return (d<3.4?4:0)+1/(1+d*d)+1/(1+q*q*q*q)}
-  function doppio(i,d){return 3000*d*(LAVORI[i][2]==='c'?8:1)+(fermo?20000:0)}
-  plano.style.transformOrigin=fx+'px '+fy+'px';
-  tv.style.cssText='left:'+bx+'px;top:'+by+'px;width:'+bw+'px;height:'+bh+'px';
-  if(!fermo){lv.style.width=(bw*s0).toFixed(2)+'px';lv.style.height=(bh*s0).toFixed(2)+'px';lv.style.transformOrigin='0 0';lv.style.transform='scale('+(1/s0).toFixed(6)+')';
-    logoMisura(bw*s0,bh*s0,1,Wd,V,hdr,fx+TL.W0*(ml+bx+bw/2-fx),fy+TL.W0*(mt+by+bh/2-fy))}
-  else lv.style.width=lv.style.height=lv.style.transformOrigin=lv.style.transform='';
-  G.pc=pc;G.Wd=Wd;G.V=V;G.hdr=hdr;G.s0=s0;G.fx=fx;G.fy=fy;G.C=C;G.P=P;
-  if(soloMisure)return;
-  tessere.textContent='';
-  var n=LAVORI.length,posti=[],usi=LAVORI.map(function(){return 0}),giro=0,simile=0;
-  for(var q=0;q<n;q++)if(LAVORI[q][0]==='sito-3')simile=q;
-  function alt(i){return Math.round(cw*LAVORI[i][1]/400)}
-  function conta(c,t,h){
-    if(fermo){var X=ml+c*(cw+g);return X<Wd&&X+cw>0&&mt+t<V&&mt+t+h>0}
-    var z=zone&&zone[c];return !zone||(z&&t<z[1]+cw&&t+h>z[0]-cw)}
-  function scegli(c,x,y,su){
-    var best=-1,bv=1e9;
-    if(!conta(c,su?y-cw*1.6:y,cw*1.6)){giro=(giro+7)%n;return giro}
-    for(var q=0;q<n;q++){var i=(q+giro)%n,h=alt(i),t=su?y-h:y,v=usi[i]*25,qui=vista(x+cw/2,t+h/2);
-      posti.forEach(function(p){if(!p.conta)return;var d=vicino(p.v,qui),gp=LAVORI[p.i][3];
-        if(p.i===i)v+=doppio(i,d);else if(gp&&gp===LAVORI[i][3])v+=2400*d;
-        if(p.tono===LAVORI[i][2]&&Math.abs(p.x-x)<1.5*(cw+g)&&Math.min(t+h,p.y+p.h)-Math.max(t,p.y)>-g*2)v+=30});
-      if(v<bv){bv=v;best=i}}
-    giro=(giro+5)%n;return best}
-  function metti(i,c,x,y){var L=LAVORI[i],h=alt(i),im=document.createElement('img'),k=conta(c,y,h);
-    im.setAttribute('data-src','../comune/img/muro/'+L[0]+'.jpg');im.alt='';im.decoding='async';im.width=400;im.height=L[1];
-    im.style.cssText='left:'+x+'px;top:'+y+'px;width:'+cw+'px';im._c=c;im._y=y;im._h=h;tessere.appendChild(im);
-    posti.push({i:i,x:x,y:y,h:h,tono:L[2],conta:k,v:vista(x+cw/2,y+h/2),el:im});if(k)usi[i]++;return h}
-  if(!fermo)posti.push({i:simile,x:bx,y:by,h:bh,tono:'s',conta:true,v:vista(bx+bw/2,by+bh/2)});
-  for(var c=0;c<C;c++){var x=c*(cw+g),y,i;
-    if(c>=c0&&c<c0+span){
-      y=by-g;while(y>0){i=scegli(c,x,y,true);y-=alt(i);metti(i,c,x,y);y-=g}
-      y=by+bh+g;while(y<Hw){i=scegli(c,x,y,false);y+=metti(i,c,x,y)+g}
-    }else{y=-Math.round(((c*53)%97)/97*cw*1.2);while(y<Hw){i=scegli(c,x,y,false);y+=metti(i,c,x,y)+g}}
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function seg(u, a, b){ return u <= a ? 0 : u >= b ? 1 : (u - a) / (b - a); }
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function dolce(x){ x = clamp(x); return x * x * (3 - 2 * x); }
+  function liscio(t){ t = clamp(t); return .5 - .5 * Math.cos(Math.PI * t); }
+  function ioc(t){ t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function fuori(t){ t = clamp(t); return 1 - Math.pow(1 - t, 3); }
+  function scrivi(el, k, v){ var c = el._st || (el._st = {}); if (c[k] !== v) { c[k] = v; el.style[k] = v; } }   /* scrive uno stile solo se cambia */
+
+  /* ── il nome e il logo: due stati della stessa scritta, misurati come prima (logoMisura): il nome «Veniello·studio» al
+        centro del riquadro sotto la testata e il simbolo, la V grande (F) col puntino in alto a destra ── */
+  var LVT = { V: 450, D0: 250, D1: 800, DY: 620, S0: 680, S1: 1050 };   /* i tratti interni del «momento V» di prima */
+  var L = null;
+  function logoMisura(bw, bh){
+    var F = Math.min(.7 * bw, .42 * bh), N = Math.min(.105 * bw, .09 * bh), em = 1.18 * N;
+    lvN.style.fontSize = N.toFixed(3) + 'px';
+    var m = document.createElement('div'); m.className = 'lv'; m.setAttribute('aria-hidden', 'true'); m.style.visibility = 'hidden';
+    var c = lvN.cloneNode(true); c.removeAttribute('style'); c.style.fontSize = lvN.style.fontSize;
+    [].forEach.call(c.children, function(x){ x.removeAttribute('style'); }); m.appendChild(c); document.body.appendChild(m);
+    var r0 = c.getBoundingClientRect(), wn = r0.width, hn = r0.height, nl = (bw - wn) / 2, nt = (bh - hn) / 2 - .04 * N;
+    function box(i){ var r = c.children[i].getBoundingClientRect(); return { x: nl + r.left - r0.left, y: nt + r.top - r0.top, w: r.width, h: r.height }; }
+    var v = box(0), e = box(1), p = box(2), st = box(3), S = F / em; document.body.removeChild(m);
+    lvN.style.left = nl.toFixed(3) + 'px'; lvN.style.top = nt.toFixed(3) + 'px';
+    var sv = [bw / 2 - .04 * F, bh / 2 + .0533 * F], off = [.32 * em, -.2747 * em];
+    L = { S: S, em: em, N: N, F: F, v: v, e: e, p: p, st: st, cv: [v.x + v.w / 2, v.y + v.h / 2], sv: sv, off: off,
+          sp: [sv[0] + S * off[0], sv[1] + S * off[1]], rs: .1733 * F / 2, cp: [p.x + p.w / 2, p.y + p.h / 2] };
   }
-  G.migliora=function(){
-    var vivi=posti.filter(function(p){return !p.el||!!p.el.parentNode}),m=vivi.length,V2=[],x,y;
-    for(x=0;x<m;x++){V2.push([]);for(y=0;y<m;y++)V2[x].push(x===y?0:vicino(vivi[x].v,vivi[y].v))}
-    var costo=function(a,i,salta){var c=0;for(var q=0;q<m;q++){if(q===a||q===salta)continue;var pi=vivi[q].i,gp=LAVORI[pi][3];
-      if(pi===i)c+=doppio(i,V2[a][q]);else if(gp&&gp===LAVORI[i][3])c+=2400*V2[a][q]}return c};
-    var metti2=function(a,i){vivi[a].i=i;vivi[a].el.setAttribute('data-src','../comune/img/muro/'+LAVORI[i][0]+'.jpg')};
-    for(var gi=0;gi<5;gi++)for(x=0;x<m;x++){if(!vivi[x].el)continue;
-      for(y=0;y<m;y++){var ix=vivi[x].i,iy=vivi[y].i;if(y===x||!vivi[y].el||iy===ix||alt(iy)!==alt(ix))continue;
-        if(costo(x,iy,y)+costo(y,ix,x)<costo(x,ix,y)+costo(y,iy,x)-1){metti2(x,iy);metti2(y,ix)}}
-      for(var j=0;j<n;j++)if(j!==vivi[x].i&&alt(j)===alt(vivi[x].i)&&costo(x,j)<costo(x,vivi[x].i)-1)metti2(x,j)}
-  };
-}
-// Il «momento V»: il logo è disegnato dentro il riquadro, alla misura che ha a tutto schermo. Due stati della stessa scritta:
-// il simbolo (la V grande col puntino in alto a destra) e la scritta «Veniello.studio». Bianca sull'arancio, col puntino nero.
-var LVT={V:450,D0:250,D1:800,DY:620,S0:680,S1:1050};
-function logoMisura(bw,bh,s0,Wd,V,hdr,cx,cy){
-  var Vh=V-hdr,F=Math.min(.7*Wd,.42*Vh)/s0,N=Math.min(.105*Wd,.09*Vh)/s0,em=1.18*N;
-  lvN.style.fontSize=N.toFixed(3)+'px';
-  var m=document.createElement('div');m.className='lv';m.setAttribute('aria-hidden','true');m.style.visibility='hidden';
-  var c=lvN.cloneNode(true);c.removeAttribute('style');c.style.fontSize=lvN.style.fontSize;
-  [].forEach.call(c.children,function(x){x.removeAttribute('style')});m.appendChild(c);document.body.appendChild(m);
-  var r0=c.getBoundingClientRect(),wn=r0.width,hn=r0.height,nl=(bw-wn)/2,nt=(bh-hn)/2-.04*N;
-  function box(i){var r=c.children[i].getBoundingClientRect();return {x:nl+r.left-r0.left,y:nt+r.top-r0.top,w:r.width,h:r.height}}
-  var v=box(0),e=box(1),p=box(2),st=box(3),S=F/em;document.body.removeChild(m);
-  lvN.style.left=nl.toFixed(3)+'px';lvN.style.top=nt.toFixed(3)+'px';
-  var sv=[bw/2-.04*F,bh/2+.0533*F],off=[.32*em,-.2747*em],sp=[sv[0]+S*off[0],sv[1]+S*off[1]],rs=.1733*F/2;
-  G.L={S:S,em:em,N:N,v:v,e:e,p:p,st:st,cv:[v.x+v.w/2,v.y+v.h/2],sv:sv,off:off,sp:sp,rs:rs,cp:[p.x+p.w/2,p.y+p.h/2],
-    px:cx+s0*(sp[0]-bw/2),py:cy+s0*(sp[1]-bh/2),pr:s0*rs};
-}
-function posa(u){ // la camera: allontanamento (e, nel sito vero, inclinazione e scorrimento del muro)
-  var z=ioq(seg(u,TL.Z0,TL.Z1)),w=Math.pow(TL.W0,1-z),s=Math.pow(G.s0,1-z),k=ioq(seg(u,TL.T0,TL.T1));
-  var sc=w*(1+.12*k),my=-.32*G.V*seg(u,TL.P0,TL.P1),cy=-.2*G.V*k;
-  plano.style.transform='translate3d(0,'+cy.toFixed(1)+'px,0) perspective('+G.P+'px) rotateX('+(TL.AX*k).toFixed(2)+'deg) rotateZ('+(TL.AZ*k).toFixed(2)+'deg) scale('+sc.toFixed(4)+')';
-  muro.style.transform='translate3d(0,'+my.toFixed(1)+'px,0)';
-  tv.style.transform=z<1?'scale('+(s/w).toFixed(4)+')':'';
-  return k;
-}
-function pota(fermo){ // toglie i riquadri che non entrano mai nello schermo e dice, colonna per colonna, quale tratto si vede
-  var im=[].slice.call(tessere.children),vis=im.map(function(){return false}),H=Math.min(stage.clientHeight,G.V+120),u,campioni=[];
-  var m=fermo?0:Math.max(24,Math.round(.012*(G.Wd+G.V)));
-  if(fermo)campioni.push(-1);else for(u=TL.WF0;u<=TL.TV+.001;u+=.05)campioni.push(u);
-  campioni.forEach(function(u){if(u>=0)posa(u);var st=stage.getBoundingClientRect();
-    im.forEach(function(e,i){if(vis[i])return;var r=e.getBoundingClientRect(),t=r.top-st.top,l=r.left-st.left;
-      if(r.width>0&&r.width<3*G.Wd&&r.height<3*H&&t<H+m&&t+r.height>-m&&l<G.Wd+m&&l+r.width>-m)vis[i]=true})});
-  var zone=[];
-  im.forEach(function(e,i){if(!vis[i]){tessere.removeChild(e);return}var z=zone[e._c];zone[e._c]=z?[Math.min(z[0],e._y),Math.max(z[1],e._y+e._h)]:[e._y,e._y+e._h]});
-  plano.style.transform=muro.style.transform=tv.style.transform='';
-  return zone;
-}
-// il muro si costruisce dopo il primo disegno della pagina, in due pezzi, molto prima che serva; poi(): ridisegna la scena
-var inCostruzione=null;
-function muroPronto(fermo,poi){
-  var chiave=stage.clientWidth+'x'+sonda.offsetHeight+(fermo?'f':'');
-  if(inCostruzione){if(inCostruzione.chiave===chiave){inCostruzione.poi=poi;return}inCostruzione.vivo=false}
-  if(G.chiave===chiave){inCostruzione=null;if(poi)poi();return}
-  var lavoro={chiave:chiave,poi:poi,vivo:true};inCostruzione=lavoro;tessere.style.visibility='hidden';
-  var dopo=function(f){requestAnimationFrame(function(){setTimeout(function(){if(lavoro.vivo)f()},0)})};
-  dopo(function(){
-    muroCostruisci(null,fermo);var zone=pota(fermo);if(lavoro.poi)lavoro.poi();
-    dopo(function(){
-      muroCostruisci(zone,fermo);pota(fermo);G.migliora();G.chiave=chiave;inCostruzione=null;
-      [].forEach.call(tessere.children,function(e){e.src=e.getAttribute('data-src')});
-      G.n=tessere.children.length;tessere.style.visibility='';
-      if(lavoro.poi)lavoro.poi();
-    });
-  });
-}
-</script>
-<script defer src="../comune/js/gsap.min.js"></script>
-<script defer src="../comune/js/ScrollTrigger.min.js"></script>
-<script>
-/* ===== Apertura dal sito vero (17/11), seconda parte: la scena legata allo scorrimento (GSAP ScrollTrigger). Copiata da
-   veniello-studio/sito/index.html (righe 1121-1416, solo la scena: niente Lenis, niente frasi, niente parti del computer):
-   la D va come il sito vero sul telefono. In più specchio(): dopo UM la camera torna sul riquadro arancio. ===== */
-addEventListener('DOMContentLoaded',function(){
-  var scena=document.querySelector('.scena'),copertina=document.getElementById('inizio'),wrap=document.getElementById('copertina-wrap'),dot=document.getElementById('rec-punto');
-  var punto=document.getElementById('ap-disco'),velo=document.getElementById('velo'),bordi=document.getElementById('bordi'),fondoV=document.getElementById('fondo-v');
-  function clamp(x){return Math.max(0,Math.min(1,x))}
-  function lerp(a,b,t){return a+(b-a)*t}
-  function dolce(x){x=clamp(x);return x*x*(3-2*x)}
-  function ioc(t){t=clamp(t);return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
-  function scrivi(el,k,v){var c=el._st||(el._st={});if(c[k]!==v){c[k]=v;el.style[k]=v}} // scrive uno stile solo se cambia
-  // sp: l'entrata del simbolo sull'arancio (0-1): il puntino nero si apre come un buco nell'arancio e intorno compare la V
-  // bianca, che si posa da appena più grande; np (0 simbolo, 1 scritta composta), o (opacità del logo)
-  function logoDisegna(sp,np,o){
-    var L=G.L;if(!L)return;
-    var t=np*LVT.S1,ev=ioc(t/LVT.V),sc=Math.pow(L.S,1-ev),c=[lerp(L.sv[0],L.cv[0],ev),lerp(L.sv[1],L.cv[1],ev)],ov=1,ap=1;
-    if(sp<1){var z=1+.07*(1-dolce(seg(sp,.1,1)));c=[L.sp[0]+z*(c[0]-L.sp[0]),L.sp[1]+z*(c[1]-L.sp[1])];sc*=z;ov=dolce(seg(sp,.12,.72));ap=1-Math.pow(1-seg(sp,0,.5),3)}
-    scrivi(lvV,'transform','translate('+(c[0]-L.cv[0]).toFixed(2)+'px,'+(c[1]-L.cv[1]).toFixed(2)+'px) scale('+sc.toFixed(4)+')');
-    scrivi(lvV,'webkitTextStrokeWidth',lerp(.0467,.036,ev).toFixed(4)+'em');
-    scrivi(lvV,'opacity',ov<1?ov.toFixed(3):'');
-    var a=[c[0]+sc*L.off[0],c[1]+sc*L.off[1]],ex=ioc(seg(t,LVT.D0,LVT.D1)),ey=ioc(seg(t,LVT.D0,LVT.DY));
-    var dx=lerp(a[0],L.cp[0],ex),dy=lerp(a[1],L.cp[1],ey),dd=lerp(sc*.1733*L.em/(sp<1?z:1),L.p.w,ex)*ap;
-    scrivi(lvD,'transform','translate('+dx.toFixed(3)+'px,'+dy.toFixed(3)+'px) scale('+(dd/100).toFixed(5)+')');
-    scrivi(lvD,'visibility',ap>0?'inherit':'hidden');
-    var re=Math.min(ex,clamp((dx-dd/2-L.e.x)/L.e.w)),q=1-Math.pow(1-seg(t,LVT.S0,LVT.S1),3);
-    var ce=re>=1?'none':'inset(-20% '+(100-100*re).toFixed(2)+'% -20% 0)',cs=q>=1?'none':'inset(-20% '+(100-100*q).toFixed(2)+'% -20% 0)';
-    scrivi(lvE,'webkitClipPath',ce);scrivi(lvE,'clipPath',ce);scrivi(lvS,'webkitClipPath',cs);scrivi(lvS,'clipPath',cs);
-    scrivi(lvS,'transform',q<1?'translateX('+(-(1-q)*.25*L.N).toFixed(2)+'px)':'');
-    scrivi(lv,'opacity',o<1?o.toFixed(3):'');
-  }
-  // «Riduci movimento» (o senza GSAP): la scena è un palco fermo alto uno schermo, col muro e il riquadro arancio del logo
-  // al suo posto (com'è nel punto più lontano della camera); niente puntino che si allarga
-  if(!window.gsap||!window.ScrollTrigger||apRidotto){
-    document.documentElement.classList.add('fermo');
-    var fermo=function(){stage.classList.add('aperto');posa(TL.UM);tessere.style.opacity=1;fondoV.style.opacity=0;logoDisegna(1,1,1)};
-    muroPronto(false,fermo);
-    var tf,wf=innerWidth;addEventListener('resize',function(){if(Math.abs(innerWidth-wf)<40)return;wf=innerWidth;clearTimeout(tf);tf=setTimeout(function(){muroPronto(false,fermo)},200)});
-    return;
-  }
-  gsap.registerPlugin(ScrollTrigger);
-  var D={},E=0,stato={u:0},aperto=false,inVista=true,scenaST=null;
-  var tenuto=false,ritardo={v:0},prima=null,battendo=false,orlo=null;
-  // Il «momento V»: da IR lo schermo resta arancio (.fondo-v) e ci entra la V bianca del logo col suo puntino nero (a tempo,
-  // LV.S ms: un colpo di dito veloce non la salta; tornando su esce col dito, nel tratto LV.dT), il nome esce LV.H ms dopo, e
-  // la camera resta sul logo finché il nome non è uscito per LV.GO (vedi camera()). La pagina non si ferma mai.
-  var LV={S:450,H:180,GO:.55,dT:.15,dP:.075,nP:.115},sT=0,tS=0,s1=-1,nome={p:0},nomeSu=null;
-  var guida=false; // nel sito vero true al computer (scena legata allo scorrimento): la D va sempre come sul telefono
-  function ridisegna(){rendi(stato.u)}
-  function muroFatto(){orlo=null;rendi(stato.u)}
-  function batti(si){if(si===battendo)return;battendo=si;if(si)gsap.ticker.add(ridisegna);else gsap.ticker.remove(ridisegna)}
-  function scritta(su,subito){
-    if(subito){gsap.killTweensOf(nome);nomeSu=su;nome.p=su?1:0;return}
-    if(su===nomeSu)return;nomeSu=su;
-    gsap.to(nome,{p:su?1:0,duration:(su?LVT.S1/1000*(1-nome.p):.28*nome.p),ease:'none',overwrite:true,onUpdate:ridisegna});
-  }
-  function vPronto(){return sT>=1&&nome.p>=LV.GO}
-  var avanti=true,sG=0;
-  function stringi(u,uv){
-    var t=performance.now(),dt=Math.min(34,t-tS);tS=t;
-    var sotto=uv<TL.IR;
-    if(sotto&&(prima===null||sT<=0)){sT=sG=0;s1=-1;avanti=true;scritta(false,true);return 0}
-    var sS=sotto?0:seg(u,TL.IR,TL.IR+(guida?LV.dP:LV.dT));
-    if(prima===null){sT=sG=sS;avanti=true}
-    else{if(sotto||uv<prima-1e-6)avanti=false;else if(uv>prima+1e-6)avanti=true;
-      var g=sG=nome.p>0?1:guida||!avanti?sS:1,v=dt/(LV.S*(avanti?1:.6));sT=g>sT?Math.min(g,sT+v):Math.max(g,sT-v)}
-    if(sT>=1){if(s1<0)s1=prima===null?t-LV.H:t}else s1=-1;
-    scritta(guida?!sotto&&u>=TL.IR+LV.nP:s1>=0&&t-s1>=LV.H&&(avanti||sS>=1),prima===null);
-    return sT;
-  }
-  // dove sta la camera: dallo schermo arancio resta sul logo (a tutto schermo) finché il nome non è uscito, anche se il dito
-  // è già più avanti; poi raggiunge il dito con dolcezza
-  function camera(u){
-    if(guida)return u;
-    if(tenuto){
-      if(u<TL.IR||vPronto()){tenuto=false;
-        var d=u-TL.Z0;if(d>.004){ritardo.v=d;gsap.to(ritardo,{v:0,duration:Math.min(1.1,.5+.4*d),ease:'power2.inOut',overwrite:true,onUpdate:ridisegna})}}
-      else return Math.min(u,TL.Z0);
+  /* b: la nascita del nome (0 niente, 1 il nome intero); np: 1 il nome, 0 il simbolo (la V grande); hc: il puntino scuro che
+     si richiude nell'arancio all'uscita (0 aperto, 1 chiuso). Da np a simbolo sono i movimenti del «momento V» di prima */
+  function logo(b, np, hc){
+    var t = np * LVT.S1, ev = ioc(t / LVT.V), sc = Math.pow(L.S, 1 - ev), c = [lerp(L.sv[0], L.cv[0], ev), lerp(L.sv[1], L.cv[1], ev)], ov = 1;
+    if (b < 1) { var bv = dolce(seg(b, .55, 1)); sc *= 1 + .07 * (1 - bv); ov = bv; }   /* la V si posa da appena più grande */
+    scrivi(lvV, 'transform', 'translate(' + (c[0] - L.cv[0]).toFixed(2) + 'px,' + (c[1] - L.cv[1]).toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')');
+    scrivi(lvV, 'webkitTextStrokeWidth', lerp(.0467, .036, ev).toFixed(4) + 'em');
+    scrivi(lvV, 'opacity', ov < 1 ? ov.toFixed(3) : '');
+    var a = [c[0] + sc * L.off[0], c[1] + sc * L.off[1]], ex = ioc(seg(t, LVT.D0, LVT.D1)), ey = ioc(seg(t, LVT.D0, LVT.DY));
+    var dx = lerp(a[0], L.cp[0], ex), dy = lerp(a[1], L.cp[1], ey), dd = lerp(sc * .1733 * L.em, L.p.w, ex);
+    if (b < 1) dd *= fuori(seg(b, 0, .4));          /* il puntino scuro si apre come un buco nell'arancio */
+    if (hc > 0) dd *= 1 - liscio(hc);               /* e all'uscita si richiude */
+    scrivi(lvD, 'transform', 'translate(' + dx.toFixed(3) + 'px,' + dy.toFixed(3) + 'px) scale(' + (dd / 100).toFixed(5) + ')');
+    scrivi(lvD, 'visibility', dd > .05 ? 'inherit' : 'hidden');
+    var ce, cs, te = '', ts = '';
+    if (b < 1) {
+      /* nascita: quando il puntino scuro è aperto, «eniello» esce dal puntino verso sinistra e «studio» verso destra
+         (senza scivolare: il puntino del nome è piccolo e le lettere ci finivano sopra, sembravano incollate) */
+      var be = fuori(seg(b, .3, .85)), bs = fuori(seg(b, .34, .9));
+      ce = be >= 1 ? 'none' : 'inset(-20% 0 -20% ' + (100 - 100 * be).toFixed(2) + '%)';
+      cs = bs >= 1 ? 'none' : 'inset(-20% ' + (100 - 100 * bs).toFixed(2) + '% -20% 0)';
+    } else {
+      /* il nome che diventa il simbolo: «eniello» si vede fino al bordo sinistro del puntino che rientra nella V, «studio» rientra */
+      var re = Math.min(ex, clamp((dx - dd / 2 - L.e.x) / L.e.w)), q = 1 - Math.pow(1 - seg(t, LVT.S0, LVT.S1), 3);
+      ce = re >= 1 ? 'none' : 'inset(-20% ' + (100 - 100 * re).toFixed(2) + '% -20% 0)';
+      cs = q >= 1 ? 'none' : 'inset(-20% ' + (100 - 100 * q).toFixed(2) + '% -20% 0)';
+      if (q < 1) ts = 'translateX(' + (-(1 - q) * .25 * L.N).toFixed(2) + 'px)';
     }
-    return ritardo.v>0?Math.max(Math.min(u,TL.Z0),u-ritardo.v):u;
+    scrivi(lvE, 'webkitClipPath', ce); scrivi(lvE, 'clipPath', ce); scrivi(lvS, 'webkitClipPath', cs); scrivi(lvS, 'clipPath', cs);
+    scrivi(lvE, 'transform', te); scrivi(lvS, 'transform', ts);
   }
-  // D: fino a UM la camera si allontana come nel sito vero; dopo torna indietro sullo stesso percorso fino al riquadro a
-  // tutto schermo e allo schermo tutto arancio (Z0), e lì resta
-  function specchio(u){return u<=TL.UM?u:Math.max(TL.Z0,2*TL.UM-u)}
-  function misuraPunto(){
-    E=Math.max(0,Math.round(copertina.offsetHeight-G.V));
-    var cr=copertina.getBoundingClientRect(),dr=dot.getBoundingClientRect(),sr=stage.getBoundingClientRect();
-    var x=dr.left+dr.width/2-sr.left,y=dr.top+dr.height/2-cr.top,H=stage.clientHeight,Wd=G.Wd,cx=G.fx,cy=G.fy,m=Math.min(Wd,G.V-G.hdr);
-    var R=Math.hypot(Math.max(cx,Wd-cx),Math.max(cy,H-cy))*1.03;
-    D={top:cr.top+scrollY,x:x,y:y,sd:Math.min(E,Math.max(0,y-Math.max(G.hdr+24,.3*G.V))),cx:cx,cy:cy,r0:dr.width/2,rM:G.pc?12:10,rD:Math.round(.085*m),R:R};
+
+  /* ── le misure (in px; quelle sul palco sono dal suo angolo in alto a sinistra) ── */
+  var A = null;
+  function misura(){
+    var W = palco.clientWidth, V = sonda.offsetHeight || innerHeight, H = palco.offsetHeight, hdr = testata.offsetHeight || 60;
+    if (!W || !V || !H) return false;
+    var a = { W: W, V: V, H: H, hdr: hdr };
+    a.m1 = Math.round(.9 * V); a.m2 = Math.round(1.8 * V);                       /* i momenti 2 e 3 */
+    a.c0 = a.m2 + Math.round(.04 * V); a.c1 = a.m2 + Math.round(.42 * V);           /* l'arancio si stringe nel puntino */
+    a.via = a.m2 + Math.round(.5 * V); a.P = a.m2 + Math.round(.62 * V);            /* il puntino parte; il palco se ne va */
+    a.gF = .6; a.b0 = .5;   /* nel primo passaggio: il disco copre tutto al 60%, il nome nasce dal 50% */
+    sez.style.height = (a.P + H) + 'px';
+    a.T = Math.round(sez.getBoundingClientRect().top + scrollY);
+    var pr = palco.getBoundingClientRect(), dr = dot.getBoundingClientRect();
+    a.x0 = dr.left + dr.width / 2 - pr.left; a.y0 = dr.top + dr.height / 2 - pr.top; a.r0 = dr.width / 2;
+    lv.style.top = hdr + 'px'; lv.style.height = (V - hdr) + 'px';
+    logoMisura(W, V - hdr);
+    a.nx = L.cp[0]; a.ny = hdr + L.cp[1];                        /* il puntino del nome */
+    a.px = L.sp[0]; a.py = hdr + L.sp[1]; a.pr = L.rs;            /* il puntino del logo */
+    a.vF = hdr + L.sv[1] + .3 * L.S * L.v.h;                      /* dove finisce in basso il disegno della V del logo (il suo riquadro è più alto: il disegno arriva al 78%) */
+    a.R1 = Math.hypot(Math.max(a.nx, W - a.nx), Math.max(a.ny, H - a.ny)) * 1.03;   /* raggi che coprono tutto il palco */
+    a.R2 = Math.hypot(Math.max(a.px, W - a.px), Math.max(a.py, H - a.py)) * 1.03;
+    apt.style.left = (a.px - a.pr).toFixed(2) + 'px'; apt.style.top = (a.py - a.pr).toFixed(2) + 'px';
+    apt.style.width = apt.style.height = (2 * a.pr).toFixed(2) + 'px';
+    A = a; return true;
   }
-  // il puntino: a pagina ferma è il punto di «scegliere» (lo disegna il palco, al posto preciso del punto del titolo). Al
-  // primo scorrimento resta fermo mentre la copertina sale e gli passa davanti, scende al centro dello schermo (d0-d1),
-  // lampeggia una volta (da b0, a tempo: LB ms), si gonfia in un disco (g0-g1) e il cerchio si allarga fino a coprire lo
-  // schermo (IR): da lì il momento V
-  var PU={d0:.02,d1:.22,b0:.23,g0:.31,g1:.39},LB=340,lampo=-1e9,ultimaU=0;
-  var chiusa={k:0};
-  function lampeggia(){rendi(stato.u);if(performance.now()-lampo>LB)gsap.ticker.remove(lampeggia)}
-  function puntino(u,a){
-    var s=scrollY-D.top,titolo=s<D.sd-.5&&u<=0;
-    scrivi(dot,'visibility',titolo?'':'hidden');
-    if(titolo||a<=0){scrivi(punto,'visibility','hidden');return}
-    var by=D.y-Math.min(Math.max(s,0),D.sd),t=seg(u,PU.d0,PU.d1),x=lerp(D.x,D.cx,dolce(t)),y=lerp(by,D.cy,ioc(t)),r;
-    if(u<PU.g0)r=lerp(D.r0,D.rM,dolce(seg(u,PU.d0+.02,PU.d1)));
-    else if(u<PU.g1)r=lerp(D.rM,D.rD,1-Math.pow(1-seg(u,PU.g0,PU.g1),3));
-    else r=D.rD*Math.pow(D.R/D.rD,Math.pow(seg(u,PU.g1,TL.IR),1.1));
-    if(chiusa.k>0&&u>PU.g1)r*=Math.pow(D.R/r,chiusa.k);
-    if(u>=PU.b0&&ultimaU<PU.b0&&u<PU.g1){lampo=performance.now();gsap.ticker.add(lampeggia)}
-    var q=(performance.now()-lampo)/LB;disco(x,y,r,a*(q<1?1-.85*Math.sin(Math.PI*q):1));
+  function disc(x, y, r){
+    var pic = r < 40, w = pic ? (2 * r).toFixed(2) + 'px' : '';
+    scrivi(disco, 'width', w); scrivi(disco, 'height', w);
+    disco.style.transform = 'translate3d(' + (x - r).toFixed(2) + 'px,' + (y - r).toFixed(2) + 'px,0)' + (pic ? '' : ' scale(' + (r / 120).toFixed(5) + ')');
+    scrivi(disco, 'visibility', 'visible');
   }
-  function disco(x,y,r,o){
-    var pic=r<40,w=pic?(2*r).toFixed(2)+'px':'';scrivi(punto,'width',w);scrivi(punto,'height',w);
-    punto.style.transform='translate3d('+(x-r).toFixed(2)+'px,'+(y-r).toFixed(2)+'px,0)'+(pic?'':' scale('+(r/120).toFixed(5)+')');
-    scrivi(punto,'opacity',o<1?o.toFixed(3):'1');scrivi(punto,'visibility','visible');
+  var chiuso = false, tst = { f: -1, m: -1 };
+  function rendi(ys){
+    if (!A) return;
+    var V = A.V, y = ys - A.T, u1 = clamp(y / A.m1);
+    /* il disco: cresce da dov'è il punto di «scegliere» (0 → m1: il raggio cresce sempre della stessa parte, come uno zoom, e
+       il centro scivola dove nascerà il puntino del nome), copre tutto (m1 → c0), si stringe nel puntino del logo (c0 → c1) */
+    if (y > .5 && y < A.c1) {
+      var r, cx, cy;
+      if (y < A.c0) { var g = seg(u1, 0, A.gF), k = liscio(seg(u1, .04, A.gF)); r = A.r0 * Math.pow(A.R1 / A.r0, Math.pow(g, 1.1)); cx = lerp(A.x0, A.nx, k); cy = lerp(A.y0, A.ny, k); }
+      else { var s = liscio(seg(y, A.c0, A.c1)); r = A.pr * Math.pow(A.R2 / A.pr, 1 - s); cx = A.px; cy = A.py; }
+      disc(cx, cy, r);
+    } else scrivi(disco, 'visibility', 'hidden');
+    scrivi(dot, 'visibility', y > .5 ? 'hidden' : '');               /* il punto del titolo diventa il disco, allo stesso posto */
+    scrivi(wrap, 'visibility', u1 >= A.gF ? 'hidden' : '');          /* coperto dall'arancio, il titolo se ne va: all'uscita sotto c'è il nero */
+    var b = seg(u1, A.b0, 1);
+    scrivi(lv, 'visibility', b > 0 && L ? 'visible' : 'hidden');
+    if (b > 0 && L) logo(b, 1 - seg(y, A.m1, A.m2), seg(y, A.m2 + .02 * V, A.c0 + .3 * (A.c1 - A.c0)));
+    var ch = y >= A.c1; if (ch !== chiuso) { chiuso = ch; API.chiuso = ch; palco.classList.toggle('chiuso', ch); }
+    /* la testata: fondo trasparente finché c'è l'arancio (l'arancio va fino in cima, niente striscia sotto la testata);
+       marchio piccolo via mentre il nome e il logo grandi sono a schermo, di nuovo quando la V è uscita del tutto in alto
+       (19/11, verifica: prima tornava a 0,4 schermi dopo P, con la V ancora dietro la testata: due loghi insieme) */
+    var f = ch ? 1 : 0, mv = y > .45 * A.m1 && y < A.P + A.vF ? 1 : 0;
+    if (f !== tst.f) { tst.f = f; testata.style.setProperty('--fondo', f); }
+    if (mv !== tst.m) { tst.m = mv; testata.classList.toggle('senza-marchio', !!mv); }
   }
-  // l'inizio (dal puntino allo schermo arancio) non corre più di VI schermate al secondo: anche con un colpo di dito veloce si
-  // vede il puntino che scende, lampeggia e si allarga
-  var ui=null,uiT=0,frenando=false,VI=1.15,VG=.36;
-  function rincorri(){rendi(stato.u)}
-  function frena(x){
-    if(guida){if(frenando){frenando=false;gsap.ticker.remove(rincorri)}ui=null;return x}
-    var t=performance.now(),r=x;
-    if(ui===null||!inVista||x<=ui||ui>=TL.IR||t-saltoLink<1600)ui=Math.min(x,TL.IR);
-    else{var dt=Math.min(50,t-uiT)/1000,n=ui<PU.g0?Math.min(ui+VI*dt,PU.g0):ui<PU.g1?ui+VG*dt:ui+VI*dt;
-      ui=Math.min(x,t-lampo<LB?PU.g0:TL.IR,n);if(ui<TL.IR)r=ui}
-    uiT=t;
-    if((r<x)!==frenando){frenando=r<x;if(frenando)gsap.ticker.add(rincorri);else gsap.ticker.remove(rincorri)}
-    return r;
+
+  var ultimo = null;
+  var API = window.APERTURA = {
+    attiva: true, chiuso: false, fine: null, motore: false,
+    /* per il motore del puntino: il suo primo posto (il puntino del logo, nel palco fermo) e quando parte */
+    punti: function(){
+      if (!A && !misura()) return null;
+      var pr = palco.getBoundingClientRect();
+      return { el: apt, x: pr.left + A.px, ly: A.py, d: 2 * A.pr, scena: { T: A.T, R: A.P }, via: A.T + A.via, alto: A.H };
+    },
+    rendi: function(ys){ ultimo = ys; rendi(ys); },
+    /* per gli strumenti di prova: le misure e i quattro agganci */
+    misure: function(){ return A; }, momenti: function(){ return A ? momenti() : null; }
+  };
+  function rifai(){ if (misura()) rendi(ultimo === null ? scrollY : ultimo); }
+  misura(); rendi(scrollY);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(rifai);
+  addEventListener('load', rifai);
+  /* se lo script del puntino non c'è, l'apertura si disegna da sé con lo scorrimento vero */
+  addEventListener('scroll', function(){ if (!API.motore) rendi(scrollY); }, { passive: true });
+
+  /* ── Aggancio: un colpo di dito = un momento ───────────────────────────────────────────────────────────────────────────
+     I momenti: M1 (la cima), M2 (il nome), M3 (il logo) e la fine dell'uscita (il puntino seduto in «serve»).
+     · Col dito, dentro l'apertura, lo scorrimento lo fa questo script: la pagina segue il dito (1:1) ma non va oltre il
+       momento prima e quello dopo; quando il dito si stacca va al momento verso cui andava (colpo veloce, o più di un quinto
+       della strada fatta), altrimenti torna dov'era. Durata 0,45-0,8 s, curva standard (dopo un colpo veloce parte più svelta
+       e frena). Un colpo di dito, anche lungo o forte, porta sempre e solo al momento dopo: chi si ferma non resta mai a metà.
+       Un secondo colpo mentre la pagina va ancora porta un momento più in là.
+     · Alla fine dell'apertura, col dito verso il basso, la pagina scorre normale: fuori dall'apertura non si tocca niente,
+       tranne un colpo verso l'alto nel mezzo schermo subito dopo, che riporta alla fine dell'apertura (il quarto aggancio)
+       senza la corsa con l'inerzia seguita dall'aggancio.
+     · Rotella, tastiera, link e l'inerzia che arriva da sotto: quando la pagina si ferma a metà di un passaggio, va al
+       momento dopo nella direzione in cui andava.
+     · Perché non lo scroll-snap del CSS o lo snap di ScrollTrigger: aspettano che l'inerzia finisca, quindi un colpo forte
+       salta due o tre momenti, e su iPhone l'aggancio dopo l'inerzia è un secondo movimento staccato. Prendere il dito
+       (preventDefault su touchmove con un ascoltatore non passivo) dà su iPhone e su Android un momento per colpo.
+     · Se qualcosa va storto (un errore qui dentro) l'aggancio si spegne da solo e la pagina scorre normale. */
+  /* AGGANCIO = false spegne tutto l'aggancio (dito, rotella, inerzia): l'apertura resta legata allo scorrimento normale */
+  var AGGANCIO = true;
+  var tw = null, giro = 0, tocco = null, ditoGiu = false, ultimaDir = 1, yUlt = -1, attesa = 0, spento = !AGGANCIO;
+  var SENZA = !!window.SENZA_AGGANCIO;   /* per gli strumenti di prova che fotografano a metà dei passaggi */
+  function momenti(){ var t = A.T, f = API.fine && API.fine > t + A.m2 + 10 ? API.fine : t + A.P; return [t, t + A.m1, t + A.m2, f]; }
+  function dopo(b, M){ for (var i = 0; i < M.length; i++) if (M[i] > b + 2) return M[i]; return M[M.length - 1]; }
+  function prima(b, M){ for (var i = M.length - 1; i >= 0; i--) if (M[i] < b - 2) return M[i]; return M[0]; }
+  function vicino(y, M){ var m = M[0]; M.forEach(function(x){ if (Math.abs(x - y) < Math.abs(m - y)) m = x; }); return m; }
+  function suMomento(y, M){ for (var i = 0; i < M.length; i++) if (Math.abs(M[i] - y) <= 2) return true; return false; }
+  function scorri(y){ html.style.scrollBehavior = 'auto'; window.scrollTo(0, y); }
+  function libera(){ html.style.scrollBehavior = ''; }
+  /* curve morbide (seno, come il resto del puntino): la velocità più alta è 1,6 volte la media (con le cubiche era 3) */
+  function curvaIO(t){ return .5 - .5 * Math.cos(Math.PI * t); }
+  function curvaO(t){ return Math.sin(Math.PI / 2 * t); }
+  function vai(dest, curva, dur, libero, presa){
+    var da = scrollY, mio = ++giro;
+    if (Math.abs(dest - da) < 1) { tw = null; if (dest !== da) scorri(dest); libera(); return; }
+    tw = { da: da, a: dest, t0: performance.now(), dur: dur || 1000 * Math.max(.45, Math.min(.8, .3 + .5 * Math.abs(dest - da) / A.V)), c: curva || curvaIO, libero: !!libero,
+           presa: !!presa, el: 0, cp: 0, salti: 0, tp: 0 };
+    /* il passo lo fa il motore del puntino all'inizio del suo fotogramma, prima di leggere la pagina (API.avanza): così
+       pagina, apertura e puntino si muovono sempre nello stesso fotogramma (con un giro a parte, a volte il puntino
+       restava indietro di un fotogramma e sembrava saltare). Senza motore, un giro suo */
+    if (API.sveglia) { API.sveglia(); return; }
+    (function passo(){ if (mio === giro && API.avanza()) requestAnimationFrame(passo); })();
   }
-  function rendi(uv){
-    uv=frena(uv);
-    var giu=uv>=TL.IR||sT>0;
-    if(giu!==aperto){aperto=giu;stage.classList.toggle('aperto',giu);gsap.killTweensOf(ritardo);ritardo.v=0;if(!giu)tenuto=false;
-      gsap.killTweensOf(chiusa);chiusa.k=0;
-      if(!giu&&inVista&&uv>PU.g1&&uv<TL.IR&&performance.now()-saltoLink>=1600)gsap.fromTo(chiusa,{k:1},{k:0,duration:.3,ease:'power2.out',overwrite:true,onUpdate:ridisegna})}
-    if(!guida&&aperto&&!tenuto&&ritardo.v<=0&&!vPronto())tenuto=true;
-    var u=specchio(camera(uv));
-    // a) la copertina scorre via con la pagina; quando il cerchio è grande quel poco che ne resta sparisce
-    var op=1-seg(u,.58,.78);
-    scrivi(wrap,'opacity',op<1?op.toFixed(3):'');scrivi(wrap,'visibility',op>0?'':'hidden');scrivi(wrap,'pointerEvents',op<.5?'none':'');
-    // b) il momento V; quando la camera si allontana, intorno al riquadro arancio del logo torna il nero
-    var sp=stringi(u,uv);
-    puntino(u,aperto?0:1);ultimaU=u;
-    var fv=aperto?1-dolce(seg(u,TL.Z0,TL.Z0+.2)):0;scrivi(fondoV,'opacity',fv<1?fv.toFixed(3):'');
-    if(aperto&&G.L)logoDisegna(sp,nome.p,1-.9*seg(u,1.42+TL.SH,1.64+TL.SH));
-    // c) la camera: allontanamento e il muro che compare; il riquadro del logo prende il suo filo quando è al suo posto
-    var k=posa(u),oo=(.26*seg(u,1.12+TL.SH,1.42+TL.SH)).toFixed(3);
-    tessere.style.opacity=seg(u,TL.WF0,TL.WF1);velo.style.opacity=seg(u,TL.VE0,TL.VE1);bordi.style.opacity=k;
-    if(oo!==orlo){orlo=oo;tv.style.setProperty('--orlo',oo)}
-    prima=uv;
-    batti(aperto&&inVista&&(Math.abs(sG-sT)>1e-4||!guida&&(tenuto||s1>=0&&!nomeSu)));
+  /* vero mentre è l'apertura a muovere la pagina (il dito preso o l'aggancio): lo scorrimento è già morbido, il motore
+     del puntino lo segue da vicino invece di addolcirlo ancora (altrimenti restava indietro fino a 250 px e poi recuperava di corsa) */
+  /* (la presa dell'inerzia che arriva da sotto no: lì la pagina andava già da sola e il motore la segue come sempre) */
+  API.guida = function(){ return !!((tw && !tw.libero) || (tocco && tocco.deciso)); };
+  API.avanza = function(){
+    if (!tw) return false;
+    var ora = performance.now(), e = tw.messo != null ? scrollY - tw.messo : 0, k;
+    if (tw.presa) {
+      /* la presa dell'inerzia: la spinta del telefono si ferma al primo scrollTo (iPhone) o uno-due fotogrammi dopo
+         (Chrome, che dopo il primo passo ne dà ancora uno). In un fotogramma in cui spinge ancora la curva aspetta e la
+         lascia andare (al più due fotogrammi di fila, poi fa comunque il suo passo, che su iPhone la ferma), e riparte da
+         dove è davvero la pagina, con il suo orologio: la pagina non resta mai ferma, non fa due passi insieme e non torna
+         indietro. Dopo 200 ms una spinta conta come «qualcun altro» (sotto) */
+      var dt = tw.tp ? ora - tw.tp : 0, spinge = tw.messo == null || (e !== 0 && (e > 0) === (tw.a > tw.da) && ora - tw.t0 < 200);
+      tw.tp = ora;
+      if (spinge && tw.cp < 1) { tw.da = (scrollY - tw.a * tw.cp) / (1 - tw.cp); e = 0; }
+      if (spinge && tw.salti < 2) { tw.salti++; tw.messo = scrollY; return true; }
+      tw.salti = 0;
+      if (Math.abs(e) > 3) { esterno(); return false; }
+      tw.el += dt; k = Math.min(1, tw.el / tw.dur);
+    } else {
+      /* se nel frattempo la pagina l'ha spostata qualcun altro (un link, la tastiera), l'aggancio si fa da parte */
+      if (Math.abs(e) > 3) { esterno(); return false; }
+      k = Math.min(1, (ora - tw.t0) / tw.dur);
+    }
+    tw.cp = tw.c(k);
+    scorri(tw.da + (tw.a - tw.da) * tw.cp); tw.messo = scrollY;
+    if (k >= 1) { tw = null; libera(); return false; }
+    return true;
+  };
+  function ferma(){ tw = null; giro++; }
+  /* l'aggancio si fa da parte perché la pagina l'ha spostata qualcun altro: la direzione resta quella in cui andava e
+     si riparte a contare da qui (19/11, verifica: il primo passo di chi subentrava poteva essere di pochi px all'indietro
+     e bastava a far tornare la pagina al momento prima) */
+  function esterno(){ ultimaDir = tw.a > tw.da ? 1 : -1; yUlt = scrollY; ferma(); libera(); }
+  addEventListener('touchstart', function(e){
+    ditoGiu = true; inerzia = null;
+    if (spento || !A) return;
+    if (e.touches.length !== 1) { tocco = null; return; }
+    var y = scrollY, M = momenti();
+    if (y > M[3] + .5 * A.V && !tw) { tocco = null; return; }   /* fuori dall'apertura (e oltre il mezzo schermo dopo): scorrimento normale */
+    var corsa = !!tw, base = tw ? tw.a : y; ferma();
+    tocco = { fy: e.touches[0].clientY, s0: y, base: base, corsa: corsa, M: M, deciso: false, p: [[performance.now(), e.touches[0].clientY]] };
+  }, { passive: true });
+  addEventListener('touchmove', function(e){
+    if (!tocco) return;
+    try {
+      if (e.touches.length !== 1) { if (tocco.corsa) vai(tocco.base); tocco = null; return; }
+      var fy = e.touches[0].clientY, dy = tocco.fy - fy;   /* > 0: verso il basso della pagina */
+      if (!tocco.deciso) {
+        if (!dy) return;
+        if (tocco.s0 >= tocco.M[3] - 2 && dy > 0 && !tocco.corsa) { tocco = null; libera(); return; }   /* in fondo all'apertura e avanti: scorrimento normale */
+        tocco.deciso = true;
+        tocco.lo = Math.min(prima(tocco.base, tocco.M), tocco.s0); tocco.hi = Math.max(dopo(tocco.base, tocco.M), tocco.s0);
+      }
+      if (e.cancelable) e.preventDefault();
+      tocco.p.push([performance.now(), fy]); if (tocco.p.length > 8) tocco.p.shift();
+      scorri(Math.max(tocco.lo, Math.min(tocco.hi, tocco.s0 + dy)));
+    } catch (x) { spento = true; tocco = null; libera(); }
+  }, { passive: false });
+  function lascia(e){
+    ditoGiu = !!(e && e.touches && e.touches.length);
+    /* un gesto che la pagina ha fatto da sola (partito sotto l'apertura): la sua spinta va tenuta d'occhio (prendi) e, se
+       si ferma a metà di un passaggio, l'aggancio parte dopo 90 ms invece di 160 */
+    if (!tocco) { if (!ditoGiu && !spento && A) { inerzia = { t: performance.now(), p: [] }; clearTimeout(attesa); attesa = setTimeout(aggancia, 90); } return; }
+    var tc = tocco; tocco = null;
+    try {
+      if (!tc.deciso) { if (tc.corsa) vai(tc.base); else libera(); return; }   /* un tocco senza movimento: se la pagina andava, riprende */
+      var p = tc.p, b = p[p.length - 1], a = b, i;
+      for (i = p.length - 1; i >= 0; i--) { if (b[0] - p[i][0] > 100) break; a = p[i]; }
+      var v = b[0] > a[0] ? (a[1] - b[1]) / (b[0] - a[0]) : 0;   /* px al ms, > 0 verso il basso della pagina */
+      if (performance.now() - b[0] > 120) v = 0;                    /* il dito si era fermato prima di staccarsi */
+      var y = scrollY, d = 0;
+      if (Math.abs(v) > .2) d = v > 0 ? 1 : -1;
+      else { var m = y - tc.s0, l = m > 0 ? tc.hi - tc.s0 : tc.s0 - tc.lo; if (l > 0 && Math.abs(m) / l > .2) d = m > 0 ? 1 : -1; }
+      var dest = d > 0 ? dopo(tc.base, tc.M) : d < 0 ? prima(tc.base, tc.M) : (tc.corsa ? tc.base : vicino(y, tc.M));
+      if (tc.s0 > tc.M[3] + 2 && !tc.corsa && d >= 0) dest = y;   /* appena sotto l'apertura, un tocco leggero non sposta niente */
+      vai(dest, Math.abs(v) > .2 ? curvaO : curvaIO);
+    } catch (x) { spento = true; libera(); }
   }
-  function imposta(){
-    ScrollTrigger.getAll().forEach(function(t){t.kill()});
-    muroCostruisci(null,false,true);orlo=null;misuraPunto();
-    scena.style.marginTop=-copertina.offsetHeight+'px';
-    scena.style.height=Math.round((TL.FINE+1)*G.V+E)+'px';
-    var tw=gsap.fromTo(stato,{u:0},{u:TL.FINE,ease:'none',overwrite:true,scrollTrigger:{trigger:scena,start:'top+='+E+' top',end:'bottom bottom',scrub:.4},onUpdate:function(){rendi(stato.u)}});
-    scenaST=tw.scrollTrigger;
-    var vista=ScrollTrigger.create({trigger:scena,start:'top bottom',end:'bottom top',onToggle:function(s){inVista=s.isActive;stage.classList.toggle('vivo',inVista);rendi(stato.u)}});
-    rendi(stato.u);
-    muroPronto(false,muroFatto);
-    ScrollTrigger.refresh();
-    inVista=vista.isActive;stage.classList.toggle('vivo',inVista);rendi(stato.u);
+  addEventListener('touchend', lascia, { passive: true });
+  addEventListener('touchcancel', lascia, { passive: true });
+  addEventListener('wheel', function(){ inerzia = null; if (tw) { ferma(); libera(); } }, { passive: true });
+
+  /* ── L'inerzia che arriva da sotto (verifica del 19/11) ───────────────────────────────────────────────────────────────
+     Un colpo di dito in su partito più di mezzo schermo sotto la fine dell'apertura lo fa la pagina da sola, con la sua
+     spinta. Prima la spinta attraversava tutta l'apertura, si fermava a metà di un passaggio e dopo circa 190 ms la pagina
+     ripartiva da sola: uno stacco. Ora la spinta si guarda fotogramma per fotogramma: se la porterebbe dentro l'apertura,
+     la prendiamo noi prima che ci entri e la posiamo sulla fine dell'apertura (il puntino in «serve»), partendo con la
+     stessa velocità con cui andava e frenando dolcemente. Così, anche entrando da sotto, un colpo = un momento.
+     · Dove si fermerebbe da sola: circa velocità × TAU più in là (iPhone ~500 ms, Chrome di più: 450 è prudente, al più
+       la prendiamo un po' più tardi e frena un po' di più).
+     · Per fermare la spinta del telefono: su iPhone basta lo scrollTo; Chrome invece continua, ma si ferma se per un
+       fotogramma la pagina non si può scorrere (overflow hidden; solo dove le barre di scorrimento non occupano posto,
+       altrimenti la pagina cambierebbe larghezza per un attimo). Se la spinta non si ferma, avanza() se ne accorge (la
+       pagina la sposta qualcun altro), si fa da parte e resta l'aggancio di prima. */
+  var inerzia = null, TAU = 450;
+  function prendi(y){
+    var t = performance.now(), q = inerzia.p;
+    if (t - inerzia.t > 2500) { inerzia = null; return; }
+    q.push([t, y]); while (q.length > 3 && t - q[1][0] > 80) q.shift();
+    if (q.length < 3 || t - q[0][0] < 30) return;
+    var v = (y - q[0][1]) / (t - q[0][0]);                   /* px al ms, < 0 se la pagina torna su */
+    var M = momenti(), f = M[3];
+    if (v > -.25 || y + v * TAU > f) return;                 /* non torna su, o si ferma da sola prima dell'apertura */
+    inerzia = null;
+    /* dove posarla: sulla fine dell'apertura se c'è strada per frenare dolcemente (almeno 220 ms alla sua velocità);
+       se è troppo vicina (o già dentro) e va forte, al momento dopo verso l'alto (il logo): un momento più in là, ma
+       senza la frenata di colpo */
+    var v0 = -v, dest = f;
+    if (y <= f + 2 || 1.5708 * (y - f) / v0 < 220) dest = prima(Math.min(y, f), M);
+    var d = y - dest; if (d < 2) { return; }
+    var dur = Math.max(300, Math.min(900, 1.5708 * d / v0)), k = Math.min(3, v0 * dur / d);
+    fermaSpinta();
+    /* curva che parte con la velocità k (in proporzione) e arriva ferma, senza mai tornare indietro (k ≤ 3). Se si posa
+       sulla fine dell'apertura il motore del puntino segue la pagina come sempre (libero); se entra nell'apertura la
+       segue da vicino, come negli altri agganci */
+    vai(dest, function(x){ return x * (k + x * ((3 - 2 * k) + x * (k - 2))); }, dur, dest === f, true);
   }
-  // finché la scena non è partita (copertina più alta dello schermo) il puntino segue lo scorrimento vero
-  addEventListener('scroll',function(){if(D.top!==undefined&&ultimaU<=0)puntino(0,1)},{passive:true});
-  // si parte quando ci sono i caratteri (danno la posizione del punto)
-  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(imposta);
-  // girando il telefono a metà scena si resta allo stesso punto della scena
-  var fScena=null,cambiando=false;
-  addEventListener('scroll',function(){if(cambiando||!scenaST)return;var a=scenaST.start,b=scenaST.end;fScena=scrollY>a&&scrollY<b?(scrollY-a)/(b-a):null},{passive:true});
-  var tr,wr=innerWidth;addEventListener('resize',function(){if(Math.abs(innerWidth-wr)<40)return;wr=innerWidth;cambiando=true;clearTimeout(tr);tr=setTimeout(function(){
-    var f=fScena;imposta();
-    if(f!==null&&scenaST)scrollTo(0,Math.round(scenaST.start+f*(scenaST.end-scenaST.start)));
-    cambiando=false;
-  },200)});
-});
+  function fermaSpinta(){
+    if (innerWidth - html.clientWidth > 0) return;
+    html.style.overflowY = 'hidden';
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ html.style.overflowY = ''; }); });
+  }
+  /* rotella, tastiera, link, inerzia: dopo 160 ms di pagina ferma a metà di un passaggio, al momento dopo nella direzione */
+  function aggancia(){
+    if (tw || tocco || SENZA || spento || !A) return;
+    if (ditoGiu) { clearTimeout(attesa); attesa = setTimeout(aggancia, 160); return; }
+    var y = scrollY, M = momenti();
+    if (y <= M[0] + 2 || y >= M[3] - 2 || suMomento(y, M)) return;
+    vai(ultimaDir > 0 ? dopo(y, M) : prima(y, M), curvaIO);
+  }
+  addEventListener('scroll', function(){
+    var y = scrollY;
+    if (!tw && !tocco && yUlt >= 0 && y !== yUlt) ultimaDir = y > yUlt ? 1 : -1;
+    yUlt = y;
+    if (inerzia && !tw && !tocco && !ditoGiu && !SENZA && !spento && A) prendi(y);
+    if (tw || tocco || SENZA || spento) return;
+    clearTimeout(attesa); attesa = setTimeout(aggancia, inerzia ? 90 : 160);
+  }, { passive: true });
+  /* girando il telefono: nuove misure, e si resta sullo stesso momento */
+  var wPrima = innerWidth, hPrima = sonda.offsetHeight;
+  addEventListener('resize', function(){
+    var w = innerWidth, h = sonda.offsetHeight;
+    if (w === wPrima && Math.abs(h - hPrima) < 2) return;
+    wPrima = w; hPrima = h;
+    var idx = -1;
+    if (A) { var M = momenti(), y = scrollY; if (y < M[3] + 2) { idx = 0; M.forEach(function(x, i){ if (Math.abs(x - y) < Math.abs(M[idx] - y)) idx = i; }); } }
+    rifai();
+    if (idx >= 0) setTimeout(function(){ ferma(); scorri(momenti()[idx]); libera(); }, 80);
+  });
+})();
 </script>
 <script>
 // Sfondo della copertina («shader», scelto da Niccolò il 18/10): tre macchie di luce (arancio, brace, ambra) che si
@@ -1566,9 +1573,9 @@ addEventListener('DOMContentLoaded',function(){
 // Si ferma fuori schermo, a scheda nascosta e a luci spente; con «Riduci movimento» disegna un solo fotogramma fermo.
 // Senza WebGL: tre luci ferme in CSS (.senza-gl) che si spengono anche loro scorrendo.
 (function(){
-  var cop=document.getElementById('inizio'),cv=cop&&cop.querySelector('.macchia');if(!cv)return;
+  var sez=document.getElementById('inizio'),cop=document.getElementById('ap-palco'),cv=cop&&cop.querySelector('.macchia');if(!cv||!sez)return; // 19/11: la copertina è il palco fermo dell'apertura
   var wrap=document.getElementById('copertina-wrap'),html=document.documentElement;
-  var T0=18,SP=.2; // T0: si apre già a metà del moto; SP: schermate di scorrimento in cui le luci si spengono (il puntino è al centro dopo .22)
+  var T0=18,SP=.5; // T0: si apre già a metà del moto; SP: schermate di scorrimento in cui le luci si spengono (19/11: il palco è fermo e l'arancio copre tutto a .54)
   var mq=null;try{mq=matchMedia('(prefers-reduced-motion: reduce)')}catch(e){}
   var fermo=!!(mq&&mq.matches);
   function lisce(t){return t*t*(3-2*t)}
@@ -1576,7 +1583,7 @@ addEventListener('DOMContentLoaded',function(){
   var top=0;
   function avanzamento(){
     if(fermo||html.classList.contains('fermo'))return 0;
-    var V=innerHeight,E=Math.max(0,cop.offsetHeight-V);return Math.max(0,Math.min(1,(scrollY-top-E)/(SP*V)));
+    return Math.max(0,Math.min(1,(scrollY-top)/(SP*innerHeight)));
   }
   function pos(el){var x=0,y=0;while(el){x+=el.offsetLeft;y+=el.offsetTop;el=el.offsetParent}return [x,y]}
   var gl=null;
@@ -1584,13 +1591,13 @@ addEventListener('DOMContentLoaded',function(){
   // quanto è salita la copertina (oltre E): il fondo sfuma nel nero per un'altezza che cresce con questo (al massimo 0,4
   // copertine). Cresce subito (radice quadrata): già dopo pochi pixel la sfumatura è alta molte volte il nero che si
   // scopre sotto, così non si vede mai una riga netta tra la luce e il nero dove la copertina finisce
-  function salita(){return Math.max(0,scrollY-top-Math.max(0,cop.offsetHeight-innerHeight))}
+  function salita(){return html.classList.contains('fermo')?Math.max(0,scrollY-top-Math.max(0,cop.offsetHeight-innerHeight)):0} // col palco fermo la copertina non sale: niente sfumatura in fondo
   function sfumatura(h){return Math.min(.4*h,45*Math.sqrt(salita()))}
   // senza shader (ripiego CSS) o a fotogramma fermo («Riduci movimento»): la stessa cosa con la maschera CSS e l'opacità
   var conCss=false;
   function css(luci){
     if(conCss)return;conCss=true;var chiesto=false;
-    function metti(){chiesto=false;top=pos(cop)[1];if(luci){var o=1-lisce(avanzamento());cv.style.opacity=o<1?o.toFixed(3):''}
+    function metti(){chiesto=false;top=pos(sez)[1];if(luci){var o=1-lisce(avanzamento());cv.style.opacity=o<1?o.toFixed(3):''}
       cv.style.setProperty('--sfuma',Math.round(sfumatura(cop.offsetHeight))+'px')}
     addEventListener('scroll',function(){if(!chiesto){chiesto=true;requestAnimationFrame(metti)}},{passive:true});metti();
   }
@@ -1705,7 +1712,7 @@ addEventListener('DOMContentLoaded',function(){
     W=w;H=h;S=Math.sqrt(w*h);
     var L=w>=h?LARGO:ALTO;Z=L.z;
     for(var i=0;i<3;i++){C[2*i]=(L.c[i][0]-.5)*w/S;C[2*i+1]=(.5-L.c[i][1])*h/S;A[2*i]=L.a[i][0];A[2*i+1]=L.a[i][1]}
-    var o=pos(cop),x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;top=o[1];
+    var o=pos(cop),x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;top=pos(sez)[1];
     [].forEach.call(wrap?wrap.children:[],function(el){if(!el.offsetWidth)return;var q=pos(el);
       x0=Math.min(x0,q[0]-o[0]);y0=Math.min(y0,q[1]-o[1]);x1=Math.max(x1,q[0]-o[0]+el.offsetWidth);y1=Math.max(y1,q[1]-o[1]+el.offsetHeight)});
     if(x1<x0){x0=.2*w;x1=.8*w;y0=.25*h;y1=.75*h}
@@ -1852,9 +1859,12 @@ addEventListener('DOMContentLoaded',function(){
   function aggiorna(){
     pianificato = false;
     var y = scrollY, vh = innerHeight;
-    var vivo = y > S.T - vh * 1.1 && y < S.T + S.R + vh;
+    /* 19/11 (verifica): le quattro schermate diventano livelli a parte (.vivo) già da sopra la scena, non a 1,1 schermi
+       prima: prima nascevano tutte insieme proprio durante il terzo colpo di dito dell'apertura (dal logo a «serve») e la
+       pagina, la prima volta, si inceppava per un attimo. Il lavoro della scena comincia sempre a 1,1 schermi prima */
+    var vivo = y < S.T + S.R + vh;
     if (vivo !== S.vivo) { S.vivo = vivo; scena.classList.toggle('vivo', vivo); if (!vivo) videoGira(false); }
-    if (!vivo) return;
+    if (!vivo || y <= S.T - vh * 1.1) return;
     var pr = (y - S.T) / S.R, p = clamp(pr, 0, 1);
     /* le frasi sopra il telefono */
     var b = p < .25 ? 0 : p < .5 ? 1 : p < .76 ? 2 : 3;
@@ -1934,7 +1944,7 @@ addEventListener('DOMContentLoaded',function(){
     L4.inY = T + .83 * R;       L4.outY = T + R + Math.max(24, L4.ly - o.Yout);
     return { L1: L1, L4: L4, W: W, interni: [
       { a: L1.outY,    b: T + .28 * R, k: 'linea', da: L1, a2: W, curva: .07 },   /* esce lungo la riga, piano */
-      { a: T + .28*R,  b: T + .755 * R, k: 'fermo', s: W },                        /* aspetta durante «serate…» e «novità…» */
+      { a: T + .28*R,  b: T + .755 * R, k: 'fermo', s: W },                        /* aspetta durante «serate…» e «eventi…» */
       { a: T + .755*R, b: L4.inY,      k: 'linea', da: W, a2: L4, curva: .07 }    /* rientra e diventa il punto di «scegliere» */
     ] };
   }
@@ -1995,7 +2005,9 @@ addEventListener('DOMContentLoaded',function(){
   document.addEventListener('visibilitychange', function(){ if (document.hidden) [].forEach.call(document.querySelectorAll('video'), function(v){ v.pause(); }); });
 
   /* la testata: trasparente sulla copertina, piena dopo i primi 30 px di scorrimento (come nel sito vero) */
-  function testataPiena(){ var f = scrollY > 30 ? 1 : 0; if (f !== testata._fondo) { testata._fondo = f; testata.style.setProperty('--fondo', f); } }
+  /* con l'apertura animata la testata la governa lo script «Apertura» (trasparente finché c'è l'arancio) */
+  var AP = window.APERTURA || null;
+  function testataPiena(){ if (AP) return; var f = scrollY > 30 ? 1 : 0; if (f !== testata._fondo) { testata._fondo = f; testata.style.setProperty('--fondo', f); } }
   testataPiena();
 
   if (ridotto || !('requestAnimationFrame' in window)) {
@@ -2003,9 +2015,7 @@ addEventListener('DOMContentLoaded',function(){
     return;
   }
   doc.classList.add('viaggio');
-  /* lo showreel comincia da un fotogramma tutto arancio, come finisce la scena dell'apertura: la sua copertina è quella
-     (con «Riduci movimento» resta la copertina di prima, che mostra il logo) */
-  var srIn = document.getElementById('showreel'); if (srIn.getAttribute('data-inizio')) srIn.poster = srIn.getAttribute('data-inizio');
+  if (AP) { AP.motore = true; AP.sveglia = function(){ chiedi(); }; }
 
   /* ── La scena del sito: battute, tendina, sito ricco che si spegne ── */
   var palco = document.getElementById('palco');
@@ -2026,7 +2036,7 @@ addEventListener('DOMContentLoaded',function(){
     if (vivo !== ST.gira) { ST.gira = vivo; scena.classList.toggle('gira', vivo); if (window.sitoRicco) sitoRicco.gira(vivo); }
   }
 
-  /* ── Il puntino: uno solo. Parte dentro lo showreel (nascosto), ne esce dal basso, fa da punto finale ai titoli,
+  /* ── Il puntino: uno solo. Parte dal puntino del logo nell'apertura, scende nel punto di «serve», fa da punto finale ai titoli,
         nella scena tiene la tendina, e alla fine torna nel marchio del piede.
         18/11 (Niccolò: «più fluide, meno scatti, e se deve curvare più lentamente»), misurato fotogramma per fotogramma
         con strumenti/misura-puntino.mjs:
@@ -2044,23 +2054,7 @@ addEventListener('DOMContentLoaded',function(){
   var vh = innerHeight, V0 = vh, Yin = 0, Yout = 0, Rm = 0, Gmin = 0, Smin = 0, Lmin = 0, PASSO = 1;
   var xM = 0, maxS = 0, larghezza = 0, hT = 60;
   var DOT = 7, SEG = [], seduto = null, ATTESA = null;
-  /* lo showreel: gira una volta quando il puntino ci entra, si ferma sulla scritta finale, poi il puntino esce dal basso
-     (in SR_USCITA ms il suo posto scende dal centro del video a poco sotto il pannello; US va da 0 a 1) */
-  var sr = document.getElementById('showreel'), SR_FINE = 18.6, SR_USCITA = 1300, srFinito = false, srEsce = 0, srPosto = null, US = 0;
-  function srFine(){ if (!srFinito && sr.currentTime >= SR_FINE) { sr.pause(); srFinito = true; srEsce = performance.now(); chiedi(); } }
-  sr.addEventListener('timeupdate', srFine);
-  /* (18/11, revisione) timeupdate arriva ogni 250 ms circa: il video si fermava tra 18,6 e 18,9 s (dalle 19,0 la
-     scritta finale se ne va). Mentre gira, lo si guarda a ogni fotogramma, così si ferma proprio a 18,6 */
-  function srGuarda(){ if (srFinito || sr.paused) return; srFine(); if (srFinito) return;
-    if (sr.requestVideoFrameCallback) sr.requestVideoFrameCallback(srGuarda); else requestAnimationFrame(srGuarda); }
-  sr.addEventListener('playing', srGuarda);
-  function uscitaSr(){
-    if (!srFinito) return 0;
-    if (!srEsce) return 1;
-    var te = (performance.now() - srEsce) / SR_USCITA;
-    if (te >= 1) { srEsce = 0; return 1; }
-    return liscio(te);
-  }
+  var APosto = null;   /* il primo posto: il puntino del logo nell'apertura (19/11) */
 
   function lerp(a, b, t){ return a + (b - a) * t; }
   function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
@@ -2069,8 +2063,8 @@ addEventListener('DOMContentLoaded',function(){
   function stageTopDi(S, y){ return y < S.T ? S.T - y : (y <= S.T + S.R ? 0 : S.T + S.R - y); }
   function stageTop(y){ return stageTopDi(ST, y); }
   function scenaDi(s){ return s.scena === true ? ST : s.scena; }
-  /* dove sta un posto sullo schermo con lo scorrimento vero y (il posto dello showreel scende mentre il puntino esce) */
-  function sy(s, y){ return s.fisso ? s.vy : s.scena ? stageTopDi(scenaDi(s), y) + s.ly : (s.video ? lerp(s.ly, s.E.ly, US) : s.ly) - y; }
+  /* dove sta un posto sullo schermo con lo scorrimento vero y (i posti dentro un palco fermo: le due scene e l'apertura) */
+  function sy(s, y){ return s.fisso ? s.vy : s.scena ? stageTopDi(scenaDi(s), y) + s.ly : s.ly - y; }
   /* curve morbide: partono e arrivano ferme (rispetto a dove vanno), niente angoli */
   function liscio(t){ return .5 - .5 * Math.cos(Math.PI * t); }
   function morbido(t){ return t * t * (3 - 2 * t); }
@@ -2084,7 +2078,7 @@ addEventListener('DOMContentLoaded',function(){
     if (innerWidth !== larghezza || !Yin) {
       larghezza = innerWidth; V0 = vh;
       Yin = Math.round(V0 * .60); Yout = Math.round(V0 * .32); Rm = Math.round(V0 * .38);   /* si siede col titolo al 60% dello schermo, riparte al 32%; aspetta al 38% (in alto: la partenza, dove titolo e puntino si allontanano, è corta; l'arrivo, dove si vengono incontro, è lungo) */
-      Gmin = Math.round(V0 * .5); Smin = Math.round(V0 * .19); Lmin = Math.round(V0 * .22);  /* dallo showreel almeno mezzo schermo; seduto almeno ~160 px; partenza e arrivo almeno ~185 px */
+      Gmin = Math.round(V0 * .5); Smin = Math.round(V0 * .19); Lmin = Math.round(V0 * .22);  /* dall'apertura almeno mezzo schermo; seduto almeno ~160 px; partenza e arrivo almeno ~185 px */
     }
     var y0 = scrollY, corpo = document.body.getBoundingClientRect();
     xM = corpo.right - 10;
@@ -2101,14 +2095,16 @@ addEventListener('DOMContentLoaded',function(){
     var H0 = { x: hs.x, ly: hs.ly, d: 10, scena: true }, H1 = { x: hs.x + ST.sw, ly: hs.ly, d: 10, scena: true };
     var L = battute.map(function(b){ var pt = b.querySelector('.pt'); if (!pt) return null; var q = offsetIn(pt, palco); return { el: pt, x: pr.left + q.x + pt.offsetWidth / 2, ly: q.y + pt.offsetHeight / 2, d: pt.offsetWidth, scena: true }; });
     /* i posti normali, in ordine di pagina */
-    var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: el.hasAttribute('data-video') ? DOT : q.width, alto: el.hasAttribute('data-dall-alto'), video: el.hasAttribute('data-video') }; });
+    var P = posti.map(function(el){ var q = el.getBoundingClientRect(); return { el: el, x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: q.width, alto: el.hasAttribute('data-dall-alto') }; });
     /* un titolo con il suo video sopra (lo spot del Jué, 17/11 sera): il puntino ci arriva senza passare sul video */
     P.forEach(function(s){ var pk = s.el.closest && s.el.closest('.pacchetto'), pn = pk && pk.querySelector(':scope > .pannello'); if (!pn) return;
       var q = pn.getBoundingClientRect(); if (q.bottom + y0 < s.ly - 20) s.pan = { bottom: q.bottom + y0, right: q.right }; });
-    P.forEach(function(s){ if (s.video) { srPosto = s; var fr = s.el.parentNode.getBoundingClientRect(); s.top = fr.top + y0; s.bottom = fr.bottom + y0; s.E = { x: s.x, ly: s.bottom + 46 }; } });
-    /* il primo posto è lo showreel (17/11, apertura del sito vero): il puntino ci sta dentro, nascosto, dall'inizio della
-       pagina. Il punto di «scegliere» della copertina è un altro elemento: fa la sua animazione fino allo schermo arancio */
-    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; if (s.video) { s.inY = -1e9; s.outY = s.ly - V0 * .12; } });
+    P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; });
+    /* il primo posto è il puntino del logo nell'apertura (19/11): il motore ci sta seduto dall'inizio della pagina (finché
+       l'arancio non è tornato nel puntino non si vede: lo disegna l'apertura) e parte in AP.via */
+    APosto = null;
+    var ap = AP && AP.punti();
+    if (ap) APosto = { el: ap.el, x: ap.x, ly: ap.ly, d: ap.d, scena: ap.scena, alto: ap.alto, ap: true, inY: -1e9, outY: ap.via };
     var L1 = L[0], L3 = L[2], L4 = L[3], R = ST.R, T = ST.T;
     L1.inY = T + L1.ly - Yin; L1.outY = T + .22 * R;
     /* (18/11, revisione) il punto di «dispositivi» arriva a .885 e non più a .91: i 50 px liberati vanno al viaggio verso
@@ -2123,13 +2119,13 @@ addEventListener('DOMContentLoaded',function(){
       if (!messa && s.ly > T) { seq.push(L1, L4); messa = true; }
       seq.push(s);
     });
+    if (APosto) seq.unshift(APosto);
     var n = seq.length, i, A, B;
     seq[n-1].inY = Math.min(seq[n-1].inY, maxS - 1);
     /* quanto scorrimento serve a ogni viaggio: partenza e arrivo durano quanto la strada che il puntino fa sullo schermo
        (PASSO px di scorrimento per px di strada, mai meno di Lmin: così non va mai molto più veloce del dito), più un poco
-       di attesa nel margine, fino a 2/3 di schermo; dallo showreel almeno mezzo schermo. Se due posti sono vicini, il
-       puntino riparte un po' prima e arriva un po' dopo (seduto mai meno di Smin); dallo showreel riparte prima, mentre
-       il video si vede ancora tutto */
+       di attesa nel margine, fino a 2/3 di schermo; dall'apertura almeno mezzo schermo. Se due posti sono vicini, il
+       puntino riparte un po' prima e arriva un po' dopo (seduto mai meno di Smin) */
     function strada(A, B){
       var ay = A.scena ? stageTopDi(scenaDi(A), A.outY) + A.ly : A.ly - A.outY, by = B.scena ? stageTopDi(scenaDi(B), B.inY) + B.ly : B.ly - B.inY;
       return { v: Math.max(Lmin, PASSO * (Math.abs(xM - A.x) + Math.abs(Rm - ay))), a: Math.max(Lmin, PASSO * (Math.abs(xM - B.x) + Math.abs(by - Rm))) };
@@ -2137,13 +2133,14 @@ addEventListener('DOMContentLoaded',function(){
     for (i = 0; i < n - 1; i++) {
       A = seq[i]; B = seq[i+1];
       if (A === L1 || (SC && A === SC.L1)) continue;   /* tra L1 e L4 c'è la scena, coi suoi tratti */
+      if (A.ap) { if (B.inY < A.outY + Gmin) B.inY = A.outY + Gmin; continue; }   /* dall'apertura: la discesa ha almeno mezzo schermo */
       var st = strada(A, B), G = B.inY - A.outY;
-      var serve = (A.video || B.video) ? Gmin : Math.min(V0 * .66, st.v + st.a + 40);
+      var serve = Math.min(V0 * .66, st.v + st.a + 40);
       if (G >= serve) continue;
       var manca = serve - G;
-      var stA = A.video ? 1e9 : Math.max(0, A.outY - A.inY - Smin);
+      var stA = Math.max(0, A.outY - A.inY - Smin);
       var stB = Math.max(0, B.outY - B.inY - Smin); if (i + 1 === n - 1) stB = Math.max(0, Math.min(stB, maxS - 1 - B.inY));
-      var dA = A.video ? manca : Math.min(manca / 2, stA), dB = Math.min(manca - dA, stB);
+      var dA = Math.min(manca / 2, stA), dB = Math.min(manca - dA, stB);
       dA = Math.min(stA, manca - dB);
       A.outY -= dA; B.inY += dB;
     }
@@ -2163,12 +2160,16 @@ addEventListener('DOMContentLoaded',function(){
         SEG.push({ a: T + .855*R, b: T + .885*R, k: 'linea', da: L3, a2: L4 });
       } else if (SC && s === SC.L1) SEG.push.apply(SEG, SC.interni);
       else if (nx) {
-        var gv = { a: s.outY, b: nx.inY, k: (nx.video || s.video) ? 'diretto' : 'viaggio', da: s, a2: nx };
+        var gv = { a: s.outY, b: nx.inY, k: s.ap ? 'scende' : 'viaggio', da: s, a2: nx };
         if (gv.k === 'viaggio') { var sd = strada(s, nx), kk = Math.min(1, (gv.b - gv.a - 30) / (sd.v + sd.a)); gv.Lv = Math.max(40, sd.v * kk); gv.La = Math.max(40, sd.a * kk); }
         SEG.push(gv);
       }
     }
     SEG.push({ a: seq[n-1].outY, b: 1e9, k: 'seduto', s: seq[n-1] });
+    /* l'apertura: dove il puntino arriva in «serve» e il quarto aggancio (il puntino seduto, il punto del titolo al 42% dello
+       schermo). 19/11, verifica: prima era a metà del tratto in cui il puntino è seduto, cioè col punto al 50% e quasi 300 px
+       di nero sopra il titolo; ora il più in alto possibile (al 42%, o 12 px prima che il puntino riparta) */
+    if (APosto && seq[1]) { var sv = seq[1]; AP.arrivo = sv.inY; AP.fine = Math.round(Math.max(sv.inY + 1, Math.min(sv.ly - V0 * .42, sv.outY - 12))); }
   }
 
   /* dove deve stare il puntino: yp (lo scorrimento morbido) sceglie il punto del percorso, y (quello vero) dice dove
@@ -2181,16 +2182,19 @@ addEventListener('DOMContentLoaded',function(){
     var t = clamp((yp - g.a) / Math.max(1, g.b - g.a), 0, 1), s, e;
     if (g.k === 'seduto' || g.k === 'fermo') {
       s = g.s;
-      if (s.video && !US) return { s: s, nascosto: true, x: s.x, y: sy(s, y), d: DOT };
-      return { x: s.x, y: sy(s, y), d: s.video ? DOT : s.d, s: g.k === 'seduto' && s.el && !s.video ? s : null };
+      return { x: s.x, y: sy(s, y), d: s.d, s: g.k === 'seduto' && s.el ? s : null };
     }
     if (g.k === 'tendina') return { x: lerp(g.da.x, g.a2.x, t), y: sy(g.da, y), d: 10 };   /* stesso conto della tendina (aggiornaScena) */
     if (g.k === 'linea') { e = liscio(t); var pa = arco(g.da.x, sy(g.da, y), g.a2.x, sy(g.a2, y), e, g.curva == null ? .2 : g.curva); return { x: pa[0], y: pa[1], d: lerp(g.da.d, g.a2.d, e) }; }
-    if (g.k === 'diretto') {
-      /* dentro e fuori dallo showreel sempre al centro: esce dal basso e scende nel punto del titolo (o il contrario) */
+    if (g.k === 'scende') {
+      /* dall'apertura (19/11): il puntino del logo scende nel punto di «serve». Parte in giù mentre la V se ne va con la
+         pagina, si fa piccolo presto (da puntino del logo a punto del titolo) e arriva dall'alto */
       e = liscio(t);
-      var A = g.da, B = g.a2, ax = A.x, ay = sy(A, y), bx = B.x, by = sy(B, y), dy = by - ay;
-      return { x: c3(ax, ax, bx, bx, e), y: A.video ? c3(ay, ay + dy * .5, by - dy * .35, by, e) : c3(ay, ay + dy * .35, by - dy * .5, by, e), d: lerp(A.video ? DOT : A.d, B.video ? DOT : B.d, e) };
+      /* parte da dove stava col palco fermo (la V che sale non se lo porta dietro) e punta a dove il punto di «serve» sarà
+         sullo schermo alla fine del tratto (bF), non a dove è adesso (ancora in fondo): così sullo schermo scende poco e
+         piano mentre la pagina sale; la differenza (by - bF) entra piano, tutta solo all'arrivo (come nel marchio del piede) */
+      var A = g.da, B = g.a2, ax = A.x, ay = A.ly + Math.max(0, stageTopDi(A.scena, y)), bx = B.x, by = sy(B, y), bF = B.ly - g.b, dy = bF - ay;
+      return { x: c3(ax, ax, bx, bx, e), y: c3(ay, ay + dy * .35, bF - dy * .5, bF, e) + (by - bF) * e * e * e, d: B.d + (A.d - B.d) * (1 - e) * (1 - e) };
     }
     return viaggio(g, yp, y);
   }
@@ -2280,6 +2284,8 @@ addEventListener('DOMContentLoaded',function(){
   function fermaMolla(){ return !E.x && !E.y && !E.d; }
   function quadro(){
     pianificato = false;
+    /* l'aggancio dell'apertura sposta la pagina qui, prima che il fotogramma la legga (19/11) */
+    var corsa = !!(AP && AP.avanza && AP.avanza());
     var y = scrollY, ora = performance.now(), dt = tPrima ? clamp(ora - tPrima, 1, 50) : 16.7;
     if (ys === null) ys = ys1 = yPrima = y;
     /* la velocità della pagina, filtrata due volte (uno scatto di rotella da solo non conta) */
@@ -2289,41 +2295,40 @@ addEventListener('DOMContentLoaded',function(){
     /* un salto della pagina (non uno scorrimento): il puntino non ripercorre più di due schermi e mezzo */
     var lag = y - ys, cap = V0 * 2.5;
     if (lag > cap) { ys += lag - cap; ys1 += lag - cap; } else if (lag < -cap) { ys += lag + cap; ys1 += lag + cap; }
-    var a = 1 - Math.exp(-dt / TAU), lim = VMAX * dt * Math.max(1, Math.abs(y - ys) / 250);
+    /* (19/11) mentre è l'apertura a muovere la pagina (dito preso o aggancio) lo scorrimento è già morbido: lo si segue da vicino */
+    var guida = !!(AP && AP.guida && AP.guida());
+    var a = 1 - Math.exp(-dt / (guida ? 12 : TAU)), lim = guida ? 1e9 : VMAX * dt * Math.max(1, Math.abs(y - ys) / 250);
     ys1 += (y - ys1) * a;
     ys += lim * Math.tanh((ys1 - ys) * a / lim);
     if (Math.abs(y - ys) < .08 && Math.abs(y - ys1) < .08) ys = ys1 = y;
     var ritardo = Math.abs(y - ys);
-    US = uscitaSr();
     testataPiena();
+    /* l'apertura si disegna con lo stesso scorrimento morbido del puntino (19/11): il disco dell'apertura e #punto non si
+       vedono mai insieme. Nell'apertura e nella discesa in «serve» il puntino non si stacca mai (niente attesa nel margine) */
+    if (AP) AP.rendi(ys);
+    var inAp = !!(APosto && ys < AP.arrivo);
     /* la scena va con lo stesso scorrimento morbido: la tendina resta nella mano del puntino */
     if (ys > ST.T - 2 * vh && ys < ST.T + ST.R + 2 * vh) aggiornaScena(ys, vh);
-    /* lo showreel gira quando si vede bene (il puntino ci sta già dentro dall'inizio della pagina): parte quando se ne
-       vedono i quattro quinti sotto la testata, si ferma quando se ne vede meno della metà */
-    if (srPosto && y > srPosto.ly - 2 * vh && sr.preload !== 'auto') sr.preload = 'auto';
-    var srVis = srPosto ? (Math.min(srPosto.bottom - y, vh) - Math.max(srPosto.top - y, hT)) / Math.max(1, srPosto.bottom - srPosto.top) : 0;
-    var gira = !srFinito && srVis >= (sr.paused ? .8 : .5);
-    if (gira && sr.paused) { var pp = sr.play(); if (pp && pp.catch) pp.catch(function(){}); }
-    else if (!gira && !sr.paused) sr.pause();
     /* il puntino */
     var g = bersaglio(ys, y);
     if (g) {
       var B = { x: g.x, y: g.y, d: g.d }, BV = Bp ? { x: (B.x - Bp.x) / dt, y: (B.y - Bp.y) / dt, d: (B.d - Bp.d) / dt } : { x: 0, y: 0, d: 0 };
       Bp = B;
-      var W = g.nascosto ? B : { x: xM, y: Rm, d: DOT }, ZERO = { x: 0, y: 0, d: 0 };   /* (se il percorso è dentro il video, staccato vuol dire dentro il video) */
-      if (!LIBERO && D && !(g.nascosto && fermaMolla()) && (v2 > 2 || ritardo > 300)) { LIBERO = true; Wp = null; molla(D, DV, W, g.nascosto ? BV : ZERO, 1 / 60, dt); }
-      else if (LIBERO && v2 < 1 && ritardo < 120) { LIBERO = false; Wp = null; molla(D, DV, B, BV, 1 / 100, dt); }
+      var W = { x: xM, y: Rm, d: DOT }, ZERO = { x: 0, y: 0, d: 0 };
+      if (!LIBERO && D && !inAp && (v2 > 2 || ritardo > 300)) { LIBERO = true; molla(D, DV, W, ZERO, 1 / 60, dt); }
+      else if (LIBERO && (inAp || (v2 < 1 && ritardo < 120))) { LIBERO = false; molla(D, DV, B, BV, 1 / 100, dt); }
       sciogli(dt);
       var Q = LIBERO ? W : B;
-      if (LIBERO && Wp && Wp.n !== !!g.nascosto) { E.x += Wp.x - Q.x; E.y += Wp.y - Q.y; E.d += Wp.d - Q.d; }   /* staccato, il bersaglio passa dal margine al video (o il contrario): lo scarto lo prende la molla */
-      Wp = { x: Q.x, y: Q.y, d: Q.d, n: !!g.nascosto };
       var nx = Q.x + E.x, ny = Q.y + E.y, nd = Math.max(1, Q.d + E.d);
       if (D) { DV = { x: (nx - D.x) / dt, y: (ny - D.y) / dt, d: (nd - D.d) / dt }; }
       D = { x: nx, y: ny, d: nd };
-      if (!LIBERO && fermaMolla() && (g.nascosto || g.s)) { siedi(g.s); }     /* nascosto nel video, o il punto vero del titolo */
+      /* sopra il palco dell'apertura (opaco) il puntino sta davanti, ma solo da quando l'arancio è tornato nel puntino del
+         logo: prima lo disegna l'apertura e #punto resta dietro, invisibile */
+      if (APosto) punto.classList.toggle('sopra', inAp && AP.chiuso && ny - nd / 2 < stageTopDi(APosto.scena, y) + APosto.alto);
+      if (!LIBERO && fermaMolla() && g.s) { siedi(g.s); }     /* il punto vero del titolo (o il puntino del logo) */
       else metti(nx, ny, nd);
     }
-    if (ys !== y || !fermaMolla() || srEsce || v2 || LIBERO) { pianificato = true; requestAnimationFrame(quadro); }
+    if (corsa || ys !== y || !fermaMolla() || v2 || LIBERO) { pianificato = true; requestAnimationFrame(quadro); }
     else tPrima = 0;
   }
 
@@ -2333,7 +2338,7 @@ addEventListener('DOMContentLoaded',function(){
   function rimisura(){
     var visto = null;
     if (D) {
-      if (seduto && seduto.el && !seduto.video) { var q = seduto.el.getBoundingClientRect(); visto = { x: q.left + q.width / 2, y: q.top + q.height / 2, d: D.d }; }
+      if (seduto && seduto.el) { var q = seduto.el.getBoundingClientRect(); visto = { x: q.left + q.width / 2, y: q.top + q.height / 2, d: D.d }; }
       else visto = D;
     }
     scala(); misura(); ST.b = -1; ST.X = -1;
@@ -2552,9 +2557,42 @@ addEventListener('DOMContentLoaded',function(){
     function metti(k, larg){ c.style.setProperty('--k', k.toFixed(4)); c.style.setProperty('--largo', larg.toFixed(1) + 'px'); c.style.setProperty('--alto', (h / k).toFixed(1) + 'px'); }
     var k = w / L; metti(k, L); c.classList.add('scala');
     var sel = c.getAttribute('data-sopra'), su = sel && document.querySelector(sel), rie = c.querySelector('.chat-rie');
-    if (!su || !rie) return;
+    if (!su || !rie) { finale(c, k); return; }
     var limite = su.getBoundingClientRect().top - c.getBoundingClientRect().top - (parseFloat(c.getAttribute('data-margine')) || 28), zona = rie.offsetTop + rie.offsetHeight;
     if (limite > 120 && zona * k > limite) { k = limite / zona; metti(k, w / k); }
+    finale(c, k);
+  }
+  /* il finale (19/11, solo con data-finale: il pannello del Virtual Assistant). Vedi «FINALE RIEPILOGO» nel CSS.
+     La copia del riepilogo (.chat-fine) sta fuori dalla chat rimpicciolita e ha le misure in em; qui si calcolano:
+     da dove parte (dove sta il riepilogo nella chat), dove arriva (al centro della parte libera del pannello: dall'alto
+     fino all'etichetta «Esempio · WhatsApp», comunque sopra il titolo e sopra lo scuro che parte al 58 %), quanto si
+     ingrandisce (data-finale, meno se non ci sta tra i 16 px dei due lati) e dove finisce la «camera» della chat, così
+     che il riepilogo della chat e la copia facciano lo stesso percorso nello stesso tempo */
+  function finale(c, k){
+    if (!c.hasAttribute('data-finale')) return;
+    var rie = c.querySelector('.chat-tela .chat-rie');
+    if (!rie || !k) return;
+    var fine = c.querySelector('.chat-fine');
+    if (!fine) { fine = document.createElement('div'); fine.className = 'chat-fine'; fine.setAttribute('aria-hidden', 'true'); fine.appendChild(rie.cloneNode(true)); c.appendChild(fine); }
+    var W = c.clientWidth, H = c.clientHeight, cr = c.getBoundingClientRect(), M = 16;
+    var basso = H * .58, pn = c.closest('.pannello'), et = pn && pn.querySelector(':scope > .chip');
+    var sel = c.getAttribute('data-sopra'), su = sel && document.querySelector(sel);
+    if (et) basso = Math.min(basso, et.getBoundingClientRect().top - cr.top);
+    if (su) basso = Math.min(basso, su.getBoundingClientRect().top - cr.top - M);
+    fine.classList.add('misura'); var lw = fine.offsetWidth, lh = fine.offsetHeight; fine.classList.remove('misura');   /* a 16 px: misure «della chat» */
+    if (!lw || !lh) return;
+    var z = parseFloat(c.getAttribute('data-finale')) || 1.25;
+    z = Math.max(1, Math.min(z, (W - 2 * M) / (lw * k), (basso - 2 * M) / (lh * k)));
+    var w1 = Math.max(lw * k * z, W - 2 * M), h1 = lh * k * z, x1 = (W - w1) / 2, y1 = Math.max(M, (basso - h1) / 2);
+    var x0 = rie.offsetLeft * k, y0 = rie.offsetTop * k, w0 = rie.offsetWidth * k, h0 = rie.offsetHeight * k;
+    var cx = x1 + w1 / 2 - (x0 + w0 / 2) * z, cy = y1 + h1 / 2 - (y0 + h0 / 2) * z;   /* la camera porta il centro del riepilogo al centro d'arrivo */
+    var st = c.style, px = function(n){ return n.toFixed(2) + 'px'; };
+    st.setProperty('--fx0', px(x0)); st.setProperty('--fy0', px(y0)); st.setProperty('--fw0', px(w0)); st.setProperty('--ff0', px(16 * k));
+    st.setProperty('--fx1', px(x1)); st.setProperty('--fy1', px(y1)); st.setProperty('--fw1', px(w1)); st.setProperty('--ff1', px(16 * k * z));
+    st.setProperty('--cx', px(cx)); st.setProperty('--cy', px(cy)); st.setProperty('--ckz', (k * z).toFixed(4));
+    c.classList.add('finale');
+    /* se la chat aspetta di partire, riattacca le animazioni (così anche Safari legge le misure nuove) */
+    if (c._fase === 'pronta') { c.classList.remove('anima'); void c.offsetWidth; c.classList.add('anima'); }
   }
   chat.forEach(scala);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ chat.forEach(scala); });
@@ -2595,5 +2633,7 @@ addEventListener('DOMContentLoaded',function(){
    FINE CHAT-VA · JS
    ============================================================================================= */
 </script>
+<!-- ETICHETTE DI PROVA (19/11): da togliere insieme a prova-etichette.js -->
+<script src="prova-etichette.js"></script>
 </body>
 </html>
