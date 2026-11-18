@@ -301,7 +301,8 @@ html.fermo .rotaia,html:not(.js) .rotaia{display:none}
 .dettagli{margin-top:var(--s3)}
 .dettagli summary{list-style:none;display:inline-flex;align-items:center;gap:12px;min-height:44px;cursor:pointer;font:500 17px/1 var(--sans);color:var(--av)}
 .dettagli summary::-webkit-details-marker{display:none}
-.piu{position:relative;width:14px;height:14px;flex:none}
+.piu{position:relative;width:14px;height:14px;flex:none;transition:color .3s ease}
+.piu.sotto-pallina{color:var(--bg)}   /* (20/11) sotto la pallina (telefono): il «+» scuro sull'arancio, come la freccia */
 .piu::before,.piu::after{content:"";position:absolute;left:0;top:6.5px;width:14px;height:1.4px;border-radius:1px;background:currentColor;transition:transform .35s var(--ease)}
 .piu::after{transform:rotate(90deg)}
 details[open] > summary .piu::after{transform:rotate(0)}
@@ -2416,10 +2417,39 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         /* sul treno, ma la pagina vera è già oltre la fine del palco fermo: si stacca subito (sulla riga della stazione,
            ferma sullo schermo), così non sale col palco che se ne va */
         if (BINg && g.s && g.s === BINg.da && (y >= BINg.a || BINg.via)) return binario(BINg, yp, y);
-        return punta(g, yp, y);
+        return g.k === 'esceChat' ? zoomChat(g, punta(g, yp, y), yp, y) : punta(g, yp, y);
       }
     }
     return null;
+  }
+  /* (20/11) 6d: il pallino del riepilogo è quello dentro la chat finché il riepilogo non zooma, poi quello della copia
+     che va al centro. Se la pallina ci è seduta, passa nell'altro (stesso posto all'inizio dello zoom) */
+  function rieScegli(){
+    if (!RIE || !chatEl) return;
+    var fin = chatEl.classList.contains('finita') || chatEl.classList.contains('zoom');
+    var el = chatEl.querySelector(fin ? '.chat-fine .chat-punto' : '.chat-tela .chat-rie .chat-punto');
+    if (!el || el === RIE.el) return;
+    if (seduto === RIE && RIE.el) { RIE.el.classList.remove('qui'); if (RIE.el._pongo) { deforma(RIE.el, ''); RIE.el._pongo = ''; } el.classList.add('qui'); }
+    RIE.el = el; RIE.card = el.closest('.chat-rie'); RIE._f = -1; RIE.d = el.getBoundingClientRect().width || RIE.d;
+  }
+  /* (20/11) mentre il riepilogo zooma la pallina non ci va: aspetta seduta nella foto profilo (entrata durante lo zoom) o
+     ferma dov'è (per strada; disegnata dentro il riquadro); finito lo zoom, da lì alla strada giusta in 0,6 s */
+  function zoomChat(g, r, yp, y){
+    var zoom = chatEl && chatEl.classList.contains('zoom'), ora = performance.now(), A = g.da;
+    if (g.modo === 'attesa' && !zoom) { g.modo = 'rie'; r = punta(g, yp, y); }
+    var t = clamp((yp - g.a) / Math.max(1, g.b - g.a), 0, 1), seduta = g.modo === 'rie' && t >= .32 && t < .48;
+    if (g.modo === 'attesa') { g.frz = { x: sx(A), py: sy(A, y) + y, d: A.d }; g.rt = 0; return { x: sx(A), y: sy(A, y), d: A.d, s: A, fermo: true, kmax: 1.35 }; }
+    if (g.modo === 'rie' && zoom && !seduta) {
+      if (!g.frz) g.frz = { x: D ? D.x : r.x, py: (D ? D.y : r.y) + y, d: D ? D.d : r.d }; g.rt = 0;
+      return { x: g.frz.x, y: g.frz.py - y, d: g.frz.d, dentroPannello: true, anima: true };
+    }
+    if (g.frz && !zoom && g.modo === 'rie') {
+      if (!g.rt) g.rt = ora;
+      var b = liscio(clamp((ora - g.rt) / 600, 0, 1));
+      if (b >= 1) { g.frz = null; g.rt = 0; return r; }
+      return { x: lerp(g.frz.x, r.x, b), y: lerp(g.frz.py - y, r.y, b), d: lerp(g.frz.d, r.d, b), dentroPannello: true, kmax: r.kmax, anima: true };
+    }
+    return r;
   }
   function punta(g, yp, y){
     var t = clamp((yp - g.a) / Math.max(1, g.b - g.a), 0, 1), s, e, p, A, B;
@@ -2615,22 +2645,27 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* (19/11, Niccolò) «Scopri i dettagli»: con i dettagli di un pacchetto aperti (4d, 5g, 6h) la pallina va sotto la
      freccia del pulsante in fondo («Parliamone»; nel Virtual Assistant «Prenota un'anteprima»), un livello sotto: la
      freccia resta sopra (diventa scura, .sotto-pallina) e la pallina, allargata come pongo in un ovale appena schiacciato
-     di 20 × 15 px (OV), le fa da fondo arancio. Ci va dal suo posto nel giro normale lungo la riga, il margine destro e la
-     riga del pulsante (a destra della freccia non c'è niente: mai sopra le scritte), in 1,1 s; le due estremità sono vive
-     (il giro normale da una parte, il pulsante dall'altra: segue la tendina che si apre e lo scorrimento).
-     · Dettagli chiusi, o pulsante uscito dallo schermo in basso (si torna su): torna piccola per la stessa strada nel giro
-       normale. Se se ne apre un altro, prima torna e poi va in quello.
-     · Scorrendo in giù (il pulsante sale sopra il 38% dello schermo), se sotto c'è un punto dentro il riquadro del pacchetto dopo (la
-       frase del Sito Web, la foto profilo della chat) o il «°» della Campagna, non torna su: esce a destra lungo la riga del pulsante, scende dritta
-       nel vuoto tra i pacchetti (a metà schermo, più a destra se lì c'è testo), e: nel Sito Web entra nel riquadro (copia
-       disegnata dentro, tagliata dal bordo), scende fino alla riga del punto della frase e ci entra da destra; nella chat
-       si ferma nel vuoto sopra il riquadro, va sopra il punto e ci scende dentro. Diventa subito piccola e tonda. Legata
-       allo scorrimento (tornando su rifà la strada all'indietro); alla fine passa la mano al giro normale (il punto).
+     di 20 × 15 px (OV), le fa da fondo arancio. (20/11, Niccolò: «la pallina proviamo a farla passare anche sui "+" di
+     Scopri i dettagli») Con i dettagli chiusi va sotto il «+» di «Scopri i dettagli»: un cerchio di 22 px che lo copre
+     tutto, tondo; il «+» diventa scuro. Ci arriva lungo la riga, il margine destro e la riga del «+» (a destra non c'è
+     niente); legata allo scorrimento: mentre la riga sale dal 72% al 62% dello schermo, poi ci resta fino al 38% e da lì
+     esce in giù verso la tappa dopo come dalla freccia (tornando su rifà tutto all'indietro). Aprendo i dettagli passa
+     dal «+» alla freccia lungo il margine destro (1,1 s), chiudendoli torna sul «+».
+     · Freccia (dettagli aperti): ci va in 1,1 s quando si aprono, se il pulsante è sullo schermo; pulsante uscito in
+       basso (si torna su): torna piccola nel giro normale per la stessa strada.
+     · Scorrendo in giù (il «+» o il pulsante sopra il 38% dello schermo), se sotto c'è un punto dentro il riquadro del
+       pacchetto dopo (la frase del Sito Web, la foto profilo della chat) o il «°» della Campagna, non torna su: esce a
+       destra lungo la riga, scende dritta nel vuoto tra i pacchetti (a metà schermo, più a destra se lì c'è testo), e:
+       nel Sito Web entra nel riquadro (copia disegnata dentro, tagliata dal bordo), scende fino alla riga del punto della
+       frase e ci entra da destra; nella chat si ferma nel vuoto sopra il riquadro, va sopra il punto e ci scende dentro;
+       verso il «°» nella corsia di destra. Diventa subito piccola e tonda. Legata allo scorrimento; alla fine passa la
+       mano al giro normale (il punto).
      · Solo coi pacchetti uno sotto l'altro (telefono): da computer, coi pacchetti in colonne, resta com'era. Con «Riduci
-       movimento» il fondo è fisso (CSS) */
-  var FRD = 20, FRT = 1100, FX = { k: 0, d: null, ult: null, vivo: 0, fuori: false, salto: false, giu: false }, DAP = [], HA = !!doc.animate, PDS = null, OV = 0;
+       movimento» il fondo sotto la freccia è fisso (CSS) */
+  var FRD = 20, FPD = 22, FRT = 1100, FX = { k: 0, d: null, ult: null, vivo: 0, fuori: false, salto: false, giu: false, pa: 0, modo: '' }, DAP = [], HA = !!doc.animate, PDS = null, OV = 0;
+  var TUTTI = [].slice.call(document.querySelectorAll('.pacchetto .dettagli'));
   function aperto(d){ return HA ? d.classList.contains('apre') && d.open : d.open; }
-  [].forEach.call(document.querySelectorAll('.pacchetto .dettagli'), function(d){
+  TUTTI.forEach(function(d){
     var sm = d.querySelector('summary'); if (!sm) return;
     sm.addEventListener('click', function(){
       setTimeout(function(){   /* dopo lo script delle tendine, che decide se si apre o si chiude */
@@ -2641,6 +2676,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     });
   });
   function frecciaDi(d){ return d.querySelector('.freccia .i') || d.querySelector('.freccia'); }
+  function piuDi(d){ return d.querySelector('summary .piu'); }
+  function centro(el){ var r = el && el.getBoundingClientRect(); return r && r.width ? [r.left + r.width / 2, r.top + r.height / 2] : null; }
   /* la tappa dopo il pacchetto: il punto dentro il riquadro del pacchetto sotto (solo se è una tappa), o il «°» della
      Campagna dopo il Virtual Assistant */
   function dopoDi(d){ var pk = d.closest('.pacchetto'), nx = pk && pk.nextElementSibling; while (nx && !nx.classList.contains('pacchetto')) nx = nx.nextElementSibling; if (!nx) return null; for (var i = 0; i < DENTRO.length; i++) if (nx.contains(DENTRO[i].el)) return DENTRO[i]; return GRADI && nx.contains(GRADI.el) ? GRADI : null; }
@@ -2660,72 +2697,105 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var vy = b.porta.vuoto - y;
     return { pts: [[bx, by], [X, by], [X, vy], [dx, vy], [dx, b.porta.bordo - y]], pan: false };
   }
+  /* l'uscita in giù da c (il «+» o la freccia, sullo schermo): da quando c (con lo scorrimento addolcito) passa sopra YG
+     fino a quando il punto dopo è il suo posto nel giro normale (0,3 schermi di scorrimento, dentro la sua sosta) */
+  function giuDi(d, c, y, sS, YG){
+    var nb = mqColonna.matches ? dopoDi(d) : null, s0 = c[1] + y - YG; if (!nb || !(sS > s0)) return null;
+    var s1 = s0 + .3 * innerHeight; if (nb.outY > nb.inY + 2) s1 = clamp(s1, nb.inY + 1, nb.outY - 1); s1 = Math.max(s1, s0 + 80);
+    return { b: nb, j: clamp((sS - s0) / (s1 - s0), 0, 1), x: c[0], y: c[1] };
+  }
+  function segna(d, pa, k, giu){
+    if (!d) return;
+    var a = d.querySelector('.freccia'), pi = piuDi(d), su = giu ? giu.j < .03 : k > .8;
+    if (a) a.classList.toggle('sotto-pallina', su && pa > .5);
+    if (pi) pi.classList.toggle('sotto-pallina', su && pa <= .5);
+  }
   function freccia(g, y, dt, inAp){
-    /* ok: si può andare sotto il pulsante (nel giro normale la pallina non sta facendo niente di speciale; l'arrivo verso il
-       «°» della Campagna, che va sopra la card, sì: la pallina resta sotto la freccia finché il pulsante è sotto il 38%
-       dello schermo, poi esce in giù verso il «°»); base: si può
-       uscire in giù verso la tappa dopo (anche se il giro normale è già al «°» della Campagna) */
+    /* ok: si può andare sotto il «+» o la freccia (nel giro normale la pallina non sta facendo niente di speciale; l'arrivo
+       verso il «°» della Campagna, che va sopra la card, sì); base: si può uscire in giù verso la tappa dopo (anche se il
+       giro normale è già al «°» della Campagna) */
     var ora = performance.now(), base = !!g && mqColonna.matches && !inAp && !LIBERO, ok = base && !g.nascosto && !g.raccogli && g.linea == null && !g.dentroPannello && !(g.s && (g.s === GRADI || g.s === RAC || g.s === FIN));
-    var vuole = null, giu = null, i, d, ic, r, cy, YG = Math.max(hT + 60, .38 * innerHeight), sS = ys === null ? y : ys;
-    for (i = DAP.length - 1; i >= 0 && base; i--) {
-      d = DAP[i]; if (!aperto(d)) { DAP.splice(i, 1); continue; }
-      ic = frecciaDi(d); if (!ic) continue; r = ic.getBoundingClientRect(); if (!r.width) continue;
-      cy = r.top + r.height / 2;
-      /* l'uscita in giù: da quando il pulsante (con lo scorrimento addolcito) passa sopra YG (il 38% dello schermo) fino a
-         quando il punto dopo è il suo posto nel giro normale (0,3 schermi di scorrimento, dentro la sua sosta) */
-      var nb = mqColonna.matches ? dopoDi(d) : null, s0 = cy + y - YG;
-      if (nb && sS > s0) {
-        var s1 = s0 + .3 * innerHeight; if (nb.outY > nb.inY + 2) s1 = clamp(s1, nb.inY + 1, nb.outY - 1); s1 = Math.max(s1, s0 + 80);
-        giu = { b: nb, j: clamp((sS - s0) / (s1 - s0), 0, 1), x: r.left + r.width / 2, y: cy }; vuole = d; break;
+    var YG = Math.max(hT + 60, .38 * innerHeight), YP = .62 * innerHeight, sS = ys === null ? y : ys, i, d, c, gi, sc = null, fb = null;
+    if (base) {
+      /* prima i dettagli aperti (l'ultimo aperto): la freccia */
+      for (i = DAP.length - 1; i >= 0 && !sc; i--) {
+        d = DAP[i]; if (!aperto(d)) { DAP.splice(i, 1); continue; }
+        c = centro(frecciaDi(d)); if (!c) continue;
+        gi = giuDi(d, c, y, sS, YG);
+        if (gi) { if (gi.j < 1) { sc = { d: d, modo: 'f', giu: gi }; break; } if (d === FX.d) fb = { d: d, modo: 'f', giu: gi }; continue; }
+        if (!ok) continue;
+        var m = d === FX.d && FX.k > 0 ? 0 : 24;
+        if (c[1] > hT + 16 + m && c[1] < innerHeight - 30 - m) sc = { d: d, modo: 'f', kT: 1 };
       }
-      if (!ok) continue;
-      var m = d === FX.d && FX.k > 0 ? 0 : 24;
-      if (cy > hT + 16 + m && cy < innerHeight - 30 - m) { vuole = d; break; }
+      /* poi i dettagli chiusi: il «+» (legato allo scorrimento: la riga dal 72% al 62% dello schermo per arrivarci) */
+      for (i = 0; i < TUTTI.length && !sc; i++) {
+        d = TUTTI[i]; if (aperto(d)) continue;
+        c = centro(piuDi(d)); if (!c) continue;
+        gi = giuDi(d, c, y, sS, YG);
+        if (gi) { if (gi.j < 1) sc = { d: d, modo: 'p', giu: gi }; else if (d === FX.d) fb = { d: d, modo: 'p', giu: gi }; continue; }
+        var cyS = c[1] + y - sS;
+        if (ok && cyS >= YG && cyS < YP + 90) sc = { d: d, modo: 'p', kT: clamp((YP + 90 - cyS) / 90, 0, 1) };
+      }
     }
+    /* finita l'uscita in giù (ha passato la mano al giro normale): conta solo se non c'è niente di nuovo */
+    if (!sc && fb) sc = fb;
+    var vuole = sc && sc.d;
     /* già passata la mano al giro normale (in fondo all'uscita in giù) e ora niente da fare: si lascia andare subito */
-    if (FX.fuori && !(giu && vuole === FX.d)) { var af = FX.d && FX.d.querySelector('.freccia'); if (af) af.classList.remove('sotto-pallina'); FX.k = 0; FX.d = null; FX.fuori = false; }
+    if (FX.fuori && !(sc && sc.giu && vuole === FX.d)) { segna(FX.d, 0, 0, null); FX.k = 0; FX.d = null; FX.fuori = false; }
     if (FX.d && FX.d !== vuole) {
-      /* i dettagli chiusi a metà dell'uscita in giù: da lì al giro normale con la molla */
-      if (FX.giu) { FX.k = 0; FX.salto = true; } else FX.k = Math.max(0, FX.k - dt / FRT);   /* torna (anche prima di andare in un altro) */
+      /* i dettagli chiusi a metà dell'uscita in giù: da lì al giro normale con la molla; dal «+» (legato allo scorrimento)
+         si lascia subito: è già al suo posto nel giro normale */
+      if (FX.giu) { FX.k = 0; FX.salto = true; }
+      else if (FX.modo === 'p' && ora >= FX.vivo) FX.k = 0;
+      else FX.k = Math.max(0, FX.k - dt / FRT);   /* torna (anche prima di andare in un altro) */
     }
-    if (FX.k <= 0) { if (FX.d) { var a0 = FX.d.querySelector('.freccia'); if (a0) a0.classList.remove('sotto-pallina'); } FX.d = vuole; FX.ult = null; }
+    if (FX.k <= 0) { segna(FX.d, 0, 0, null); FX.d = vuole; FX.ult = null; FX.pa = sc && sc.modo === 'f' ? 1 : 0; }
     FX.giu = false;
     if (FX.d && FX.d === vuole) {
-      if (giu) { if (FX.k < .999 && dt > 0) FX.salto = true; FX.k = 1; } else FX.k = Math.min(1, FX.k + dt / FRT);
+      FX.modo = sc.modo;
+      FX.pa += clamp((sc.modo === 'f' ? 1 : 0) - FX.pa, -dt / FRT, dt / FRT);   /* dal «+» alla freccia e ritorno, a tempo */
+      if (sc.giu) { if (FX.k < .999 && dt > 0) FX.salto = true; FX.k = 1; }
+      else if (sc.modo === 'p' && ora >= FX.vivo && FX.pa <= 0) FX.k = sc.kT;   /* il «+»: legata allo scorrimento */
+      else FX.k = clamp(FX.k + clamp(sc.kT - FX.k, -dt / FRT, dt / FRT), 0, 1);
     }
     OV = 0;
-    if (!FX.d || FX.k <= 0 || !g) return g;
-    var a = FX.d.querySelector('.freccia');
-    if (giu && FX.d === vuole) {
-      if (a) a.classList.toggle('sotto-pallina', giu.j < .03);
-      if (giu.j >= 1) { FX.fuori = true; return g; }
+    if (!FX.d || FX.k <= 0 || !g) { if (FX.d && FX.k <= 0) segna(FX.d, 0, 0, null); return g; }
+    if (sc && sc.giu && FX.d === vuole) {
+      segna(FX.d, FX.pa, 1, sc.giu);
+      if (sc.giu.j >= 1) { FX.fuori = true; return g; }
       FX.fuori = false; FX.giu = true;
-      var gp = giuPunti(giu.b, giu.x, giu.y, y), e = liscio(giu.j), q = clamp(giu.j / .08, 0, 1), pg = traccia(gp.pts, 16).at(e);
-      OV = 1 - q;
-      return { x: pg[0], y: pg[1], d: q < 1 ? lerp(FRD, DOT, q) : lerp(DOT, giu.b.d || DOT, e), kmax: 1.4, pdS: gp.pan, sopra: gp.L != null && (pg[1] > giu.y + 1 || pg[0] >= gp.L - 1), anima: ora < FX.vivo };
+      var gp = giuPunti(sc.giu.b, sc.giu.x, sc.giu.y, y), e = liscio(sc.giu.j), q = clamp(sc.giu.j / .08, 0, 1), pg = traccia(gp.pts, 16).at(e), d0 = lerp(FPD, FRD, FX.pa);
+      OV = (1 - q) * FX.pa;
+      return { x: pg[0], y: pg[1], d: q < 1 ? lerp(d0, DOT, q) : lerp(DOT, sc.giu.b.d || DOT, e), kmax: 1.4, pdS: gp.pan, sopra: gp.L != null && (pg[1] > sc.giu.y + 1 || pg[0] >= gp.L - 1), anima: ora < FX.vivo };
     }
-    /* il pulsante sullo schermo (mentre la tendina si apre è già al suo posto, solo tagliato: ci arriva quando compare).
-       Se la tendina si chiude, il punto d'arrivo risale col fondo della tendina fino alla riga di «Scopri i dettagli», a
-       destra della scritta (la pagina sotto risale e prende il posto del pulsante) */
-    ic = frecciaDi(FX.d); r = ic && ic.getBoundingClientRect();
-    var bx, by;
-    if (aperto(FX.d) && r && r.width) { bx = r.left + r.width / 2; by = r.top + r.height / 2; FX.ult = { x: bx, py: by + y }; }
-    else {
-      var dr = FX.d.getBoundingClientRect(), sm = FX.d.querySelector('summary').getBoundingClientRect(), sc = sm.top + sm.height / 2;
-      var y0 = FX.ult ? FX.ult.py - y : sc, x0 = FX.ult ? FX.ult.x : sm.right + FRD / 2 + 6;
-      by = Math.max(sc, Math.min(y0, dr.bottom - FRD / 2));
-      bx = lerp(x0, Math.max(x0, sm.right + FRD / 2 + 6), y0 > sc ? clamp((y0 - by) / (y0 - sc), 0, 1) : 1);
+    /* il «+» e la freccia sullo schermo (mentre la tendina si apre la freccia è già al suo posto, solo tagliata: ci arriva
+       quando compare). Se la tendina si chiude, la freccia risale col fondo della tendina fino alla riga di «Scopri i
+       dettagli» (la pagina sotto risale e prende il posto del pulsante) e la pallina torna sul «+» */
+    var pc = centro(piuDi(FX.d)), fr = null, ic = frecciaDi(FX.d), r = ic && ic.getBoundingClientRect();
+    if (FX.pa > 0) {
+      if (aperto(FX.d) && r && r.width) { fr = [r.left + r.width / 2, r.top + r.height / 2]; FX.ult = { x: fr[0], py: fr[1] + y }; }
+      else {
+        var dr = FX.d.getBoundingClientRect(), sm = FX.d.querySelector('summary').getBoundingClientRect(), scy = sm.top + sm.height / 2;
+        var y0 = FX.ult ? FX.ult.py - y : scy, x0 = FX.ult ? FX.ult.x : sm.right + FRD / 2 + 6;
+        var by0 = Math.max(scy, Math.min(y0, dr.bottom - FRD / 2));
+        fr = [lerp(x0, Math.max(x0, sm.right + FRD / 2 + 6), y0 > scy ? clamp((y0 - by0) / (y0 - scy), 0, 1) : 1), by0];
+      }
     }
-    var ax = g.x, ay = g.y, L = Math.max(bx + FRD / 2 + 8, Math.min(xM, innerWidth - 12));
+    var L = Math.min(xM, innerWidth - 12), B;
+    if (!pc || FX.pa >= 1) B = fr || pc; else if (FX.pa <= 0 || !fr) B = pc;
+    else B = traccia([pc, [L, pc[1]], [L, fr[1]], fr], RAGGIO).at(liscio(FX.pa));
+    if (!B) return g;
+    var bx = B[0], by = B[1], dd = lerp(FPD, FRD, FX.pa);
+    var ax = g.x, ay = g.y, L2 = Math.max(bx + dd / 2 + 8, L);
     var pts = [[ax, ay]];
-    if (Math.abs(L - ax) > 1) pts.push([L, ay]);
-    if (Math.abs(by - ay) > 1) pts.push([L, by]);
+    if (Math.abs(L2 - ax) > 1) pts.push([L2, ay]);
+    if (Math.abs(by - ay) > 1) pts.push([L2, by]);
     pts.push([bx, by]);
     var e2 = liscio(FX.k), p = pts.length > 1 ? traccia(pts, RAGGIO).at(e2) : [bx, by];
     if (!isFinite(p[0]) || !isFinite(p[1])) p = [bx, by];
-    if (a) a.classList.toggle('sotto-pallina', FX.k > .8);
-    var gr = morbido(clamp((FX.k - .62) / .38, 0, 1)); OV = gr;
-    return { x: p[0], y: p[1], d: lerp(g.d || DOT, FRD, gr), kmax: 1.4, anima: FX.k < 1 || (FX.d !== vuole) || ora < FX.vivo };
+    segna(FX.d, FX.pa, FX.k, null);
+    var gr = morbido(clamp((FX.k - .62) / .38, 0, 1)); OV = gr * FX.pa;
+    return { x: p[0], y: p[1], d: lerp(g.d || DOT, dd, gr), kmax: 1.4, anima: FX.k < 1 || (FX.d !== vuole) || ora < FX.vivo || (FX.pa > 0 && FX.pa < 1) };
   }
   function siedi(s){
     if (s === seduto) return;
@@ -2904,7 +2974,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var inAp = !!(APosto && ys < AP.arrivo);
     /* «Come funziona» si muove prima che il puntino legga dov'è il treno: stesso fotogramma */
     var binMuove = binPasso(y, dt);
-    if (CHATSEG) { var inCs = ys >= CHATSEG.a && ys < CHATSEG.b; if (inCs && !CHATSEG.dentro) { CHATSEG.dentro = true; CHATSEG.modo = chatEl && chatEl.classList.contains('finita') ? 'rie' : 'nascosto'; } else if (!inCs) CHATSEG.dentro = false; }
+    rieScegli();
+    if (CHATSEG) { var inCs = ys >= CHATSEG.a && ys < CHATSEG.b; if (inCs && !CHATSEG.dentro) { CHATSEG.dentro = true; var cf = chatEl && chatEl.classList; CHATSEG.modo = !cf ? 'nascosto' : cf.contains('finita') ? 'rie' : cf.contains('zoom') ? 'attesa' : cf.contains('rie-su') ? 'rie' : 'nascosto'; CHATSEG.frz = null; CHATSEG.rt = 0; } else if (!inCs) CHATSEG.dentro = false; }
     var g = freccia(bersaglio(ys, y), y, dt, inAp);
     if (g) {
       var Bq = { x: g.x, y: g.y, d: g.d }, BV = Bp ? { x: (Bq.x - Bp.x) / dt, y: (Bq.y - Bp.y) / dt, d: (Bq.d - Bp.d) / dt } : { x: 0, y: 0, d: 0 };
@@ -3093,9 +3164,15 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   if (ridotto || !('IntersectionObserver' in window)) return;
 
   /* pronta = animazioni attaccate e ferme a 0 (si vede l'inizio: la chat vuota); gira; pausa */
-  function pronta(c){ c.classList.remove('anima', 'finita'); void c.offsetWidth; c.classList.add('anima', 'ferma'); c._fase = 'pronta'; }
+  function pronta(c){ c.classList.remove('anima', 'finita', 'rie-su', 'zoom'); void c.offsetWidth; c.classList.add('anima', 'ferma'); c._fase = 'pronta'; }
   /* (18/11 notte, anteprima N) finita: il riepilogo è arrivato al centro (lo legge il puntino che viaggia, per passarci) */
-  chat.forEach(function(c){ c.addEventListener('animationend', function(e){ if (e.animationName === 'chat-fine-va') c.classList.add('finita'); }); });
+  chat.forEach(function(c){
+    c.addEventListener('animationend', function(e){
+      if (e.animationName === 'chat-fine-va') { c.classList.add('finita'); c.classList.remove('zoom'); }
+      else if (e.animationName === 'chat-punto' && !e.target.closest('.chat-fine')) c.classList.add('rie-su');   /* (20/11) il pallino del riepilogo è comparso */
+    });
+    c.addEventListener('animationstart', function(e){ if (e.animationName === 'chat-fine-va') c.classList.add('zoom'); });   /* (20/11) il riepilogo zooma al centro */
+  });
   function gira(c){ c.classList.remove('ferma'); c._fase = 'gira'; }
   function pausa(c){ c.classList.add('ferma'); c._fase = 'pausa'; }
   /* quanta parte della conversazione (dall'alto fino al riepilogo) è dentro lo schermo, da 0 a 1 */
