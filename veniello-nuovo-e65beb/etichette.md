@@ -89,6 +89,7 @@ c messaggi, d riepilogo, e etichetta).
 - 6h — «Scopri i dettagli +» (con «Prenota un'anteprima»)
 
 ## 7 · Campagna Pubblicitaria 360° (prima era 8)
+- 7x — l'etichetta «Abbonamenti» (con la linea leggera da bordo a bordo sopra)
 - 7 — il pacchetto speciale
 - 7a — «Pacchetto speciale»
 - 7b — il titolo «Campagna Pubblicitaria 360°» (il puntino si posa nel «°» e l'arancio dilaga su tutto il titolo: prima
@@ -96,7 +97,7 @@ c messaggi, d riepilogo, e etichetta).
   riunisce in pallina a sinistra del titolo, che riparte verso 8b)
 - 7c — «Contenuti, sito e Virtual Assistant insieme…»
 - 7d — il pulsante «Parliamone»
-- 7e — «Cosa comprende» e le tre voci
+- 7e — «Cosa comprende» a tendina, con le tre voci
 - 7f — la nota «Siti, video e grafiche: lavori veri…» (sotto la Campagna)
 
 ## 8 · Partner (i blocchi pieni della D; prima era 2, ora in fondo ai servizi come nella D)

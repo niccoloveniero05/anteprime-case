@@ -279,6 +279,13 @@ html.fermo .rotaia,html:not(.js) .rotaia{display:none}
 /* più aria sopra e sotto le linee centrali: 144 px invece di 112 (Niccolò, 18/11 notte) */
 .pacchetto+.pacchetto:not(.speciale){padding-top:var(--s7)}
 .pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:var(--s7)}
+/* angoli piccoli intorno alla linea: due che chiudono il pacchetto sopra e due che aprono quello sotto (Niccolò, 18/11 notte) */
+.pacchetto+.pacchetto:not(.speciale)::after{content:"";position:absolute;left:0;right:0;top:-46px;height:92px;pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/1.5px 22px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 20.5px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/1.5px 22px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 20.5px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 70px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 22px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 70px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 22px no-repeat}
+/* «Abbonamenti» (7x): la Campagna staccata come una sezione, con la linea leggera da bordo a bordo come sopra «Servizi» e la stessa etichetta (3a) */
+.abbonamenti-testa{position:relative;padding-top:var(--s6)}
+.abbonamenti-testa::before{content:"";position:absolute;top:0;left:calc(-1 * var(--lato));right:calc(-1 * var(--lato));border-top:var(--linea-sezione);pointer-events:none}
+.abbonamenti-testa .etichetta{font-size:16px;margin:-48px 0 calc(var(--s2) + 41px)}
+.abbonamenti-testa + .pacchetto.speciale{margin-top:0}
 .pacchetto:first-child{padding-top:0;border-top:0}
 /* il riquadro del lavoro (video, anteprima del sito, chat): 4:5, come i pannelli della D */
 .m{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#1A1912 0%,#13120C 60%);box-shadow:inset 0 0 0 1px rgba(245,244,239,.085);isolation:isolate;margin:0 calc(var(--pan) - var(--lato))}
@@ -330,6 +337,9 @@ details[open] > summary .piu::after{transform:rotate(0)}
   .pacchetto+.pacchetto:not(.speciale)::before{display:none}
   .pacchetto+.pacchetto:not(.speciale){padding-top:0}
   .pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:0}
+  .pacchetto+.pacchetto:not(.speciale)::after{display:none}
+  .abbonamenti-testa{grid-column:1/-1;margin-top:var(--s6)}
+  .sp-elenco .dettagli{margin-top:0}
   .m{margin:0}
   .pacchetto .t2{font-size:34px}
   .pacchetto.speciale{grid-column:1/-1;margin:var(--s6) 0 0;padding:var(--s5);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 var(--s5)}
@@ -1144,6 +1154,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20prenotare%20un%E2%80%99anteprima%20del%20Virtual%20Assistant%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener">Prenota un’anteprima<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
           </details>
         </li>
+        <li class="abbonamenti-testa"><span class="etichetta">Abbonamenti</span></li>
         <li class="pacchetto speciale" id="campagna">
           <div class="sp-testa">
             <p class="speciale-tag">Pacchetto speciale</p>
@@ -1152,8 +1163,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
           </div>
           <div class="sp-elenco">
-            <p class="sp-titolo">Cosa comprende</p>
-            <ul class="voci"><li><b>Creazione Contenuti</b>Video, foto, stories, Google, Instagram e&nbsp;TikTok</li><li><b>Sito Web</b>Sul tuo dominio, gestito e aggiornato</li><li><b>Virtual Assistant</b>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi</li></ul>
+            <details class="dettagli"><summary>Cosa comprende<i class="piu" aria-hidden="true"></i></summary>
+            <ul class="voci"><li><b>Creazione Contenuti</b>Video, foto, stories, Google, Instagram e&nbsp;TikTok</li><li><b>Sito Web</b>Sul tuo dominio, gestito e aggiornato</li><li><b>Virtual Assistant</b>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi</li></ul></details>
           </div>
         </li>
       </ul>
@@ -2632,7 +2643,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function frecciaDi(d){ return d.querySelector('.freccia .i') || d.querySelector('.freccia'); }
   /* la tappa dopo il pacchetto: il punto dentro il riquadro del pacchetto sotto (solo se è una tappa), o il «°» della
      Campagna dopo il Virtual Assistant */
-  function dopoDi(d){ var pk = d.closest('.pacchetto'), nx = pk && pk.nextElementSibling; if (!nx) return null; for (var i = 0; i < DENTRO.length; i++) if (nx.contains(DENTRO[i].el)) return DENTRO[i]; return GRADI && nx.contains(GRADI.el) ? GRADI : null; }
+  function dopoDi(d){ var pk = d.closest('.pacchetto'), nx = pk && pk.nextElementSibling; while (nx && !nx.classList.contains('pacchetto')) nx = nx.nextElementSibling; if (!nx) return null; for (var i = 0; i < DENTRO.length; i++) if (nx.contains(DENTRO[i].el)) return DENTRO[i]; return GRADI && nx.contains(GRADI.el) ? GRADI : null; }
   function copiaIn(pan){ var c = document.createElement('i'); c.className = 'punto punto-dentro'; c.setAttribute('aria-hidden', 'true'); c.innerHTML = '<svg viewBox="-20 -20 40 40" focusable="false"><path d="M20 0A20 20 0 1 1-20 0A20 20 0 1 1 20 0Z"/></svg>'; pan.appendChild(c); return c; }
   function giuPunti(b, bx, by, y){
     var dx = sx(b), dy = sy(b, y), pk = b.el.closest('.pacchetto'), pan = pk && pk.querySelector('.m'), X = Math.max(innerWidth / 2 + 6, bx + 40, dx + 24);

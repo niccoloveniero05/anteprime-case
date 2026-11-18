@@ -94,12 +94,13 @@
     ['#va > .sotto', '6g', '«Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.»'],
     ['#va > .dettagli', '6h', '«Scopri i dettagli +» (e l’elenco che si apre)'],
 
+    ['.abbonamenti-testa .etichetta', '7x', 'L’etichetta «Abbonamenti» (con la linea da bordo a bordo sopra)'],
     ['#campagna', '7', 'Campagna Pubblicitaria 360° (pacchetto speciale)'],
     ['#campagna .speciale-tag', '7a', '«Pacchetto speciale»'],
     ['#t-360', '7b', 'Il titolo «Campagna Pubblicitaria 360°» (il puntino si posa nel «°» e l’arancio dilaga su tutto il titolo)'],
     ['#campagna .sp-testa > .sotto', '7c', '«Contenuti, sito e Virtual Assistant insieme…»'],
     ['#campagna .speciale-azione', '7d', 'Il pulsante «Parliamone»'],
-    ['#campagna .sp-elenco', '7e', '«Cosa comprende» e le tre voci'],
+    ['#campagna .sp-elenco', '7e', '«Cosa comprende» a tendina, con le tre voci'],
     ['#servizi .nota', '7f', 'La nota «Siti, video e grafiche: lavori veri…»'],
 
     ['#partner', '8', 'Partner (in fondo ai servizi, come nella D)'],
