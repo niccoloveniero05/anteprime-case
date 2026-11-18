@@ -1496,7 +1496,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function vai(dest, curva, dur, libero, presa){
     var da = scrollY, mio = ++giro;
     if (Math.abs(dest - da) < 1) { tw = null; if (dest !== da) scorri(dest); libera(); return; }
-    tw = { da: da, a: dest, t0: performance.now(), dur: dur || 1000 * Math.max(.7, Math.min(2.6, .5 + .65 * Math.abs(dest - da) / A.V)), c: curva || curvaIO, libero: !!libero,
+    tw = { da: da, a: dest, t0: performance.now(), dur: dur || 1000 * Math.max(.85, Math.min(3.1, .6 + .78 * Math.abs(dest - da) / A.V)), c: curva || curvaIO, libero: !!libero,
            presa: !!presa, el: 0, cp: 0, salti: 0, tp: 0 };
     /* il passo lo fa il motore del puntino all'inizio del suo fotogramma, prima di leggere la pagina (API.avanza): così
        pagina, apertura e puntino si muovono sempre nello stesso fotogramma (con un giro a parte, a volte il puntino
@@ -1582,7 +1582,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       else { var m = y - tc.s0, l = m > 0 ? tc.hi - tc.s0 : tc.s0 - tc.lo; if (l > 0 && Math.abs(m) / l > .2) d = m > 0 ? 1 : -1; }
       var dest = d > 0 ? dopo(tc.base, tc.M) : d < 0 ? prima(tc.base, tc.M) : (tc.corsa ? tc.base : vicino(y, tc.M));
       if (tc.s0 > tc.M[1] + 2 && !tc.corsa && d >= 0) dest = y;   /* appena sotto l'apertura, un tocco leggero non sposta niente */
-      vai(dest, Math.abs(v) > .2 ? curvaO : curvaIO);
+      /* (18/11 notte, Niccolò: «dipende dalla velocità dello swipe») anche col colpo forte parte morbida (pendenza 1,1 invece del seno) */
+      vai(dest, Math.abs(v) > .2 ? function(x){ return x * (1.1 + x * (.8 - .9 * x)); } : curvaIO);
     } catch (x) { spento = true; libera(); }
   }
   addEventListener('touchend', lascia, { passive: true });
