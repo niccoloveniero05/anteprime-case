@@ -109,7 +109,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
    · .sotto      descrizione 17 px; testo 16 px; nota 15 px ── */
 .etichetta{display:block;font:400 11px/1.4 var(--mono);letter-spacing:.12em;word-spacing:0;text-transform:uppercase;color:var(--av3);margin-bottom:var(--s2)}
 /* 3a (18/11): «Servizi» più grande e 48 px più in alto; il margine sotto compensa, così il titolo 3b non si sposta */
-#servizi > .wrap > .etichetta{font-size:16px;margin-top:-48px;margin-bottom:calc(var(--s2) + 41px)}
+#servizi > .wrap > .etichetta{font-size:18px;margin-top:-48px;margin-bottom:calc(var(--s2) + 38px);width:max-content;position:relative}
 .t-sez{font-family:var(--sans);font-weight:560;font-size:clamp(36px,10.4vw,44px);line-height:1.04;letter-spacing:-.04em;word-spacing:0;color:var(--av2);max-width:13em;text-wrap:balance}
 .t-sez em{font-style:normal;font-weight:600;color:var(--av);letter-spacing:-.034em}
 @media (min-width:900px){.t-sez{font-size:clamp(46px,4.3vw,58px)}}
@@ -279,16 +279,12 @@ html.fermo .rotaia,html:not(.js) .rotaia{display:none}
 /* più aria sopra e sotto le linee centrali: 144 px invece di 112 (Niccolò, 18/11 notte) */
 .pacchetto+.pacchetto:not(.speciale){padding-top:var(--s7)}
 .pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:var(--s7)}
-/* angoli piccoli (10 px) attaccati alla linea, solo dove comincia un gruppo (Niccolò, 18/11 notte): sotto la linea di «Servizi»
-   (tra 2f e 3a) e sopra e sotto quella di «Abbonamenti» (tra 6h e 7x); tra i pacchetti niente angoli */
-#servizi::after{content:"";position:absolute;top:6px;height:10px;left:calc(max(0px, (100% - var(--max)) / 2) + 8px);right:calc(max(0px, (100% - var(--max)) / 2) + 8px);pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
-/* (18/11 notte) anche sulla linea di «Partner» (8): solo i due angoli sopra */
-#partner::after{content:"";position:absolute;top:-16px;height:10px;left:calc(max(0px, (100% - var(--max)) / 2) + 8px);right:calc(max(0px, (100% - var(--max)) / 2) + 8px);pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 8.5px/10px 1.5px no-repeat}
 /* «Abbonamenti» (7x): la Campagna staccata come una sezione, con la linea leggera da bordo a bordo come sopra «Servizi» e la stessa etichetta (3a) */
 .abbonamenti-testa{position:relative;padding-top:var(--s6)}
 .abbonamenti-testa::before{content:"";position:absolute;top:0;left:calc(-1 * var(--lato));right:calc(-1 * var(--lato));border-top:var(--linea-sezione);pointer-events:none}
-.abbonamenti-testa .etichetta{font-size:16px;margin:-48px 0 calc(var(--s2) + 41px)}
-.abbonamenti-testa::after{content:"";position:absolute;left:calc(8px - var(--lato));right:calc(8px - var(--lato));top:-16px;height:32px;pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
+.abbonamenti-testa .etichetta{font-size:18px;margin:-48px 0 calc(var(--s2) + 38px);width:max-content;position:relative}
+/* (18/11 notte, Niccolò) niente più angoli sulle linee: uno solo, piccolo, in basso a destra di «Servizi» (3a) e «Abbonamenti» (7x), che passano a 18 px */
+#servizi > .wrap > .etichetta::after,.abbonamenti-testa .etichetta::after{content:"";position:absolute;right:-13px;bottom:3px;width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;pointer-events:none}
 .abbonamenti-testa + .pacchetto.speciale{margin-top:0}
 .pacchetto:first-child{padding-top:0;border-top:0}
 /* il riquadro del lavoro (video, anteprima del sito, chat): 4:5, come i pannelli della D */
