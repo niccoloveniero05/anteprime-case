@@ -279,12 +279,14 @@ html.fermo .rotaia,html:not(.js) .rotaia{display:none}
 /* più aria sopra e sotto le linee centrali: 144 px invece di 112 (Niccolò, 18/11 notte) */
 .pacchetto+.pacchetto:not(.speciale){padding-top:var(--s7)}
 .pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:var(--s7)}
-/* angoli piccoli intorno alla linea: due che chiudono il pacchetto sopra e due che aprono quello sotto (Niccolò, 18/11 notte) */
-.pacchetto+.pacchetto:not(.speciale)::after{content:"";position:absolute;left:0;right:0;top:-46px;height:92px;pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/1.5px 22px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 20.5px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/1.5px 22px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 20.5px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 70px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 22px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 70px/22px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 22px no-repeat}
+/* angoli piccoli (10 px) attaccati alla linea, solo dove comincia un gruppo (Niccolò, 18/11 notte): sotto la linea di «Servizi»
+   (tra 2f e 3a) e sopra e sotto quella di «Abbonamenti» (tra 6h e 7x); tra i pacchetti niente angoli */
+#servizi::after{content:"";position:absolute;top:6px;height:10px;left:calc(max(0px, (100% - var(--max)) / 2) + var(--lato));right:calc(max(0px, (100% - var(--max)) / 2) + var(--lato));pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
 /* «Abbonamenti» (7x): la Campagna staccata come una sezione, con la linea leggera da bordo a bordo come sopra «Servizi» e la stessa etichetta (3a) */
 .abbonamenti-testa{position:relative;padding-top:var(--s6)}
 .abbonamenti-testa::before{content:"";position:absolute;top:0;left:calc(-1 * var(--lato));right:calc(-1 * var(--lato));border-top:var(--linea-sezione);pointer-events:none}
 .abbonamenti-testa .etichetta{font-size:16px;margin:-48px 0 calc(var(--s2) + 41px)}
+.abbonamenti-testa::after{content:"";position:absolute;left:0;right:0;top:-16px;height:32px;pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
 .abbonamenti-testa + .pacchetto.speciale{margin-top:0}
 .pacchetto:first-child{padding-top:0;border-top:0}
 /* il riquadro del lavoro (video, anteprima del sito, chat): 4:5, come i pannelli della D */
@@ -337,7 +339,6 @@ details[open] > summary .piu::after{transform:rotate(0)}
   .pacchetto+.pacchetto:not(.speciale)::before{display:none}
   .pacchetto+.pacchetto:not(.speciale){padding-top:0}
   .pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:0}
-  .pacchetto+.pacchetto:not(.speciale)::after{display:none}
   .abbonamenti-testa{grid-column:1/-1;margin-top:var(--s6)}
   .sp-elenco .dettagli{margin-top:0}
   .m{margin:0}
