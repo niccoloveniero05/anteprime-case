@@ -32,6 +32,10 @@
   --bg:#100F09; --bg2:#14130D; --bg3:#1A1913; --bg4:#22211A;
   --av:#F5F4EF; --av2:rgba(245,244,239,.62); --av3:rgba(245,244,239,.42);
   --filo:rgba(245,244,239,.085); --filo2:rgba(245,244,239,.16);
+  /* linee di divisione a tre livelli (18/11, feedback: non si capiva dove finivano i blocchi):
+     1 fine di una sezione intera = 3 px da bordo a bordo; 2 fine di un pacchetto = 1,5 px dentro i margini;
+     3 dentro un pacchetto (elenco dei dettagli, domande) = il filo di 1 px di prima */
+  --linea-sezione:3px solid rgba(245,244,239,.26); --linea-pacchetto:1.5px solid rgba(245,244,239,.17);
   --rec:#FF5A1F;
   --serif:'News','Iowan Old Style',Georgia,serif;
   --sans:'Inter',-apple-system,system-ui,sans-serif;
@@ -127,7 +131,7 @@ html.viaggio .pt.qui{background:var(--rec)}
 html.viaggio .punto.su{opacity:1}
 
 /* ── Blocchi: tanta aria, un filo sottile tra uno e l'altro (112 + filo + 112) ── */
-.sez{position:relative;padding:var(--s6) 0;border-top:1px solid var(--filo)}
+.sez{position:relative;padding:var(--s6) 0;border-top:var(--linea-sezione)}
 .dopo-apertura{padding-top:var(--s7);border-top:0}
 
 /* ── 1 · Apertura in tre momenti (dalla D, 19/11; voce «Apertura» in NOTE.md). Una sezione alta quanto lo scorrimento
@@ -208,7 +212,7 @@ html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec
 }
 
 /* ── 2 · Come funziona (dal sito online): i tre passi scorrono di lato su un binario; il puntino fa da treno ── */
-.binario{position:relative;padding:var(--s6) 0;border-top:1px solid var(--filo)}
+.binario{position:relative;padding:var(--s6) 0;border-top:var(--linea-sezione)}
 .binario.dopo-apertura{padding-top:var(--s7);border-top:0}
 .binario-testa{padding:0 var(--lato);margin-bottom:var(--s4)}
 .vagoni{display:flex;gap:12px;padding:0 var(--lato);will-change:transform}
@@ -256,7 +260,7 @@ html.fermo .rotaia,html:not(.js) .rotaia{display:none}
 /* ── 3-7 · Servizi: i quattro pacchetti del sito online. Telefono: uno sotto l'altro (112 + filo + 112), il riquadro del
    lavoro largo quanto lo schermo meno 16 px per lato; da computer tre colonne e la Campagna 360° sotto, larga ── */
 .pacchetti{margin-top:var(--s5)}
-.pacchetto{position:relative;padding:var(--s6) 0;border-top:1px solid var(--filo)}
+.pacchetto{position:relative;padding:var(--s6) 0;border-top:var(--linea-pacchetto)}
 .pacchetto:first-child{padding-top:0;border-top:0}
 /* il riquadro del lavoro (video, anteprima del sito, chat): 4:5, come i pannelli della D */
 .m{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#1A1912 0%,#13120C 60%);box-shadow:inset 0 0 0 1px rgba(245,244,239,.085);isolation:isolate;margin:0 calc(var(--pan) - var(--lato))}
@@ -337,7 +341,7 @@ a.recapito:hover{background:var(--bg4)}
 @media (min-width:900px){.contatti .wrap{grid-template-columns:1.15fr 1fr;align-items:center;gap:var(--s5) 80px}}
 
 /* ── 11 · La striscia dei loghi (dal sito online, uguale) ── */
-.loghi{padding:26px 0;border-top:1px solid var(--filo);overflow:hidden;position:relative}
+.loghi{padding:26px 0;border-top:var(--linea-sezione);overflow:hidden;position:relative}
 .loghi::before,.loghi::after{content:"";position:absolute;top:0;bottom:0;width:14%;z-index:1;pointer-events:none}
 .loghi::before{left:0;background:linear-gradient(90deg,var(--bg),rgba(16,15,9,0))}
 .loghi::after{right:0;background:linear-gradient(-90deg,var(--bg),rgba(16,15,9,0))}
@@ -350,7 +354,7 @@ a.recapito:hover{background:var(--bg4)}
 @keyframes loghi{to{transform:translateX(-50%)}}
 
 /* ── 12 · Piede (testi del sito online; il marchio grande della D col suo puntino fermo) ── */
-.piede{padding:var(--s5) 0 calc(var(--s6) + env(safe-area-inset-bottom));border-top:1px solid var(--filo)}
+.piede{padding:var(--s5) 0 calc(var(--s6) + env(safe-area-inset-bottom));border-top:var(--linea-pacchetto)}
 .piede-marchio{font-size:clamp(36px,10.6vw,46px)}
 .piede-marchio .vv{-webkit-text-stroke:.04em currentColor}
 .piede-marchio .pt{width:.21em;height:.21em;margin:0 .035em 0 .045em}
