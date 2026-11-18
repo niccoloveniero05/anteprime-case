@@ -85,7 +85,7 @@
 
     ['#va', '6', 'Virtual Assistant'],
     ['#va .m-va', '6a', 'Il riquadro con la chat di WhatsApp', { resta: true }],
-    ['#va .m-va .chat-testa', '6b', 'La testa della chat «Enomia Lab · online» (il puntino della foto profilo è una tappa; nella D era la 5b)'],
+    ['#va .m-va .chat-testa', '6b', 'La testa della chat «AnomiaLabs · online» (il puntino della foto profilo è una tappa; nella D era la 5b)'],
     ['#va .m-va .chat-flusso .chat-m', '6c', 'I messaggi della chat (nella D la 5c)'],
     ['#va .m-va .chat-rie', '6d', 'Il riquadro «Riepilogo per il titolare» (il suo pallino è un anellino: a chat finita la pallina ci passa; nella D la 5d)'],
     ['#va .m-va > .chip', '6e', 'L’etichetta «Esempio · WhatsApp» (nella D la 5e)'],
