@@ -2426,7 +2426,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var Lv = Math.min(g.Lv, G / 2), La = Math.min(g.La, G - Lv);
     if (u < Lv) {
       e = liscio(u / Lv); var vp = viaPunti(g, y); p = traccia(vp, vp.r || RAGGIO).at(e); r = { x: p[0], y: p[1], d: lerp(a.d, DOT, e) };
-      r.kmax = (b.dentro && b.lato < 0) ? 1.4 : 1.4 + 1.4 * morbido(clamp((e - .15) / .25, 0, 1));   /* virgola corta finché è vicina al titolo da cui parte */
+      r.kmax = (b.dentro && b.lato < 0) ? 1.4 : 1.4 + 1.0 * morbido(clamp((e - .15) / .25, 0, 1));   /* (19/11 notte) al più 2,4 (prima 2,8): la virgola che gira negli angoli è più corta */   /* virgola corta finché è vicina al titolo da cui parte */
       if (g.cardL != null && p[0] > g.cardL - 4) r.sopra = true;   /* uscendo dal «°»: sopra la card, finché ci è dentro */
       if (a.raccolta && QD < .999) r.nascosto = true;
       return r;
@@ -2436,7 +2436,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       e = b.dentro ? 1 - Math.cos(Math.PI / 2 * t) : liscio(t);   /* nei punti dentro i riquadri ci cade dentro (in fondo va svelta) */
       p = traccia(arrivoPunti(g, y), RAGGIO).at(e); r = { x: p[0], y: p[1], d: lerp(DOT, b.d, e), sopra: b === GRADI };
       if (b === GRADI) r.kmax = 1.8; else if ((b.dentro && b.lato < 0) || b.riq) r.kmax = 1.4;   /* virgola corta dove arriva accanto alle lettere */
-      else r.kmax = 1.4 + 1.4 * morbido(clamp((.85 - e) / .25, 0, 1));
+      else r.kmax = 1.4 + 1.0 * morbido(clamp((.85 - e) / .25, 0, 1));
       /* il taglio su «Veniello»: sulla riga del logo, da dove parte fino al puntino. linea: quanto ne ha fatto (0-1) */
       if (b === FIN && b.taglio) {
         var x0 = b.taglio.col != null ? b.taglio.col : g.corsia, bx = sx(b), by = sy(b, y);
@@ -2471,8 +2471,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       g.k1 = Math.max(Math.min(1, g.k1 + dt / 200), clamp((uM - g.u0) / 16, 0, 1));   /* a tempo, o col dito se va più svelto */
       if (g.k1 >= 1) g.k2 = Math.max(Math.min(1, g.k2 + dt / 400), clamp((uM - g.u0 - 16) / 160, 0, 1));
     }
-    else if (g.k2 > 0) g.k2 = Math.max(0, g.k2 - dt / 400);
-    else { g.k1 = Math.max(0, g.k1 - dt / 200); if (g.k1 <= 0) { g.via = false; return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa }; } }
+    /* (19/11 notte) tornando su il ritorno sul treno va a tempo, ma è finito quando la pagina è 48 px prima della fine del
+       palco: entrando da sotto con un colpo di dito (la pagina si posa sulla carta 03, 58 px prima) la pallina è sul treno
+       insieme alla pagina (prima arrivava mezzo secondo dopo) */
+    else if (g.k2 > 0) g.k2 = Math.max(0, Math.min(g.k2 - dt / 400, (uM + 24) / 24));
+    else { g.k1 = Math.max(0, Math.min(g.k1 - dt / 200, (uM + 48) / 24)); if (g.k1 <= 0) { g.via = false; return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa }; } }
     var anima = (g.k1 > 0 && g.k1 < 1) || (g.k2 > 0 && g.k2 < 1);
     /* l'ultimo tratto lungo la riga del titolo si legge dallo scorrimento vero (la riga è dove la mette la pagina): prima,
        tornando su col ritardo, a pagina ferma passava dalla riga all'attesa con un salto (fino a 58 px, controllo delle
@@ -2545,7 +2548,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      · Dettagli chiusi, o pulsante uscito dallo schermo in basso (si torna su): torna piccola per la stessa strada nel giro
        normale. Se se ne apre un altro, prima torna e poi va in quello.
      · Scorrendo in giù (il pulsante sale sopra il 38% dello schermo), se sotto c'è un punto dentro il riquadro del pacchetto dopo (la
-       frase del Sito Web, la foto profilo della chat), non torna su: esce a destra lungo la riga del pulsante, scende dritta
+       frase del Sito Web, la foto profilo della chat) o il «°» della Campagna, non torna su: esce a destra lungo la riga del pulsante, scende dritta
        nel vuoto tra i pacchetti (a metà schermo, più a destra se lì c'è testo), e: nel Sito Web entra nel riquadro (copia
        disegnata dentro, tagliata dal bordo), scende fino alla riga del punto della frase e ci entra da destra; nella chat
        si ferma nel vuoto sopra il riquadro, va sopra il punto e ci scende dentro. Diventa subito piccola e tonda. Legata
@@ -2565,8 +2568,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     });
   });
   function frecciaDi(d){ return d.querySelector('.freccia .i') || d.querySelector('.freccia'); }
-  /* il punto dentro il riquadro del pacchetto dopo (solo se è una tappa) */
-  function dopoDi(d){ var pk = d.closest('.pacchetto'), nx = pk && pk.nextElementSibling; if (!nx) return null; for (var i = 0; i < DENTRO.length; i++) if (nx.contains(DENTRO[i].el)) return DENTRO[i]; return null; }
+  /* la tappa dopo il pacchetto: il punto dentro il riquadro del pacchetto sotto (solo se è una tappa), o il «°» della
+     Campagna dopo il Virtual Assistant */
+  function dopoDi(d){ var pk = d.closest('.pacchetto'), nx = pk && pk.nextElementSibling; if (!nx) return null; for (var i = 0; i < DENTRO.length; i++) if (nx.contains(DENTRO[i].el)) return DENTRO[i]; return GRADI && nx.contains(GRADI.el) ? GRADI : null; }
   function copiaIn(pan){ var c = document.createElement('i'); c.className = 'punto punto-dentro'; c.setAttribute('aria-hidden', 'true'); c.innerHTML = '<svg viewBox="-20 -20 40 40" focusable="false"><path d="M20 0A20 20 0 1 1-20 0A20 20 0 1 1 20 0Z"/></svg>'; pan.appendChild(c); return c; }
   function giuPunti(b, bx, by, y){
     var dx = sx(b), dy = sy(b, y), pk = b.el.closest('.pacchetto'), pan = pk && pk.querySelector('.m'), X = Math.max(innerWidth / 2 + 6, bx + 40, dx + 24);
@@ -2577,13 +2581,20 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       if (!PDS) PDS = copiaIn(pan);
       return { pts: [[bx, by], [X, by], [X, dy], [dx, dy]], pan: true };
     }
+    /* il «°» della Campagna: a destra fino alla corsia, giù nella corsia fino alla riga del «°» e lì a sinistra (come
+       l'arrivo di sempre; a destra del «°» non c'è niente). Sopra la card della Campagna (che altrimenti la coprirebbe) */
+    if (b === GRADI) { var L = corsia(b); return { pts: [[bx, by], [L, by], [L, dy], [dx, dy]], pan: false, L: L }; }
     var vy = b.porta.vuoto - y;
     return { pts: [[bx, by], [X, by], [X, vy], [dx, vy], [dx, b.porta.bordo - y]], pan: false };
   }
   function freccia(g, y, dt, inAp){
-    var ora = performance.now(), ok = !!g && mqColonna.matches && !inAp && !LIBERO && !g.sopra && !g.nascosto && !g.raccogli && g.linea == null && !g.dentroPannello && !(g.s && (g.s === GRADI || g.s === RAC || g.s === FIN));
+    /* ok: si può andare sotto il pulsante (nel giro normale la pallina non sta facendo niente di speciale; l'arrivo verso il
+       «°» della Campagna, che va sopra la card, sì: la pallina resta sotto la freccia finché il pulsante è sotto il 38%
+       dello schermo, poi esce in giù verso il «°»); base: si può
+       uscire in giù verso la tappa dopo (anche se il giro normale è già al «°» della Campagna) */
+    var ora = performance.now(), base = !!g && mqColonna.matches && !inAp && !LIBERO, ok = base && !g.nascosto && !g.raccogli && g.linea == null && !g.dentroPannello && !(g.s && (g.s === GRADI || g.s === RAC || g.s === FIN));
     var vuole = null, giu = null, i, d, ic, r, cy, YG = Math.max(hT + 60, .38 * innerHeight), sS = ys === null ? y : ys;
-    for (i = DAP.length - 1; i >= 0 && (ok || FX.fuori); i--) {
+    for (i = DAP.length - 1; i >= 0 && base; i--) {
       d = DAP[i]; if (!aperto(d)) { DAP.splice(i, 1); continue; }
       ic = frecciaDi(d); if (!ic) continue; r = ic.getBoundingClientRect(); if (!r.width) continue;
       cy = r.top + r.height / 2;
@@ -2618,7 +2629,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       FX.fuori = false; FX.giu = true;
       var gp = giuPunti(giu.b, giu.x, giu.y, y), e = liscio(giu.j), q = clamp(giu.j / .08, 0, 1), pg = traccia(gp.pts, 16).at(e);
       OV = 1 - q;
-      return { x: pg[0], y: pg[1], d: q < 1 ? lerp(FRD, DOT, q) : lerp(DOT, giu.b.d || DOT, e), kmax: 1.4, pdS: gp.pan, anima: ora < FX.vivo };
+      return { x: pg[0], y: pg[1], d: q < 1 ? lerp(FRD, DOT, q) : lerp(DOT, giu.b.d || DOT, e), kmax: 1.4, pdS: gp.pan, sopra: gp.L != null && (pg[1] > giu.y + 1 || pg[0] >= gp.L - 1), anima: ora < FX.vivo };
     }
     /* il pulsante sullo schermo (mentre la tendina si apre è già al suo posto, solo tagliato: ci arriva quando compare).
        Se la tendina si chiude, il punto d'arrivo risale col fondo della tendina fino alla riga di «Scopri i dettagli», a
@@ -2660,7 +2671,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 
   /* ── Il puntino di pongo (dalla D, 19/11): tondo da fermo, si allunga in una virgola quando corre, si schiaccia quando
         arriva; scorrendo piano resta tondo. I numeri sono in PONGO (anche dalla console: window.PONGO) ── */
-  var PONGO = window.PONGO = { KMAX: 2.8, SIGMA: 3, V0: .15, V1: .6, HZ: 4.2, ZETA: .72, SCHIACCIA: .24, COLPO: 1, RISUCCHIO: 1.8, CODA: .5, CURVA: 1, ANTICIPO: 0 };
+  var PONGO = window.PONGO = { KMAX: 2.4, SIGMA: 3, V0: .15, V1: .6, HZ: 4.2, ZETA: .72, SCHIACCIA: .24, COLPO: 1, RISUCCHIO: 1.8, CODA: .5, CURVA: 1, ANTICIPO: 0 };
   var COLPOOK = true;   /* (19/11 sera) il colpo all'arresto solo arrivando in un posto (lo decide il fotogramma) */
   var FO = { ox: 0, oy: 0, ux: 0, uy: 0, vx: 0, vy: 0, dx: 0, dy: 1, vr: 0, armato: false, fermoT: 0, ext: 0, d: '', tr: '' };
   window.PONGO_FORMA = FO;
@@ -2676,7 +2687,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var s = Math.sqrt(FO.vx * FO.vx + FO.vy * FO.vy), gn = gradino((s - PONGO.V0) / (PONGO.V1 - PONGO.V0));
     var ex = FO.vx * gn, ey = FO.vy * gn, se = s * gn;
     if (s > PONGO.V0) {
-      var tx = FO.vx / s, ty = FO.vy / s, an = Math.atan2(FO.dx * ty - FO.dy * tx, FO.dx * tx + FO.dy * ty) * (1 - Math.exp(-dt / 30));
+      var tx = FO.vx / s, ty = FO.vy / s, an = Math.atan2(FO.dx * ty - FO.dy * tx, FO.dx * tx + FO.dy * ty) * (1 - Math.exp(-dt / 50));
       var c = Math.cos(an), sn = Math.sin(an), nx = FO.dx * c - FO.dy * sn; FO.dy = FO.dx * sn + FO.dy * c; FO.dx = nx;
     }
     FO.vr += (se - FO.vr) * (1 - Math.exp(-dt / 140));
@@ -2862,9 +2873,16 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         if (LINEA.on || lineaLunga(nd, g.linea, nx - g.lineaDa) > nd / 2 + (FO.ext || 0)) {
           LINEA.on = true; FO.ox = FO.oy = FO.ux = FO.uy = FO.vx = FO.vy = FO.vr = 0;
           metti(nx, ny, nd); lineaDisegna(nd, g.linea, LINEA.dir, nx - g.lineaDa);
-        } else { KQ = 1.6; metti(nx, ny, nd); formaDisegna(nd); }
+        } else {
+          /* (19/11 notte) intanto la virgola si gira lungo la riga del taglio (coda dietro, in orizzontale): quando la linea
+             la sostituisce hanno la stessa direzione */
+          var lo = Math.sqrt(FO.ox * FO.ox + FO.oy * FO.oy), ld = LINEA.dir || 1;
+          FO.ox += (-ld * lo - FO.ox) * .45; FO.oy *= .55; FO.uy *= .55; FO.dx += (ld - FO.dx) * .45; FO.dy *= .55;
+          var ln2 = Math.sqrt(FO.dx * FO.dx + FO.dy * FO.dy) || 1; FO.dx /= ln2; FO.dy /= ln2;
+          KQ = 1.6; metti(nx, ny, nd); formaDisegna(nd);
+        }
       } else {
-        if (LINEA.on) { LINEA.on = false; formaColpo(LINEA.dir, 0, 1.3); }   /* finito il taglio: torna tonda e si schiaccia */
+        if (LINEA.on) { LINEA.on = false; formaColpo(LINEA.dir, 0, .7); }   /* finito il taglio: torna tonda e si schiaccia */
         if (!LIBERO && fermaMolla() && g.s && (formaFerma() || g.fermo || coperto(g.s, g.x, g.y))) { formaDisegna(nd); siedi(g.s); formaSuPosto(g.s); }
         else { metti(nx, ny, nd); formaDisegna(nd); }
       }
