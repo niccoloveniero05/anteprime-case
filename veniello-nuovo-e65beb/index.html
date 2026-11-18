@@ -276,6 +276,9 @@ html.fermo .rotaia,html:not(.js) .rotaia{display:none}
 .pacchetto{position:relative;padding:var(--s6) 0;border-top:0}
 /* linee tra i pacchetti (5, 6 e i prossimi): larghe metà e al centro, visibili ma senza dare noia (Niccolò, 18/11) */
 .pacchetto+.pacchetto:not(.speciale)::before{content:"";position:absolute;top:0;left:25%;right:25%;border-top:var(--linea-pacchetto);pointer-events:none}
+/* più aria sopra e sotto le linee centrali: 144 px invece di 112 (Niccolò, 18/11 notte) */
+.pacchetto+.pacchetto:not(.speciale){padding-top:var(--s7)}
+.pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:var(--s7)}
 .pacchetto:first-child{padding-top:0;border-top:0}
 /* il riquadro del lavoro (video, anteprima del sito, chat): 4:5, come i pannelli della D */
 .m{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#1A1912 0%,#13120C 60%);box-shadow:inset 0 0 0 1px rgba(245,244,239,.085);isolation:isolate;margin:0 calc(var(--pan) - var(--lato))}
@@ -325,6 +328,8 @@ details[open] > summary .piu::after{transform:rotate(0)}
   .pacchetti{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 32px;align-items:start}
   .pacchetto{padding:0;border-top:0}
   .pacchetto+.pacchetto:not(.speciale)::before{display:none}
+  .pacchetto+.pacchetto:not(.speciale){padding-top:0}
+  .pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:0}
   .m{margin:0}
   .pacchetto .t2{font-size:34px}
   .pacchetto.speciale{grid-column:1/-1;margin:var(--s6) 0 0;padding:var(--s5);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 var(--s5)}
