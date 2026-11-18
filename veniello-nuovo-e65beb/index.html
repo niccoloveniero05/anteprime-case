@@ -3140,7 +3140,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var rg = document.createRange(); rg.selectNodeContents(tit);
     [].forEach.call(rg.getClientRects(), function(q){ if (q.width > 1 && q.bottom < y0 - 2) dx = Math.max(dx, q.right); });
     var xl = Math.max(x0 + 14, dx + R + 8), ty = hT + R + 14, cx = innerWidth / 2;   /* (18/11 notte, Niccolò) molto più in alto: al centro, appena sotto il logo della testata (0a) */
-    return { p: [[x0, y0], [xl, y0], [xl, ty], [cx, ty]], d0: r.width };
+    /* (18/11 notte, disegno di Niccolò) su a destra, a sinistra appena sopra la scritta fino al centro, poi su dritta */
+    var ya = Math.max(ty + 40, t.top - 28);
+    return { p: [[x0, y0], [xl, y0], [xl, ya], [cx, ya], [cx, ty]], d0: r.width };
   }
   function punto(P, e){
     var L = [], tot = 0, i, k = 14;
