@@ -281,12 +281,12 @@ html.fermo .rotaia,html:not(.js) .rotaia{display:none}
 .pacchetto:has(+ .pacchetto:not(.speciale)){padding-bottom:var(--s7)}
 /* angoli piccoli (10 px) attaccati alla linea, solo dove comincia un gruppo (Niccolò, 18/11 notte): sotto la linea di «Servizi»
    (tra 2f e 3a) e sopra e sotto quella di «Abbonamenti» (tra 6h e 7x); tra i pacchetti niente angoli */
-#servizi::after{content:"";position:absolute;top:6px;height:10px;left:calc(max(0px, (100% - var(--max)) / 2) + var(--lato));right:calc(max(0px, (100% - var(--max)) / 2) + var(--lato));pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
+#servizi::after{content:"";position:absolute;top:6px;height:10px;left:calc(max(0px, (100% - var(--max)) / 2) + 8px);right:calc(max(0px, (100% - var(--max)) / 2) + 8px);pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
 /* «Abbonamenti» (7x): la Campagna staccata come una sezione, con la linea leggera da bordo a bordo come sopra «Servizi» e la stessa etichetta (3a) */
 .abbonamenti-testa{position:relative;padding-top:var(--s6)}
 .abbonamenti-testa::before{content:"";position:absolute;top:0;left:calc(-1 * var(--lato));right:calc(-1 * var(--lato));border-top:var(--linea-sezione);pointer-events:none}
 .abbonamenti-testa .etichetta{font-size:16px;margin:-48px 0 calc(var(--s2) + 41px)}
-.abbonamenti-testa::after{content:"";position:absolute;left:0;right:0;top:-16px;height:32px;pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
+.abbonamenti-testa::after{content:"";position:absolute;left:calc(8px - var(--lato));right:calc(8px - var(--lato));top:-16px;height:32px;pointer-events:none;background:linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 0/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 8.5px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 0 100%/1.5px 10px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 22px/10px 1.5px no-repeat,linear-gradient(rgba(245,244,239,.26),rgba(245,244,239,.26)) 100% 100%/1.5px 10px no-repeat}
 .abbonamenti-testa + .pacchetto.speciale{margin-top:0}
 .pacchetto:first-child{padding-top:0;border-top:0}
 /* il riquadro del lavoro (video, anteprima del sito, chat): 4:5, come i pannelli della D */
@@ -1481,7 +1481,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var AGGANCIO = true;
   var tw = null, giro = 0, tocco = null, ditoGiu = false, ultimaDir = 1, yUlt = -1, attesa = 0, spento = !AGGANCIO;
   var SENZA = !!window.SENZA_AGGANCIO;   /* per gli strumenti di prova che fotografano a metà dei passaggi */
-  function momenti(){ var t = A.T, f = API.fine && API.fine > t + A.m2 + 10 ? API.fine : t + A.P; return [t, t + A.m1, t + A.m2, f]; }
+  function momenti(){ var t = A.T, f = API.fine && API.fine > t + A.m2 + 10 ? API.fine : t + A.P; return [t, t + A.m2, t + A.m2, f]; }   /* (19/11 notte) nome e logo: una fermata sola */
   function dopo(b, M){ for (var i = 0; i < M.length; i++) if (M[i] > b + 2) return M[i]; return M[M.length - 1]; }
   function prima(b, M){ for (var i = M.length - 1; i >= 0; i--) if (M[i] < b - 2) return M[i]; return M[0]; }
   function vicino(y, M){ var m = M[0]; M.forEach(function(x){ if (Math.abs(x - y) < Math.abs(m - y)) m = x; }); return m; }
@@ -1494,7 +1494,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function vai(dest, curva, dur, libero, presa){
     var da = scrollY, mio = ++giro;
     if (Math.abs(dest - da) < 1) { tw = null; if (dest !== da) scorri(dest); libera(); return; }
-    tw = { da: da, a: dest, t0: performance.now(), dur: dur || 1000 * Math.max(.45, Math.min(.8, .3 + .5 * Math.abs(dest - da) / A.V)), c: curva || curvaIO, libero: !!libero,
+    tw = { da: da, a: dest, t0: performance.now(), dur: dur || 1000 * Math.max(.7, Math.min(1.3, .5 + .45 * Math.abs(dest - da) / A.V)), c: curva || curvaIO, libero: !!libero,
            presa: !!presa, el: 0, cp: 0, salti: 0, tp: 0 };
     /* il passo lo fa il motore del puntino all'inizio del suo fotogramma, prima di leggere la pagina (API.avanza): così
        pagina, apertura e puntino si muovono sempre nello stesso fotogramma (con un giro a parte, a volte il puntino
