@@ -91,6 +91,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .freccia{display:inline-flex;align-items:center;gap:8px;min-height:44px;font:500 17px/1 var(--sans);color:var(--av)}
 .freccia .i{width:16px;height:16px;transition:transform .25s var(--ease)}
 .freccia:hover .i,.freccia:active .i{transform:translateX(3px)}
+/* (19/11) «Scopri i dettagli» aperto (telefono): la pallina fa da sfondo tondo arancio alla freccia del pulsante (la mette
+   il motore: .sotto-pallina) e la freccia, sopra, diventa scura. Senza la pallina che viaggia («Riduci movimento»): lo
+   sfondo tondo è fisso, subito */
+.dettagli .freccia .i{transition:transform .25s var(--ease),color .3s ease}
+.dettagli .freccia.sotto-pallina .i{color:var(--bg)}
+@media (max-width:1023px){html:not(.viaggio) .pacchetto .dettagli[open] .freccia .i{color:var(--bg);background:var(--rec);border-radius:50%;box-shadow:0 0 0 6px var(--rec)}}
 
 /* ── Le scritte (dalla D, tabella completa in NOTE.md):
    · .etichetta  Geist Mono 11 px maiuscolo, sopra i titoli di sezione (dal sito online: Partner, Come funziona…)
@@ -1962,26 +1968,27 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
   /* un passo a ogni fotogramma del motore: insegue la posizione giusta con un po' di inerzia (come lo «scrub» di prima);
      restituisce true finché si muove */
-  /* (18/11 notte) al telefono il treno va a scatti: la stazione giusta la sceglie lo scorrimento (soglie 0,44 e 0,74 del
-     palco fermo, con un poco di isteresi), il passaggio da una all'altra dura 0,3 s (curva decisa) e finisce anche a
-     pagina ferma: così a riposo il treno (e il puntino) sta sempre esattamente su «Ci scrivi», «Anteprima» o «Online» */
-  var SOGLIE = [.44, .74], ISTE = .015, SCATTO = 300;
-  function stazioneDi(q, c){
-    var su = 0, giu = 0; SOGLIE.forEach(function(s){ if (q >= s + ISTE) su++; if (q >= s - ISTE) giu++; });
-    if (c == null) return q < SOGLIE[0] ? 0 : q < SOGLIE[1] ? 1 : 2;
-    return su > c ? su : giu < c ? giu : c;
-  }
-  function scatto(k){ return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
+  /* (19/11, Niccolò: «troppo scattosa e veloce; più fluida ma che non si fermi a metà tra le schede») al telefono carte
+     e treno seguono lo scorrimento con le soste di prima (tappe: ferme fino a 0,3 · 0,54-0,64 · da 0,88 del palco fermo)
+     attraverso una molla morbida senza rimbalzo (circa mezzo secondo, al massimo una carta ogni 0,4 s): niente scatti a
+     tempo. Se la pagina si ferma tra due carte, dopo 0,13 s la fila aggancia da sola la carta più vicina (o quella verso
+     cui si andava) con la stessa molla; il treno, e la pallina che ci sta sopra, arrivano sulla stazione insieme alla
+     carta. Al primo scorrimento oltre la carta agganciata, o all'indietro, torna a seguire la pagina. Prima (18/11 notte):
+     a scatti di 0,3 s decisi dalle soglie 0,44 e 0,74 */
+  var BOM = .0095, BVC = 1 / 400, BFERMA = 130;
   function binPasso(y, dt){
     if (!BN.pc) {
-      var qq = c01((y - BN.T) / BN.R), st = stazioneDi(qq, BN.cur === null ? null : BN.st), ora = performance.now();
-      if (BN.cur === null) { BN.st = BN.da = BN.cur = st; }
-      else if (st !== BN.st) { BN.da = BN.cur; BN.st = st; BN.t0 = ora; BN.q0 = qq; }
-      /* il passaggio dura 0,3 s, ma col dito svelto finisce entro un decimo del palco fermo (così il treno è su «Online»
-         prima che il palco riparta) */
-      if (BN.cur !== BN.st) { var kq = Math.max(c01((ora - BN.t0) / (SCATTO * Math.max(1, Math.abs(BN.st - BN.da)))), c01(Math.abs(qq - BN.q0) / .1)); BN.cur = kq >= 1 ? BN.st : BN.da + (BN.st - BN.da) * scatto(kq); }
+      var qq = c01((y - BN.T) / BN.R), p = tappe(qq), ora = performance.now();
+      if (BN.cur === null) { BN.cur = p; BN.v = 0; BN.anc = null; BN.yv = y; BN.tv = ora; BN.dir = 1; }
+      if (Math.abs(y - BN.yv) > .5) { BN.dir = y > BN.yv ? 1 : -1; BN.yv = y; BN.tv = ora; }
+      var fermo = ora - BN.tv > BFERMA;
+      if (BN.anc != null && !fermo && BN.dir * (BN.anc - p) <= 0) BN.anc = null;
+      if (BN.anc == null && fermo) { var fl = Math.floor(p), fr = p - fl; if (fr > .001 && fr < .999) BN.anc = BN.dir > 0 ? (fr >= .3 ? fl + 1 : fl) : (fr <= .7 ? fl : fl + 1); }
+      var T = BN.anc != null ? BN.anc : p, n = Math.max(1, Math.ceil(dt / 8)), h = dt / n;
+      for (var i = 0; i < n; i++) { BN.v += (BOM * BOM * (T - BN.cur) - 2 * BOM * BN.v) * h; BN.v = clamp(BN.v, -BVC, BVC); BN.cur += BN.v * h; }
+      if (Math.abs(T - BN.cur) < .0006 && Math.abs(BN.v) < .00002) { BN.cur = T; BN.v = 0; }
       binDisegna(BN.cur);
-      return BN.cur !== BN.st;
+      return BN.cur !== T || BN.v !== 0 || (BN.anc == null && !fermo && Math.abs(p - Math.round(p)) > .001);
     }
     var p = BN.pc ? c01((y - BN.a) / Math.max(1, BN.b - BN.a)) * 2 : tappe(c01((y - BN.T) / BN.R));
     if (BN.cur === null || Math.abs(p - BN.cur) > 1.2) BN.cur = p;
@@ -2028,7 +2035,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      dal bordo: con quella di sempre, che sta dietro, ne fa una sola anche a cavallo del bordo) */
   var CHATSEG = null, RIE = null, PD = null;
   var mqColonna = matchMedia('(max-width:1023px)');   /* i pacchetti uno sotto l'altro: i loro titoli sono tappe */
-  var vh = innerHeight, V0 = vh, Yin = 0, Yout = 0, Rm = 0, Gmin = 0, Smin = 0, Lmin = 0, PASSO = 1, RAGGIO = 22;
+  var vh = innerHeight, V0 = vh, Yin = 0, Yout = 0, Rm = 0, Gmin = 0, Smin = 0, Lmin = 0, PASSO = 1.3, RAGGIO = 22;   /* PASSO 1,3 (19/11, Niccolò: «un po' più lenta»): i viaggi tra le tappe usano il 30% di scorrimento in più */
   var xM = 0, maxS = 0, larghezza = 0, hT = 60, FR = 0;
   var DOT = 7, SEG = [], seduto = null, ATTESA = null, FIN = null, GRADI = null, RAC = null, DENTRO = [], BINg = null;
   var APosto = null;
@@ -2336,8 +2343,16 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var colL = cr.left - Math.max(4, Math.min(10, (cr.left - pr.left) / 2)), su2 = cr.top - 14, band = pr.bottom - 8;
       if (t < .32) { e = liscio(t / .32); p = traccia([[sx(A), sy(A, y)], [sx(A), su2], [colL, su2], [colL, ry], [rx, ry]], 12).at(e); return { x: p[0], y: p[1], d: lerp(A.d, RIE.d, e), dentroPannello: true }; }
       if (t < .48) return { x: rx, y: ry, d: RIE.d, s: RIE, dentroPannello: true };
-      e = liscio((t - .48) / .52); p = traccia([[rx, ry], [rx, band], [sx(B), band], [sx(B), sy(B, y)]], 14).at(e);
-      return { x: p[0], y: p[1], d: lerp(RIE.d, B.d, e), dentroPannello: true, kmax: 1.4 };
+      /* (18/11 notte, dopo la seconda verifica) il tratto lungo il fondo finisce prima: si ferma dentro il riquadro sopra la
+         x del punto di «Virtual Assistant», si posa un attimo e da lì scende dritta in verticale, fuori dal fondo alla x
+         esatta del punto, come negli altri pacchetti. Prima girava l'angolo in corsa: attraversava il fondo in diagonale
+         3 px a sinistra, con la virgola ancora girata di lato, larga 11 px sopra la «t» di «Assistant».
+         dritta: nel tratto in verticale il pongo lascia andare quello che aveva dal tratto in orizzontale */
+      var fx = sx(B), dd = lerp(RIE.d, B.d, liscio((t - .48) / .52));
+      if (t < .8) { e = liscio((t - .48) / .32); p = traccia([[rx, ry], [rx, band], [fx, band]], 14).at(e); return { x: p[0], y: p[1], d: dd, dentroPannello: true, kmax: 1.4 }; }
+      if (t < .83) return { x: fx, y: band, d: dd, dentroPannello: true, kmax: 1.4, dritta: true };
+      e = liscio((t - .83) / .17);
+      return { x: fx, y: lerp(band, sy(B, y), e), d: dd, dentroPannello: true, kmax: 1.4, dritta: true };
     }
     if (g.k === 'esceDentro' || g.k === 'esceChat') {
       /* da un punto dentro un riquadro al titolo sotto: dietro al riquadro (non si vede) fino a poco sopra il fondo, alla x
@@ -2409,14 +2424,15 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       g.via = true; g.u0 = uM; g.r0 = sy(T, y); g.xv = sx(T); g.k1 = 0; g.k2 = 0;
     }
     if (!g.via) return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa };
-    /* lo stacco: un passo a destra sulla riga della stazione in 0,15 s (prima che la scritta «ONLINE», che sale col
-       binario, gli arrivi sotto), poi giù fino a M in 0,3 s, o più svelta se il dito va più svelto; tornando su, a ritroso */
+    /* lo stacco: un passo a destra sulla riga della stazione in 0,2 s (prima che la scritta «ONLINE», che sale col
+       binario, gli arrivi sotto), poi giù fino a M in 0,4 s, o più svelta se il dito va più svelto; tornando su, a ritroso
+       (19/11: 0,15 e 0,3 s prima, la pallina ora è un po' più lenta) */
     if (avanti) {
-      g.k1 = Math.max(Math.min(1, g.k1 + dt / 150), clamp((uM - g.u0) / 12, 0, 1));   /* a tempo, o col dito se va più svelto */
-      if (g.k1 >= 1) g.k2 = Math.max(Math.min(1, g.k2 + dt / 300), clamp((uM - g.u0 - 12) / 120, 0, 1));
+      g.k1 = Math.max(Math.min(1, g.k1 + dt / 200), clamp((uM - g.u0) / 16, 0, 1));   /* a tempo, o col dito se va più svelto */
+      if (g.k1 >= 1) g.k2 = Math.max(Math.min(1, g.k2 + dt / 400), clamp((uM - g.u0 - 16) / 160, 0, 1));
     }
-    else if (g.k2 > 0) g.k2 = Math.max(0, g.k2 - dt / 300);
-    else { g.k1 = Math.max(0, g.k1 - dt / 150); if (g.k1 <= 0) { g.via = false; return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa }; } }
+    else if (g.k2 > 0) g.k2 = Math.max(0, g.k2 - dt / 400);
+    else { g.k1 = Math.max(0, g.k1 - dt / 200); if (g.k1 <= 0) { g.via = false; return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa }; } }
     var anima = (g.k1 > 0 && g.k1 < 1) || (g.k2 > 0 && g.k2 < 1);
     if (avanti && uM >= Ld && g.k2 >= 1) { e = liscio(clamp((uM - Ld) / g.La, 0, 1)); return { x: lerp(g.xr, sx(b), e), y: sy(b, y), d: lerp(DOT, b.d, e), attesa: g.attesa, kmax: 1.4 }; }
     var x0 = avanti ? g.xv : sx(T), y0 = avanti ? g.r0 : Math.min(g.r0, sy(T, y));
@@ -2473,6 +2489,65 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     FO.ext = L;
   }
 
+
+  /* (19/11, Niccolò) «Scopri i dettagli»: con i dettagli di un pacchetto aperti (4d, 5g, 6h) la pallina va sotto la
+     freccia del pulsante in fondo («Parliamone»; nel Virtual Assistant «Prenota un'anteprima»), un livello sotto: la
+     freccia resta sopra (diventa scura, .sotto-pallina) e la pallina, cresciuta come pongo a un cerchio di 28 px, le fa da
+     sfondo tondo arancio. Ci va dal suo posto nel giro normale lungo la riga, il margine destro e la riga del pulsante
+     (a destra della freccia non c'è niente: mai sopra le scritte), in 1,1 s; le due estremità sono vive (il giro normale da
+     una parte, il pulsante dall'altra: segue la tendina che si apre e lo scorrimento). Dettagli chiusi, o pulsante uscito
+     dallo schermo: torna piccola per la stessa strada nel giro normale; pulsante di nuovo in vista con i dettagli ancora
+     aperti: ci ritorna. Se se ne apre un altro, prima torna e poi va in quello. Solo coi pacchetti uno sotto l'altro
+     (telefono): da computer, coi pacchetti in colonne, resta com'era. Con «Riduci movimento» lo sfondo è fisso (CSS) */
+  var FRD = 28, FRT = 1100, FX = { k: 0, d: null, ult: null, vivo: 0 }, DAP = [], HA = !!doc.animate;
+  function aperto(d){ return HA ? d.classList.contains('apre') && d.open : d.open; }
+  [].forEach.call(document.querySelectorAll('.pacchetto .dettagli'), function(d){
+    var sm = d.querySelector('summary'); if (!sm) return;
+    sm.addEventListener('click', function(){
+      setTimeout(function(){   /* dopo lo script delle tendine, che decide se si apre o si chiude */
+        var i = DAP.indexOf(d); if (i >= 0) DAP.splice(i, 1);
+        if (aperto(d)) DAP.push(d);
+        FX.vivo = performance.now() + 1200; chiedi();
+      }, 0);
+    });
+  });
+  function frecciaDi(d){ var ic = d.querySelector('.freccia .i') || d.querySelector('.freccia'); return ic; }
+  function freccia(g, y, dt, inAp){
+    var ora = performance.now(), ok = !!g && mqColonna.matches && !inAp && !LIBERO && !g.sopra && !g.nascosto && !g.raccogli && g.linea == null && !g.dentroPannello && !(g.s && (g.s === GRADI || g.s === RAC || g.s === FIN));
+    /* il pulsante da raggiungere: l'ultimo pacchetto aperto col pulsante sullo schermo (un poco di isteresi) */
+    var vuole = null, i, d, ic, r, cy;
+    for (i = DAP.length - 1; i >= 0 && ok; i--) {
+      d = DAP[i]; if (!aperto(d)) { DAP.splice(i, 1); continue; }
+      ic = frecciaDi(d); if (!ic) continue; r = ic.getBoundingClientRect(); if (!r.width) continue;
+      cy = r.top + r.height / 2; var m = d === FX.d && FX.k > 0 ? 0 : 24;
+      if (cy > hT + 16 + m && cy < innerHeight - 30 - m) { vuole = d; break; }
+    }
+    if (FX.d && FX.d !== vuole) FX.k = Math.max(0, FX.k - dt / FRT);   /* torna (anche prima di andare in un altro) */
+    if (FX.k <= 0) { if (FX.d) { var a0 = FX.d.querySelector('.freccia'); if (a0) a0.classList.remove('sotto-pallina'); } FX.d = vuole; FX.ult = null; }
+    if (FX.d && FX.d === vuole) FX.k = Math.min(1, FX.k + dt / FRT);
+    if (!FX.d || FX.k <= 0 || !g) return g;
+    /* il pulsante sullo schermo (mentre la tendina si apre è già al suo posto, solo tagliato: ci arriva quando compare).
+       Se la tendina si chiude, il punto d'arrivo risale col fondo della tendina fino alla riga di «Scopri i dettagli», a
+       destra della scritta (la pagina sotto risale e prende il posto del pulsante) */
+    ic = frecciaDi(FX.d); r = ic && ic.getBoundingClientRect();
+    var bx, by;
+    if (aperto(FX.d) && r && r.width) { bx = r.left + r.width / 2; by = r.top + r.height / 2; FX.ult = { x: bx, py: by + y }; }
+    else {
+      var dr = FX.d.getBoundingClientRect(), sm = FX.d.querySelector('summary').getBoundingClientRect(), sc = sm.top + sm.height / 2;
+      var y0 = FX.ult ? FX.ult.py - y : sc, x0 = FX.ult ? FX.ult.x : sm.right + FRD / 2 + 6;
+      by = Math.max(sc, Math.min(y0, dr.bottom - FRD / 2));
+      bx = lerp(x0, Math.max(x0, sm.right + FRD / 2 + 6), y0 > sc ? clamp((y0 - by) / (y0 - sc), 0, 1) : 1);
+    }
+    var ax = g.x, ay = g.y, L = Math.max(bx + FRD / 2 + 8, Math.min(xM, innerWidth - 12));
+    var pts = [[ax, ay]];
+    if (Math.abs(L - ax) > 1) pts.push([L, ay]);
+    if (Math.abs(by - ay) > 1) pts.push([L, by]);
+    pts.push([bx, by]);
+    var e = liscio(FX.k), p = pts.length > 1 ? traccia(pts, RAGGIO).at(e) : [bx, by];
+    if (!isFinite(p[0]) || !isFinite(p[1])) p = [bx, by];
+    var a = FX.d.querySelector('.freccia'); if (a) a.classList.toggle('sotto-pallina', FX.k > .8);
+    return { x: p[0], y: p[1], d: lerp(g.d || DOT, FRD, morbido(clamp((FX.k - .62) / .38, 0, 1))), kmax: 1.4, anima: FX.k < 1 || (FX.d !== vuole) || ora < FX.vivo };
+  }
   function siedi(s){
     if (s === seduto) return;
     if (seduto && seduto.el) { seduto.el.classList.remove('qui'); if (seduto.el._pongo) { deforma(seduto.el, ''); seduto.el._pongo = ''; } }
@@ -2489,7 +2564,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 
   /* ── Il puntino di pongo (dalla D, 19/11): tondo da fermo, si allunga in una virgola quando corre, si schiaccia quando
         arriva; scorrendo piano resta tondo. I numeri sono in PONGO (anche dalla console: window.PONGO) ── */
-  var PONGO = window.PONGO = { KMAX: 2.8, SIGMA: 3, V0: .15, V1: .6, HZ: 6.5, ZETA: .55, SCHIACCIA: .24, COLPO: 1, RISUCCHIO: 1.8, CODA: .5, CURVA: 1, ANTICIPO: 0 };
+  var PONGO = window.PONGO = { KMAX: 2.8, SIGMA: 3, V0: .15, V1: .6, HZ: 5, ZETA: .55, SCHIACCIA: .24, COLPO: 1, RISUCCHIO: 1.8, CODA: .5, CURVA: 1, ANTICIPO: 0 };
   var FO = { ox: 0, oy: 0, ux: 0, uy: 0, vx: 0, vy: 0, dx: 0, dy: 1, vr: 0, armato: false, fermoT: 0, ext: 0, d: '', tr: '' };
   window.PONGO_FORMA = FO;
   var fPath = punto.querySelector('path');
@@ -2522,6 +2597,12 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       FO.ox += (FO.ux - ex) * h; FO.oy += (FO.uy - ey) * h;
     }
     if (Math.abs(FO.ox) + Math.abs(FO.oy) < .04 && Math.abs(FO.ux - ex) + Math.abs(FO.uy - ey) < .002 && se < 1e-3) FO.ox = FO.oy = FO.ux = FO.uy = 0;
+  }
+  function dritta(dt, vq){
+    var kz = Math.exp(-dt / 10), sg = vq > .01 ? 1 : vq < -.01 ? -1 : (FO.dy < 0 ? -1 : 1);
+    FO.ox *= kz; FO.ux *= kz; FO.vx *= kz; if (Math.abs(FO.ox) < .01) FO.ox = FO.ux = 0;
+    FO.dx *= kz; FO.dy += (sg - FO.dy) * (1 - kz);
+    var ln = Math.sqrt(FO.dx * FO.dx + FO.dy * FO.dy); if (ln < .3) { FO.dx = 0; FO.dy = sg; } else { FO.dx /= ln; FO.dy /= ln; }
   }
   function formaFerma(){ return !FO.ox && !FO.oy && !FO.ux && !FO.uy; }
   function formaColpo(dx, dy, forza){
@@ -2605,7 +2686,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* Il movimento, fotogramma per fotogramma (dalla D): ys insegue lo scorrimento vero con due inseguimenti in fila e un
      limite morbido di velocità; con un colpo veloce il puntino si stacca e aspetta nel margine; ogni cambio di bersaglio
      passa per una molla smorzata */
-  var TAU = 45, VMAX = 2.2, OM = 1 / 65;
+  var TAU = 65, VMAX = 1.45, OM = 1 / 90;   /* (19/11) un terzo più lenta: prima 45, 2,2 e 1/65 */
   var ys = null, ys1 = 0, tPrima = 0, yPrima = 0, v1 = 0, v2 = 0, chPrima = null;
   var STACCO = false, KQ = null, RACC = false, LIBERO = false, LW = null, E = { x: 0, y: 0, d: 0, vx: 0, vy: 0, vd: 0 }, D = null, DV = { x: 0, y: 0, d: 0 }, Bp = null;
   function molla(da, dav, a, av, om, dt){ OM = om; dt = dt || 0; E.x = da.x - a.x + av.x * dt; E.y = da.y - a.y + av.y * dt; E.d = da.d - a.d + av.d * dt; E.vx = dav.x - av.x; E.vy = dav.y - av.y; E.vd = dav.d - av.d; }
@@ -2643,7 +2724,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     /* «Come funziona» si muove prima che il puntino legga dov'è il treno: stesso fotogramma */
     var binMuove = binPasso(y, dt);
     if (CHATSEG) { var inCs = ys >= CHATSEG.a && ys < CHATSEG.b; if (inCs && !CHATSEG.dentro) { CHATSEG.dentro = true; CHATSEG.modo = chatEl && chatEl.classList.contains('finita') ? 'rie' : 'nascosto'; } else if (!inCs) CHATSEG.dentro = false; }
-    var g = bersaglio(ys, y);
+    var g = freccia(bersaglio(ys, y), y, dt, inAp);
     if (g) {
       var Bq = { x: g.x, y: g.y, d: g.d }, BV = Bp ? { x: (Bq.x - Bp.x) / dt, y: (Bq.y - Bp.y) / dt, d: (Bq.d - Bp.d) / dt } : { x: 0, y: 0, d: 0 };
       Bp = Bq;
@@ -2665,7 +2746,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       if (D) { DV = { x: (nx - D.x) / dt, y: (ny - D.y) / dt, d: (nd - D.d) / dt }; }
       D = { x: nx, y: ny, d: nd };
       KQ = g.kmax || null;
+      if (g.dritta) dritta(dt, DV.y + sv);
       formaPasso(dt, DV, sv);
+      if (g.dritta) dritta(dt, DV.y + sv);
       /* l'arancio del titolo della Campagna si riunisce in pallina a sinistra: si raccoglie e diventa tonda */
       if (g.raccogli && !RACC && !LIBERO) formaColpo(-1, 0, 1.4);
       RACC = !!g.raccogli;
@@ -2712,10 +2795,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     }
     misura();
     if (visto && ys !== null) {
-      var g = bersaglio(ys, scrollY);
+      var g = freccia(bersaglio(ys, scrollY), scrollY, 0, !!(APosto && AP && ys < AP.arrivo));
       if (g) {
         var Q = LIBERO ? (LW || { x: xM, y: Rm, d: DOT }) : g;
-        E.x = visto.x - Q.x; E.y = visto.y - Q.y; E.d = visto.d - Q.d; if (E.x || E.y) OM = 1 / 70;
+        E.x = visto.x - Q.x; E.y = visto.y - Q.y; E.d = visto.d - Q.d; if (E.x || E.y) OM = 1 / 95;
         if (Math.abs(E.x) + Math.abs(E.y) + Math.abs(E.d) < .3) E.x = E.y = E.d = 0;
         Bp = null;
       }
