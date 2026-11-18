@@ -3179,16 +3179,21 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     for (i = 1; i < Q.length; i++) { if (s <= L[i - 1] || i === Q.length - 1) { var f = L[i - 1] ? c01(s / L[i - 1]) : 1; return [Q[i - 1][0] + (Q[i][0] - Q[i - 1][0]) * f, Q[i - 1][1] + (Q[i][1] - Q[i - 1][1]) * f]; } s -= L[i - 1]; }
     return Q[Q.length - 1];
   }
-  /* p: 0 = pallina nel punto, 1 = cerchietto pieno sopra il titolo */
+  /* p: 0 = pallina nel punto, 1 = cerchio chiuso sotto la testata.
+     (18/11 notte, Niccolò: «quando va in alto si srotola il pallino e diventa linea curva chiusa») fino a 0,68 la
+     pallina sale piena; poi si srotola: la sua testa gira sul cerchio (dall'alto, in senso orario) e si lascia dietro la
+     linea, rimpicciolendo fino allo spessore della linea, finché il cerchio si chiude */
   function disegna(p){
-    var S = strada(), q = fermo ? 1 : liscio(p), xy = fermo ? S.p[S.p.length - 1] : punto(S.p, q);
-    var m = fermo ? 1 : c01((p - .12) / .63), r0 = S.d0 / 2, col = c01(p / .3);
+    var S = strada(), a = fermo ? 1 : c01(p / .68), u = fermo ? 1 : c01((p - .68) / .32), xy = fermo ? S.p[S.p.length - 1] : punto(S.p, liscio(a));
+    var r0 = S.d0 / 2, col = c01(p / .3);
     var C = ARANCIO.map(function(v, i){ return Math.round(v + (BIANCO[i] - v) * col); }), cs = 'rgb(' + C.join(',') + ')';
-    ag.style.transform = 'translate3d(' + (xy[0] - 20).toFixed(2) + 'px,' + (xy[1] - 20).toFixed(2) + 'px,0)';
-    pal.setAttribute('r', (r0 * (1 - m)).toFixed(2)); pal.style.fill = cs;
-    var rr = r0 + (R - r0) * m;
-    arco.setAttribute('r', rr.toFixed(2)); arco.style.stroke = cs; arco.style.strokeWidth = (W * m).toFixed(2);
-    arco.style.strokeDasharray = (2 * Math.PI * rr * c01(p)).toFixed(2) + ' ' + (2 * Math.PI * rr).toFixed(2);
+    /* la pallina sta in cima al cerchio (0, -R): il cerchio ha il centro R più in basso del punto della strada */
+    ag.style.transform = 'translate3d(' + (xy[0] - 20).toFixed(2) + 'px,' + (xy[1] + R - 20).toFixed(2) + 'px,0)';
+    var e = liscio(u), th = -Math.PI / 2 + 2 * Math.PI * e, rt = r0 + (W / 2 - r0) * c01(u / .3);
+    pal.setAttribute('cx', (R * Math.cos(th)).toFixed(2)); pal.setAttribute('cy', (R * Math.sin(th)).toFixed(2));
+    pal.setAttribute('r', (u >= 1 ? 0 : rt).toFixed(2)); pal.style.fill = cs;
+    arco.setAttribute('r', R); arco.style.stroke = cs; arco.style.strokeWidth = (u > 0 ? W : 0).toFixed(2);
+    arco.style.strokeDasharray = (CIRC * e).toFixed(2) + ' ' + CIRC.toFixed(2);
     ag.classList.toggle('su', p > 0); rp.style.visibility = p > 0 ? 'hidden' : '';
   }
   function finisci(){ ag.classList.remove('su', 'gira'); rp.style.visibility = ''; }
