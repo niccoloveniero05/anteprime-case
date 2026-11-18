@@ -3185,7 +3185,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      linea, rimpicciolendo fino allo spessore della linea, finché il cerchio si chiude */
   function disegna(p){
     var S = strada(), a = fermo ? 1 : c01(p / .68), u = fermo ? 1 : c01((p - .68) / .32), xy = fermo ? S.p[S.p.length - 1] : punto(S.p, liscio(a));
-    var r0 = S.d0 / 2, col = c01(p / .3);
+    var r0 = S.d0 / 2, col = liscio(a);   /* (18/11 notte) da arancio a bianco piano lungo tutta la salita: bianca quando comincia a srotolarsi */
     var C = ARANCIO.map(function(v, i){ return Math.round(v + (BIANCO[i] - v) * col); }), cs = 'rgb(' + C.join(',') + ')';
     /* la pallina sta in cima al cerchio (0, -R): il cerchio ha il centro R più in basso del punto della strada */
     ag.style.transform = 'translate3d(' + (xy[0] - 20).toFixed(2) + 'px,' + (xy[1] + R - 20).toFixed(2) + 'px,0)';
