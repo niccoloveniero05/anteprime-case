@@ -54,6 +54,7 @@
     ['#ap-logo .vv', '1c', 'La V grande del logo', { nonSe: '#ap-logo .e', riq: [0.32, 0.18, 0.95, 0.85] }],
     ['#ap-disco', '1d', 'L’arancio: il punto di «scegliere» che si allarga e poi torna nel puntino del logo', { cerchio: true }],
     ['#inizio .macchia', '1e', 'Lo sfondo con le luci (la macchia) dietro al titolo', { vedi: '#copertina-wrap', copertoDa: '#ap-disco', resta: true }],
+    ['#aggiorna', '1f', 'Il cerchietto di aggiornamento (in cima, tirando giù la pagina: si vede solo mentre si tira)'],
 
     ['#come', '2', 'Come funziona'],
     ['#come .etichetta', '2a', 'L’etichetta «Come funziona»'],

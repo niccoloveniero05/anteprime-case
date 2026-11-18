@@ -40,6 +40,7 @@ c messaggi, d riepilogo, e etichetta).
 - 1c — la V grande del logo
 - 1d — l'arancio: il punto di «scegliere» che si allarga e poi torna nel puntino del logo
 - 1e — lo sfondo con le luci (la macchia)
+- 1f — il cerchietto di aggiornamento: in cima alla pagina, tirando giù, il punto di «scegliere» sale sopra il titolo e diventa un cerchietto (si vede solo mentre si tira)
 
 ## 2 · Come funziona (dal sito online; prima era 3)
 - 2 — il blocco
