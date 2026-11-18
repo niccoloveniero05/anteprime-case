@@ -85,7 +85,7 @@
 
     ['#va', '6', 'Virtual Assistant'],
     ['#va .m-va', '6a', 'Il riquadro con la chat di WhatsApp', { resta: true }],
-    ['#va .m-va .chat-testa', '6b', 'La testa della chat «Oreficeria Bianchi · online» (nella D era la 5b)'],
+    ['#va .m-va .chat-testa', '6b', 'La testa della chat «Oreficeria Bianchi · online» (il puntino della foto profilo è una tappa; nella D era la 5b)'],
     ['#va .m-va .chat-flusso .chat-m', '6c', 'I messaggi della chat (nella D la 5c)'],
     ['#va .m-va .chat-rie', '6d', 'Il riquadro «Riepilogo per il titolare» (nella D la 5d)'],
     ['#va .m-va > .chip', '6e', 'L’etichetta «Esempio · WhatsApp» (nella D la 5e)'],
@@ -95,7 +95,7 @@
 
     ['#campagna', '7', 'Campagna Pubblicitaria 360° (pacchetto speciale)'],
     ['#campagna .speciale-tag', '7a', '«Pacchetto speciale»'],
-    ['#t-360', '7b', 'Il titolo «Campagna Pubblicitaria 360°» (il puntino si posa nel «°» e l’arancio dilaga sul «360»)'],
+    ['#t-360', '7b', 'Il titolo «Campagna Pubblicitaria 360°» (il puntino si posa nel «°» e l’arancio dilaga su tutto il titolo)'],
     ['#campagna .sp-testa > .sotto', '7c', '«Contenuti, sito e Virtual Assistant insieme…»'],
     ['#campagna .speciale-azione', '7d', 'Il pulsante «Parliamone»'],
     ['#campagna .sp-elenco', '7e', '«Cosa comprende» e le tre voci'],
@@ -103,7 +103,7 @@
 
     ['#partner', '8', 'Partner (in fondo ai servizi, come nella D)'],
     ['#partner .etichetta', '8a', 'L’etichetta «Partner»'],
-    ['#t-partner', '8b', 'Il titolo «Chi ha scelto Veniello·studio.» (col logo)'],
+    ['#t-partner', '8b', 'Il titolo «Chi ha scelto Veniello·studio.» (col logo: l’ultima tappa del puntino è il suo puntino arancio)'],
     ['#partner .wrap > .sotto', '8c', '«Le attività con cui lavoriamo ogni mese.»'],
     ['#partner .carosello > .card:nth-child(1)', '8d', 'Card Jué Club (foto del bancone)', { resta: true }],
     ['#partner .carosello > .card:nth-child(2)', '8e', 'Card Elena Baldi Wedding Planner', { resta: true }],
