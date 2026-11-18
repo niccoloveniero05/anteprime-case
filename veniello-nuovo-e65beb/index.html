@@ -360,6 +360,17 @@ a.recapito:hover{background:var(--bg4)}
 
 /* ── I titoli che non sono più tappe del puntino (Partner, Domande; 18/11): il punto è del colore della parola chiave ── */
 .pt.pt-testo,html.viaggio .pt.pt-testo{background:var(--av)}
+/* «Veniello Studio» nel titolo dei Partner (8b) scritto come il logo della testata (V corsiva Instrument Serif, «eniello»
+   Geist 700, puntino arancio fermo, «studio»), alla misura del titolo e sulla sua riga di base */
+.t-sez .t-marchio .marchio{font-size:1em;line-height:1;vertical-align:baseline;color:var(--av)}
+.t-sez .t-marchio .marchio .vv{-webkit-text-stroke:.04em currentColor}
+/* il punto arancio della frase dell'anteprima del Sito Web (18/11 sera): al telefono è una tappa della pallina, che ci
+   scende dentro dall'alto e diventa lui. Si vede solo quando la pallina c'è (.qui, la mette il motore); lo schiacciamento
+   del pongo va sul ::before (--sa-fo), perché il .sa-punto si sposta già con transform. Con «Riduci movimento» e da
+   computer (niente .sa-tappa) resta com'era */
+html.viaggio .sa.sa-tappa .sa-punto{background:transparent}
+html.viaggio .sa.sa-tappa .sa-punto::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--sa-rec);transform:var(--sa-fo,none);opacity:0}
+html.viaggio .sa.sa-tappa .sa-punto.qui::before{opacity:1}
 
 /* ── «360°» della Campagna (18/11): il puntino si posa nel «°» (lo riempie: è un pallino della misura del cerchietto, sopra
    il carattere) e l'arancio dilaga sul «360», dal «°» verso il «3». L'arancio è una sfumatura dentro le lettere
@@ -1105,7 +1116,7 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
   <section class="sez partner" id="partner" aria-labelledby="t-partner">
     <div class="wrap">
       <span class="etichetta">Partner</span>
-      <h2 class="t-sez" id="t-partner">Chi ha scelto <em>Veniello&nbsp;Studio</em><i class="pt pt-testo" aria-hidden="true"></i><span class="sr">.</span></h2>
+      <h2 class="t-sez" id="t-partner">Chi ha scelto <span class="t-marchio"><span class="sr">Veniello Studio</span><span class="marchio" aria-hidden="true"><span class="vv">V</span><span>eniello</span><i class="pl"></i><span>studio</span></span></span><i class="pt pt-testo" aria-hidden="true"></i><span class="sr">.</span></h2>
       <p class="sotto">Le attività con cui lavoriamo ogni mese.</p>
       <div class="carosello" role="list">
         <a class="card" role="listitem" data-anima href="https://jueclub.it" target="_blank" rel="noopener">
@@ -1954,11 +1965,14 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
         · Non passa mai sopra una scritta: esce da un titolo verso destra lungo la sua riga, sale o scende nella corsia del
           margine destro e arriva nel titolo dopo da destra, lungo la sua riga. Tra i pacchetti coi riquadri (video,
           anteprima del sito, chat) passa al centro, dietro ai riquadri: dalla corsia va al centro nello spazio vuoto sopra
-          il riquadro, ci entra dall'alto ed esce di lato poco sopra il fondo, nella corsia (tra il riquadro e il titolo lo
-          spazio è poco). In «Come funziona» scende sul binario dal margine sinistro (a destra c'è la carta 02).
+          il riquadro e ci entra dall'alto; esce dal fondo del riquadro in verticale, proprio sopra il punto del titolo, e
+          ci scende dritto (correzione del 18/11 sera). Nel riquadro del Sito Web entra dall'alto in verticale sopra il
+          punto arancio della frase dell'anteprima e diventa quel punto (posto «sa»). In «Come funziona» scende sul binario
+          dal margine sinistro (a destra c'è la carta 02); dal binario a «…farti scegliere» va solo in giù o di lato
+          (tratto «bin»: niente risalite, neanche per il ritardo con cui segue lo scorrimento).
         · il percorso lo sceglie uno scorrimento «morbido» (ys), i posti restano attaccati alla pagina vera (y);
-        · con un colpo di dito veloce il puntino si stacca e aspetta nel margine destro, poi rientra con una molla (non
-          quando è già nel «°»: lì resta);
+        · con un colpo di dito veloce il puntino si stacca e aspetta nel margine destro (dopo il binario: più in basso,
+          dove aspetterebbe comunque), poi rientra con una molla (non quando è già nel «°»: lì resta);
         · il punto vero del titolo (.pt.qui) prende il posto del puntino solo quando quello disegnato è arrivato;
         · i posti si rimisurano quando cambia l'altezza della pagina o di un blocco (ResizeObserver): la differenza passa
           alla molla, senza salti.
@@ -1967,10 +1981,13 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var posti = [].slice.call(document.querySelectorAll('[data-posto]'));
   var trenoPt = treno.querySelector('[data-posto]'), comePt = document.querySelector('#t-come [data-posto]');
   var finPt = document.querySelector('[data-gradi]'), t360c = document.querySelector('.t360-c'), t360 = t360c && t360c.parentNode;
+  /* (18/11, correzioni dal telefono di Niccolò) il punto arancio della frase dell'anteprima del Sito Web: la pallina ci
+     scende dentro dall'alto e diventa lui (vedi «sa» qui sotto) */
+  var saPunto = document.querySelector('#sito .sa-punto'), saEl = saPunto && saPunto.closest('.sa');
   var mqColonna = matchMedia('(max-width:1023px)');   /* i pacchetti uno sotto l'altro: i loro titoli sono tappe */
   var vh = innerHeight, V0 = vh, Yin = 0, Yout = 0, Rm = 0, Gmin = 0, Smin = 0, Lmin = 0, PASSO = 1, RAGGIO = 22;
   var xM = 0, maxS = 0, larghezza = 0, hT = 60, FR = 0;
-  var DOT = 7, SEG = [], seduto = null, ATTESA = null, FIN = null;
+  var DOT = 7, SEG = [], seduto = null, ATTESA = null, FIN = null, SA = null, BINg = null;
   var APosto = null;
 
   function offsetIn(el, anc){ var x = 0, y = 0; while (el && el !== anc) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x: x, y: y }; }
@@ -2012,7 +2029,7 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
     } };
   }
   /* la corsia: il margine destro (tra i pacchetti coi riquadri, appena fuori dal riquadro) */
-  function corsia(B){ return B.riq ? Math.min(xM, B.riq.right + 22) : xM; }
+  function corsia(B){ var q = B.riq || B.porta; return q ? Math.min(xM, q.right + 22) : xM; }
   /* dove aspetta nella corsia tra due tappe (sullo schermo): al 38% dello schermo, o più in basso se il posto da cui parte
      sta più in basso (il treno), al più all'altezza dove arriverà il titolo dopo */
   function attesaY(A){ var ya = A.live || A.scena ? A.ly : Yout; return Math.max(Rm, Math.min(ya, Yin)); }
@@ -2021,11 +2038,25 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function viaPunti(g, y, statico){
     var a = g.da, b = g.a2, L = g.corsia, ax = statico && a.live ? (a.x2 || a.x) : sx(a), ay = statico && a.live ? a.ly : sy(a, y);
     if (b.riq) { var gy = b.riq.vuoto - y; return [[ax, ay], [L, ay], [L, gy], [b.riq.cx, gy], [b.riq.cx, b.riq.dentro - y]]; }
+    /* verso il punto della frase del Sito Web: nello spazio vuoto sopra il riquadro, fino a sopra il punto (lì aspetta) */
+    if (b.sa) { var py = b.porta.vuoto - y; return [[ax, ay], [L, ay], [L, py], [sx(b), py]]; }
     return [[ax, ay], [L, ay], [L, g.Wy]];
+  }
+  /* dove aspetta tra l'uscita e l'arrivo (sullo schermo) */
+  function attesaPunto(g, y){
+    var b = g.a2;
+    if (b.riq) return [b.riq.cx, b.riq.dentro - y];
+    if (b.sa) return [sx(b), b.porta.vuoto - y];
+    return [g.corsia, g.Wy];
   }
   function arrivoPunti(g, y){
     var b = g.a2, L = g.corsia, bx = sx(b), by = sy(b, y);
-    if (b.riq) { var ey = b.riq.esce - y; return [[b.riq.cx, b.riq.dentro - y], [b.riq.cx, ey], [L, ey], [L, by], [bx, by]]; }
+    /* (18/11 sera) dal riquadro: dietro al riquadro fino alla x del punto del titolo, poi giù dritto: esce dal fondo del
+       riquadro e scende in verticale nel punto */
+    if (b.riq) { var dy = b.riq.dentro - y; return [[b.riq.cx, dy], [bx, dy], [bx, by]]; }
+    /* nel punto della frase del Sito Web: giù dritto fino al bordo del riquadro, ci passa sotto e in quel momento il punto
+       della frase compare (il posto si siede lì: il salto fin dentro la frase avviene dietro al riquadro) */
+    if (b.sa) return [[bx, b.porta.vuoto - y], [bx, b.porta.bordo - y]];
     if (b.daSopra) { var gy = b.daSopra - y; return [[L, g.Wy], [L, gy], [bx, gy], [bx, by]]; }
     return [[L, g.Wy], [L, by], [bx, by]];
   }
@@ -2066,9 +2097,25 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var q = pn.getBoundingClientRect(), top = q.top + y0, bot = q.bottom + y0; if (bot > s.ly - 20) return;
       var pr = pk.previousElementSibling, sp = pr ? (pr.lastElementChild || pr) : (pk.parentNode.previousElementSibling || pk.parentNode);
       var su = sp.getBoundingClientRect().bottom + y0;
-      s.riq = { right: q.right, cx: q.left + q.width / 2, vuoto: top - Math.max(10, Math.min(56, (top - su) / 2)), dentro: top + .5 * q.height, esce: bot - Math.min(34, .1 * q.height) };
+      s.riq = { top: top, right: q.right, cx: q.left + q.width / 2, vuoto: top - Math.max(10, Math.min(56, (top - su) / 2)), dentro: top + .5 * q.height, esce: bot - Math.min(34, .1 * q.height) };
     });
     P.forEach(function(s){ s.inY = s.ly - Yin; s.outY = s.ly - Yout; });
+    /* (18/11 sera) il punto arancio della frase dell'anteprima del Sito Web è una tappa (prima di «Sito Web.»): la pallina
+       ci scende dentro dall'alto, in verticale sopra il punto, e diventa lui (il punto si vede solo quando lei c'è: .sa-tappa
+       e .qui nello stile). Posto vivo: segue il punto quando la frase cambia («dispositivi.»). porta: lo spazio vuoto sopra
+       il riquadro (dove aspetta) e il bordo destro del riquadro (la corsia) */
+    SA = null;
+    if (saPunto && saEl && saEl.classList.contains('sa-js') && saPunto.offsetWidth) {
+      var iSito = -1; P.forEach(function(s, k){ if (s.riq && s.el.closest('#sito')) iSito = k; });
+      if (iSito >= 0) {
+        var sit = P[iSito], qs = saPunto.getBoundingClientRect();
+        SA = { el: saPunto, live: true, cop: true, sa: true, x: qs.left + qs.width / 2, ly: qs.top + y0 + qs.height / 2, d: qs.width,
+               porta: { vuoto: sit.riq.vuoto, right: sit.riq.right, bordo: sit.riq.top + 5 } };
+        SA.inY = SA.ly - Yin; SA.outY = sit.inY - Math.round(.13 * V0);   /* ci resta finché il titolo «Sito Web» è vicino */
+        P.splice(iSito, 0, SA);
+      }
+    }
+    if (saEl) saEl.classList.toggle('sa-tappa', !!SA);
     /* l'ultima tappa: il «°» della Campagna. Da computer (Campagna larga, l'elenco a destra del titolo) ci arriva dall'alto:
        nello spazio vuoto sopra la card va a sinistra fino al «°» e poi scende */
     FIN = null;
@@ -2081,7 +2128,7 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var o1 = offsetIn(rot, bSt), o2 = offsetIn(comePt, bSt), xs = bSt.getBoundingClientRect().left;
       var hC = comePt.closest('h2'), oh = offsetIn(hC, bSt), ov = offsetIn(vag, bSt);
       BT = { el: trenoPt, live: true, cop: true, scena: S, ly: BN.top + o1.y + 5, x: xs + o1.x + BN.rR, x2: xs + o1.x + BN.rW - BN.rR, d: 13,
-             inY: S.T + .28 * S.R, outY: S.T + .92 * S.R };
+             inY: S.T + .28 * S.R, outY: S.T + .9 * S.R };
       BC = { el: comePt, scena: S, ly: BN.top + o2.y + comePt.offsetHeight / 2, x: xs + o2.x + comePt.offsetWidth / 2, d: comePt.offsetWidth };
       BC.inY = S.T + BC.ly - Yin; BC.outY = S.T - Math.round(.06 * V0);
       BC.vuoto = BN.top + (oh.y + hC.offsetHeight + ov.y) / 2;   /* tra il titolo e le carte */
@@ -2096,17 +2143,29 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (APosto) seq.unshift(APosto);
     var n = seq.length, i, A, B;
     seq[n-1].inY = Math.min(seq[n-1].inY, maxS - 1);
+    /* (18/11 sera) dal binario a «…farti scegliere» (tratto «bin»): solo in giù o di lato, mai su. Lascia il treno a «Online»
+       col palco ancora fermo, va a destra nella corsia e scende un poco (Wy, sotto il binario); lì aspetta fermo sullo
+       schermo finché la riga del titolo arriva alla sua altezza, poi ci scivola dentro lungo la riga. Il titolo dopo si
+       siede quindi più in basso del solito (inY = ly − Wy + La) */
+    var BIN = null, iBT = seq.indexOf(BT); BINg = null;
+    if (BT && iBT >= 0 && seq[iBT + 1]) {
+      var nb = seq[iBT + 1], Lb = corsia(nb), Wb = Math.max(BT.ly, Math.min(Math.round(.86 * V0), BT.ly + Math.round(.05 * V0)));
+      var Lvb = Math.max(30, Math.min(.09 * S.R, 1.2 * ((Lb - BT.x2) + (Wb - BT.ly)))), Lab = clamp(.7 * Math.abs(Lb - nb.x), 50, 100);
+      nb.inY = Math.max(nb.ly - Wb + Lab, BT.outY + Lvb + Lab + 20); Wb = nb.ly - nb.inY + Lab;
+      if (nb.outY < nb.inY + 40) nb.outY = nb.inY + 40;
+      BIN = BINg = { k: 'bin', a: BT.outY, b: nb.inY, da: BT, a2: nb, corsia: Lb, Wy: Wb, Lv: Lvb, La: Lab, attesa: { x: Lb, y: Wb } };
+    }
     for (i = 0; i < n - 1; i++) {
       A = seq[i]; B = seq[i+1];
       if (A === BC && B === BT) continue;   /* la discesa sul binario ha i suoi tempi (palco fermo) */
+      if (A === BT || A.sa) continue;       /* il tratto «bin» e l'uscita dal punto della frase del Sito Web hanno i loro */
       if (A.ap) { if (B.inY < A.outY + Gmin) B.inY = A.outY + Gmin; continue; }
       var st = strada(A, B), G = B.inY - A.outY;
-      var serve = Math.min(V0 * .66, st.v + st.a + 40);
+      var serve = Math.min(V0 * (B.sa ? .5 : .66), st.v + st.a + 40);   /* verso il punto della frase: un po' più svelto, così ci resta di più */
       if (G >= serve) continue;
       var manca = serve - G;
       var stA = Math.max(0, A.outY - A.inY - Smin);
       var stB = Math.max(0, B.outY - B.inY - Smin); if (i + 1 === n - 1) stB = Math.max(0, Math.min(stB, maxS - 1 - B.inY));
-      if (A === BT) stA = Math.max(0, Math.min(stA, A.outY - (S.T + .9 * S.R)));   /* lascia il treno solo a «Online» */
       var dA = Math.min(manca / 2, stA), dB = Math.min(manca - dA, stB);
       dA = Math.min(stA, manca - dB);
       A.outY -= dA; B.inY += dB;
@@ -2118,8 +2177,10 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
     for (i = 0; i < n; i++) {
       var s = seq[i], nx = seq[i+1];
       if (!nx) { SEG.push({ a: s.inY, b: 1e9, k: 'seduto', s: s }); break; }
-      SEG.push({ a: s.inY, b: s.outY, k: 'seduto', s: s });
+      SEG.push({ a: s.inY, b: s.outY, k: 'seduto', s: s, attesa: s === BT && BIN ? BIN.attesa : null });
       if (s === BC && nx === BT) SEG.push({ a: s.outY, b: nx.inY, k: 'discesa', da: s, a2: nx });
+      else if (s === BT && BIN) SEG.push(BIN);
+      else if (s.sa) SEG.push({ a: s.outY, b: nx.inY, k: 'saEsce', da: s, a2: nx });
       else if (s.ap) SEG.push({ a: s.outY, b: nx.inY, k: 'scende', da: s, a2: nx, corsia: s.x > fineRighe(nx.el) + 24 ? s.x : xM });
       else {
         var sd = strada(s, nx), gv = sd.g; gv.a = s.outY; gv.b = nx.inY; gv.k = 'viaggio';
@@ -2133,12 +2194,29 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
 
   function bersaglio(yp, y){
-    for (var i = 0; i < SEG.length; i++) { var g = SEG[i]; if (yp >= g.a && yp < g.b) return punta(g, yp, y); }
+    for (var i = 0; i < SEG.length; i++) {
+      var g = SEG[i];
+      if (yp >= g.a && yp < g.b) {
+        /* sul treno, ma la pagina vera è già oltre la fine della sua corsa: si stacca subito (sulla riga del binario, ferma
+           sullo schermo), così non sale col palco che se ne va */
+        if (BINg && g.s && g.s === BINg.da && y >= BINg.a) return binario(BINg, yp, y);
+        return punta(g, yp, y);
+      }
+    }
     return null;
   }
   function punta(g, yp, y){
     var t = clamp((yp - g.a) / Math.max(1, g.b - g.a), 0, 1), s, e, p, A, B;
-    if (g.k === 'seduto' || g.k === 'fermo') { s = g.s; return { x: sx(s), y: sy(s, y), d: s.d, s: g.k === 'seduto' && s.el ? s : null }; }
+    if (g.k === 'seduto' || g.k === 'fermo') { s = g.s; return { x: sx(s), y: sy(s, y), d: s.d, s: g.k === 'seduto' && s.el ? s : null, attesa: g.attesa }; }
+    if (g.k === 'bin') return binario(g, yp, y);
+    if (g.k === 'saEsce') {
+      /* dal punto della frase del Sito Web a «Sito Web.»: dietro al riquadro (non si vede) fino a poco sopra il fondo, alla
+         x del punto del titolo, poi giù dritto fuori dal riquadro e nel punto */
+      e = liscio(t); B = g.a2;
+      var bx2 = sx(B), q = B.riq;
+      p = traccia([[bx2, q ? q.esce - y : sy(B, y) - 60], [bx2, sy(B, y)]], RAGGIO).at(e);
+      return { x: p[0], y: p[1], d: lerp(DOT, B.d, e) };
+    }
     if (g.k === 'scende') {
       /* dall'apertura: il puntino del logo va a destra fino alla corsia (o, se sotto c'è posto, scende dritto), scende fino
          alla riga del titolo e ci entra da destra. Parte da dove stava col palco fermo */
@@ -2159,12 +2237,33 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
     return viaggio(g, yp, y);
   }
   function viaggio(g, yp, y){
-    var a = g.da, b = g.a2, G = g.b - g.a, u = yp - g.a, p, e;
+    var a = g.da, b = g.a2, G = g.b - g.a, u = yp - g.a, p, e, t;
     var Lv = Math.min(g.Lv, G / 2), La = Math.min(g.La, G - Lv);
     if (u < Lv) { e = liscio(u / Lv); p = traccia(viaPunti(g, y), RAGGIO).at(e); return { x: p[0], y: p[1], d: lerp(a.d, DOT, e) }; }
-    if (u > G - La) { e = liscio((u - (G - La)) / La); p = traccia(arrivoPunti(g, y), RAGGIO).at(e); return { x: p[0], y: p[1], d: lerp(DOT, b.d, e), sopra: b === FIN }; }
-    if (b.riq) return { x: b.riq.cx, y: b.riq.dentro - y, d: DOT };
+    if (u > G - La) {
+      t = (u - (G - La)) / La;
+      e = b.sa ? 1 - Math.cos(Math.PI / 2 * t) : liscio(t);   /* nel punto della frase ci cade dentro (in fondo va svelta: si schiaccia) */
+      p = traccia(arrivoPunti(g, y), RAGGIO).at(e); return { x: p[0], y: p[1], d: lerp(DOT, b.d, e), sopra: b === FIN };
+    }
+    if (b.riq || b.sa) { p = attesaPunto(g, y); return { x: p[0], y: p[1], d: DOT }; }
     return { x: g.corsia, y: g.Wy, d: DOT };
+  }
+  /* il tratto «bin»: dal treno a «…farti scegliere», solo in giù o di lato. L'uscita (col palco fermo) e l'attesa sono
+     ferme sullo schermo; l'arrivo è lungo la riga del titolo, e la sua fase si legge dallo scorrimento vero quando la pagina
+     scende (max(y, ys)): così il ritardo con cui il puntino segue lo scorrimento non lo fa mai risalire */
+  function binario(g, ys_, y){
+    var a = g.da, b = g.a2, G = g.b - g.a, uS = ys_ - g.a, uM = Math.max(y, ys_) - g.a, e, p;
+    var Lv = Math.min(g.Lv, G / 2), La = Math.min(g.La, G - Lv);
+    if (uM > G - La) {
+      e = liscio(clamp((uM - (G - La)) / La, 0, 1));
+      return { x: lerp(g.corsia, sx(b), e), y: sy(b, y), d: lerp(DOT, b.d, e), attesa: g.attesa };
+    }
+    if (uS < Lv) {
+      e = liscio(clamp(uS / Lv, 0, 1));
+      p = traccia([[sx(a), a.ly], [g.corsia, a.ly], [g.corsia, g.Wy]], RAGGIO).at(e);
+      return { x: p[0], y: p[1], d: lerp(a.d, DOT, e), attesa: g.attesa };
+    }
+    return { x: g.corsia, y: g.Wy, d: DOT, attesa: g.attesa };
   }
 
   /* l'arancio che dilaga sul «360» (dal «°» verso il «3») quando il puntino è seduto nel «°», e si ritira quando se ne va:
@@ -2181,7 +2280,7 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
 
   function siedi(s){
     if (s === seduto) return;
-    if (seduto && seduto.el) { seduto.el.classList.remove('qui'); if (seduto.el._pongo) { seduto.el.style.transform = ''; seduto.el._pongo = ''; } }
+    if (seduto && seduto.el) { seduto.el.classList.remove('qui'); if (seduto.el._pongo) { deforma(seduto.el, ''); seduto.el._pongo = ''; } }
     seduto = s;
     if (s && s.el) { s.el.classList.add('qui'); punto.classList.remove('su'); }
     else punto.classList.add('su');
@@ -2303,15 +2402,17 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function formaSuPosto(s){
     var el = s.el; if (!el) return;
     var tr = formaFerma() ? '' : formaMatrice();
-    if (tr !== (el._pongo || '')) { el.style.transform = tr; el._pongo = tr; }
+    if (tr !== (el._pongo || '')) { deforma(el, tr); el._pongo = tr; }
   }
+  /* la forma di pongo su un posto: nel transform, tranne il punto della frase del Sito Web (lì nel suo --sa-fo) */
+  function deforma(el, tr){ if (el === saPunto) { if (tr) el.style.setProperty('--sa-fo', tr); else el.style.removeProperty('--sa-fo'); } else el.style.transform = tr; }
 
   /* Il movimento, fotogramma per fotogramma (dalla D): ys insegue lo scorrimento vero con due inseguimenti in fila e un
      limite morbido di velocità; con un colpo veloce il puntino si stacca e aspetta nel margine; ogni cambio di bersaglio
      passa per una molla smorzata */
   var TAU = 45, VMAX = 2.2, OM = 1 / 65;
   var ys = null, ys1 = 0, tPrima = 0, yPrima = 0, v1 = 0, v2 = 0, chPrima = null;
-  var LIBERO = false, E = { x: 0, y: 0, d: 0, vx: 0, vy: 0, vd: 0 }, D = null, DV = { x: 0, y: 0, d: 0 }, Bp = null;
+  var LIBERO = false, LW = null, E = { x: 0, y: 0, d: 0, vx: 0, vy: 0, vd: 0 }, D = null, DV = { x: 0, y: 0, d: 0 }, Bp = null;
   function molla(da, dav, a, av, om, dt){ OM = om; dt = dt || 0; E.x = da.x - a.x + av.x * dt; E.y = da.y - a.y + av.y * dt; E.d = da.d - a.d + av.d * dt; E.vx = dav.x - av.x; E.vy = dav.y - av.y; E.vd = dav.d - av.d; }
   function sciogli(dt){
     var n = Math.max(1, Math.ceil(dt / 6)), h = dt / n, VS = 1.8;
@@ -2350,14 +2451,21 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (g) {
       var Bq = { x: g.x, y: g.y, d: g.d }, BV = Bp ? { x: (Bq.x - Bp.x) / dt, y: (Bq.y - Bp.y) / dt, d: (Bq.d - Bp.d) / dt } : { x: 0, y: 0, d: 0 };
       Bp = Bq;
-      var W = { x: xM, y: Rm, d: DOT }, ZERO = { x: 0, y: 0, d: 0 };
+      var W = g.attesa ? { x: g.attesa.x, y: g.attesa.y, d: DOT } : { x: xM, y: Rm, d: DOT }, ZERO = { x: 0, y: 0, d: 0 };
       /* nel «°» della Campagna (l'ultima tappa) non si stacca più; se era staccato, ci torna subito (anche con la pagina che
          corre): dopo la Campagna non aspetta nel margine */
-      if (!LIBERO && D && !inAp && !(FIN && g.s === FIN) && (v2 > 2 || ritardo > 300)) { LIBERO = true; molla(D, DV, W, ZERO, 1 / 60, dt); }
+      if (!LIBERO && D && !inAp && !(FIN && g.s === FIN) && (v2 > 2 || ritardo > 300)) { LIBERO = true; LW = W; molla(D, DV, W, ZERO, 1 / 60, dt); }
       else if (LIBERO && (inAp || (v2 < 1 && ritardo < 120) || (FIN && g.s === FIN))) { LIBERO = false; molla(D, DV, Bq, BV, 1 / 100, dt); }
       sciogli(dt);
-      var Q = LIBERO ? W : Bq;
+      var Q = LIBERO ? (LW || W) : Bq;
       var nx = Q.x + E.x, ny = Q.y + E.y, nd = Math.max(1, Q.d + E.d);
+      if (D && Math.abs(nx - D.x) + Math.abs(ny - D.y) > 220) { D = null; FO.ox = FO.oy = FO.ux = FO.uy = FO.vx = FO.vy = FO.vr = 0; DV = { x: 0, y: 0, d: 0 }; }
+      /* il punto della frase del Sito Web: la pallina è passata sotto il bordo del riquadro e il punto compare nella frase
+         (un salto dietro al riquadro): niente virgola dal salto, solo un piccolo schiacciamento, come cadendoci dentro */
+      if (D && !LIBERO && g.s && g.s.sa && seduto !== g.s && Math.abs(ny - D.y) > 12) {
+        var giu = ny > D.y ? 1 : -1; FO.ox = FO.oy = FO.ux = FO.uy = FO.vx = FO.vy = FO.vr = 0; D = null; DV = { x: 0, y: 0, d: 0 };
+        if (giu > 0) formaColpo(0, 1, 1.4);
+      }
       if (D) { DV = { x: (nx - D.x) / dt, y: (ny - D.y) / dt, d: (nd - D.d) / dt }; }
       D = { x: nx, y: ny, d: nd };
       formaPasso(dt, DV, sv);
@@ -2387,7 +2495,7 @@ html.viaggio .t360-c{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (visto && ys !== null) {
       var g = bersaglio(ys, scrollY);
       if (g) {
-        var Q = LIBERO ? { x: xM, y: Rm, d: DOT } : g;
+        var Q = LIBERO ? (LW || { x: xM, y: Rm, d: DOT }) : g;
         E.x = visto.x - Q.x; E.y = visto.y - Q.y; E.d = visto.d - Q.d; if (E.x || E.y) OM = 1 / 70;
         if (Math.abs(E.x) + Math.abs(E.y) + Math.abs(E.d) < .3) E.x = E.y = E.d = 0;
         Bp = null;

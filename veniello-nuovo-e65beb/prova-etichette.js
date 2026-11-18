@@ -63,12 +63,12 @@
     ['#vagoni > .vagone:nth-child(3)', '2e', 'Carta 03 «Se ti piace, va online»', { resta: true }],
     ['#rotaia', '2f', 'Il binario con le tre stazioni (il treno è il puntino)'],
 
-    ['#servizi > .wrap > .etichetta, #t-servizi, #servizi > .wrap > .sotto', '3', 'Servizi: l’ingresso'],
+    ['#servizi > .wrap > .etichetta, #t-servizi, #servizi > .wrap > .sotto', '3', 'Servizi: l’ingresso', { riq: [-0.05, 0, 1, 1] }],   /* nel margine a sinistra: non copre «SERVIZI» */
     ['#servizi > .wrap > .etichetta', '3a', 'L’etichetta «Servizi»'],
     ['#t-servizi', '3b', 'Il titolo «Tutto quello che serve per farti scegliere.»'],
     ['#servizi > .wrap > .sotto', '3c', '«Quattro pacchetti. Prendi quello che ti serve…»'],
 
-    ['#contenuti', '4', 'Creazione Contenuti'],
+    ['#contenuti', '4', 'Creazione Contenuti', { riq: [-0.05, 0, 1, 1] }],   /* a sinistra di «4a»: non sta sul video */
     ['#contenuti .m', '4a', 'Il riquadro col video dello spot (gira una volta)', { resta: true }],
     ['#t-contenuti', '4b', 'Il titolo «Creazione Contenuti.»'],
     ['#contenuti > .sotto', '4c', '«Video, foto e stories per i tuoi social, anche con l’IA.»'],
@@ -103,7 +103,7 @@
 
     ['#partner', '8', 'Partner (in fondo ai servizi, come nella D)'],
     ['#partner .etichetta', '8a', 'L’etichetta «Partner»'],
-    ['#t-partner', '8b', 'Il titolo «Chi ha scelto Veniello Studio.»'],
+    ['#t-partner', '8b', 'Il titolo «Chi ha scelto Veniello·studio.» (col logo)'],
     ['#partner .wrap > .sotto', '8c', '«Le attività con cui lavoriamo ogni mese.»'],
     ['#partner .carosello > .card:nth-child(1)', '8d', 'Card Jué Club (foto del bancone)', { resta: true }],
     ['#partner .carosello > .card:nth-child(2)', '8e', 'Card Elena Baldi Wedding Planner', { resta: true }],

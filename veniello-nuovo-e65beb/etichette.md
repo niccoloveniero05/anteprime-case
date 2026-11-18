@@ -51,13 +51,13 @@ c messaggi, d riepilogo, e etichetta).
 - 2f — il binario con le tre stazioni (al telefono il treno è il puntino)
 
 ## 3 · Servizi: l'ingresso (prima era 4)
-- 3 — l'ingresso dei servizi
+- 3 — l'ingresso dei servizi (l'etichetta sta nel margine a sinistra di «SERVIZI», per non coprirlo)
 - 3a — l'etichetta «Servizi»
 - 3b — il titolo «Tutto quello che serve per farti **scegliere**.»
 - 3c — «Quattro pacchetti. Prendi quello che ti serve…»
 
 ## 4 · Creazione Contenuti (prima era 5)
-- 4 — il pacchetto
+- 4 — il pacchetto (l'etichetta sta nel margine a sinistra, non sul video)
 - 4a — il riquadro col video dello spot (gira una volta quando si vede)
 - 4b — il titolo «Creazione Contenuti.»
 - 4c — «Video, foto e stories per i tuoi social, anche con l'IA.»
@@ -66,7 +66,8 @@ c messaggi, d riepilogo, e etichetta).
 ## 5 · Sito Web (prima era 6)
 - 5 — il pacchetto
 - 5a — il riquadro dell'anteprima animata del sito (il telefono che cambia aspetto, poi anche il computer)
-- 5b — l'anteprima: la frase («Completamente personalizzabile» → «E su tutti i tuoi dispositivi») — classe `.sa-frase`
+- 5b — l'anteprima: la frase («Completamente personalizzabile» → «E su tutti i tuoi dispositivi») — classe `.sa-frase`; al
+  telefono il suo punto arancio compare quando ci entra la pallina (dal 18/11 sera)
 - 5c — l'anteprima: il telefono — classe `.sa-tel`
 - 5d — l'anteprima: il computer (compare alla fine) — classe `.sa-pc`
 - 5e — il titolo «Sito Web.»
@@ -96,7 +97,7 @@ c messaggi, d riepilogo, e etichetta).
 ## 8 · Partner (i blocchi pieni della D; prima era 2, ora in fondo ai servizi come nella D)
 - 8 — il blocco dei partner
 - 8a — l'etichetta «Partner»
-- 8b — il titolo «Chi ha scelto **Veniello Studio**.»
+- 8b — il titolo «Chi ha scelto **Veniello·studio**.» («Veniello Studio» scritto come il logo, dal 18/11 sera)
 - 8c — «Le attività con cui lavoriamo ogni mese.»
 - 8d — la card del Jué Club (foto del bancone)
 - 8e — la card di Elena Baldi Wedding Planner
