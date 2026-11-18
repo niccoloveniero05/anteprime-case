@@ -80,7 +80,8 @@ c messaggi, d riepilogo, e etichetta).
 - 6b — la testa della chat «23:47 · Oreficeria Bianchi · online / sta scrivendo…» (nella D 5b); al telefono il puntino
   arancio della foto profilo è una tappa: compare quando ci entra la pallina
 - 6c — i messaggi della chat (nella D 5c)
-- 6d — il riquadro «Riepilogo per il titolare» (nella D 5d)
+- 6d — il riquadro «Riepilogo per il titolare» (nella D 5d); al telefono il suo pallino è un anellino arancio: a chat
+  finita la pallina ci passa (lo riempie) andando da 6b a 6f
 - 6e — l'etichetta «Esempio · WhatsApp» (nella D 5e)
 - 6f — il titolo «Virtual Assistant.»
 - 6g — «Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.»
@@ -90,7 +91,8 @@ c messaggi, d riepilogo, e etichetta).
 - 7 — il pacchetto speciale
 - 7a — «Pacchetto speciale»
 - 7b — il titolo «Campagna Pubblicitaria 360°» (il puntino si posa nel «°» e l'arancio dilaga su tutto il titolo: prima
-  «360», poi «Campagna» e «Pubblicitaria» insieme; scorrendo ancora si ritira e il puntino riparte)
+  «360», poi «Campagna» e «Pubblicitaria» insieme; scorrendo ancora il bianco torna da destra a sinistra e l'arancio si
+  riunisce in pallina a sinistra del titolo, che riparte verso 8b)
 - 7c — «Contenuti, sito e Virtual Assistant insieme…»
 - 7d — il pulsante «Parliamone»
 - 7e — «Cosa comprende» e le tre voci

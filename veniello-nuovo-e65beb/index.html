@@ -371,6 +371,12 @@ html.viaggio .t-marchio .pl.qui{background:var(--rec)}
    diventa lui; al telefono si vede solo quando lei c'è (.chat-tappa e .qui) */
 .chat-logo-pt{position:absolute;left:16.5px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--rec)}
 html.viaggio .chat.chat-tappa .chat-logo-pt:not(.qui){visibility:hidden}
+/* il pallino del riepilogo (6d): al telefono è una tappa della pallina (a chat finita ci passa), quindi è un anellino arancio
+   vuoto finché lei non lo riempie (.qui), e torna vuoto quando riparte: mai una seconda pallina */
+html.viaggio .chat.chat-tappa .chat-punto{background:transparent;box-shadow:inset 0 0 0 1.6px var(--rec)}
+html.viaggio .chat.chat-tappa .chat-punto.qui{background:var(--rec);box-shadow:none}
+/* la pallina disegnata dentro il riquadro della chat (la mette il motore): sopra la chat, tagliata dal bordo del riquadro */
+.punto.punto-dentro{position:absolute;z-index:4}
 /* il punto arancio della frase dell'anteprima del Sito Web (18/11 sera): al telefono è una tappa della pallina, che ci
    scende dentro dall'alto e diventa lui. Si vede solo quando la pallina c'è (.qui, la mette il motore); lo schiacciamento
    del pongo va sul ::before (--sa-fo), perché il .sa-punto si sposta già con transform. Con «Riduci movimento» e da
@@ -392,7 +398,7 @@ html:not(.viaggio) .pt.pt-gradi{background:transparent}
 html.viaggio .t360-g{transition:color .12s linear}
 html.viaggio .t360.pieno .t360-g{color:var(--rec)}
 html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent;
-  background-image:linear-gradient(282deg,var(--rec) calc(var(--f)*140% - 40%),var(--av) calc(var(--f)*140%));
+  --w:0;background-image:linear-gradient(282deg,var(--av) calc(var(--w)*140% - 40%),var(--rec) calc(var(--w)*140%),var(--rec) calc(var(--f)*140% - 40%),var(--av) calc(var(--f)*140%));
   -webkit-background-clip:text;background-clip:text}
 .pt.pt-gradi{width:.335em;height:.335em;margin:0 .0025em 0 -.3325em;vertical-align:.37em}
 
@@ -2014,10 +2020,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* i punti arancio dentro i riquadri: la frase dell'anteprima del Sito Web e la foto profilo della chat */
   var saPunto = document.querySelector('#sito .sa-punto'), saEl = saPunto && saPunto.closest('.sa');
   var chatPt = document.querySelector('#va .chat-logo-pt'), chatEl = chatPt && chatPt.closest('.chat');
+  /* (18/11 notte) a chat finita la pallina passa anche dal pallino del riepilogo (6d): CHATSEG il tratto foto profilo →
+     «Virtual Assistant.», RIE il pallino, PD la pallina disegnata dentro il riquadro della chat (sopra la chat, tagliata
+     dal bordo: con quella di sempre, che sta dietro, ne fa una sola anche a cavallo del bordo) */
+  var CHATSEG = null, RIE = null, PD = null;
   var mqColonna = matchMedia('(max-width:1023px)');   /* i pacchetti uno sotto l'altro: i loro titoli sono tappe */
   var vh = innerHeight, V0 = vh, Yin = 0, Yout = 0, Rm = 0, Gmin = 0, Smin = 0, Lmin = 0, PASSO = 1, RAGGIO = 22;
   var xM = 0, maxS = 0, larghezza = 0, hT = 60, FR = 0;
-  var DOT = 7, SEG = [], seduto = null, ATTESA = null, FIN = null, GRADI = null, DENTRO = [], BINg = null;
+  var DOT = 7, SEG = [], seduto = null, ATTESA = null, FIN = null, GRADI = null, RAC = null, DENTRO = [], BINg = null;
   var APosto = null;
 
   function offsetIn(el, anc){ var x = 0, y = 0; while (el && el !== anc) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x: x, y: y }; }
@@ -2072,8 +2082,6 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      statico: per le misure (il treno alla fine della sua corsa) */
   function viaPunti(g, y, statico){
     var a = g.da, b = g.a2, L = g.corsia, ax = statico && a.live ? (a.x2 || a.x) : sx(a), ay = statico && a.live ? a.ly : sy(a, y), sg;
-    /* dal «°» al logo dei Partner: giù nello spazio tra il titolo e la frase sotto, a sinistra fuori dalla card, giù */
-    if (a === GRADI && b === FIN && a.sotto != null) { sg = a.sotto - y; return [[ax, ay], [ax, sg], [L, sg], [L, g.Wy]]; }
     if (b.riq) { var gy = b.riq.vuoto - y; return [[ax, ay], [L, ay], [L, gy], [b.riq.cx, gy], [b.riq.cx, b.riq.dentro - y]]; }
     if (b.dentro) {
       var py = b.porta.vuoto - y;
@@ -2166,19 +2174,41 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var D = { el: c[1], live: true, cop: true, dentro: true, lato: c[3], x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: q.width,
                 porta: { vuoto: t.riq.vuoto, left: t.riq.left, right: t.riq.right, bordo: t.riq.top + 5 } };
       D.inY = D.ly - Yin; D.outY = t.inY - Math.round(.13 * V0);   /* ci resta finché il titolo sotto è vicino */
+      /* la chat: più strada fino a «Virtual Assistant.» (anche dal riepilogo, a chat finita); il titolo si siede al 45% */
+      if (c[3] < 0) { t.inY = t.ly - Math.round(.45 * V0); D.outY = t.inY - Math.round(.40 * V0); }
       P.splice(k, 0, D); DENTRO.push(D);
     });
     if (saEl) saEl.classList.toggle('sa-tappa', DENTRO.some(function(d){ return d.el === saPunto; }));
     if (chatEl) chatEl.classList.toggle('chat-tappa', DENTRO.some(function(d){ return d.el === chatPt; }));
+    var chatTappa = DENTRO.some(function(d){ return d.el === chatPt; });
+    RIE = null; if (!chatTappa) CHATSEG = null;
+    var rd = chatEl && chatEl.querySelector('.chat-fine .chat-punto');
+    if (rd && chatTappa) {
+      RIE = { el: rd, live: true, cop: true, d: rd.getBoundingClientRect().width || 9, card: rd.closest('.chat-rie'), pan: chatEl.closest('.m') };
+      if (!PD && RIE.pan) { PD = document.createElement('i'); PD.className = 'punto punto-dentro'; PD.setAttribute('aria-hidden', 'true'); PD.innerHTML = '<svg viewBox="-20 -20 40 40" focusable="false"><path d="M20 0A20 20 0 1 1-20 0A20 20 0 1 1 20 0Z"/></svg>'; RIE.pan.appendChild(PD); }
+    }
     /* il «°» della Campagna (GRADI): ci arriva da destra (da computer dall'alto), l'arancio dilaga su tutto il titolo; quando il
        «°» è salito al 38% dello schermo l'arancio comincia a ritirarsi con lo scorrimento (R1) e al 22% il puntino riparte.
        La fine (FIN): il puntino del logo nel titolo dei Partner, raggiunto dalla corsia di sinistra col taglio su «Veniello» */
     GRADI = FIN = null;
     P.forEach(function(s){ if (s.el === gradiPt) GRADI = s; if (s.el === logoPt) FIN = s; });
+    RAC = null;
     if (GRADI) {
       var cq = GRADI.el.closest('.pacchetto').getBoundingClientRect();
       if (!colonna) GRADI.daSopra = cq.top + y0 - 56;
-      GRADI.outY = GRADI.ly - Math.round(.22 * V0); GRADI.R1 = Math.round(.16 * V0); GRADI.cardL = cq.left;
+      /* (18/11 notte, correzione del ritiro) quando il «°» è salito al 38% dello schermo il puntino lascia il «°» e il bianco
+         torna da destra verso sinistra su tutte e due le righe insieme (spazzata, R1 di scorrimento: le due righe arrivano
+         al bordo sinistro nello stesso momento); alla fine l'arancio si riunisce in pallina a sinistra del titolo (RAC),
+         nello spazio della card accanto alla «C» e alla «P», e da lì scende a sinistra fino al logo dei Partner */
+      GRADI.outY = GRADI.ly - Math.round(.38 * V0); GRADI.R1 = Math.round(.16 * V0); GRADI.cardL = cq.left;
+      var pezzi = parole360.concat([t360.querySelector('.t360-g')]).filter(Boolean).map(function(el){ var q = el.getBoundingClientRect(); return { el: el, l: q.left, r: q.right, t: q.top, b: q.bottom }; });
+      var righe = [];
+      pezzi.forEach(function(pz){ var k = -1; righe.forEach(function(R, j){ if (Math.abs(R.t - pz.t) < 8) k = j; }); if (k < 0) { righe.push({ t: pz.t, b: pz.b, l: pz.l, r: pz.r }); k = righe.length - 1; } var R = righe[k]; R.l = Math.min(R.l, pz.l); R.r = Math.max(R.r, pz.r); R.b = Math.max(R.b, pz.b); pz.riga = k; });
+      GRADI.spazza = { pezzi: pezzi, righe: righe };
+      var sx0 = Math.min.apply(null, righe.map(function(R){ return R.l; })), ry0 = righe[0], ry1 = righe[righe.length - 1];
+      RAC = { raccolta: true, x: sx0 - Math.min(16, (sx0 - cq.left) / 2), ly: ((ry0.t + ry0.b) / 2 + (ry1.t + ry1.b) / 2) / 2 + y0, d: DOT, cardL: cq.left };
+      RAC.inY = GRADI.outY + GRADI.R1; RAC.outY = RAC.inY + Math.round(.04 * V0);
+      P.splice(P.indexOf(GRADI) + 1, 0, RAC);
     }
     if (FIN) {
       FIN.corsiaS = Math.max(8, (GRADI ? GRADI.cardL : FIN.el.closest('.wrap').getBoundingClientRect().left + 24) - 22);
@@ -2226,13 +2256,13 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     for (i = 0; i < n - 1; i++) {
       A = seq[i]; B = seq[i+1];
       if (A === BC && B === BT) continue;   /* la discesa sul binario ha i suoi tempi (palco fermo) */
-      if (A === BT || A.dentro) continue;   /* il tratto «bin» e l'uscita dai punti dentro i riquadri hanno i loro */
+      if (A === BT || A.dentro || A === GRADI) continue;   /* il tratto «bin», l'uscita dai punti dentro i riquadri e la spazzata hanno i loro */
       if (A.ap) { if (B.inY < A.outY + Gmin) B.inY = A.outY + Gmin; continue; }
       var st = strada(A, B), G = B.inY - A.outY;
       var serve = Math.min(V0 * (B.dentro ? .5 : .66), st.v + st.a + 40);   /* verso un punto dentro un riquadro: un po' più svelto */
       if (G >= serve) continue;
       var manca = serve - G;
-      var stA = A === GRADI ? 0 : Math.max(0, A.outY - A.inY - Smin);   /* il «°» tiene il suo tempo (l'arancio che si ritira) */
+      var stA = A === RAC ? 0 : Math.max(0, A.outY - A.inY - Smin);   /* la pallina riformata a sinistra del titolo tiene il suo tempo */
       var stB = Math.max(0, B.outY - B.inY - Smin); if (i + 1 === n - 1) stB = Math.max(0, Math.min(stB, maxS - 1 - B.inY));
       var dA = Math.min(manca / 2, stA), dB = Math.min(manca - dA, stB);
       dA = Math.min(stA, manca - dB);
@@ -2248,12 +2278,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       SEG.push({ a: s.inY, b: s.outY, k: 'seduto', s: s, attesa: s === BT && BIN ? BIN.attesa : null });
       if (s === BC && nx === BT) SEG.push({ a: s.outY, b: nx.inY, k: 'discesa', da: s, a2: nx });
       else if (s === BT && BIN) SEG.push(BIN);
+      else if (s.dentro && s.lato < 0) SEG.push(CHATSEG = { a: s.outY, b: nx.inY, k: 'esceChat', da: s, a2: nx, modo: CHATSEG && CHATSEG.dentro ? CHATSEG.modo : null, dentro: !!(CHATSEG && CHATSEG.dentro) });
       else if (s.dentro) SEG.push({ a: s.outY, b: nx.inY, k: 'esceDentro', da: s, a2: nx });
+      else if (s === GRADI && nx === RAC) SEG.push({ a: s.outY, b: nx.inY, k: 'spazza', da: s, a2: nx });
       else if (s.ap) SEG.push({ a: s.outY, b: nx.inY, k: 'scende', da: s, a2: nx, corsia: s.x > fineRighe(nx.el) + 24 ? s.x : xM });
       else {
         var sd = strada(s, nx), gv = sd.g; gv.a = s.outY; gv.b = nx.inY; gv.k = 'viaggio';
         var kk = Math.min(1, (gv.b - gv.a - 30) / (sd.v + sd.a)); gv.Lv = Math.max(40, sd.v * kk); gv.La = Math.max(40, sd.a * kk);
-        if (s === GRADI) gv.cardL = GRADI.cardL;
+        if (s === RAC) gv.cardL = RAC.cardL;
         SEG.push(gv);
       }
     }
@@ -2276,9 +2308,28 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
   function punta(g, yp, y){
     var t = clamp((yp - g.a) / Math.max(1, g.b - g.a), 0, 1), s, e, p, A, B;
-    if (g.k === 'seduto' || g.k === 'fermo') { s = g.s; return { x: sx(s), y: sy(s, y), d: s.d, s: g.k === 'seduto' && s.el ? s : null, attesa: g.attesa }; }
+    if (g.k === 'seduto' || g.k === 'fermo') { s = g.s; return { x: sx(s), y: sy(s, y), d: s.d, s: g.k === 'seduto' && s.el ? s : null, attesa: g.attesa, sopra: !!s.raccolta }; }
+    if (g.k === 'spazza') {
+      /* la spazzata del bianco su tutto il titolo (la disegna versaPasso): il puntino non c'è (piccolissimo, già dove si
+         riformerà); nell'ultimo quinto l'arancio si riunisce in pallina a sinistra del titolo, sopra la card */
+      B = g.a2; var rf = t < .8 ? 0 : morbido((t - .8) / .2);
+      return { x: sx(B), y: sy(B, y), d: Math.max(.02, DOT * rf), sopra: true, raccogli: t >= .8, nascosto: t < .8 };
+    }
     if (g.k === 'bin') return binario(g, yp, y);
-    if (g.k === 'esceDentro') {
+    if (g.k === 'esceChat' && g.modo === 'rie' && RIE && RIE.el.isConnected) {
+      /* a chat finita: dalla foto profilo giù dritto fin sopra il riepilogo, a sinistra fuori dal riepilogo (nella striscia
+         tra il bordo della chat e il riepilogo), giù e dentro il pallino da sinistra; ci si posa; poi giù a sinistra di
+         «Giulia · scelta delle fedi», a destra lungo il fondo del riquadro (sotto «Esempio · WhatsApp») fino alla x del punto
+         di «Virtual Assistant», giù fuori dal riquadro e nel punto. Disegnata anche dentro il riquadro (dentroPannello) */
+      A = g.da; B = g.a2;
+      var pr = RIE.pan.getBoundingClientRect(), cr = RIE.card.getBoundingClientRect(), rx = sx(RIE), ry = sy(RIE, y);
+      var colL = cr.left - Math.max(4, Math.min(10, (cr.left - pr.left) / 2)), su2 = cr.top - 14, band = pr.bottom - 8;
+      if (t < .32) { e = liscio(t / .32); p = traccia([[sx(A), sy(A, y)], [sx(A), su2], [colL, su2], [colL, ry], [rx, ry]], 12).at(e); return { x: p[0], y: p[1], d: lerp(A.d, RIE.d, e), dentroPannello: true }; }
+      if (t < .48) return { x: rx, y: ry, d: RIE.d, s: RIE, dentroPannello: true };
+      e = liscio((t - .48) / .52); p = traccia([[rx, ry], [rx, band], [sx(B), band], [sx(B), sy(B, y)]], 14).at(e);
+      return { x: p[0], y: p[1], d: lerp(RIE.d, B.d, e), dentroPannello: true };
+    }
+    if (g.k === 'esceDentro' || g.k === 'esceChat') {
       /* da un punto dentro un riquadro al titolo sotto: dietro al riquadro (non si vede) fino a poco sopra il fondo, alla x
          del punto del titolo, poi giù dritto fuori dal riquadro e nel punto */
       e = liscio(t); B = g.a2;
@@ -2309,7 +2360,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var a = g.da, b = g.a2, G = g.b - g.a, u = yp - g.a, p, e, t, r;
     var Lv = Math.min(g.Lv, G / 2), La = Math.min(g.La, G - Lv);
     if (u < Lv) {
-      e = liscio(u / Lv); var vp = viaPunti(g, y); p = traccia(vp, vp.r || RAGGIO).at(e); r = { x: p[0], y: p[1], d: lerp(a.d, DOT, a === GRADI ? clamp(e * 4, 0, 1) : e) };
+      e = liscio(u / Lv); var vp = viaPunti(g, y); p = traccia(vp, vp.r || RAGGIO).at(e); r = { x: p[0], y: p[1], d: lerp(a.d, DOT, e) };
       if (g.cardL != null && p[0] > g.cardL - 4) r.sopra = true;   /* uscendo dal «°»: sopra la card, finché ci è dentro */
       return r;
     }
@@ -2342,19 +2393,30 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
 
   /* l'arancio che dilaga su tutto il titolo della Campagna quando il puntino è seduto nel «°»: prima su «360» (dal «°»
-     verso il «3»), poi «Campagna» e «Pubblicitaria» insieme; in tutto circa 1 s (indietro 0,6 s). Scorrendo ancora (quando
-     il «°» è salito al 38% dello schermo) si ritira con lo scorrimento al contrario: prima le due parole insieme, poi «360»
-     dentro il «°»; poi il puntino riparte. --f di ogni parola (0-1) lo disegna lo stile (.t360-w, sfumatura nelle lettere) */
+     verso il «3»), poi «Campagna» e «Pubblicitaria» insieme; in tutto circa 1 s (--f di ogni parola, a tempo). Il ritiro
+     (correzione del 18/11 notte) è legato allo scorrimento: quando il puntino lascia il «°» il bianco torna da destra verso
+     sinistra su tutte e due le righe insieme (--w di ogni parola: quanto ne è già tornato bianco, dalla sua destra), le due
+     righe arrivano al bordo sinistro nello stesso momento; il «°» torna normale subito (.pieno via). Tornando su il bianco
+     si ritira verso destra: l'arancio si riallarga da sinistra fino al «°». Lo disegna lo stile (.t360-w) */
   var VT = 0, VK = '', A360 = .42;
   function versaPasso(dt){
     if (!parole360.length || !GRADI || !t360) return false;
-    var su = seduto === GRADI, meta = su ? 1 : 0;
+    var yy = ys === null ? scrollY : ys, su = seduto === GRADI, meta = su || yy >= GRADI.outY ? 1 : 0;
     if (VT !== meta) VT = meta > VT ? Math.min(1, VT + dt / 1000) : Math.max(0, VT - dt / 600);
-    var sc = GRADI.R1 ? clamp((GRADI.outY - (ys === null ? scrollY : ys)) / GRADI.R1, 0, 1) : 1;
-    var F = Math.min(VT, sc), f1 = clamp(F / A360, 0, 1), f2 = clamp((F - A360) / (1 - A360), 0, 1);
+    var f1 = clamp(VT / A360, 0, 1), f2 = clamp((VT - A360) / (1 - A360), 0, 1);
     f1 = f1 * f1 * (3 - 2 * f1); f2 = f2 * f2 * (3 - 2 * f2);
-    var k = f1.toFixed(4) + ' ' + f2.toFixed(4);
-    if (k !== VK) { VK = k; parole360.forEach(function(w){ w.style.setProperty('--f', (w === t360c ? f1 : f2).toFixed(4)); }); t360.classList.toggle('pieno', F > 0 || su); }
+    var q = GRADI.R1 ? clamp((yy - GRADI.outY) / (.8 * GRADI.R1), 0, 1) : 0, SP = GRADI.spazza;
+    var k = f1.toFixed(4) + ' ' + f2.toFixed(4) + ' ' + q.toFixed(4);
+    if (k !== VK) {
+      VK = k;
+      var fronte = SP ? SP.righe.map(function(R){ return R.r - q * (R.r - R.l); }) : [];
+      parole360.forEach(function(w){
+        var pz = SP && SP.pezzi.filter(function(z){ return z.el === w; })[0], wq = 0;
+        if (pz && q > 0) wq = clamp((pz.r - fronte[pz.riga]) / Math.max(1, pz.r - pz.l), 0, 1);
+        w.style.setProperty('--f', (w === t360c ? f1 : f2).toFixed(4)); w.style.setProperty('--w', wq.toFixed(4));
+      });
+      t360.classList.toggle('pieno', (VT > 0 || su) && q === 0);
+    }
     return VT !== meta;
   }
 
@@ -2504,7 +2566,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      passa per una molla smorzata */
   var TAU = 45, VMAX = 2.2, OM = 1 / 65;
   var ys = null, ys1 = 0, tPrima = 0, yPrima = 0, v1 = 0, v2 = 0, chPrima = null;
-  var LIBERO = false, LW = null, E = { x: 0, y: 0, d: 0, vx: 0, vy: 0, vd: 0 }, D = null, DV = { x: 0, y: 0, d: 0 }, Bp = null;
+  var RACC = false, LIBERO = false, LW = null, E = { x: 0, y: 0, d: 0, vx: 0, vy: 0, vd: 0 }, D = null, DV = { x: 0, y: 0, d: 0 }, Bp = null;
   function molla(da, dav, a, av, om, dt){ OM = om; dt = dt || 0; E.x = da.x - a.x + av.x * dt; E.y = da.y - a.y + av.y * dt; E.d = da.d - a.d + av.d * dt; E.vx = dav.x - av.x; E.vy = dav.y - av.y; E.vd = dav.d - av.d; }
   function sciogli(dt){
     var n = Math.max(1, Math.ceil(dt / 6)), h = dt / n, VS = 1.8;
@@ -2539,6 +2601,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var inAp = !!(APosto && ys < AP.arrivo);
     /* «Come funziona» si muove prima che il puntino legga dov'è il treno: stesso fotogramma */
     var binMuove = binPasso(y, dt);
+    if (CHATSEG) { var inCs = ys >= CHATSEG.a && ys < CHATSEG.b; if (inCs && !CHATSEG.dentro) { CHATSEG.dentro = true; CHATSEG.modo = chatEl && chatEl.classList.contains('finita') ? 'rie' : 'nascosto'; } else if (!inCs) CHATSEG.dentro = false; }
     var g = bersaglio(ys, y);
     if (g) {
       var Bq = { x: g.x, y: g.y, d: g.d }, BV = Bp ? { x: (Bq.x - Bp.x) / dt, y: (Bq.y - Bp.y) / dt, d: (Bq.d - Bp.d) / dt } : { x: 0, y: 0, d: 0 };
@@ -2561,6 +2624,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       if (D) { DV = { x: (nx - D.x) / dt, y: (ny - D.y) / dt, d: (nd - D.d) / dt }; }
       D = { x: nx, y: ny, d: nd };
       formaPasso(dt, DV, sv);
+      /* l'arancio del titolo della Campagna si riunisce in pallina a sinistra: si raccoglie e diventa tonda */
+      if (g.raccogli && !RACC && !LIBERO) formaColpo(-1, 0, 1.4);
+      RACC = !!g.raccogli;
       /* sopra al sito: nell'apertura (finché è sul palco) e nell'ultimo arrivo, nel «°» della Campagna (la card lo coprirebbe) */
       var sopra = !LIBERO && !!g.sopra && Math.abs(E.x) + Math.abs(E.y) < 3;   /* non mentre la molla lo riporta sul percorso */
       if (APosto && inAp && AP.chiuso && ny - Math.max(nd / 2, FO.ext) < stageTopDi(APosto.scena, y) + APosto.alto) sopra = true;
@@ -2574,6 +2640,16 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         if (LINEA.on) { LINEA.on = false; formaColpo(LINEA.dir, 0, 1.3); }   /* finito il taglio: torna tonda e si schiaccia */
         if (!LIBERO && fermaMolla() && g.s && (formaFerma() || coperto(g.s, g.x, g.y))) { formaDisegna(nd); siedi(g.s); formaSuPosto(g.s); }
         else { metti(nx, ny, nd); formaDisegna(nd); }
+      }
+      if (!seduto) punto.classList.toggle('su', !g.nascosto);   /* durante la spazzata del bianco il puntino non c'è */
+      if (PD) {
+        var dp = !!g.dentroPannello && !LIBERO && punto.classList.contains('su');
+        PD.classList.toggle('su', dp);
+        if (dp) {
+          var pr2 = PD.parentNode.getBoundingClientRect(), pp = PD.firstChild.firstChild, ft = fPath.getAttribute('transform');
+          PD.style.transform = 'translate3d(' + (nx - nd / 2 - pr2.left).toFixed(2) + 'px,' + (ny - nd / 2 - pr2.top).toFixed(2) + 'px,0) scale(' + (nd / 40).toFixed(4) + ')';
+          pp.setAttribute('d', fPath.getAttribute('d')); if (ft) pp.setAttribute('transform', ft); else pp.removeAttribute('transform');
+        }
       }
     }
     var versa = versaPasso(dt);
@@ -2697,7 +2773,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   if (ridotto || !('IntersectionObserver' in window)) return;
 
   /* pronta = animazioni attaccate e ferme a 0 (si vede l'inizio: la chat vuota); gira; pausa */
-  function pronta(c){ c.classList.remove('anima'); void c.offsetWidth; c.classList.add('anima', 'ferma'); c._fase = 'pronta'; }
+  function pronta(c){ c.classList.remove('anima', 'finita'); void c.offsetWidth; c.classList.add('anima', 'ferma'); c._fase = 'pronta'; }
+  /* (18/11 notte, anteprima N) finita: il riepilogo è arrivato al centro (lo legge il puntino che viaggia, per passarci) */
+  chat.forEach(function(c){ c.addEventListener('animationend', function(e){ if (e.animationName === 'chat-fine-va') c.classList.add('finita'); }); });
   function gira(c){ c.classList.remove('ferma'); c._fase = 'gira'; }
   function pausa(c){ c.classList.add('ferma'); c._fase = 'pausa'; }
   /* quanta parte della conversazione (dall'alto fino al riepilogo) è dentro lo schermo, da 0 a 1 */
