@@ -233,9 +233,11 @@ html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec
 html:not(.viaggio) .treno{display:none}
 @media (min-width:900px){.treno{display:none}} /* da computer il puntino non fa da treno (vedi il motore) */
 @media (max-width:899px){
-  /* il palco è alto quanto il suo contenuto e si ferma a metà schermo solo mentre le carte scorrono (0,8 schermi) */
-  .binario::after{content:"";display:block;height:80svh}
-  .binario-stage{position:sticky;top:var(--bin-top,76px);overflow:hidden;padding-bottom:8px}
+  /* (19/11 notte) niente palco fermo: la sezione scorre con la pagina; le carte si passano di lato (il dito in verticale
+     fa scorrere la pagina: pan-y; in orizzontale le prende lo script). Le carte vicine spuntano ai lati */
+  .binario-stage{position:relative;overflow:hidden;padding-bottom:8px}   /* relative: resta il riferimento delle misure (offsetIn) */
+  html.viaggio .vagoni{touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+  html.viaggio .vagoni.tira{cursor:grabbing}
 }
 @media (min-width:900px){
   .binario-testa,.vagoni,.rotaia{max-width:var(--max);margin-left:auto;margin-right:auto}
@@ -1448,8 +1450,6 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function suMomento(y, M){ for (var i = 0; i < M.length; i++) if (Math.abs(M[i] - y) <= 2) return true; return false; }
   function scorri(y){ html.style.scrollBehavior = 'auto'; window.scrollTo(0, y); }
   function libera(){ html.style.scrollBehavior = ''; }
-  /* (19/11 sera) le fermate del palco di «Come funziona» (le dà il motore del puntino; null da computer) */
-  function come(){ var c = API.come && API.come(); return c && c.M && c.M.length === 3 ? c : null; }
   /* curve morbide (seno, come il resto del puntino): la velocità più alta è 1,6 volte la media (con le cubiche era 3) */
   function curvaIO(t){ return .5 - .5 * Math.cos(Math.PI * t); }
   function curvaO(t){ return Math.sin(Math.PI / 2 * t); }
@@ -1503,18 +1503,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     ditoGiu = true; inerzia = null;
     if (spento || !A) return;
     if (e.touches.length !== 1) { tocco = null; return; }
-    var y = scrollY, M = momenti(), C = come(), z = 'ap', b0 = tw ? tw.a : y, cs = null;
-    /* (19/11 sera) il palco di «Come funziona»: dentro (tra la carta 01 e la 03) un colpo di dito = una carta; poco prima
-       (dalla fine dell'apertura) un colpo in giù porta alla 01, poco dopo (mezzo schermo) un colpo in su alla 03 */
-    if (C) {
-      if (b0 >= C.M[0] - 2 && b0 <= C.M[2] + 2) cs = 'dentro';
-      else if (!tw && b0 < C.M[0] && b0 >= Math.max(M[3] - 2, C.M[0] - A.V)) cs = 'sopra';
-      else if (!tw && b0 > C.M[2] && b0 <= C.M[2] + .6 * A.V) cs = 'sotto';
-    }
-    if (cs === 'dentro') { M = C.M; z = 'come'; }
-    else if (!cs && y > M[3] + .5 * A.V && !tw) { tocco = null; return; }   /* fuori dall'apertura (e oltre il mezzo schermo dopo): scorrimento normale */
-    var corsa = !!tw, base = b0; ferma();
-    tocco = { fy: e.touches[0].clientY, s0: y, base: base, corsa: corsa, M: M, z: z, cs: cs, C: C, deciso: false, p: [[performance.now(), e.touches[0].clientY]] };
+    if (e.target && e.target.closest && e.target.closest('#vagoni')) { tocco = null; return; }   /* (19/11 notte) sulle carte di «Come funziona» */
+    var y = scrollY, M = momenti();
+    if (y > M[3] + .5 * A.V && !tw) { tocco = null; return; }   /* fuori dall'apertura (e oltre il mezzo schermo dopo): scorrimento normale */
+    var corsa = !!tw, base = tw ? tw.a : y; ferma();
+    tocco = { fy: e.touches[0].clientY, s0: y, base: base, corsa: corsa, M: M, deciso: false, p: [[performance.now(), e.touches[0].clientY]] };
   }, { passive: true });
   addEventListener('touchmove', function(e){
     if (!tocco) return;
@@ -1523,12 +1516,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var fy = e.touches[0].clientY, dy = tocco.fy - fy;   /* > 0: verso il basso della pagina */
       if (!tocco.deciso) {
         if (!dy) return;
-        if (tocco.cs === 'sopra' || tocco.cs === 'sotto') {
-          if ((tocco.cs === 'sopra') === (dy > 0)) { tocco.M = tocco.C.M; tocco.z = 'come'; }   /* verso il palco: alla prima carta che incontra */
-          else if (tocco.cs === 'sotto' || tocco.s0 > tocco.M[3] + .5 * A.V) { tocco = null; libera(); return; }   /* via dal palco: scorrimento normale */
-        }
-        if (tocco.s0 >= tocco.M[tocco.M.length - 1] - 2 && dy > 0 && !tocco.corsa) { tocco = null; libera(); return; }   /* in fondo all'apertura (o alla carta 03) e avanti: scorrimento normale */
-        if (tocco.z === 'come' && tocco.s0 <= tocco.M[0] + 2 && dy < 0 && !tocco.corsa) { tocco = null; libera(); return; }   /* dalla carta 01 in su: scorrimento normale */
+        if (tocco.s0 >= tocco.M[3] - 2 && dy > 0 && !tocco.corsa) { tocco = null; libera(); return; }   /* in fondo all'apertura e avanti: scorrimento normale */
         tocco.deciso = true;
         tocco.lo = Math.min(prima(tocco.base, tocco.M), tocco.s0); tocco.hi = Math.max(dopo(tocco.base, tocco.M), tocco.s0);
       }
@@ -1553,12 +1541,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       if (Math.abs(v) > .2) d = v > 0 ? 1 : -1;
       else { var m = y - tc.s0, l = m > 0 ? tc.hi - tc.s0 : tc.s0 - tc.lo; if (l > 0 && Math.abs(m) / l > .2) d = m > 0 ? 1 : -1; }
       var dest = d > 0 ? dopo(tc.base, tc.M) : d < 0 ? prima(tc.base, tc.M) : (tc.corsa ? tc.base : vicino(y, tc.M));
-      if (tc.z !== 'come' && tc.s0 > tc.M[3] + 2 && !tc.corsa && d >= 0) dest = y;   /* appena sotto l'apertura, un tocco leggero non sposta niente */
-      /* (19/11 sera) nelle carte di «Come funziona» la forza del colpo decide solo quanto è svelto il passaggio (0,35-0,8 s) */
-      if (tc.z === 'come' && ((tc.cs === 'sopra' && d <= 0) || (tc.cs === 'sotto' && d >= 0))) dest = y;   /* fuori dal palco, un colpo leggero non sposta niente */
-      var dd = Math.abs(dest - y);
-      if (tc.z === 'come' && dd >= 1) vai(dest, Math.abs(v) > .2 ? curvaO : curvaIO, Math.abs(v) > .2 ? Math.max(350, Math.min(800, 1.5708 * dd / Math.abs(v))) : 700);
-      else vai(dest, Math.abs(v) > .2 ? curvaO : curvaIO);
+      if (tc.s0 > tc.M[3] + 2 && !tc.corsa && d >= 0) dest = y;   /* appena sotto l'apertura, un tocco leggero non sposta niente */
+      vai(dest, Math.abs(v) > .2 ? curvaO : curvaIO);
     } catch (x) { spento = true; libera(); }
   }
   addEventListener('touchend', lascia, { passive: true });
@@ -1584,21 +1568,6 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     q.push([t, y]); while (q.length > 3 && t - q[1][0] > 80) q.shift();
     if (q.length < 3 || t - q[0][0] < 30) return;
     var v = (y - q[0][1]) / (t - q[0][0]);                   /* px al ms, < 0 se la pagina torna su */
-    /* (19/11 sera) entrando con la spinta nel palco di «Come funziona» (da sopra o da sotto): la prendiamo e la posiamo
-       sulla prima fermata che incontra (la carta 01 da sopra, la 03 da sotto), con la sua velocità, frenando */
-    var C = come();
-    if (C) {
-      var fC = null;
-      if (v > .25 && y < C.M[0] - 2 && y + v * TAU > C.M[0]) fC = C.M[0];
-      else if (v < -.25 && y > C.M[2] + 2 && y + v * TAU < C.M[2]) fC = C.M[2];
-      if (fC !== null) {
-        inerzia = null;
-        var vC = Math.abs(v), dC = Math.abs(fC - y), durC = Math.max(300, Math.min(900, 1.5708 * dC / vC)), kC = Math.min(3, vC * durC / dC);
-        fermaSpinta();
-        vai(fC, function(x){ return x * (kC + x * ((3 - 2 * kC) + x * (kC - 2))); }, durC, false, true);
-        return;
-      }
-    }
     var M = momenti(), f = M[3];
     if (v > -.25 || y + v * TAU > f) return;                 /* non torna su, o si ferma da sola prima dell'apertura */
     inerzia = null;
@@ -1624,13 +1593,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function aggancia(){
     if (tw || tocco || SENZA || spento || !A) return;
     if (ditoGiu) { clearTimeout(attesa); attesa = setTimeout(aggancia, 160); return; }
-    var y = scrollY, M = momenti(), C = come();
-    /* (19/11 sera) il palco di «Come funziona»: ferma tra due carte, alla carta dopo nella direzione; poco prima della 01
-       (la pallina che scende sul treno), scendendo, alla 01 */
-    if (C) {
-      if (y > C.M[0] + 2 && y < C.M[2] - 2 && !suMomento(y, C.M)) { vai(ultimaDir > 0 ? dopo(y, C.M) : prima(y, C.M), curvaIO); return; }
-      if (y > C.T + 2 && y < C.M[0] - 2 && ultimaDir > 0) { vai(C.M[0], curvaIO); return; }
-    }
+    var y = scrollY, M = momenti();
     if (y <= M[0] + 2 || y >= M[3] - 2 || suMomento(y, M)) return;
     vai(ultimaDir > 0 ? dopo(y, M) : prima(y, M), curvaIO);
   }
@@ -1954,10 +1917,6 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
   doc.classList.add('viaggio');
   if (AP) { AP.motore = true; AP.sveglia = function(){ chiedi(); }; }
-  /* (19/11 sera) le fermate del palco di «Come funziona» al telefono, per l'aggancio dell'apertura (un colpo di dito = una
-     carta): la carta 01 con la pallina su «Ci scrivi» (0,3 del palco fermo: prima scende sul treno), la 02 su «Anteprima»
-     (0,6), la 03 su «Online» (la fine del palco; da lì un colpo in giù libera la pagina) */
-  if (AP) AP.come = function(){ if (BN.pc || !(BN.R > 50)) return null; return { T: BN.T, M: fermateCome() }; };
 
   /* ── «Come funziona» (dal sito online, 17/11; riscritto senza GSAP il 18/11 per l'anteprima N).
         Telefono: il palco si ferma a metà schermo (sotto la testata) per 0,8 schermi e intanto le carte scorrono di lato
@@ -1981,8 +1940,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var bH = bSt.offsetHeight; BN.top = Math.round(Math.max(76, (innerHeight - bH) / 2)); bin.style.setProperty('--bin-top', BN.top + 'px');
       var cs = getComputedStyle(bin), pt = parseFloat(cs.paddingTop) || 0, pb = parseFloat(cs.paddingBottom) || 0;
       var bt = bin.getBoundingClientRect().top + y0;
-      BN.T = bt + pt - BN.top;                                  /* lo scorrimento a cui il palco si ferma */
-      BN.R = Math.max(1, bin.offsetHeight - pt - pb - bH);      /* quanto resta fermo (lo spazio dell'::after, 80svh) */
+      BN.T = bt + pt - BN.top;                                  /* lo scorrimento a cui il palco sarebbe a BN.top (riferimento dei posti) */
+      BN.R = 0;                                                 /* (19/11 notte) il palco non si ferma più */
       decidi.style.opacity = '';
     } else {
       vag.style.transform = ''; vg.forEach(function(v, i){ v.style.transform = ''; v.style.opacity = ''; num[i].style.transform = ''; });
@@ -1990,7 +1949,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       BN.a = r.top + y0 - .78 * innerHeight; BN.b = r.bottom + y0 - .45 * innerHeight;
       decidi.style.opacity = '';
     }
-    BN.cur = null; BN.ult = '';
+    BN.cur = null; BN.ult = '';   /* al telefono la carta scelta resta (BN.carta) */
   }
   /* (18/11, ritocchi pallina) le carte partono a 0,3 del palco fermo invece che a 0,1: prima il puntino scende da «Poi
      decidi» sul binario e sale sul treno (a 0,28); arrivano all'ultima a 0,88 (soste: 0-0,3 · 0,54-0,64 · da 0,88). Prima
@@ -2012,23 +1971,81 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
   /* un passo a ogni fotogramma del motore: insegue la posizione giusta con un po' di inerzia (come lo «scrub» di prima);
      restituisce true finché si muove */
-  /* (19/11, Niccolò: «troppo scattosa e veloce; più fluida ma che non si fermi a metà tra le schede») al telefono carte
-     e treno seguono lo scorrimento con le soste di prima (tappe: ferme fino a 0,3 · 0,54-0,64 · da 0,88 del palco fermo)
-     attraverso una molla morbida senza rimbalzo (circa mezzo secondo, al massimo una carta ogni 0,4 s): niente scatti a
-     tempo. Se la pagina si ferma tra due carte, dopo 0,13 s la fila aggancia da sola la carta più vicina (o quella verso
-     cui si andava) con la stessa molla; il treno, e la pallina che ci sta sopra, arrivano sulla stazione insieme alla
-     carta. Al primo scorrimento oltre la carta agganciata, o all'indietro, torna a seguire la pagina. Prima (18/11 notte):
-     a scatti di 0,3 s decisi dalle soglie 0,44 e 0,74 */
-  /* (19/11 sera, Niccolò: «servono 2 swipe per passare alla 3 scheda») carte e treno legati allo scorrimento, senza molla:
-     tra le fermate del palco (0,3 · 0,6 · 1 del palco fermo) la fila scorre in proporzione. Il passaggio da una carta
-     all'altra lo fa l'aggancio dell'apertura (AP.come): un colpo di dito = una carta, svelto quanto il colpo (0,35-0,8 s);
-     la pallina, seduta sul treno, scivola con lui nello stesso fotogramma */
-  function fermateCome(){ return [BN.T + .3 * BN.R, BN.T + .6 * BN.R, BN.T + BN.R].map(Math.round); }
+  /* (19/11 notte, Niccolò: «swipe orizzontale scorri tra i blocchi, swipe verticale scendi direttamente giù») al
+     telefono le carte non seguono più lo scorrimento: BN.cur è la carta (0-2, con le frazioni mentre si trascina o
+     passa). Un colpo di lato = una carta, mai due: si trascina al più fino alla carta accanto; al rilascio va alla carta
+     verso cui andava (colpo veloce, o più di un quinto della strada), altrimenti torna. Svelta quanto il colpo
+     (0,35-0,8 s; la curva parte alla velocità del dito e frena), lenta e morbida se si lascia piano (0,6 s). Un colpo
+     mentre passa ancora porta alla carta dopo quella verso cui va. Il treno (e la pallina seduta sopra) va con le carte
+     nello stesso fotogramma */
+  var CR = { da: 0, a: 0, t0: 0, dur: 0, curva: null }, PR = null, RUOTA = { s: 0, t: 0, fatto: false };
+  function curvaIO(t){ return .5 - .5 * Math.cos(Math.PI * t); }
+  function curvaO(t){ return Math.sin(Math.PI / 2 * t); }
+  function cartaVai(a, v){
+    a = Math.max(0, Math.min(2, a)); BN.carta = a;
+    var px = Math.abs(a - BN.cur) * (BN.passo || 300);
+    if (px < .5) { CR.dur = 0; BN.cur = a; chiedi(); return; }
+    var sv = Math.abs(v || 0);
+    CR.da = BN.cur; CR.a = a; CR.t0 = performance.now();
+    CR.dur = sv > .2 ? Math.max(350, Math.min(800, 1.5708 * px / sv)) : 600; CR.curva = sv > .2 ? curvaO : curvaIO;
+    chiedi();
+  }
+  function presaInizio(x, y){
+    if (BN.pc) return;
+    var base = CR.dur ? CR.a : Math.round(BN.cur == null ? (BN.carta || 0) : BN.cur);
+    PR = { x0: x, y0: y, base: base, c0: BN.cur == null ? base : BN.cur, dir: 0, p: [[performance.now(), x]] };
+  }
+  function presaMuovi(x, y, e){
+    if (!PR) return;
+    var dx = x - PR.x0, dy = y - PR.y0;
+    if (!PR.dir) {
+      if (Math.abs(dx) > 8 && Math.abs(dx) > 1.2 * Math.abs(dy)) { PR.dir = 1; CR.dur = 0; vag.classList.add('tira'); }
+      else if (Math.abs(dy) > 8) { PR = null; return; }   /* in verticale: la pagina scorre (al browser) */
+      else return;
+    }
+    if (e && e.cancelable) e.preventDefault();
+    PR.p.push([performance.now(), x]); if (PR.p.length > 8) PR.p.shift();
+    /* al più fino alla carta accanto (di quella verso cui si andava): un colpo non salta mai una carta */
+    BN.cur = Math.max(Math.max(0, PR.base - 1), Math.min(Math.min(2, PR.base + 1), PR.c0 - dx / (BN.passo || 300)));
+    chiedi();
+  }
+  function presaFine(){
+    if (!PR) return;
+    var pr = PR; PR = null; vag.classList.remove('tira');
+    if (!pr.dir) return;
+    var p = pr.p, b = p[p.length - 1], a = b, i;
+    for (i = p.length - 1; i >= 0; i--) { if (b[0] - p[i][0] > 100) break; a = p[i]; }
+    var v = b[0] > a[0] ? (b[1] - a[1]) / (b[0] - a[0]) : 0;   /* px al ms, > 0 verso destra (carta prima) */
+    if (performance.now() - b[0] > 120) v = 0;
+    var d = 0, m = BN.cur - pr.base;
+    if (Math.abs(v) > .2) d = v < 0 ? 1 : -1;
+    else if (Math.abs(m) > .2) d = m > 0 ? 1 : -1;
+    cartaVai(pr.base + d, v);
+  }
+  vag.addEventListener('touchstart', function(e){ if (e.touches.length === 1) presaInizio(e.touches[0].clientX, e.touches[0].clientY); else PR = null; }, { passive: true });
+  vag.addEventListener('touchmove', function(e){ if (e.touches.length === 1) presaMuovi(e.touches[0].clientX, e.touches[0].clientY, e); }, { passive: false });
+  vag.addEventListener('touchend', presaFine, { passive: true });
+  vag.addEventListener('touchcancel', presaFine, { passive: true });
+  /* il mouse (da computer con la finestra stretta): trascinando */
+  vag.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' || e.button !== 0) return; presaInizio(e.clientX, e.clientY); });
+  addEventListener('pointermove', function(e){ if (PR && e.pointerType === 'mouse') presaMuovi(e.clientX, e.clientY, e); });
+  addEventListener('pointerup', function(e){ if (e.pointerType === 'mouse') presaFine(); });
+  /* il trackpad di lato: una carta per gesto (i colpi della stessa spinta si contano una volta sola); la rotella in
+     verticale fa scorrere la pagina */
+  vag.addEventListener('wheel', function(e){
+    if (BN.pc || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    if (e.cancelable) e.preventDefault();
+    var ora = performance.now();
+    if (ora - RUOTA.t > 220) { RUOTA.s = 0; RUOTA.fatto = false; }
+    RUOTA.t = ora; RUOTA.s += e.deltaX;
+    if (!RUOTA.fatto && Math.abs(RUOTA.s) > 30) { RUOTA.fatto = true; cartaVai((CR.dur ? CR.a : Math.round(BN.cur || 0)) + (RUOTA.s > 0 ? 1 : -1), .8); }
+  }, { passive: false });
   function binPasso(y, dt){
     if (!BN.pc) {
-      var F = fermateCome(), p = y <= F[0] ? 0 : y <= F[1] ? (y - F[0]) / (F[1] - F[0]) : y < F[2] ? 1 + (y - F[1]) / (F[2] - F[1]) : 2;
-      BN.cur = p; binDisegna(p);
-      return false;
+      if (BN.cur === null) BN.cur = BN.carta || 0;
+      if (CR.dur && !PR) { var k = Math.min(1, (performance.now() - CR.t0) / CR.dur); BN.cur = CR.da + (CR.a - CR.da) * CR.curva(k); if (k >= 1) { CR.dur = 0; BN.cur = CR.a; } }
+      binDisegna(BN.cur);
+      return !!CR.dur;
     }
     var p = BN.pc ? c01((y - BN.a) / Math.max(1, BN.b - BN.a)) * 2 : tappe(c01((y - BN.T) / BN.R));
     if (BN.cur === null || Math.abs(p - BN.cur) > 1.2) BN.cur = p;
@@ -2278,9 +2295,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var o1 = offsetIn(rot, bSt), o2 = offsetIn(comePt, bSt), xs = bSt.getBoundingClientRect().left;
       var hC = comePt.closest('h2'), oh = offsetIn(hC, bSt), ov = offsetIn(vag, bSt);
       BT = { el: trenoPt, live: true, cop: true, scena: S, ly: BN.top + o1.y + 5.5, x: xs + o1.x + BN.rR, x2: xs + o1.x + BN.rW - BN.rR, fine: xs + o1.x + BN.rW, d: 13,
-             inY: S.T + .28 * S.R, outY: S.T + S.R + Math.round(.06 * V0) };   /* (verifica) su «Online» anche un tratto dopo la fine del palco */
+             inY: 0, outY: 0 };
+      /* (19/11 notte) niente più palco fermo (S.R = 0: i posti del palco scorrono con la pagina). «Poi decidi» quando il
+         titolo è tra il 78% e il 64% dello schermo, giù sul treno in 0,14 schermi di scorrimento (con le carte a metà
+         schermo è già sul treno: si possono passare con lei sopra), sul treno finché il binario sale al 32% */
+      BT.outY = S.T + BT.ly - Yout;
       BC = { el: comePt, scena: S, ly: BN.top + o2.y + comePt.offsetHeight / 2, x: xs + o2.x + comePt.offsetWidth / 2, d: comePt.offsetWidth };
-      BC.inY = S.T + BC.ly - Yin; BC.outY = S.T - Math.round(.06 * V0);
+      BC.inY = S.T + BC.ly - Math.round(.78 * V0); BC.outY = S.T + BC.ly - Math.round(.64 * V0);
+      BT.inY = Math.min(BC.outY + Math.round(.14 * V0), BT.outY - 40);
       BC.vuoto = BN.top + (oh.y + hC.offsetHeight + ov.y) / 2;   /* tra il titolo e le carte */
       BC.xl = Math.min(BT.x, xs + (parseFloat(getComputedStyle(vag).paddingLeft) || 24) + BN.x0 - 10);   /* a sinistra della carta 01 */
     }
@@ -2299,13 +2321,15 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
        dentro lungo la riga. Il titolo dopo si siede quindi più in basso del solito (inY = ly − M + La) */
     var BIN = null, iBT = seq.indexOf(BT); BINg = null;
     if (BT && iBT >= 0 && seq[iBT + 1]) {
-      var nb = seq[iBT + 1], xr = Math.min(xM, BT.fine + 12), M = Math.round(Math.min(.88 * V0, BT.ly + .12 * V0)), Lab = clamp(.7 * Math.abs(xr - nb.x), 50, 100);
+      /* M: almeno 0,12 schermi sotto la riga del binario com'è quando la pallina se ne stacca, e non sopra il 62% dello
+         schermo (la sosta in «…scegliere» resta lunga com'era col palco fermo) */
+      var nb = seq[iBT + 1], xr = Math.min(xM, BT.fine + 12), M = Math.round(Math.min(.88 * V0, Math.max(S.T + BT.ly - BT.outY + .12 * V0, .62 * V0))), Lab = clamp(.7 * Math.abs(xr - nb.x), 50, 100);
       var ym = Math.max(nb.ly - M, BT.outY + 80); M = nb.ly - ym;
       nb.inY = ym + Lab; if (nb.outY < nb.inY + 40) nb.outY = nb.inY + 40;
       var vecchio = BINg;
       BIN = BINg = { k: 'bin', a: BT.outY, b: nb.inY, da: BT, a2: nb, x0: BT.x2, row: BT.ly - (BT.outY - S.T - S.R), xr: xr, M: M, La: Lab, attesa: { x: xr, y: M } };
       /* un ricalcolo a metà dello stacco non lo fa ripartire da capo */
-      if (vecchio) ['via', 'u0', 'r0', 'xv', 'k1', 'k2', 'fr'].forEach(function(k){ BIN[k] = vecchio[k]; });
+      if (vecchio) ['via', 'u0', 'r0', 'xv', 'k0', 'k1', 'k2', 'fr'].forEach(function(k){ BIN[k] = vecchio[k]; });
     }
     for (i = 0; i < n - 1; i++) {
       A = seq[i]; B = seq[i+1];
@@ -2416,7 +2440,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
          giù a sinistra della carta 01 fino al binario e dentro il treno, fermo alla prima stazione */
       e = liscio(t); A = g.da; B = g.a2;
       var st = stageTopDi(A.scena, y), gy = st + A.vuoto, ty = sy(B, y);
-      p = traccia([[A.x, st + A.ly], [A.x + 14, st + A.ly], [A.x + 14, gy], [A.xl, gy], [A.xl, ty], [sx(B), ty]], 10).at(e);
+      p = traccia([[A.x, st + A.ly], [A.x + 14, st + A.ly], [A.x + 14, gy], [A.xl, gy], [A.xl, ty], [B.x, ty]], 10).at(e);
+      /* (19/11 notte) la strada si misura fino alla prima stazione (B.x): passando le carte la pallina non scivola lungo la
+         discesa; l'ultimo tratto, sulla riga del binario, si stira fino a dov'è il treno */
+      if (Math.abs(p[1] - ty) < .5 && p[0] > A.xl && B.x > A.xl + 1) p[0] = A.xl + (p[0] - A.xl) * (sx(B) - A.xl) / (B.x - A.xl);
       return { x: p[0], y: p[1], d: lerp(A.d, B.d, e), kmax: 1.4 };
     }
     return viaggio(g, yp, y);
@@ -2459,30 +2486,39 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var dt = 0; if (g.fr !== FR) { dt = BINt ? Math.min(50, ora - BINt) : 16; BINt = ora; g.fr = FR; }   /* il tempo passa una volta per fotogramma */
     var avanti = uM >= 0, T = g.da;
     if (avanti && !g.via) {
-      /* il treno non è ancora arrivato a «Online» (dito veloce): la pallina ci resta seduta finché non arriva */
-      if (!BN.pc && BN.cur < 2) return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa };
-      g.via = true; g.u0 = uM; g.r0 = sy(T, y); g.xv = sx(T); g.k1 = 0; g.k2 = 0;
+      /* (19/11 notte) le carte non vanno più da sole a «Online»: la pallina lascia il treno (che resta alla stazione della
+         carta) e corre lei sul binario fino a «Online» (k0), toccando le stazioni in ordine lungo la riga; poi lo stacco */
+      g.via = true; g.u0 = uM; g.r0 = sy(T, y); g.xv = sx(T); g.k0 = sx(T) >= T.x2 - .5 ? 1 : 0; g.k1 = 0; g.k2 = 0;
     }
     if (!g.via) return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa };
     /* lo stacco: un passo a destra sulla riga della stazione in 0,2 s (prima che la scritta «ONLINE», che sale col
        binario, gli arrivi sotto), poi giù fino a M in 0,4 s, o più svelta se il dito va più svelto; tornando su, a ritroso
        (19/11: 0,15 e 0,3 s prima, la pallina ora è un po' più lenta) */
-    if (avanti) {
+    /* la corsa sul binario: svelta (0,35 s per tutto il binario), o col dito se va più svelto; la riga è quella vera */
+    var Lr = Math.max(1, T.x2 - T.x), corsa = Math.max(.05, (T.x2 - (g.xv == null ? T.x : g.xv)) / Lr);
+    if (avanti && g.k0 < 1) {
+      g.k0 = Math.max(Math.min(1, g.k0 + dt / (350 * corsa)), clamp((uM - g.u0) / 40, 0, 1));
+      if (g.k0 >= 1) { g.r0 = sy(T, y); g.u0 = uM; }
+    }
+    else if (avanti) {
       g.k1 = Math.max(Math.min(1, g.k1 + dt / 200), clamp((uM - g.u0) / 16, 0, 1));   /* a tempo, o col dito se va più svelto */
       if (g.k1 >= 1) g.k2 = Math.max(Math.min(1, g.k2 + dt / 400), clamp((uM - g.u0 - 16) / 160, 0, 1));
     }
-    /* (19/11 notte) tornando su il ritorno sul treno va a tempo, ma è finito quando la pagina è 48 px prima della fine del
-       palco: entrando da sotto con un colpo di dito (la pagina si posa sulla carta 03, 58 px prima) la pallina è sul treno
-       insieme alla pagina (prima arrivava mezzo secondo dopo) */
+    /* tornando su il ritorno va a tempo (giù da M, il passo indietro fino a «Online», la corsa sul binario fino alla
+       stazione del treno), ma finisce comunque entro 72 px di scorrimento: tornando su di colpo la pallina è sul treno
+       insieme alla pagina */
     else if (g.k2 > 0) g.k2 = Math.max(0, Math.min(g.k2 - dt / 400, (uM + 24) / 24));
-    else { g.k1 = Math.max(0, Math.min(g.k1 - dt / 200, (uM + 48) / 24)); if (g.k1 <= 0) { g.via = false; return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa }; } }
-    var anima = (g.k1 > 0 && g.k1 < 1) || (g.k2 > 0 && g.k2 < 1);
+    else if (g.k1 > 0) g.k1 = Math.max(0, Math.min(g.k1 - dt / 200, (uM + 48) / 24));
+    else { g.k0 = Math.max(0, Math.min(g.k0 - dt / (350 * Math.max(.05, (T.x2 - sx(T)) / Lr)), (uM + 72) / 24)); if (g.k0 <= 0 || sx(T) >= T.x2 - .5) { g.via = false; return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa }; } }
+    var anima = (g.k0 > 0 && g.k0 < 1) || (g.k1 > 0 && g.k1 < 1) || (g.k2 > 0 && g.k2 < 1);
+    /* sul binario: dalla stazione del treno (andando: dov'era quando è partita; tornando: dov'è ora) a «Online», lungo la riga */
+    if (g.k0 < 1) { e = liscio(g.k0); return { x: lerp(avanti ? g.xv : sx(T), T.x2, e), y: sy(T, y), d: T.d, attesa: g.attesa, kmax: 1.4, anima: anima }; }
     /* l'ultimo tratto lungo la riga del titolo si legge dallo scorrimento vero (la riga è dove la mette la pagina): prima,
        tornando su col ritardo, a pagina ferma passava dalla riga all'attesa con un salto (fino a 58 px, controllo delle
        fermate del 19/11 sera) */
     var uR = y - g.a;
     if (avanti && uR >= Ld && g.k2 >= 1) { e = liscio(clamp((uR - Ld) / g.La, 0, 1)); return { x: lerp(g.xr, sx(b), e), y: sy(b, y), d: lerp(DOT, b.d, e), attesa: g.attesa, kmax: 1.4 }; }
-    var x0 = avanti ? g.xv : sx(T), y0 = avanti ? g.r0 : Math.min(g.r0, sy(T, y));
+    var x0 = T.x2;   /* lo stacco parte da «Online» (in fondo al binario) */
     if (g.k2 <= 0) { e = morbido(g.k1); return { x: lerp(x0, g.xr, e), y: lerp(avanti ? g.r0 : sy(T, y), g.r0, avanti ? 0 : e), d: lerp(T.d, DOT, e), attesa: g.attesa, kmax: 1.4, anima: anima }; }
     e = morbido(g.k2);
     return { x: g.xr, y: lerp(g.r0, Math.max(g.M, g.r0), e), d: DOT, attesa: g.attesa, kmax: 1.4, anima: anima };
