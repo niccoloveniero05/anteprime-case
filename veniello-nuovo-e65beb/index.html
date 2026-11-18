@@ -138,7 +138,7 @@ html,body{overscroll-behavior-y:none}
 .aggiorna.su{opacity:1}
 .aggiorna svg{display:block;width:40px;height:40px;overflow:visible}
 .aggiorna .ag-arco{fill:none;stroke-linecap:round}
-.aggiorna.gira svg{animation:ag-gira .75s linear infinite}
+.aggiorna.gira svg{animation:ag-gira 1.2s linear infinite}
 @keyframes ag-gira{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.aggiorna.gira svg{animation:none}}
 html.viaggio .punto.su{opacity:1}
@@ -3119,7 +3119,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      SOGLIA px di dito. Sul fondo arancio della copertina l'arancio si confondeva: appena lascia il punto diventa bianca
      (il colore del testo), e torna arancio rientrando.
    · Oltre la soglia, lasciando: gira come lo spinner dei siti e la pagina si ricarica (con «Riduci movimento» il
-     cerchietto resta fermo). Prima della soglia: torna pallina nel punto, morbida (0,3 s).
+     cerchietto resta fermo). Prima della soglia: torna pallina nel punto, con calma come all'andata.
    · Il «tira per aggiornare» del browser è spento in CSS (overscroll-behavior-y); dove non c'è, questo non parte (si
      vedrebbero due cerchietti). Da computer niente. ===== */
 (function(){
@@ -3129,7 +3129,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var pal = ag.querySelector('.ag-pallina'), arco = ag.querySelector('.ag-arco');
   var fermo = false; try { fermo = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (x) {}
   var SOGLIA = 150, R = 10, W = 2.2, CIRC = 2 * Math.PI * R, ARANCIO = [255, 90, 31], BIANCO = [245, 244, 239];
-  var G = null, torna = 0, via = false, ult = 0;
+  var G = null, via = false, vis = 0, obi = 0, raf = 0, tPrec = 0, dopo = null, VMAX = 1.1;   /* vis: dove si vede; obi: dove lo porta il dito; VMAX: strada al secondo, al massimo */
   function c01(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
   function liscio(t){ return .5 - .5 * Math.cos(Math.PI * t); }
   function pronta(){ var A = window.APERTURA; return scrollY <= .5 && !html.classList.contains('logo-in') && !(A && A.guida && A.guida()); }
@@ -3160,7 +3160,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* p: 0 = pallina nel punto, 1 = cerchietto pieno sopra il titolo */
   function disegna(p){
     var S = strada(), q = fermo ? 1 : liscio(p), xy = fermo ? S.p[S.p.length - 1] : punto(S.p, q);
-    var m = fermo ? 1 : c01(p / .35), r0 = S.d0 / 2, col = c01(p / .3);
+    var m = fermo ? 1 : c01((p - .12) / .63), r0 = S.d0 / 2, col = c01(p / .3);
     var C = ARANCIO.map(function(v, i){ return Math.round(v + (BIANCO[i] - v) * col); }), cs = 'rgb(' + C.join(',') + ')';
     ag.style.transform = 'translate3d(' + (xy[0] - 20).toFixed(2) + 'px,' + (xy[1] - 20).toFixed(2) + 'px,0)';
     pal.setAttribute('r', (r0 * (1 - m)).toFixed(2)); pal.style.fill = cs;
@@ -3170,22 +3170,39 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     ag.classList.toggle('su', p > 0); rp.style.visibility = p > 0 ? 'hidden' : '';
   }
   function finisci(){ ag.classList.remove('su', 'gira'); rp.style.visibility = ''; }
+  /* (18/11 notte, Niccolò: «più lenta sia ad arrivare che mentre si trasforma») quello che si vede insegue il dito con
+     calma: al massimo VMAX di strada al secondo (la salita intera in circa un secondo) e frena arrivando */
+  function anima(){
+    raf = 0;
+    var ora = performance.now(), dt = Math.min(.05, (ora - tPrec) / 1000); tPrec = ora;
+    var d = obi - vis, passo = d * (1 - Math.exp(-dt * 8)), lim = VMAX * dt;
+    if (passo > lim) passo = lim; else if (passo < -1.6 * lim) passo = -1.6 * lim;
+    vis += passo; if (Math.abs(obi - vis) < .002) vis = obi;
+    disegna(vis);
+    if (vis !== obi) raf = requestAnimationFrame(anima);
+    else if (dopo) { var f = dopo; dopo = null; f(); }
+  }
+  function verso(p, poi){
+    obi = p; dopo = poi || null;
+    if (raf) return;
+    if (vis === obi) { if (dopo) { var f = dopo; dopo = null; f(); } return; }
+    tPrec = performance.now(); raf = requestAnimationFrame(anima);
+  }
   function ricarica(){
-    via = true; disegna(1);
-    arco.style.strokeDasharray = (CIRC * .72).toFixed(2) + ' ' + CIRC.toFixed(2);   /* lo spinner: tre quarti di cerchio */
-    if (!fermo) ag.classList.add('gira');
-    setTimeout(function(){ location.reload(); }, 480);
+    via = true;
+    verso(1, function(){
+      arco.style.strokeDasharray = (CIRC * .72).toFixed(2) + ' ' + CIRC.toFixed(2);   /* lo spinner: tre quarti di cerchio */
+      if (!fermo) ag.classList.add('gira');
+      setTimeout(function(){ location.reload(); }, 900);
+    });
   }
-  function rientra(p0){
-    var t0 = performance.now(), mio = ++torna;
-    (function passo(){ if (mio !== torna) return; var k = c01((performance.now() - t0) / 420), p = p0 * (1 - liscio(k)); disegna(p); if (k < 1) requestAnimationFrame(passo); else finisci(); })();
-  }
+  function rientra(){ verso(0, finisci); }
   addEventListener('touchstart', function(e){
     if (via || e.touches.length !== 1 || !pronta()) { G = null; return; }
-    torna++; G = { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: 0, p: 0 };
+    G = { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: 0, p: 0 };
   }, { passive: true });
   addEventListener('touchmove', function(e){
-    if (!G || e.touches.length !== 1) { if (G && G.dir) rientra(G.p); G = null; return; }
+    if (!G || e.touches.length !== 1) { if (G && G.dir) rientra(); G = null; return; }
     var dx = e.touches[0].clientX - G.x, dy = e.touches[0].clientY - G.y;
     if (!G.dir) {
       if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
@@ -3193,14 +3210,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     }
     if (e.cancelable) e.preventDefault();
     G.p = c01(dy / SOGLIA);
-    var ora = performance.now(); if (ora - ult > 8) { ult = ora; disegna(G.p); }
+    verso(G.p);
   }, { passive: false });
   function lascia(){
     if (!G) return; var g = G; G = null; if (!g.dir) return;
-    if (g.p >= 1) ricarica(); else if (g.p > 0) rientra(g.p); else finisci();
+    if (g.p >= 1) ricarica(); else rientra();
   }
   addEventListener('touchend', lascia, { passive: true });
-  addEventListener('touchcancel', function(){ if (G && G.dir) rientra(G.p); G = null; }, { passive: true });
+  addEventListener('touchcancel', function(){ if (G && G.dir) rientra(); G = null; }, { passive: true });
 })();
 </script>
 <script>
