@@ -179,6 +179,7 @@ html:not(.viaggio) .linea-v,html:not(.viaggio) .linea-curva{display:none}
    titolo e diventa un cerchietto sottile che si riempie; oltre la soglia gira e la pagina si ricarica (script «Tira giù
    per aggiornare»). Sotto la testata. Il «tira per aggiornare» del browser è spento, altrimenti i cerchietti sarebbero due */
 html,body{overscroll-behavior-y:none}
+html.ios .testata.vetro-spento::before{-webkit-backdrop-filter:none;backdrop-filter:none}   /* (20/11 notte) iPhone */
 html.ap-presa .apertura{touch-action:none}   /* (20/11 sera) iPhone: nell'apertura scorre solo il codice */
 .aggiorna{position:fixed;left:0;top:0;width:40px;height:40px;z-index:49;pointer-events:none;opacity:0;will-change:transform}
 .aggiorna.su{opacity:1}
@@ -1605,6 +1606,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   'use strict';
   var html = document.documentElement;
   var ridotto = false; try { ridotto = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  var IOS_AP = window.__IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (IOS_AP) html.classList.add('ios');
   var sez = document.getElementById('inizio'), palco = document.getElementById('ap-palco'), wrap = document.getElementById('copertina-wrap');
   var dot = document.getElementById('rec-punto'), disco = document.getElementById('ap-disco'), lv = document.getElementById('ap-logo'), apt = document.getElementById('ap-pt');
   var testata = document.getElementById('testata');
@@ -1648,7 +1651,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var t = np * LVT.S1, ev = ioc(t / LVT.V), sc = Math.pow(L.S, 1 - ev), c = [lerp(L.sv[0], L.cv[0], ev), lerp(L.sv[1], L.cv[1], ev)], ov = 1;
     if (b < 1) { var bv = dolce(seg(b, .55, 1)); sc *= 1 + .07 * (1 - bv); ov = bv; }   /* la V si posa da appena più grande */
     scrivi(lvV, 'transform', 'translate(' + (c[0] - L.cv[0]).toFixed(2) + 'px,' + (c[1] - L.cv[1]).toFixed(2) + 'px) scale(' + sc.toFixed(4) + ')');
-    scrivi(lvV, 'webkitTextStrokeWidth', lerp(.0467, .036, ev).toFixed(4) + 'em');
+    if (!IOS_AP) scrivi(lvV, 'webkitTextStrokeWidth', lerp(.0467, .036, ev).toFixed(4) + 'em');   /* (20/11 notte) iPhone: fisso */
     scrivi(lvV, 'opacity', ov < 1 ? ov.toFixed(3) : '');
     var a = [c[0] + sc * L.off[0], c[1] + sc * L.off[1]], ex = ioc(seg(t, LVT.D0, LVT.D1)), ey = ioc(seg(t, LVT.D0, LVT.DY));
     var dx = lerp(a[0], L.cp[0], ex), dy = lerp(a[1], L.cp[1], ey), dd = lerp(sc * .1733 * L.em, L.p.w, ex);
@@ -1759,7 +1762,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
        marchio piccolo via mentre il nome e il logo grandi sono a schermo, di nuovo quando la V è uscita del tutto in alto
        (19/11, verifica: prima tornava a 0,4 schermi dopo P, con la V ancora dietro la testata: due loghi insieme) */
     var f = ch ? 1 : 0, mv = y > .45 * A.m1 && y < A.P + A.vF ? 1 : 0;
-    if (f !== tst.f) { tst.f = f; testata.style.setProperty('--fondo', f); }
+    if (f !== tst.f) { tst.f = f; testata.style.setProperty('--fondo', f); testata.classList.toggle('vetro-spento', !f); }
     if (mv !== tst.m) { tst.m = mv; testata.classList.toggle('senza-marchio', !!mv); }
   }
 
@@ -1818,7 +1821,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* curve morbide (seno, come il resto del puntino): la velocità più alta è 1,6 volte la media (con le cubiche era 3) */
   function curvaIO(t){ return .5 - .5 * Math.cos(Math.PI * t); }
   function curvaO(t){ return Math.sin(Math.PI / 2 * t); }
-  function vai(dest, curva, dur, libero, presa){
+  function vai(dest, curva, dur, libero, presa){ if (window.DIAG) DIAG.vai++;
     var da = scrollY, mio = ++giro;
     if (Math.abs(dest - da) < 1) { tw = null; if (dest !== da) scorri(dest); libera(); return; }
     tw = { da: da, a: dest, t0: performance.now(), dur: dur || 1000 * Math.max(.85, Math.min(3.1, .6 + .78 * Math.abs(dest - da) / A.V)), c: curva || curvaIO, libero: !!libero,
@@ -1832,10 +1835,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* vero mentre è l'apertura a muovere la pagina (il dito preso o l'aggancio): lo scorrimento è già morbido, il motore
      del puntino lo segue da vicino invece di addolcirlo ancora (altrimenti restava indietro fino a 250 px e poi recuperava di corsa) */
   /* (la presa dell'inerzia che arriva da sotto no: lì la pagina andava già da sola e il motore la segue come sempre) */
+  API.yGuida = function(){ if (!IOS) return null; if (tw && !tw.libero && tw.messo != null) return tw.messo; if (tocco && tocco.deciso && tocco.yv != null) return tocco.yv; return null; };
   API.guida = function(){ return !!((tw && !tw.libero) || (tocco && tocco.deciso)); };
   API.avanza = function(){
     if (!tw) return false;
-    var ora = performance.now(), e = tw.messo != null ? scrollY - tw.messo : 0, k;
+    var ora = performance.now(), e = tw.messo != null ? scrollY - tw.messo : 0, k; if (window.DIAG) DIAG.e = Math.max(DIAG.e, Math.abs(e));
     if (tw.presa) {
       /* la presa dell'inerzia: la spinta del telefono si ferma al primo scrollTo (iPhone) o uno-due fotogrammi dopo
          (Chrome, che dopo il primo passo ne dà ancora uno). In un fotogramma in cui spinge ancora la curva aspetta e la
@@ -1851,19 +1855,26 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       tw.el += dt; k = Math.min(1, tw.el / tw.dur);
     } else {
       /* se nel frattempo la pagina l'ha spostata qualcun altro (un link, la tastiera), l'aggancio si fa da parte */
-      if (Math.abs(e) > 3) { esterno(); return false; }
+      if (IOS) {
+        tw.fuori = Math.abs(e) > Math.max(40, 3 * (tw.passo || 0)) ? (tw.fuori || 0) + 1 : 0;
+        if (tw.fuori >= 3) { esterno(); return false; }
+      } else if (Math.abs(e) > 3) { esterno(); return false; }
       k = Math.min(1, (ora - tw.t0) / tw.dur);
     }
     tw.cp = tw.c(k);
-    scorri(tw.da + (tw.a - tw.da) * tw.cp); tw.messo = scrollY;
-    if (k >= 1) { tw = null; libera(); return false; }
+    var yT = tw.da + (tw.a - tw.da) * tw.cp;
+    tw.passo = tw.messo != null ? Math.abs(yT - tw.messo) : 0;
+    scorri(yT); tw.messo = IOS ? yT : scrollY;
+    if (k >= 1) { tw = null; libera(); if (IOS) assesta(yT); return false; }
     return true;
   };
   function ferma(){ tw = null; giro++; }
+  /* (piano 19/11) iPhone: un ritorno indietro arrivato dopo l'ultimo passo non lascia la pagina accanto alla fine */
+  function assesta(y){ var n = 0; (function f(){ if (tw || tocco || ++n > 15) return; var d = Math.abs(scrollY - y); if (d > .5 && d < 80) { scorri(y); libera(); } requestAnimationFrame(f); })(); }
   /* l'aggancio si fa da parte perché la pagina l'ha spostata qualcun altro: la direzione resta quella in cui andava e
      si riparte a contare da qui (19/11, verifica: il primo passo di chi subentrava poteva essere di pochi px all'indietro
      e bastava a far tornare la pagina al momento prima) */
-  function esterno(){ ultimaDir = tw.a > tw.da ? 1 : -1; yUlt = scrollY; ferma(); libera(); }
+  function esterno(){ if (window.DIAG) DIAG.est++; ultimaDir = tw.a > tw.da ? 1 : -1; yUlt = scrollY; ferma(); libera(); clearTimeout(attesa); attesa = setTimeout(aggancia, 160); }
   addEventListener('touchstart', function(e){
     ditoGiu = true; inerzia = null; API.corsaAlTocco = !!tw;
     if (spento || !A) return;
@@ -1889,7 +1900,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       }
       if (e.cancelable) e.preventDefault();
       tocco.p.push([ts(e), fy]); if (tocco.p.length > 8) tocco.p.shift();
-      scorri(Math.max(tocco.lo, Math.min(tocco.hi, tocco.s0 + dy)));
+      tocco.yv = Math.max(tocco.lo, Math.min(tocco.hi, tocco.s0 + dy)); scorri(tocco.yv);
     } catch (x) { spento = true; tocco = null; libera(); }
   }
   [document.querySelector('.apertura'), document.getElementById('come')].forEach(function(el){ if (el) el.addEventListener('touchmove', mvAp, { passive: false }); });
@@ -2027,7 +2038,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var top=0;
   function avanzamento(){
     if(fermo||html.classList.contains('fermo'))return 0;
-    return Math.max(0,Math.min(1,(scrollY-top)/(SP*innerHeight)));
+    var AA=window.APERTURA,yv=AA&&AA.yGuida?AA.yGuida():null;
+    return Math.max(0,Math.min(1,((yv!=null?yv:scrollY)-top)/(SP*innerHeight)));
   }
   function pos(el){var x=0,y=0;while(el){x+=el.offsetLeft;y+=el.offsetTop;el=el.offsetParent}return [x,y]}
   var gl=null;
@@ -2686,7 +2698,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     abSveglia();
   }
   /* il dito sulle schede: come le carte di «Come funziona» (un colpo = una scheda, mai due) */
-  function abPresa(x, y){ if (!AB.on) return; var base = ABCR.dur ? ABCR.a : Math.round(AB.cur); ABPR = { x0: x, y0: y, base: base, c0: AB.cur, dir: 0, p: [[performance.now(), x]] }; }
+  function abPresa(x, y){ if (!AB.on) return; AB.tocco = performance.now(); var base = ABCR.dur ? ABCR.a : Math.round(AB.cur); ABPR = { x0: x, y0: y, base: base, c0: AB.cur, dir: 0, p: [[performance.now(), x]] }; }
   function abMuovi(x, y, ev){
     if (!ABPR) return;
     var dx = x - ABPR.x0, dy = y - ABPR.y0;
@@ -3597,6 +3609,24 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var gr = morbido(clamp((FX.k - .62) / .38, 0, 1)); OV = gr;
     return { x: p[0], y: p[1], d: lerp(g.d || DOT, FRD, gr), kmax: 1.4, anima: FX.k < 1 || (FX.d !== vuole) || ora < FX.vivo };
   }
+  /* (piano 19/11) l'ingresso nel binario 7g si completa (molla da dov'è, poi seduta) se si toccano le schede col binario
+     sullo schermo o se la pagina è ferma da 120 ms nella fascia d'ingresso; scorrendo resta legato allo scorrimento */
+  var ABIN = { preso: false, fermoDa: 0 };
+  function abEntra(g, y){
+    var seg = null, i;
+    if (g && GRADI && GRADI.ab && AB.on && !AB.pc) for (i = 0; i < SEG.length; i++) if (SEG[i].a2 === GRADI && SEG[i].k === 'viaggio') seg = SEG[i];
+    if (!seg || ys < seg.a || ys >= seg.b || LIBERO) { if (ABIN.preso) FX.salto = true; ABIN.preso = false; ABIN.fermoDa = 0; return g; }
+    var ora = performance.now(), ry = sy(GRADI, y), h2 = clamp(.15 * innerHeight, 40, .5 * (seg.b - seg.a)), banda = ys >= seg.b - h2;
+    var mano = !!ABPR || !!ABCR.dur || (AB.tocco && ora - AB.tocco < 700);
+    var fermo = Math.abs(y - ys) < 2 && v2 < .05;
+    if (fermo && banda) { if (!ABIN.fermoDa) ABIN.fermoDa = ora; } else ABIN.fermoDa = 0;
+    var vuole = ry > hT && ry < innerHeight - 30 && (mano || (ABIN.fermoDa && ora - ABIN.fermoDa > 120));
+    var prima = ABIN.preso;
+    if (vuole) ABIN.preso = true; else if (ABIN.preso && !banda && !mano) ABIN.preso = false;
+    if (ABIN.preso !== prima) FX.salto = true;   /* la molla parte da dov'è: niente salti */
+    if (!ABIN.preso) { if (banda && fermo) g.anima = true; return g; }   /* tiene vivo il motore per i 120 ms */
+    return { x: sx(GRADI), y: ry, d: GRADI.d, s: GRADI, fermo: true, kmax: 1.35 };
+  }
   function siedi(s){
     if (s === seduto) return;
     if (seduto && seduto.el) { seduto.el.classList.remove('qui'); if (seduto.el._pongo) { deforma(seduto.el, ''); seduto.el._pongo = ''; } }
@@ -3753,9 +3783,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
   function fermaMolla(){ return !E.x && !E.y && !E.d; }
   function quadro(){
+    if (AB.raf && !AB.pc) { cancelAnimationFrame(AB.raf); abTick(); }   /* (piano 19/11) al telefono: schede prima del motore */
     pianificato = false; FR++;
     var corsa = !!(AP && AP.avanza && AP.avanza());
-    var y = scrollY, ora = performance.now(), dt = tPrima ? clamp(ora - tPrima, 1, 50) : 16.7;
+    var yv = AP && AP.yGuida ? AP.yGuida() : null;   /* (piano 19/11) iPhone: il valore chiesto dall'apertura */
+    var y = yv != null ? yv : scrollY, ora = performance.now(), dt = tPrima ? clamp(ora - tPrima, 1, 50) : 16.7;
     if (ys === null) ys = ys1 = yPrima = y;
     var vNow = tPrima ? Math.abs(y - yPrima) / dt : 0, sv = (y - yPrima) / dt, av = 1 - Math.exp(-dt / 30);
     tPrima = ora; yPrima = y;
@@ -3776,7 +3808,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var binMuove = binPasso(y, dt);
     rieScegli();
     if (CHATSEG) { var inCs = ys >= CHATSEG.a && ys < CHATSEG.b; if (inCs && !CHATSEG.dentro) { CHATSEG.dentro = true; var cf = chatEl && chatEl.classList; CHATSEG.modo = !cf ? 'nascosto' : cf.contains('finita') ? 'rie' : cf.contains('zoom') ? 'attesa' : cf.contains('rie-su') ? 'rie' : 'nascosto'; CHATSEG.frz = null; CHATSEG.rt = 0; } else if (!inCs) CHATSEG.dentro = false; }
-    var g = freccia(bersaglio(ys, y), y, dt, inAp);
+    var g = abEntra(freccia(bersaglio(ys, y), y, dt, inAp), y);
     if (g) {
       var Bq = { x: g.x, y: g.y, d: g.d }, BV = Bp ? { x: (Bq.x - Bp.x) / dt, y: (Bq.y - Bp.y) / dt, d: (Bq.d - Bp.d) / dt } : { x: 0, y: 0, d: 0 };
       Bp = Bq;
@@ -3860,7 +3892,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     }
     misura();
     if (visto && ys !== null) {
-      var g = freccia(bersaglio(ys, scrollY), scrollY, 0, !!(APosto && AP && ys < AP.arrivo));
+      var g = abEntra(freccia(bersaglio(ys, scrollY), scrollY, 0, !!(APosto && AP && ys < AP.arrivo)), scrollY);
       if (g) {
         var Q = LIBERO ? (LW || { x: xM, y: Rm, d: DOT }) : g;
         E.x = visto.x - Q.x; E.y = visto.y - Q.y; E.d = visto.d - Q.d; if (E.x || E.y) OM = 1 / 95;
