@@ -151,15 +151,14 @@ html:not(.viaggio) .linea-v,html:not(.viaggio) .linea-curva{display:none}
 @media (max-width:599px){
   html.viaggio #servizi > .wrap{padding-right:44px}
   html.viaggio .abbonamenti-testa::before{right:-25px}   /* (19/11 sera) finisce sulla linea verticale (44 − 19): non la incrocia */
-  /* (20/11, Niccolò: «i quadrati falli come se fossero attaccati a sinistra, quindi senza il lato [sinistro], mentre gli
-     altri lati arrivano fino al confine, l'interno sempre centrale però») i tre riquadri (video, sito, chat) partono dal
-     bordo sinistro dello schermo: senza filo e senza angoli a sinistra, i fili sopra e sotto dal bordo. Il contenuto resta
-     dov'era (16 px dal bordo) e alto uguale: l'altezza la dà il padding (125 % della colonna + 20 px = 4:5 della larghezza
-     di prima), non più aspect-ratio */
-  #servizi .m{margin-left:calc(-1 * var(--lato));border-radius:0 14px 14px 0;box-shadow:none;aspect-ratio:auto;height:0;padding-bottom:calc(125% + 20px)}
-  #servizi .m::after{box-shadow:none;border:1px solid rgba(245,244,239,.16);border-left:0}
-  #servizi .m-sito > .slot-sito-anteprima,#servizi .m-va > .chat{left:var(--pan)}
-  #servizi .m-va{background:#100F09}
+  /* (20/11, Niccolò, con una foto del sito di Linear: «senza bordi i riquadri non mi piacciono, proviamo a farli più
+     liberi») i tre riquadri (video, sito, chat) tornano al loro posto (16 px dal bordo), ma della cornice restano solo il
+     filo in alto e quello a sinistra, con l'angolo tondo in alto a sinistra, e sfumano andando a destra e in basso; anche
+     il fondo grigio sfuma nel nero della pagina. Niente filo a destra né in basso. Il contenuto non sfuma.
+     (Prima, stessa mattina: attaccati al bordo sinistro senza il lato sinistro; scartato) */
+  #servizi .m{box-shadow:none;background:linear-gradient(155deg,#1C1B14 0%,#15140E 40%,rgba(16,15,9,0) 85%)}
+  #servizi .m::after{box-shadow:none;border:1px solid rgba(245,244,239,.2);border-right:0;border-bottom:0;
+    -webkit-mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%)}
 }
 /* (19/11 sera, stessa richiesta) anche la linea di sezione sopra «Servizi» finisce sulla linea verticale invece di
    attraversarla fino al bordo: al posto del bordo una riga disegnata larga quanto la sezione meno 19 px */
