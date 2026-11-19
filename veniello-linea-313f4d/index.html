@@ -256,6 +256,10 @@ footer.piede{border-top:0}
 .ab-pannello .speciale-azione{margin-top:var(--s4)}
 .ab-fig{display:none}
 .ab-lbl-pc{display:none}
+/* (20/11 sera) 0c, «Scrivici» nella testata: col contorno sottile (proposta C scelta da Niccolò; «aggiornarlo sia su mobile che pc»), più leggero della pillola bianca */
+#testata-scrivi{height:34px;padding:0 16px;gap:8px;font:500 14px/1 var(--sans);background:rgba(245,244,239,.04);color:var(--av);box-shadow:inset 0 0 0 1px rgba(245,244,239,.18);transition:background-color .2s ease,box-shadow .2s ease}
+#testata-scrivi:hover{background:rgba(245,244,239,.08);box-shadow:inset 0 0 0 1px rgba(245,244,239,.32)}
+#testata-scrivi .i{width:15px;height:15px}
 @media (min-width:1024px){
   /* 2 · Come funziona come il Changelog di Linear: il binario in alto con un pallino all'inizio di ogni colonna (la linea
      continua fino alla linea verticale con la curva 2h), sotto tre colonne senza riquadro: titolo, testo, «Passo 01» in mono */
