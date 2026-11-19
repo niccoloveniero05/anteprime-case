@@ -229,6 +229,26 @@ html.js:not(.fermo) .ap-palco{position:sticky;top:0;height:100vh;height:100lvh}
 html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec)}
 footer.piede{border-top:0}
 /* ── (20/11 sera) Versione da computer come Linear (da 1024 px). Fonte: _lavoro/nb/pc-linear.py ── */
+/* il pannello laterale di «Cosa comprende» degli abbonamenti (da computer; lo crea abbonamenti.js) */
+.ab-velo{position:fixed;inset:0;z-index:90;background:rgba(6,6,4,.62);opacity:0;visibility:hidden;transition:opacity .35s cubic-bezier(.2,.7,.2,1),visibility 0s linear .35s}
+.ab-velo.su{opacity:1;visibility:visible;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
+.ab-pannello{position:fixed;top:8px;right:8px;bottom:8px;z-index:91;width:min(640px,calc(100vw - 16px));display:flex;flex-direction:column;
+  background:#15140F;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.1),0 24px 80px -20px rgba(0,0,0,.8);
+  opacity:0;visibility:hidden;transform:translate3d(32px,0,0);transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease,visibility 0s linear .45s}
+.ab-pannello.su{opacity:1;visibility:visible;transform:none;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
+.ab-pannello-testa{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 14px 14px 32px;border-bottom:1px solid var(--filo)}
+.ab-pannello-tag{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--av3)}
+.ab-pannello-x{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:none;border:0;cursor:pointer;color:var(--av2);box-shadow:inset 0 0 0 1px rgba(245,244,239,.14);transition:color .2s ease,box-shadow .2s ease}
+.ab-pannello-x:hover,.ab-pannello-x:focus-visible{color:var(--av);box-shadow:inset 0 0 0 1px rgba(245,244,239,.32);outline:0}
+.ab-pannello-x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.ab-pannello-corpo{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:44px 32px 40px}
+.ab-pannello-t{font:560 44px/1.05 var(--sans);letter-spacing:-.035em;color:var(--av)}
+.ab-pannello-sotto{margin-top:var(--s3);font:400 17px/1.6 var(--sans);color:var(--av2);max-width:34em}
+.ab-pannello-box{margin-top:var(--s5);border-radius:10px;box-shadow:inset 0 0 0 1px var(--filo);padding:24px 28px 8px}
+.ab-pannello-box-t{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--av3)}
+.ab-pannello-box .voci{border-top:0;margin-top:var(--s2)}
+.ab-pannello-box .voci li:last-child{border-bottom:0}
+.ab-pannello .speciale-azione{margin-top:var(--s4)}
 .ab-fig{display:none}
 @media (min-width:1024px){
   /* 2 · Come funziona come il Changelog di Linear: il binario in alto con un pallino all'inizio di ogni colonna (la linea
@@ -2482,6 +2502,39 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      scheda). Per riaccendere il salto e il colore: AB.SALTA = true */
   AB.SALTA = false;
   var AB_ANIM = 520;
+  /* ── (20/11 sera) da computer: «Cosa comprende» apre un pannello laterale grande (come le schede tecniche di Linear): da
+        destra, alto quasi quanto lo schermo, col sito sotto oscurato. Dentro: l'etichetta, il titolo grande, la frase,
+        le voci in un riquadro, «Parliamone». Si chiude con la X in alto, cliccando fuori dal pannello o con Esc ── */
+  var PAN = null;
+  function abPannello(i, da){
+    if (!PAN) {
+      PAN = { velo: document.createElement('div'), el: document.createElement('aside'), da: null };
+      PAN.velo.className = 'ab-velo'; PAN.el.className = 'ab-pannello';
+      PAN.el.setAttribute('role', 'dialog'); PAN.el.setAttribute('aria-modal', 'true'); PAN.el.setAttribute('aria-labelledby', 'ab-pannello-t');
+      document.body.appendChild(PAN.velo); document.body.appendChild(PAN.el);
+      PAN.velo.addEventListener('click', abPannelloChiudi);
+      PAN.velo.addEventListener('wheel', function(e){ e.preventDefault(); }, { passive: false });   /* il sito sotto non scorre */
+      PAN.el.addEventListener('click', function(e){ if (e.target.closest('.ab-pannello-x')) abPannelloChiudi(); });
+      addEventListener('keydown', function(e){ if (e.key === 'Escape' && PAN && PAN.aperto) abPannelloChiudi(); });
+    }
+    var card = abSch[i], tag = card.querySelector('.speciale-tag'), tit = card.querySelector('.t2'), sotto = card.querySelector('.sp-testa > .sotto');
+    var voci = card.querySelector('.dettagli .voci'), az = card.querySelector('.speciale-azione');
+    var titolo = tit ? tit.textContent.replace(/\.$/, '').trim() : '';
+    PAN.el.innerHTML = '<div class="ab-pannello-testa"><span class="ab-pannello-tag">Cosa comprende · ' + (tag ? tag.textContent : '') + '</span>' +
+      '<button type="button" class="ab-pannello-x" aria-label="Chiudi"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg></button></div>' +
+      '<div class="ab-pannello-corpo"><h2 class="ab-pannello-t" id="ab-pannello-t">' + titolo + '</h2>' + (sotto ? '<p class="ab-pannello-sotto">' + sotto.innerHTML + '</p>' : '') +
+      (voci ? '<div class="ab-pannello-box"><p class="ab-pannello-box-t">Nel pacchetto</p>' + voci.outerHTML + '</div>' : '') +
+      (az ? az.outerHTML : '') + '</div>';
+    PAN.da = da || null; PAN.aperto = true;
+    void PAN.el.offsetWidth;
+    PAN.velo.classList.add('su'); PAN.el.classList.add('su');
+    var x = PAN.el.querySelector('.ab-pannello-x'); if (x) x.focus({ preventScroll: true });
+  }
+  function abPannelloChiudi(){
+    if (!PAN || !PAN.aperto) return; PAN.aperto = false;
+    PAN.velo.classList.remove('su'); PAN.el.classList.remove('su');
+    if (PAN.da) PAN.da.focus({ preventScroll: true });
+  }
   function abApri(i){
     if (AB.det) abChiudi(false, true);
     var card = abSch[i], d = card.querySelector('.dettagli'), voci = d && d.querySelector('.voci'), W = card.offsetWidth;
@@ -2578,6 +2631,12 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     abSt.forEach(function(s, i){ s.addEventListener('click', function(){ abVai(abItemDi(i), 0); }); });
     /* al telefono «Cosa comprende» si apre di lato (prima delle tendine: fase di cattura, e la tendina non si apre) */
     abTr.addEventListener('click', function(e){
+      if (AB.on && AB.pc) {
+        /* (20/11 sera) da computer: il pannello laterale grande */
+        var sp = e.target.closest && e.target.closest('.dettagli > summary'); if (!sp) return;
+        var cp = sp.closest('.ab-schede > li'), ip = abSch.indexOf(cp); if (ip < 0) return;
+        e.preventDefault(); e.stopPropagation(); abPannello(ip, sp); return;
+      }
       if (!AB.on || AB.pc) return;
       var x = e.target.closest && e.target.closest('.ab-dett-x');
       if (x) { e.preventDefault(); abChiudi(true); return; }
