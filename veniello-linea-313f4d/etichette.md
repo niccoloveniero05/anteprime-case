@@ -1,4 +1,4 @@
-# NB: anteprima solo telefono con la linea verticale (20/11). Etichette uguali a N, più la 2g.
+# NB: anteprima solo telefono con la linea verticale (19/11). Etichette uguali a N, più la 2g (la linea verticale) e la 2h (la curva a 90° che la collega al binario 2f).
 
 # Etichette di prova dell'anteprima N: la mappa (18/11, rinumerata dopo i ritocchi della pallina)
 

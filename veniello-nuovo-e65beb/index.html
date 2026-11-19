@@ -2500,14 +2500,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
        su «Online» finché il palco è fermo; quando il palco riparte se ne stacca: un passo a destra sulla riga della stazione
        (la scritta «ONLINE» è sotto), poi giù dritto fino a M; lì la riga del titolo lo raggiunge salendo e lui ci scivola
        dentro lungo la riga. Il titolo dopo si siede quindi più in basso del solito (inY = ly − M + La) */
-    var BIN = null, iBT = seq.indexOf(BT); BINg = null;
+    var BIN = null, iBT = seq.indexOf(BT), BINv = BINg; BINg = null;   /* (19/11 sera) lo stato di prima, per il ricalcolo */
     if (BT && iBT >= 0 && seq[iBT + 1]) {
       /* M: almeno 0,12 schermi sotto la riga del binario com'è quando la pallina se ne stacca, e non sopra il 62% dello
          schermo (la sosta in «…scegliere» resta lunga com'era col palco fermo) */
       var nb = seq[iBT + 1], xr = Math.min(xM, BT.fine + 12), M = Math.round(Math.min(.88 * V0, Math.max(S.T + BT.ly - BT.outY + .12 * V0, .62 * V0))), Lab = clamp(.7 * Math.abs(xr - nb.x), 50, 100);
       var ym = Math.max(nb.ly - M, BT.outY + 80); M = nb.ly - ym;
       nb.inY = ym + Lab; if (nb.outY < nb.inY + 40) nb.outY = nb.inY + 40;
-      var vecchio = BINg;
+      var vecchio = BINv;
       BIN = BINg = { k: 'bin', a: BT.outY, b: nb.inY, da: BT, a2: nb, x0: BT.x2, row: BT.ly - (BT.outY - S.T - S.R), xr: xr, M: M, La: Lab, attesa: { x: xr, y: M } };
       /* un ricalcolo a metà dello stacco non lo fa ripartire da capo */
       if (vecchio) ['via', 'u0', 'r0', 'xv', 'k0', 'k1', 'k2', 'fr'].forEach(function(k){ BIN[k] = vecchio[k]; });

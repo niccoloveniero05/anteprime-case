@@ -135,19 +135,27 @@ html.viaggio .pt.qui{background:var(--rec)}
    come un righello: lunghe ai capitoli (Servizi, Abbonamenti), corte ai pacchetti. Dietro al sito come la pallina; solo
    telefono. Il colore delle linee di divisione */
 .linea-v{position:absolute;left:0;top:0;width:1px;z-index:-1;pointer-events:none;background:var(--filo)}
-/* (19/11 sera, Niccolò: «per ogni punto dove si ferma mettici una piccola linea perpendicolare sulla linea di scorrimento»)
-   le tacche a cavallo della linea, un po' più chiare di lei: lunghe ai capitoli, corte alle altre fermate */
-.linea-v i{position:absolute;left:0;height:1px;margin-top:-.5px;background:rgba(245,244,239,.24)}
-.linea-v .lv-lunga{width:19px;margin-left:-9px}
-.linea-v .lv-corta{width:11px;margin-left:-5px}
-html:not(.viaggio) .linea-v{display:none}
-@media (min-width:1024px){.linea-v{display:none}}
+/* (19/11 sera, Niccolò: «per ogni punto dove si ferma mettici una piccola linea perpendicolare sulla linea di scorrimento»;
+   poi «falle finire sulla linea, non farle incrociate, devono essere tangenti perpendicolarmente») le tacche partono dalla
+   linea verso il testo e finiscono su di lei, un po' più chiare: lunghe ai capitoli, corte alle fermate */
+.linea-v i{position:absolute;right:0;height:1px;margin-top:-.5px;background:rgba(245,244,239,.24)}
+.linea-v .lv-lunga{width:18px}
+.linea-v .lv-corta{width:10px}
+/* (19/11 sera) la curva 2h che collega il binario (2f) alla linea: la disegna e la misura il motore (#linea-curva) */
+.linea-curva{position:absolute;left:0;top:0;z-index:-1;pointer-events:none;overflow:visible}
+html:not(.viaggio) .linea-v,html:not(.viaggio) .linea-curva{display:none}
+@media (min-width:1024px){.linea-v,.linea-curva{display:none}}
 /* (19/11 sera, Niccolò: «decentra la pagina verso sinistra, così la riga dove scorre la pallina ha più spazio») al
    telefono i Servizi lasciano 44 px a destra invece di 24: la linea sta a 20 px dal bordo e i riquadri finiscono 16 px
    prima di lei. A sinistra tutto come prima (le scritte restano allineate con il resto della pagina) */
 @media (max-width:599px){
   html.viaggio #servizi > .wrap{padding-right:44px}
-  html.viaggio .abbonamenti-testa::before{right:-44px}
+  html.viaggio .abbonamenti-testa::before{right:-25px}   /* (19/11 sera) finisce sulla linea verticale (44 − 19): non la incrocia */
+}
+/* (19/11 sera, stessa richiesta) anche la linea di sezione sopra «Servizi» finisce sulla linea verticale invece di
+   attraversarla fino al bordo: al posto del bordo una riga disegnata larga quanto la sezione meno 19 px */
+@media (max-width:1023px){
+  html.viaggio #servizi{border-top:0;background:linear-gradient(var(--filo),var(--filo)) 0 0 / calc(100% - 19px) 1px no-repeat}
 }
 /* (19/11 notte) «tira giù per aggiornare» (1f): in cima alla pagina, tirando giù, il punto di «scegliere» sale sopra il
    titolo e diventa un cerchietto sottile che si riempie; oltre la soglia gira e la pagina si ricarica (script «Tira giù
@@ -897,14 +905,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 .sa-tel{z-index:0;background:none;box-shadow:none}
 .sa-tel::before{content:"";position:absolute;inset:-6px;z-index:-1;border-radius:44px;border:6px solid transparent;pointer-events:none;
   background:linear-gradient(#050404,#050404) padding-box,
-    conic-gradient(from 0deg,#E26B2C 0deg,#F49A62 16deg,#FFE1C9 24deg,#F08A4E 28deg,#C4581E 44deg,#E0732F 78deg,#F39558 92deg,
-      #C9591D 108deg,#8E3C13 140deg,#5F270B 151deg,#D7692A 155deg,#6A2B0C 160deg,#963F14 182deg,#C2561D 200deg,#FFB98E 205deg,
-      #A3461A 212deg,#C85A20 236deg,#F7A16B 262deg,#FFD0AE 268deg,#E7783A 276deg,#B84F1B 304deg,#E57A3C 326deg,#FFEBDB 335deg,
-      #F5945A 341deg,#E26B2C 360deg) border-box;
-  box-shadow:inset 0 0 0 1px rgba(255,214,184,.34),inset 0 0 0 2px rgba(0,0,0,.6),0 0 0 .5px rgba(70,24,4,.9),0 0 0 1.5px rgba(255,180,130,.16),0 40px 80px -30px rgba(0,0,0,.9)}
-.sa-tel::after{content:"";position:absolute;z-index:-2;left:-8px;top:16%;width:4px;height:5.5%;border-radius:2px;background:#D2652A;pointer-events:none;
-  box-shadow:0 calc(var(--sa-th) * .075) 0 #D2652A,0 calc(var(--sa-th) * .15) 0 #D2652A,
-    calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .09) 0 #B9531E,calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .33) 0 #9E4417}
+    linear-gradient(160deg,#A2461A 0%,#96401A 45%,#8A3A14 100%) border-box;
+  box-shadow:inset 0 0 0 1px rgba(255,200,165,.14),inset 0 0 0 2px rgba(0,0,0,.6),0 0 0 .5px rgba(70,24,4,.9),0 0 0 1.5px rgba(255,180,130,.16),0 40px 80px -30px rgba(0,0,0,.9)}
+.sa-tel::after{content:"";position:absolute;z-index:-2;left:-8px;top:16%;width:4px;height:5.5%;border-radius:2px;background:#9A421A;pointer-events:none;
+  box-shadow:0 calc(var(--sa-th) * .075) 0 #9A421A,0 calc(var(--sa-th) * .15) 0 #9A421A,
+    calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .09) 0 #8A3A14,calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .33) 0 #7C3311}
 /* 5d (19/11): MacBook. Il bordo di alluminio è il bordo del .sa-desk (sfondo a due livelli: vetro nero dentro, metallo nel
    bordo), la fotocamera il ::before, la base il ::after. Le misure seguono --sa-dw (le stesse costanti sono nello script) */
 .sa-desk{--sa-mr:max(2px, calc(var(--sa-dw,320px) * .006));overflow:visible;border:var(--sa-mr) solid transparent;
@@ -2404,14 +2409,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
        su «Online» finché il palco è fermo; quando il palco riparte se ne stacca: un passo a destra sulla riga della stazione
        (la scritta «ONLINE» è sotto), poi giù dritto fino a M; lì la riga del titolo lo raggiunge salendo e lui ci scivola
        dentro lungo la riga. Il titolo dopo si siede quindi più in basso del solito (inY = ly − M + La) */
-    var BIN = null, iBT = seq.indexOf(BT); BINg = null;
+    var BIN = null, iBT = seq.indexOf(BT), BINv = BINg; BINg = null;   /* (19/11 sera) lo stato di prima, per il ricalcolo */
     if (BT && iBT >= 0 && seq[iBT + 1]) {
       /* M: almeno 0,12 schermi sotto la riga del binario com'è quando la pallina se ne stacca, e non sopra il 62% dello
          schermo (la sosta in «…scegliere» resta lunga com'era col palco fermo) */
       var nb = seq[iBT + 1], xr = Math.min(xM, BT.fine + 12), M = Math.round(Math.min(.88 * V0, Math.max(S.T + BT.ly - BT.outY + .12 * V0, .62 * V0))), Lab = clamp(.7 * Math.abs(xr - nb.x), 50, 100);
       var ym = Math.max(nb.ly - M, BT.outY + 80); M = nb.ly - ym;
       nb.inY = Math.max(nb.ly - Yin, BT.outY + Math.round(.22 * V0)); if (nb.outY < nb.inY + 40) nb.outY = nb.inY + 40;   /* (NB) dalla linea */
-      var vecchio = BINg;
+      var vecchio = BINv;
       BIN = BINg = { k: 'bin', a: BT.outY, b: nb.inY, da: BT, a2: nb, x0: BT.x2, row: BT.ly - (BT.outY - S.T - S.R), xr: xr, M: M, La: Lab, attesa: { x: xr, y: M } };
       /* un ricalcolo a metà dello stacco non lo fa ripartire da capo */
       if (vecchio) ['via', 'u0', 'u1', 'r0', 'xv', 'k0', 'k1', 'k2', 'fr'].forEach(function(k){ BIN[k] = vecchio[k]; });
@@ -2503,31 +2508,63 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         pallina si muove in verticale e quando si deve posare sui punti che abbiamo concordato semplicemente si sposta
         perpendicolarmente. Arrivata a 7b poi va bene il comportamento che ha adesso»). Solo telefono (mqColonna).
         Dalla riga del binario di «Come funziona» (2f) fino alla riga del «°» della Campagna (7b) una linea verticale
-        sottile (2g, #linea-v) a destra del testo, 14 px dal bordo: a destra dei punti di fine titolo non c'è niente, così
-        le uscite in orizzontale non passano mai sulle scritte. Tacche come un righello, verso il testo: lunghe all'altezza
+        sottile (2g, #linea-v) a destra del testo, 20 px dal bordo (19/11 sera; prima 14), collegata al binario dalla curva 2h: a destra dei punti di fine titolo non c'è niente, così
+        le uscite in orizzontale non passano mai sulle scritte. Tacche come un righello, a cavallo della linea (19/11 sera): lunghe all'altezza
         dei capitoli («…farti scegliere.» dei Servizi e «Abbonamenti»), corte a quella dei pacchetti (Creazione
         Contenuti, Sito Web, Virtual Assistant). Dietro al sito (z-index −1) come la pallina: i riquadri la coprono.
         Fra due tappe la pallina va in orizzontale dal punto alla linea, lungo la linea fino alla riga della tappa dopo e
         in orizzontale nel punto (lineaPunta), legata allo scorrimento. Nei riquadri (la frase del Sito Web, la foto
         profilo e il riepilogo della chat) i tratti in orizzontale passano dietro al riquadro. ── */
-  var LV = { on: false, x: 0, dal: 0, al: 0, carta: 1e9, el: null };
+  var LV = { on: false, x: 0, dal: 0, al: 0, carta: 1e9, el: null, cu: null, R: 0, xs: 0 };
   function lineaMisura(y0, BT){
     if (!LV.el) { LV.el = document.createElement('div'); LV.el.className = 'linea-v'; LV.el.id = 'linea-v'; LV.el.setAttribute('aria-hidden', 'true'); document.body.appendChild(LV.el); }
+    /* (19/11 sera, Niccolò: «collega poi la linea di 2f alla linea verticale (mettici un numero e lettera così la chiamo con
+       quella) con una curva 90°») la curva 2h (#linea-curva): dalla fine del binario un tratto dritto sulla sua riga e un
+       quarto di giro (raggio LV.R, al più 16 px) che scende nella linea verticale; la linea comincia dove finisce la
+       curva. È la stessa curva che fa la pallina (binario: la Q con il punto di controllo nell'angolo, come traccia). Il
+       colore sfuma da quello del binario (0,16) a quello della linea (0,085) */
+    if (!LV.cu) {
+      LV.cu = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); LV.cu.setAttribute('class', 'linea-curva'); LV.cu.id = 'linea-curva';
+      LV.cu.setAttribute('aria-hidden', 'true'); LV.cu.setAttribute('focusable', 'false');
+      LV.cu.innerHTML = '<defs><linearGradient id="lc-sfuma" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5F4EF" stop-opacity=".16"/><stop offset="1" stop-color="#F5F4EF" stop-opacity=".085"/></linearGradient></defs><path fill="none" stroke="url(#lc-sfuma)" stroke-width="1"/>';
+      document.body.appendChild(LV.cu);
+    }
     LV.on = mqColonna.matches && !BN.pc && !!BT && !!GRADI;
-    if (!LV.on) { LV.el.style.display = 'none'; return; }
+    if (!LV.on) { LV.el.style.display = 'none'; LV.cu.style.display = 'none'; return; }
     LV.x = Math.round(document.documentElement.clientWidth - 20);   /* (19/11 sera) 20 px dal bordo: i Servizi sono decentrati a sinistra */
     LV.dal = BN.T + BT.ly; LV.al = GRADI.ly;
     var cg = GRADI.el.closest('.pacchetto'); LV.carta = cg ? cg.getBoundingClientRect().top + y0 : 1e9;
+    /* la curva: dalla fine del binario (x xs, riga yr nella pagina) alla linea (X); Y1: dove comincia la linea dritta */
+    var rl = rot.querySelector('.linea').getBoundingClientRect(), X = LV.x + .5, yr = (rl.top + rl.bottom) / 2 + y0;
+    var Y1 = Math.round(LV.dal);
+    LV.xs = rl.right; LV.R = 0;
+    if (rl.width > 0 && X - LV.xs >= 4) {   /* il binario si vede (senza, la linea comincia dritta come prima) */
+      LV.R = Math.min(16, X - LV.xs);
+      /* (verifica 19/11) l'svg sta su un pixel intero (oy) e la curva finisce esattamente dove comincia la linea (Y1, intero
+         anche lui): né sovrapposta (un puntino più chiaro) né staccata; la riga dritta resta sulla riga del binario (yr) */
+      var w = X - LV.xs, gr = LV.cu.querySelector('linearGradient'), oy = Math.floor(yr - .5), r0 = yr - oy, hc;
+      Y1 = Math.round(yr + LV.R); hc = Y1 - oy;
+      gr.setAttribute('y1', r0.toFixed(2)); gr.setAttribute('x2', w.toFixed(2)); gr.setAttribute('y2', (r0 + LV.R).toFixed(2));
+      LV.cu.querySelector('path').setAttribute('d', 'M0 ' + r0.toFixed(2) + 'H' + (w - LV.R).toFixed(2) + 'Q' + w.toFixed(2) + ' ' + r0.toFixed(2) + ' ' + w.toFixed(2) + ' ' + Math.min(hc, r0 + LV.R).toFixed(2) + 'V' + hc);
+      LV.cu.setAttribute('width', (w + 1).toFixed(2)); LV.cu.setAttribute('height', hc);
+      LV.cu.style.transform = 'translate(' + LV.xs.toFixed(2) + 'px,' + oy + 'px)'; LV.cu.style.display = '';
+    } else LV.cu.style.display = 'none';
     var pg = function(e){ if (typeof e === 'string') e = document.querySelector(e); if (!e) return null; var r = e.getBoundingClientRect(); return r.height ? (r.top + r.bottom) / 2 + y0 : null; };
-    /* (19/11 sera) una tacca a ogni fermata: le due estremità («Online» e il «°»), i titoli (lunga a «…farti scegliere»,
-       il capitolo Servizi), la freccia di «Parliamone» dei dettagli aperti; più la lunga del capitolo Abbonamenti */
-    var T = [['#t-servizi .pt', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga'], ['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']];
-    [].forEach.call(document.querySelectorAll('.pacchetto .dettagli[open] .freccia'), function(a){ T.push([a.querySelector('.i') || a, 'lv-corta']); });
-    var h = '<i class="lv-corta" style="top:0"></i><i class="lv-corta" style="top:' + Math.round(LV.al - LV.dal) + 'px"></i>';
-    T.forEach(function(t){ var yy = pg(t[0]); if (yy != null && yy > LV.dal && yy < LV.al) h += '<i class="' + t[1] + '" style="top:' + Math.round(yy - LV.dal) + 'px"></i>'; });
+    /* (19/11 sera) una tacca corta a ogni fermata: la fine (il «°»), i titoli, la freccia di «Parliamone» dei dettagli aperti;
+       le lunghe sulle etichette dei capitoli, «Servizi» (3a; Niccolò: «la linea mettila su 3a, non 3b») e «Abbonamenti»
+       (7x). In cima non serve: c'è la curva */
+    var T = [['#servizi > .wrap > .etichetta', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga'], ['#t-servizi .pt', 'lv-corta'], ['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']];
+    /* (verifica 19/11) solo coi dettagli davvero aperti (aperto: chiudendo, «open» resta per tutta l'animazione e la tacca
+       restava orfana) */
+    [].forEach.call(document.querySelectorAll('.pacchetto .dettagli'), function(d){ var a = aperto(d) && d.querySelector('.freccia'); if (a) T.push([a.querySelector('.i') || a, 'lv-corta']); });
+    var fondo = Math.round(LV.al), h = '<i class="lv-corta" style="top:' + (fondo - Y1) + 'px"></i>';
+    T.forEach(function(t){ var yy = pg(t[0]); if (yy != null && yy > Y1 && yy < LV.al) h += '<i class="' + t[1] + '" style="top:' + (Math.round(yy) - Y1) + 'px"></i>'; });
     LV.el.innerHTML = h; LV.el.style.display = '';
-    LV.el.style.transform = 'translate(' + LV.x + 'px,' + Math.round(LV.dal) + 'px)'; LV.el.style.height = Math.round(LV.al - LV.dal) + 'px';
+    LV.el.style.transform = 'translate(' + LV.x + 'px,' + Y1 + 'px)'; LV.el.style.height = (fondo - Y1) + 'px';
   }
+  /* (verifica 19/11) la freccia di «Parliamone» arriva con l'animazione «voce» (6 px), che finisce dopo l'ultima misura:
+     alla fine si rimisura, così la sua tacca sta sulla riga giusta */
+  document.addEventListener('animationend', function(e){ var t = e.target; if (LV.on && t && t.classList && t.classList.contains('freccia')) chiediRimisura(); }, true);
   function lineaPagY(s, y){ return sy(s, y) + y; }
   function lineaDentro(s, y){ var q = lineaPagY(s, y); return q >= LV.dal - 8 && q <= LV.al + 8; }
   /* vale per i tratti fra due tappe della linea (non dal «°» in poi) */
@@ -2647,7 +2684,34 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* il tratto «bin» (anteprima NB): dalla stazione del treno la pallina corre sul binario fino a «Online» (k0, svelta,
      toccando le stazioni in ordine), un passo a destra lungo la riga fino alla linea verticale (k1), poi giù lungo la
      linea fino alla riga di «…farti scegliere» e lì in orizzontale nel punto (legata allo scorrimento). Tornando su rifà
-     la strada: su lungo la linea, il passo indietro, la corsa sul binario fino alla stazione del treno */
+     la strada: su lungo la linea, il passo indietro, la corsa sul binario fino alla stazione del treno.
+     (19/11 sera) Il passo k1 segue la curva 2h: dritta sulla riga fino a dove comincia la curva, il quarto di giro (raggio
+     LV.R, la stessa Q disegnata) e aspetta sulla linea appena sotto; da lì la discesa legata allo scorrimento */
+  /* come traccia, ma col raggio di ogni angolo (rs) e senza il limite di metà tratto ai due capi (al primo angolo il tratto
+     prima è tutto suo, all'ultimo quello dopo): serve per fare esattamente la curva 2h */
+  function tracciaR(pts, rs){
+    var pz = [], tot = 0, i, A = pts[0], n = pts.length, ts = [];
+    function lun(a, b){ var dx = b[0] - a[0], dy = b[1] - a[1]; return Math.sqrt(dx * dx + dy * dy); }
+    for (i = 1; i < n - 1; i++) { var m1 = lun(pts[i - 1], pts[i]), m2 = lun(pts[i], pts[i + 1]); ts[i] = Math.max(0, Math.min(rs[i - 1] || 0, i === 1 ? m1 : m1 / 2, i === n - 2 ? m2 : m2 / 2)); }
+    for (i = 1; i < n; i++) {
+      var P = pts[i], Q = pts[i - 1], N = pts[i + 1];
+      if (!N) { pz.push({ a: A, b: P }); break; }
+      var l1 = lun(Q, P), l2 = lun(P, N), t = ts[i];
+      var Ai = l1 ? [P[0] - (P[0] - Q[0]) * t / l1, P[1] - (P[1] - Q[1]) * t / l1] : P;
+      var Bo = l2 ? [P[0] + (N[0] - P[0]) * t / l2, P[1] + (N[1] - P[1]) * t / l2] : P;
+      pz.push({ a: A, b: Ai }); pz.push({ a: Ai, c: P, b: Bo }); A = Bo;
+    }
+    pz.forEach(function(z){ z.l = z.c ? (2 * lun(z.a, z.b) + lun(z.a, z.c) + lun(z.c, z.b)) / 3 : lun(z.a, z.b); tot += z.l; });
+    return { L: tot, at: function(e){
+      var s = clamp(e, 0, 1) * tot, k, z, u;
+      for (k = 0; k < pz.length; k++) {
+        z = pz[k]; if (z.l <= 0) continue;
+        if (s <= z.l || k === pz.length - 1) { u = clamp(s / z.l, 0, 1); return z.c ? [q2(z.a[0], z.c[0], z.b[0], u), q2(z.a[1], z.c[1], z.b[1], u)] : [lerp(z.a[0], z.b[0], u), lerp(z.a[1], z.b[1], u)]; }
+        s -= z.l;
+      }
+      return pts[n - 1].slice();
+    } };
+  }
   var BINt = 0;
   function binario(g, ys_, y){
     var b = g.a2, G = g.b - g.a, uM = Math.max(y, ys_) - g.a, e, ora = performance.now();
@@ -2662,11 +2726,15 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       if (g.k1 > 0) g.k1 = Math.max(0, Math.min(g.k1 - dt / 200, (uM + 48) / 24));
       else { g.k0 = Math.max(0, Math.min(g.k0 - dt / (350 * Math.max(.05, (T.x2 - sx(T)) / Lr)), (uM + 72) / 24)); if (g.k0 <= 0 || sx(T) >= T.x2 - .5) { g.via = false; return { x: sx(T), y: sy(T, y), d: T.d, s: T, fermo: true, kmax: 1.35, attesa: g.attesa }; } }
     }
-    var anima = (g.k0 > 0 && g.k0 < 1) || (g.k1 > 0 && g.k1 < 1), ry = sy(T, y);
+    var anima = (g.k0 > 0 && g.k0 < 1) || (g.k1 > 0 && g.k1 < 1), ry = sy(T, y), Rc = LV.on ? LV.R : 0, p;
     if (g.k0 < 1) { e = liscio(g.k0); return { x: lerp(avanti ? g.xv : sx(T), T.x2, e), y: ry, d: T.d, attesa: g.attesa, kmax: 1.4, anima: anima }; }
-    if (g.k1 < 1 || g.u1 == null) { e = morbido(g.k1); return { x: lerp(T.x2, X, e), y: ry, d: lerp(T.d, DOT, e), attesa: g.attesa, kmax: 1.4, anima: anima }; }
+    if (g.k1 < 1 || g.u1 == null) {
+      e = morbido(g.k1);
+      p = Rc ? tracciaR([[T.x2, ry], [X, ry], [X, ry + Rc]], [Rc]).at(e) : [lerp(T.x2, X, e), ry];   /* (19/11 sera) per la curva 2h */
+      return { x: p[0], y: p[1], d: lerp(T.d, DOT, e), attesa: g.attesa, kmax: 1.4, anima: anima };
+    }
     e = liscio(clamp((uM - g.u1) / Math.max(1, G - g.u1), 0, 1));
-    var p = traccia([[X, ry], [X, sy(b, y)], [sx(b), sy(b, y)]], 10).at(e);
+    p = traccia([[X, ry + Rc], [X, sy(b, y)], [sx(b), sy(b, y)]], 10).at(e);
     return { x: p[0], y: p[1], d: e > .88 ? lerp(DOT, b.d, (e - .88) / .12) : DOT, attesa: g.attesa, kmax: 1.4, anima: anima };
   }
 

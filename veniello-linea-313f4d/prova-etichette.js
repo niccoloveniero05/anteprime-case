@@ -63,7 +63,8 @@
     ['#vagoni > .vagone:nth-child(2)', '2d', 'Carta 02 «Ti prepariamo l’anteprima» (Gratis)', { resta: true }],
     ['#vagoni > .vagone:nth-child(3)', '2e', 'Carta 03 «Se ti piace, va online»', { resta: true }],
     ['#rotaia', '2f', 'Il binario con le tre stazioni (il treno è il puntino)'],
-    ['#linea-v', '2g', 'La linea verticale (NB): la pallina ci corre sopra da 2f a 7b; tacche lunghe ai capitoli, corte ai pacchetti'],
+    ['#linea-v', '2g', 'La linea verticale (NB): la pallina ci corre sopra da 2f a 7b; tacche lunghe ai capitoli, corte alle fermate', { riq: [0, 0.02, 1, 1] }],
+    ['#linea-curva', '2h', 'La curva a 90° che collega il binario (2f) alla linea verticale (2g)', { riq: [0.45, 0, 1, 1] }],
 
     ['#servizi > .wrap > .etichetta, #t-servizi, #servizi > .wrap > .sotto', '3', 'Servizi: l’ingresso', { riq: [-0.05, 0, 1, 1] }],   /* nel margine a sinistra: non copre «SERVIZI» */
     ['#servizi > .wrap > .etichetta', '3a', 'L’etichetta «Servizi»'],
