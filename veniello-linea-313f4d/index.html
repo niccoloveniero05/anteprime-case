@@ -144,31 +144,32 @@ html.viaggio .pt.qui{background:var(--rec)}
 /* (19/11 sera) la curva 2h che collega il binario (2f) alla linea: la disegna e la misura il motore (#linea-curva) */
 .linea-curva{position:absolute;left:0;top:0;z-index:-1;pointer-events:none;overflow:visible}
 html:not(.viaggio) .linea-v,html:not(.viaggio) .linea-curva{display:none}
-@media (min-width:1024px){.linea-v,.linea-curva{display:none}}
+/* (20/11) da computer c'è anche lei: nel margine destro (lineaX) */
 /* (19/11 sera, Niccolò: «decentra la pagina verso sinistra, così la riga dove scorre la pallina ha più spazio») al
    telefono i Servizi lasciano 44 px a destra invece di 24: la linea sta a 20 px dal bordo e i riquadri finiscono 16 px
    prima di lei. A sinistra tutto come prima (le scritte restano allineate con il resto della pagina) */
 @media (max-width:599px){
   html.viaggio #servizi > .wrap{padding-right:44px}
   html.viaggio .abbonamenti-testa::before{right:-25px}   /* (19/11 sera) finisce sulla linea verticale (44 − 19): non la incrocia */
-  /* (20/11, Niccolò, con una foto del sito di Linear: «senza bordi i riquadri non mi piacciono, proviamo a farli più
-     liberi») i tre riquadri (video, sito, chat) tornano al loro posto (16 px dal bordo), ma della cornice restano solo il
-     filo in alto e quello a sinistra, con l'angolo tondo in alto a sinistra, e sfumano andando a destra e in basso; anche
-     il fondo grigio sfuma nel nero della pagina. Niente filo a destra né in basso. Il contenuto non sfuma.
-     (Prima, stessa mattina: attaccati al bordo sinistro senza il lato sinistro; scartato) */
-  #servizi .m{box-shadow:none;background:linear-gradient(155deg,#1C1B14 0%,#15140E 40%,rgba(16,15,9,0) 85%)}
-  #servizi .m::after{box-shadow:none;border:1px solid rgba(245,244,239,.2);border-right:0;border-bottom:0;
-    -webkit-mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%)}
-  /* (20/11, Niccolò: «creazione di contenuti per farlo coerente agli altri: sotto va in sfumatura scura e ci scrivi sopra
-     il testo, senza delineare il bordo netto del video») il video sfuma nel nero in basso (dal 45 %) e un po' a destra; il
-     titolo «Creazione Contenuti» sale sulla parte sfumata */
-  #servizi .m-video{background:none}
-  #servizi .m-video::after{display:none}   /* il filo a sinistra scendeva lungo il video fino in fondo: qui il bordo è il video */
-  #servizi .m-video video,#servizi .m-video .ferma{
-    -webkit-mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.45) 70%,rgba(0,0,0,0) 100%),linear-gradient(90deg,#000 72%,rgba(0,0,0,0) 100%);-webkit-mask-composite:source-in;
-    mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.45) 70%,rgba(0,0,0,0) 100%),linear-gradient(90deg,#000 72%,rgba(0,0,0,0) 100%);mask-composite:intersect}
-  /* (20/11, poi Niccolò: «4b troppo in alto, deve essere come su 5e») il titolo resta sotto il video, alla stessa distanza del Sito Web */
 }
+/* (20/11, versione da computer: «aggiorna anche la versione pc […] come vengono mostrate le anteprime») i riquadri sfumati valgono a tutte le misure */
+/* (20/11, Niccolò, con una foto del sito di Linear: «senza bordi i riquadri non mi piacciono, proviamo a farli più
+   liberi») i tre riquadri (video, sito, chat) tornano al loro posto (16 px dal bordo), ma della cornice restano solo il
+   filo in alto e quello a sinistra, con l'angolo tondo in alto a sinistra, e sfumano andando a destra e in basso; anche
+   il fondo grigio sfuma nel nero della pagina. Niente filo a destra né in basso. Il contenuto non sfuma.
+   (Prima, stessa mattina: attaccati al bordo sinistro senza il lato sinistro; scartato) */
+#servizi .m{box-shadow:none;background:linear-gradient(155deg,#1C1B14 0%,#15140E 40%,rgba(16,15,9,0) 85%)}
+#servizi .m::after{box-shadow:none;border:1px solid rgba(245,244,239,.2);border-right:0;border-bottom:0;
+  -webkit-mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%)}
+/* (20/11, Niccolò: «creazione di contenuti per farlo coerente agli altri: sotto va in sfumatura scura e ci scrivi sopra
+   il testo, senza delineare il bordo netto del video») il video sfuma nel nero in basso (dal 45 %) e un po' a destra; il
+   titolo «Creazione Contenuti» sale sulla parte sfumata */
+#servizi .m-video{background:none}
+#servizi .m-video::after{display:none}   /* il filo a sinistra scendeva lungo il video fino in fondo: qui il bordo è il video */
+#servizi .m-video video,#servizi .m-video .ferma{
+  -webkit-mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.45) 70%,rgba(0,0,0,0) 100%),linear-gradient(90deg,#000 72%,rgba(0,0,0,0) 100%);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.45) 70%,rgba(0,0,0,0) 100%),linear-gradient(90deg,#000 72%,rgba(0,0,0,0) 100%);mask-composite:intersect}
+/* (20/11, poi Niccolò: «4b troppo in alto, deve essere come su 5e») il titolo resta sotto il video, alla stessa distanza del Sito Web */
 /* (19/11 sera, stessa richiesta) anche la linea di sezione sopra «Servizi» finisce sulla linea verticale invece di
    attraversarla fino al bordo: al posto del bordo una riga disegnata larga quanto la sezione meno 19 px */
 @media (max-width:1023px){
@@ -254,7 +255,9 @@ html:not(.viaggio) .ab-vista{overflow:visible;margin:0}
 html:not(.viaggio) .ab-schede{flex-direction:column;gap:var(--s3)}
 html:not(.viaggio) .ab-schede > .pacchetto.speciale{width:auto;margin:0 calc(var(--pan) - var(--lato))}
 @media (max-width:599px){html.viaggio .ab-vista{margin-right:-44px}}
-@media (min-width:900px){.ab-rotaia{display:none}.ab-vista{overflow:visible;margin:0}.ab-schede{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;transform:none!important}
+@media (min-width:900px) and (max-width:1023px){.ab-rotaia{display:none}}
+@media (min-width:1024px){.ab-st.ab-s1,.ab-st.ab-s2{transform:translateX(-5.5px);align-items:flex-start}}
+@media (min-width:900px){.ab-vista{overflow:visible;margin:0}.ab-schede{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;transform:none!important}
   .ab-schede > .pacchetto.speciale{width:auto;display:block;grid-column:auto;margin:0;padding:var(--s4) var(--s3);opacity:1!important;transform:none!important}
   .ab-schede .sp-elenco{border-left:0;padding-left:0;margin-top:var(--s3)} .ab-schede .t2{font-size:30px}}
 @media (min-width:1024px){.ab-giostra{grid-column:1/-1}}   /* (20/11, Niccolò: «togliamo la riga 12») niente linea sopra il piede */
@@ -1284,7 +1287,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             <span class="ab-st ab-s0"><i></i><span>Campagna 360°</span></span>
             <span class="ab-st ab-s1"><i></i><span>Abbonamento 2</span></span>
             <span class="ab-st ab-s2"><i></i><span>Abbonamento 3</span></span>
-            <i class="ab-pt" id="ab-pt" data-posto data-gradi data-colonna></i>
+            <i class="ab-pt" id="ab-pt" data-posto data-gradi></i>
           </div>
           <div class="ab-vista">
             <ul class="ab-schede" id="ab-schede">
@@ -2273,18 +2276,28 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   abSch.forEach(function(c, i){ AB.f[i] = 0; AB.tw[i] = null; });
   function abStX(p){ if (ABN < 2) return AB.st[0] || 0; var i = Math.max(0, Math.min(ABN - 2, Math.floor(p))); return AB.st[i] + (AB.st[i + 1] - AB.st[i]) * (p - i); }
   function abMisura(){
-    AB.on = !!(abRot && abTr && abPt && ABN) && mqColonna.matches && !BN.pc;
+    /* (20/11) da computer (pacchetti affiancati, AB.pc) le tre schede si vedono insieme: il binario sta sopra di loro, una
+       stazione per scheda all'inizio del suo testo, e si sceglie la scheda passandoci sopra col mouse (o col tasto Tab) */
+    AB.pc = !mqColonna.matches;
+    AB.on = !!(abRot && abTr && abPt && ABN) && (AB.pc || !BN.pc);
     if (!AB.on) {
       if (abTr) { abTr.style.transform = ''; abSch.forEach(function(c){ c.style.opacity = ''; c.style.transform = ''; }); }
       abTit.forEach(function(t){ if (t) t.style.removeProperty('--ab-f'); });
       return;
     }
     var cw = document.documentElement.clientWidth, vr = abTr.parentNode.getBoundingClientRect(), rr = abRot.getBoundingClientRect();
-    var W = Math.round(Math.min(300, cw * .78)); abTr.style.setProperty('--ab-w', W + 'px');
-    AB.passo = W + 12; AB.x0 = 16 - vr.left;
-    /* le stazioni: dalla x dove comincia il testo delle schede fino a 22 px prima della curva verso la linea verticale */
-    var pl = parseFloat(getComputedStyle(abSch[0]).paddingLeft) || 24, X = Math.round(cw - 20) + .5, s1 = 16 + pl, sN = X - AB.R - 22;
-    for (var i = 0; i < ABN; i++) AB.st[i] = ABN > 1 ? s1 + (sN - s1) * i / (ABN - 1) : s1;
+    var pl = parseFloat(getComputedStyle(abSch[0]).paddingLeft) || 24, X = lineaX() + .5, s1, sN, i;
+    if (AB.pc) {
+      abTr.style.transform = ''; abSch.forEach(function(c){ c.style.opacity = ''; c.style.transform = ''; });
+      for (i = 0; i < ABN; i++) AB.st[i] = abSch[i].getBoundingClientRect().left + (parseFloat(getComputedStyle(abSch[i]).paddingLeft) || 24);
+      s1 = AB.st[0]; AB.passo = ABN > 1 ? AB.st[1] - AB.st[0] : 300;
+    } else {
+      var W = Math.round(Math.min(300, cw * .78)); abTr.style.setProperty('--ab-w', W + 'px');
+      AB.passo = W + 12; AB.x0 = 16 - vr.left;
+      /* le stazioni: dalla x dove comincia il testo delle schede fino a 22 px prima della curva verso la linea verticale */
+      s1 = 16 + pl; sN = X - AB.R - 22;
+      for (i = 0; i < ABN; i++) AB.st[i] = ABN > 1 ? s1 + (sN - s1) * i / (ABN - 1) : s1;
+    }
     AB.sw = Math.max(1, X - AB.R - s1);
     abLinea.style.left = (s1 - rr.left).toFixed(1) + 'px'; abLinea.style.width = AB.sw.toFixed(1) + 'px';
     abSt.forEach(function(s, i){ s.style.left = (AB.st[i] - rr.left).toFixed(1) + 'px'; });
@@ -2313,8 +2326,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function abDisegna(){
     if (!AB.on) return;
     var p = AB.cur;
-    abTr.style.transform = 'translateX(' + (AB.x0 - p * AB.passo).toFixed(1) + 'px)';
-    abSch.forEach(function(c, i){ var ad = Math.min(1, Math.abs(i - p)); c.style.opacity = (1 - .5 * ad).toFixed(3); c.style.transform = 'scale(' + (1 - .05 * ad).toFixed(4) + ')'; });
+    if (!AB.pc) {
+      abTr.style.transform = 'translateX(' + (AB.x0 - p * AB.passo).toFixed(1) + 'px)';
+      abSch.forEach(function(c, i){ var ad = Math.min(1, Math.abs(i - p)); c.style.opacity = (1 - .5 * ad).toFixed(3); c.style.transform = 'scale(' + (1 - .05 * ad).toFixed(4) + ')'; });
+    }
     abPieno.style.transform = 'scaleX(' + ((abStX(p) - AB.st[0]) / AB.sw).toFixed(4) + ')';
     abSt.forEach(function(s, i){ s.style.setProperty('--on', c01((p - i) * 4 + 1).toFixed(3)); });
     abTit.forEach(function(t, i){ if (t) t.style.setProperty('--ab-f', AB.f[i].toFixed(4)); });
@@ -2406,6 +2421,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     abTr.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' || e.button !== 0) return; abPresa(e.clientX, e.clientY); });
     addEventListener('pointermove', function(e){ if (ABPR && e.pointerType === 'mouse') abMuovi(e.clientX, e.clientY, e); });
     addEventListener('pointerup', function(e){ if (e.pointerType === 'mouse') abLascia(); });
+    /* (20/11) da computer: la scheda sotto il mouse (o col tasto Tab) */
+    abSch.forEach(function(c, i){ c.addEventListener('mouseenter', function(){ if (AB.on && AB.pc) abVai(i, 0); }); c.addEventListener('focusin', function(){ if (AB.on && AB.pc) abVai(i, 0); }); });
     /* le stazioni: un tocco porta alla sua scheda */
     abSt.forEach(function(s, i){ s.addEventListener('click', function(){ abVai(i, 0); }); });
     /* il motore mette e toglie .qui alla pallina del binario quando ci si siede o riparte */
@@ -2499,6 +2516,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function corsia(B){
     if (B.dentro) return B.lato < 0 ? Math.max(8, B.porta.left - 22) : Math.min(xM, B.porta.right + 22);
     if (B === FIN && B.corsiaS != null) return B.corsiaS;
+    if (LV.on && !mqColonna.matches) return LV.x + .5;   /* (20/11) da computer: lungo la linea */
     return B.riq ? Math.min(xM, B.riq.right + 22) : xM;
   }
   /* dove aspetta nella corsia tra due tappe (sullo schermo): al 38% dello schermo, o più in basso se il posto da cui parte
@@ -2622,11 +2640,12 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     GRADI = FIN = null;
     P.forEach(function(s){ if (s.el === gradiPt) GRADI = s; if (s.el === logoPt) FIN = s; });
     RAC = null;
+    if (GRADI && !AB.on) { P.splice(P.indexOf(GRADI), 1); GRADI = null; }   /* (20/11) tra 900 e 1023 px: niente linea né binario */
     if (GRADI) {
       /* (20/11) il «GRADI» è la pallina del binario degli abbonamenti (#ab-pt): un posto vivo che si muove da sé (sul binario
          con le schede, il salto nel titolo). Per le misure sta sulla stazione della scheda che si vede, sulla riga del
          binario. Ci resta seduta finché il binario non è salito al 12% dello schermo: il tempo di scorrere le schede */
-      GRADI.live = true; GRADI.ab = true; GRADI.cardL = 16;
+      GRADI.live = true; GRADI.ab = true; GRADI.cardL = AB.pc ? abSch[0].getBoundingClientRect().left : 16;
       GRADI.x = abStX(AB.cur); GRADI.ly = abRot.getBoundingClientRect().top + 5.5 + y0; GRADI.d = 11;
       GRADI.inY = GRADI.ly - Math.round(.68 * V0); GRADI.outY = GRADI.ly - Math.round(.12 * V0);
     }
@@ -2777,6 +2796,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         Fra due tappe la pallina va in orizzontale dal punto alla linea, lungo la linea fino alla riga della tappa dopo e
         in orizzontale nel punto (lineaPunta), legata allo scorrimento. Nei riquadri (la frase del Sito Web, la foto
         profilo e il riepilogo della chat) i tratti in orizzontale passano dietro al riquadro. ── */
+  /* (20/11) la x della linea: al telefono 20 px dal bordo; da computer (pacchetti affiancati) nel margine destro, 40 px
+     fuori dal testo (al più 20 px dal bordo) */
+  function lineaX(){
+    var cw = document.documentElement.clientWidth;
+    if (mqColonna.matches) return Math.round(cw - 20);
+    var w = document.querySelector('#servizi > .wrap'), r = w && w.getBoundingClientRect(), pr = w ? parseFloat(getComputedStyle(w).paddingRight) || 0 : 0;
+    return Math.round(Math.min(cw - 20, r ? r.right - pr + 40 : cw - 20));
+  }
   var LV = { on: false, x: 0, dal: 0, al: 0, carta: 1e9, el: null, cu: null, R: 0, xs: 0 };
   function lineaMisura(y0, BT){
     if (!LV.el) { LV.el = document.createElement('div'); LV.el.className = 'linea-v'; LV.el.id = 'linea-v'; LV.el.setAttribute('aria-hidden', 'true'); document.body.appendChild(LV.el); }
@@ -2791,13 +2818,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       LV.cu.innerHTML = '<defs><linearGradient id="lc-sfuma" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5F4EF" stop-opacity=".16"/><stop offset="1" stop-color="#F5F4EF" stop-opacity=".085"/></linearGradient></defs><path fill="none" stroke="url(#lc-sfuma)" stroke-width="1"/>';
       document.body.appendChild(LV.cu);
     }
-    LV.on = mqColonna.matches && !BN.pc && !!BT && !!GRADI;
+    LV.on = !!GRADI && ((mqColonna.matches && !BN.pc && !!BT) || !mqColonna.matches);   /* (20/11) anche da computer */
     if (!LV.on) { LV.el.style.display = 'none'; LV.cu.style.display = 'none'; lineaAngolo(null); return; }
-    LV.x = Math.round(document.documentElement.clientWidth - 20);   /* (19/11 sera) 20 px dal bordo: i Servizi sono decentrati a sinistra */
-    LV.dal = BN.T + BT.ly; LV.al = GRADI.ly;
+    LV.x = lineaX();   /* (19/11 sera) 20 px dal bordo: i Servizi sono decentrati a sinistra */
+    LV.dal = BT ? BN.T + BT.ly : 0; LV.al = GRADI.ly;
     var cg = GRADI.el.closest('.pacchetto'); LV.carta = cg ? cg.getBoundingClientRect().top + y0 : 1e9;
     /* la curva: dalla fine del binario (x xs, riga yr nella pagina) alla linea (X); Y1: dove comincia la linea dritta */
     var rl = rot.querySelector('.linea').getBoundingClientRect(), X = LV.x + .5, yr = (rl.top + rl.bottom) / 2 + y0;
+    if (!BT) LV.dal = yr;   /* (20/11) da computer non c'è il treno: comincia sulla riga del binario */
     var Y1 = Math.round(LV.dal);
     LV.xs = rl.right; LV.R = 0;
     if (rl.width > 0 && X - LV.xs >= 4) {   /* il binario si vede (senza, la linea comincia dritta come prima) */
@@ -2817,7 +2845,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
        (7x). In cima non serve: c'è la curva */
     /* (20/11, Niccolò: «anche se la pallina ci va togli la linea in prossimità di 3b e su tutti i Parliamone») niente tacca
        su 3b («…farti scegliere.») né sulle frecce di «Parliamone»: la pallina ci si ferma lo stesso */
-    var T = [['#servizi > .wrap > .etichetta', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga'], ['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']];
+    var T = [['#servizi > .wrap > .etichetta', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga']];
+    if (mqColonna.matches) T.push(['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']);   /* (20/11) da computer la pallina non si ferma sui titoli dei pacchetti */
     /* (20/11) con gli abbonamenti la linea non finisce nel «°» ma gira nel binario 7g (quarto di giro 7h, raggio AB.R) */
     var abFine = !!(GRADI && GRADI.ab && AB.on);
     var fondo = Math.round(LV.al) - (abFine ? AB.R : 0), h = abFine ? '' : '<i class="lv-corta" style="top:' + (fondo - Y1) + 'px"></i>';
