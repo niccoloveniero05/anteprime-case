@@ -226,6 +226,9 @@ html.js:not(.fermo) .ap-palco{position:sticky;top:0;height:100vh;height:100lvh}
 .lv .e,.lv .st{-webkit-clip-path:inset(-20% 100% -20% 0);clip-path:inset(-20% 100% -20% 0)}
 .ap-pt{position:absolute;left:0;top:0;z-index:5;border-radius:50%;visibility:hidden;pointer-events:none}
 html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec)}
+/* (20/11 NB) l'apertura parte dal nome: il titolo resta solo per la sintesi vocale; il puntino del nome e del logo è arancio */
+html.js:not(.fermo) #copertina-wrap{opacity:0}
+#ap-logo .pd{background:var(--rec)}
 /* Safari su iOS 26 colora la barra in basso con l'elemento fisso che tocca il bordo: questa striscia scura gli dà il colore del sito */
 .tinta-safari{display:none;position:fixed;left:0;right:0;bottom:0;height:8px;background:var(--bg);pointer-events:none;z-index:60}
 @supports (-webkit-touch-callout:none){.tinta-safari{display:block}}
@@ -1075,7 +1078,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   <section class="sez servizi" id="servizi" aria-labelledby="t-servizi">
     <div class="wrap">
       <span class="etichetta">Servizi</span>
-      <h2 class="t-sez" id="t-servizi">Tutto per farti <em>scegliere</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
+      <h2 class="t-sez" id="t-servizi">Fatti trovare.<br>Fatti <em>scegliere</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
       <p class="sotto">Quattro pacchetti. Prendi <b>quello che ti serve</b>, oppure <b>tutto insieme</b> con la Campagna&nbsp;360°.</p>
       <ul class="pacchetti">
         <li class="pacchetto" id="contenuti">
@@ -1439,10 +1442,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (!W || !V || !H) return false;
     var a = { W: W, V: V, H: H, hdr: hdr };
     a.m1 = Math.round(.9 * V); a.m2 = Math.round(1.8 * V);                       /* i momenti 2 e 3 */
-    a.c0 = a.m2 + Math.round(.04 * V); a.c1 = a.m2 + Math.round(.42 * V);           /* l'arancio si stringe nel puntino */
-    a.via = a.m2 + Math.round(.5 * V); a.P = a.m2 + Math.round(.62 * V);            /* il puntino parte; il palco se ne va */
+    a.O = a.m1; a.c0 = a.m2; a.c1 = a.m2 + Math.round(.02 * V);   /* (20/11 NB) */           /* l'arancio si stringe nel puntino */
+    a.via = a.m2 + Math.round(.1 * V); a.P = a.m2 + Math.round(.22 * V);   /* (20/11 NB) */            /* il puntino parte; il palco se ne va */
     a.gF = .6; a.b0 = .5;   /* nel primo passaggio: il disco copre tutto al 60%, il nome nasce dal 50% */
-    sez.style.height = (a.P + H) + 'px';
+    sez.style.height = (a.P - a.O + H) + 'px';
     a.T = Math.round(sez.getBoundingClientRect().top + scrollY);
     var pr = palco.getBoundingClientRect(), dr = dot.getBoundingClientRect();
     a.x0 = dr.left + dr.width / 2 - pr.left; a.y0 = dr.top + dr.height / 2 - pr.top; a.r0 = dr.width / 2;
@@ -1484,10 +1487,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var chiuso = false, tst = { f: -1, m: -1 };
   function rendi(ys){
     if (!A) return;
-    var V = A.V, y = ys - A.T, u1 = clamp(y / A.m1);
+    var V = A.V, y = ys - A.T + A.O, u1 = clamp(y / A.m1);   /* (20/11 NB) si parte da M2 */
     /* il disco: cresce da dov'è il punto di «scegliere» (0 → m1: il raggio cresce sempre della stessa parte, come uno zoom, e
        il centro scivola dove nascerà il puntino del nome), copre tutto (m1 → c0), si stringe nel puntino del logo (c0 → c1) */
-    if (y > .5 && y < A.c1) {
+    if (false) {   /* (20/11 NB) niente più disco arancio */
       var r, cx, cy, fo = null;
       if (y < A.c0) {
         var g = seg(u1, 0, A.gF), k = liscio(seg(u1, .04, A.gF)); r = A.r0 * Math.pow(A.R1 / A.r0, Math.pow(g, 1.1)); cx = lerp(A.x0, A.nx, k); cy = lerp(A.y0, A.ny, k);
@@ -1508,10 +1511,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       disc(cx, cy, r, fo);
     } else scrivi(disco, 'visibility', 'hidden');
     scrivi(dot, 'visibility', y > .5 ? 'hidden' : '');               /* il punto del titolo diventa il disco, allo stesso posto */
-    scrivi(wrap, 'visibility', u1 >= A.gF ? 'hidden' : '');          /* coperto dall'arancio, il titolo se ne va: all'uscita sotto c'è il nero */
+    /* (20/11 NB) il titolo non si vede (CSS: opacity 0) */          /* coperto dall'arancio, il titolo se ne va: all'uscita sotto c'è il nero */
     var b = seg(u1, A.b0, 1);
     scrivi(lv, 'visibility', b > 0 && L ? 'visible' : 'hidden');
-    if (b > 0 && L) logo(b, 1 - seg(y, A.m1, A.m2), seg(y, A.m2 + .02 * V, A.c0 + .3 * (A.c1 - A.c0)));
+    if (b > 0 && L) logo(b, 1 - seg(y, A.m1, A.m2), y >= A.c1 ? 1 : 0);   /* (20/11 NB) il puntino del logo lascia il posto alla pallina (.ap-pt) quando è «chiuso» */
     var ch = y >= A.c1; if (ch !== chiuso) { chiuso = ch; API.chiuso = ch; palco.classList.toggle('chiuso', ch); }
     /* la testata: fondo trasparente finché c'è l'arancio (l'arancio va fino in cima, niente striscia sotto la testata);
        marchio piccolo via mentre il nome e il logo grandi sono a schermo, di nuovo quando la V è uscita del tutto in alto
@@ -1528,7 +1531,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     punti: function(){
       if (!A && !misura()) return null;
       var pr = palco.getBoundingClientRect();
-      return { el: apt, x: pr.left + A.px, ly: A.py, d: 2 * A.pr, scena: { T: A.T, R: A.P }, via: A.T + A.via, alto: A.H };
+      return { el: apt, x: pr.left + A.px, ly: A.py, d: 2 * A.pr, scena: { T: A.T, R: A.P - A.O }, via: A.T + A.via - A.O, alto: A.H };
     },
     rendi: function(ys){ ultimo = ys; rendi(ys); },
     /* per gli strumenti di prova: le misure e i quattro agganci */
@@ -1563,7 +1566,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var AGGANCIO = true;
   var tw = null, giro = 0, tocco = null, ditoGiu = false, ultimaDir = 1, yUlt = -1, attesa = 0, spento = !AGGANCIO;
   var SENZA = !!window.SENZA_AGGANCIO;   /* per gli strumenti di prova che fotografano a metà dei passaggi */
-  function momenti(){ var t = A.T, f = API.fine && API.fine > t + A.m2 + 10 ? API.fine : t + A.P; return [t, f]; }   /* (19/11 notte) un colpo solo: la cima e la fine */
+  function momenti(){ var t = A.T, f = API.fine && API.fine > t + A.m2 - A.O + 10 ? API.fine : t + A.P - A.O; return [t, f]; }   /* (19/11 notte) un colpo solo: la cima e la fine */
   function dopo(b, M){ for (var i = 0; i < M.length; i++) if (M[i] > b + 2) return M[i]; return M[M.length - 1]; }
   function prima(b, M){ for (var i = M.length - 1; i >= 0; i--) if (M[i] < b - 2) return M[i]; return M[0]; }
   function vicino(y, M){ var m = M[0]; M.forEach(function(x){ if (Math.abs(x - y) < Math.abs(m - y)) m = x; }); return m; }
@@ -1753,7 +1756,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 (function(){
   var sez=document.getElementById('inizio'),cop=document.getElementById('ap-palco'),cv=cop&&cop.querySelector('.macchia');if(!cv||!sez)return; // 19/11: la copertina è il palco fermo dell'apertura
   var wrap=document.getElementById('copertina-wrap'),html=document.documentElement;
-  var T0=18,SP=.5; // T0: si apre già a metà del moto; SP: schermate di scorrimento in cui le luci si spengono (19/11: il palco è fermo e l'arancio copre tutto a .54)
+  var T0=18,SP=1.1; // T0: si apre già a metà del moto; SP: schermate di scorrimento in cui le luci si spengono (19/11: il palco è fermo e l'arancio copre tutto a .54)
   var mq=null;try{mq=matchMedia('(prefers-reduced-motion: reduce)')}catch(e){}
   var fermo=!!(mq&&mq.matches);
   function lisce(t){return t*t*(3-2*t)}
@@ -3345,7 +3348,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      vedrebbero due cerchietti). Da computer niente. ===== */
 (function(){
   'use strict';
-  var html = document.documentElement, ag = document.getElementById('aggiorna'), rp = document.getElementById('rec-punto'), tit = document.getElementById('t-eroe');
+  var html = document.documentElement, ag = document.getElementById('aggiorna'), rp = document.querySelector('#ap-logo .pd'), tit = document.querySelector('#ap-logo .n');   /* (20/11 NB) dal puntino del nome */
   if (!ag || !rp || !tit || !('ontouchstart' in window) || !(window.CSS && CSS.supports && CSS.supports('overscroll-behavior-y', 'none'))) return;
   var pal = ag.querySelector('.ag-pallina'), arco = ag.querySelector('.ag-arco');
   var fermo = false; try { fermo = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (x) {}
@@ -3395,9 +3398,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     pal.setAttribute('r', (u >= 1 ? 0 : rt).toFixed(2)); pal.style.fill = cs;
     arco.setAttribute('r', R); arco.style.stroke = cs; arco.style.strokeWidth = (u > 0 ? W : 0).toFixed(2);
     arco.style.strokeDasharray = (CIRC * e).toFixed(2) + ' ' + CIRC.toFixed(2);
-    ag.classList.toggle('su', p > 0); rp.style.visibility = p > 0 ? 'hidden' : '';
+    ag.classList.toggle('su', p > 0); rp.style.opacity = p > 0 ? '0' : '';
   }
-  function finisci(){ ag.classList.remove('su', 'gira'); rp.style.visibility = ''; }
+  function finisci(){ ag.classList.remove('su', 'gira'); rp.style.opacity = ''; }
   /* (18/11 notte, Niccolò: «più lenta sia ad arrivare che mentre si trasforma») quello che si vede insegue il dito con
      calma: al massimo VMAX di strada al secondo (la salita intera in circa un secondo) e frena arrivando */
   function anima(){
