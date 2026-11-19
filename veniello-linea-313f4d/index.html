@@ -3254,7 +3254,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
          fino alla x del pallino di 2e e giù dentro di lui */
       e = liscio(t); A = g.da; B = g.a2;
       var vx = sx(A), vy = sy(A, y), wx = sx(B), wy = sy(B, y), my = (vy + wy) / 2;
-      p = traccia([[vx, vy], [vx + 14, vy], [vx + 14, my], [wx, my], [wx, wy]], 10).at(e);
+      /* (20/11 sera, Niccolò, col disegno: strada ad angolo retto) a destra lungo la riga di «decidi» fin sopra il pallino e
+         giù dritta dentro di lui; se il pallino è a sinistra del punto (schermi larghi), prima giù sotto il titolo, così non
+         passa sulle lettere */
+      var vie = wx >= vx - 1 ? [[vx, vy], [wx, vy], [wx, wy]] : [[vx, vy], [vx, vy + (wy - vy) * .45], [wx, vy + (wy - vy) * .45], [wx, wy]];
+      p = traccia(vie, 14).at(e);
       return { x: p[0], y: p[1], d: lerp(A.d, B.d, e), kmax: 1.4 };
     }
     return viaggio(g, yp, y);
