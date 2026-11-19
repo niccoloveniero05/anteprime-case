@@ -319,6 +319,9 @@ html:not(.viaggio) .ab-rotaia{display:none}
 .ab-dett-x .piu::after{transform:rotate(0)}
 .dettagli.lato-aperto > summary .piu::after{transform:rotate(0)}
 .ab-pt{transition:width .12s linear,height .12s linear,margin .12s linear,border-radius .12s linear}
+/* (20/11 sera) il pallino di 2e quando la pallina ci si posa (da computer) */
+html.viaggio .stazione i.qui{background:var(--rec);box-shadow:none}
+html.viaggio .stazione i.qui::after{opacity:0}
 html.viaggio .ab-pt.qui.scia{width:2px;height:22px;margin:-11px 0 0 -1px;border-radius:1px}
 html:not(.viaggio) .ab-vista{overflow:visible;margin:0}
 html:not(.viaggio) .ab-schede{flex-direction:column;gap:var(--s3)}
@@ -1362,7 +1365,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             <ul class="ab-schede" id="ab-schede">
             <li class="pacchetto speciale" id="campagna">
               <div class="sp-testa">
-                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.1</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="o d" d="M28.4 118.8 L28.5 116.2 L28.8 113.6 L29.4 111.0 L30.1 108.5 L31.1 105.9 L32.3 103.4 L33.7 101.0 L35.4 98.6 L37.2 96.2 L39.2 93.9 L41.4 91.6 L43.8 89.4 L46.4 87.3 L49.2 85.2 L52.1 83.3 L55.2 81.4 L58.5 79.6 L61.9 77.9 L65.4 76.3 L69.1 74.8 L72.9 73.4 L76.8 72.2 L80.8 71.0 L84.9 69.9 L89.1 69.0 L93.4 68.2 L97.7 67.5 L102.1 66.9 L106.6 66.5 L111.0 66.2 L115.5 66.0 L120.0 65.9 L124.5 66.0 L129.0 66.2 L133.4 66.5 L137.9 66.9 L142.3 67.5 L146.6 68.2 L150.9 69.0 L155.1 69.9 L159.2 71.0 L163.2 72.2 L167.1 73.4 L170.9 74.8 L174.6 76.3 L178.1 77.9 L181.5 79.6 L184.8 81.4 L187.9 83.3 L190.8 85.2 L193.6 87.3 L196.2 89.4 L198.6 91.6 L200.8 93.9 L202.8 96.2 L204.6 98.6 L206.3 101.0 L207.7 103.4 L208.9 105.9 L209.9 108.5 L210.6 111.0 L211.2 113.6 L211.5 116.2 L211.6 118.8"/><path class="f l" d="M61.1 146.0 L120.0 180.0 L120.0 170.7 L61.1 136.7 Z"/><path class="f r" d="M178.9 146.0 L120.0 180.0 L120.0 170.7 L178.9 136.7 Z"/><path class="f t" d="M120.0 102.7 L178.9 136.7 L120.0 170.7 L61.1 136.7 Z"/><path class="f l" d="M61.1 124.8 L120.0 158.8 L120.0 149.4 L61.1 115.4 Z"/><path class="f r" d="M178.9 124.8 L120.0 158.8 L120.0 149.4 L178.9 115.4 Z"/><path class="f t" d="M120.0 81.4 L178.9 115.4 L120.0 149.4 L61.1 115.4 Z"/><path class="f l" d="M61.1 103.5 L120.0 137.5 L120.0 128.2 L61.1 94.2 Z"/><path class="f r" d="M178.9 103.5 L120.0 137.5 L120.0 128.2 L178.9 94.2 Z"/><path class="f t" d="M120.0 60.2 L178.9 94.2 L120.0 128.2 L61.1 94.2 Z"/><path class="o" d="M211.6 118.8 L211.5 121.4 L211.2 124.0 L210.6 126.6 L209.9 129.1 L208.9 131.7 L207.7 134.2 L206.3 136.6 L204.6 139.0 L202.8 141.4 L200.8 143.7 L198.6 146.0 L196.2 148.2 L193.6 150.3 L190.8 152.4 L187.9 154.3 L184.8 156.2 L181.5 158.0 L178.1 159.7 L174.6 161.3 L170.9 162.8 L167.1 164.2 L163.2 165.4 L159.2 166.6 L155.1 167.7 L150.9 168.6 L146.6 169.4 L142.3 170.1 L137.9 170.7 L133.4 171.1 L129.0 171.4 L124.5 171.6 L120.0 171.7 L115.5 171.6 L111.0 171.4 L106.6 171.1 L102.1 170.7 L97.7 170.1 L93.4 169.4 L89.1 168.6 L84.9 167.7 L80.8 166.6 L76.8 165.4 L72.9 164.2 L69.1 162.8 L65.4 161.3 L61.9 159.7 L58.5 158.0 L55.2 156.2 L52.1 154.3 L49.2 152.4 L46.4 150.3 L43.8 148.2 L41.4 146.0 L39.2 143.7 L37.2 141.4 L35.4 139.0 L33.7 136.6 L32.3 134.2 L31.1 131.7 L30.1 129.1 L29.4 126.6 L28.8 124.0 L28.5 121.4 L28.4 118.8"/><path class="o p" d="M136.2 103.5 L134.5 104.4 L132.7 105.1 L130.8 105.8 L128.8 106.4 L126.6 106.8 L124.5 107.1 L122.2 107.3 L120.0 107.4 L117.8 107.3 L115.5 107.1 L113.4 106.8 L111.2 106.4 L109.2 105.8 L107.3 105.1 L105.5 104.4 L103.8 103.5 L102.3 102.5 L101.0 101.5 L99.8 100.4 L98.8 99.2 L98.1 98.0 L97.5 96.7 L97.2 95.4 L97.1 94.2 L97.2 92.9 L97.5 91.6 L98.1 90.3 L98.8 89.1 L99.8 87.9 L101.0 86.8 L102.3 85.8 L103.8 84.8 L105.5 83.9 L107.3 83.2 L109.2 82.5 L111.2 81.9 L113.4 81.5 L115.5 81.2 L117.8 81.0 L120.0 80.9 L122.2 81.0 L124.5 81.2 L126.6 81.5 L128.8 81.9 L130.8 82.5 L132.7 83.2 L134.5 83.9 L136.2 84.8 L137.7 85.8 L139.0 86.8 L140.2 87.9 L141.2 89.1 L141.9 90.3 L142.5 91.6 L142.8 92.9 L142.9 94.2 L142.8 95.4 L142.5 96.7 L141.9 98.0 L141.2 99.2 L140.2 100.4 L139.0 101.5 L137.7 102.5 L136.2 103.5"/></svg></div><p class="speciale-tag">Pacchetto speciale</p>
+                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.1</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M79.5 141.4 L120.0 164.8 L120.0 118.0 L79.5 94.6 Z"/><path class="f r" d="M160.5 141.4 L120.0 164.8 L120.0 118.0 L160.5 94.6 Z"/><path class="f t" d="M120.0 71.2 L160.5 94.6 L120.0 118.0 L79.5 94.6 Z"/></svg></div><p class="speciale-tag">Pacchetto speciale</p>
                 <h3 class="t2 ab-tit" id="t-360">Campagna Pubblicitaria 360°<span class="sr">.</span></h3>
                 <p class="sotto">Contenuti, sito e Virtual Assistant insieme, in una sola&nbsp;campagna.</p>
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
@@ -1374,7 +1377,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             </li>
             <li class="pacchetto speciale ab-segnaposto" id="abbonamento-2">
               <div class="sp-testa">
-                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.2</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M89.5 121.6 L120.0 139.2 L120.0 97.6 L89.5 80.0 Z"/><path class="f r" d="M150.5 121.6 L120.0 139.2 L120.0 97.6 L150.5 80.0 Z"/><path class="f t" d="M120.0 62.4 L150.5 80.0 L120.0 97.6 L89.5 80.0 Z"/><path class="f l" d="M125.5 142.4 L156.0 160.0 L156.0 134.4 L125.5 116.8 Z"/><path class="f r" d="M186.5 142.4 L156.0 160.0 L156.0 134.4 L186.5 116.8 Z"/><path class="f t" d="M156.0 99.2 L186.5 116.8 L156.0 134.4 L125.5 116.8 Z"/><path class="f l" d="M53.5 142.4 L84.0 160.0 L84.0 131.2 L53.5 113.6 Z"/><path class="f r" d="M114.5 142.4 L84.0 160.0 L84.0 131.2 L114.5 113.6 Z"/><path class="f t" d="M84.0 96.0 L114.5 113.6 L84.0 131.2 L53.5 113.6 Z"/><path class="f l" d="M89.5 163.2 L120.0 180.8 L120.0 129.6 L89.5 112.0 Z"/><path class="f r" d="M150.5 163.2 L120.0 180.8 L120.0 129.6 L150.5 112.0 Z"/><path class="f t" d="M120.0 94.4 L150.5 112.0 L120.0 129.6 L89.5 112.0 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
+                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.2</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M59.6 121.3 L97.9 143.4 L97.9 99.2 L59.6 77.1 Z"/><path class="f r" d="M136.2 121.3 L97.9 143.4 L97.9 99.2 L136.2 77.1 Z"/><path class="f t" d="M97.9 55.0 L136.2 77.1 L97.9 99.2 L59.6 77.1 Z"/><path class="f l" d="M103.8 146.8 L142.1 168.9 L142.1 124.7 L103.8 102.6 Z"/><path class="f r" d="M180.4 146.8 L142.1 168.9 L142.1 124.7 L180.4 102.6 Z"/><path class="f t" d="M142.1 80.5 L180.4 102.6 L142.1 124.7 L103.8 102.6 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
                 <h3 class="t2 ab-tit" id="t-ab2">Abbonamento 2<span class="sr">.</span></h3>
                 <p class="sotto">Qui la frase che spiega l'abbonamento, in una o due&nbsp;righe.</p>
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
@@ -1386,7 +1389,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             </li>
             <li class="pacchetto speciale ab-segnaposto" id="abbonamento-3">
               <div class="sp-testa">
-                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.3</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M50.2 184.5 L53.9 186.6 L53.9 177.6 L50.2 175.5 Z"/><path class="f r" d="M113.6 152.1 L53.9 186.6 L53.9 177.6 L113.6 143.1 Z"/><path class="f t" d="M110.0 141.0 L113.6 143.1 L53.9 177.6 L50.2 175.5 Z"/><path class="f l" d="M60.0 190.1 L63.6 192.2 L63.6 175.0 L60.0 172.9 Z"/><path class="f r" d="M123.4 157.7 L63.6 192.2 L63.6 175.0 L123.4 140.5 Z"/><path class="f t" d="M119.7 138.4 L123.4 140.5 L63.6 175.0 L60.0 172.9 Z"/><path class="f l" d="M69.7 195.8 L73.4 197.8 L73.4 172.3 L69.7 170.2 Z"/><path class="f r" d="M133.1 163.3 L73.4 197.8 L73.4 172.3 L133.1 137.8 Z"/><path class="f t" d="M129.5 135.8 L133.1 137.8 L73.4 172.3 L69.7 170.2 Z"/><path class="f l" d="M79.5 201.4 L83.1 203.5 L83.1 169.7 L79.5 167.6 Z"/><path class="f r" d="M142.9 169.0 L83.1 203.5 L83.1 169.7 L142.9 135.2 Z"/><path class="f t" d="M139.2 133.1 L142.9 135.2 L83.1 169.7 L79.5 167.6 Z"/><path class="f l" d="M89.2 207.0 L92.9 209.1 L92.9 167.1 L89.2 165.0 Z"/><path class="f r" d="M152.6 174.6 L92.9 209.1 L92.9 167.1 L152.6 132.6 Z"/><path class="f t" d="M149.0 130.5 L152.6 132.6 L92.9 167.1 L89.2 165.0 Z"/><path class="f l" d="M99.0 212.6 L102.6 214.7 L102.6 164.5 L99.0 162.4 Z"/><path class="f r" d="M162.4 180.2 L102.6 214.7 L102.6 164.5 L162.4 130.0 Z"/><path class="f t" d="M158.7 127.9 L162.4 130.0 L102.6 164.5 L99.0 162.4 Z"/><path class="f l" d="M108.7 218.2 L112.3 220.3 L112.3 161.8 L108.7 159.8 Z"/><path class="f r" d="M172.1 185.8 L112.3 220.3 L112.3 161.8 L172.1 127.3 Z"/><path class="f t" d="M168.5 125.2 L172.1 127.3 L112.3 161.8 L108.7 159.8 Z"/><path class="f l" d="M118.4 223.9 L122.1 226.0 L122.1 159.2 L118.4 157.1 Z"/><path class="f r" d="M181.8 191.5 L122.1 226.0 L122.1 159.2 L181.8 124.7 Z"/><path class="f t" d="M178.2 122.6 L181.8 124.7 L122.1 159.2 L118.4 157.1 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
+                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.3</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M66.7 126.2 L100.5 145.8 L100.5 106.8 L66.7 87.2 Z"/><path class="f r" d="M134.3 126.2 L100.5 145.8 L100.5 106.8 L134.3 87.2 Z"/><path class="f t" d="M100.5 67.8 L134.3 87.2 L100.5 106.8 L66.7 87.2 Z"/><path class="f l" d="M66.7 87.2 L100.5 106.8 L100.5 67.8 L66.7 48.2 Z"/><path class="f r" d="M134.3 87.2 L100.5 106.8 L100.5 67.8 L134.3 48.2 Z"/><path class="f t" d="M100.5 28.8 L134.3 48.2 L100.5 67.8 L66.7 48.2 Z"/><path class="f l" d="M105.7 148.8 L139.5 168.2 L139.5 129.2 L105.7 109.8 Z"/><path class="f r" d="M173.3 148.8 L139.5 168.2 L139.5 129.2 L173.3 109.8 Z"/><path class="f t" d="M139.5 90.2 L173.3 109.8 L139.5 129.2 L105.7 109.8 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
                 <h3 class="t2 ab-tit" id="t-ab3">Abbonamento 3<span class="sr">.</span></h3>
                 <p class="sotto">Qui la frase che spiega l'abbonamento, in una o due&nbsp;righe.</p>
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
@@ -2437,6 +2440,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (AB.anim && ora < AB.anim) vivo = true;
     /* fermi su un'altra scheda (né il pannello né la sua scheda): il pannello si chiude */
     if (ferma && AB.det && qui && qui !== AB.det.el && qui !== abSch[AB.det.i] && !AB.det.chiude) abChiudi(false);
+    if (!seduta && AB.pc && !ABCR.dur && AB.cur !== 0) AB.cur = 0;   /* (20/11 sera) da computer arriva sempre sulla prima stazione */
     if (!seduta) {
       /* la pallina non c'è (sta arrivando o è andata via): sul binario, il colore si ritira */
       if (AB.stato !== 'binario') { if (AB.f[AB.cc] > 0) abColore(AB.cc, 0, 320); AB.stato = 'binario'; }
@@ -2556,7 +2560,17 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     addEventListener('pointermove', function(e){ if (ABPR && e.pointerType === 'mouse') abMuovi(e.clientX, e.clientY, e); });
     addEventListener('pointerup', function(e){ if (e.pointerType === 'mouse') abLascia(); });
     /* (20/11) da computer: la scheda sotto il mouse (o col tasto Tab) */
-    abSch.forEach(function(c, i){ c.addEventListener('mouseenter', function(){ if (AB.on && AB.pc) abVai(abItemDi(i), 0); }); c.addEventListener('focusin', function(){ if (AB.on && AB.pc) abVai(abItemDi(i), 0); }); });
+    /* (20/11 sera, Niccolò: «in 7g la pallina falla andare automaticamente sul primo punto a sinistra al posto di lasciarlo
+       sul 3») solo col mouse che si muove davvero (scorrendo, la scheda sotto il mouse cambiava da sola); fuori dalle schede
+       torna alla prima */
+    abSch.forEach(function(c, i){
+      c.addEventListener('mousemove', function(e){ if (AB.on && AB.pc && AB.mosso && Math.round(ABCR.dur ? ABCR.a : AB.cur) !== abItemDi(i)) abVai(abItemDi(i), 0); });
+      c.addEventListener('focusin', function(){ if (AB.on && AB.pc) abVai(abItemDi(i), 0); });
+    });
+    abTr.addEventListener('mouseleave', function(){ if (AB.on && AB.pc) abVai(0, 0); });
+    /* il mouse si è mosso davvero: un mousemove dopo lo scorrimento (il browser lo manda per aggiornare il passaggio) ha la
+       stessa posizione sullo schermo di prima e non conta */
+    addEventListener('mousemove', function(e){ AB.mosso = e.clientX !== AB.mx || e.clientY !== AB.my; AB.mx = e.clientX; AB.my = e.clientY; }, true);
     /* le stazioni: un tocco porta alla sua scheda */
     abSt.forEach(function(s, i){ s.addEventListener('click', function(){ abVai(abItemDi(i), 0); }); });
     /* al telefono «Cosa comprende» si apre di lato (prima delle tendine: fase di cattura, e la tendina non si apre) */
@@ -2829,6 +2843,17 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     APosto = null;
     var ap = AP && AP.punti();
     if (ap) APosto = { el: ap.el, x: ap.x, ly: ap.ly, d: ap.d, scena: ap.scena, alto: ap.alto, ap: true, inY: -1e9, outY: ap.via };
+    /* (20/11 sera) da computer la stazione di 2e (terza colonna di «Come funziona») è una tappa: ci si arriva da «Poi decidi»
+       scendendo (tratto «versoSt») e si riparte lungo il binario verso la linea verticale */
+    if (GRADI && !mqColonna.matches) {
+      var se3 = rot.querySelector('.stazione.s2 i'), iC = -1;
+      P.forEach(function(q, j){ if (q.el === comePt) iC = j; });
+      if (se3 && iC >= 0) {
+        var sq3 = se3.getBoundingClientRect(), ST3 = { el: se3, st3: true, x: sq3.left + sq3.width / 2, ly: sq3.top + sq3.height / 2 + y0, d: sq3.width || 11 };
+        ST3.inY = ST3.ly - Math.round(.5 * V0); ST3.outY = ST3.ly - Math.round(.36 * V0);
+        P.splice(iC + 1, 0, ST3);
+      }
+    }
     var seq = [], messa = !BT, binTop = bin.getBoundingClientRect().top + y0;
     P.forEach(function(s){ if (!messa && s.ly > binTop) { seq.push(BC, BT); messa = true; } seq.push(s); });
     if (!messa) seq.push(BC, BT);
@@ -2880,6 +2905,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       else if (s.dentro && s.lato < 0) SEG.push(CHATSEG = { a: s.outY, b: nx.inY, k: 'esceChat', da: s, a2: nx, modo: CHATSEG && CHATSEG.dentro ? CHATSEG.modo : null, dentro: !!(CHATSEG && CHATSEG.dentro) });
       else if (s.dentro) SEG.push({ a: s.outY, b: nx.inY, k: 'esceDentro', da: s, a2: nx });
       else if (s === GRADI && nx === RAC) SEG.push({ a: s.outY, b: nx.inY, k: 'spazza', da: s, a2: nx });
+      else if (nx.st3) SEG.push({ a: s.outY, b: nx.inY, k: 'versoSt', da: s, a2: nx });
       else if (s.ap) SEG.push({ a: s.outY, b: nx.inY, k: 'scende', da: s, a2: nx, corsia: s.x > fineRighe(nx.el) + 24 ? s.x : xM });
       else {
         var sd = strada(s, nx), gv = sd.g; gv.a = s.outY; gv.b = nx.inY; gv.k = 'viaggio';
@@ -3030,13 +3056,33 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function lineaTra(A, B, e, y){
     var ax = sx(A), ay = sy(A, y), bx = sx(B), by = sy(B, y), X = LV.x + .5;
     var pts = [[ax, ay], [X, ay], [X, by], [bx, by]];
-    var p = (B === GRADI && B.ab && AB.on ? tracciaR(pts, [10, AB.R]) : traccia(pts, 10)).at(e);   /* (20/11) nel binario degli abbonamenti gira come la curva 7h */
+    var r1 = A.st3 && LV.R ? LV.R : 10, r2 = B === GRADI && B.ab && AB.on ? AB.R : 10;
+    var p = (r1 !== 10 || r2 !== 10 ? tracciaR(pts, [r1, r2]) : traccia(pts, 10)).at(e);   /* (20/11) dalla stazione di 2e gira come la 2h, nel binario degli abbonamenti come la 7h */
+    /* (20/11 sera) sul tratto lungo la linea non esce mai dallo schermo: aspetta al bordo che la tappa arrivi */
+    if (Math.abs(p[0] - X) < .6) p[1] = clamp(p[1], hT + 30, innerHeight - 30);
     var d = e < .12 ? lerp(A.d, DOT, e / .12) : e > .88 ? lerp(DOT, B.d, (e - .88) / .12) : DOT;
     /* verso il «°»: sopra la card della Campagna (che altrimenti la coprirebbe), dove c'è la card */
     return { x: p[0], y: p[1], d: d, kmax: 1.4, sopra: B === GRADI && p[1] + y >= LV.carta };
   }
+  /* (20/11 sera, da computer: «la pallina non segue bene lo scorrimento del sito, a volte rimane ferma fuori dalla zona
+     visibile») tra due tappe lontane (da computer i pacchetti sono alti) lo scorrimento non si divide più in parti uguali
+     lungo la strada: il passo di lato dalla tappa alla linea si fa nei primi px di scorrimento, finché la riga della tappa è
+     ancora nello schermo (h1), l'ingresso di lato nella tappa dopo negli ultimi (h2), e in mezzo la pallina scende lungo la
+     linea restando nello schermo. Gli angoli sono le curve della linea (r1 dalla stazione di 2e, r2 nel binario 7g) */
+  function lineaPc(g, t, y){
+    var A = g.da, B = g.a2, X = LV.x + .5, G = Math.max(1, g.b - g.a), u = t * G;
+    var ax = sx(A), ay = sy(A, y), bx = sx(B), by = sy(B, y);
+    var r1 = A.st3 && LV.R ? LV.R : 10, r2 = B === GRADI && B.ab && AB.on ? AB.R : 10;
+    var a0 = lineaPagY(A, y) - g.a, b1 = lineaPagY(B, y) - g.b;   /* dove sono le due righe sullo schermo all'inizio e alla fine */
+    var h1 = clamp(a0 - hT - 40, 40, .3 * G), h2 = clamp(innerHeight - 40 - b1, 40, .3 * G), p, k, d = DOT;
+    if (u < h1) { k = liscio(u / h1); p = tracciaR([[ax, ay], [X, ay], [X, ay + r1]], [r1]).at(k); d = lerp(A.d, DOT, Math.min(1, k / .4)); }
+    else if (u > G - h2) { k = liscio((u - (G - h2)) / h2); p = tracciaR([[X, by - r2], [X, by], [bx, by]], [r2]).at(k); d = lerp(DOT, B.d, Math.max(0, (k - .6) / .4)); }
+    else { k = (u - h1) / Math.max(1, G - h1 - h2); p = [X, clamp(lerp(ay + r1, by - r2, k), hT + 30, innerHeight - 30)]; }
+    return { x: p[0], y: p[1], d: d, kmax: 1.4 };
+  }
   function lineaPunta(g, t, y){
     var A = g.da, B = g.a2;
+    if (!mqColonna.matches && g.k === 'viaggio') return lineaPc(g, t, y);   /* (20/11 sera) da computer */
     if (g.k === 'esceChat' && g.modo === 'rie' && RIE && RIE.el.isConnected) {
       /* con 6d (il riepilogo della chat): dalla foto profilo alla linea, giù fino alla riga del pallino, dentro; ci si
          posa; poi alla linea e giù fino a «Virtual Assistant.» (le regole di quando ci passa sono quelle di sempre) */
@@ -3107,6 +3153,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       /* (19/11 notte) la strada si misura fino alla prima stazione (B.x): passando le carte la pallina non scivola lungo la
          discesa; l'ultimo tratto, sulla riga del binario, si stira fino a dov'è il treno */
       if (Math.abs(p[1] - ty) < .5 && p[0] > A.xl && B.x > A.xl + 1) p[0] = A.xl + (p[0] - A.xl) * (sx(B) - A.xl) / (B.x - A.xl);
+      return { x: p[0], y: p[1], d: lerp(A.d, B.d, e), kmax: 1.4 };
+    }
+    if (g.k === 'versoSt') {
+      /* (20/11 sera) da «Poi decidi» un passo a destra lungo la riga, giù a metà tra il titolo e il binario, a sinistra
+         fino alla x del pallino di 2e e giù dentro di lui */
+      e = liscio(t); A = g.da; B = g.a2;
+      var vx = sx(A), vy = sy(A, y), wx = sx(B), wy = sy(B, y), my = (vy + wy) / 2;
+      p = traccia([[vx, vy], [vx + 14, vy], [vx + 14, my], [wx, my], [wx, wy]], 10).at(e);
       return { x: p[0], y: p[1], d: lerp(A.d, B.d, e), kmax: 1.4 };
     }
     return viaggio(g, yp, y);
