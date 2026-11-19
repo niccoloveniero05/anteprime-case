@@ -311,7 +311,7 @@ footer.piede{border-top:0}
 .ab-st i{display:block;width:11px;height:11px;border-radius:50%;background:var(--bg);box-shadow:inset 0 0 0 1px var(--filo2)}
 .ab-st i::after{content:"";display:block;width:100%;height:100%;border-radius:50%;background:var(--av);transform:scale(var(--on,0))}
 .ab-st span{opacity:calc(.45 + var(--on,0)*.55);color:var(--av)}
-.ab-pt{position:absolute;left:0;top:5.5px;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:var(--rec);visibility:hidden;pointer-events:none;z-index:3}
+.ab-pt{position:absolute;left:0;top:5.5px;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:var(--rec);visibility:hidden;pointer-events:none;z-index:3}
 html.viaggio .ab-pt.qui{visibility:visible}
 html.viaggio .ab-pt.qui.assorbita{visibility:hidden}
 .ab-vista{overflow:hidden;margin:0 calc(-1 * var(--lato));padding:2px 0 6px}
@@ -1836,7 +1836,21 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
   addEventListener('touchend', lascia, { passive: true });
   addEventListener('touchcancel', lascia, { passive: true });
-  addEventListener('wheel', function(){ inerzia = null; if (tw) { ferma(); libera(); } }, { passive: true });
+  var ROT = { t: 0, preso: false };
+  addEventListener('wheel', function(e){
+    inerzia = null;
+    var ora = performance.now(), nuovo = ora - ROT.t > 220; ROT.t = ora;
+    if (nuovo) ROT.preso = false;
+    if (ROT.preso) { if (e.cancelable) e.preventDefault(); return; }   /* il resto dello stesso gesto: niente */
+    if (spento || SENZA || !A || e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX) || !e.deltaY) { if (tw) { ferma(); libera(); } return; }
+    var y = scrollY, M = momenti(), giu = e.deltaY > 0;
+    var dentro = giu ? y < M[1] - 2 : (y > M[0] + 2 && y <= M[1] + 2);
+    if (!dentro) { if (tw) { ferma(); libera(); } return; }
+    if (e.cancelable) e.preventDefault();
+    ROT.preso = true;
+    var base = tw ? tw.a : y;
+    vai(giu ? dopo(base, M) : prima(base, M), curvaIO);
+  }, { passive: false });
 
   /* ── L'inerzia che arriva da sotto (verifica del 19/11) ───────────────────────────────────────────────────────────────
      Un colpo di dito in su partito più di mezzo schermo sotto la fine dell'apertura lo fa la pagina da sola, con la sua
@@ -2866,7 +2880,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
          con le schede, il salto nel titolo). Per le misure sta sulla stazione della scheda che si vede, sulla riga del
          binario. Ci resta seduta finché il binario non è salito al 12% dello schermo: il tempo di scorrere le schede */
       GRADI.live = true; GRADI.ab = true; GRADI.cardL = AB.pc ? abSch[0].getBoundingClientRect().left : 16;
-      GRADI.x = abStX(abSp(AB.cur)); GRADI.ly = abRot.getBoundingClientRect().top + 5.5 + y0; GRADI.d = 11;
+      GRADI.x = abStX(abSp(AB.cur)); GRADI.ly = abRot.getBoundingClientRect().top + 5.5 + y0; GRADI.d = 13;   /* (20/11 sera) 13 px: copre del tutto il pallino della stazione (11), come la pallina sul binario 2f */
       GRADI.inY = GRADI.ly - Math.round(.68 * V0); GRADI.outY = GRADI.ly - Math.round(.12 * V0);
     }
     if (FIN) {
