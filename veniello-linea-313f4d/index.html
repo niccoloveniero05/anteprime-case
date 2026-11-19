@@ -301,6 +301,25 @@ html.viaggio .ab-schede{touch-action:pan-y;-webkit-user-select:none;user-select:
 html.viaggio .ab-tit{color:transparent;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;
   background-image:linear-gradient(180deg,var(--rec) calc(var(--ab-f,0) * 100% - 1px),var(--av) calc(var(--ab-f,0) * 100% + 1px))}
 html:not(.viaggio) .ab-rotaia{display:none}
+/* (20/11, Niccolò: «la riga 7g la sposterei in basso, per colorare le scritte fallo pure passare attraverso basta che lo
+   rendi sottile come hai fatto per Veniello») al telefono il binario sta sotto le schede; la pallina che sale nel titolo
+   attraversa la scheda come una linea sottile */
+@media (max-width:1023px){
+  .ab-giostra{display:flex;flex-direction:column}
+  .ab-vista{order:1}
+  .ab-rotaia{order:2;margin:var(--s3) 0 0}
+}
+/* (20/11) «Cosa comprende» di lato, al telefono: un pannello come le schede che si allarga e spinge avanti le altre */
+.ab-dett{flex:none;overflow:hidden;background:var(--bg3);border-radius:14px;box-shadow:inset 0 0 0 1px var(--filo2);transform-origin:50% 0}
+.ab-dett.va{transition:width .52s cubic-bezier(.2,.7,.2,1),margin-left .52s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
+.ab-dett-in{padding:var(--s4) var(--s3);box-sizing:border-box;height:100%;overflow-y:auto;overscroll-behavior:contain}
+.ab-dett-t{font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
+.ab-dett .voci li{animation:voce .5s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--n,0)*50ms + 180ms)}
+.ab-dett-x{display:inline-flex;align-items:center;gap:12px;min-height:44px;margin-top:var(--s2);font:500 17px/1 var(--sans);color:var(--av);background:none;border:0;padding:0;cursor:pointer}
+.ab-dett-x .piu::after{transform:rotate(0)}
+.dettagli.lato-aperto > summary .piu::after{transform:rotate(0)}
+.ab-pt{transition:width .12s linear,height .12s linear,margin .12s linear,border-radius .12s linear}
+html.viaggio .ab-pt.qui.scia{width:2px;height:22px;margin:-11px 0 0 -1px;border-radius:1px}
 html:not(.viaggio) .ab-vista{overflow:visible;margin:0}
 html:not(.viaggio) .ab-schede{flex-direction:column;gap:var(--s3)}
 html:not(.viaggio) .ab-schede > .pacchetto.speciale{width:auto;margin:0 calc(var(--pan) - var(--lato))}
@@ -2323,7 +2342,19 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var abSch = abTr ? [].slice.call(abTr.children) : [], abTit = abSch.map(function(c){ return c.querySelector('.ab-tit'); });
   var abSt = abRot ? [].slice.call(abRot.querySelectorAll('.ab-st')) : [], abLinea = abRot && abRot.querySelector('.ab-linea'), abPieno = abRot && abRot.querySelector('.ab-pieno');
   var ABN = abSch.length, ABCR = { da: 0, a: 0, t0: 0, dur: 0, curva: null }, ABPR = null;
-  abSch.forEach(function(c, i){ AB.f[i] = 0; AB.tw[i] = null; });
+  abSch.forEach(function(c, i){ AB.f[i] = 0; AB.tw[i] = null; c._ab = i; });
+  /* (20/11, Niccolò: «su mobile il cosa comprende lo farei aprire lateralmente spostando gli altri quadrati, altrimenti i
+     dettagli non si vedono ma devo scorrere in basso, sempre con il solito modo che stiamo utilizzando per animazioni e
+     quadrati») al telefono «Cosa comprende» non si apre sotto ma di lato: un pannello come le schede (.ab-dett) entra subito
+     dopo la scheda allargandosi e spinge avanti le altre, e le schede scorrono fino a lui. Le schede in fila sono quindi
+     AB.it (le tre schede più, se aperto, il pannello); AB.cur è la posizione in questa fila. Il pannello si chiude
+     ritoccando «Cosa comprende», col suo «Chiudi» o andando su un'altra scheda */
+  AB.it = abSch.slice(); AB.det = null;
+  function abItemDi(i){ return Math.max(0, AB.it.indexOf(abSch[i])); }
+  function abAbbDi(j){ var el = AB.it[Math.max(0, Math.min(AB.it.length - 1, j))]; return el ? el._ab : 0; }
+  /* la posizione sul binario (0-2, con le frazioni) per una posizione nella fila */
+  function abSp(p){ var j = Math.floor(p), a = abAbbDi(j), b = abAbbDi(j + 1); return a + (b - a) * (p - j); }
+  function abOff(p){ var n = AB.it.length, j = Math.max(0, Math.min(n - 1, Math.floor(p))), k = Math.min(n - 1, j + 1), a = AB.it[j].offsetLeft, b = AB.it[k].offsetLeft; return a + (b - a) * (p - j); }
   function abStX(p){ if (ABN < 2) return AB.st[0] || 0; var i = Math.max(0, Math.min(ABN - 2, Math.floor(p))); return AB.st[i] + (AB.st[i + 1] - AB.st[i]) * (p - i); }
   function abMisura(){
     /* (20/11) da computer (pacchetti affiancati, AB.pc) le tre schede si vedono insieme: il binario sta sopra di loro, una
@@ -2351,7 +2382,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     AB.sw = Math.max(1, X - AB.R - s1);
     abLinea.style.left = (s1 - rr.left).toFixed(1) + 'px'; abLinea.style.width = AB.sw.toFixed(1) + 'px';
     abSt.forEach(function(s, i){ s.style.left = (AB.st[i] - rr.left).toFixed(1) + 'px'; });
-    AB.cur = Math.max(0, Math.min(ABN - 1, AB.cur));
+    AB.cur = Math.max(0, Math.min(AB.it.length - 1, AB.cur));
     abDisegna();
   }
   /* dove salta nel titolo della scheda c (sullo schermo): sulla prima riga, alla x della stazione se ci sta */
@@ -2363,25 +2394,33 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     return { x: Math.max(q.left + 8, Math.min(q.right - 8, AB.st[c])), y: q.top + .48 * q.height };
   }
   function abPtMetti(){
-    var rr = abRot.getBoundingClientRect(), ry = 5.5, rx = abStX(AB.cur) - rr.left, x = rx, y = ry, b, k;
+    var rr = abRot.getBoundingClientRect(), ry = 5.5, rx = abStX(abSp(AB.cur)) - rr.left, x = rx, y = ry, b, k;
     if (AB.stato !== 'binario') {
       b = abBersaglio(AB.cc); var bx = b ? b.x - rr.left : rx, by = b ? b.y - rr.top : ry + 60;
-      if (AB.stato === 'cade') { k = AB.k; x = AB.da + (bx - AB.da) * k; y = ry - 14 * Math.sin(Math.PI * Math.min(1, k * 1.5)) * (1 - k) + (by - ry) * k * k; }
+      if (!AB.pc && (AB.stato === 'cade' || AB.stato === 'sale')) {
+        /* (20/11) al telefono il binario è sotto le schede: la pallina sale dritta attraverso la scheda fino al titolo (e
+           torna giù), sottile come nel taglio su «Veniello» (.scia) */
+        k = AB.stato === 'cade' ? AB.k : 1 - AB.k; var e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        var x0 = AB.stato === 'cade' ? AB.da : rx; x = x0 + (bx - x0) * Math.min(1, e * 1.6); y = ry + (by - ry) * e;
+      }
+      else if (AB.stato === 'cade') { k = AB.k; x = AB.da + (bx - AB.da) * k; y = ry - 14 * Math.sin(Math.PI * Math.min(1, k * 1.5)) * (1 - k) + (by - ry) * k * k; }
       else if (AB.stato === 'sale') { k = 1 - AB.k; x = rx + (bx - rx) * k; y = ry - 10 * Math.sin(Math.PI * Math.min(1, (1 - k) * 1.5)) * k + (by - ry) * k * k; }
       else { x = bx; y = by; }
     }
     abPt.style.left = x.toFixed(2) + 'px'; abPt.style.top = y.toFixed(2) + 'px';
     abPt.classList.toggle('assorbita', AB.stato === 'dentro' || AB.stato === 'svuota');
+    abPt.classList.toggle('scia', !AB.pc && (AB.stato === 'cade' || AB.stato === 'sale'));
   }
   function abDisegna(){
     if (!AB.on) return;
     var p = AB.cur;
     if (!AB.pc) {
-      abTr.style.transform = 'translateX(' + (AB.x0 - p * AB.passo).toFixed(1) + 'px)';
-      abSch.forEach(function(c, i){ var ad = Math.min(1, Math.abs(i - p)); c.style.opacity = (1 - .5 * ad).toFixed(3); c.style.transform = 'scale(' + (1 - .05 * ad).toFixed(4) + ')'; });
+      abTr.style.transform = 'translateX(' + (AB.x0 - abOff(p)).toFixed(1) + 'px)';
+      AB.it.forEach(function(c, i){ var ad = Math.min(1, Math.abs(i - p)); c.style.opacity = (1 - .5 * ad).toFixed(3); c.style.transform = 'scale(' + (1 - .05 * ad).toFixed(4) + ')'; });
     }
-    abPieno.style.transform = 'scaleX(' + ((abStX(p) - AB.st[0]) / AB.sw).toFixed(4) + ')';
-    abSt.forEach(function(s, i){ s.style.setProperty('--on', c01((p - i) * 4 + 1).toFixed(3)); });
+    var sp = abSp(p);
+    abPieno.style.transform = 'scaleX(' + ((abStX(sp) - AB.st[0]) / AB.sw).toFixed(4) + ')';
+    abSt.forEach(function(s, i){ s.style.setProperty('--on', c01((sp - i) * 4 + 1).toFixed(3)); });
     abTit.forEach(function(t, i){ if (t) t.style.setProperty('--ab-f', AB.f[i].toFixed(4)); });
     abPtMetti();
   }
@@ -2394,25 +2433,29 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     /* le schede: trascinate (ABPR) o in corsa verso la scheda scelta (ABCR) */
     if (ABCR.dur && !ABPR) { var kc = Math.min(1, (ora - ABCR.t0) / ABCR.dur); AB.cur = ABCR.da + (ABCR.a - ABCR.da) * ABCR.curva(kc); if (kc >= 1) { ABCR.dur = 0; AB.cur = ABCR.a; } vivo = true; }
     var seduta = abPt.classList.contains('qui'), ferma = !ABPR && !ABCR.dur && Math.abs(AB.cur - Math.round(AB.cur)) < .001;
+    var qui = AB.it[Math.round(AB.cur)], suScheda = !!qui && !qui.classList.contains('ab-dett');
+    if (AB.anim && ora < AB.anim) vivo = true;
+    /* fermi su un'altra scheda (né il pannello né la sua scheda): il pannello si chiude */
+    if (ferma && AB.det && qui && qui !== AB.det.el && qui !== abSch[AB.det.i] && !AB.det.chiude) abChiudi(false);
     if (!seduta) {
       /* la pallina non c'è (sta arrivando o è andata via): sul binario, il colore si ritira */
       if (AB.stato !== 'binario') { if (AB.f[AB.cc] > 0) abColore(AB.cc, 0, 320); AB.stato = 'binario'; }
       AB.tf = 0;
     } else if (AB.stato === 'binario') {
-      if (ferma) { if (!AB.tf) AB.tf = ora; if (ora - AB.tf > 220) { AB.stato = 'cade'; AB.cc = Math.round(AB.cur); AB.da = abStX(AB.cur) - abRot.getBoundingClientRect().left; AB.t0 = ora; AB.k = 0; } vivo = true; }
+      if (ferma && suScheda && AB.SALTA) { if (!AB.tf) AB.tf = ora; if (ora - AB.tf > 220) { AB.stato = 'cade'; AB.cc = qui._ab; AB.da = abStX(abSp(AB.cur)) - abRot.getBoundingClientRect().left; AB.t0 = ora; AB.k = 0; } vivo = true; }
       else AB.tf = 0;
     } else if (AB.stato === 'cade') {
-      AB.k = Math.min(1, (ora - AB.t0) / 380);
+      AB.k = Math.min(1, (ora - AB.t0) / (AB.pc ? 380 : 520));
       if (!ferma) { AB.stato = 'sale'; AB.t0 = ora - (1 - AB.k) * 300; AB.k = 1 - AB.k; }
       else if (AB.k >= 1) { AB.stato = 'dentro'; abColore(AB.cc, 1, 620); }
       vivo = true;
     } else if (AB.stato === 'dentro') {
-      if (!ferma || Math.round(AB.cur) !== AB.cc) { AB.stato = 'svuota'; abColore(AB.cc, 0, 320); vivo = true; }
+      if (!ferma || !suScheda || qui._ab !== AB.cc) { AB.stato = 'svuota'; abColore(AB.cc, 0, 320); vivo = true; }
     } else if (AB.stato === 'svuota') {
       if (!AB.tw[AB.cc]) { AB.stato = 'sale'; AB.t0 = ora; AB.k = 0; }
       vivo = true;
     } else if (AB.stato === 'sale') {
-      AB.k = Math.min(1, (ora - AB.t0) / 300);
+      AB.k = Math.min(1, (ora - AB.t0) / (AB.pc ? 300 : 420));
       if (AB.k >= 1) { AB.stato = 'binario'; AB.tf = 0; }
       vivo = true;
     }
@@ -2424,11 +2467,52 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     }
     abDisegna();
     if (!seduta) chiedi();   /* la pallina che arriva o riparte legge dove sta il posto: il motore ridisegna */
-    if (vivo || ABPR || (seduta && AB.stato === 'binario' && ferma)) abSveglia();
+    if (vivo || ABPR || (AB.SALTA && seduta && AB.stato === 'binario' && ferma && suScheda)) abSveglia();
   }
   function abSveglia(){ if (AB.on && !AB.raf) AB.raf = requestAnimationFrame(abTick); }
+  /* (20/11, poi Niccolò: «anzi fai che non si colorino i testi, lascia la pallina sul binario 7g nel checkpoint
+     dell'abbonamento. Poi evita che la pallina faccia movimenti strani quando si aprono i dettagli») niente salto nel
+     titolo né colore: la pallina resta sulla stazione della scheda che si vede (col pannello aperto, su quella della sua
+     scheda). Per riaccendere il salto e il colore: AB.SALTA = true */
+  AB.SALTA = false;
+  var AB_ANIM = 520;
+  function abApri(i){
+    if (AB.det) abChiudi(false, true);
+    var card = abSch[i], d = card.querySelector('.dettagli'), voci = d && d.querySelector('.voci'), W = card.offsetWidth;
+    var li = document.createElement('li'); li.className = 'ab-dett'; li._ab = i; li.setAttribute('aria-label', 'Cosa comprende');
+    li.style.height = card.offsetHeight + 'px';   /* alto come la scheda: la fila non cresce e il binario sotto non si sposta */
+    li.innerHTML = '<div class="ab-dett-in" style="width:' + W + 'px"><p class="ab-dett-t">Cosa comprende</p>' + (voci ? voci.outerHTML : '') + '<button type="button" class="ab-dett-x">Chiudi<i class="piu" aria-hidden="true"></i></button></div>';
+    li.style.width = '0px'; li.style.marginLeft = '-12px'; li.style.opacity = '0';
+    card.after(li); void li.offsetWidth;
+    li.classList.add('va'); li.style.width = W + 'px'; li.style.marginLeft = '0px'; li.style.opacity = '';
+    [].forEach.call(li.querySelectorAll('.voci li'), function(v, n){ v.style.setProperty('--n', n); });
+    if (d) d.classList.add('lato-aperto');
+    AB.det = { el: li, i: i, chiude: false };
+    AB.it = [].slice.call(abTr.children);
+    AB.anim = performance.now() + AB_ANIM;
+    abVai(AB.it.indexOf(li), 0);
+    setTimeout(chiediRimisura, AB_ANIM + 40);
+  }
+  /* torna: le schede tornano alla scheda del pannello (col «Chiudi» o ritoccando «Cosa comprende») */
+  function abChiudi(torna, subito){
+    var D = AB.det; if (!D || D.chiude) return; D.chiude = true;
+    var d = abSch[D.i].querySelector('.dettagli'); if (d) d.classList.remove('lato-aperto');
+    if (torna) abVai(abItemDi(D.i), 0);
+    function via(){
+      var j = AB.it.indexOf(D.el), c = AB.cur;
+      if (D.el.parentNode) D.el.parentNode.removeChild(D.el);
+      AB.it = [].slice.call(abTr.children);
+      if (j >= 0 && c > j) { AB.cur = c - 1; if (ABCR.dur) { ABCR.da = Math.max(0, ABCR.da - 1); ABCR.a = Math.max(0, ABCR.a - 1); } }
+      if (AB.det === D) AB.det = null;
+      abDisegna(); abSveglia(); chiediRimisura();
+    }
+    if (subito) { via(); return; }
+    D.el.style.width = '0px'; D.el.style.marginLeft = '-12px'; D.el.style.opacity = '0';
+    AB.anim = performance.now() + AB_ANIM; abSveglia();
+    setTimeout(via, AB_ANIM);
+  }
   function abVai(a, v){
-    a = Math.max(0, Math.min(ABN - 1, a)); AB.carta = a;
+    a = Math.max(0, Math.min(AB.it.length - 1, a)); AB.carta = a;
     var px = Math.abs(a - AB.cur) * AB.passo;
     if (px < .5) { ABCR.dur = 0; AB.cur = a; abSveglia(); return; }
     var sv = Math.abs(v || 0);
@@ -2449,7 +2533,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     }
     if (ev && ev.cancelable) ev.preventDefault();
     ABPR.p.push([performance.now(), x]); if (ABPR.p.length > 8) ABPR.p.shift();
-    AB.cur = Math.max(Math.max(0, ABPR.base - 1), Math.min(Math.min(ABN - 1, ABPR.base + 1), ABPR.c0 - dx / AB.passo));
+    AB.cur = Math.max(Math.max(0, ABPR.base - 1), Math.min(Math.min(AB.it.length - 1, ABPR.base + 1), ABPR.c0 - dx / AB.passo));
     abSveglia();
   }
   function abLascia(){
@@ -2472,9 +2556,19 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     addEventListener('pointermove', function(e){ if (ABPR && e.pointerType === 'mouse') abMuovi(e.clientX, e.clientY, e); });
     addEventListener('pointerup', function(e){ if (e.pointerType === 'mouse') abLascia(); });
     /* (20/11) da computer: la scheda sotto il mouse (o col tasto Tab) */
-    abSch.forEach(function(c, i){ c.addEventListener('mouseenter', function(){ if (AB.on && AB.pc) abVai(i, 0); }); c.addEventListener('focusin', function(){ if (AB.on && AB.pc) abVai(i, 0); }); });
+    abSch.forEach(function(c, i){ c.addEventListener('mouseenter', function(){ if (AB.on && AB.pc) abVai(abItemDi(i), 0); }); c.addEventListener('focusin', function(){ if (AB.on && AB.pc) abVai(abItemDi(i), 0); }); });
     /* le stazioni: un tocco porta alla sua scheda */
-    abSt.forEach(function(s, i){ s.addEventListener('click', function(){ abVai(i, 0); }); });
+    abSt.forEach(function(s, i){ s.addEventListener('click', function(){ abVai(abItemDi(i), 0); }); });
+    /* al telefono «Cosa comprende» si apre di lato (prima delle tendine: fase di cattura, e la tendina non si apre) */
+    abTr.addEventListener('click', function(e){
+      if (!AB.on || AB.pc) return;
+      var x = e.target.closest && e.target.closest('.ab-dett-x');
+      if (x) { e.preventDefault(); abChiudi(true); return; }
+      var sm = e.target.closest && e.target.closest('.dettagli > summary'); if (!sm) return;
+      var card = sm.closest('.ab-schede > li'), i = abSch.indexOf(card); if (i < 0) return;
+      e.preventDefault(); e.stopPropagation();
+      if (AB.det && AB.det.i === i && !AB.det.chiude) abChiudi(true); else abApri(i);
+    }, true);
     /* il motore mette e toglie .qui alla pallina del binario quando ci si siede o riparte */
     if (abPt && window.MutationObserver) new MutationObserver(abSveglia).observe(abPt, { attributes: true, attributeFilter: ['class'] });
     addEventListener('scroll', function(){ if (AB.on && AB.stato !== 'binario') abSveglia(); }, { passive: true });
@@ -2696,8 +2790,13 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
          con le schede, il salto nel titolo). Per le misure sta sulla stazione della scheda che si vede, sulla riga del
          binario. Ci resta seduta finché il binario non è salito al 12% dello schermo: il tempo di scorrere le schede */
       GRADI.live = true; GRADI.ab = true; GRADI.cardL = AB.pc ? abSch[0].getBoundingClientRect().left : 16;
-      GRADI.x = abStX(AB.cur); GRADI.ly = abRot.getBoundingClientRect().top + 5.5 + y0; GRADI.d = 11;
+      GRADI.x = abStX(abSp(AB.cur)); GRADI.ly = abRot.getBoundingClientRect().top + 5.5 + y0; GRADI.d = 11;
       GRADI.inY = GRADI.ly - Math.round(.68 * V0); GRADI.outY = GRADI.ly - Math.round(.12 * V0);
+      if (!AB.pc && abTit[0]) {
+        /* (20/11) al telefono il binario è sotto le schede e la pallina ci resta (niente salto nel titolo): seduta da quando il
+           binario entra nello schermo (96%) finché non è salito al 30% */
+        GRADI.inY = GRADI.ly - Math.round(.96 * V0); GRADI.outY = GRADI.ly - Math.round(.30 * V0);
+      }
     }
     if (FIN) {
       FIN.corsiaS = Math.max(8, (GRADI ? GRADI.cardL : FIN.el.closest('.wrap').getBoundingClientRect().left + 24) - 22);
