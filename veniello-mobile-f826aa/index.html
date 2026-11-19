@@ -179,6 +179,7 @@ html:not(.viaggio) .linea-v,html:not(.viaggio) .linea-curva{display:none}
    titolo e diventa un cerchietto sottile che si riempie; oltre la soglia gira e la pagina si ricarica (script «Tira giù
    per aggiornare»). Sotto la testata. Il «tira per aggiornare» del browser è spento, altrimenti i cerchietti sarebbero due */
 html,body{overscroll-behavior-y:none}
+html.ap-presa .apertura{touch-action:none}   /* (20/11 sera) iPhone: nell'apertura scorre solo il codice */
 .aggiorna{position:fixed;left:0;top:0;width:40px;height:40px;z-index:49;pointer-events:none;opacity:0;will-change:transform}
 .aggiorna.su{opacity:1}
 .aggiorna svg{display:block;width:40px;height:40px;overflow:visible}
@@ -228,6 +229,34 @@ html.js:not(.fermo) .ap-palco{position:sticky;top:0;height:100vh;height:100lvh}
 .ap-pt{position:absolute;left:0;top:0;z-index:5;border-radius:50%;visibility:hidden;pointer-events:none}
 html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec)}
 footer.piede{border-top:0}
+/* ── (20/11 sera) controllo generale (fonte _lavoro/nb/controllo-2011.py) ── */
+/* un solo «+» in tutta la pagina, quello di 7e «Dettagli»: disegnato col tratto della freccia (1,4 px, punte tonde); aperto
+   diventa «−». Valeva solo per gli abbonamenti da computer: ora anche «Scopri i dettagli», le domande e «Cosa comprende» */
+html .piu{width:14px;height:14px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.5v11M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.5v11M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+html .piu::before,html .piu::after{display:none}
+html details[open] > summary .piu,html .dettagli.lato-aperto > summary .piu,html .ab-dett-x .piu{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E")}
+@media (hover:hover){html details:not([open]) > summary:hover .piu{transform:rotate(90deg)}}
+html .dettagli summary{gap:10px;letter-spacing:-.01em}
+/* una sola freccia: quella dei link «Parliamone →» degli abbonamenti (14 px, tratto 1,4) anche nei «Parliamone» dei pacchetti
+   e nella card «La tua attività» (simbolo #i-dx ridisegnato) */
+html .freccia .i{width:14px;height:14px}
+/* le etichette in mono: tutte 11 px con la stessa spaziatura (.12em) */
+html .ab-st{font-size:11px;letter-spacing:.12em}
+html .ab-fig-n,html .ab-pannello-tag,html .ab-pannello-box-t{letter-spacing:.12em}
+@media (min-width:1024px){
+  html #come .vagone .n{font-size:11px;letter-spacing:.12em}
+  html #servizi .ab-schede .speciale-tag{letter-spacing:.12em}
+  /* la linea sopra «Abbonamenti» comincia dal bordo del testo, come le altre (prima 40 px più a sinistra) */
+  html .abbonamenti-testa::before{left:0}
+}
+/* tra 900 e 1023 px: le tre schede degli abbonamenti una sotto l'altra (in tre colonne erano larghe 173 px, titoli tagliati) */
+@media (min-width:900px) and (max-width:1023px){
+  html #servizi .ab-schede{grid-template-columns:1fr!important;gap:var(--s3)!important}
+}
+/* bersagli per il dito di almeno 44 px senza cambiare l'aspetto: «Scrivici» in alto e le stazioni del binario 7g */
+#testata-scrivi{position:relative}
+#testata-scrivi::before{content:"";position:absolute;inset:-5px -4px}
+.ab-st::before{content:"";position:absolute;inset:-8px -6px}
 /* ── (20/11 sera) Versione da computer come Linear (da 1024 px). Fonte: _lavoro/nb/pc-linear.py ── */
 /* il pannello laterale di «Cosa comprende» degli abbonamenti (da computer; lo crea abbonamenti.js) */
 .ab-velo{position:fixed;inset:0;z-index:90;background:rgba(6,6,4,.62);opacity:0;visibility:hidden;transition:opacity .35s cubic-bezier(.2,.7,.2,1),visibility 0s linear .35s}
@@ -1190,7 +1219,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   <symbol id="i-tel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
-  <symbol id="i-dx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-dx" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h11M8 3l4 4-4 4"/></symbol>
 </svg>
 
 <!-- 0 · Testata (dalla D): marchio, menu del sito online (solo da computer), «Scrivici» -->
@@ -1431,7 +1460,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
                 <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.1</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M79.5 141.4 L120.0 164.8 L120.0 118.0 L79.5 94.6 Z"/><path class="f r" d="M160.5 141.4 L120.0 164.8 L120.0 118.0 L160.5 94.6 Z"/><path class="f t" d="M120.0 71.2 L160.5 94.6 L120.0 118.0 L79.5 94.6 Z"/></svg></div><p class="speciale-tag">Pacchetto speciale</p>
                 <h3 class="t2 ab-tit" id="t-360">Campagna Pubblicitaria 360°<span class="sr">.</span></h3>
                 <p class="sotto">Contenuti, sito e Virtual Assistant insieme, in una sola&nbsp;campagna.</p>
-                <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
+                <div class="speciale-azione"><a class="pill pill-chiara" data-conta="ab1" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
               </div>
               <div class="sp-elenco">
                 <details class="dettagli"><summary><span class="ab-lbl-m">Cosa comprende</span><span class="ab-lbl-pc">Dettagli</span><i class="piu" aria-hidden="true"></i></summary>
@@ -1442,8 +1471,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
               <div class="sp-testa">
                 <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.2</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M63.2 136.8 L99.2 157.6 L99.2 116.0 L63.2 95.2 Z"/><path class="f r" d="M135.2 136.8 L99.2 157.6 L99.2 116.0 L135.2 95.2 Z"/><path class="f t" d="M99.2 74.4 L135.2 95.2 L99.2 116.0 L63.2 95.2 Z"/><path class="f l" d="M104.8 160.8 L140.8 181.6 L140.8 140.0 L104.8 119.2 Z"/><path class="f r" d="M176.8 160.8 L140.8 181.6 L140.8 140.0 L176.8 119.2 Z"/><path class="f t" d="M140.8 98.4 L176.8 119.2 L140.8 140.0 L104.8 119.2 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
                 <h3 class="t2 ab-tit" id="t-ab2">Abbonamento 2<span class="sr">.</span></h3>
-                <p class="sotto">Qui la frase che spiega l'abbonamento, in una o due&nbsp;righe.</p>
-                <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
+                <p class="sotto">Qui la frase che spiega l’abbonamento, in una o due&nbsp;righe.</p>
+                <div class="speciale-azione"><a class="pill pill-chiara" data-conta="ab2" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%E2%80%99Abbonamento%202" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
               </div>
               <div class="sp-elenco">
                 <details class="dettagli"><summary><span class="ab-lbl-m">Cosa comprende</span><span class="ab-lbl-pc">Dettagli</span><i class="piu" aria-hidden="true"></i></summary>
@@ -1454,8 +1483,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
               <div class="sp-testa">
                 <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.3</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M70.3 157.7 L101.8 175.9 L101.8 139.5 L70.3 121.3 Z"/><path class="f r" d="M133.3 157.7 L101.8 175.9 L101.8 139.5 L133.3 121.3 Z"/><path class="f t" d="M101.8 103.1 L133.3 121.3 L101.8 139.5 L70.3 121.3 Z"/><path class="f l" d="M70.3 121.3 L101.8 139.5 L101.8 103.1 L70.3 84.9 Z"/><path class="f r" d="M133.3 121.3 L101.8 139.5 L101.8 103.1 L133.3 84.9 Z"/><path class="f t" d="M101.8 66.7 L133.3 84.9 L101.8 103.1 L70.3 84.9 Z"/><path class="f l" d="M106.7 178.7 L138.2 196.9 L138.2 160.5 L106.7 142.3 Z"/><path class="f r" d="M169.7 178.7 L138.2 196.9 L138.2 160.5 L169.7 142.3 Z"/><path class="f t" d="M138.2 124.1 L169.7 142.3 L138.2 160.5 L106.7 142.3 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
                 <h3 class="t2 ab-tit" id="t-ab3">Abbonamento 3<span class="sr">.</span></h3>
-                <p class="sotto">Qui la frase che spiega l'abbonamento, in una o due&nbsp;righe.</p>
-                <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
+                <p class="sotto">Qui la frase che spiega l’abbonamento, in una o due&nbsp;righe.</p>
+                <div class="speciale-azione"><a class="pill pill-chiara" data-conta="ab3" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%E2%80%99Abbonamento%203" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
               </div>
               <div class="sp-elenco">
                 <details class="dettagli"><summary><span class="ab-lbl-m">Cosa comprende</span><span class="ab-lbl-pc">Dettagli</span><i class="piu" aria-hidden="true"></i></summary>
@@ -1479,17 +1508,17 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       <div class="carosello" role="list">
         <a class="card" role="listitem" data-anima href="https://jueclub.it" target="_blank" rel="noopener">
           <img class="lento" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" width="900" height="1200" loading="lazy">
-          <div class="card-nome"><h3>Jué Club</h3><p>Cocktail bar&nbsp;· Montecatini&nbsp;Terme</p></div>
+          <div class="card-nome"><h3>Jué Club</h3><p>Cocktail bar ·&nbsp;Montecatini&nbsp;Terme</p></div>
           <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Sito, video delle serate, social</p></div>
         </a>
         <a class="card" role="listitem" data-anima href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener">
           <img class="lento" src="img/elena-dettagli.jpg" alt="Fedi, partecipazioni e fiori di un matrimonio curato da Elena Baldi" width="720" height="1080" loading="lazy" style="object-position:50% 35%">
-          <div class="card-nome"><h3>Elena Baldi<br><em>Wedding Planner</em></h3><p>Matrimoni&nbsp;· Montecatini&nbsp;Terme</p></div>
+          <div class="card-nome"><h3>Elena Baldi<br><em>Wedding Planner</em></h3><p>Matrimoni ·&nbsp;Montecatini&nbsp;Terme</p></div>
           <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Social e video</p></div>
         </a>
         <a class="card" role="listitem" data-anima href="https://www.instagram.com/gb.oro/" target="_blank" rel="noopener">
           <img class="lento" src="img/gb-catenina.jpg" alt="La catenina d’oro nell’astuccio blu, dal reel fatto per GB" width="600" height="1067" loading="lazy" style="object-position:50% 62%">
-          <div class="card-nome"><h3>GB Gioielli</h3><p>Compro oro&nbsp;· Città di&nbsp;Castello, Umbertide</p></div>
+          <div class="card-nome"><h3>GB Gioielli</h3><p>Compro oro ·&nbsp;Città di&nbsp;Castello, Umbertide</p></div>
           <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Instagram, TikTok, reel</p></div>
         </a>
         <a class="card card-tua" role="listitem" href="#contatti">
@@ -1531,7 +1560,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         </div>
       </div>
       <div class="recapiti">
-        <a class="recapito" href="tel:+393520338377"><svg class="i" aria-hidden="true"><use href="#i-tel"/></svg><span><small>Telefono e WhatsApp&nbsp;· <span class="nw">Giuseppe Fusciello</span></small><b>+39 352 033 8377</b></span></a>
+        <a class="recapito" href="tel:+393520338377"><svg class="i" aria-hidden="true"><use href="#i-tel"/></svg><span><small>Telefono e WhatsApp <span class="nw">·&nbsp;Giuseppe Fusciello</span></small><b>+39 352 033 8377</b></span></a>
         <a class="recapito" href="mailto:giuseppe@veniellostudio.it"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg><span><small>Email</small><b>giuseppe@veniellostudio.it</b></span></a>
         <div class="recapito"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg><span><small>Dove</small><b>Montecatini Terme, Valdinievole</b></span></div>
       </div>
@@ -1775,7 +1804,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   /* AGGANCIO = false spegne tutto l'aggancio (dito, rotella, inerzia): l'apertura resta legata allo scorrimento normale */
   var AGGANCIO = true;
   var tw = null, giro = 0, tocco = null, ditoGiu = false, ultimaDir = 1, yUlt = -1, attesa = 0, spento = !AGGANCIO;
-  var SENZA = !!window.SENZA_AGGANCIO;   /* per gli strumenti di prova che fotografano a metà dei passaggi */
+  var SENZA = !!window.SENZA_AGGANCIO;
+  /* (20/11 sera) iPhone e iPad (anche quelli che si presentano come Mac) */
+  var IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  function ts(e){ var t = e && e.timeStamp, n = performance.now(); return t > 0 && Math.abs(n - t) < 5000 ? t : n; }   /* per gli strumenti di prova che fotografano a metà dei passaggi */
   function momenti(){ var t = A.T, f = API.fine && API.fine > t + A.m2 - A.O + 10 ? API.fine : t + A.P - A.O; return [t, f]; }   /* (19/11 notte) un colpo solo: la cima e la fine */
   function dopo(b, M){ for (var i = 0; i < M.length; i++) if (M[i] > b + 2) return M[i]; return M[M.length - 1]; }
   function prima(b, M){ for (var i = M.length - 1; i >= 0; i--) if (M[i] < b - 2) return M[i]; return M[0]; }
@@ -1833,17 +1865,19 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
      e bastava a far tornare la pagina al momento prima) */
   function esterno(){ ultimaDir = tw.a > tw.da ? 1 : -1; yUlt = scrollY; ferma(); libera(); }
   addEventListener('touchstart', function(e){
-    ditoGiu = true; inerzia = null;
+    ditoGiu = true; inerzia = null; API.corsaAlTocco = !!tw;
     if (spento || !A) return;
     if (e.touches.length !== 1) { tocco = null; return; }
     if (e.target && e.target.closest && e.target.closest('#vagoni')) { tocco = null; return; }   /* (19/11 notte) sulle carte di «Come funziona» */
     var y = scrollY, M = momenti();
     if (y > M[1] + .5 * A.V && !tw) { tocco = null; return; }   /* fuori dall'apertura (e oltre il mezzo schermo dopo): scorrimento normale */
+    if (IOS && y >= M[1] - 2 && !tw) { tocco = null; return; }   /* (20/11 sera) iPhone: sotto l'apertura scorre Safari */
     var corsa = !!tw, base = tw ? tw.a : y; ferma();
-    tocco = { fy: e.touches[0].clientY, s0: y, base: base, corsa: corsa, M: M, deciso: false, p: [[performance.now(), e.touches[0].clientY]] };
+    tocco = { fy: e.touches[0].clientY, s0: y, base: base, corsa: corsa, M: M, deciso: false, p: [[ts(e), e.touches[0].clientY]] };
   }, { passive: true });
-  addEventListener('touchmove', function(e){
+  function mvAp(e){
     if (!tocco) return;
+    if (e.cancelable && tocco.s0 < tocco.M[1] - 2) e.preventDefault();
     try {
       if (e.touches.length !== 1) { if (tocco.corsa) vai(tocco.base); tocco = null; return; }
       var fy = e.touches[0].clientY, dy = tocco.fy - fy;   /* > 0: verso il basso della pagina */
@@ -1854,10 +1888,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         tocco.lo = Math.min(prima(tocco.base, tocco.M), tocco.s0); tocco.hi = Math.max(dopo(tocco.base, tocco.M), tocco.s0);
       }
       if (e.cancelable) e.preventDefault();
-      tocco.p.push([performance.now(), fy]); if (tocco.p.length > 8) tocco.p.shift();
+      tocco.p.push([ts(e), fy]); if (tocco.p.length > 8) tocco.p.shift();
       scorri(Math.max(tocco.lo, Math.min(tocco.hi, tocco.s0 + dy)));
     } catch (x) { spento = true; tocco = null; libera(); }
-  }, { passive: false });
+  }
+  [document.querySelector('.apertura'), document.getElementById('come')].forEach(function(el){ if (el) el.addEventListener('touchmove', mvAp, { passive: false }); });
   function lascia(e){
     ditoGiu = !!(e && e.touches && e.touches.length);
     /* un gesto che la pagina ha fatto da sola (partito sotto l'apertura): la sua spinta va tenuta d'occhio (prendi) e, se
@@ -1869,10 +1904,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var p = tc.p, b = p[p.length - 1], a = b, i;
       for (i = p.length - 1; i >= 0; i--) { if (b[0] - p[i][0] > 100) break; a = p[i]; }
       var v = b[0] > a[0] ? (a[1] - b[1]) / (b[0] - a[0]) : 0;   /* px al ms, > 0 verso il basso della pagina */
-      if (performance.now() - b[0] > 120) v = 0;                    /* il dito si era fermato prima di staccarsi */
+      if (ts(e) - b[0] > 120) v = 0;                    /* il dito si era fermato prima di staccarsi (tempo dell'evento) */
       var y = scrollY, d = 0;
       if (Math.abs(v) > .2) d = v > 0 ? 1 : -1;
-      else { var m = y - tc.s0, l = m > 0 ? tc.hi - tc.s0 : tc.s0 - tc.lo; if (l > 0 && Math.abs(m) / l > .2) d = m > 0 ? 1 : -1; }
+      else { var m = y - tc.s0, l = m > 0 ? tc.hi - tc.s0 : tc.s0 - tc.lo; if (l > 0 && Math.abs(m) > (IOS ? Math.min(.2 * l, 40) : .2 * l)) d = m > 0 ? 1 : -1; }   /* (20/11 sera) iPhone: bastano 40 px */
       var dest = d > 0 ? dopo(tc.base, tc.M) : d < 0 ? prima(tc.base, tc.M) : (tc.corsa ? tc.base : vicino(y, tc.M));
       if (tc.s0 > tc.M[1] + 2 && !tc.corsa && d >= 0) dest = y;   /* appena sotto l'apertura, un tocco leggero non sposta niente */
       /* (18/11 notte, Niccolò: «dipende dalla velocità dello swipe») anche col colpo forte parte morbida (pendenza 1,1 invece del seno) */
@@ -1945,7 +1980,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (y <= M[0] + 2 || y >= M[1] - 2 || suMomento(y, M)) return;
     vai(ultimaDir > 0 ? dopo(y, M) : (y > M[1] - .45 * A.V ? M[1] : prima(y, M)), curvaIO);   /* (20/11) fermo appena dentro, venendo da sotto: torna alla fine */
   }
+  /* (20/11 sera) ap-presa: finché la pagina è dentro l'apertura (prima della fine) il dito non fa scorrere la pagina da sé */
+  function presa(){ html.classList.toggle('ap-presa', !spento && !SENZA && !!A && scrollY < momenti()[1] - 2); }
+  setTimeout(presa, 0);
   addEventListener('scroll', function(){
+    presa();
     var y = scrollY;
     if (!tw && !tocco && yUlt >= 0 && y !== yUlt) ultimaDir = y > yUlt ? 1 : -1;
     yUlt = y;
@@ -2450,7 +2489,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var pl = parseFloat(getComputedStyle(abSch[0]).paddingLeft) || 24, X = lineaX() + .5, s1, sN, i;
     if (AB.pc) {
       abTr.style.transform = ''; abSch.forEach(function(c){ c.style.opacity = ''; c.style.transform = ''; });
-      for (i = 0; i < ABN; i++) AB.st[i] = abSch[i].getBoundingClientRect().left + (parseFloat(getComputedStyle(abSch[i]).paddingLeft) || 24);
+      for (i = 0; i < ABN; i++) { var pLi = parseFloat(getComputedStyle(abSch[i]).paddingLeft); AB.st[i] = abSch[i].getBoundingClientRect().left + (isNaN(pLi) ? 24 : pLi); }
       s1 = AB.st[0]; AB.passo = ABN > 1 ? AB.st[1] - AB.st[0] : 300;
     } else {
       var W = Math.round(Math.min(300, cw * .78)); abTr.style.setProperty('--ab-w', W + 'px');
@@ -2584,6 +2623,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       '<div class="ab-pannello-corpo"><h2 class="ab-pannello-t" id="ab-pannello-t">' + titolo + '</h2>' + (sotto ? '<p class="ab-pannello-sotto">' + sotto.innerHTML + '</p>' : '') +
       (voci ? '<div class="ab-pannello-box"><p class="ab-pannello-box-t">Nel pacchetto</p>' + voci.outerHTML + '</div>' : '') +
       (az ? az.outerHTML : '') + '</div>';
+    var tEl = PAN.el.querySelector('.ab-pannello-t'); if (tEl) tEl.textContent = titolo;
+    var lk = PAN.el.querySelector('.speciale-azione a'); if (lk) lk.setAttribute('data-conta', (lk.getAttribute('data-conta') || ('ab' + (i + 1))) + '-pannello');
+    ['contenuto', 'testata', 'piede'].forEach(function(id){ var el = document.getElementById(id); if (el) el.inert = true; });
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: 'dettagli/' + (card.id || ('ab' + (i + 1))), event: true });
     PAN.da = da || null; PAN.aperto = true;
     void PAN.el.offsetWidth;
     PAN.velo.classList.add('su'); PAN.el.classList.add('su');
@@ -2592,6 +2635,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function abPannelloChiudi(){
     if (!PAN || !PAN.aperto) return; PAN.aperto = false;
     PAN.velo.classList.remove('su'); PAN.el.classList.remove('su');
+    ['contenuto', 'testata', 'piede'].forEach(function(id){ var el = document.getElementById(id); if (el) el.inert = false; });
     if (PAN.da) PAN.da.focus({ preventScroll: true });
   }
   function abApri(i){
@@ -2605,6 +2649,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     li.classList.add('va'); li.style.width = W + 'px';
     [].forEach.call(li.querySelectorAll('.voci li'), function(v, n){ v.style.setProperty('--n', n); });
     if (d) d.classList.add('lato-aperto');
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: 'dettagli/' + (card.id || ('ab' + (i + 1))), event: true });
     AB.det = { el: li, i: i, chiude: false };
     AB.it = [].slice.call(abTr.children);
     AB.anim = performance.now() + AB_ANIM;
@@ -3980,7 +4025,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   var G = null, via = false, vis = 0, obi = 0, raf = 0, tPrec = 0, dopo = null, VMAX = 1.1;   /* vis: dove si vede; obi: dove lo porta il dito; VMAX: strada al secondo, al massimo */
   function c01(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
   function liscio(t){ return .5 - .5 * Math.cos(Math.PI * t); }
-  function pronta(){ var A = window.APERTURA; return scrollY <= .5 && !html.classList.contains('logo-in') && !(A && A.guida && A.guida()); }
+  function pronta(){ var A = window.APERTURA; return scrollY <= .5 && !html.classList.contains('logo-in') && !(A && A.guida && A.guida()) && !(A && A.corsaAlTocco); }
   /* la strada (sullo schermo): dal punto, a destra, su fin sopra il titolo e a metà schermo; angoli arrotondati */
   function strada(){
     var r = rp.getBoundingClientRect(), t = tit.getBoundingClientRect(), x0 = r.left + r.width / 2, y0 = r.top + r.height / 2;
@@ -4056,7 +4101,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (via || e.touches.length !== 1 || !pronta()) { G = null; return; }
     G = { x: e.touches[0].clientX, y: e.touches[0].clientY, dir: 0, p: 0 };
   }, { passive: true });
-  addEventListener('touchmove', function(e){
+  (document.querySelector('.apertura') || window).addEventListener('touchmove', function(e){   /* (20/11 sera) solo sull'apertura */
     if (!G || e.touches.length !== 1) { if (G && G.dir) rientra(); G = null; return; }
     var dx = e.touches[0].clientX - G.x, dy = e.touches[0].clientY - G.y;
     if (!G.dir) {
