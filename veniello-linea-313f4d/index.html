@@ -1326,9 +1326,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   </section>
 
   <!-- 11 · La striscia dei loghi (dal sito online) -->
-  <section class="loghi" id="loghi" aria-label="I nostri partner">
-    <div class="loghi-nastro" id="loghi-nastro"></div>
-  </section>
+  <!-- (20/11) qui stava la striscia dei loghi (11): tolta su richiesta di Niccolò -->
 </main>
 
 <!-- 12 · Piede (testi del sito online; il marchio col suo puntino fermo, come nella testata) -->
@@ -3624,5 +3622,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 </script>
 <!-- ETICHETTE DI PROVA (18/11): da togliere insieme a prova-etichette.js (vedi n/etichette.md) -->
 <script src="prova-etichette.js"></script>
+<!-- RIGHELLO DI PROVA (20/11): da togliere con le etichette -->
+<div id="righello" aria-hidden="true" style="position:fixed;left:0;right:0;top:50%;height:0;border-top:1px solid rgba(57,255,20,.8);z-index:2147483646;pointer-events:none"><span style="position:absolute;left:6px;top:3px;font:500 11px/1 'Geist Mono',ui-monospace,monospace;color:#39FF14;text-shadow:0 1px 2px rgba(0,0,0,.9);white-space:nowrap"></span></div>
+<script>(function(){var r=document.getElementById('righello');if(/[?&]etichette=0/.test(location.search)){r.remove();return}var t=r.firstChild,f=0;function m(){f=0;t.textContent=Math.round(scrollY+innerHeight/2)+' px'}addEventListener('scroll',function(){if(!f){f=1;requestAnimationFrame(m)}},{passive:true});addEventListener('resize',m);m()})();</script>
 </body>
 </html>
