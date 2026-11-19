@@ -228,6 +228,56 @@ html.js:not(.fermo) .ap-palco{position:sticky;top:0;height:100vh;height:100lvh}
 .ap-pt{position:absolute;left:0;top:0;z-index:5;border-radius:50%;visibility:hidden;pointer-events:none}
 html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec)}
 footer.piede{border-top:0}
+/* ── (20/11 sera) Versione da computer come Linear (da 1024 px). Fonte: _lavoro/nb/pc-linear.py ── */
+.ab-fig{display:none}
+@media (min-width:1024px){
+  /* 2 · Come funziona come il Changelog di Linear: il binario in alto con un pallino all'inizio di ogni colonna (la linea
+     continua fino alla linea verticale con la curva 2h), sotto tre colonne senza riquadro: titolo, testo, «Passo 01» in mono */
+  #binario-stage{display:flex;flex-direction:column}
+  #binario-stage > .binario-testa{order:0;width:100%}
+  #binario-stage > .rotaia{order:1;height:12px;margin:var(--s4) 0 var(--s4) max(var(--lato),calc((100% - var(--max)) / 2 + var(--lato)))}
+  #binario-stage > .vagoni{order:2;width:100%}
+  #come .stazione,#come .stazione.s0,#come .stazione.s2{transform:translateX(-5.5px);align-items:flex-start}
+  #come .stazione span{display:none}
+  #come .vagone{background:none;box-shadow:none;border-radius:0;padding:0 var(--s4) 0 0;min-height:0}
+  #come .vagone .n{order:9;font:400 12px/1 var(--mono);letter-spacing:.08em;color:var(--av3);margin:var(--s3) 0 0;padding:0;transform:none!important}
+  #come .vagone .n::before{content:"Passo "}
+  #come .vagone h3{font:500 17px/1.35 var(--sans);letter-spacing:-.01em}
+  #come .vagone p{font-size:15px;line-height:1.6;margin-top:var(--s1)}
+  #come .vagone .gratis{height:22px;margin:8px 0 0;font-size:10px}
+
+  /* 3-6 · i pacchetti riempiono la pagina: una riga per pacchetto, il testo a sinistra (al centro in altezza) e il riquadro
+     grande a destra (16:10), separati da un filo */
+  #servizi .pacchetti{display:block;max-width:none}
+  #servizi .pacchetto:not(.speciale){display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);grid-template-rows:1fr auto auto auto 1fr;column-gap:72px;padding:var(--s6) 0;border-top:1px solid var(--filo)}
+  #servizi .pacchetto:not(.speciale):first-child{border-top:0;padding-top:var(--s5)}
+  #servizi .pacchetto:not(.speciale) > .m{grid-column:2;grid-row:1 / 6;aspect-ratio:16 / 10;margin:0}
+  #servizi .pacchetto:not(.speciale) > .t2{grid-column:1;grid-row:2;margin-top:0;font:560 clamp(30px,2.6vw,38px)/1.08 var(--sans);letter-spacing:-.035em}
+  #servizi .pacchetto:not(.speciale) > .sotto{grid-column:1;grid-row:3;margin-top:var(--s2);font:400 17px/1.55 var(--sans);color:var(--av2)}
+  #servizi .pacchetto:not(.speciale) > .dettagli{grid-column:1;grid-row:4}
+  /* la chat del Virtual Assistant resta larga come un telefono, al centro del riquadro largo (altrimenti si ingrandiva troppo) */
+  #servizi .m-va{background:#100F09}
+  #servizi .m-va > .chat{left:50%;right:auto;width:min(420px,70%);transform:translateX(-50%)}
+  #servizi .abbonamenti-testa{margin-top:0;border-top:0}
+
+  /* 7 · gli abbonamenti come le «FIG» di Linear: tre colonne divise da fili verticali, senza riquadro; in ognuna «Fig 0.x»
+     in mono, il disegno a fili, l'etichetta, il titolo (lo colora la pallina) e il testo. Il binario 7g resta sopra */
+  #servizi .ab-schede{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important}
+  #servizi .ab-schede > .pacchetto.speciale{background:none;box-shadow:none;border-radius:0;padding:0 var(--s4)!important;border-left:1px solid var(--filo)}
+  #servizi .ab-schede > .pacchetto.speciale:first-child{border-left:0;padding-left:0!important}
+  .ab-fig{display:block;position:relative;margin:0 0 var(--s3)}
+  .ab-fig-n{display:block;font:400 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--av3)}
+  .ab-svg{display:block;width:100%;max-width:300px;height:auto;margin:var(--s2) auto 0}
+  .ab-svg .f{fill:var(--bg);stroke:rgba(245,244,239,.34);stroke-width:1;stroke-linejoin:round}
+  .ab-svg .f.t{fill:#15140E}
+  .ab-svg .o{fill:none;stroke:rgba(245,244,239,.34);stroke-width:1}
+  .ab-svg .o.d{stroke-dasharray:2 3;stroke:rgba(245,244,239,.22)}
+  .ab-svg .o.p{stroke:rgba(245,244,239,.5)}
+  #servizi .ab-schede .speciale-tag{box-shadow:none;padding:0;height:auto;font-size:11px;color:var(--av3)}
+  #servizi .ab-schede .t2{margin-top:var(--s2);font:500 19px/1.3 var(--sans)!important;letter-spacing:-.01em}
+  #servizi .ab-schede .sp-testa > .sotto{font:400 15px/1.6 var(--sans);color:var(--av2);margin-top:var(--s1)}
+  #servizi .ab-schede .speciale-azione{margin-top:var(--s3)}
+}
 /* (20/11) 7 · Abbonamenti: il binario 7g sopra le schede (come quello di «Come funziona», 2f) e le schede che scorrono di
    lato (al telefono). Il titolo della scheda si colora d'arancio dall'alto in basso quando la pallina ci salta dentro
    (--ab-f 0-1, lo muove abbonamenti.js) */
@@ -1293,7 +1343,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             <ul class="ab-schede" id="ab-schede">
             <li class="pacchetto speciale" id="campagna">
               <div class="sp-testa">
-                <p class="speciale-tag">Pacchetto speciale</p>
+                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.1</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="o d" d="M28.4 118.8 L28.5 116.2 L28.8 113.6 L29.4 111.0 L30.1 108.5 L31.1 105.9 L32.3 103.4 L33.7 101.0 L35.4 98.6 L37.2 96.2 L39.2 93.9 L41.4 91.6 L43.8 89.4 L46.4 87.3 L49.2 85.2 L52.1 83.3 L55.2 81.4 L58.5 79.6 L61.9 77.9 L65.4 76.3 L69.1 74.8 L72.9 73.4 L76.8 72.2 L80.8 71.0 L84.9 69.9 L89.1 69.0 L93.4 68.2 L97.7 67.5 L102.1 66.9 L106.6 66.5 L111.0 66.2 L115.5 66.0 L120.0 65.9 L124.5 66.0 L129.0 66.2 L133.4 66.5 L137.9 66.9 L142.3 67.5 L146.6 68.2 L150.9 69.0 L155.1 69.9 L159.2 71.0 L163.2 72.2 L167.1 73.4 L170.9 74.8 L174.6 76.3 L178.1 77.9 L181.5 79.6 L184.8 81.4 L187.9 83.3 L190.8 85.2 L193.6 87.3 L196.2 89.4 L198.6 91.6 L200.8 93.9 L202.8 96.2 L204.6 98.6 L206.3 101.0 L207.7 103.4 L208.9 105.9 L209.9 108.5 L210.6 111.0 L211.2 113.6 L211.5 116.2 L211.6 118.8"/><path class="f l" d="M61.1 146.0 L120.0 180.0 L120.0 170.7 L61.1 136.7 Z"/><path class="f r" d="M178.9 146.0 L120.0 180.0 L120.0 170.7 L178.9 136.7 Z"/><path class="f t" d="M120.0 102.7 L178.9 136.7 L120.0 170.7 L61.1 136.7 Z"/><path class="f l" d="M61.1 124.8 L120.0 158.8 L120.0 149.4 L61.1 115.4 Z"/><path class="f r" d="M178.9 124.8 L120.0 158.8 L120.0 149.4 L178.9 115.4 Z"/><path class="f t" d="M120.0 81.4 L178.9 115.4 L120.0 149.4 L61.1 115.4 Z"/><path class="f l" d="M61.1 103.5 L120.0 137.5 L120.0 128.2 L61.1 94.2 Z"/><path class="f r" d="M178.9 103.5 L120.0 137.5 L120.0 128.2 L178.9 94.2 Z"/><path class="f t" d="M120.0 60.2 L178.9 94.2 L120.0 128.2 L61.1 94.2 Z"/><path class="o" d="M211.6 118.8 L211.5 121.4 L211.2 124.0 L210.6 126.6 L209.9 129.1 L208.9 131.7 L207.7 134.2 L206.3 136.6 L204.6 139.0 L202.8 141.4 L200.8 143.7 L198.6 146.0 L196.2 148.2 L193.6 150.3 L190.8 152.4 L187.9 154.3 L184.8 156.2 L181.5 158.0 L178.1 159.7 L174.6 161.3 L170.9 162.8 L167.1 164.2 L163.2 165.4 L159.2 166.6 L155.1 167.7 L150.9 168.6 L146.6 169.4 L142.3 170.1 L137.9 170.7 L133.4 171.1 L129.0 171.4 L124.5 171.6 L120.0 171.7 L115.5 171.6 L111.0 171.4 L106.6 171.1 L102.1 170.7 L97.7 170.1 L93.4 169.4 L89.1 168.6 L84.9 167.7 L80.8 166.6 L76.8 165.4 L72.9 164.2 L69.1 162.8 L65.4 161.3 L61.9 159.7 L58.5 158.0 L55.2 156.2 L52.1 154.3 L49.2 152.4 L46.4 150.3 L43.8 148.2 L41.4 146.0 L39.2 143.7 L37.2 141.4 L35.4 139.0 L33.7 136.6 L32.3 134.2 L31.1 131.7 L30.1 129.1 L29.4 126.6 L28.8 124.0 L28.5 121.4 L28.4 118.8"/><path class="o p" d="M136.2 103.5 L134.5 104.4 L132.7 105.1 L130.8 105.8 L128.8 106.4 L126.6 106.8 L124.5 107.1 L122.2 107.3 L120.0 107.4 L117.8 107.3 L115.5 107.1 L113.4 106.8 L111.2 106.4 L109.2 105.8 L107.3 105.1 L105.5 104.4 L103.8 103.5 L102.3 102.5 L101.0 101.5 L99.8 100.4 L98.8 99.2 L98.1 98.0 L97.5 96.7 L97.2 95.4 L97.1 94.2 L97.2 92.9 L97.5 91.6 L98.1 90.3 L98.8 89.1 L99.8 87.9 L101.0 86.8 L102.3 85.8 L103.8 84.8 L105.5 83.9 L107.3 83.2 L109.2 82.5 L111.2 81.9 L113.4 81.5 L115.5 81.2 L117.8 81.0 L120.0 80.9 L122.2 81.0 L124.5 81.2 L126.6 81.5 L128.8 81.9 L130.8 82.5 L132.7 83.2 L134.5 83.9 L136.2 84.8 L137.7 85.8 L139.0 86.8 L140.2 87.9 L141.2 89.1 L141.9 90.3 L142.5 91.6 L142.8 92.9 L142.9 94.2 L142.8 95.4 L142.5 96.7 L141.9 98.0 L141.2 99.2 L140.2 100.4 L139.0 101.5 L137.7 102.5 L136.2 103.5"/></svg></div><p class="speciale-tag">Pacchetto speciale</p>
                 <h3 class="t2 ab-tit" id="t-360">Campagna Pubblicitaria 360°<span class="sr">.</span></h3>
                 <p class="sotto">Contenuti, sito e Virtual Assistant insieme, in una sola&nbsp;campagna.</p>
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
@@ -1305,7 +1355,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             </li>
             <li class="pacchetto speciale ab-segnaposto" id="abbonamento-2">
               <div class="sp-testa">
-                <p class="speciale-tag">Abbonamento</p>
+                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.2</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M89.5 121.6 L120.0 139.2 L120.0 97.6 L89.5 80.0 Z"/><path class="f r" d="M150.5 121.6 L120.0 139.2 L120.0 97.6 L150.5 80.0 Z"/><path class="f t" d="M120.0 62.4 L150.5 80.0 L120.0 97.6 L89.5 80.0 Z"/><path class="f l" d="M125.5 142.4 L156.0 160.0 L156.0 134.4 L125.5 116.8 Z"/><path class="f r" d="M186.5 142.4 L156.0 160.0 L156.0 134.4 L186.5 116.8 Z"/><path class="f t" d="M156.0 99.2 L186.5 116.8 L156.0 134.4 L125.5 116.8 Z"/><path class="f l" d="M53.5 142.4 L84.0 160.0 L84.0 131.2 L53.5 113.6 Z"/><path class="f r" d="M114.5 142.4 L84.0 160.0 L84.0 131.2 L114.5 113.6 Z"/><path class="f t" d="M84.0 96.0 L114.5 113.6 L84.0 131.2 L53.5 113.6 Z"/><path class="f l" d="M89.5 163.2 L120.0 180.8 L120.0 129.6 L89.5 112.0 Z"/><path class="f r" d="M150.5 163.2 L120.0 180.8 L120.0 129.6 L150.5 112.0 Z"/><path class="f t" d="M120.0 94.4 L150.5 112.0 L120.0 129.6 L89.5 112.0 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
                 <h3 class="t2 ab-tit" id="t-ab2">Abbonamento 2<span class="sr">.</span></h3>
                 <p class="sotto">Qui la frase che spiega l'abbonamento, in una o due&nbsp;righe.</p>
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
@@ -1317,7 +1367,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
             </li>
             <li class="pacchetto speciale ab-segnaposto" id="abbonamento-3">
               <div class="sp-testa">
-                <p class="speciale-tag">Abbonamento</p>
+                <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.3</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M50.2 184.5 L53.9 186.6 L53.9 177.6 L50.2 175.5 Z"/><path class="f r" d="M113.6 152.1 L53.9 186.6 L53.9 177.6 L113.6 143.1 Z"/><path class="f t" d="M110.0 141.0 L113.6 143.1 L53.9 177.6 L50.2 175.5 Z"/><path class="f l" d="M60.0 190.1 L63.6 192.2 L63.6 175.0 L60.0 172.9 Z"/><path class="f r" d="M123.4 157.7 L63.6 192.2 L63.6 175.0 L123.4 140.5 Z"/><path class="f t" d="M119.7 138.4 L123.4 140.5 L63.6 175.0 L60.0 172.9 Z"/><path class="f l" d="M69.7 195.8 L73.4 197.8 L73.4 172.3 L69.7 170.2 Z"/><path class="f r" d="M133.1 163.3 L73.4 197.8 L73.4 172.3 L133.1 137.8 Z"/><path class="f t" d="M129.5 135.8 L133.1 137.8 L73.4 172.3 L69.7 170.2 Z"/><path class="f l" d="M79.5 201.4 L83.1 203.5 L83.1 169.7 L79.5 167.6 Z"/><path class="f r" d="M142.9 169.0 L83.1 203.5 L83.1 169.7 L142.9 135.2 Z"/><path class="f t" d="M139.2 133.1 L142.9 135.2 L83.1 169.7 L79.5 167.6 Z"/><path class="f l" d="M89.2 207.0 L92.9 209.1 L92.9 167.1 L89.2 165.0 Z"/><path class="f r" d="M152.6 174.6 L92.9 209.1 L92.9 167.1 L152.6 132.6 Z"/><path class="f t" d="M149.0 130.5 L152.6 132.6 L92.9 167.1 L89.2 165.0 Z"/><path class="f l" d="M99.0 212.6 L102.6 214.7 L102.6 164.5 L99.0 162.4 Z"/><path class="f r" d="M162.4 180.2 L102.6 214.7 L102.6 164.5 L162.4 130.0 Z"/><path class="f t" d="M158.7 127.9 L162.4 130.0 L102.6 164.5 L99.0 162.4 Z"/><path class="f l" d="M108.7 218.2 L112.3 220.3 L112.3 161.8 L108.7 159.8 Z"/><path class="f r" d="M172.1 185.8 L112.3 220.3 L112.3 161.8 L172.1 127.3 Z"/><path class="f t" d="M168.5 125.2 L172.1 127.3 L112.3 161.8 L108.7 159.8 Z"/><path class="f l" d="M118.4 223.9 L122.1 226.0 L122.1 159.2 L118.4 157.1 Z"/><path class="f r" d="M181.8 191.5 L122.1 226.0 L122.1 159.2 L181.8 124.7 Z"/><path class="f t" d="M178.2 122.6 L181.8 124.7 L122.1 159.2 L118.4 157.1 Z"/></svg></div><p class="speciale-tag">Abbonamento</p>
                 <h3 class="t2 ab-tit" id="t-ab3">Abbonamento 3<span class="sr">.</span></h3>
                 <p class="sotto">Qui la frase che spiega l'abbonamento, in una o due&nbsp;righe.</p>
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
