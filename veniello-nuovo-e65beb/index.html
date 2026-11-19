@@ -1732,14 +1732,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
        altrimenti la pagina cambierebbe larghezza per un attimo). Se la spinta non si ferma, avanza() se ne accorge (la
        pagina la sposta qualcun altro), si fa da parte e resta l'aggancio di prima. */
   var inerzia = null, TAU = 300;   /* (20/11) prima 450: prendeva colpi che si sarebbero fermati prima */
-  function prendi(y){
+  function prendi(y){ inerzia = null; return;   /* (20/11) spenta: prendeva colpi che si sarebbero fermati prima o li portava fino in cima */
     var t = performance.now(), q = inerzia.p;
     if (t - inerzia.t > 2500) { inerzia = null; return; }
     q.push([t, y]); while (q.length > 3 && t - q[1][0] > 80) q.shift();
     if (q.length < 3 || t - q[0][0] < 30) return;
     var v = (y - q[0][1]) / (t - q[0][0]);                   /* px al ms, < 0 se la pagina torna su */
     var M = momenti(), f = M[1];
-    if (v > -.25 || y + v * TAU > f - .15 * A.V) return;   /* (20/11) solo se andrebbe davvero dentro */                 /* non torna su, o si ferma da sola prima dell'apertura */
+    if (v > -.25 || y + v * TAU > f) return;                 /* non torna su, o si ferma da sola prima dell'apertura */
     inerzia = null;
     /* dove posarla: sulla fine dell'apertura se c'è strada per frenare dolcemente (almeno 220 ms alla sua velocità);
        se è troppo vicina (o già dentro) e va forte, al momento dopo verso l'alto (il logo): un momento più in là, ma
@@ -1765,7 +1765,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (ditoGiu) { clearTimeout(attesa); attesa = setTimeout(aggancia, 160); return; }
     var y = scrollY, M = momenti();
     if (y <= M[0] + 2 || y >= M[1] - 2 || suMomento(y, M)) return;
-    vai(ultimaDir > 0 ? dopo(y, M) : (y > M[1] - .35 * A.V ? M[1] : prima(y, M)), curvaIO);   /* (20/11) fermo appena dentro, venendo da sotto: torna alla fine */
+    vai(ultimaDir > 0 ? dopo(y, M) : (y > M[1] - .45 * A.V ? M[1] : prima(y, M)), curvaIO);   /* (20/11) fermo appena dentro, venendo da sotto: torna alla fine */
   }
   addEventListener('scroll', function(){
     var y = scrollY;
