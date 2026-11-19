@@ -2892,6 +2892,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (BC) BC.outY = Math.max(BC.outY, BC.inY + 40);
     for (i = 0; i < n - 1; i++) { A = seq[i]; B = seq[i+1]; if (A.outY < A.inY) A.outY = A.inY; if (B.inY < A.outY + 40 && !(A === BC && B === BT)) A.outY = Math.max(A.inY, B.inY - 40); }
     ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
+    if (ST3 && BN.pc) {
+      var iS3 = seq.indexOf(ST3), C3 = iS3 > 0 ? seq[iS3 - 1] : null, dl = Math.round(BN.b) - ST3.inY;
+      if (C3 && dl) {
+        if (dl < 0) dl = Math.max(dl, C3.inY + 40 - C3.outY);   /* più presto: non prima che la sosta in «decidi» cominci */
+        C3.outY += dl; ST3.inY += dl; ST3.outY = Math.max(ST3.outY, ST3.inY + Math.round(.1 * V0));
+        if (seq[iS3 + 1] && seq[iS3 + 1].inY < ST3.outY + 40) seq[iS3 + 1].inY = ST3.outY + 40;
+      }
+    }
     lineaMisura(y0, BT);   /* (NB) la linea verticale e le sue tacche */
     SEG = [];
     for (i = 0; i < n; i++) {
