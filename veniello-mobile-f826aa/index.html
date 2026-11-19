@@ -255,6 +255,7 @@ footer.piede{border-top:0}
 .ab-pannello-box .voci li:last-child{border-bottom:0}
 .ab-pannello .speciale-azione{margin-top:var(--s4)}
 .ab-fig{display:none}
+.ab-lbl-pc{display:none}
 @media (min-width:1024px){
   /* 2 · Come funziona come il Changelog di Linear: il binario in alto con un pallino all'inizio di ogni colonna (la linea
      continua fino alla linea verticale con la curva 2h), sotto tre colonne senza riquadro: titolo, testo, «Passo 01» in mono */
@@ -312,6 +313,23 @@ footer.piede{border-top:0}
     mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat}
   #servizi .ab-schede .speciale-azione .pill:hover::after,.ab-pannello .speciale-azione .pill:hover::after{transform:translateX(3px)}
   #servizi .ab-schede .dettagli{margin-top:0}
+  /* (20/11 sera, Niccolò: «scambia Parliamone e Cosa comprende di posizione e poi sostituisci Cosa comprende con Dettagli,
+     rifai anche il + di Dettagli, al Parliamone lascia la freccia») prima «Dettagli +», sotto «Parliamone →»; il + ha lo
+     stesso tratto della freccia */
+  #servizi .ab-schede > .pacchetto.speciale{display:flex;flex-direction:column}
+  #servizi .ab-schede .sp-testa{display:contents}
+  #servizi .ab-schede .speciale-tag{margin-bottom:0}
+  #servizi .ab-schede .speciale-tag + .t2{margin-top:24px}   /* senza la sovrapposizione dei margini: la stessa distanza di prima */
+  #servizi .ab-schede .sp-elenco{order:1;margin-top:var(--s2)}
+  #servizi .ab-schede .speciale-azione{order:2;margin-top:0}
+  #servizi .ab-schede .dettagli summary{min-height:40px;gap:10px;font:500 17px/1 var(--sans);letter-spacing:-.01em}
+  #servizi .ab-schede .dettagli summary .piu{width:14px;height:14px;background:currentColor;transition:transform .3s cubic-bezier(.2,.7,.2,1);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.5v11M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.5v11M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat}
+  #servizi .ab-schede .dettagli summary .piu::before,#servizi .ab-schede .dettagli summary .piu::after{display:none}
+  #servizi .ab-schede .dettagli summary:hover .piu{transform:rotate(90deg)}
+  .ab-lbl-pc{display:inline}
+  .ab-lbl-m{display:none}
 }
 /* (20/11) 7 · Abbonamenti: il binario 7g sopra le schede (come quello di «Come funziona», 2f) e le schede che scorrono di
    lato (al telefono). Il titolo della scheda si colora d'arancio dall'alto in basso quando la pallina ci salta dentro
@@ -1404,7 +1422,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20la%20Campagna%20Pubblicitaria%20360%C2%B0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
               </div>
               <div class="sp-elenco">
-                <details class="dettagli"><summary>Cosa comprende<i class="piu" aria-hidden="true"></i></summary>
+                <details class="dettagli"><summary><span class="ab-lbl-m">Cosa comprende</span><span class="ab-lbl-pc">Dettagli</span><i class="piu" aria-hidden="true"></i></summary>
                 <ul class="voci"><li><b>Creazione Contenuti</b>Video, foto, stories, Google, Instagram e&nbsp;TikTok</li><li><b>Sito Web</b>Sul tuo dominio, gestito e aggiornato</li><li><b>Virtual Assistant</b>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi</li></ul></details>
               </div>
             </li>
@@ -1416,7 +1434,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
               </div>
               <div class="sp-elenco">
-                <details class="dettagli"><summary>Cosa comprende<i class="piu" aria-hidden="true"></i></summary>
+                <details class="dettagli"><summary><span class="ab-lbl-m">Cosa comprende</span><span class="ab-lbl-pc">Dettagli</span><i class="piu" aria-hidden="true"></i></summary>
                 <ul class="voci"><li><b>Prima voce</b>Da scrivere</li><li><b>Seconda voce</b>Da scrivere</li><li><b>Terza voce</b>Da scrivere</li></ul></details>
               </div>
             </li>
@@ -1428,7 +1446,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
                 <div class="speciale-azione"><a class="pill pill-chiara" href="https://wa.me/393520338377" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Parliamone</a></div>
               </div>
               <div class="sp-elenco">
-                <details class="dettagli"><summary>Cosa comprende<i class="piu" aria-hidden="true"></i></summary>
+                <details class="dettagli"><summary><span class="ab-lbl-m">Cosa comprende</span><span class="ab-lbl-pc">Dettagli</span><i class="piu" aria-hidden="true"></i></summary>
                 <ul class="voci"><li><b>Prima voce</b>Da scrivere</li><li><b>Seconda voce</b>Da scrivere</li><li><b>Terza voce</b>Da scrivere</li></ul></details>
               </div>
             </li>
@@ -2549,7 +2567,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var card = abSch[i], tag = card.querySelector('.speciale-tag'), tit = card.querySelector('.t2'), sotto = card.querySelector('.sp-testa > .sotto');
     var voci = card.querySelector('.dettagli .voci'), az = card.querySelector('.speciale-azione');
     var titolo = tit ? tit.textContent.replace(/\.$/, '').trim() : '';
-    PAN.el.innerHTML = '<div class="ab-pannello-testa"><span class="ab-pannello-tag">Cosa comprende · ' + (tag ? tag.textContent : '') + '</span>' +
+    PAN.el.innerHTML = '<div class="ab-pannello-testa"><span class="ab-pannello-tag">Dettagli · ' + (tag ? tag.textContent : '') + '</span>' +
       '<button type="button" class="ab-pannello-x" aria-label="Chiudi"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg></button></div>' +
       '<div class="ab-pannello-corpo"><h2 class="ab-pannello-t" id="ab-pannello-t">' + titolo + '</h2>' + (sotto ? '<p class="ab-pannello-sotto">' + sotto.innerHTML + '</p>' : '') +
       (voci ? '<div class="ab-pannello-box"><p class="ab-pannello-box-t">Nel pacchetto</p>' + voci.outerHTML + '</div>' : '') +
