@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
 <script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('logo-in');else document.documentElement.classList.add('fermo')}catch(e){}</script>
-<!-- Anteprima NB (20/11): solo telefono, la pallina su una linea verticale da 2f a 7b. Fonte: _lavoro/nb/pallina-linea.py -->
+<!-- Anteprima NB (19/11): solo telefono, la pallina su una linea verticale da 2f a 7b. Fonte: _lavoro/nb/pallina-linea.py -->
 <title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
 <meta name="description" content="Veniello Studio gestisce ogni mese Instagram, TikTok, scheda Google e video per ogni attività della Valdinievole: negozi, ristoranti, saloni, studi, artigiani e strutture. Vedi il tuo sito prima di pagare.">
 <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
@@ -135,11 +135,20 @@ html.viaggio .pt.qui{background:var(--rec)}
    come un righello: lunghe ai capitoli (Servizi, Abbonamenti), corte ai pacchetti. Dietro al sito come la pallina; solo
    telefono. Il colore delle linee di divisione */
 .linea-v{position:absolute;left:0;top:0;width:1px;z-index:-1;pointer-events:none;background:var(--filo)}
-.linea-v i{position:absolute;right:0;height:1px;margin-top:-.5px;background:var(--filo)}
-.linea-v .lv-lunga{width:17px}
-.linea-v .lv-corta{width:9px}
+/* (19/11 sera, Niccolò: «per ogni punto dove si ferma mettici una piccola linea perpendicolare sulla linea di scorrimento»)
+   le tacche a cavallo della linea, un po' più chiare di lei: lunghe ai capitoli, corte alle altre fermate */
+.linea-v i{position:absolute;left:0;height:1px;margin-top:-.5px;background:rgba(245,244,239,.24)}
+.linea-v .lv-lunga{width:19px;margin-left:-9px}
+.linea-v .lv-corta{width:11px;margin-left:-5px}
 html:not(.viaggio) .linea-v{display:none}
 @media (min-width:1024px){.linea-v{display:none}}
+/* (19/11 sera, Niccolò: «decentra la pagina verso sinistra, così la riga dove scorre la pallina ha più spazio») al
+   telefono i Servizi lasciano 44 px a destra invece di 24: la linea sta a 20 px dal bordo e i riquadri finiscono 16 px
+   prima di lei. A sinistra tutto come prima (le scritte restano allineate con il resto della pagina) */
+@media (max-width:599px){
+  html.viaggio #servizi > .wrap{padding-right:44px}
+  html.viaggio .abbonamenti-testa::before{right:-44px}
+}
 /* (19/11 notte) «tira giù per aggiornare» (1f): in cima alla pagina, tirando giù, il punto di «scegliere» sale sopra il
    titolo e diventa un cerchietto sottile che si riempie; oltre la soglia gira e la pagina si ricarica (script «Tira giù
    per aggiornare»). Sotto la testata. Il «tira per aggiornare» del browser è spento, altrimenti i cerchietti sarebbero due */
@@ -744,7 +753,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   --sa-fl:252px; --sa-ft:34px; --sa-fw:156px; --sa-fh:340px; --sa-fr:18px; --sa-fo:0; --sa-fsc:.96;
 }
 .sa-schermo[data-tema="chiaro"]{--sa-c-bg:#F5F4EF;--sa-c-fg:#100F09;--sa-c-fg2:rgba(16,15,9,.6);--sa-c-filo:rgba(16,15,9,.12);--sa-c-card:#E8E6DE;--sa-c-btn:#100F09;--sa-c-btnt:#F5F4EF;--sa-c-pt:#FF5A1F}
-.sa-schermo[data-tema="arancio"]{--sa-c-bg:#FF5A1F;--sa-c-fg:#100F09;--sa-c-fg2:rgba(16,15,9,.68);--sa-c-filo:rgba(16,15,9,.2);--sa-c-card:#F36A30;--sa-c-btn:#100F09;--sa-c-btnt:#F5F4EF;--sa-c-pt:#100F09}
+.sa-schermo[data-tema="arancio"]{--sa-c-bg:#16233F;--sa-c-fg:#F5F4EF;--sa-c-fg2:rgba(245,244,239,.66);--sa-c-filo:rgba(245,244,239,.16);--sa-c-card:#22335A;--sa-c-btn:#F5F4EF;--sa-c-btnt:#16233F;--sa-c-pt:#FF5A1F}   /* (19/11 sera) blu notte al posto dell'arancio */
 .sa-schermo[data-btn="quadro"]{--sa-b-r:4px;--sa-b-rp:4px}
 .sa-schermo[data-btn="contorno"]{--sa-b-bg:rgba(16,15,9,0);--sa-b-fg:var(--sa-c-fg);--sa-b-bd:var(--sa-c-fg);--sa-b-r:4px;--sa-b-rp:4px}
 /* due colonne: testo a sinistra, foto a destra */
@@ -883,6 +892,35 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 .sa-desk-barra{height:var(--sa-db,16px);display:flex;align-items:center;gap:calc(var(--sa-db,16px) * .25);padding:0 calc(var(--sa-db,16px) * .5);border-bottom:1px solid rgba(245,244,239,.08)}
 .sa-desk-barra i{width:calc(var(--sa-db,16px) * .31);height:calc(var(--sa-db,16px) * .31);border-radius:50%;background:rgba(245,244,239,.22)}
 .sa-desk-schermo{position:relative;aspect-ratio:1280/780;overflow:hidden}
+/* 5d (19/11): iPhone 17 Pro arancio. Il vetro nero (prima lo sfondo della scocca) e la cornice di metallo sono il ::before,
+   un livello sotto lo schermo; i tasti (Action, volume, laterale, Camera Control) sono il ::after con le sue copie */
+.sa-tel{z-index:0;background:none;box-shadow:none}
+.sa-tel::before{content:"";position:absolute;inset:-6px;z-index:-1;border-radius:44px;border:6px solid transparent;pointer-events:none;
+  background:linear-gradient(#050404,#050404) padding-box,
+    conic-gradient(from 0deg,#E26B2C 0deg,#F49A62 16deg,#FFE1C9 24deg,#F08A4E 28deg,#C4581E 44deg,#E0732F 78deg,#F39558 92deg,
+      #C9591D 108deg,#8E3C13 140deg,#5F270B 151deg,#D7692A 155deg,#6A2B0C 160deg,#963F14 182deg,#C2561D 200deg,#FFB98E 205deg,
+      #A3461A 212deg,#C85A20 236deg,#F7A16B 262deg,#FFD0AE 268deg,#E7783A 276deg,#B84F1B 304deg,#E57A3C 326deg,#FFEBDB 335deg,
+      #F5945A 341deg,#E26B2C 360deg) border-box;
+  box-shadow:inset 0 0 0 1px rgba(255,214,184,.34),inset 0 0 0 2px rgba(0,0,0,.6),0 0 0 .5px rgba(70,24,4,.9),0 0 0 1.5px rgba(255,180,130,.16),0 40px 80px -30px rgba(0,0,0,.9)}
+.sa-tel::after{content:"";position:absolute;z-index:-2;left:-8px;top:16%;width:4px;height:5.5%;border-radius:2px;background:#D2652A;pointer-events:none;
+  box-shadow:0 calc(var(--sa-th) * .075) 0 #D2652A,0 calc(var(--sa-th) * .15) 0 #D2652A,
+    calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .09) 0 #B9531E,calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .33) 0 #9E4417}
+/* 5d (19/11): MacBook. Il bordo di alluminio è il bordo del .sa-desk (sfondo a due livelli: vetro nero dentro, metallo nel
+   bordo), la fotocamera il ::before, la base il ::after. Le misure seguono --sa-dw (le stesse costanti sono nello script) */
+.sa-desk{--sa-mr:max(2px, calc(var(--sa-dw,320px) * .006));overflow:visible;border:var(--sa-mr) solid transparent;
+  border-radius:calc(var(--sa-dw,320px) * .03) calc(var(--sa-dw,320px) * .03) calc(var(--sa-dw,320px) * .01) calc(var(--sa-dw,320px) * .01);
+  padding:calc(var(--sa-dw,320px) * .021) calc(var(--sa-dw,320px) * .017) calc(var(--sa-dw,320px) * .024);
+  background:linear-gradient(#040404,#040404) padding-box,linear-gradient(160deg,#E6E8EB 0%,#A6A9AF 28%,#D0D3D7 55%,#878A90 80%,#B8BBC0 100%) border-box;
+  box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+.sa-desk::before{content:"";position:absolute;top:calc(var(--sa-dw,320px) * .0075);left:50%;width:max(2px, calc(var(--sa-dw,320px) * .0055));height:max(2px, calc(var(--sa-dw,320px) * .0055));
+  margin-left:calc(max(2px, calc(var(--sa-dw,320px) * .0055)) / -2);border-radius:50%;background:#1A1D23;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.14)}
+.sa-desk::after{content:"";position:absolute;left:calc(-3.5% - var(--sa-mr));right:calc(-3.5% - var(--sa-mr));top:calc(100% + var(--sa-mr));height:max(7px, calc(var(--sa-dw,320px) * .03));
+  border-radius:1px 1px calc(var(--sa-dw,320px) * .05) calc(var(--sa-dw,320px) * .05) / 1px 1px 100% 100%;
+  background:radial-gradient(50% 100% at 50% 0,#767980 0 56%,rgba(118,121,128,0) 60%) 50% 0 / 13% 48% no-repeat,
+    linear-gradient(180deg,#F0F2F4 0%,#C5C8CD 20%,#9FA2A8 58%,#6B6E74 100%);
+  box-shadow:0 26px 44px -16px rgba(0,0,0,.9)}
+.sa-desk-barra{background:#13120F;border-radius:calc(var(--sa-dw,320px) * .006) calc(var(--sa-dw,320px) * .006) 0 0}
+.sa-desk-schermo{border-radius:0 0 calc(var(--sa-dw,320px) * .004) calc(var(--sa-dw,320px) * .004)}
 .sa-md{position:absolute;left:0;top:0;width:1280px;height:780px;transform-origin:0 0;transform:scale(var(--sa-dk,.25));background:#100F09;color:#F5F4EF;font-family:'sa-geist',-apple-system,system-ui,sans-serif;line-height:1.4;letter-spacing:0;word-spacing:0}
 .sa-md-testata{height:76px;display:flex;align-items:center;padding:0 48px;border-bottom:1px solid rgba(245,244,239,.08)}
 .sa-md-testata .sa-logo{font-size:24px}
@@ -2283,7 +2321,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     DENTRO = [];
     [['#sito', saPunto, saPunto && saEl && saEl.classList.contains('sa-js') && saPunto.offsetWidth, 1],
      ['#va', chatPt, chatPt && chatPt.offsetWidth, -1]].forEach(function(c){
-      if (!c[2]) return;
+      if (!c[2] || mqColonna.matches) return;   /* (NB, 19/11 sera) al telefono solo i titoli: niente tappe nei video */
       var k = -1; P.forEach(function(s, j){ if (s.riq && s.el.closest(c[0])) k = j; }); if (k < 0) return;
       var t = P[k], q = c[1].getBoundingClientRect();
       var D = { el: c[1], live: true, cop: true, dentro: true, lato: c[3], x: q.left + q.width / 2, ly: q.top + y0 + q.height / 2, d: q.width,
@@ -2477,11 +2515,15 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (!LV.el) { LV.el = document.createElement('div'); LV.el.className = 'linea-v'; LV.el.id = 'linea-v'; LV.el.setAttribute('aria-hidden', 'true'); document.body.appendChild(LV.el); }
     LV.on = mqColonna.matches && !BN.pc && !!BT && !!GRADI;
     if (!LV.on) { LV.el.style.display = 'none'; return; }
-    LV.x = Math.round(document.documentElement.clientWidth - 14);
+    LV.x = Math.round(document.documentElement.clientWidth - 20);   /* (19/11 sera) 20 px dal bordo: i Servizi sono decentrati a sinistra */
     LV.dal = BN.T + BT.ly; LV.al = GRADI.ly;
     var cg = GRADI.el.closest('.pacchetto'); LV.carta = cg ? cg.getBoundingClientRect().top + y0 : 1e9;
-    var pg = function(sel){ var e = document.querySelector(sel); if (!e) return null; var r = e.getBoundingClientRect(); return r.height ? (r.top + r.bottom) / 2 + y0 : null; };
-    var T = [['#t-servizi .pt', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga'], ['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']], h = '';
+    var pg = function(e){ if (typeof e === 'string') e = document.querySelector(e); if (!e) return null; var r = e.getBoundingClientRect(); return r.height ? (r.top + r.bottom) / 2 + y0 : null; };
+    /* (19/11 sera) una tacca a ogni fermata: le due estremità («Online» e il «°»), i titoli (lunga a «…farti scegliere»,
+       il capitolo Servizi), la freccia di «Parliamone» dei dettagli aperti; più la lunga del capitolo Abbonamenti */
+    var T = [['#t-servizi .pt', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga'], ['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']];
+    [].forEach.call(document.querySelectorAll('.pacchetto .dettagli[open] .freccia'), function(a){ T.push([a.querySelector('.i') || a, 'lv-corta']); });
+    var h = '<i class="lv-corta" style="top:0"></i><i class="lv-corta" style="top:' + Math.round(LV.al - LV.dal) + 'px"></i>';
     T.forEach(function(t){ var yy = pg(t[0]); if (yy != null && yy > LV.dal && yy < LV.al) h += '<i class="' + t[1] + '" style="top:' + Math.round(yy - LV.dal) + 'px"></i>'; });
     LV.el.innerHTML = h; LV.el.style.display = '';
     LV.el.style.transform = 'translate(' + LV.x + 'px,' + Math.round(LV.dal) + 'px)'; LV.el.style.height = Math.round(LV.al - LV.dal) + 'px';
@@ -2710,7 +2752,10 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   function frecciaDi(d){ return d.querySelector('.freccia .i') || d.querySelector('.freccia'); }
   /* la tappa dopo il pacchetto: il punto dentro il riquadro del pacchetto sotto (solo se è una tappa), o il «°» della
      Campagna dopo il Virtual Assistant */
-  function dopoDi(d){ var pk = d.closest('.pacchetto'), nx = pk && pk.nextElementSibling; while (nx && !nx.classList.contains('pacchetto')) nx = nx.nextElementSibling; if (!nx) return null; for (var i = 0; i < DENTRO.length; i++) if (nx.contains(DENTRO[i].el)) return DENTRO[i]; return GRADI && nx.contains(GRADI.el) ? GRADI : null; }
+  function dopoDi(d){ var pk = d.closest('.pacchetto'), nx = pk && pk.nextElementSibling; while (nx && !nx.classList.contains('pacchetto')) nx = nx.nextElementSibling; if (!nx) return null; for (var i = 0; i < DENTRO.length; i++) if (nx.contains(DENTRO[i].el)) return DENTRO[i]; if (GRADI && nx.contains(GRADI.el)) return GRADI;
+    /* (NB, 19/11 sera) altrimenti il titolo del pacchetto sotto, lungo la linea */
+    if (LV.on) for (var j = 0; j < SEG.length; j++) if (SEG[j].k === 'seduto' && SEG[j].s && SEG[j].s.el && nx.contains(SEG[j].s.el)) return SEG[j].s;
+    return null; }
   function copiaIn(pan){ var c = document.createElement('i'); c.className = 'punto punto-dentro'; c.setAttribute('aria-hidden', 'true'); c.innerHTML = '<svg viewBox="-20 -20 40 40" focusable="false"><path d="M20 0A20 20 0 1 1-20 0A20 20 0 1 1 20 0Z"/></svg>'; pan.appendChild(c); return c; }
   function giuPunti(b, bx, by, y){
     /* (NB) dalla freccia di «Parliamone»: a destra lungo la riga fino alla linea, giù lungo la linea fino alla riga della
@@ -3404,12 +3449,15 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       var k = w / 390;
       vars(ms, { '--sa-k': k.toFixed(5), '--sa-msh': Math.ceil(box.clientHeight / k) + 'px' });
       var th = tel.offsetHeight, dl, dt, dw, db, fx, fy, fs;
+      /* 5d (19/11): il MacBook. Dalla larghezza del coperchio: lo schermo vero (iw, dentro bordo e vetro) e l'altezza di
+         coperchio più base (stesse costanti del CSS di .sa-desk) */
+      function mac(dw, db){ var mr = Math.max(2, dw * .006), iw = dw - 2 * (mr + dw * .017); return { iw: iw, h: 2 * mr + dw * .045 + db + iw * 780 / 1280 + Math.max(7, dw * .03) }; }
       if (W >= 600) {
         // blocco largo (computer): computer e telefono affiancati, il telefono poggia sulla stessa riga del computer
         var r = 780 / 1280, f = .86, padX = Math.max(32, W * .07), padY = Math.max(28, H * .11), gap = Math.max(22, W * .035);
         dw = Math.min((W - 2 * padX - gap) / (1 + f * r * .462), (H - 2 * padY) / f / r - 20, 860);
         db = Math.max(16, Math.min(24, dw * .026));
-        var dh = dw * r + db, ph = f * dh, pw = ph * .462, gw = dw + gap + pw;
+        var dh = mac(dw, db).h, ph = f * dh, pw = ph * .462, gw = dw + gap + pw;
         dl = (W - gw) / 2; dt = (H - dh) / 2;
         fs = ph / th; fx = dl + dw + gap + pw / 2 - W / 2; fy = dt + dh - ph / 2 - H / 2;
       } else {
@@ -3419,7 +3467,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       }
       vars(sa, { '--sa-dl': dl.toFixed(1) + 'px', '--sa-dt': dt.toFixed(1) + 'px', '--sa-dw': dw.toFixed(1) + 'px', '--sa-db': db.toFixed(1) + 'px',
                  '--sa-fx': fx.toFixed(1) + 'px', '--sa-fy': fy.toFixed(1) + 'px', '--sa-fs': fs.toFixed(4) });
-      vars(md, { '--sa-dk': (dw / 1280).toFixed(5) });
+      vars(md, { '--sa-dk': (mac(dw, db).iw / 1280).toFixed(5) });
       mettiPunto();
     }
 

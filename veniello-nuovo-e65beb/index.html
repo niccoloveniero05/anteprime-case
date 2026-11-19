@@ -734,7 +734,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   --sa-fl:252px; --sa-ft:34px; --sa-fw:156px; --sa-fh:340px; --sa-fr:18px; --sa-fo:0; --sa-fsc:.96;
 }
 .sa-schermo[data-tema="chiaro"]{--sa-c-bg:#F5F4EF;--sa-c-fg:#100F09;--sa-c-fg2:rgba(16,15,9,.6);--sa-c-filo:rgba(16,15,9,.12);--sa-c-card:#E8E6DE;--sa-c-btn:#100F09;--sa-c-btnt:#F5F4EF;--sa-c-pt:#FF5A1F}
-.sa-schermo[data-tema="arancio"]{--sa-c-bg:#FF5A1F;--sa-c-fg:#100F09;--sa-c-fg2:rgba(16,15,9,.68);--sa-c-filo:rgba(16,15,9,.2);--sa-c-card:#F36A30;--sa-c-btn:#100F09;--sa-c-btnt:#F5F4EF;--sa-c-pt:#100F09}
+.sa-schermo[data-tema="arancio"]{--sa-c-bg:#16233F;--sa-c-fg:#F5F4EF;--sa-c-fg2:rgba(245,244,239,.66);--sa-c-filo:rgba(245,244,239,.16);--sa-c-card:#22335A;--sa-c-btn:#F5F4EF;--sa-c-btnt:#16233F;--sa-c-pt:#FF5A1F}   /* (19/11 sera) blu notte al posto dell'arancio */
 .sa-schermo[data-btn="quadro"]{--sa-b-r:4px;--sa-b-rp:4px}
 .sa-schermo[data-btn="contorno"]{--sa-b-bg:rgba(16,15,9,0);--sa-b-fg:var(--sa-c-fg);--sa-b-bd:var(--sa-c-fg);--sa-b-r:4px;--sa-b-rp:4px}
 /* due colonne: testo a sinistra, foto a destra */
@@ -878,11 +878,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 .sa-tel{z-index:0;background:none;box-shadow:none}
 .sa-tel::before{content:"";position:absolute;inset:-6px;z-index:-1;border-radius:44px;border:6px solid transparent;pointer-events:none;
   background:linear-gradient(#050404,#050404) padding-box,
-    linear-gradient(140deg,#F7A36B 0%,#E3692A 16%,#B44E1B 40%,#EC7A3C 62%,#9A4216 84%,#D9672B 100%) border-box;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 0 0 1px rgba(255,186,140,.28),0 40px 80px -30px rgba(0,0,0,.9)}
-.sa-tel::after{content:"";position:absolute;z-index:-2;left:-8px;top:16%;width:4px;height:5.5%;border-radius:2px;background:#C0561F;pointer-events:none;
-  box-shadow:0 calc(var(--sa-th) * .075) 0 #C0561F,0 calc(var(--sa-th) * .15) 0 #C0561F,
-    calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .09) 0 #C0561F,calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .33) 0 #A9491A}
+    conic-gradient(from 0deg,#E26B2C 0deg,#F49A62 16deg,#FFE1C9 24deg,#F08A4E 28deg,#C4581E 44deg,#E0732F 78deg,#F39558 92deg,
+      #C9591D 108deg,#8E3C13 140deg,#5F270B 151deg,#D7692A 155deg,#6A2B0C 160deg,#963F14 182deg,#C2561D 200deg,#FFB98E 205deg,
+      #A3461A 212deg,#C85A20 236deg,#F7A16B 262deg,#FFD0AE 268deg,#E7783A 276deg,#B84F1B 304deg,#E57A3C 326deg,#FFEBDB 335deg,
+      #F5945A 341deg,#E26B2C 360deg) border-box;
+  box-shadow:inset 0 0 0 1px rgba(255,214,184,.34),inset 0 0 0 2px rgba(0,0,0,.6),0 0 0 .5px rgba(70,24,4,.9),0 0 0 1.5px rgba(255,180,130,.16),0 40px 80px -30px rgba(0,0,0,.9)}
+.sa-tel::after{content:"";position:absolute;z-index:-2;left:-8px;top:16%;width:4px;height:5.5%;border-radius:2px;background:#D2652A;pointer-events:none;
+  box-shadow:0 calc(var(--sa-th) * .075) 0 #D2652A,0 calc(var(--sa-th) * .15) 0 #D2652A,
+    calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .09) 0 #B9531E,calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .33) 0 #9E4417}
 /* 5d (19/11): MacBook. Il bordo di alluminio è il bordo del .sa-desk (sfondo a due livelli: vetro nero dentro, metallo nel
    bordo), la fotocamera il ::before, la base il ::after. Le misure seguono --sa-dw (le stesse costanti sono nello script) */
 .sa-desk{--sa-mr:max(2px, calc(var(--sa-dw,320px) * .006));overflow:visible;border:var(--sa-mr) solid transparent;
