@@ -159,6 +159,15 @@ html:not(.viaggio) .linea-v,html:not(.viaggio) .linea-curva{display:none}
   #servizi .m{box-shadow:none;background:linear-gradient(155deg,#1C1B14 0%,#15140E 40%,rgba(16,15,9,0) 85%)}
   #servizi .m::after{box-shadow:none;border:1px solid rgba(245,244,239,.2);border-right:0;border-bottom:0;
     -webkit-mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%)}
+  /* (20/11, Niccolò: «creazione di contenuti per farlo coerente agli altri: sotto va in sfumatura scura e ci scrivi sopra
+     il testo, senza delineare il bordo netto del video») il video sfuma nel nero in basso (dal 45 %) e un po' a destra; il
+     titolo «Creazione Contenuti» sale sulla parte sfumata */
+  #servizi .m-video{background:none}
+  #servizi .m-video::after{display:none}   /* il filo a sinistra scendeva lungo il video fino in fondo: qui il bordo è il video */
+  #servizi .m-video video,#servizi .m-video .ferma{
+    -webkit-mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.45) 70%,rgba(0,0,0,0) 100%),linear-gradient(90deg,#000 72%,rgba(0,0,0,0) 100%);-webkit-mask-composite:source-in;
+    mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.45) 70%,rgba(0,0,0,0) 100%),linear-gradient(90deg,#000 72%,rgba(0,0,0,0) 100%);mask-composite:intersect}
+  #contenuti .t2{position:relative;z-index:7;margin-top:-104px;text-shadow:0 2px 18px rgba(16,15,9,.55)}
 }
 /* (19/11 sera, stessa richiesta) anche la linea di sezione sopra «Servizi» finisce sulla linea verticale invece di
    attraversarla fino al bordo: al posto del bordo una riga disegnata larga quanto la sezione meno 19 px */
