@@ -226,6 +226,7 @@ html.js:not(.fermo) .ap-palco{position:sticky;top:0;height:100vh;height:100lvh}
 .lv .e,.lv .st{-webkit-clip-path:inset(-20% 100% -20% 0);clip-path:inset(-20% 100% -20% 0)}
 .ap-pt{position:absolute;left:0;top:0;z-index:5;border-radius:50%;visibility:hidden;pointer-events:none}
 html.viaggio .ap-palco.chiuso .ap-pt.qui{visibility:visible;background:var(--rec)}
+.vagone .n b{font-weight:inherit;color:var(--rec)}   /* (20/11) la cifra dei numeri di «Come funziona» */
 /* (20/11 NB) l'apertura parte dal nome: il titolo resta solo per la sintesi vocale; il puntino del nome e del logo è arancio */
 html.js:not(.fermo) #copertina-wrap{opacity:0}
 #ap-logo .pd{background:var(--rec)}
@@ -277,7 +278,7 @@ html.js:not(.fermo) #copertina-wrap{opacity:0}
 .binario-testa{padding:0 var(--lato);margin-bottom:var(--s4)}
 .vagoni{display:flex;gap:12px;padding:0 var(--lato);will-change:transform}
 .vagone{flex:none;width:min(76vw,400px);background:var(--bg3);border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--filo);padding:var(--s3);min-height:min(36svh,300px);display:flex;flex-direction:column;will-change:transform;transform-origin:50% 50%}
-.vagone .n{display:block;font:400 clamp(56px,15vw,80px)/.9 var(--serif);font-optical-sizing:auto;letter-spacing:-.03em;color:var(--av3);margin-bottom:auto;padding-bottom:var(--s4);will-change:transform}
+.vagone .n{display:block;font:560 clamp(56px,15vw,80px)/.9 var(--sans);letter-spacing:-.05em;color:var(--av3);margin-bottom:auto;padding-bottom:var(--s4);will-change:transform}
 .vagone h3{font:450 24px/1.2 var(--serif);font-optical-sizing:auto;letter-spacing:-.012em;color:var(--av);text-wrap:balance}
 .vagone p{margin-top:var(--s1);color:var(--av2);font-size:16px;line-height:1.55;text-wrap:pretty}
 .gratis{display:flex;width:max-content;align-items:center;height:26px;margin:10px 0 2px;padding:0 11px;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av2);border-radius:999px;box-shadow:inset 0 0 0 1px var(--filo2)}
@@ -1060,9 +1061,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
         <h2 class="t-sez" id="t-come">Prima lo vedi. <em>Poi decidi</em><i class="pt" data-posto aria-hidden="true"></i><span class="sr">.</span></h2>
       </div>
       <div class="vagoni" id="vagoni">
-        <article class="vagone"><span class="n">01</span><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></article>
-        <article class="vagone"><span class="n">02</span><h3>Ti prepariamo l’anteprima</h3><span class="gratis">Gratis</span><p>Con foto e informazioni vere della tua attività. Ti arriva un link da aprire sul&nbsp;telefono.</p></article>
-        <article class="vagone"><span class="n">03</span><h3>Se ti piace, va online</h3><p>Sul tuo dominio, insieme a Google e ai social. Da lì in poi ti&nbsp;trovano.</p></article>
+        <article class="vagone"><span class="n">0<b>1</b></span><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></article>
+        <article class="vagone"><span class="n">0<b>2</b></span><h3>Ti prepariamo l’anteprima</h3><span class="gratis">Gratis</span><p>Con foto e informazioni vere della tua attività. Ti arriva un link da aprire sul&nbsp;telefono.</p></article>
+        <article class="vagone"><span class="n">0<b>3</b></span><h3>Se ti piace, va online</h3><p>Sul tuo dominio, insieme a Google e ai social. Da lì in poi ti&nbsp;trovano.</p></article>
       </div>
       <div class="rotaia" id="rotaia" aria-hidden="true">
         <i class="linea"><i class="pieno" id="rotaia-pieno"></i></i>
