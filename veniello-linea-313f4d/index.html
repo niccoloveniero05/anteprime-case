@@ -2553,18 +2553,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     /* (19/11 sera) una tacca corta a ogni fermata: la fine (il «°»), i titoli, la freccia di «Parliamone» dei dettagli aperti;
        le lunghe sulle etichette dei capitoli, «Servizi» (3a; Niccolò: «la linea mettila su 3a, non 3b») e «Abbonamenti»
        (7x). In cima non serve: c'è la curva */
-    var T = [['#servizi > .wrap > .etichetta', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga'], ['#t-servizi .pt', 'lv-corta'], ['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']];
-    /* (verifica 19/11) solo coi dettagli davvero aperti (aperto: chiudendo, «open» resta per tutta l'animazione e la tacca
-       restava orfana) */
-    [].forEach.call(document.querySelectorAll('.pacchetto .dettagli'), function(d){ var a = aperto(d) && d.querySelector('.freccia'); if (a) T.push([a.querySelector('.i') || a, 'lv-corta']); });
+    /* (20/11, Niccolò: «anche se la pallina ci va togli la linea in prossimità di 3b e su tutti i Parliamone») niente tacca
+       su 3b («…farti scegliere.») né sulle frecce di «Parliamone»: la pallina ci si ferma lo stesso */
+    var T = [['#servizi > .wrap > .etichetta', 'lv-lunga'], ['li.abbonamenti-testa .etichetta', 'lv-lunga'], ['#t-contenuti .pt', 'lv-corta'], ['#t-sito .pt', 'lv-corta'], ['#t-va .pt', 'lv-corta']];
     var fondo = Math.round(LV.al), h = '<i class="lv-corta" style="top:' + (fondo - Y1) + 'px"></i>';
     T.forEach(function(t){ var yy = pg(t[0]); if (yy != null && yy > Y1 && yy < LV.al) h += '<i class="' + t[1] + '" style="top:' + (Math.round(yy) - Y1) + 'px"></i>'; });
     LV.el.innerHTML = h; LV.el.style.display = '';
     LV.el.style.transform = 'translate(' + LV.x + 'px,' + Y1 + 'px)'; LV.el.style.height = (fondo - Y1) + 'px';
   }
-  /* (verifica 19/11) la freccia di «Parliamone» arriva con l'animazione «voce» (6 px), che finisce dopo l'ultima misura:
-     alla fine si rimisura, così la sua tacca sta sulla riga giusta */
-  document.addEventListener('animationend', function(e){ var t = e.target; if (LV.on && t && t.classList && t.classList.contains('freccia')) chiediRimisura(); }, true);
   function lineaPagY(s, y){ return sy(s, y) + y; }
   function lineaDentro(s, y){ var q = lineaPagY(s, y); return q >= LV.dal - 8 && q <= LV.al + 8; }
   /* vale per i tratti fra due tappe della linea (non dal «°» in poi) */
