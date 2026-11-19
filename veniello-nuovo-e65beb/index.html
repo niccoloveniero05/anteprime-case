@@ -878,13 +878,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 .sa-tel{z-index:0;background:none;box-shadow:none}
 .sa-tel::before{content:"";position:absolute;inset:-6px;z-index:-1;border-radius:44px;border:6px solid transparent;pointer-events:none;
   background:linear-gradient(#050404,#050404) padding-box,
-    conic-gradient(from 0deg,#E0682A 0deg,#EA7E42 18deg,#F4A16E 25deg,#E77A3C 31deg,#D06024 50deg,#DA6B2C 85deg,#E37B3E 95deg,
-      #CC5E22 115deg,#AE4C1B 145deg,#C45A21 160deg,#B5511D 180deg,#C95D22 200deg,#E5884F 206deg,#CB5E23 214deg,#D4652A 240deg,
-      #E8844A 264deg,#EE9A64 270deg,#DE7231 280deg,#CB5E22 305deg,#DF7535 325deg,#F2AA7A 335deg,#E88044 342deg,#E0682A 360deg) border-box;
-  box-shadow:inset 0 0 0 1px rgba(255,214,184,.22),inset 0 0 0 2px rgba(0,0,0,.6),0 0 0 .5px rgba(70,24,4,.9),0 0 0 1.5px rgba(255,180,130,.16),0 40px 80px -30px rgba(0,0,0,.9)}
-.sa-tel::after{content:"";position:absolute;z-index:-2;left:-8px;top:16%;width:4px;height:5.5%;border-radius:2px;background:#D2652A;pointer-events:none;
-  box-shadow:0 calc(var(--sa-th) * .075) 0 #D2652A,0 calc(var(--sa-th) * .15) 0 #D2652A,
-    calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .09) 0 #B9531E,calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .33) 0 #9E4417}
+    linear-gradient(160deg,#A2461A 0%,#96401A 45%,#8A3A14 100%) border-box;
+  box-shadow:inset 0 0 0 1px rgba(255,200,165,.14),inset 0 0 0 2px rgba(0,0,0,.6),0 0 0 .5px rgba(70,24,4,.9),0 0 0 1.5px rgba(255,180,130,.16),0 40px 80px -30px rgba(0,0,0,.9)}
+.sa-tel::after{content:"";position:absolute;z-index:-2;left:-8px;top:16%;width:4px;height:5.5%;border-radius:2px;background:#9A421A;pointer-events:none;
+  box-shadow:0 calc(var(--sa-th) * .075) 0 #9A421A,0 calc(var(--sa-th) * .15) 0 #9A421A,
+    calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .09) 0 #8A3A14,calc(var(--sa-th) * .462 + 12px) calc(var(--sa-th) * .33) 0 #7C3311}
 /* 5d (19/11): MacBook. Il bordo di alluminio è il bordo del .sa-desk (sfondo a due livelli: vetro nero dentro, metallo nel
    bordo), la fotocamera il ::before, la base il ::after. Le misure seguono --sa-dw (le stesse costanti sono nello script) */
 .sa-desk{--sa-mr:max(2px, calc(var(--sa-dw,320px) * .006));overflow:visible;border:var(--sa-mr) solid transparent;
