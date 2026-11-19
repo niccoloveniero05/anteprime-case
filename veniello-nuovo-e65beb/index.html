@@ -781,6 +781,21 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
 .sa-schermo[data-menu="burger"] .sa-pill,.sa-schermo[data-menu="nav"] .sa-pill{opacity:0;transform:scale(.86)}
 .sa-schermo[data-menu="burger"] .sa-burger{opacity:1;transform:none}
 .sa-schermo[data-menu="nav"] .sa-nav{opacity:1;transform:none}
+/* (20/11) l'interruttore scuro/chiaro: binario 44 × 24, manopola 18 del colore del testo con dentro luna o sole (del colore
+   dello sfondo); scuro = manopola a sinistra e luna, chiaro = a destra e sole. Sta a sinistra di «Scrivici» o del panino */
+.sa-sw{position:absolute;top:26px;right:var(--sa-sw-r,118px);width:44px;height:24px;border-radius:12px;background-color:rgba(245,244,239,.14);box-shadow:inset 0 0 0 1px rgba(245,244,239,.12);
+  transition:background-color var(--sa-t) var(--sa-mossa),box-shadow var(--sa-t) var(--sa-mossa),right var(--sa-t) var(--sa-mossa),opacity var(--sa-t) var(--sa-mossa)}
+.sa-sw-m{position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background-color:var(--sa-c-fg);transform:translate3d(0,0,0);
+  transition:transform calc(var(--sa-t) * 1.25) cubic-bezier(.3,1.35,.5,1),background-color var(--sa-t) var(--sa-mossa)}
+.sa-sw svg{position:absolute;left:3px;top:3px;width:12px;height:12px;transition:opacity var(--sa-t) var(--sa-mossa),transform calc(var(--sa-t) * 1.25) var(--sa-mossa)}
+.sa-sw-luna{fill:var(--sa-c-bg)}
+.sa-sw-sole{fill:var(--sa-c-bg);stroke:var(--sa-c-bg);stroke-width:2.2;stroke-linecap:round;opacity:0;transform:rotate(-90deg) scale(.5)}
+.sa-schermo[data-tema="chiaro"] .sa-sw{background-color:rgba(16,15,9,.1);box-shadow:inset 0 0 0 1px rgba(16,15,9,.1)}
+.sa-schermo[data-tema="chiaro"] .sa-sw-m{transform:translate3d(20px,0,0)}
+.sa-schermo[data-tema="chiaro"] .sa-sw-luna{opacity:0;transform:rotate(90deg) scale(.5)}
+.sa-schermo[data-tema="chiaro"] .sa-sw-sole{opacity:1;transform:none}
+.sa-schermo[data-menu="burger"] .sa-sw{--sa-sw-r:58px}
+.sa-schermo[data-menu="nav"] .sa-sw{opacity:0}
 
 /* la prima schermata (alta 408, come nella D). Ogni pezzo è messo a mano: cambiando disposizione scivola al posto nuovo */
 .sa-cop{position:absolute;left:0;top:64px;width:390px;height:408px;overflow:hidden;
@@ -1183,6 +1198,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
                   <span class="sa-pill">Scrivici</span>
                   <span class="sa-burger"><i></i><i></i></span>
                   <span class="sa-nav"><span>Lavori</span><span>Servizi</span><span>Contatti</span></span>
+                  <span class="sa-sw"><i class="sa-sw-m"><svg class="sa-sw-luna" viewBox="0 0 24 24"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg><svg class="sa-sw-sole" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.6"/><path d="M12 1.8v2.9M12 19.3v2.9M1.8 12h2.9M19.3 12h2.9M4.8 4.8l2 2M17.2 17.2l2 2M4.8 19.2l2-2M17.2 6.8l2-2"/></svg></i></span>
                 </div>
                 <!-- prima schermata: testo al centro, due colonne o foto grande -->
                 <div class="sa-cop">
@@ -3785,9 +3801,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     [1100, { tema: 'chiaro', vivo: '0' }],                 // colori: da scuro a chiaro (e da ricco a semplice)
     [2100, { tit: 'sans', btn: 'quadro' }],                 // titoli senza grazie, pulsanti squadrati
     [3100, { cop: 'colonne', menu: 'nav' }],                // prima schermata a due colonne, menu con le voci
-    [4100, { tema: 'arancio' }],                            // un colore pieno
+    [4100, { tema: 'scuro', menu: 'burger' }],              // (20/11) di nuovo scuro con l'interruttore (luna), menu a panino
     [5100, { cop: 'foto', btn: 'contorno' }],               // foto grande, pulsanti solo contorno
-    [6100, { schede: 'lista', menu: 'burger' }],            // lavori in elenco, menu a panino
+    [6100, { schede: 'lista' }],                            // lavori in elenco
     [7100, { tema: 'scuro', tit: 'serif', cop: 'centro', btn: 'pillola', menu: 'pill', schede: 'griglia', vivo: '0' }]  // il sito scelto
   ];
   var FINE = 8150;        // la frase cambia, il telefono si allontana e compare il computer (0,8 s, come nella D)
