@@ -2897,6 +2897,7 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       GRADI.live = true; GRADI.ab = true; GRADI.cardL = AB.pc ? abSch[0].getBoundingClientRect().left : 16;
       GRADI.x = abStX(abSp(AB.cur)); GRADI.ly = abRot.getBoundingClientRect().top + 5.5 + y0; GRADI.d = 13;   /* (20/11 sera) 13 px: copre del tutto il pallino della stazione (11), come la pallina sul binario 2f */
       GRADI.inY = GRADI.ly - Math.round(.68 * V0); GRADI.outY = GRADI.ly - Math.round(.12 * V0);
+      if (!AB.pc) GRADI.inY = GRADI.ly - Math.round(.52 * V0);   /* (20/11 sera) al telefono nel binario più tardi: l'ingresso comincia quando il binario è a circa il 70% dello schermo (Niccolò: «una volta che la linea verde è scesa sotto i 6220 px allora falla andare in 7g») */
     }
     if (FIN) {
       FIN.corsiaS = Math.max(8, (GRADI ? GRADI.cardL : FIN.el.closest('.wrap').getBoundingClientRect().left + 24) - 22);
@@ -2980,6 +2981,12 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     if (BC) BC.outY = Math.max(BC.outY, BC.inY + 40);
     for (i = 0; i < n - 1; i++) { A = seq[i]; B = seq[i+1]; if (A.outY < A.inY) A.outY = A.inY; if (B.inY < A.outY + 40 && !(A === BC && B === BT)) A.outY = Math.max(A.inY, B.inY - 40); }
     ATTESA = { x: xM, vy: Rm, d: DOT, fisso: true };
+    /* (20/11 sera) al telefono la pallina lascia «Virtual Assistant» un po' prima (titolo al 36% dello schermo invece del 32%):
+       più strada lungo la linea prima del binario degli abbonamenti */
+    if (GRADI && GRADI.ab && !AB.pc) {
+      var iGa = seq.indexOf(GRADI), VAg = iGa > 0 ? seq[iGa - 1] : null;
+      if (VAg && !VAg.dentro && !VAg.live && !VAg.scena) VAg.outY = Math.max(VAg.inY + 40, Math.min(VAg.outY, VAg.ly - Math.round(.36 * V0)));
+    }
     if (ST3 && BN.pc) {
       var iS3 = seq.indexOf(ST3), C3 = iS3 > 0 ? seq[iS3 - 1] : null, dl = Math.round(BN.b) - ST3.inY;
       if (C3 && dl) {
@@ -3169,6 +3176,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var r1 = A.st3 && LV.R ? LV.R : 10, r2 = B === GRADI && B.ab && AB.on ? AB.R : 10;
     var a0 = lineaPagY(A, y) - g.a, b1 = lineaPagY(B, y) - g.b;   /* dove sono le due righe sullo schermo all'inizio e alla fine */
     var h1 = clamp(a0 - hT - 40, 40, .3 * G), h2 = clamp(innerHeight - 40 - b1, 40, .3 * G), p, k, d = DOT;
+    /* (20/11 sera) al telefono, verso il binario degli abbonamenti: esce svelta dal titolo, sta sulla linea, e l'ingresso nel
+       binario dura 0,15 schermi di scorrimento (non scatta) */
+    if (mqColonna.matches) { h1 = clamp(a0 - hT - 40, 30, Math.min(60, .3 * G)); h2 = clamp(.15 * innerHeight, 40, .5 * G); }
     if (u < h1) { k = liscio(u / h1); p = tracciaR([[ax, ay], [X, ay], [X, ay + r1]], [r1]).at(k); d = lerp(A.d, DOT, Math.min(1, k / .4)); }
     else if (u > G - h2) { k = liscio((u - (G - h2)) / h2); p = tracciaR([[X, by - r2], [X, by], [bx, by]], [r2]).at(k); d = lerp(DOT, B.d, Math.max(0, (k - .6) / .4)); }
     else { k = (u - h1) / Math.max(1, G - h1 - h2); p = [X, clamp(lerp(ay + r1, by - r2, k), hT + 30, innerHeight - 30)]; }
@@ -3176,7 +3186,8 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
   }
   function lineaPunta(g, t, y){
     var A = g.da, B = g.a2;
-    if (!mqColonna.matches && g.k === 'viaggio') return lineaPc(g, t, y);   /* (20/11 sera) da computer */
+    /* (20/11 sera) da computer, e al telefono verso il binario degli abbonamenti (Niccolò: «la pallina da 6f a 7g scatta troppo, metti che può sostare anche lungo il tratto disegnato»): scende piano lungo la linea restando nello schermo */
+    if (g.k === 'viaggio' && (!mqColonna.matches || (g.a2 && g.a2.ab))) return lineaPc(g, t, y);
     if (g.k === 'esceChat' && g.modo === 'rie' && RIE && RIE.el.isConnected) {
       /* con 6d (il riepilogo della chat): dalla foto profilo alla linea, giù fino alla riga del pallino, dentro; ci si
          posa; poi alla linea e giù fino a «Virtual Assistant.» (le regole di quando ci passa sono quelle di sempre) */
