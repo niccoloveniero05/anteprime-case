@@ -172,7 +172,7 @@ html:not(.viaggio) .linea-v,html:not(.viaggio) .linea-curva{display:none}
 /* (19/11 sera, stessa richiesta) anche la linea di sezione sopra «Servizi» finisce sulla linea verticale invece di
    attraversarla fino al bordo: al posto del bordo una riga disegnata larga quanto la sezione meno 19 px */
 @media (max-width:1023px){
-  html.viaggio #servizi{border-top:0;background:linear-gradient(var(--filo),var(--filo)) 0 0 / calc(100% - 19px) 1px no-repeat}
+  #servizi{border-top:0;background:none}   /* (20/11, Niccolò: «togliamo questa, tanto c'è la linea sopra che delimita») niente linea sopra «Servizi»: basta il binario di Come funziona */
 }
 /* (19/11 notte) «tira giù per aggiornare» (1f): in cima alla pagina, tirando giù, il punto di «scegliere» sale sopra il
    titolo e diventa un cerchietto sottile che si riempie; oltre la soglia gira e la pagina si ricarica (script «Tira giù
