@@ -301,18 +301,16 @@ html.viaggio .ab-schede{touch-action:pan-y;-webkit-user-select:none;user-select:
 html.viaggio .ab-tit{color:transparent;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;
   background-image:linear-gradient(180deg,var(--rec) calc(var(--ab-f,0) * 100% - 1px),var(--av) calc(var(--ab-f,0) * 100% + 1px))}
 html:not(.viaggio) .ab-rotaia{display:none}
-/* (20/11, Niccolò: «la riga 7g la sposterei in basso, per colorare le scritte fallo pure passare attraverso basta che lo
-   rendi sottile come hai fatto per Veniello») al telefono il binario sta sotto le schede; la pallina che sale nel titolo
-   attraversa la scheda come una linea sottile */
-@media (max-width:1023px){
-  .ab-giostra{display:flex;flex-direction:column}
-  .ab-vista{order:1}
-  .ab-rotaia{order:2;margin:var(--s3) 0 0}
-}
-/* (20/11) «Cosa comprende» di lato, al telefono: un pannello come le schede che si allarga e spinge avanti le altre */
-.ab-dett{flex:none;overflow:hidden;background:var(--bg3);border-radius:14px;box-shadow:inset 0 0 0 1px var(--filo2);transform-origin:50% 0}
-.ab-dett.va{transition:width .52s cubic-bezier(.2,.7,.2,1),margin-left .52s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
-.ab-dett-in{padding:var(--s4) var(--s3);box-sizing:border-box;height:100%;overflow-y:auto;overscroll-behavior:contain}
+/* (20/11 sera) il binario era passato sotto le schede (per far salire la pallina nei titoli); poi, spento il colore nei
+   titoli e visto che la linea verticale tagliava le schede, Niccolò ha scelto la proposta C: di nuovo sopra le schede */
+/* (20/11) «Cosa comprende» di lato, al telefono. (20/11 sera, Niccolò: «allargando la scheda dell'abbonamento e non
+   creandola nuova») la parte coi dettagli è attaccata alla scheda (niente spazio, niente bordo in mezzo, gli angoli tondi
+   solo fuori): la scheda si allarga verso destra e spinge avanti le altre; un filo sottile divide le due parti */
+.ab-dett{flex:none;overflow:hidden;background:var(--bg3);border-radius:0 14px 14px 0;margin-left:-12px;
+  box-shadow:inset 0 1px 0 var(--filo2),inset -1px 0 0 var(--filo2),inset 0 -1px 0 var(--filo2)}
+.ab-dett.va{transition:width .52s cubic-bezier(.2,.7,.2,1)}
+.ab-schede > li.ab-aperta{border-radius:14px 0 0 14px;box-shadow:inset 1px 0 0 var(--filo2),inset 0 1px 0 var(--filo2),inset 0 -1px 0 var(--filo2)}
+.ab-dett-in{padding:var(--s4) var(--s3);box-sizing:border-box;height:100%;overflow-y:auto;overscroll-behavior:contain;border-left:1px solid var(--filo)}
 .ab-dett-t{font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
 .ab-dett .voci li{animation:voce .5s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--n,0)*50ms + 180ms)}
 .ab-dett-x{display:inline-flex;align-items:center;gap:12px;min-height:44px;margin-top:var(--s2);font:500 17px/1 var(--sans);color:var(--av);background:none;border:0;padding:0;cursor:pointer}
@@ -2419,7 +2417,11 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var p = AB.cur;
     if (!AB.pc) {
       abTr.style.transform = 'translateX(' + (AB.x0 - abOff(p)).toFixed(1) + 'px)';
-      AB.it.forEach(function(c, i){ var ad = Math.min(1, Math.abs(i - p)); c.style.opacity = (1 - .5 * ad).toFixed(3); c.style.transform = 'scale(' + (1 - .05 * ad).toFixed(4) + ')'; });
+      var jc = AB.det ? AB.it.indexOf(abSch[AB.det.i]) : -1, jd = AB.det ? AB.it.indexOf(AB.det.el) : -1;
+      AB.it.forEach(function(c, i){
+        var coppia = AB.det && (i === jc || i === jd), ad = Math.min(1, coppia ? Math.min(Math.abs(jc - p), Math.abs(jd - p)) : Math.abs(i - p));
+        c.style.opacity = (1 - .5 * ad).toFixed(3); c.style.transform = coppia ? '' : 'scale(' + (1 - .05 * ad).toFixed(4) + ')';
+      });
     }
     var sp = abSp(p);
     abPieno.style.transform = 'scaleX(' + ((abStX(sp) - AB.st[0]) / AB.sw).toFixed(4) + ')';
@@ -2486,9 +2488,9 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     var li = document.createElement('li'); li.className = 'ab-dett'; li._ab = i; li.setAttribute('aria-label', 'Cosa comprende');
     li.style.height = card.offsetHeight + 'px';   /* alto come la scheda: la fila non cresce e il binario sotto non si sposta */
     li.innerHTML = '<div class="ab-dett-in" style="width:' + W + 'px"><p class="ab-dett-t">Cosa comprende</p>' + (voci ? voci.outerHTML : '') + '<button type="button" class="ab-dett-x">Chiudi<i class="piu" aria-hidden="true"></i></button></div>';
-    li.style.width = '0px'; li.style.marginLeft = '-12px'; li.style.opacity = '0';
-    card.after(li); void li.offsetWidth;
-    li.classList.add('va'); li.style.width = W + 'px'; li.style.marginLeft = '0px'; li.style.opacity = '';
+    li.style.width = '0px';
+    card.after(li); card.classList.add('ab-aperta'); void li.offsetWidth;
+    li.classList.add('va'); li.style.width = W + 'px';
     [].forEach.call(li.querySelectorAll('.voci li'), function(v, n){ v.style.setProperty('--n', n); });
     if (d) d.classList.add('lato-aperto');
     AB.det = { el: li, i: i, chiude: false };
@@ -2505,13 +2507,14 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
     function via(){
       var j = AB.it.indexOf(D.el), c = AB.cur;
       if (D.el.parentNode) D.el.parentNode.removeChild(D.el);
+      abSch[D.i].classList.remove('ab-aperta');
       AB.it = [].slice.call(abTr.children);
       if (j >= 0 && c > j) { AB.cur = c - 1; if (ABCR.dur) { ABCR.da = Math.max(0, ABCR.da - 1); ABCR.a = Math.max(0, ABCR.a - 1); } }
       if (AB.det === D) AB.det = null;
       abDisegna(); abSveglia(); chiediRimisura();
     }
     if (subito) { via(); return; }
-    D.el.style.width = '0px'; D.el.style.marginLeft = '-12px'; D.el.style.opacity = '0';
+    D.el.style.width = '0px';
     AB.anim = performance.now() + AB_ANIM; abSveglia();
     setTimeout(via, AB_ANIM);
   }
@@ -2806,11 +2809,6 @@ html.viaggio .t360-w{--f:0;color:transparent;-webkit-text-fill-color:transparent
       GRADI.live = true; GRADI.ab = true; GRADI.cardL = AB.pc ? abSch[0].getBoundingClientRect().left : 16;
       GRADI.x = abStX(abSp(AB.cur)); GRADI.ly = abRot.getBoundingClientRect().top + 5.5 + y0; GRADI.d = 11;
       GRADI.inY = GRADI.ly - Math.round(.68 * V0); GRADI.outY = GRADI.ly - Math.round(.12 * V0);
-      if (!AB.pc && abTit[0]) {
-        /* (20/11) al telefono il binario è sotto le schede e la pallina ci resta (niente salto nel titolo): seduta da quando il
-           binario entra nello schermo (96%) finché non è salito al 30% */
-        GRADI.inY = GRADI.ly - Math.round(.96 * V0); GRADI.outY = GRADI.ly - Math.round(.30 * V0);
-      }
     }
     if (FIN) {
       FIN.corsiaS = Math.max(8, (GRADI ? GRADI.cardL : FIN.el.closest('.wrap').getBoundingClientRect().left + 24) - 22);
