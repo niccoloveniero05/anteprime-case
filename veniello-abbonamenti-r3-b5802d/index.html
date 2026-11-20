@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -38,7 +38,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:76px}
-body{font:400 17px/1.55 var(--sans);letter-spacing:-.006em;word-spacing:.02em;color:var(--testo);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{overflow-anchor:none;font:400 17px/1.55 var(--sans);letter-spacing:-.006em;word-spacing:.02em;color:var(--testo);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
@@ -126,22 +126,34 @@ h2 em{font-style:normal;font-weight:600;color:var(--testo);letter-spacing:-.034e
 .agg .prezzo{margin-top:16px}
 .agg .prezzo b{font-size:30px;letter-spacing:-.035em}
 .piano .btn{width:100%;margin-top:20px}
-/* opzione A di Crescita: una riga da spuntare (come le voci di «Comprende», con il «+» al posto della spunta). Niente pop-up né interruttore:
-   toccandola il «+» diventa ✓ e il messaggio su WhatsApp include il sito. «−10%» in arancio, stesso carattere e peso del resto. */
-.opzione{width:100%;display:flex;align-items:center;gap:14px;margin-top:22px;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-tap-highlight-color:transparent}
-.opzione + .btn{margin-top:20px}
-.opz-segno{position:relative;width:26px;height:26px;flex:none;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(245,244,239,.6);transition:background .35s var(--curva),box-shadow .35s var(--curva),transform .35s var(--curva)}
-.opz-segno::before,.opz-segno::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.6px;margin:-.8px 0 0 -6px;border-radius:2px;background:var(--testo);transition:transform .45s var(--curva),opacity .25s ease}
+/* opzione A di Crescita (r9): riga «+ Aggiungi sito web o e-commerce» tra prezzo e «Contattaci». Il «+» è senza cerchio, della misura delle spunte.
+   Toccata, la riga vola giù e diventa la prima voce di «Comprende»; arrivata, il «+» diventa la spunta arancio come le altre.
+   Toccando la voce in «Comprende» torna su (si toglie il sito). Il messaggio WhatsApp segue la scelta. */
+.opz-slot{display:grid;grid-template-rows:1fr;transition:grid-template-rows .82s cubic-bezier(.65,0,.35,1),opacity .3s ease}
+.opz-slot > div{min-height:0;overflow:hidden}
+.opz-slot.via{grid-template-rows:0fr;opacity:0}
+.opzione{width:100%;display:block;margin-top:22px;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-tap-highlight-color:transparent}
+.opz-in{display:flex;align-items:flex-start;gap:11px}
+.opz-segno{position:relative;width:17px;height:17px;flex:none;margin-top:2px}
+.opz-segno::before,.opz-segno::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:1.8px;margin:-.9px 0 0 -7px;border-radius:2px;background:var(--testo);transition:transform .45s var(--curva),opacity .25s ease}
 .opz-segno::after{transform:rotate(90deg)}
-.opz-segno svg{position:absolute;inset:0;margin:auto;width:15px;height:15px;color:var(--bg);opacity:0;transform:scale(.6);transition:opacity .25s ease,transform .45s var(--curva)}
-.opzione:active .opz-segno{transform:scale(.92)}
-.opz-t{font:500 16px/1.3 var(--sans);letter-spacing:-.01em}
+.opz-segno svg{position:absolute;inset:0;width:17px;height:17px;color:var(--rec);opacity:0;transform:scale(.5) rotate(-20deg);transition:opacity .25s ease,transform .5s var(--curva)}
+.opzione:active .opz-segno{transform:scale(.88)}
+.opz-t{font:500 16px/1.35 var(--sans);letter-spacing:-.01em}
 .nw{white-space:nowrap}
 .opz-t small{display:block;margin-top:4px;font:400 14px/1.35 var(--sans);color:var(--testo3);letter-spacing:0}
-.opz-t .meno{color:var(--rec)}
-.opzione[aria-checked="true"] .opz-segno{background:var(--rec);box-shadow:inset 0 0 0 1.5px var(--rec)}
-.opzione[aria-checked="true"] .opz-segno::before,.opzione[aria-checked="true"] .opz-segno::after{opacity:0;transform:rotate(180deg) scale(.4)}
-.opzione[aria-checked="true"] .opz-segno svg{opacity:1;transform:none}
+.meno{color:var(--rec)}
+.opz-slot + .btn{margin-top:20px}
+/* la voce in «Comprende»: chiusa finché il sito non è scelto (il margine negativo annulla lo spazio della lista) */
+.lista li.voce-sito{display:grid;grid-template-rows:0fr;margin-bottom:-11px;transition:grid-template-rows .82s cubic-bezier(.65,0,.35,1),margin .82s cubic-bezier(.65,0,.35,1)}
+.lista li.voce-sito.dentro{grid-template-rows:1fr;margin-bottom:0}
+.voce-sito > button{min-height:0;overflow:hidden;display:flex;gap:11px;width:100%;font:inherit;line-height:1.4;text-align:left;opacity:0;transition:opacity .25s ease;-webkit-tap-highlight-color:transparent}
+.voce-sito.vista > button{opacity:1}
+.voce-sito .opz-segno{margin-top:1px}
+.voce-sito.spunta .opz-segno::before,.voce-sito.spunta .opz-segno::after{opacity:0;transform:rotate(180deg) scale(.3)}
+.voce-sito.spunta .opz-segno svg{opacity:1;transform:none}
+/* la copia che vola */
+.volo{position:fixed;z-index:40;pointer-events:none;margin:0;will-change:transform,opacity}
 .comprende{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
 .comprende .titoletto{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
 .lista{list-style:none;margin-top:14px;display:grid;gap:11px}
@@ -290,14 +302,17 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
           <div class="piano-testa"><h3>Crescita</h3><span class="badge ar">Consigliato</span></div>
           <p class="desc">Per crescere ogni mese, con contenuti veri e i risultati misurati.</p>
           <p class="prezzo"><b>850&nbsp;€</b><span>al mese</span></p>
-          <button class="opzione" id="crescita-sito" type="button" role="checkbox" aria-checked="false">
-            <span class="opz-segno" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
-            <span class="opz-t">Aggiungi sito web o <span class="nw">e-commerce</span><small>405&nbsp;€ invece di 450&nbsp;€ · <span class="meno">−10%</span></small></span>
-          </button>
+          <div class="opz-slot" id="opz-slot"><div>
+            <button class="opzione" id="crescita-sito" type="button" aria-pressed="false">
+              <span class="opz-in"><span class="opz-segno" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+              <span class="opz-t">Aggiungi sito web o <span class="nw">e-commerce</span><small>405&nbsp;€ invece di 450&nbsp;€ · <span class="meno">−10%</span></small></span></span>
+            </button>
+          </div></div>
           <a class="btn btn-pieno" id="crescita-contatta" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Crescita" data-base="Ciao, mi interessa l'abbonamento Crescita" data-sito="Ciao, mi interessa l'abbonamento Crescita con il sito web o e-commerce a 405 €" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contattaci</a>
           <div class="comprende">
             <p class="titoletto">Comprende</p>
             <ul class="lista">
+              <li class="voce-sito" id="crescita-sito-voce"><button type="button" tabindex="-1" aria-label="Togli sito web o e-commerce"><span class="opz-segno" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span><span>Sito web o <span class="nw">e-commerce</span> <span class="meno">−10%</span></span></button></li>
               <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span>Crescita del profilo social<small>Con report mensile sulle conversioni</small></span></li>
               <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span>Riprese dal vivo</span></li>
               <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span>Editing di video e foto</span></li>
@@ -428,13 +443,57 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
   function testata(){t.classList.toggle('piena',scrollY>8)}
   addEventListener('scroll',testata,{passive:true});testata();
 
-  /* Crescita: la riga «+ sito» cambia il testo che arriva su WhatsApp */
-  var sw=document.getElementById('crescita-sito'),cc=document.getElementById('crescita-contatta');
-  sw.addEventListener('click',function(){
-    var on=sw.getAttribute('aria-checked')!=='true';
-    sw.setAttribute('aria-checked',String(on));
-    cc.href='https://wa.me/393520338377?text='+encodeURIComponent(cc.dataset[on?'sito':'base']);
-  });
+  /* Crescita: «+ sito». Toccata, la riga vola nella prima voce di «Comprende» e il «+» diventa la spunta; toccando la voce torna su.
+     Il messaggio su WhatsApp segue la scelta. Con «Riduci movimento» lo scambio è immediato. */
+  (function(){
+    var slot=document.getElementById('opz-slot'),riga=document.getElementById('crescita-sito'),voce=document.getElementById('crescita-sito-voce');
+    var cc=document.getElementById('crescita-contatta'),dentroVoce=voce.querySelector('button'),inRiga=riga.querySelector('.opz-in');
+    var occupato=false,scelto=false,DURATA=820,curva='cubic-bezier(.65,0,.35,1)';
+    var fermo=matchMedia('(prefers-reduced-motion:reduce)');
+    function messaggio(){cc.href='https://wa.me/393520338377?text='+encodeURIComponent(cc.dataset[scelto?'sito':'base'])}
+    /* giu=true: la riga scende in «Comprende» e la riga piccola del prezzo sparisce mentre scende; giu=false: torna su e la riga piccola ricompare alla fine */
+    function vola(da,a,fine,giu){
+      var g=inRiga.cloneNode(true);g.classList.add('volo');g.removeAttribute('id');
+      g.style.left=da.left+'px';g.style.top=da.top+'px';g.style.width=da.width+'px';
+      document.body.appendChild(g);
+      var pic=g.querySelector('small');
+      if(pic)pic.animate(giu?[{opacity:1},{opacity:0}]:[{opacity:0},{opacity:0},{opacity:1}],{duration:giu?280:DURATA,easing:'ease',fill:'forwards'});
+      var an=g.animate([{transform:'translate3d(0,0,0)'},{transform:'translate3d('+(a.left-da.left)+'px,'+(a.top-da.top)+'px,0)'}],{duration:DURATA,easing:curva,fill:'forwards'});
+      an.onfinish=function(){fine(g)};
+    }
+    function aggiungi(){
+      scelto=true;messaggio();riga.setAttribute('aria-pressed','true');
+      if(fermo.matches){slot.classList.add('via');voce.classList.add('dentro','vista','spunta');dentroVoce.tabIndex=0;return}
+      occupato=true;
+      var da=inRiga.getBoundingClientRect(),h=slot.getBoundingClientRect().height,v=voce.getBoundingClientRect();
+      var a={left:v.left,top:v.top-h};
+      riga.style.visibility='hidden';
+      slot.classList.add('via');voce.classList.add('dentro');
+      vola(da,a,function(g){
+        voce.classList.add('vista');
+        g.animate([{opacity:1},{opacity:0}],{duration:220,fill:'forwards'}).onfinish=function(){g.remove()};
+        setTimeout(function(){voce.classList.add('spunta');occupato=false;dentroVoce.tabIndex=0},90);
+      },true);
+    }
+    function togli(){
+      scelto=false;messaggio();riga.setAttribute('aria-pressed','false');dentroVoce.tabIndex=-1;
+      if(fermo.matches){voce.classList.remove('dentro','vista','spunta');slot.classList.remove('via');riga.style.visibility='';return}
+      occupato=true;
+      var v=dentroVoce.getBoundingClientRect(),st=slot.getBoundingClientRect();
+      var a={left:v.left,top:st.top+SCARTO};
+      voce.classList.remove('spunta');
+      setTimeout(function(){
+        voce.classList.remove('vista','dentro');slot.classList.remove('via');
+        vola({left:v.left,top:v.top,width:inRiga.getBoundingClientRect().width||v.width},a,function(g){
+          riga.style.visibility='';g.remove();occupato=false;
+        },false);
+      },160);
+    }
+    /* distanza tra l'inizio dello spazio della riga e il suo contenuto (margine + filetto + spazio interno), misurata a riga aperta */
+    var SCARTO=inRiga.getBoundingClientRect().top-slot.getBoundingClientRect().top;
+    riga.addEventListener('click',function(){if(!occupato&&!scelto)aggiungi()});
+    dentroVoce.addEventListener('click',function(){if(!occupato&&scelto)togli()});
+  })();
 
   /* partner: la foto si muove piano solo quando il blocco si vede (come VSLinear) */
   if('IntersectionObserver' in window){
