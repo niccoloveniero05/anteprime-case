@@ -1,4 +1,4 @@
-/* ETICHETTE DI PROVA (landing Abbonamenti r6, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
+/* ETICHETTE DI PROVA (landing Abbonamenti r7, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
    messa in fondo a index.html, subito prima di </body>.
    ==========================================================================================================================
    Servono solo nella fase di prova: Niccolò dice «sposta la 4c» e noi sappiamo di che pezzo parla (la mappa delle etichette
@@ -69,20 +69,20 @@
     ['#a-va', '3e', 'Virtual Assistant', { resta: true }],
     ['#a-video', '3f', 'Video con l’IA', { resta: true }],
 
-    ['#domande', '4', 'Domande'],
-    ['#domande .etichetta', '4a', 'L’etichetta «Domande»'],
-    ['#t-faq', '4b', 'Il titolo «Prima di iniziare.»'],
-    ['#d1', '4c', 'Come si parte?', { dentro: true }],
-    ['#d2', '4d', 'La consulenza è gratis?', { dentro: true }],
-    ['#d4', '4e', 'Abbonamenti e componenti aggiuntivi', { dentro: true }],
-    ['#d5', '4f', 'Ci sono altre spese?', { dentro: true }],
+    ['#partner', '4', 'Chi ci ha scelto'],
+    ['#partner .etichetta', '4a', 'L’etichetta «Partner»'],
+    ['#t-partner', '4b', 'Il titolo «Chi ha scelto Veniello Studio.»'],
+    ['#pa-jue', '4c', 'Jué Club', { resta: true }],
+    ['#pa-elena', '4d', 'Elena Baldi', { resta: true }],
+    ['#pa-gb', '4e', 'GB Gioielli', { resta: true }],
 
-    ['#partner', '5', 'Chi ci ha scelto'],
-    ['#partner .etichetta', '5a', 'L’etichetta «Partner»'],
-    ['#t-partner', '5b', 'Il titolo «Chi ha scelto Veniello Studio.»'],
-    ['#pa-jue', '5c', 'Jué Club', { resta: true }],
-    ['#pa-elena', '5d', 'Elena Baldi', { resta: true }],
-    ['#pa-gb', '5e', 'GB Gioielli', { resta: true }],
+    ['#domande', '5', 'Domande'],
+    ['#domande .etichetta', '5a', 'L’etichetta «Domande»'],
+    ['#t-faq', '5b', 'Il titolo «Prima di iniziare.»'],
+    ['#d1', '5c', 'Come si parte?', { dentro: true }],
+    ['#d2', '5d', 'La consulenza è gratis?', { dentro: true }],
+    ['#d4', '5e', 'Abbonamenti e componenti aggiuntivi', { dentro: true }],
+    ['#d5', '5f', 'Ci sono altre spese?', { dentro: true }],
 
     ['#contatta', '6', 'La chiusura'],
     ['#t-fine', '6a', 'Il titolo «Pronto a farti scegliere?»'],

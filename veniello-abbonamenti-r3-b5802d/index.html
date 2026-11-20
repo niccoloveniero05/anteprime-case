@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -358,21 +358,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
     </div>
   </section>
 
-  <!-- 4 · DOMANDE (solo sull'acquisto) -->
-  <section class="sez" id="domande" aria-labelledby="t-faq">
-    <div class="wrap">
-      <span class="etichetta">Domande</span>
-      <h2 id="t-faq">Prima di <em>iniziare</em>.</h2>
-      <div class="faq">
-        <div class="faq-v" id="d1"><button class="faq-d" aria-expanded="false" aria-controls="r1">Come si parte?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r1" role="region"><div><p>Premi Contatta e scrivici su WhatsApp. Fissiamo la consulenza di partenza: studiamo la tua attività e il piano per farla crescere. Poi scegli l’abbonamento e si parte.</p></div></div></div>
-        <div class="faq-v" id="d2"><button class="faq-d" aria-expanded="false" aria-controls="r2">La consulenza è gratis?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r2" role="region"><div><p>Sì, se poi scegli un abbonamento. Se non acquisti, la consulenza è a pagamento.</p></div></div></div>
-        <div class="faq-v" id="d4"><button class="faq-d" aria-expanded="false" aria-controls="r4">Che differenza c’è tra abbonamenti e componenti aggiuntivi?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r4" role="region"><div><p>Gli abbonamenti si pagano ogni mese e comprendono il lavoro continuo: social, contenuti, report. I componenti aggiuntivi sono lavori singoli, come un sito o un video, e si pagano una volta sola.</p></div></div></div>
-        <div class="faq-v" id="d5"><button class="faq-d" aria-expanded="false" aria-controls="r5">Ci sono altre spese?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r5" role="region"><div><p>Se fai il sito, solo il dominio (per esempio latuaattivita.it): è intestato a te e costa circa 10-15 € l’anno. Con Google Ads, il budget della pubblicità lo paghi direttamente a Google.</p></div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 · CHI CI HA SCELTO -->
+  <!-- 4 · CHI CI HA SCELTO -->
   <section class="sez" id="partner" aria-labelledby="t-partner">
     <div class="wrap">
       <span class="etichetta">Partner</span>
@@ -393,6 +379,20 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
           <div class="card-nome"><h3>GB Gioielli</h3><p>Compro oro ·&nbsp;Città di&nbsp;Castello, Umbertide</p></div>
           <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Instagram, TikTok, reel</p></div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · DOMANDE (solo sull'acquisto) -->
+  <section class="sez" id="domande" aria-labelledby="t-faq">
+    <div class="wrap">
+      <span class="etichetta">Domande</span>
+      <h2 id="t-faq">Prima di <em>iniziare</em>.</h2>
+      <div class="faq">
+        <div class="faq-v" id="d1"><button class="faq-d" aria-expanded="false" aria-controls="r1">Come si parte?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r1" role="region"><div><p>Premi Contatta e scrivici su WhatsApp. Fissiamo la consulenza di partenza: studiamo la tua attività e il piano per farla crescere. Poi scegli l’abbonamento e si parte.</p></div></div></div>
+        <div class="faq-v" id="d2"><button class="faq-d" aria-expanded="false" aria-controls="r2">La consulenza è gratis?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r2" role="region"><div><p>Sì, se poi scegli un abbonamento. Se non acquisti, la consulenza è a pagamento.</p></div></div></div>
+        <div class="faq-v" id="d4"><button class="faq-d" aria-expanded="false" aria-controls="r4">Che differenza c’è tra abbonamenti e componenti aggiuntivi?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r4" role="region"><div><p>Gli abbonamenti si pagano ogni mese e comprendono il lavoro continuo: social, contenuti, report. I componenti aggiuntivi sono lavori singoli, come un sito o un video, e si pagano una volta sola.</p></div></div></div>
+        <div class="faq-v" id="d5"><button class="faq-d" aria-expanded="false" aria-controls="r5">Ci sono altre spese?<span class="piu" aria-hidden="true"></span></button><div class="faq-r" id="r5" role="region"><div><p>Se fai il sito, solo il dominio (per esempio latuaattivita.it): è intestato a te e costa circa 10-15 € l’anno. Con Google Ads, il budget della pubblicità lo paghi direttamente a Google.</p></div></div></div>
       </div>
     </div>
   </section>
