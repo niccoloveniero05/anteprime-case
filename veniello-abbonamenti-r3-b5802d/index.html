@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -126,18 +126,22 @@ h2 em{font-style:normal;font-weight:600;color:var(--testo);letter-spacing:-.034e
 .agg .prezzo{margin-top:16px}
 .agg .prezzo b{font-size:30px;letter-spacing:-.035em}
 .piano .btn{width:100%;margin-top:20px}
-/* opzione «aggiungi il sito» di Crescita (come gli add-on con interruttore di Figma): nessun passaggio in più, cambia solo il messaggio */
-.opzione{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:20px;padding:14px 16px;border-radius:14px;background:rgba(245,244,239,.035);box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .3s ease,background .3s ease;-webkit-tap-highlight-color:transparent}
-.opzione + .btn{margin-top:12px}
-.opz-t{font:500 15.5px/1.3 var(--sans);letter-spacing:-.01em}
+/* opzione A di Crescita: una riga da spuntare (come le voci di «Comprende», con il «+» al posto della spunta). Niente pop-up né interruttore:
+   toccandola il «+» diventa ✓ e il messaggio su WhatsApp include il sito. «−10%» in arancio, stesso carattere e peso del resto. */
+.opzione{width:100%;display:flex;align-items:center;gap:14px;margin-top:22px;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-tap-highlight-color:transparent}
+.opzione + .btn{margin-top:20px}
+.opz-segno{position:relative;width:26px;height:26px;flex:none;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(245,244,239,.6);transition:background .35s var(--curva),box-shadow .35s var(--curva),transform .35s var(--curva)}
+.opz-segno::before,.opz-segno::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.6px;margin:-.8px 0 0 -6px;border-radius:2px;background:var(--testo);transition:transform .45s var(--curva),opacity .25s ease}
+.opz-segno::after{transform:rotate(90deg)}
+.opz-segno svg{position:absolute;inset:0;margin:auto;width:15px;height:15px;color:var(--bg);opacity:0;transform:scale(.6);transition:opacity .25s ease,transform .45s var(--curva)}
+.opzione:active .opz-segno{transform:scale(.92)}
+.opz-t{font:500 16px/1.3 var(--sans);letter-spacing:-.01em}
 .nw{white-space:nowrap}
-.opz-t small{display:block;margin-top:4px;font:400 13.5px/1.35 var(--sans);color:var(--testo3);letter-spacing:0}
-.interr{position:relative;width:44px;height:26px;flex:none;border-radius:999px;background:rgba(245,244,239,.16);transition:background .35s var(--curva)}
-.interr::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#ECEBE5;box-shadow:0 1px 3px rgba(0,0,0,.4);transition:transform .45s var(--curva)}
-.opzione[aria-checked="true"]{background:rgba(255,90,31,.08);box-shadow:inset 0 0 0 1px rgba(255,90,31,.45)}
-.opzione[aria-checked="true"] .interr{background:var(--rec)}
-.opzione[aria-checked="true"] .interr::after{transform:translateX(18px)}
-.opzione[aria-checked="true"] .opz-t small{color:#FFB08F}
+.opz-t small{display:block;margin-top:4px;font:400 14px/1.35 var(--sans);color:var(--testo3);letter-spacing:0}
+.opz-t .meno{color:var(--rec)}
+.opzione[aria-checked="true"] .opz-segno{background:var(--rec);box-shadow:inset 0 0 0 1.5px var(--rec)}
+.opzione[aria-checked="true"] .opz-segno::before,.opzione[aria-checked="true"] .opz-segno::after{opacity:0;transform:rotate(180deg) scale(.4)}
+.opzione[aria-checked="true"] .opz-segno svg{opacity:1;transform:none}
 .comprende{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
 .comprende .titoletto{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
 .lista{list-style:none;margin-top:14px;display:grid;gap:11px}
@@ -286,9 +290,9 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
           <div class="piano-testa"><h3>Crescita</h3><span class="badge ar">Consigliato</span></div>
           <p class="desc">Per crescere ogni mese, con contenuti veri e i risultati misurati.</p>
           <p class="prezzo"><b>850&nbsp;€</b><span>al mese</span></p>
-          <button class="opzione" id="crescita-sito" type="button" role="switch" aria-checked="false">
-            <span class="opz-t">Aggiungi sito web o <span class="nw">e-commerce</span><small>405&nbsp;€ invece di 450&nbsp;€, una volta sola</small></span>
-            <span class="interr" aria-hidden="true"></span>
+          <button class="opzione" id="crescita-sito" type="button" role="checkbox" aria-checked="false">
+            <span class="opz-segno" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
+            <span class="opz-t">Aggiungi sito web o <span class="nw">e-commerce</span><small>405&nbsp;€ invece di 450&nbsp;€ · <span class="meno">−10%</span></small></span>
           </button>
           <a class="btn btn-pieno" id="crescita-contatta" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Crescita" data-base="Ciao, mi interessa l'abbonamento Crescita" data-sito="Ciao, mi interessa l'abbonamento Crescita con il sito web o e-commerce a 405 €" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contattaci</a>
           <div class="comprende">
@@ -424,7 +428,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
   function testata(){t.classList.toggle('piena',scrollY>8)}
   addEventListener('scroll',testata,{passive:true});testata();
 
-  /* Crescita: l'interruttore del sito cambia il testo che arriva su WhatsApp */
+  /* Crescita: la riga «+ sito» cambia il testo che arriva su WhatsApp */
   var sw=document.getElementById('crescita-sito'),cc=document.getElementById('crescita-contatta');
   sw.addEventListener('click',function(){
     var on=sw.getAttribute('aria-checked')!=='true';
