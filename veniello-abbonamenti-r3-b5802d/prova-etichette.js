@@ -1,4 +1,4 @@
-/* ETICHETTE DI PROVA (landing Abbonamenti r15, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
+/* ETICHETTE DI PROVA (landing Abbonamenti r16, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
    messa in fondo a index.html, subito prima di </body>.
    ==========================================================================================================================
    Servono solo nella fase di prova: Niccolò dice «sposta la 4c» e noi sappiamo di che pezzo parla (la mappa delle etichette
@@ -50,6 +50,7 @@
     ['#inizio', '1', 'L’apertura (stile Linear)'],
     ['#titolo', '1a', 'Il titolo «Fatti trovare. Fatti scegliere.»'],
     ['#inizio .frase', '1b', 'La frase che dice chi siamo'],
+    ['#aggiorna', '1c', 'Tira giù per aggiornare: la pallina che si srotola (si vede solo tirando giù in cima)'],
 
     ['#abbonamenti', '2', 'Abbonamenti'],
     ['#abbonamenti .etichetta', '2a', 'L’etichetta «Abbonamenti»'],
