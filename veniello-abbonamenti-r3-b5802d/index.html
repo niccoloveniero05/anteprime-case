@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -77,6 +77,11 @@ h2 em{font-style:normal;font-weight:600;color:var(--testo);letter-spacing:-.034e
 .marchio .vv{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0;font-size:1.18em;margin-right:.01em;-webkit-text-stroke:1px currentColor;paint-order:stroke fill}
 .marchio .pm{display:inline-block;width:.21em;height:.21em;border-radius:50%;background:var(--rec);margin:0 .035em 0 .045em}
 .testata .btn{min-height:40px;padding:0 16px;font-size:14px}
+/* il logo dentro un titolo (4b), come .t-sez .t-marchio di VSLinear: stessa altezza del titolo, puntino arancio, punto finale bianco */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h2 .t-marchio .marchio{font-size:1em;line-height:1;vertical-align:baseline;color:var(--testo)}
+h2 .t-marchio .marchio .vv{-webkit-text-stroke:.04em currentColor}
+h2 .fine{color:var(--testo)}
 
 /* 1 · apertura in stile Linear: testo a sinistra, una frase che dice chi siamo (prima parte chiara, poi grigia) */
 .eroe{position:relative;overflow:hidden;padding:calc(var(--testata) + 36px) 0 151px}
@@ -257,7 +262,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
 
 <header class="testata" id="testata">
   <div class="wrap">
-    <a class="marchio" href="#inizio" aria-label="Veniello Studio, torna all'inizio"><span aria-hidden="true"><span class="vv">V</span>eniello<span class="pm"></span>studio</span></a>
+    <a class="marchio" href="#inizio" aria-label="Veniello Studio, torna all'inizio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><span class="pm"></span><span aria-hidden="true">studio</span></a>
     <a class="btn btn-pieno" id="testata-contatta" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20sugli%20abbonamenti%20di%20Veniello%20Studio" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
   </div>
 </header>
@@ -380,7 +385,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
   <section class="sez" id="partner" aria-labelledby="t-partner">
     <div class="wrap">
       <span class="etichetta">Partner</span>
-      <h2 id="t-partner">Chi ha scelto <em>Veniello Studio</em>.</h2>
+      <h2 id="t-partner">Chi ha scelto <span class="t-marchio"><span class="sr">Veniello Studio</span><span class="marchio" aria-hidden="true"><span class="vv">V</span>eniello<span class="pm"></span>studio</span></span><span class="fine">.</span></h2>
       <div class="carosello" role="list">
         <a class="card" id="pa-jue" role="listitem" data-anima href="https://jueclub.it" target="_blank" rel="noopener">
           <img class="lento" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" width="900" height="1200" loading="lazy">
