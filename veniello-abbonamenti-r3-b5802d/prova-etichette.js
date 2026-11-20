@@ -1,4 +1,4 @@
-/* ETICHETTE DI PROVA (landing Abbonamenti r11, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
+/* ETICHETTE DI PROVA (landing Abbonamenti r12, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
    messa in fondo a index.html, subito prima di </body>.
    ==========================================================================================================================
    Servono solo nella fase di prova: Niccolò dice «sposta la 4c» e noi sappiamo di che pezzo parla (la mappa delle etichette
@@ -60,6 +60,7 @@
     ['#p-enterprise', '2f', 'La scheda Enterprise', { resta: true }],
     ['#crescita-sito', '2g', 'Crescita: riga «+ Aggiungi sito web o e-commerce» (−10%)'],
     ['#crescita-sito-voce > button', '2h', 'Crescita: la voce «Sito web o e-commerce −10%» arrivata in «Comprende»'],
+    ['#crescita-piu', '2i', 'Crescita: «+ 405 €» accanto al prezzo (solo col sito scelto)'],
 
     ['#aggiuntivi', '3', 'Componenti aggiuntivi'],
     ['#aggiuntivi .etichetta', '3a', 'L’etichetta «Componenti aggiuntivi»'],

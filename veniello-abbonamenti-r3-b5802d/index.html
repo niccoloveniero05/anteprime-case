@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r12 (20/11/2026): scegliendo il sito, accanto a «850 € al mese» si scrive «+ 405 €» insieme al volo. r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -129,6 +129,9 @@ h2 .fine{color:var(--testo)}
 .prezzo b{font:560 44px/1 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .prezzo span{color:var(--testo3);font-size:15px;letter-spacing:-.005em}
 .agg .prezzo{margin-top:16px}
+/* «+ 405 €» accanto al prezzo di Crescita: compare solo se si sceglie il sito, scritto da sinistra a destra con la stessa durata e curva del volo */
+.prezzo .piu-sito{display:none;font-size:30px;letter-spacing:-.035em;white-space:nowrap;clip-path:inset(-20% 100% -20% 0)}
+.prezzo .piu-sito.si{display:inline-block;clip-path:inset(-20% 0 -20% 0)}
 .agg .prezzo b{font-size:30px;letter-spacing:-.035em}
 .piano .btn{width:100%;margin-top:20px}
 /* opzione A di Crescita (r9): riga «+ Aggiungi sito web o e-commerce» tra prezzo e «Contattaci». Il «+» è senza cerchio, della misura delle spunte.
@@ -305,7 +308,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
         <article class="piano consigliato" id="p-crescita">
           <div class="piano-testa"><h3>Crescita</h3><span class="badge ar">Consigliato</span></div>
           <p class="desc">Per crescere ogni mese, con contenuti veri e i risultati misurati.</p>
-          <p class="prezzo"><b>850&nbsp;€</b><span>al mese</span></p>
+          <p class="prezzo" id="crescita-prezzo"><b>850&nbsp;€</b><span>al mese</span><b class="piu-sito" id="crescita-piu" aria-hidden="true">+&nbsp;405&nbsp;€</b></p>
           <div class="opz-slot" id="opz-slot"><div>
             <button class="opzione" id="crescita-sito" type="button" aria-pressed="false">
               <span class="opz-in"><span class="opz-segno" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
@@ -452,9 +455,30 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
   (function(){
     var slot=document.getElementById('opz-slot'),riga=document.getElementById('crescita-sito'),voce=document.getElementById('crescita-sito-voce');
     var cc=document.getElementById('crescita-contatta'),dentroVoce=voce.querySelector('button'),inRiga=riga.querySelector('.opz-in');
+    var prezzo=document.getElementById('crescita-prezzo'),piu=document.getElementById('crescita-piu');
     var occupato=false,scelto=false,DURATA=820,curva='cubic-bezier(.65,0,.35,1)';
     var fermo=matchMedia('(prefers-reduced-motion:reduce)');
     function messaggio(){cc.href='https://wa.me/393520338377?text='+encodeURIComponent(cc.dataset[scelto?'sito':'base'])}
+    /* «+ 405 €»: si scrive da sinistra a destra (andata) o si cancella (ritorno) con la durata del volo. Se sul telefono non sta accanto
+       al prezzo va a capo: allora anche l'altezza del prezzo cresce piano, e il volo ne tiene conto (restituisce di quanto cresce). */
+    function prezzoSi(){
+      var h0=prezzo.offsetHeight;prezzo.style.height=h0+'px';
+      piu.classList.add('si');piu.setAttribute('aria-hidden','false');
+      var h1=prezzo.scrollHeight;
+      piu.animate([{clipPath:'inset(-20% 100% -20% 0)'},{clipPath:'inset(-20% 0 -20% 0)'}],{duration:DURATA,easing:curva});
+      prezzo.animate([{height:h0+'px'},{height:h1+'px'}],{duration:DURATA,easing:curva}).onfinish=function(){prezzo.style.height=''};
+      prezzo.style.height=h1+'px';
+      return h1-h0;
+    }
+    function prezzoNo(){
+      var h1=prezzo.offsetHeight;piu.classList.remove('si');var h0=prezzo.offsetHeight;piu.classList.add('si');
+      prezzo.style.height=h1+'px';
+      var an=piu.animate([{clipPath:'inset(-20% 0 -20% 0)'},{clipPath:'inset(-20% 100% -20% 0)'}],{duration:DURATA,easing:curva,fill:'forwards'});
+      prezzo.animate([{height:h1+'px'},{height:h0+'px'}],{duration:DURATA,easing:curva});
+      prezzo.style.height=h0+'px';
+      an.onfinish=function(){piu.classList.remove('si');piu.setAttribute('aria-hidden','true');an.cancel();prezzo.style.height=''};
+      return h1-h0;
+    }
     /* giu=true: la riga scende in «Comprende» e la riga piccola del prezzo sparisce mentre scende; giu=false: torna su e la riga piccola ricompare alla fine */
     function vola(da,a,fine,giu){
       var g=inRiga.cloneNode(true);g.classList.add('volo');g.removeAttribute('id');
@@ -467,10 +491,11 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
     }
     function aggiungi(){
       scelto=true;messaggio();riga.setAttribute('aria-pressed','true');
-      if(fermo.matches){slot.classList.add('via');voce.classList.add('dentro','vista','spunta');dentroVoce.tabIndex=0;return}
+      if(fermo.matches){slot.classList.add('via');voce.classList.add('dentro','vista','spunta');piu.classList.add('si');piu.setAttribute('aria-hidden','false');dentroVoce.tabIndex=0;return}
       occupato=true;
       var da=inRiga.getBoundingClientRect(),h=slot.getBoundingClientRect().height,v=voce.getBoundingClientRect();
-      var a={left:v.left,top:v.top-h};
+      var dh=prezzoSi();
+      var a={left:v.left,top:v.top-h+dh};
       riga.style.visibility='hidden';
       slot.classList.add('via');voce.classList.add('dentro');
       vola(da,a,function(g){
@@ -481,12 +506,13 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
     }
     function togli(){
       scelto=false;messaggio();riga.setAttribute('aria-pressed','false');dentroVoce.tabIndex=-1;
-      if(fermo.matches){voce.classList.remove('dentro','vista','spunta');slot.classList.remove('via');riga.style.visibility='';return}
+      if(fermo.matches){voce.classList.remove('dentro','vista','spunta');slot.classList.remove('via');piu.classList.remove('si');piu.setAttribute('aria-hidden','true');riga.style.visibility='';return}
       occupato=true;
-      var v=dentroVoce.getBoundingClientRect(),st=slot.getBoundingClientRect();
-      var a={left:v.left,top:st.top+SCARTO};
       voce.classList.remove('spunta');
       setTimeout(function(){
+        var v=dentroVoce.getBoundingClientRect(),st=slot.getBoundingClientRect();
+        var dh=prezzoNo();
+        var a={left:v.left,top:st.top+SCARTO-dh};
         voce.classList.remove('vista','dentro');slot.classList.remove('via');
         vola({left:v.left,top:v.top,width:inRiga.getBoundingClientRect().width||v.width},a,function(g){
           riga.style.visibility='';g.remove();occupato=false;
