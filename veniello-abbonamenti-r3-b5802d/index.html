@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -116,9 +116,9 @@ h2 em{font-style:normal;font-weight:600;color:var(--testo);letter-spacing:-.034e
 .piano-testa{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .piano h3{font-family:var(--serif);font-optical-sizing:auto;font-weight:440;font-size:clamp(34px,10.2vw,41px);line-height:1.04;letter-spacing:-.022em}
 .piano h3 em{font-style:italic}
-.badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;border-radius:999px;white-space:nowrap}
-.badge.ar{color:#FFB08F;background:rgba(255,90,31,.14);box-shadow:inset 0 0 0 1px rgba(255,90,31,.35)}
-.badge.gr{color:var(--testo3);box-shadow:inset 0 0 0 1px var(--line2)}
+.badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.badge.ar{color:#FFB08F}
+.badge.gr{color:var(--testo3)}
 .piano .desc{margin-top:12px;color:var(--testo2);font-size:17px;line-height:1.5;max-width:30em}
 .prezzo{margin-top:20px;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px}
 .prezzo b{font:560 44px/1 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
@@ -242,7 +242,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
 <header class="testata" id="testata">
   <div class="wrap">
     <a class="marchio" href="#inizio" aria-label="Veniello Studio, torna all'inizio"><span aria-hidden="true"><span class="vv">V</span>eniello<span class="pm"></span>studio</span></a>
-    <a class="btn btn-pieno" id="testata-contatta" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20sugli%20abbonamenti%20di%20Veniello%20Studio" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contatta</a>
+    <a class="btn btn-pieno" id="testata-contatta" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20sugli%20abbonamenti%20di%20Veniello%20Studio" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
   </div>
 </header>
 
@@ -267,10 +267,10 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
 
       <div class="piani">
         <article class="piano" id="p-presenza">
-          <div class="piano-testa"><h3>Presenza</h3></div>
+          <div class="piano-testa"><h3>Presenza</h3><span class="badge gr">Per iniziare</span></div>
           <p class="desc">Per farti trovare: la tua pagina, Google e i social pronti a lavorare.</p>
           <p class="prezzo"><b>430&nbsp;€</b><span>al mese</span></p>
-          <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Presenza" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contatta</a>
+          <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Presenza" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contattaci</a>
           <div class="comprende">
             <p class="titoletto">Comprende</p>
             <ul class="lista">
@@ -290,7 +290,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
             <span class="opz-t">Aggiungi sito web o <span class="nw">e-commerce</span><small>405&nbsp;€ invece di 450&nbsp;€, una volta sola</small></span>
             <span class="interr" aria-hidden="true"></span>
           </button>
-          <a class="btn btn-pieno" id="crescita-contatta" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Crescita" data-base="Ciao, mi interessa l'abbonamento Crescita" data-sito="Ciao, mi interessa l'abbonamento Crescita con il sito web o e-commerce a 405 €" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contatta</a>
+          <a class="btn btn-pieno" id="crescita-contatta" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Crescita" data-base="Ciao, mi interessa l'abbonamento Crescita" data-sito="Ciao, mi interessa l'abbonamento Crescita con il sito web o e-commerce a 405 €" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contattaci</a>
           <div class="comprende">
             <p class="titoletto">Comprende</p>
             <ul class="lista">
@@ -304,10 +304,10 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
         </article>
 
         <article class="piano" id="p-enterprise">
-          <div class="piano-testa"><h3>Enterprise</h3></div>
+          <div class="piano-testa"><h3>Enterprise</h3><span class="badge gr">Tutto incluso</span></div>
           <p class="desc">Tutto il marketing della tua attività, gestito da noi a 360°.</p>
           <p class="prezzo"><b>2.600&nbsp;€</b><span>al mese</span></p>
-          <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Enterprise" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contatta</a>
+          <a class="btn btn-linea" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%27abbonamento%20Enterprise" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contattaci</a>
           <div class="comprende">
             <p class="titoletto">Comprende</p>
             <ul class="lista">
@@ -338,21 +338,21 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
           <h3>Sito web o e-commerce</h3>
           <p>Il tuo sito o il tuo negozio online, sul tuo dominio.</p>
           <p class="prezzo"><b>450&nbsp;€</b><span>una volta sola</span></p>
-          <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20un%20sito%20web%20o%20un%20e-commerce" target="_blank" rel="noopener">Contatta<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+          <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20un%20sito%20web%20o%20un%20e-commerce" target="_blank" rel="noopener">Contattaci<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
         </article>
         <article class="agg" id="a-va" style="--n:1">
           <div class="agg-testa"><span class="agg-ico"><svg class="i" aria-hidden="true"><use href="#i-va"/></svg></span></div>
           <h3>Virtual Assistant</h3>
           <p>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.</p>
           <p class="prezzo"><b>Su richiesta</b></p>
-          <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20il%20Virtual%20Assistant" target="_blank" rel="noopener">Contatta<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+          <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20prenotare%20un%E2%80%99anteprima%20del%20Virtual%20Assistant%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener">Prenota anteprima<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
         </article>
         <article class="agg" id="a-video" style="--n:2">
           <div class="agg-testa"><span class="agg-ico"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg></span></div>
           <h3>Video con l’IA</h3>
           <p>Spot e reel creati con l’IA, su misura per la tua attività.</p>
           <p class="prezzo"><span>da</span><b>100&nbsp;€</b><span>a video</span></p>
-          <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20un%20video%20con%20l%27IA" target="_blank" rel="noopener">Contatta<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+          <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20un%20video%20con%20l%27IA" target="_blank" rel="noopener">Contattaci<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
         </article>
       </div>
     </div>
@@ -403,7 +403,7 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
     <div class="wrap">
       <h2 id="t-fine">Pronto a farti <em>scegliere</em>?</h2>
       <p class="sotto">Scrivici su WhatsApp il nome della tua attività: fissiamo la consulenza di partenza.</p>
-      <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20sugli%20abbonamenti%20di%20Veniello%20Studio" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contatta su WhatsApp</a>
+      <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20sugli%20abbonamenti%20di%20Veniello%20Studio" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contattaci su WhatsApp</a>
       <p class="recapito">Telefono e WhatsApp · Giuseppe Fusciello<br><a href="tel:+393520338377">+39 352 033 8377</a></p>
     </div>
   </section>

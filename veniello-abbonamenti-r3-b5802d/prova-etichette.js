@@ -1,4 +1,4 @@
-/* ETICHETTE DI PROVA (landing Abbonamenti r5, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
+/* ETICHETTE DI PROVA (landing Abbonamenti r6, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
    messa in fondo a index.html, subito prima di </body>.
    ==========================================================================================================================
    Servono solo nella fase di prova: Niccolò dice «sposta la 4c» e noi sappiamo di che pezzo parla (la mappa delle etichette
@@ -45,7 +45,7 @@
   var TABELLA = [
     ['#testata', '0', 'La testata fissa in alto'],
     ['#testata .marchio', '0a', 'Il marchio «Veniello·studio»'],
-    ['#testata-contatta', '0b', 'Il pulsante «Contatta» della testata'],
+    ['#testata-contatta', '0b', 'Il pulsante «Scrivici» della testata'],
 
     ['#inizio', '1', 'L’apertura (stile Linear)'],
     ['#inizio .etichetta', '1a', 'L’etichetta «Abbonamenti · Veniello Studio»'],
@@ -87,7 +87,7 @@
     ['#contatta', '6', 'La chiusura'],
     ['#t-fine', '6a', 'Il titolo «Pronto a farti scegliere?»'],
     ['#contatta .sotto', '6b', '«Scrivici su WhatsApp il nome…»'],
-    ['#contatta .btn', '6c', 'Il pulsante «Contatta su WhatsApp»'],
+    ['#contatta .btn', '6c', 'Il pulsante «Contattaci su WhatsApp»'],
     ['#contatta .recapito', '6d', 'Telefono di Giuseppe'],
 
     ['#piede', '7', 'Il piede'],
