@@ -1,4 +1,4 @@
-/* ETICHETTE DI PROVA (landing Abbonamenti r20, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
+/* ETICHETTE DI PROVA (landing Abbonamenti r21, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
    messa in fondo a index.html, subito prima di </body>.
    ==========================================================================================================================
    Servono solo nella fase di prova: Niccolò dice «sposta la 4c» e noi sappiamo di che pezzo parla (la mappa delle etichette
@@ -71,6 +71,7 @@
     ['#a-sito', '3d', 'Sito web o e-commerce', { resta: true }],
     ['#a-va', '3e', 'Virtual Assistant', { resta: true }],
     ['#a-video', '3f', 'Video con l’IA', { resta: true }],
+    ['#a-sito .agg-cassetta, #a-va .agg-cassetta, #a-video .agg-cassetta', '3g', 'Da computer: la «cassetta» coi lavori dentro la scheda'],
 
     ['#partner', '4', 'Chi ci ha scelto'],
     ['#partner .etichetta', '4a', 'L’etichetta «Partner»'],

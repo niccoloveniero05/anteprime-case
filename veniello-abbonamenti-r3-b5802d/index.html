@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r20 (20/11/2026): versione da computer (da 1024 px): abbonamenti come VSLinear (colonne «Fig» coi cubi, «Dettagli +» apre il pannello laterale; niente pallina né binario), servizi più grandi, entrata come linear.com. Il telefono non cambia. r19 (20/11/2026): «+ 405 €» come il testo di 2g ma arancio #FF5A1F. r18 (20/11/2026): «+ 405 €» identico al testo di 2g (Inter 500, 16 px, bianco). r17 (20/11/2026): «+ 405 €» più piccolo e più sottile (22 px, peso 300). r16 (20/11/2026): «tira giù per aggiornare» con la pallina che si srotola, presa da VSLinear (senza il viaggio dal titolo). r15 (20/11/2026): «+ 405 €» con carattere e colore del «−10%»; pannello ISPEZIONA nelle anteprime. r14 (20/11/2026): sezione 3 «Servizi» / «Prendi solo quello che ti serve»; via il punto dopo il logo in 4b. r13 (20/11/2026): «1 reel a settimana, fino a 30 secondi». r12 (20/11/2026): scegliendo il sito, accanto a «850 € al mese» si scrive «+ 405 €» insieme al volo. r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r21 (20/11/2026): entrata come Linear anche sul telefono; da computer servizi «come Spotify» (schede larghe che si impilano come cassette, coi lavori dentro); da computer il «+ sito» di Crescita sta nel pannello dei Dettagli. r20 (20/11/2026): versione da computer (da 1024 px): abbonamenti come VSLinear (colonne «Fig» coi cubi, «Dettagli +» apre il pannello laterale; niente pallina né binario), servizi più grandi, entrata come linear.com. Il telefono non cambia. r19 (20/11/2026): «+ 405 €» come il testo di 2g ma arancio #FF5A1F. r18 (20/11/2026): «+ 405 €» identico al testo di 2g (Inter 500, 16 px, bianco). r17 (20/11/2026): «+ 405 €» più piccolo e più sottile (22 px, peso 300). r16 (20/11/2026): «tira giù per aggiornare» con la pallina che si srotola, presa da VSLinear (senza il viaggio dal titolo). r15 (20/11/2026): «+ 405 €» con carattere e colore del «−10%»; pannello ISPEZIONA nelle anteprime. r14 (20/11/2026): sezione 3 «Servizi» / «Prendi solo quello che ti serve»; via il punto dopo il logo in 4b. r13 (20/11/2026): «1 reel a settimana, fino a 30 secondi». r12 (20/11/2026): scegliendo il sito, accanto a «850 € al mese» si scrive «+ 405 €» insieme al volo. r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -102,7 +102,8 @@ h2 .fine{color:var(--testo)}
 .fiducia{margin-top:24px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--testo3);line-height:1.9}
 
 /* entrata alla Linear: ogni riga arriva da una leggera sfocatura, una dopo l'altra (solo all'apertura, non allo scroll) */
-.rv{animation:entra 2s var(--curva) both;animation-delay:calc(var(--d,0) * 90ms + 80ms)}
+/* entrata come linear.com (telefono e computer): sfocatura forte → nitido, niente spostamento, uno dopo l'altro */
+.rv,.rv-pc{animation:entra-linear 1.1s cubic-bezier(.25,.1,.25,1) both;animation-delay:calc(var(--d,0) * 420ms + 250ms)}
 @keyframes entra{from{opacity:0;filter:blur(10px);transform:translateY(14px)}to{opacity:1;filter:blur(0);transform:none}}
 
 /* sezioni */
@@ -161,7 +162,7 @@ h2 .fine{color:var(--testo)}
 .voce-sito.spunta .opz-segno::before,.voce-sito.spunta .opz-segno::after{opacity:0;transform:rotate(180deg) scale(.3)}
 .voce-sito.spunta .opz-segno svg{opacity:1;transform:none}
 /* la copia che vola */
-.volo{position:fixed;z-index:40;pointer-events:none;margin:0;will-change:transform,opacity}
+.volo{position:fixed;z-index:95;pointer-events:none;margin:0;will-change:transform,opacity}
 .comprende{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
 .comprende .titoletto{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
 .lista{list-style:none;margin-top:14px;display:grid;gap:11px}
@@ -259,7 +260,7 @@ html,body{overscroll-behavior-y:none}
    laterale grande col sito sotto oscurato; niente pallina né binario). «Comprende» si legge nel pannello. Il prezzo resta nella colonna.
    Servizi più grandi (riempiono la riga). Entrata dell'apertura come linear.com: ogni pezzo arriva da una sfocatura forte,
    senza muoversi, uno dopo l'altro (titolo, frase, poi gli abbonamenti). */
-.ab-fig,.dett-pc{display:none}
+.ab-fig,.dett-pc,.agg-cassetta{display:none}
 @media (min-width:1024px){
   :root{--max:1280px}
   .eroe{padding-bottom:64px;min-height:0}
@@ -295,21 +296,40 @@ html,body{overscroll-behavior-y:none}
   .piano .btn:hover{background:none}.piano .btn:hover::after{transform:translateX(3px)}.piano .btn:active{transform:none}
   .opz-slot + .btn{margin-top:auto}
   .piano .comprende{display:none}
-  /* «+ sito» di Crescita da computer: niente volo (la lista sta nel pannello), il «+» diventa la spunta sul posto */
-  .opzione.preso .opz-segno::before,.opzione.preso .opz-segno::after{opacity:0;transform:rotate(180deg) scale(.3)}
-  .opzione.preso .opz-segno svg{opacity:1;transform:none}
 
-  /* servizi più grandi: riempiono la riga, più aria e caratteri più grandi */
-  .pila{gap:20px;margin-top:56px}
-  .agg{display:flex;flex-direction:column;min-height:440px;padding:40px 36px 36px;border-radius:24px}
-  .agg-ico{width:60px;height:60px;border-radius:16px}.agg-ico .i{width:27px;height:27px}
-  .agg h3{margin-top:auto;padding-top:48px;font:560 30px/1.1 var(--sans);letter-spacing:-.03em}
-  .agg p{margin-top:12px;font-size:17px;line-height:1.55}
-  .agg .prezzo{margin-top:24px}.agg .prezzo b{font-size:40px}
-  .agg .freccia{margin-top:24px;font-size:17px}
+  /* servizi «come Spotify» (r21): schede larghe quanto la pagina che, scorrendo, salgono una sopra l'altra come cassette (quella sotto
+     resta in alto, un po' più piccola e più scura); a sinistra la «cassetta» coi lavori veri, a destra il testo. Colori del tema, niente
+     fondi accesi come Spotify: solo una luce leggera diversa per scheda. */
+  .pila{display:block;margin-top:56px;padding-bottom:18vh;margin-bottom:-18vh}
+  .agg{position:sticky;top:calc(var(--testata) + 24px + var(--n,0) * 18px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:64px;align-items:center;height:min(500px,calc(100vh - var(--testata) - 120px));min-height:420px;margin:0 0 28px;padding:28px 56px 28px 28px;border-radius:28px;background:radial-gradient(90% 120% at 0% 100%,var(--tinta,rgba(255,90,31,.10)),rgba(24,23,15,0) 60%),#18170F;box-shadow:0 -24px 60px -30px rgba(0,0,0,.9);overflow:hidden}
+  .agg::after{display:block;border-radius:inherit}
+  #a-sito{--tinta:rgba(212,160,60,.12)}#a-va{--tinta:rgba(80,200,140,.09)}#a-video{--tinta:rgba(60,120,255,.12)}
+  .agg-testo{display:flex;flex-direction:column;align-items:flex-start}
+  .agg-ico{width:56px;height:56px;border-radius:16px}.agg-ico .i{width:26px;height:26px}
+  .agg h3{margin-top:28px;padding-top:0;font:560 clamp(34px,3vw,44px)/1.05 var(--sans);letter-spacing:-.035em}
+  .agg p{margin-top:14px;font-size:18px;line-height:1.55;max-width:26em}
+  .agg .prezzo{margin-top:28px}.agg .prezzo b{font-size:44px}
+  .agg .freccia{margin-top:28px;font-size:17px}
+  /* la cassetta: un vano incassato con dentro i lavori */
+  .agg-cassetta{display:block;position:relative;height:100%;border-radius:20px;overflow:hidden;background:linear-gradient(180deg,#100F0A,#0C0B07);box-shadow:inset 0 0 0 1px rgba(245,244,239,.08),inset 0 24px 48px -28px rgba(0,0,0,.9)}
+  .agg-cassetta::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 100%,var(--tinta),rgba(0,0,0,0) 70%);pointer-events:none}
+  .cas-nota{position:absolute;left:22px;top:20px;z-index:2;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
+  .cas-el{position:absolute;bottom:-28px;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(245,244,239,.14),0 30px 60px -20px rgba(0,0,0,.9);transition:transform .6s var(--curva)}
+  .cas-el img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+  .cas-tel{width:30%;aspect-ratio:520/1125}
+  .cas-tel.c1{left:6%;transform:translateY(34px) rotate(-4deg)}
+  .cas-tel.c2{left:35%;z-index:1;width:31%;transform:translateY(-6px)}
+  .cas-tel.c3{right:6%;transform:translateY(34px) rotate(4deg)}
+  .cas-reel{width:28%;aspect-ratio:9/16}
+  .cas-reel.c1{left:7%;transform:translateY(40px) rotate(-5deg)}
+  .cas-reel.c2{left:36%;z-index:1;transform:translateY(-4px)}
+  .cas-reel.c3{right:7%;transform:translateY(40px) rotate(5deg)}
+  .cas-reel.c2::after{content:"";position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(16,15,9,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='%23F5F4EF'/%3E%3C/svg%3E") center/22px no-repeat;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px rgba(245,244,239,.25)}
+  .cas-chat{left:9%;right:9%;bottom:-24px;aspect-ratio:720/540;border-radius:24px}
+  .agg:hover .cas-tel.c2,.agg:hover .cas-reel.c2{transform:translateY(-16px)}
+  /* da computer il «+ sito» di Crescita non sta nella colonna ma nel pannello dei Dettagli */
+  #p-crescita .opz-slot{display:none}
 
-  /* entrata come linear.com: sfocatura forte → nitido, niente spostamento, uno dopo l'altro */
-  .rv,.rv-pc{animation:entra-linear 1.1s cubic-bezier(.25,.1,.25,1) both;animation-delay:calc(var(--d,0) * 420ms + 250ms)}
 }
 @keyframes entra-linear{from{opacity:0;filter:blur(18px)}to{opacity:1;filter:blur(0)}}
 
@@ -336,6 +356,16 @@ html,body{overscroll-behavior-y:none}
 .voci li:last-child{border-bottom:0}
 .voci li::before{content:"";position:absolute;left:2px;top:25px;width:9px;height:1px;background:var(--testo3)}
 .voci b{display:block;color:var(--testo);font-weight:500}
+.ab-pannello .opzione{margin-top:24px}
+.voci li.voce-sito{display:grid;grid-template-rows:0fr;padding:0;margin:0;border-bottom:0 solid var(--line);transition:grid-template-rows .82s cubic-bezier(.65,0,.35,1)}
+.voci li.voce-sito::before{display:none}
+.voci li.voce-sito.dentro{grid-template-rows:1fr;border-bottom-width:1px}
+.voci li.voce-sito > button{min-height:0;overflow:hidden;display:flex;gap:11px;width:100%;padding:0;font:inherit;color:inherit;text-align:left;opacity:0;transition:opacity .25s ease,padding .82s cubic-bezier(.65,0,.35,1);-webkit-tap-highlight-color:transparent}
+.voci li.voce-sito.dentro > button{padding:14px 0}
+.voci li.voce-sito.vista > button{opacity:1}
+.voci li.voce-sito .opz-segno{margin-top:3px;flex:none}
+.voci li.voce-sito.spunta .opz-segno::before,.voci li.voce-sito.spunta .opz-segno::after{opacity:0;transform:rotate(180deg) scale(.3)}
+.voci li.voce-sito.spunta .opz-segno svg{opacity:1;transform:none}
 .ab-pannello-azione{margin-top:32px}
 .ab-pannello-azione a{display:inline-flex;align-items:center;gap:10px;min-height:40px;font:500 17px/1 var(--sans);letter-spacing:-.01em;color:var(--testo)}
 .ab-pannello-azione a::after{content:"";width:14px;height:14px;flex:none;background:currentColor;transition:transform .25s cubic-bezier(.2,.7,.2,1);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat}
@@ -464,25 +494,34 @@ html,body{overscroll-behavior-y:none}
       <p class="sotto">Servizi a parte, da pagare una volta sola.</p>
       <div class="pila" id="pila">
         <article class="agg" id="a-sito" style="--n:0">
+          <div class="agg-cassetta" aria-hidden="true"><span class="cas-nota">Progetto · Jué Club</span><div class="cas-el cas-tel c1"><img src="img/sito-2.jpg" alt="" width="520" height="1125" loading="lazy"></div><div class="cas-el cas-tel c2"><img src="img/sito-1.jpg" alt="" width="520" height="1125" loading="lazy"></div><div class="cas-el cas-tel c3"><img src="img/sito-4.jpg" alt="" width="520" height="1125" loading="lazy"></div></div>
+          <div class="agg-testo">
           <div class="agg-testa"><span class="agg-ico"><svg class="i" aria-hidden="true"><use href="#i-sito"/></svg></span></div>
           <h3>Sito web o <span class="nw">e-commerce</span></h3>
           <p>Il tuo sito o il tuo negozio online, sul tuo dominio.</p>
           <p class="prezzo"><b>450&nbsp;€</b><span>una volta sola</span></p>
           <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20un%20sito%20web%20o%20un%20e-commerce" target="_blank" rel="noopener">Contattaci<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+          </div>
         </article>
         <article class="agg" id="a-va" style="--n:1">
+          <div class="agg-cassetta" aria-hidden="true"><span class="cas-nota">Esempio · Assistente su WhatsApp</span><div class="cas-el cas-chat"><img src="img/va-orizzontale.jpg" alt="" width="720" height="540" loading="lazy"></div></div>
+          <div class="agg-testo">
           <div class="agg-testa"><span class="agg-ico"><svg class="i" aria-hidden="true"><use href="#i-va"/></svg></span></div>
           <h3>Virtual Assistant</h3>
           <p>Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.</p>
           <p class="prezzo"><b>Su richiesta</b></p>
           <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20prenotare%20un%E2%80%99anteprima%20del%20Virtual%20Assistant%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener">Prenota anteprima<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+          </div>
         </article>
         <article class="agg" id="a-video" style="--n:2">
+          <div class="agg-cassetta" aria-hidden="true"><span class="cas-nota">Progetto · Jué Club</span><div class="cas-el cas-reel c1"><img src="img/reel-9-0.jpg" alt="" width="600" height="1067" loading="lazy"></div><div class="cas-el cas-reel c2"><img src="img/spot.jpg" alt="" width="540" height="960" loading="lazy"></div><div class="cas-el cas-reel c3"><img src="img/reel-1-2.jpg" alt="" width="600" height="1067" loading="lazy"></div></div>
+          <div class="agg-testo">
           <div class="agg-testa"><span class="agg-ico"><svg class="i" aria-hidden="true"><use href="#i-video"/></svg></span></div>
           <h3>Video con l’IA</h3>
           <p>Spot e reel creati con l’IA, su misura per la tua attività.</p>
           <p class="prezzo"><span>da</span><b>100&nbsp;€</b><span>a video</span></p>
           <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20un%20video%20con%20l%27IA" target="_blank" rel="noopener">Contattaci<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+          </div>
         </article>
       </div>
     </div>
@@ -555,125 +594,88 @@ html,body{overscroll-behavior-y:none}
   addEventListener('scroll',testata,{passive:true});testata();
 
   /* Crescita: «+ sito». Toccata, la riga vola nella prima voce di «Comprende» e il «+» diventa la spunta; toccando la voce torna su.
+     La stessa logica vale per la scheda (telefono) e per il pannello dei Dettagli (computer): opzioneSito() la costruisce sui suoi pezzi.
      Il messaggio su WhatsApp segue la scelta. Con «Riduci movimento» lo scambio è immediato. */
   (function(){
-    var slot=document.getElementById('opz-slot'),riga=document.getElementById('crescita-sito'),voce=document.getElementById('crescita-sito-voce');
-    var cc=document.getElementById('crescita-contatta'),dentroVoce=voce.querySelector('button'),inRiga=riga.querySelector('.opz-in');
-    var prezzo=document.getElementById('crescita-prezzo'),piu=document.getElementById('crescita-piu');
-    var occupato=false,scelto=false,DURATA=820,curva='cubic-bezier(.65,0,.35,1)';
-    var fermo=matchMedia('(prefers-reduced-motion:reduce)');
-    function messaggio(){cc.href='https://wa.me/393520338377?text='+encodeURIComponent(cc.dataset[scelto?'sito':'base'])}
-    /* «+ 405 €»: si scrive da sinistra a destra (andata) o si cancella (ritorno) con la durata del volo. Se sul telefono non sta accanto
-       al prezzo va a capo: allora anche l'altezza del prezzo cresce piano, e il volo ne tiene conto (restituisce di quanto cresce). */
-    function prezzoSi(){
-      var h0=prezzo.offsetHeight;prezzo.style.height=h0+'px';
-      piu.classList.add('si');piu.setAttribute('aria-hidden','false');
-      var h1=prezzo.scrollHeight;
-      piu.animate([{clipPath:'inset(-20% 100% -20% 0)'},{clipPath:'inset(-20% 0 -20% 0)'}],{duration:DURATA,easing:curva});
-      prezzo.animate([{height:h0+'px'},{height:h1+'px'}],{duration:DURATA,easing:curva}).onfinish=function(){prezzo.style.height=''};
-      prezzo.style.height=h1+'px';
-      return h1-h0;
-    }
-    function prezzoNo(){
-      var h1=prezzo.offsetHeight;piu.classList.remove('si');var h0=prezzo.offsetHeight;piu.classList.add('si');
-      prezzo.style.height=h1+'px';
-      var an=piu.animate([{clipPath:'inset(-20% 0 -20% 0)'},{clipPath:'inset(-20% 100% -20% 0)'}],{duration:DURATA,easing:curva,fill:'forwards'});
-      prezzo.animate([{height:h1+'px'},{height:h0+'px'}],{duration:DURATA,easing:curva});
-      prezzo.style.height=h0+'px';
-      an.onfinish=function(){piu.classList.remove('si');piu.setAttribute('aria-hidden','true');an.cancel();prezzo.style.height=''};
-      return h1-h0;
-    }
-    /* giu=true: la riga scende in «Comprende» e la riga piccola del prezzo sparisce mentre scende; giu=false: torna su e la riga piccola ricompare alla fine */
-    function vola(da,a,fine,giu){
-      var g=inRiga.cloneNode(true);g.classList.add('volo');g.removeAttribute('id');
-      g.style.left=da.left+'px';g.style.top=da.top+'px';g.style.width=da.width+'px';
-      document.body.appendChild(g);
-      var pic=g.querySelector('small');
-      if(pic)pic.animate(giu?[{opacity:1},{opacity:0}]:[{opacity:0},{opacity:0},{opacity:1}],{duration:giu?280:DURATA,easing:'ease',fill:'forwards'});
-      var an=g.animate([{transform:'translate3d(0,0,0)'},{transform:'translate3d('+(a.left-da.left)+'px,'+(a.top-da.top)+'px,0)'}],{duration:DURATA,easing:curva,fill:'forwards'});
-      an.onfinish=function(){fine(g)};
-    }
-    function aggiungi(){
-      scelto=true;messaggio();riga.setAttribute('aria-pressed','true');
-      if(fermo.matches){slot.classList.add('via');voce.classList.add('dentro','vista','spunta');piu.classList.add('si');piu.setAttribute('aria-hidden','false');dentroVoce.tabIndex=0;return}
-      occupato=true;
-      var da=inRiga.getBoundingClientRect(),h=slot.getBoundingClientRect().height,v=voce.getBoundingClientRect();
-      var dh=prezzoSi();
-      var a={left:v.left,top:v.top-h+dh};
-      riga.style.visibility='hidden';
-      slot.classList.add('via');voce.classList.add('dentro');
-      vola(da,a,function(g){
-        voce.classList.add('vista');
-        g.animate([{opacity:1},{opacity:0}],{duration:220,fill:'forwards'}).onfinish=function(){g.remove()};
-        setTimeout(function(){voce.classList.add('spunta');occupato=false;dentroVoce.tabIndex=0},90);
-      },true);
-    }
-    function togli(){
-      scelto=false;messaggio();riga.setAttribute('aria-pressed','false');dentroVoce.tabIndex=-1;
-      if(fermo.matches){voce.classList.remove('dentro','vista','spunta');slot.classList.remove('via');piu.classList.remove('si');piu.setAttribute('aria-hidden','true');riga.style.visibility='';return}
-      occupato=true;
-      voce.classList.remove('spunta');
-      setTimeout(function(){
-        var v=dentroVoce.getBoundingClientRect(),st=slot.getBoundingClientRect();
-        var dh=prezzoNo();
-        var a={left:v.left,top:st.top+SCARTO-dh};
-        voce.classList.remove('vista','dentro');slot.classList.remove('via');
-        vola({left:v.left,top:v.top,width:inRiga.getBoundingClientRect().width||v.width},a,function(g){
-          riga.style.visibility='';g.remove();occupato=false;
-        },false);
-      },160);
-    }
-    /* distanza tra l'inizio dello spazio della riga e il suo contenuto (margine + filetto + spazio interno), misurata a riga aperta */
-    var SCARTO=inRiga.getBoundingClientRect().top-slot.getBoundingClientRect().top;
-    var pc=matchMedia('(min-width:1024px)');
-    function pcSi(){scelto=true;messaggio();riga.setAttribute('aria-pressed','true');riga.classList.add('preso');voce.classList.add('dentro','vista','spunta');prezzoSi()}
-    function pcNo(){scelto=false;messaggio();riga.setAttribute('aria-pressed','false');riga.classList.remove('preso');voce.classList.remove('dentro','vista','spunta');prezzoNo()}
-    riga.addEventListener('click',function(){
-      if(pc.matches){if(scelto)pcNo();else pcSi();return}
-      if(!occupato&&!scelto)aggiungi();
-    });
-    dentroVoce.addEventListener('click',function(){if(!occupato&&scelto)togli()});
-  })();
-
-  /* 1c · tira giù per aggiornare (vedi il CSS): la pallina compare sotto la testata, si srotola seguendo il dito, a cerchio chiuso si ricarica */
-  (function(){
-    var ag=document.getElementById('aggiorna');
-    if(!ag||!('ontouchstart' in window)||!(window.CSS&&CSS.supports&&CSS.supports('overscroll-behavior-y','none')))return;
-    var pal=ag.querySelector('.ag-pallina'),arco=ag.querySelector('.ag-arco'),testa=document.getElementById('testata');
-    var SOGLIA=150,R=10,W=2.2,R0=5,CIRC=2*Math.PI*R,AR=[255,90,31],BI=[245,244,239],G=null,via=false;
-    function c01(v){return v<0?0:v>1?1:v}
-    function disegna(p){
-      var x=innerWidth/2,y=testa.getBoundingClientRect().bottom+R+14;
-      ag.style.transform='translate3d('+(x-20).toFixed(1)+'px,'+(y-20).toFixed(1)+'px,0)';
-      /* fino a 0,2 la pallina e basta; poi si srotola: la sua testa gira sul cerchio (dall'alto, in senso orario), lascia dietro la linea
-         e rimpicciolisce fino allo spessore della linea; intanto da arancio diventa bianca */
-      var u=c01((p-.2)/.8),th=-Math.PI/2+2*Math.PI*u,rt=R0+(W/2-R0)*c01(u/.3);
-      var cs='rgb('+AR.map(function(v,i){return Math.round(v+(BI[i]-v)*c01(u/.5))}).join(',')+')';
-      pal.setAttribute('cx',(R*Math.cos(th)).toFixed(2));pal.setAttribute('cy',(R*Math.sin(th)).toFixed(2));
-      pal.setAttribute('r',(u>=1?0:rt).toFixed(2));pal.style.fill=cs;
-      arco.style.stroke=cs;arco.style.strokeWidth=(u>0?W:0);arco.style.strokeDasharray=(CIRC*u).toFixed(2)+' '+CIRC.toFixed(2);
-      ag.classList.toggle('su',p>0);
-    }
-    addEventListener('touchstart',function(e){
-      if(via||e.touches.length!==1||scrollY>.5){G=null;return}
-      G={x:e.touches[0].clientX,y:e.touches[0].clientY,dir:0,p:0};
-    },{passive:true});
-    addEventListener('touchmove',function(e){
-      if(!G||e.touches.length!==1){if(G&&G.dir)disegna(0);G=null;return}
-      var dx=e.touches[0].clientX-G.x,dy=e.touches[0].clientY-G.y;
-      if(!G.dir){
-        if(Math.abs(dx)<6&&Math.abs(dy)<6)return;
-        if(dy>0&&dy>Math.abs(dx)&&scrollY<=.5)G.dir=1;else{G=null;return}
+    var DURATA=820,curva='cubic-bezier(.65,0,.35,1)',fermo=matchMedia('(prefers-reduced-motion:reduce)');
+    var cc=document.getElementById('crescita-contatta');
+    function messaggio(s){cc.href='https://wa.me/393520338377?text='+encodeURIComponent(cc.dataset[s?'sito':'base'])}
+    function opzioneSito(E,quando){
+      var slot=E.slot,riga=E.riga,voce=E.voce,prezzo=E.prezzo,piu=E.piu;
+      var dentroVoce=voce.querySelector('button'),inRiga=riga.querySelector('.opz-in'),occupato=false,scelto=false;
+      function scarto(){var c=getComputedStyle(riga);return parseFloat(c.marginTop)+parseFloat(c.borderTopWidth)+parseFloat(c.paddingTop)}
+      /* «+ 405 €»: si scrive da sinistra a destra (andata) o si cancella (ritorno) con la durata del volo; se va a capo il prezzo cresce piano */
+      function prezzoSi(){
+        var h0=prezzo.offsetHeight;prezzo.style.height=h0+'px';
+        piu.classList.add('si');piu.setAttribute('aria-hidden','false');
+        var h1=prezzo.scrollHeight;
+        piu.animate([{clipPath:'inset(-20% 100% -20% 0)'},{clipPath:'inset(-20% 0 -20% 0)'}],{duration:DURATA,easing:curva});
+        prezzo.animate([{height:h0+'px'},{height:h1+'px'}],{duration:DURATA,easing:curva}).onfinish=function(){prezzo.style.height=''};
+        prezzo.style.height=h1+'px';
+        return h1-h0;
       }
-      if(e.cancelable)e.preventDefault();
-      G.p=c01(dy/SOGLIA);disegna(G.p);
-    },{passive:false});
-    function lascia(){
-      if(!G)return;var g=G;G=null;if(!g.dir)return;
-      if(g.p>=1){via=true;location.reload()}else disegna(0);
+      function prezzoNo(){
+        var h1=prezzo.offsetHeight;piu.classList.remove('si');var h0=prezzo.offsetHeight;piu.classList.add('si');
+        prezzo.style.height=h1+'px';
+        var an=piu.animate([{clipPath:'inset(-20% 0 -20% 0)'},{clipPath:'inset(-20% 100% -20% 0)'}],{duration:DURATA,easing:curva,fill:'forwards'});
+        prezzo.animate([{height:h1+'px'},{height:h0+'px'}],{duration:DURATA,easing:curva});
+        prezzo.style.height=h0+'px';
+        an.onfinish=function(){piu.classList.remove('si');piu.setAttribute('aria-hidden','true');an.cancel();prezzo.style.height=''};
+        return h1-h0;
+      }
+      /* giu=true: la riga scende in «Comprende» e la riga piccola del prezzo sparisce mentre scende; giu=false: torna su e ricompare alla fine */
+      function vola(da,a,fine,giu){
+        var g=inRiga.cloneNode(true);g.classList.add('volo');g.removeAttribute('id');
+        g.style.left=da.left+'px';g.style.top=da.top+'px';g.style.width=da.width+'px';
+        document.body.appendChild(g);
+        var pic=g.querySelector('small');
+        if(pic)pic.animate(giu?[{opacity:1},{opacity:0}]:[{opacity:0},{opacity:0},{opacity:1}],{duration:giu?280:DURATA,easing:'ease',fill:'forwards'});
+        var an=g.animate([{transform:'translate3d(0,0,0)'},{transform:'translate3d('+(a.left-da.left)+'px,'+(a.top-da.top)+'px,0)'}],{duration:DURATA,easing:curva,fill:'forwards'});
+        an.onfinish=function(){fine(g)};
+      }
+      /* senza animazione (per allineare la scheda e il pannello) */
+      function imposta(s){
+        scelto=s;riga.style.visibility='';slot.classList.toggle('via',s);
+        ['dentro','vista','spunta'].forEach(function(c){voce.classList.toggle(c,s)});
+        piu.classList.toggle('si',s);piu.setAttribute('aria-hidden',String(!s));
+        dentroVoce.tabIndex=s?0:-1;riga.setAttribute('aria-pressed',String(s));
+      }
+      function aggiungi(){
+        if(occupato||scelto)return;scelto=true;riga.setAttribute('aria-pressed','true');if(quando)quando(true);
+        if(fermo.matches){imposta(true);return}
+        occupato=true;
+        var da=inRiga.getBoundingClientRect(),h=slot.getBoundingClientRect().height,v=voce.getBoundingClientRect();
+        var dh=prezzoSi();
+        var a={left:v.left,top:v.top-h+dh};
+        riga.style.visibility='hidden';
+        slot.classList.add('via');voce.classList.add('dentro');
+        vola(da,a,function(g){
+          voce.classList.add('vista');
+          g.animate([{opacity:1},{opacity:0}],{duration:220,fill:'forwards'}).onfinish=function(){g.remove()};
+          setTimeout(function(){voce.classList.add('spunta');occupato=false;dentroVoce.tabIndex=0},90);
+        },true);
+      }
+      function togli(){
+        if(occupato||!scelto)return;scelto=false;riga.setAttribute('aria-pressed','false');dentroVoce.tabIndex=-1;if(quando)quando(false);
+        if(fermo.matches){imposta(false);return}
+        occupato=true;
+        voce.classList.remove('spunta');
+        setTimeout(function(){
+          var v=dentroVoce.getBoundingClientRect(),st=slot.getBoundingClientRect();
+          var dh=prezzoNo();
+          var a={left:v.left,top:st.top+scarto()-dh};
+          voce.classList.remove('vista','dentro');slot.classList.remove('via');
+          vola({left:v.left,top:v.top,width:inRiga.getBoundingClientRect().width||v.width},a,function(g){
+            riga.style.visibility='';g.remove();occupato=false;
+          },false);
+        },160);
+      }
+      riga.addEventListener('click',aggiungi);dentroVoce.addEventListener('click',togli);
+      return {imposta:imposta,scelto:function(){return scelto}};
     }
-    addEventListener('touchend',lascia,{passive:true});addEventListener('touchcancel',function(){if(G&&G.dir)disegna(0);G=null},{passive:true});
-    window.AGGIORNA={disegna:disegna};
+    var scheda=opzioneSito({slot:document.getElementById('opz-slot'),riga:document.getElementById('crescita-sito'),voce:document.getElementById('crescita-sito-voce'),
+      prezzo:document.getElementById('crescita-prezzo'),piu:document.getElementById('crescita-piu')},messaggio);
+    window.CRESCITA={scheda:scheda,messaggio:messaggio,opzioneSito:opzioneSito};
   })();
 
   /* da computer: «Dettagli +» apre il pannello laterale (come VSLinear). Dentro: etichetta, nome grande, frase, prezzo, le voci di
@@ -699,22 +701,37 @@ html,body{overscroll-behavior-y:none}
         addEventListener('keydown',function(e){if(e.key==='Escape'&&PAN&&PAN.aperto)chiudi()});
       }
       var tag=card.querySelector('.badge'),tit=card.querySelector('h3'),desc=card.querySelector('.desc'),pr=card.querySelector('.prezzo'),btn=card.querySelector('.btn');
+      var conSito=card.id==='p-crescita'&&window.CRESCITA;
       var voci=[].map.call(card.querySelectorAll('.lista > li'),function(li){
-        if(li.classList.contains('voce-sito')&&!li.classList.contains('dentro'))return '';
+        if(li.classList.contains('voce-sito')){
+          if(!conSito)return '';
+          return '<li class="voce-sito"><button type="button" tabindex="-1" aria-label="Togli sito web o e-commerce">'+li.querySelector('.opz-segno').outerHTML+
+            '<span><b>Sito web o <span class="nw">e-commerce</span></b>405 € invece di 450 €, una volta sola · <span class="meno">−10%</span></span></button></li>';
+        }
         var sp=li.querySelector('button > span:last-child')||li.querySelector(':scope > span');if(!sp)return '';
         var sm=sp.querySelector('small');
         var nome=li.classList.contains('voce-sito')?'Sito web o e-commerce':testoSenza(sp,'small');
         var sotto=li.classList.contains('voce-sito')?'405 € invece di 450 €, una volta sola · −10%':(sm?sm.textContent:'');
         return '<li><b>'+nome+'</b>'+sotto+'</li>';
       }).join('');
-      var prc=pr?pr.cloneNode(true):null;if(prc){prc.removeAttribute('id');var ps=prc.querySelector('.piu-sito');if(ps)ps.removeAttribute('id')}
+      var prc=pr?pr.cloneNode(true):null;if(prc){prc.removeAttribute('id');prc.style.height='';var ps=prc.querySelector('.piu-sito');if(ps)ps.removeAttribute('id')}
+      var sl=null;
+      if(conSito){sl=card.querySelector('.opz-slot').cloneNode(true);sl.removeAttribute('id');sl.classList.remove('via');var r0=sl.querySelector('.opzione');r0.removeAttribute('id');r0.style.visibility=''}
       PAN.el.innerHTML='<div class="ab-pannello-testa"><span class="ab-pannello-tag">Dettagli · '+(tag?tag.textContent:'')+'</span>'+
         '<button type="button" class="ab-pannello-x" aria-label="Chiudi"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg></button></div>'+
         '<div class="ab-pannello-corpo"><h2 class="ab-pannello-t" id="ab-pannello-t"></h2>'+(desc?'<p class="ab-pannello-sotto">'+desc.innerHTML+'</p>':'')+
-        (prc?prc.outerHTML:'')+
+        (prc?prc.outerHTML:'')+(sl?sl.outerHTML:'')+
         (voci?'<div class="ab-pannello-box"><p class="ab-pannello-box-t">Comprende</p><ul class="voci">'+voci+'</ul></div>':'')+
         (btn?'<div class="ab-pannello-azione"><a href="'+btn.href+'" target="_blank" rel="noopener">Contattaci</a></div>':'')+'</div>';
       PAN.el.querySelector('.ab-pannello-t').textContent=tit?tit.textContent:'';
+      if(conSito){
+        var pl=PAN.el.querySelector('.ab-pannello-azione a');
+        var ctl=CRESCITA.opzioneSito({slot:PAN.el.querySelector('.opz-slot'),riga:PAN.el.querySelector('.opzione'),voce:PAN.el.querySelector('.voci li.voce-sito'),
+          prezzo:PAN.el.querySelector('.prezzo'),piu:PAN.el.querySelector('.prezzo .piu-sito')},function(s){
+            CRESCITA.scheda.imposta(s);CRESCITA.messaggio(s);if(pl)pl.href=document.getElementById('crescita-contatta').href;
+          });
+        ctl.imposta(CRESCITA.scheda.scelto());
+      }
       ['contenuto','testata','piede'].forEach(function(id){var e=document.getElementById(id);if(e)e.inert=true});
       PAN.da=da||null;PAN.aperto=true;
       void PAN.el.offsetWidth;
@@ -742,7 +759,7 @@ html,body{overscroll-behavior-y:none}
   });
 
   /* componenti aggiuntivi: la scheda sotto si rimpicciolisce e si scurisce mentre la successiva le sale sopra */
-  var fermo=matchMedia('(prefers-reduced-motion:reduce)'),largo=matchMedia('(min-width:900px)');
+  var fermo=matchMedia('(prefers-reduced-motion:reduce)'),largo=matchMedia('(min-width:900px) and (max-width:1023px)');
   var carte=[].slice.call(document.querySelectorAll('.agg')),inCoda=false;
   function pila(){
     inCoda=false;
