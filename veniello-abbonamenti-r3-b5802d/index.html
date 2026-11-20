@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -79,7 +79,7 @@ h2 em{font-style:normal;font-weight:600;color:var(--testo);letter-spacing:-.034e
 .testata .btn{min-height:40px;padding:0 16px;font-size:14px}
 
 /* 1 · apertura in stile Linear: testo a sinistra, una frase che dice chi siamo (prima parte chiara, poi grigia) */
-.eroe{position:relative;overflow:hidden;padding:calc(var(--testata) + 36px) 0 40px}
+.eroe{position:relative;overflow:hidden;padding:calc(var(--testata) + 36px) 0 151px}
 .eroe .luce{position:absolute;inset:0;z-index:0;pointer-events:none;background:
   radial-gradient(80vmax 58vmax at 92% 100%,rgba(207,75,27,.55),rgba(150,45,14,.26) 40%,rgba(74,23,10,.1) 64%,rgba(16,15,9,0) 82%),
   radial-gradient(50vmax 40vmax at 100% 0%,rgba(184,56,15,.32),rgba(16,15,9,0) 72%),
@@ -97,7 +97,7 @@ h2 em{font-style:normal;font-weight:600;color:var(--testo);letter-spacing:-.034e
 .fiducia{margin-top:24px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--testo3);line-height:1.9}
 
 /* entrata alla Linear: ogni riga arriva da una leggera sfocatura, una dopo l'altra (solo all'apertura, non allo scroll) */
-.rv{animation:entra 1s var(--curva) both;animation-delay:calc(var(--d,0) * 90ms + 80ms)}
+.rv{animation:entra 2s var(--curva) both;animation-delay:calc(var(--d,0) * 90ms + 80ms)}
 @keyframes entra{from{opacity:0;filter:blur(10px);transform:translateY(14px)}to{opacity:1;filter:blur(0);transform:none}}
 
 /* sezioni */
@@ -173,13 +173,23 @@ h2 em{font-style:normal;font-weight:600;color:var(--testo);letter-spacing:-.034e
 .faq-r p{color:var(--testo2);font-size:16px;padding:0 0 22px;max-width:58ch;opacity:0;transform:translateY(-6px);transition:opacity .35s ease,transform .5s var(--curva)}
 .aperta .faq-r p{opacity:1;transform:none}
 
-/* 5 · chi ci ha scelto */
-.partner{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:34px}
-.partner a{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:14px;padding:22px 10px 16px;border-radius:var(--r);background:var(--surf);border:1px solid var(--line);text-align:center;transition:transform .25s var(--curva),background .2s ease}
-.partner a:active{transform:scale(.97)}
-.partner a:hover{background:var(--surf2)}
-.partner img{width:100%;max-width:104px;height:56px;object-fit:contain}
-.partner span{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--testo3);line-height:1.5}
+/* 5 · chi ci ha scelto: i blocchi di VSLinear 0.1 (stesse misure, stessi caratteri, foto che si muove piano quando si vede) */
+.carosello{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 16px;padding:0 16px 6px;margin:40px calc(-1 * var(--lato)) 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.carosello::-webkit-scrollbar{display:none}
+.card{position:relative;flex:0 0 min(80vw,330px);aspect-ratio:4/5;border-radius:14px;overflow:hidden;scroll-snap-align:start;background:var(--surf);isolation:isolate;transition:transform .3s var(--curva);-webkit-tap-highlight-color:transparent}
+.card:active{transform:scale(.985)}
+.card > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.card .lento{animation:lento 22s ease-in-out infinite alternate;animation-play-state:paused}
+.card.va .lento{animation-play-state:running}
+@keyframes lento{from{transform:scale(1.03) translate3d(0,0,0)}to{transform:scale(1.15) translate3d(-2.5%,2%,0)}}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(245,244,239,.1)}
+.card-nome{position:absolute;right:24px;top:24px;left:24px;z-index:2;text-align:right}
+.card-nome h3{font:440 30px/1.02 var(--serif);font-optical-sizing:auto;letter-spacing:-.02em;text-shadow:0 1px 18px rgba(8,7,4,.5)}
+.card-nome h3 em{font-style:italic}
+.card-nome p{margin-top:10px;text-wrap:balance;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.82);text-shadow:0 1px 10px rgba(8,7,4,.8)}
+.card-piede{position:absolute;left:24px;right:24px;bottom:24px;z-index:2}
+.card-lavori{font:450 16px/1.4 var(--sans);color:var(--testo);text-shadow:0 1px 12px rgba(8,7,4,.7)}
+.card-lavori small{display:block;font:400 11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.66);margin-bottom:6px}
 
 /* 6 · chiusura */
 .chiusura{position:relative;overflow:hidden;text-align:left}
@@ -205,13 +215,13 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
   .pila{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-bottom:0;margin-bottom:0}
   .agg{position:relative;top:auto;margin:0}
   .agg::after{display:none}
-  .partner{gap:16px}
-  .partner a{padding:34px 16px 22px}
-  .partner img{max-width:150px;height:72px}
+  .carosello{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;overflow:visible;margin:64px 0 0;padding:0}
+  .card{aspect-ratio:4/5.2}
+  .card:hover .lento{animation-play-state:running}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .rv,.eroe .luce{animation:none}
+  .rv,.eroe .luce,.card .lento{animation:none}
   .agg{position:relative;top:auto}
   .agg::after{display:none}
   .faq-r,.faq-r p,.piu::after,.piu::before{transition:none}
@@ -245,10 +255,6 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
       <span class="etichetta rv" style="--d:0">Abbonamenti · Veniello Studio</span>
       <h1 id="titolo" class="rv" style="--d:1">Fatti trovare.<br>Fatti <em>scegliere</em><span class="pt" aria-hidden="true"></span></h1>
       <p class="frase rv" style="--d:2"><b>Veniello Studio porta online la tua attività e la fa crescere.</b></p>
-      <div class="azioni rv" style="--d:3">
-        <a class="btn btn-pieno" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20sugli%20abbonamenti%20di%20Veniello%20Studio" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Contatta su WhatsApp</a>
-        <a class="freccia" href="#abbonamenti">Abbonamenti<svg class="i" aria-hidden="true"><use href="#i-giu"/></svg></a>
-      </div>
     </div>
   </section>
 
@@ -371,10 +377,22 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
     <div class="wrap">
       <span class="etichetta">Partner</span>
       <h2 id="t-partner">Chi ha scelto <em>Veniello Studio</em>.</h2>
-      <div class="partner">
-        <a id="pa-jue" href="https://jueclub.it" target="_blank" rel="noopener"><img src="img/jue-logo.png" alt="Jué Club" width="480" height="184" loading="lazy"><span>Cocktail bar<br>Montecatini</span></a>
-        <a id="pa-elena" href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener"><img src="img/elena-logo.png" alt="Elena Baldi Wedding Planner" width="619" height="376" loading="lazy"><span>Wedding planner<br>Montecatini</span></a>
-        <a id="pa-gb" href="https://www.instagram.com/gb.oro/" target="_blank" rel="noopener"><img src="img/gb-logo.png" alt="GB Oro" width="136" height="184" loading="lazy"><span>Compro oro<br>Umbria</span></a>
+      <div class="carosello" role="list">
+        <a class="card" id="pa-jue" role="listitem" data-anima href="https://jueclub.it" target="_blank" rel="noopener">
+          <img class="lento" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" width="900" height="1200" loading="lazy">
+          <div class="card-nome"><h3>Jué Club</h3><p>Cocktail bar ·&nbsp;Montecatini&nbsp;Terme</p></div>
+          <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Sito, video delle serate, social</p></div>
+        </a>
+        <a class="card" id="pa-elena" role="listitem" data-anima href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener">
+          <img class="lento" src="img/elena-dettagli.jpg" alt="Fedi, partecipazioni e fiori di un matrimonio curato da Elena Baldi" width="720" height="1080" loading="lazy" style="object-position:50% 35%">
+          <div class="card-nome"><h3>Elena Baldi<br><em>Wedding Planner</em></h3><p>Matrimoni ·&nbsp;Montecatini&nbsp;Terme</p></div>
+          <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Social e video</p></div>
+        </a>
+        <a class="card" id="pa-gb" role="listitem" data-anima href="https://www.instagram.com/gb.oro/" target="_blank" rel="noopener">
+          <img class="lento" src="img/gb-catenina.jpg" alt="La catenina d’oro nell’astuccio blu, dal reel fatto per GB" width="600" height="1067" loading="lazy" style="object-position:50% 62%">
+          <div class="card-nome"><h3>GB Gioielli</h3><p>Compro oro ·&nbsp;Città di&nbsp;Castello, Umbertide</p></div>
+          <div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Instagram, TikTok, reel</p></div>
+        </a>
       </div>
     </div>
   </section>
@@ -413,6 +431,12 @@ sup{font-size:.7em;line-height:0;color:var(--rec)}
     sw.setAttribute('aria-checked',String(on));
     cc.href='https://wa.me/393520338377?text='+encodeURIComponent(cc.dataset[on?'sito':'base']);
   });
+
+  /* partner: la foto si muove piano solo quando il blocco si vede (come VSLinear) */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('va',e.isIntersecting)})},{threshold:.08});
+    [].forEach.call(document.querySelectorAll('[data-anima]'),function(el){io.observe(el)});
+  }
 
   /* domande: una alla volta, altezza animata in CSS */
   var voci=[].slice.call(document.querySelectorAll('.faq-v'));

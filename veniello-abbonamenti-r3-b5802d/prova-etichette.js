@@ -1,4 +1,4 @@
-/* ETICHETTE DI PROVA (landing Abbonamenti r3, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
+/* ETICHETTE DI PROVA (landing Abbonamenti r4, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
    messa in fondo a index.html, subito prima di </body>.
    ==========================================================================================================================
    Servono solo nella fase di prova: Niccolò dice «sposta la 4c» e noi sappiamo di che pezzo parla (la mappa delle etichette
@@ -51,8 +51,6 @@
     ['#inizio .etichetta', '1a', 'L’etichetta «Abbonamenti · Veniello Studio»'],
     ['#titolo', '1b', 'Il titolo «Fatti trovare. Fatti scegliere.»'],
     ['#inizio .frase', '1c', 'La frase che dice chi siamo'],
-    ['#inizio .azioni .btn', '1d', 'Il pulsante «Contatta su WhatsApp»'],
-    ['#inizio .azioni .freccia', '1e', 'Il link «Abbonamenti»'],
 
     ['#abbonamenti', '2', 'Abbonamenti'],
     ['#abbonamenti .etichetta', '2a', 'L’etichetta «Abbonamenti»'],
@@ -82,9 +80,9 @@
     ['#partner', '5', 'Chi ci ha scelto'],
     ['#partner .etichetta', '5a', 'L’etichetta «Partner»'],
     ['#t-partner', '5b', 'Il titolo «Chi ha scelto Veniello Studio.»'],
-    ['#pa-jue', '5c', 'Jué Club'],
-    ['#pa-elena', '5d', 'Elena Baldi'],
-    ['#pa-gb', '5e', 'GB Oro'],
+    ['#pa-jue', '5c', 'Jué Club', { resta: true }],
+    ['#pa-elena', '5d', 'Elena Baldi', { resta: true }],
+    ['#pa-gb', '5e', 'GB Gioielli', { resta: true }],
 
     ['#contatta', '6', 'La chiusura'],
     ['#t-fine', '6a', 'Il titolo «Pronto a farti scegliere?»'],
