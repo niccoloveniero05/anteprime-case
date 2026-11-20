@@ -1,4 +1,4 @@
-/* ETICHETTE DI PROVA (landing Abbonamenti r13, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
+/* ETICHETTE DI PROVA (landing Abbonamenti r14, 20/11; motore di VSLinear 0.1) — da togliere: cancellare questo file e la riga <script src="prova-etichette.js"></script>
    messa in fondo a index.html, subito prima di </body>.
    ==========================================================================================================================
    Servono solo nella fase di prova: Niccolò dice «sposta la 4c» e noi sappiamo di che pezzo parla (la mappa delle etichette
@@ -62,9 +62,9 @@
     ['#crescita-sito-voce > button', '2h', 'Crescita: la voce «Sito web o e-commerce −10%» arrivata in «Comprende»'],
     ['#crescita-piu', '2i', 'Crescita: «+ 405 €» accanto al prezzo (solo col sito scelto)'],
 
-    ['#aggiuntivi', '3', 'Componenti aggiuntivi'],
-    ['#aggiuntivi .etichetta', '3a', 'L’etichetta «Componenti aggiuntivi»'],
-    ['#t-agg', '3b', 'Il titolo «Aggiungi solo quello che serve.»'],
+    ['#aggiuntivi', '3', 'Servizi'],
+    ['#aggiuntivi .etichetta', '3a', 'L’etichetta «Servizi»'],
+    ['#t-agg', '3b', 'Il titolo «Prendi solo quello che ti serve.»'],
     ['#aggiuntivi .sotto', '3c', '«Servizi a parte…»'],
     ['#a-sito', '3d', 'Sito web o e-commerce', { resta: true }],
     ['#a-va', '3e', 'Virtual Assistant', { resta: true }],
@@ -72,7 +72,7 @@
 
     ['#partner', '4', 'Chi ci ha scelto'],
     ['#partner .etichetta', '4a', 'L’etichetta «Partner»'],
-    ['#t-partner', '4b', 'Il titolo «Chi ha scelto Veniello·studio.» (col logo)'],
+    ['#t-partner', '4b', 'Il titolo «Chi ha scelto Veniello·studio» (col logo)'],
     ['#pa-jue', '4c', 'Jué Club', { resta: true }],
     ['#pa-elena', '4d', 'Elena Baldi', { resta: true }],
     ['#pa-gb', '4e', 'GB Gioielli', { resta: true }],
@@ -82,7 +82,7 @@
     ['#t-faq', '5b', 'Il titolo «Prima di iniziare.»'],
     ['#d1', '5c', 'Come si parte?', { dentro: true }],
     ['#d2', '5d', 'La consulenza è gratis?', { dentro: true }],
-    ['#d4', '5e', 'Abbonamenti e componenti aggiuntivi', { dentro: true }],
+    ['#d4', '5e', 'Abbonamenti e servizi', { dentro: true }],
     ['#d5', '5f', 'Ci sono altre spese?', { dentro: true }],
 
     ['#contatta', '6', 'La chiusura'],
