@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r21 (20/11/2026): entrata come Linear anche sul telefono; da computer servizi «come Spotify» (schede larghe che si impilano come cassette, coi lavori dentro); da computer il «+ sito» di Crescita sta nel pannello dei Dettagli. r20 (20/11/2026): versione da computer (da 1024 px): abbonamenti come VSLinear (colonne «Fig» coi cubi, «Dettagli +» apre il pannello laterale; niente pallina né binario), servizi più grandi, entrata come linear.com. Il telefono non cambia. r19 (20/11/2026): «+ 405 €» come il testo di 2g ma arancio #FF5A1F. r18 (20/11/2026): «+ 405 €» identico al testo di 2g (Inter 500, 16 px, bianco). r17 (20/11/2026): «+ 405 €» più piccolo e più sottile (22 px, peso 300). r16 (20/11/2026): «tira giù per aggiornare» con la pallina che si srotola, presa da VSLinear (senza il viaggio dal titolo). r15 (20/11/2026): «+ 405 €» con carattere e colore del «−10%»; pannello ISPEZIONA nelle anteprime. r14 (20/11/2026): sezione 3 «Servizi» / «Prendi solo quello che ti serve»; via il punto dopo il logo in 4b. r13 (20/11/2026): «1 reel a settimana, fino a 30 secondi». r12 (20/11/2026): scegliendo il sito, accanto a «850 € al mese» si scrive «+ 405 €» insieme al volo. r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r21 (20/11/2026, bis): entrata come Linear anche sul telefono; da computer servizi «come Spotify» (schede larghe che si impilano come cassette, coi lavori dentro); da computer il «+ sito» di Crescita sta nel pannello dei Dettagli. r20 (20/11/2026): versione da computer (da 1024 px): abbonamenti come VSLinear (colonne «Fig» coi cubi, «Dettagli +» apre il pannello laterale; niente pallina né binario), servizi più grandi, entrata come linear.com. Il telefono non cambia. r19 (20/11/2026): «+ 405 €» come il testo di 2g ma arancio #FF5A1F. r18 (20/11/2026): «+ 405 €» identico al testo di 2g (Inter 500, 16 px, bianco). r17 (20/11/2026): «+ 405 €» più piccolo e più sottile (22 px, peso 300). r16 (20/11/2026): «tira giù per aggiornare» con la pallina che si srotola, presa da VSLinear (senza il viaggio dal titolo). r15 (20/11/2026): «+ 405 €» con carattere e colore del «−10%»; pannello ISPEZIONA nelle anteprime. r14 (20/11/2026): sezione 3 «Servizi» / «Prendi solo quello che ti serve»; via il punto dopo il logo in 4b. r13 (20/11/2026): «1 reel a settimana, fino a 30 secondi». r12 (20/11/2026): scegliendo il sito, accanto a «850 € al mese» si scrive «+ 405 €» insieme al volo. r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -676,6 +676,47 @@ html,body{overscroll-behavior-y:none}
     var scheda=opzioneSito({slot:document.getElementById('opz-slot'),riga:document.getElementById('crescita-sito'),voce:document.getElementById('crescita-sito-voce'),
       prezzo:document.getElementById('crescita-prezzo'),piu:document.getElementById('crescita-piu')},messaggio);
     window.CRESCITA={scheda:scheda,messaggio:messaggio,opzioneSito:opzioneSito};
+  })();
+
+  /* 1c · tira giù per aggiornare (vedi il CSS): la pallina compare sotto la testata, si srotola seguendo il dito, a cerchio chiuso si ricarica */
+  (function(){
+    var ag=document.getElementById('aggiorna');
+    if(!ag||!('ontouchstart' in window)||!(window.CSS&&CSS.supports&&CSS.supports('overscroll-behavior-y','none')))return;
+    var pal=ag.querySelector('.ag-pallina'),arco=ag.querySelector('.ag-arco'),testa=document.getElementById('testata');
+    var SOGLIA=150,R=10,W=2.2,R0=5,CIRC=2*Math.PI*R,AR=[255,90,31],BI=[245,244,239],G=null,via=false;
+    function c01(v){return v<0?0:v>1?1:v}
+    function disegna(p){
+      var x=innerWidth/2,y=testa.getBoundingClientRect().bottom+R+14;
+      ag.style.transform='translate3d('+(x-20).toFixed(1)+'px,'+(y-20).toFixed(1)+'px,0)';
+      /* fino a 0,2 la pallina e basta; poi si srotola: la sua testa gira sul cerchio (dall'alto, in senso orario), lascia dietro la linea
+         e rimpicciolisce fino allo spessore della linea; intanto da arancio diventa bianca */
+      var u=c01((p-.2)/.8),th=-Math.PI/2+2*Math.PI*u,rt=R0+(W/2-R0)*c01(u/.3);
+      var cs='rgb('+AR.map(function(v,i){return Math.round(v+(BI[i]-v)*c01(u/.5))}).join(',')+')';
+      pal.setAttribute('cx',(R*Math.cos(th)).toFixed(2));pal.setAttribute('cy',(R*Math.sin(th)).toFixed(2));
+      pal.setAttribute('r',(u>=1?0:rt).toFixed(2));pal.style.fill=cs;
+      arco.style.stroke=cs;arco.style.strokeWidth=(u>0?W:0);arco.style.strokeDasharray=(CIRC*u).toFixed(2)+' '+CIRC.toFixed(2);
+      ag.classList.toggle('su',p>0);
+    }
+    addEventListener('touchstart',function(e){
+      if(via||e.touches.length!==1||scrollY>.5){G=null;return}
+      G={x:e.touches[0].clientX,y:e.touches[0].clientY,dir:0,p:0};
+    },{passive:true});
+    addEventListener('touchmove',function(e){
+      if(!G||e.touches.length!==1){if(G&&G.dir)disegna(0);G=null;return}
+      var dx=e.touches[0].clientX-G.x,dy=e.touches[0].clientY-G.y;
+      if(!G.dir){
+        if(Math.abs(dx)<6&&Math.abs(dy)<6)return;
+        if(dy>0&&dy>Math.abs(dx)&&scrollY<=.5)G.dir=1;else{G=null;return}
+      }
+      if(e.cancelable)e.preventDefault();
+      G.p=c01(dy/SOGLIA);disegna(G.p);
+    },{passive:false});
+    function lascia(){
+      if(!G)return;var g=G;G=null;if(!g.dir)return;
+      if(g.p>=1){via=true;location.reload()}else disegna(0);
+    }
+    addEventListener('touchend',lascia,{passive:true});addEventListener('touchcancel',function(){if(G&&G.dir)disegna(0);G=null},{passive:true});
+    window.AGGIORNA={disegna:disegna};
   })();
 
   /* da computer: «Dettagli +» apre il pannello laterale (come VSLinear). Dentro: etichetta, nome grande, frase, prezzo, le voci di
