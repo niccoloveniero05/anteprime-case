@@ -12,7 +12,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Newsreader.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* Landing «Abbonamenti» di Veniello Studio, r19 (20/11/2026): «+ 405 €» come il testo di 2g ma arancio #FF5A1F. r18 (20/11/2026): «+ 405 €» identico al testo di 2g (Inter 500, 16 px, bianco). r17 (20/11/2026): «+ 405 €» più piccolo e più sottile (22 px, peso 300). r16 (20/11/2026): «tira giù per aggiornare» con la pallina che si srotola, presa da VSLinear (senza il viaggio dal titolo). r15 (20/11/2026): «+ 405 €» con carattere e colore del «−10%»; pannello ISPEZIONA nelle anteprime. r14 (20/11/2026): sezione 3 «Servizi» / «Prendi solo quello che ti serve»; via il punto dopo il logo in 4b. r13 (20/11/2026): «1 reel a settimana, fino a 30 secondi». r12 (20/11/2026): scegliendo il sito, accanto a «850 € al mese» si scrive «+ 405 €» insieme al volo. r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
+/* Landing «Abbonamenti» di Veniello Studio, r20 (20/11/2026): versione da computer (da 1024 px): abbonamenti come VSLinear (colonne «Fig» coi cubi, «Dettagli +» apre il pannello laterale; niente pallina né binario), servizi più grandi, entrata come linear.com. Il telefono non cambia. r19 (20/11/2026): «+ 405 €» come il testo di 2g ma arancio #FF5A1F. r18 (20/11/2026): «+ 405 €» identico al testo di 2g (Inter 500, 16 px, bianco). r17 (20/11/2026): «+ 405 €» più piccolo e più sottile (22 px, peso 300). r16 (20/11/2026): «tira giù per aggiornare» con la pallina che si srotola, presa da VSLinear (senza il viaggio dal titolo). r15 (20/11/2026): «+ 405 €» con carattere e colore del «−10%»; pannello ISPEZIONA nelle anteprime. r14 (20/11/2026): sezione 3 «Servizi» / «Prendi solo quello che ti serve»; via il punto dopo il logo in 4b. r13 (20/11/2026): «1 reel a settimana, fino a 30 secondi». r12 (20/11/2026): scegliendo il sito, accanto a «850 € al mese» si scrive «+ 405 €» insieme al volo. r11 (20/11/2026): nel titolo dei partner il logo «Veniello·studio» col puntino arancio, come VSLinear; nella testata il puntino ora è a metà altezza come in VSLinear. r10 (20/11/2026): via l'etichetta «Abbonamenti · Veniello Studio» dall'apertura. r9 (20/11/2026): il «+» del sito senza cerchio; toccato, scende in «Comprende» e diventa una spunta. r8 (20/11/2026): su Crescita la riga da spuntare «+ sito» (opzione A) al posto dell'interruttore. r7 (20/11/2026): prima i partner, poi le domande. r6 (20/11/2026): pulsanti «Contattaci» / «Scrivici» / «Prenota anteprima»; etichette dei piani senza contorno. r5 (20/11/2026): via «Una tantum», la riga «Con l'abbonamento Crescita» e le pillole grigie dei piani. r4 (20/11/2026): via pulsante e link dall'apertura (lo spazio resta), entrata 1 s più lenta, partner a blocchi come VSLinear. r3 (20/11/2026): apertura corta (si vedono subito gli abbonamenti) e prezzi dal documento. r2 (20/11/2026): caratteri presi dall'anteprima VSLinear 0.1 (NC), non dal sito online.
    Tema e caratteri da veniellostudio.it e VSLinear 0.1; impaginazione dei piani da Notion e Figma (telefono);
    transizioni alla Linear: entrata del titolo con sfocatura, schede che si aprono, componenti che si sovrappongono
    scorrendo, pressione al tocco. Niente fade-up allo scroll, niente barra fissa in basso. */
@@ -254,8 +254,95 @@ html,body{overscroll-behavior-y:none}
 .aggiorna svg{display:block;width:40px;height:40px;overflow:visible}
 .aggiorna .ag-arco{fill:none;stroke-linecap:round}
 
+/* ===== Versione da computer (da 1024 px, r20) =====
+   Abbonamenti come VSLinear 0.1 (colonne «Fig» con i cubi isometrici 1/2/3, separate da un filo; «Dettagli +» apre il pannello
+   laterale grande col sito sotto oscurato; niente pallina né binario). «Comprende» si legge nel pannello. Il prezzo resta nella colonna.
+   Servizi più grandi (riempiono la riga). Entrata dell'apertura come linear.com: ogni pezzo arriva da una sfocatura forte,
+   senza muoversi, uno dopo l'altro (titolo, frase, poi gli abbonamenti). */
+.ab-fig,.dett-pc{display:none}
+@media (min-width:1024px){
+  :root{--max:1280px}
+  .eroe{padding-bottom:64px;min-height:0}
+  #abbonamenti{padding-top:56px}
+  h1{font-size:clamp(58px,7.6vw,104px)}
+  h2{font-size:clamp(46px,4.3vw,58px)}
+  .frase{font-size:24px;max-width:none}
+  .piani{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;align-items:stretch;margin-top:56px}
+  .piano,.piano.consigliato{position:relative;display:flex;flex-direction:column;padding:0 40px;background:none;border:0;border-radius:0;box-shadow:none}
+  .piano:first-child{padding-left:0}.piano:last-child{padding-right:0}
+  .piano + .piano::before{content:"";position:absolute;left:0;top:0;bottom:64px;width:1px;background:var(--line);pointer-events:none}
+  .piano:active{transform:none}
+  .ab-fig{display:block;order:0;margin:0 0 24px}
+  .ab-fig-n{display:block;font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
+  .ab-svg{display:block;width:auto;max-width:100%;height:220px;margin:16px auto 0}
+  .ab-svg .f{fill:var(--bg);stroke:rgba(245,244,239,.34);stroke-width:1;stroke-linejoin:round}
+  .ab-svg .f.t{fill:#15140E}
+  .piano-testa{order:1;flex-direction:column-reverse;align-items:flex-start;gap:24px}
+  .piano h3{font:500 19px/1.3 var(--sans);letter-spacing:-.01em}
+  .badge{font-size:11px}
+  .piano .desc{order:2;margin-top:8px;font-size:15px;line-height:1.6;max-width:none}
+  .piano .prezzo{order:3;margin-top:20px}
+  .piano .prezzo b{font-size:36px}
+  .piano .prezzo b.piu-sito{font-size:16px;letter-spacing:-.01em}
+  .opz-slot{order:4}
+  .dett-pc{order:5;display:inline-flex;align-self:flex-start;align-items:center;gap:10px;min-height:40px;margin-top:16px;font:500 17px/1 var(--sans);letter-spacing:-.01em;color:var(--testo);cursor:pointer}
+  .piu-pc{width:14px;height:14px;background:currentColor;transition:transform .3s cubic-bezier(.2,.7,.2,1);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.5v11M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1.5v11M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat}
+  .dett-pc:hover .piu-pc{transform:rotate(90deg)}
+  /* «Contattaci» come il «Parliamone →» di VSLinear: testo con la freccia, in fondo a destra */
+  .piano .btn,.piano .btn.btn-pieno,.piano .btn.btn-linea{order:6;width:auto;align-self:flex-end;margin-top:auto;padding:24px 0 0;min-height:40px;border-radius:0;background:none;box-shadow:none;color:var(--testo);font:500 17px/1 var(--sans);gap:10px}
+  .piano .btn .i{display:none}
+  .piano .btn::after{content:"";width:14px;height:14px;flex:none;background:currentColor;transition:transform .25s cubic-bezier(.2,.7,.2,1);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat}
+  .piano .btn:hover{background:none}.piano .btn:hover::after{transform:translateX(3px)}.piano .btn:active{transform:none}
+  .opz-slot + .btn{margin-top:auto}
+  .piano .comprende{display:none}
+  /* «+ sito» di Crescita da computer: niente volo (la lista sta nel pannello), il «+» diventa la spunta sul posto */
+  .opzione.preso .opz-segno::before,.opzione.preso .opz-segno::after{opacity:0;transform:rotate(180deg) scale(.3)}
+  .opzione.preso .opz-segno svg{opacity:1;transform:none}
+
+  /* servizi più grandi: riempiono la riga, più aria e caratteri più grandi */
+  .pila{gap:20px;margin-top:56px}
+  .agg{display:flex;flex-direction:column;min-height:440px;padding:40px 36px 36px;border-radius:24px}
+  .agg-ico{width:60px;height:60px;border-radius:16px}.agg-ico .i{width:27px;height:27px}
+  .agg h3{margin-top:auto;padding-top:48px;font:560 30px/1.1 var(--sans);letter-spacing:-.03em}
+  .agg p{margin-top:12px;font-size:17px;line-height:1.55}
+  .agg .prezzo{margin-top:24px}.agg .prezzo b{font-size:40px}
+  .agg .freccia{margin-top:24px;font-size:17px}
+
+  /* entrata come linear.com: sfocatura forte → nitido, niente spostamento, uno dopo l'altro */
+  .rv,.rv-pc{animation:entra-linear 1.1s cubic-bezier(.25,.1,.25,1) both;animation-delay:calc(var(--d,0) * 420ms + 250ms)}
+}
+@keyframes entra-linear{from{opacity:0;filter:blur(18px)}to{opacity:1;filter:blur(0)}}
+
+/* il pannello laterale dei «Dettagli» (come VSLinear: da destra, alto quanto lo schermo, il sito sotto oscurato) */
+.ab-velo{position:fixed;inset:0;z-index:90;background:rgba(6,6,4,.62);opacity:0;visibility:hidden;transition:opacity .35s cubic-bezier(.2,.7,.2,1),visibility 0s linear .35s}
+.ab-velo.su{opacity:1;visibility:visible;transition:opacity .35s cubic-bezier(.2,.7,.2,1)}
+.ab-pannello{position:fixed;top:8px;right:8px;bottom:8px;z-index:91;width:min(640px,calc(100vw - 16px));display:flex;flex-direction:column;background:#15140F;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.1),0 24px 80px -20px rgba(0,0,0,.8);opacity:0;visibility:hidden;transform:translate3d(32px,0,0);transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease,visibility 0s linear .45s}
+.ab-pannello.su{opacity:1;visibility:visible;transform:none;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease}
+.ab-pannello-testa{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 14px 14px 32px;border-bottom:1px solid var(--line)}
+.ab-pannello-tag{font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
+.ab-pannello-x{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;color:var(--testo2);box-shadow:inset 0 0 0 1px rgba(245,244,239,.14);transition:color .2s ease,box-shadow .2s ease}
+.ab-pannello-x:hover,.ab-pannello-x:focus-visible{color:var(--testo);box-shadow:inset 0 0 0 1px rgba(245,244,239,.32);outline:0}
+.ab-pannello-x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.ab-pannello-corpo{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:44px 32px 40px}
+.ab-pannello-t{font:560 44px/1.05 var(--sans);letter-spacing:-.035em;color:var(--testo);margin:0;max-width:none}
+.ab-pannello-sotto{margin-top:24px;font:400 17px/1.6 var(--sans);color:var(--testo2);max-width:34em}
+.ab-pannello .prezzo{margin-top:24px}
+.ab-pannello .prezzo .piu-sito{clip-path:none}
+.ab-pannello-box{position:relative;margin-top:40px;border-radius:14px;padding:24px 28px 8px;isolation:isolate;background:linear-gradient(155deg,#1E1D16 0%,#18170F 40%,rgba(21,20,15,0) 85%)}
+.ab-pannello-box::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;border:1px solid rgba(245,244,239,.2);border-right:0;border-bottom:0;-webkit-mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%)}
+.ab-pannello-box-t{font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--testo3)}
+.voci{list-style:none;margin-top:16px}
+.voci li{padding:14px 0 14px 22px;border-bottom:1px solid var(--line);position:relative;color:var(--testo2);font-size:16px;line-height:1.55}
+.voci li:last-child{border-bottom:0}
+.voci li::before{content:"";position:absolute;left:2px;top:25px;width:9px;height:1px;background:var(--testo3)}
+.voci b{display:block;color:var(--testo);font-weight:500}
+.ab-pannello-azione{margin-top:32px}
+.ab-pannello-azione a{display:inline-flex;align-items:center;gap:10px;min-height:40px;font:500 17px/1 var(--sans);letter-spacing:-.01em;color:var(--testo)}
+.ab-pannello-azione a::after{content:"";width:14px;height:14px;flex:none;background:currentColor;transition:transform .25s cubic-bezier(.2,.7,.2,1);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat}
+.ab-pannello-azione a:hover::after{transform:translateX(3px)}
+
 @media (prefers-reduced-motion:reduce){
-  .rv,.eroe .luce,.card .lento{animation:none}
+  .rv,.rv-pc,.eroe .luce,.card .lento{animation:none}
   .agg{position:relative;top:auto}
   .agg::after{display:none}
   .faq-r,.faq-r p,.piu::after,.piu::before{transition:none}
@@ -281,7 +368,7 @@ html,body{overscroll-behavior-y:none}
   </div>
 </header>
 
-<main>
+<main id="contenuto">
   <!-- 1 · APERTURA -->
   <section class="eroe" id="inizio" aria-labelledby="titolo">
     <div class="luce" aria-hidden="true"></div>
@@ -295,12 +382,13 @@ html,body{overscroll-behavior-y:none}
   <!-- 2 · ABBONAMENTI -->
   <section class="sez" id="abbonamenti" aria-labelledby="t-abb">
     <div class="wrap">
-      <span class="etichetta">Abbonamenti</span>
-      <h2 id="t-abb">Scegli come <em>crescere</em>.</h2>
-      <p class="sotto">Si parte sempre da una consulenza gratuita<sup>*</sup> per studiare il piano di crescita.</p>
+      <span class="etichetta rv-pc" style="--d:2">Abbonamenti</span>
+      <h2 id="t-abb" class="rv-pc" style="--d:2">Scegli come <em>crescere</em>.</h2>
+      <p class="sotto rv-pc" style="--d:2">Si parte sempre da una consulenza gratuita<sup>*</sup> per studiare il piano di crescita.</p>
 
-      <div class="piani">
+      <div class="piani rv-pc" style="--d:3">
         <article class="piano" id="p-presenza">
+          <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.1</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M79.5 141.4 L120.0 164.8 L120.0 118.0 L79.5 94.6 Z"/><path class="f r" d="M160.5 141.4 L120.0 164.8 L120.0 118.0 L160.5 94.6 Z"/><path class="f t" d="M120.0 71.2 L160.5 94.6 L120.0 118.0 L79.5 94.6 Z"/></svg></div>
           <div class="piano-testa"><h3>Presenza</h3><span class="badge gr">Per iniziare</span></div>
           <p class="desc">Per farti trovare: la tua pagina, Google e i social pronti a lavorare.</p>
           <p class="prezzo"><b>430&nbsp;€</b><span>al mese</span></p>
@@ -314,9 +402,11 @@ html,body{overscroll-behavior-y:none}
               <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span>4 post carosello</span></li>
             </ul>
           </div>
+          <button class="dett-pc" type="button" aria-haspopup="dialog">Dettagli<i class="piu-pc" aria-hidden="true"></i></button>
         </article>
 
         <article class="piano consigliato" id="p-crescita">
+          <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.2</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M63.2 136.8 L99.2 157.6 L99.2 116.0 L63.2 95.2 Z"/><path class="f r" d="M135.2 136.8 L99.2 157.6 L99.2 116.0 L135.2 95.2 Z"/><path class="f t" d="M99.2 74.4 L135.2 95.2 L99.2 116.0 L63.2 95.2 Z"/><path class="f l" d="M104.8 160.8 L140.8 181.6 L140.8 140.0 L104.8 119.2 Z"/><path class="f r" d="M176.8 160.8 L140.8 181.6 L140.8 140.0 L176.8 119.2 Z"/><path class="f t" d="M140.8 98.4 L176.8 119.2 L140.8 140.0 L104.8 119.2 Z"/></svg></div>
           <div class="piano-testa"><h3>Crescita</h3><span class="badge ar">Consigliato</span></div>
           <p class="desc">Per crescere ogni mese, con contenuti veri e i risultati misurati.</p>
           <p class="prezzo" id="crescita-prezzo"><b>850&nbsp;€</b><span>al mese</span><b class="piu-sito" id="crescita-piu" aria-hidden="true">+&nbsp;405&nbsp;€</b></p>
@@ -338,9 +428,11 @@ html,body{overscroll-behavior-y:none}
               <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span>Contenuti video con l’IA<small>1 reel a settimana, fino a 30 secondi</small></span></li>
             </ul>
           </div>
+          <button class="dett-pc" type="button" aria-haspopup="dialog">Dettagli<i class="piu-pc" aria-hidden="true"></i></button>
         </article>
 
         <article class="piano" id="p-enterprise">
+          <div class="ab-fig" aria-hidden="true"><span class="ab-fig-n">Fig 0.3</span><svg class="ab-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f l" d="M70.3 157.7 L101.8 175.9 L101.8 139.5 L70.3 121.3 Z"/><path class="f r" d="M133.3 157.7 L101.8 175.9 L101.8 139.5 L133.3 121.3 Z"/><path class="f t" d="M101.8 103.1 L133.3 121.3 L101.8 139.5 L70.3 121.3 Z"/><path class="f l" d="M70.3 121.3 L101.8 139.5 L101.8 103.1 L70.3 84.9 Z"/><path class="f r" d="M133.3 121.3 L101.8 139.5 L101.8 103.1 L133.3 84.9 Z"/><path class="f t" d="M101.8 66.7 L133.3 84.9 L101.8 103.1 L70.3 84.9 Z"/><path class="f l" d="M106.7 178.7 L138.2 196.9 L138.2 160.5 L106.7 142.3 Z"/><path class="f r" d="M169.7 178.7 L138.2 196.9 L138.2 160.5 L169.7 142.3 Z"/><path class="f t" d="M138.2 124.1 L169.7 142.3 L138.2 160.5 L106.7 142.3 Z"/></svg></div>
           <div class="piano-testa"><h3>Enterprise</h3><span class="badge gr">Tutto incluso</span></div>
           <p class="desc">Tutto il marketing della tua attività, gestito da noi a 360°.</p>
           <p class="prezzo"><b>2.600&nbsp;€</b><span>al mese</span></p>
@@ -358,6 +450,7 @@ html,body{overscroll-behavior-y:none}
               <li><svg class="i" aria-hidden="true"><use href="#i-ok"/></svg><span>Report mensile<small>Con consulenza dal vivo o in videochiamata</small></span></li>
             </ul>
           </div>
+          <button class="dett-pc" type="button" aria-haspopup="dialog">Dettagli<i class="piu-pc" aria-hidden="true"></i></button>
         </article>
       </div>
     </div>
@@ -372,7 +465,7 @@ html,body{overscroll-behavior-y:none}
       <div class="pila" id="pila">
         <article class="agg" id="a-sito" style="--n:0">
           <div class="agg-testa"><span class="agg-ico"><svg class="i" aria-hidden="true"><use href="#i-sito"/></svg></span></div>
-          <h3>Sito web o e-commerce</h3>
+          <h3>Sito web o <span class="nw">e-commerce</span></h3>
           <p>Il tuo sito o il tuo negozio online, sul tuo dominio.</p>
           <p class="prezzo"><b>450&nbsp;€</b><span>una volta sola</span></p>
           <a class="freccia" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20un%20sito%20web%20o%20un%20e-commerce" target="_blank" rel="noopener">Contattaci<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
@@ -532,7 +625,13 @@ html,body{overscroll-behavior-y:none}
     }
     /* distanza tra l'inizio dello spazio della riga e il suo contenuto (margine + filetto + spazio interno), misurata a riga aperta */
     var SCARTO=inRiga.getBoundingClientRect().top-slot.getBoundingClientRect().top;
-    riga.addEventListener('click',function(){if(!occupato&&!scelto)aggiungi()});
+    var pc=matchMedia('(min-width:1024px)');
+    function pcSi(){scelto=true;messaggio();riga.setAttribute('aria-pressed','true');riga.classList.add('preso');voce.classList.add('dentro','vista','spunta');prezzoSi()}
+    function pcNo(){scelto=false;messaggio();riga.setAttribute('aria-pressed','false');riga.classList.remove('preso');voce.classList.remove('dentro','vista','spunta');prezzoNo()}
+    riga.addEventListener('click',function(){
+      if(pc.matches){if(scelto)pcNo();else pcSi();return}
+      if(!occupato&&!scelto)aggiungi();
+    });
     dentroVoce.addEventListener('click',function(){if(!occupato&&scelto)togli()});
   })();
 
@@ -575,6 +674,55 @@ html,body{overscroll-behavior-y:none}
     }
     addEventListener('touchend',lascia,{passive:true});addEventListener('touchcancel',function(){if(G&&G.dir)disegna(0);G=null},{passive:true});
     window.AGGIORNA={disegna:disegna};
+  })();
+
+  /* da computer: «Dettagli +» apre il pannello laterale (come VSLinear). Dentro: etichetta, nome grande, frase, prezzo, le voci di
+     «Comprende» in un riquadro, «Contattaci →». Si chiude con la X, cliccando fuori o con Esc; il sito sotto è inerte. */
+  (function(){
+    var PAN=null;
+    function chiudi(){
+      if(!PAN||!PAN.aperto)return;PAN.aperto=false;
+      PAN.velo.classList.remove('su');PAN.el.classList.remove('su');
+      ['contenuto','testata','piede'].forEach(function(id){var e=document.getElementById(id);if(e)e.inert=false});
+      if(PAN.da)PAN.da.focus({preventScroll:true});
+    }
+    function testoSenza(el,via){var c=el.cloneNode(true);[].forEach.call(c.querySelectorAll(via),function(x){x.remove()});return c.textContent.replace(/\s+/g,' ').trim()}
+    function apri(card,da){
+      if(!PAN){
+        PAN={velo:document.createElement('div'),el:document.createElement('aside')};
+        PAN.velo.className='ab-velo';PAN.el.className='ab-pannello';
+        PAN.el.setAttribute('role','dialog');PAN.el.setAttribute('aria-modal','true');PAN.el.setAttribute('aria-labelledby','ab-pannello-t');
+        document.body.appendChild(PAN.velo);document.body.appendChild(PAN.el);
+        PAN.velo.addEventListener('click',chiudi);
+        PAN.velo.addEventListener('wheel',function(e){e.preventDefault()},{passive:false});
+        PAN.el.addEventListener('click',function(e){if(e.target.closest('.ab-pannello-x'))chiudi()});
+        addEventListener('keydown',function(e){if(e.key==='Escape'&&PAN&&PAN.aperto)chiudi()});
+      }
+      var tag=card.querySelector('.badge'),tit=card.querySelector('h3'),desc=card.querySelector('.desc'),pr=card.querySelector('.prezzo'),btn=card.querySelector('.btn');
+      var voci=[].map.call(card.querySelectorAll('.lista > li'),function(li){
+        if(li.classList.contains('voce-sito')&&!li.classList.contains('dentro'))return '';
+        var sp=li.querySelector('button > span:last-child')||li.querySelector(':scope > span');if(!sp)return '';
+        var sm=sp.querySelector('small');
+        var nome=li.classList.contains('voce-sito')?'Sito web o e-commerce':testoSenza(sp,'small');
+        var sotto=li.classList.contains('voce-sito')?'405 € invece di 450 €, una volta sola · −10%':(sm?sm.textContent:'');
+        return '<li><b>'+nome+'</b>'+sotto+'</li>';
+      }).join('');
+      var prc=pr?pr.cloneNode(true):null;if(prc){prc.removeAttribute('id');var ps=prc.querySelector('.piu-sito');if(ps)ps.removeAttribute('id')}
+      PAN.el.innerHTML='<div class="ab-pannello-testa"><span class="ab-pannello-tag">Dettagli · '+(tag?tag.textContent:'')+'</span>'+
+        '<button type="button" class="ab-pannello-x" aria-label="Chiudi"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg></button></div>'+
+        '<div class="ab-pannello-corpo"><h2 class="ab-pannello-t" id="ab-pannello-t"></h2>'+(desc?'<p class="ab-pannello-sotto">'+desc.innerHTML+'</p>':'')+
+        (prc?prc.outerHTML:'')+
+        (voci?'<div class="ab-pannello-box"><p class="ab-pannello-box-t">Comprende</p><ul class="voci">'+voci+'</ul></div>':'')+
+        (btn?'<div class="ab-pannello-azione"><a href="'+btn.href+'" target="_blank" rel="noopener">Contattaci</a></div>':'')+'</div>';
+      PAN.el.querySelector('.ab-pannello-t').textContent=tit?tit.textContent:'';
+      ['contenuto','testata','piede'].forEach(function(id){var e=document.getElementById(id);if(e)e.inert=true});
+      PAN.da=da||null;PAN.aperto=true;
+      void PAN.el.offsetWidth;
+      PAN.velo.classList.add('su');PAN.el.classList.add('su');
+      var x=PAN.el.querySelector('.ab-pannello-x');if(x)x.focus({preventScroll:true});
+    }
+    [].forEach.call(document.querySelectorAll('.dett-pc'),function(b){b.addEventListener('click',function(){apri(b.closest('.piano'),b)})});
+    window.PANNELLO={apri:apri,chiudi:chiudi};
   })();
 
   /* partner: la foto si muove piano solo quando il blocco si vede (come VSLinear) */
