@@ -184,7 +184,7 @@
     ['#t-servizi', '3b', 'Il titolo «Tutto quello che serve per farti scegliere.»: si accende parola per parola scorrendo'],
     ['#servizi > .wrap > .sotto', '3c', '«Prendi solo quello che ti serve…»'],
     ['#contenuti', '3d', 'Scheda Creazione Contenuti (fondo bruno scuro): si ferma in alto e la successiva le sale sopra', { resta: true }],
-    ['#contenuti-scena', '3e', 'Il riquadro incassato (r6): la scena «Dall’idea al video / Dritto sul tuo profilo» col portatile disegnato e instagram.com da computer; il foglio diventa il primo quadrato, poi profilo e reel veri (una volta sola)', { resta: true }],
+    ['#contenuti-scena', '3e', 'Il riquadro incassato (r6): la scena «Dall’idea al video / Dritto sul tuo profilo» col telefono disegnato e il profilo Instagram da telefono (r7, come al telefono); il foglio diventa il primo quadrato, poi profilo e reel veri (una volta sola)', { resta: true }],
     ['#t-contenuti', '3f', 'Il titolo «Creazione Contenuti.»'],
     ['#contenuti > .sotto', '3g', '«Video, foto e stories per i tuoi social, anche con l’IA.»'],
     ['#contenuti > .dettagli', '3h', '«Scopri i dettagli +» (e l’elenco che si apre)'],

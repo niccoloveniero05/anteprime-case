@@ -6,7 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
-<script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){if(!matchMedia('(min-width:1024px)').matches)document.documentElement.classList.add('vola')}else document.documentElement.classList.add('fermo')}catch(e){}</script>
+<script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('vola')}else document.documentElement.classList.add('fermo')}catch(e){}</script>
+<!-- Home 2026 r7 (21/11/2026): r6 + da computer la stessa scena di Creazione Contenuti del telefono (telefono disegnato), margine sotto il telefono. Fonte: home-2026/strumenti/costruisci-r7.py -->
 <!-- Home 2026 r6 (21/11/2026): r5 + la scena nuova di Creazione Contenuti (dalla bozza a linee al profilo Instagram del Jué; telefono disegnato al telefono, portatile disegnato da computer) al posto del portatile col montaggio. Fonte: home-2026/strumenti/costruisci-r6.py -->
 <!-- Home 2026 r5 (21/11/2026): r4 + testi legali e promesse allineati alla landing r47 (consulenza, domande, piede, privacy). Fonte: home-2026/strumenti/costruisci-r5.py -->
 <!-- Home 2026 r4 (21/11/2026): r3 + richieste di Niccolò del 21/11 al TELEFONO (apertura a sinistra, scala di Crescita quando la scheda è ferma, tendine degli abbonamenti). Fonte: home-2026/strumenti/costruisci-r4.py -->
@@ -963,12 +964,13 @@ html.corsa .corsa-palla{display:block}
 .abb-fig,.abb-dett,.abb-desc,.abb-pc,.abb-opz-slot{display:none}
 .abb-tocca,.abb-segno,.abb-tendina{display:none}   /* r4: la tendina c'è solo al telefono (più giù) */
 .abb-testa{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;margin-top:10px}   /* se non ci sta, l'etichetta va sotto il nome */
-.abb-piano h3{font:700 34px/1.1 var(--sans);letter-spacing:-.035em;color:var(--abb-c,var(--av))}
+.abb-piano h3{font:700 34px/1.1 var(--sans);letter-spacing:-.035em;color:var(--av)}   /* r7 (21/11, Niccolò: «i colori non tornano»): i nomi dei piani tutti crema; il colore passa all'etichetta */
 #abb-presenza{--abb-c:#F5F4EF}
 #abb-crescita{--abb-c:#FF5A1F}
 #abb-enterprise{--abb-c:#FFB08F}
 .abb-badge{font:400 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;color:rgba(245,244,239,.5)}
-.abb-badge.abb-ar{color:#FFB08F}
+.abb-badge.abb-ar{color:#FF5A1F}       /* r7: «Consigliato» con l'arancio di Crescita (5,5:1 sulla scheda) */
+.abb-badge.abb-chiaro{color:#FFB08F}   /* r7: «Il più completo» con l'arancio chiaro di Enterprise (9,8:1); «Per iniziare» resta grigia. Classi, non id: le copie in volo non hanno l'id */
 .abb-prezzo{margin-top:6px;display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 5px;font:650 17px/1.3 var(--sans);letter-spacing:-.01em;color:var(--av)}
 .abb-prezzo b{font-weight:inherit;font-variant-numeric:tabular-nums}
 .abb-al{font-weight:inherit}
@@ -1237,37 +1239,21 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   .solo-tel{display:none}
   .solo-pc{display:inline}
 
-  /* ── 0 · testata: il marchio completo da subito (niente volo da computer; lo script «Volo» toglie anche le classi) ── */
-  html.vola #marchio-testata .vv,html.vola #marchio-testata .pl{opacity:1}
+  /* ── 0 · testata (r7, 21/11, Niccolò: «si legge a malapena»): tutto più grande, testata alta 72. Il marchio arriva in
+     volo come al telefono (script «Volo»: misura il marchio vero, quindi arriva sulla misura nuova) ── */
+  :root{--testata:72px}
+  .testata .marchio{font-size:25px}
+  .testata nav{gap:34px;font-size:16px}
+  .testata nav a{padding:12px 0}
+  #testata-scrivi{height:40px;padding:0 20px;gap:9px;font-size:16px}
+  #testata-scrivi .i{width:17px;height:17px}
 
-  /* ── 1 · Apertura come la testata di Spotify ── */
-  .eroe{overflow:hidden;text-align:left;justify-content:center;min-height:max(680px,100svh);padding:calc(var(--testata) + 24px) 0 clamp(96px,14svh,150px)}
-  .eroe-testo{position:relative;z-index:1;align-items:flex-start}
-  .eroe-logo{position:absolute;width:1px;height:1px;overflow:hidden}   /* il titolo «Veniello Studio» resta per i lettori di schermo */
-  .eroe-logo .eroe-v,.eroe-logo .eroe-pl{display:none}
-  .eroe-frase{margin:0;max-width:none;font-size:clamp(54px,4.7vw,78px);line-height:1;letter-spacing:-.045em;text-wrap:nowrap}
-  .eroe-sotto{margin:clamp(24px,3.2svh,36px) 0 0;max-width:19em;font-size:clamp(20px,1.6vw,24px);line-height:1.4;text-align:left;text-wrap:balance}
-  /* il logo animato: il pallino del marchio in grande (#FF5A1F), dentro una luce morbida che gira piano (due macchie
-     sfumate che si spostano, solo transform), sopra la V del marchio scura. Lo sposta e lo rimpicciolisce lo script
-     «Cerchio», legato allo scorrimento (transform). Con «Riduci movimento» è fermo */
-  .cerchio-pc{display:block;position:absolute;z-index:0;left:calc(var(--cx) - var(--d) / 2);top:calc(var(--cy) - var(--d) / 2);width:var(--d);height:var(--d);
-    --d:min(82svh,55vw,880px);--cx:74vw;--cy:56%;transform-origin:50% 50%;pointer-events:none;-webkit-user-select:none;user-select:none}
-  html:not(.fermo) .cerchio-pc{will-change:transform}
-  /* (r3, sfondo nuovo con lo sfumato arancio) il cerchio resta staccato dal fondo: un alone nero intorno (come un'ombra
-     portata su tutti i lati) e la luce dentro più contenuta */
-  .cerchio-pc::before{content:"";position:absolute;inset:-9%;border-radius:50%;pointer-events:none;
-    background:radial-gradient(closest-side,rgba(10,9,5,.82) 80%,rgba(10,9,5,.42) 89%,rgba(10,9,5,0) 100%)}
-  .cerchio-disco{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#FF5A1F;clip-path:circle(50% at 50% 50%);isolation:isolate}
-  .cerchio-disco i{position:absolute;display:block;border-radius:50%;pointer-events:none}
-  .cerchio-luce{left:-6%;top:-10%;width:78%;height:78%;background:radial-gradient(closest-side,rgba(255,222,200,.5),rgba(255,186,148,.24) 46%,rgba(255,150,100,0) 100%);
-    animation:cerchio-luce 30s ease-in-out infinite alternate}
-  .cerchio-luce2{right:-14%;top:30%;width:62%;height:62%;background:radial-gradient(closest-side,rgba(255,176,143,.34),rgba(255,176,143,0) 100%);
-    animation:cerchio-luce2 36s ease-in-out infinite alternate}
-  .cerchio-ombra{left:22%;bottom:-34%;width:92%;height:92%;background:radial-gradient(closest-side,rgba(150,36,4,.42),rgba(150,36,4,0) 100%);
-    animation:cerchio-ombra 42s ease-in-out infinite alternate}
-  html:not(.fermo) .cerchio-disco i{will-change:transform}
-  .cerchio-v{position:absolute;left:50%;top:50%;font:italic 400 calc(var(--d) * .86)/1 'Instrument Serif',serif;letter-spacing:0;color:#100F09;
-    -webkit-text-stroke:.05em currentColor;paint-order:stroke fill;white-space:nowrap;transform:translate(-53%,-47%)}
+  /* ── 1 · Apertura (r7, 21/11): come al telefono, la V grande col pallino al centro sopra la macchia, che volano nel marchio
+     della testata (script «Volo», lo stesso del telefono). Titolo e sottofrase del telefono, CENTRATI sotto la V (da computer
+     la V centrata con il testo a sinistra lasciava un vuoto a destra). Misure della r2 per il computer (nuovo.css, da 1024 px) ── */
+  .eroe-sotto .solo-tel{display:inline}
+  .eroe-sotto .solo-pc{display:none}
+  .eroe-sotto{max-width:27em}
 
   /* ── titoli che si accendono parola per parola (script «Accendi»): le parole vanno da grigio scuro a bianco, legate allo
      scorrimento come «Qui la musica non si ferma mai» di Spotify. Si muove solo l'opacità (niente spostamenti). Prima che
@@ -1340,7 +1326,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   #abbonamenti .abb-svg .f{fill:#13120C}
   #abbonamenti .abb-svg .f.t{fill:#1A1912}
   #abbonamenti .abb-testa{gap:14px}
-  #abbonamenti .abb-piano h3{font:650 30px/1.05 var(--sans);letter-spacing:-.035em;color:var(--abb-c,var(--av))}
+  #abbonamenti .abb-piano h3{font:650 30px/1.05 var(--sans);letter-spacing:-.035em;color:var(--av)}   /* r7: nomi crema, il colore sta nell'etichetta */
   #abbonamenti .abb-desc{min-height:0;margin-top:12px;font-size:15px;line-height:1.55}
   #abbonamenti .abb-prezzo{margin-top:auto;padding-top:22px}
   #abbonamenti .abb-prezzo b{font-size:34px}
@@ -1355,11 +1341,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   #abbonamenti .abb-note{margin:var(--s3) auto 0;max-width:46em;text-align:center}
   #abbonamenti .abb-note p{font-size:13.5px;color:var(--av3)}
 }
-@keyframes cerchio-luce{0%{transform:translate3d(0,0,0) scale(1)}35%{transform:translate3d(18%,9%,0) scale(1.07)}70%{transform:translate3d(6%,24%,0) scale(.96)}100%{transform:translate3d(22%,18%,0) scale(1.03)}}
-@keyframes cerchio-luce2{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(-28%,-14%,0)}100%{transform:translate3d(-12%,14%,0)}}
-@keyframes cerchio-ombra{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(-16%,-8%,0)}100%{transform:translate3d(5%,-16%,0)}}
 @media (min-width:1024px) and (prefers-reduced-motion:reduce){
-  .cerchio-disco i{animation:none!important}
   #servizi .pacchetto{will-change:auto}
 }
 /* ===== 3d · CREAZIONE CONTENUTI (r6, 21/11): «dall'idea al video, dritto sul tuo profilo» ======================
@@ -1381,7 +1363,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 
 /* la scena: palco 340 × 360 adattato dallo script, appoggiato in basso */
 .cc-scena{position:relative;flex:1 1 auto;min-height:0;overflow:hidden}
-.cc-palco{position:absolute;left:0;top:0;width:340px;height:360px;transform-origin:0 0}
+.cc-palco{position:absolute;left:0;top:0;width:340px;height:372px;transform-origin:0 0}
 .cc-giro{position:absolute;inset:0}
 .cc-ab{position:absolute}
 
@@ -1439,30 +1421,8 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .cc-casa{position:absolute;left:50%;bottom:7px;width:54px;height:3px;margin-left:-27px;border-radius:2px;background:rgba(245,244,239,.55)}
 /* il reel vero: il ritaglio 3:4 sta fuori, il cerchio che lo scopre dentro */
 .cc-reel-in{position:absolute;inset:0;clip-path:circle(0px at 50% 50%)}
-/* ── da computer (da 1024 px): un portatile disegnato con instagram.com da computer ── */
-.cc-nav,.cc-base{display:none}
-@media (min-width:1024px){
-  .cc-palco{width:520px;height:350px}
-  .cc-carta,.cc-reel{left:175.625px;top:44px}
-  .cc-tel{left:40px;top:28px;width:440px;height:284px;border-radius:12px}
-  .cc-schermo{inset:6px;border-radius:4px;display:grid;grid-template-columns:44px minmax(0,1fr) 68px 176px minmax(0,1fr);grid-template-rows:16px auto auto 12px auto auto 1fr;align-content:start}
-  .cc-isola,.cc-casa{display:none}
-  .cc-nav{grid-column:1;grid-row:1 / -1;display:flex;flex-direction:column;align-items:center;gap:14px;padding:15px 0 12px;border-right:1px solid rgba(245,244,239,.1)}
-  .cc-nav > i{display:block;width:11px;height:11px;color:var(--av)}
-  .cc-nav svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-  .cc-nav > .cc-nav-av{margin-top:auto;border-radius:50%;background:#000 url(img/jue-logo.png) 50% 54%/70% auto no-repeat;box-shadow:0 0 0 1px rgba(245,244,239,.4)}
-  .cc-barra{grid-column:4;grid-row:2;margin:0;padding:0;height:auto;align-self:end;font-size:10.5px}
-  .cc-prof{display:contents}
-  .cc-av{grid-column:3;grid-row:2 / 4;align-self:center;width:54px;height:54px}
-  .cc-chi{grid-column:4;grid-row:3;margin-top:6px}
-  .cc p.cc-nome{font-size:8.5px}
-  .cc p.cc-bio{font-size:7.2px}
-  .cc-schede{grid-column:3 / 5;grid-row:5;margin-top:0}
-  .cc-griglia{grid-column:3 / 5;grid-row:6}
-  .cc-griglia > i{aspect-ratio:1 / 1}
-  .cc-base{display:block;position:absolute;left:-28px;right:-28px;top:100%;height:12px;border-radius:2px 2px 12px 12px / 2px 2px 9px 9px;
-    background:linear-gradient(180deg,#3A392F 0%,#24231B 45%,#141309 100%)}
-}
+/* r7 (21/11): da computer la STESSA scena del telefono (telefono disegnato), centrata nel riquadro incassato della scheda.
+   Il palco è alto 372 invece di 360: il telefono (alto 352 + il filo) resta dentro il riquadro con un po' di margine sotto. */
 /* ===== FINE 3d · CREAZIONE CONTENUTI ===== */
 </style>
 </head>
@@ -1491,17 +1451,14 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 
   <!-- 1 · Apertura (r2, 21/11): al centro la V grande del marchio col pallino arancio accanto; sotto la frase e la sottofrase.
        Scorrendo, la V e il pallino volano nel marchio della testata (script «Volo»). Con «Riduci movimento» restano qui, fermi.
-       r3 (21/11), SOLO COMPUTER (da 1024 px): niente V che vola (la testata ha il marchio completo da subito); a sinistra frase
-       e sottofrase, a destra in sottofondo il logo animato: il pallino arancio del marchio in grande, con una luce morbida
-       che si muove piano dentro, e la V del marchio scura sopra (come le barre nere del cerchio di Spotify). Scorrendo il
-       cerchio si sposta e si rimpicciolisce (script «Cerchio»). Sotto i 1024 px il cerchio non c'è (display:none) -->
+       r7 (21/11, Niccolò): anche da computer come al telefono (il cerchio arancio con la V scura della r3 è tolto); da
+       computer titolo e sottofrase (quella del telefono) centrati sotto la V -->
   <section class="eroe" id="inizio" aria-labelledby="t-eroe">
     <!-- r3 (21/11, Niccolò, telefono e computer): lo sfondo dell'apertura è la «macchia» originale della pagina di partenza
          (VSLinear NB/NC: shader WebGL, stessi colori e stessa grana), rallentata fino a muoversi quasi senza che si veda
          (script «Macchia»). Si ferma fuori schermo e a scheda nascosta; con «Riduci movimento» un fotogramma fermo; senza
          WebGL un'immagine ferma presa dalla macchia stessa (img/macchia-largo.jpg, img/macchia-alto.jpg) -->
     <div class="eroe-fondo" id="eroe-fondo" aria-hidden="true"><canvas class="macchia"></canvas></div>
-    <div class="cerchio-pc" id="cerchio-pc" data-pc aria-hidden="true"><div class="cerchio-disco"><i class="cerchio-luce"></i><i class="cerchio-luce2"></i><i class="cerchio-ombra"></i></div><span class="cerchio-v">V</span></div>
     <div class="wrap eroe-testo">
       <h1 class="eroe-logo" id="t-eroe"><span class="sr">Veniello Studio</span><span class="eroe-v" id="eroe-v" aria-hidden="true">V</span><i class="eroe-pl" id="eroe-pl" aria-hidden="true"></i></h1>
       <p class="t-sez eroe-frase">Fatti trovare.<br>Fatti <em>scegliere</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></p>
@@ -1545,7 +1502,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
         <li class="pacchetto" id="contenuti">
           <div class="m pannello m-video"><video src="video/spot-una-volta.mp4" muted playsinline preload="none" aria-label="Lo spot Jué × Bombay Sapphire: il Bombay &amp; Tonic e la bottiglietta in omaggio"></video><img class="ferma" src="img/spot-una-volta.jpg" alt="" width="540" height="960" loading="lazy"></div>
           <!-- 3d (r6): la scena di Creazione Contenuti (pezzi-r6/contenuti-scena.html, dal prototipo prove/contenuti-r5), telefono
-               e computer. Il riquadro è il .m della home (da computer il riquadro incassato della scheda) -->
+               e computer (r7: anche da computer il telefono disegnato). Il riquadro è il .m della home (da computer quello incassato della scheda) -->
           <div class="m pannello m-cc" id="contenuti-scena">
           <div class="cc" id="cc" role="img" aria-label="Esempio: un bicchiere e una bottiglia disegnati a linee, la scritta «Aperitivo al Jué», poi la vista si allarga su un profilo Instagram disegnato; il disegno diventa il primo post e alla fine profilo e reel diventano quelli veri del Jué Club.">
               <div class="cc-testa" aria-hidden="true">
@@ -1563,15 +1520,6 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
                   <!-- 5 · il profilo vero: nome, foto, «Jué Club», la riga del locale, le schede e la griglia grigia; il primo quadrato è il reel -->
                   <div class="cc-ab cc-tel" id="cc-tel"><div class="cc-schermo">
                     <i class="cc-isola" id="cc-isola"></i>
-                    <div class="cc-nav" id="cc-nav">
-                      <i><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></i>
-                      <i><svg viewBox="0 0 24 24"><path d="M3.5 10.2 12 3l8.5 7.2V21h-5.6v-6.2H9.1V21H3.5z"/></svg></i>
-                      <i><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="M15.6 15.6 21 21"/></svg></i>
-                      <i><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M2.5 8h19M8.5 2.5l3 5.5M14.5 2.5l3 5.5"/></svg></i>
-                      <i><svg viewBox="0 0 24 24"><path d="M16.8 3.6c-1.9 0-3.6 1-4.8 2.6-1.2-1.6-2.9-2.6-4.8-2.6C4.1 3.6 1.9 6.1 1.9 9.2c0 4.9 6.5 9.5 10.1 11.7 3.6-2.2 10.1-6.8 10.1-11.7 0-3.1-2.2-5.6-5.3-5.6z"/></svg></i>
-                      <i><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 7.5v9M7.5 12h9"/></svg></i>
-                      <i class="cc-nav-av"></i>
-                    </div>
                     <div class="cc-barra"><span id="cc-m-nick">jueclubmontecatini</span><svg viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></svg></div>
                     <div class="cc-prof"><i class="cc-av" id="cc-m-av"></i>
                       <div class="cc-chi"><p class="cc-nome"><span id="cc-m-nome">Jué Club</span></p>
@@ -1584,7 +1532,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
                     </div>
                     <div class="cc-griglia" id="cc-m-griglia"><i></i><i></i><i></i><i></i><i></i><i></i></div>
                     <i class="cc-casa" id="cc-casa"></i>
-                  </div><i class="cc-base" id="cc-base"></i></div>
+                  </div></div>
           
                   <!-- 1-2 · il foglio: bicchiere e bottiglia a linee, poi la scritta -->
                   <div class="cc-ab cc-carta" id="cc-carta">
@@ -1863,7 +1811,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 
         <article class="abb-piano" id="abb-enterprise" style="--n:2">
           <div class="abb-fig" aria-hidden="true"><svg class="abb-svg abb-sfera" id="abb-fig-sfera" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><circle class="abb-nucleo-alone" cx="120" cy="128" r="11"/><circle class="abb-nucleo" cx="120" cy="128" r="4.5"/></svg></div>
-          <div class="abb-testa"><h3>Enterprise</h3><span class="abb-badge">Il più completo</span></div>
+          <div class="abb-testa"><h3>Enterprise</h3><span class="abb-badge abb-chiaro">Il più completo</span></div>
           <p class="abb-desc">Tutto il marketing della tua attività, gestito da noi a 360°.</p>
           <p class="abb-prezzo"><b>2.600&nbsp;€</b><span class="abb-al"><span class="abb-m">/ mese</span><span class="abb-pc">al mese</span></span></p>
           <!-- r4 (21/11, Niccolò) · solo telefono: toccando la scheda si apre la tendina con l’essenziale e «Scrivici» (script «Pila e tendine») -->
@@ -2040,8 +1988,8 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
    (opacità 0 e visibility:hidden), un poco prima della fine del percorso (SPEGNI_V, quando manca meno di mezzo pixel),
    così non c'è mai un fotogramma con le due V una sull'altra a bordi più spessi. Tornando su riappare e rifà il percorso
    al contrario. Il pallino come prima: quello della testata compare quando arriva quello che vola.
-   r3 (21/11): SOLO SOTTO I 1024 PX. Da computer niente volo: la testata ha il marchio completo da subito (lo script toglie
-   «vola»/«vola-on» e svuota le animazioni); se la finestra passa da una misura all'altra si rifà tutto ===== */
+   r7 (21/11, Niccolò): il volo vale ANCHE da computer (nella r3-r6 da computer non c'era); misure e posizioni sono quelle
+   vere della pagina, quindi vale per tutte e due. Se la finestra passa da una misura all'altra si rifà tutto ===== */
 (function(){
   'use strict';
   var html = document.documentElement;
@@ -2137,11 +2085,6 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   function chiedi(){ if (!raf) raf = requestAnimationFrame(disegna); }
   function rifai(){
     rq = 0;
-    if (daPC.matches) {   /* r3: da computer niente volo, marchio completo nella testata */
-      M = null; stile.textContent = ''; ultimo = {};
-      fv.style.transform = fp.style.transform = fv.style.opacity = fp.style.opacity = tv.style.opacity = tp.style.opacity = fv.style.visibility = '';
-      html.classList.remove('vola-on', 'vola'); return;
-    }
     misura();
     if (!M) { html.classList.remove('vola-on', 'vola'); stile.textContent = ''; return; }   /* niente volo: testata completa */
     if (conCSS) scriviCSS(); else { ultimo = {}; disegna(); }
@@ -2810,32 +2753,16 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 })();
 </script>
 <script>
-/* ===== r3 (21/11/2026) · SCRIPT DEL COMPUTER (da 1024 px): Cerchio, Accendi, Pila PC =====================================
+/* ===== r3 (21/11/2026) · SCRIPT DEL COMPUTER (da 1024 px): Accendi, Pila PC (r7: tolto il Cerchio) =====================================
    Valgono solo da 1024 px in su (condizione sulla larghezza, rifatta se la finestra cambia misura); sotto i 1024 px non
    toccano niente e la pagina è la r2. Si anima solo con transform e opacity, niente cattura dello scorrimento.
-   Con «Riduci movimento»: cerchio fermo, titoli bianchi, schede che si fermano in alto senza rimpicciolire ===== */
+   Con «Riduci movimento»: titoli bianchi, schede che si fermano in alto senza rimpicciolire ===== */
 (function(){
   'use strict';
   if (!window.matchMedia || !('requestAnimationFrame' in window)) return;
   var daPC = matchMedia('(min-width:1024px)'), ridotto = matchMedia('(prefers-reduced-motion: reduce)').matches;
   function c01(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
   function ascolta(mq, f){ if (mq.addEventListener) mq.addEventListener('change', f); else if (mq.addListener) mq.addListener(f); }
-
-  /* ── Cerchio: scorrendo l'apertura il logo animato si sposta (verso il centro, e sale un po' più piano della pagina) e si
-     rimpicciolisce fino al 60 %. Legato alla posizione: tornando su torna com'era. Rimpicciolendo resta sopra il bordo in
-     fondo all'apertura (niente taglio dritto sul cerchio) ── */
-  var cer = document.getElementById('cerchio-pc'), eroe = document.getElementById('inizio'), fondo = eroe && eroe.querySelector('.eroe-fondo .macchia');
-  var C = null;
-  function misuraCerchio(){ C = (cer && eroe && daPC.matches && !ridotto) ? { h: eroe.offsetHeight || 1, w: innerWidth } : null; if (!C) { if (cer) cer.style.transform = ''; if (fondo) fondo.style.transform = ''; } }
-  function cerchio(){
-    if (!C) return;
-    var p = c01((window.scrollY || 0) / C.h), e = p * (2 - p);                 /* lineare nello scorrimento, morbida in fondo */
-    var t = 'translate3d(' + (-.12 * C.w * e).toFixed(2) + 'px,' + (.12 * C.h * p).toFixed(2) + 'px,0) scale(' + (1 - .4 * e).toFixed(4) + ')';
-    if (t !== cer._t) { cer._t = t; cer.style.transform = t; }
-    /* lo sfondo (la macchia) scende piano: lo scorrimento lo sposta di poco */
-    if (fondo) { var g = 'translate3d(0,' + (.16 * C.h * p).toFixed(2) + 'px,0)'; if (g !== fondo._t) { fondo._t = g; fondo.style.transform = g; } }
-  }
-
 
   /* ── Accendi: i titoli di Come funziona, Servizi e Abbonamenti si accendono parola per parola (da grigio scuro a bianco)
      mentre salgono nello schermo, come i titoli di Spotify. Ogni parola ha la sua opacità, legata alla posizione del
@@ -2920,9 +2847,9 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   }
 
   var raf = 0, rq = 0;
-  function disegna(){ raf = 0; cerchio(); accendi(); pila(); }
+  function disegna(){ raf = 0; accendi(); pila(); }
   function chiedi(){ if (!raf) raf = requestAnimationFrame(disegna); }
-  function rifai(){ rq = 0; misuraCerchio(); preparaTitoli(); misuraPila(); if (!daPC.matches) { parole = []; document.dispatchEvent(new Event('pila-pc')); } disegna(); }
+  function rifai(){ rq = 0; preparaTitoli(); misuraPila(); if (!daPC.matches) { parole = []; document.dispatchEvent(new Event('pila-pc')); } disegna(); }
   function chiediRifai(){ if (!rq) rq = requestAnimationFrame(rifai); }
   addEventListener('scroll', chiedi, { passive: true });
   addEventListener('resize', chiediRifai);
@@ -2937,7 +2864,6 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
     pila: function(){ return P ? { cima: P.cima, passo: P.passo, h: P.h, Q: (P.cima - ul.getBoundingClientRect().top) / P.passo,
       carte: carte.map(function(c){ var r = c.getBoundingClientRect(); return { id: c.id, top: +r.top.toFixed(1), left: +r.left.toFixed(1), w: +r.width.toFixed(1), h: +r.height.toFixed(1), s: c._s || '', coperta: c.classList.contains('coperta') }; }) } : null; },
     parole: function(){ return parole.map(function(q){ return { id: q.h.id, o: q.l.map(function(s){ return +(s._o || 1); }) }; }); },
-    cerchio: function(){ if (!cer) return null; var r = cer.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, d: r.width, t: cer.style.transform }; },
     rifai: rifai
   };
 })();
@@ -2952,15 +2878,14 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   'use strict';
   var radice = document.getElementById('cc'); if (!radice) return;
   function corpo() {
-  /* r5 (21/11): la stessa scena al telefono (telefono disegnato) e da computer, da 1024 px (portatile disegnato con
-     instagram.com da computer: colonna del menu a sinistra, foto grande con nome accanto, griglia a quadrati).
+  /* r7 (21/11): la stessa scena (telefono disegnato) al telefono e da computer; il portatile della r6 è tolto.
      Il disegno del profilo è ricavato dalle misure del profilo vero, quindi vale per tutti e due. Una volta sola. */
   var L = 8.4, FERMO = 8.4, PLAY = 7.25;
   var $ = function (id) { return document.getElementById(id); };
   var cc = $('cc'), scena = $('cc-scena'), palco = $('cc-palco'), video = $('cc-video');
   if (!cc.animate) return;
 
-  // ── il palco (telefono 340 × 360, computer 520 × 350) si adatta alla scena, appoggiato in basso e centrato ──
+  // ── il palco (340 × 372, telefono e computer) si adatta alla scena, appoggiato in basso e centrato ──
   function adatta() {
     var PW = palco.offsetWidth, PH = palco.offsetHeight, w = scena.clientWidth, h = scena.clientHeight, k = Math.min(w / PW, h / PH);
     palco.style.transform = 'translate(' + ((w - PW * k) / 2).toFixed(2) + 'px,' + (h - PH * k).toFixed(2) + 'px) scale(' + k.toFixed(4) + ')';
@@ -3040,15 +2965,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
     var gG = $('cc-d-griglia'), gT = $('cc-d-telg'), gH = $('cc-d-testa'), r;
     var tel = M('cc-tel'), rTel = parseFloat(getComputedStyle($('cc-tel')).borderTopLeftRadius) || 0;
     quadro(gT, tel, rTel, 'cc-tr');
-    r = M('cc-base'); if (r) tratto(gT, 'path', { d: 'M' + r.x + ' ' + r.y + 'H' + (r.x + r.w) + 'v' + (r.h - 4) + 'q0 4 -4 4H' + (r.x + 4) + 'q-4 0 -4 -4z' }, 'cc-tr');
     r = M('cc-isola'); quadro(gH, r, r ? r.h / 2 : 0, 'cc-tr cc-fine');
-    r = M('cc-nav');
-    if (r) {
-      tratto(gH, 'path', { d: 'M' + (r.x + r.w) + ' ' + r.y + 'V' + (r.y + r.h) }, 'cc-tr cc-fine');
-      Array.prototype.forEach.call($('cc-nav').children, function (ic) { var q = M(ic); if (!q) return;
-        if (ic.classList.contains('cc-nav-av')) tratto(gH, 'circle', { cx: q.x + q.w / 2, cy: q.y + q.h / 2, r: q.w / 2 }, 'cc-tr cc-fine');
-        else quadro(gH, q, 2.5, 'cc-tr cc-fine'); });
-    }
     r = M('cc-m-nick'); if (r) {
       riga(gH, { x: r.x + 1, y: r.y, w: r.w - 2, h: r.h }, 'cc-tr cc-testo');
       tratto(gH, 'path', { d: 'M' + (r.x + r.w + 4) + ' ' + (r.y + r.h / 2 - 1.5) + 'l2.5 2.5l2.5-2.5' }, 'cc-tr cc-fine');
