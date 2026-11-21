@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
 <script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){if(!matchMedia('(min-width:1024px)').matches)document.documentElement.classList.add('vola')}else document.documentElement.classList.add('fermo')}catch(e){}</script>
+<!-- Home 2026 r5 (21/11/2026): r4 + testi legali e promesse allineati alla landing r47 (consulenza, domande, piede, privacy). Fonte: home-2026/strumenti/costruisci-r5.py -->
 <!-- Home 2026 r4 (21/11/2026): r3 + richieste di Niccolò del 21/11 al TELEFONO (apertura a sinistra, scala di Crescita quando la scheda è ferma, tendine degli abbonamenti). Fonte: home-2026/strumenti/costruisci-r4.py -->
 <!-- Home 2026 r3 (21/11/2026): versione da COMPUTER (da 1024 px) come spotify.com/premium: apertura col logo animato (pallino arancio grande, luce che si muove, V scura), Come funziona e Servizi coi titoli che si accendono, servizi in schede scure che si impilano, abbonamenti corti con un solo pulsante. Telefono come la r2 (salvo montaggio semplificato e scala che si forma). Fonte: home-2026/strumenti/costruisci-r3.py -->
 <title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
@@ -1073,7 +1074,11 @@ html.corsa .corsa-palla{display:block}
   .abb-scopri .i{width:14px;height:14px}
   .abb-scopri:hover{filter:brightness(1.06)}
   .abb-scopri:active{transform:scale(.98)}
-  #abbonamenti .abb-note{display:none}   /* niente note al telefono (id: vince sulla regola comune più sotto) */
+  /* r5 (21/11, landing r46-r47): al telefono sotto la pila la nota dell'asterisco, piccola e grigia come nella landing (12 px);
+     la seconda nota (anteprima gratis) resta solo da computer */
+  #abbonamenti .abb-note{display:grid;gap:4px;margin-top:24px;max-width:none}
+  #abbonamenti .abb-note p{font:400 12px/1.5 var(--sans);letter-spacing:0;color:var(--av2);text-wrap:pretty}
+  #abbonamenti .abb-note .abb-n-pc{display:none}
   /* r4 (21/11, Niccolò) · la tendina. Tutta la scheda è un pulsante (.abb-tocca, sopra al corpo, trasparente); accanto al
      prezzo il «+» del sito («Scopri i dettagli +») che diventa «−». Sotto il prezzo si apre la tendina: quattro voci e il
      pulsante pieno «Scrivici», del colore del piano. Apertura e chiusura: altezza, come le tendine del sito (script) */
@@ -1217,6 +1222,16 @@ html.corsa .corsa-palla{display:block}
   .abb-scala.caduta .abb-pezzo{animation:none!important;opacity:1;transform:none}
   .abb-piano{will-change:auto}
 }
+
+/* r5 (21/11, landing r47): asterisco arancio della consulenza gratuita; piede col titolare, la riga «© · luogo · Privacy» */
+sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
+.piede-legale{margin-top:var(--s3);max-width:34em}
+.piede .titolare{font-size:14px;line-height:1.6;color:var(--av3);text-wrap:pretty}
+.piede .titolare a{color:var(--av2);text-underline-offset:3px}
+.da-completare{color:var(--rec)}
+.piede-leg-riga{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:15px;line-height:1.55;color:var(--av3)}
+.piede-leg-riga a{color:var(--av2);text-decoration:underline;text-underline-offset:3px}
+@media (min-width:900px){.piede-legale{margin:0 0 8px;max-width:48em;text-align:right}.piede-leg-riga{justify-content:flex-end}}
 /* =============================================================================================
    r3 (21/11/2026) · Lo sfondo dell'apertura (telefono e computer). Niccolò, con la foto della pagina NC di VSLinear 0.1:
    «su pc la versione prima aveva già quello sfondo quando aprivi» → è la «macchia» originale della pagina di partenza
@@ -1668,7 +1683,7 @@ html.corsa .corsa-palla{display:block}
     <div class="wrap">
       <span class="etichetta">Abbonamenti</span>
       <h2 class="t-sez" id="t-abb"><span class="solo-tel">Scegli come <em>crescere</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></span><span class="solo-pc" data-pc>Oppure scegli uno dei nostri <em>abbonamenti</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></span></h2>
-      <p class="sotto">Per chi vuole un lavoro continuo, ogni mese. Si parte da una consulenza per studiare il piano di&nbsp;crescita.</p>
+      <p class="sotto">Per chi vuole un lavoro continuo, ogni mese. Si parte sempre da una consulenza gratuita<sup class="ast">*</sup> per studiare il piano di&nbsp;crescita.</p>
       <div class="abb-piani" id="abb-piani">
         <article class="abb-piano" id="abb-presenza" style="--n:0">
           <div class="abb-fig" aria-hidden="true"><svg class="abb-svg" viewBox="0 0 240 240" focusable="false" aria-hidden="true"><path class="f t" d="M120.0 99.4 L194.3 142.3 L120.0 185.2 L45.7 142.3 Z"/><path class="f f" d="M45.7 170.9 L120.0 213.8 L120.0 185.2 L45.7 142.3 Z"/><path class="f f" d="M194.3 170.9 L120.0 213.8 L120.0 185.2 L194.3 142.3 Z"/></svg></div>
@@ -1756,10 +1771,11 @@ html.corsa .corsa-palla{display:block}
       </div>
       <!-- il pulsante verso la landing degli abbonamenti, nella stessa scheda (telefono e, dalla r3, computer). Al lancio: /abbonamenti/ -->
       <a class="abb-scopri" id="abb-scopri" href="https://niccoloveniero05.github.io/anteprime-case/veniello-abbonamenti-r3-b5802d/">Scopri gli abbonamenti<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
-      <!-- solo computer: le due note (come la landing r40; la consulenza è gratis solo con un abbonamento) -->
+      <!-- r5 (21/11, Niccolò, landing r46-r47): la consulenza è gratis con un abbonamento O con un servizio, altrimenti 70 €.
+           La prima nota (con l’asterisco) si vede al telefono e da computer; la seconda solo da computer -->
       <div class="abb-note">
-        <p>La consulenza di partenza è gratis se scegli un abbonamento; altrimenti costa 70&nbsp;€.</p>
-        <p>L’anteprima di siti web e landing page è gratis.</p>
+        <p class="abb-n-ast"><sup class="ast">*</sup> Se si sceglie un abbonamento o un servizio, altrimenti il costo è di 70&nbsp;€.</p>
+        <p class="abb-n-pc">L’anteprima di siti web e landing page è gratis.</p>
       </div>
     </div>
   </section>
@@ -1807,7 +1823,9 @@ html.corsa .corsa-palla{display:block}
         <details><summary>Venite voi a fare le riprese?<i class="piu" aria-hidden="true"></i></summary><p>Se serve sì, e lo decidiamo insieme prima. Altrimenti foto e video li fai tu con il telefono, seguendo la nostra guida passo per passo, oppure li creiamo con l’IA partendo dalle tue foto. Al resto pensiamo noi: montaggio, testi e&nbsp;pubblicazione.</p></details>
         <details><summary>In che zona lavorate?<i class="piu" aria-hidden="true"></i></summary><p>Siamo a Montecatini Terme e lavoriamo con le attività di tutta la Valdinievole. Se vuoi, ci vediamo di&nbsp;persona.</p></details>
         <details><summary>Cosa devo fare io per avere il Virtual Assistant?<i class="piu" aria-hidden="true"></i></summary><p>Compili una scheda semplice, circa 30 minuti: gli orari, i servizi, i prezzi che non cambiano, le domande che ricevi di più e le cose che non deve mai dire. Con quelle informazioni lo prepariamo e lo vedi rispondere in anteprima. Se ti convince, lo attiviamo, e per le prime due settimane lo controlliamo noi. Se poi cambia qualcosa, ci&nbsp;scrivi.</p></details>
-        <details><summary>Che differenza c’è tra abbonamenti e servizi?<i class="piu" aria-hidden="true"></i></summary><p>Gli abbonamenti si pagano ogni mese e comprendono il lavoro continuo: social, contenuti, report. I servizi sono lavori singoli, come un sito o un video, e si pagano una volta sola. Per un servizio si parte dall’anteprima gratis; per un abbonamento, da una consulenza sul piano di&nbsp;crescita.</p></details>
+        <details><summary>Che differenza c’è tra abbonamenti e servizi?<i class="piu" aria-hidden="true"></i></summary><p>Gli abbonamenti si pagano ogni mese e comprendono il lavoro continuo: social, contenuti, report. I servizi sono lavori singoli, come un sito o un video, e si pagano una volta sola. Per un servizio si parte dall’anteprima gratis. Si parte sempre da una consulenza, che è gratis se poi scegli un abbonamento o un servizio.</p></details>
+        <details><summary>La consulenza è gratis?<i class="piu" aria-hidden="true"></i></summary><p>Sì, se poi scegli un abbonamento o un servizio. Altrimenti costa 70&nbsp;€.</p></details>
+        <details><summary>C’è un vincolo di durata?<i class="piu" aria-hidden="true"></i></summary><p>No. Gli abbonamenti si disdicono di mese in mese, quando vuoi: basta un messaggio su WhatsApp e l’abbonamento finisce alla fine del mese già pagato.</p></details>
       </div>
     </div>
   </section>
@@ -1837,7 +1855,10 @@ html.corsa .corsa-palla{display:block}
 <footer class="piede" id="piede">
   <div class="wrap">
     <p class="marchio piede-marchio" aria-label="Veniello Studio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><i class="pl" id="piede-pl" aria-hidden="true"></i><span aria-hidden="true">studio</span></p>
-    <p class="piede-riga"><span>Siti, Google, social e video&nbsp;·&nbsp;Montecatini&nbsp;Terme</span><span class="sep"> · </span><span>©&nbsp;<span id="anno">2026</span> ·&nbsp;Niente cookie, niente&nbsp;tracciamenti.</span></p>
+    <div class="piede-legale">
+      <p class="titolare" id="titolare">Veniello Studio di Giuseppe Fusciello · <span class="da-completare">[via, CAP e città]</span> · P.&nbsp;IVA <span class="da-completare">[numero]</span> · <a href="mailto:giuseppe@veniellostudio.it">giuseppe@veniellostudio.it</a></p>
+      <p class="piede-leg-riga"><span>©&nbsp;<span id="anno">2026</span> Veniello Studio</span><span>Montecatini Terme · Valdinievole</span><a href="privacy.html">Privacy</a></p>
+    </div>
   </div>
 </footer>
 

@@ -99,7 +99,7 @@
     ['#abbonamenti', '4', 'Abbonamenti'],
     ['#abbonamenti > .wrap > .etichetta', '4a', 'L’etichetta «Abbonamenti»'],
     ['#t-abb', '4b', 'Il titolo «Scegli come crescere.»'],
-    ['#abbonamenti > .wrap > .sotto', '4c', 'La frase breve sotto il titolo'],
+    ['#abbonamenti > .wrap > .sotto', '4c', 'r5: «Si parte sempre da una consulenza gratuita* per studiare il piano di crescita» (asterisco arancio, spiegato dalla nota 4l)'],
     ['#abb-presenza', '4d', 'Presenza (430 € al mese). Telefono: le schede «a cassette» che si impilano', { resta: true }],
     ['#abb-crescita', '4e', 'Crescita (850 € al mese, Consigliato)', { resta: true }],
     ['#abb-enterprise', '4f', 'Enterprise (2.600 € al mese, Il più completo)', { resta: true }],
@@ -108,7 +108,7 @@
     ['#abbonamenti .abb-prezzo', '4i', 'Il prezzo'],
     ['#abb-scopri', '4j', 'Telefono: il pulsante «Scopri gli abbonamenti →» (apre la landing, stessa scheda)'],
     ['#abbonamenti .abb-btn', '4k', 'Computer: «Contattaci →»'],
-    ['#abbonamenti .abb-note', '4l', 'Computer: le due note sotto le colonne'],
+    ['#abbonamenti .abb-note', '4l', 'r5: la nota «* Se si sceglie un abbonamento o un servizio, altrimenti il costo è di 70 €» sotto la pila (telefono, 12 px grigio) e, da computer, con l’altra nota («L’anteprima di siti web e landing page è gratis»)'],
     ['#abbonamenti .abb-dett', '4m', '«Dettagli +» (computer): apre il pannello'],
     ['.abb-pannello', '4n', 'Il pannello dei Dettagli (computer)', { resta: true }],
     ['#abbonamenti .abb-desc', '4o', 'La frase sotto il nome'],
@@ -136,7 +136,9 @@
     ['#domande .faq > details:nth-of-type(6)', '6h', '«Venite voi a fare le riprese?»', { dentro: true }],
     ['#domande .faq > details:nth-of-type(7)', '6i', '«In che zona lavorate?»', { dentro: true }],
     ['#domande .faq > details:nth-of-type(8)', '6j', '«Cosa devo fare io per avere il Virtual Assistant?»', { dentro: true }],
-    ['#domande .faq > details:nth-of-type(9)', '6k', '«Che differenza c’è tra abbonamenti e servizi?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(9)', '6k', '«Che differenza c’è tra abbonamenti e servizi?» (r5: risposta con la consulenza gratis con un abbonamento o un servizio)', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(10)', '6l', 'r5: «La consulenza è gratis?» (dalla landing r47)', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(11)', '6m', 'r5: «C’è un vincolo di durata?» (dalla landing r47)', { dentro: true }],
 
     ['#contatti', '7', 'Contatti'],
     ['#contatti .etichetta', '7a', 'L’etichetta «Contatti»'],
@@ -150,7 +152,9 @@
 
     ['#piede', '8', 'Il piede'],
     ['#piede .piede-marchio', '8a', 'Il marchio grande «Veniello·studio» (il puntino resta arancio, fermo)'],
-    ['#piede .piede-riga', '8b', 'La riga «Siti, Google, social e video · … · Niente cookie»']
+    ['#titolare', '8b', 'r5: «Veniello Studio di Giuseppe Fusciello · [via, CAP e città] · P. IVA [numero] · email» (i segnaposto arancio li riempie Giuseppe)'],
+    ['#piede .piede-leg-riga', '8c', 'r5: «© 2026 Veniello Studio · Montecatini Terme · Valdinievole · Privacy»'],
+    ['#piede .piede-leg-riga a', '8d', 'r5: il link «Privacy» (apre privacy.html)']
   ];
   var TABELLA_PC = [
     ['#testata', '0', 'La testata fissa in alto'],
@@ -206,7 +210,7 @@
     ['#abbonamenti', '4', 'Abbonamenti'],
     ['#abbonamenti > .wrap > .etichetta', '4a', 'L’etichetta «Abbonamenti»'],
     ['#t-abb', '4b', 'Il titolo «Oppure scegli uno dei nostri abbonamenti.»: si accende parola per parola scorrendo'],
-    ['#abbonamenti > .wrap > .sotto', '4c', 'La frase breve sotto il titolo'],
+    ['#abbonamenti > .wrap > .sotto', '4c', 'r5: «Si parte sempre da una consulenza gratuita* per studiare il piano di crescita» (asterisco arancio, spiegato dalla nota 4l)'],
     ['#abb-presenza', '4d', 'Scheda Presenza (430 € al mese)', { resta: true }],
     ['#abb-crescita', '4e', 'Scheda Crescita (850 € al mese, Consigliato)', { resta: true }],
     ['#abb-enterprise', '4f', 'Scheda Enterprise (2.600 € al mese, Il più completo)', { resta: true }],
@@ -215,7 +219,7 @@
     ['#abbonamenti .abb-desc', '4i', 'La frase sotto il nome'],
     ['#abbonamenti .abb-prezzo', '4j', 'Il prezzo'],
     ['#abb-scopri', '4k', 'Il pulsante «Scopri gli abbonamenti →»: apre la landing nella stessa scheda'],
-    ['#abbonamenti .abb-note', '4l', 'Le due note piccole (consulenza gratis solo con un abbonamento, altrimenti 70 €; anteprima gratis di siti e landing page)'],
+    ['#abbonamenti .abb-note', '4l', 'r5: le due note piccole sotto il pulsante («* Se si sceglie un abbonamento o un servizio, altrimenti il costo è di 70 €»; anteprima gratis di siti e landing page)'],
 
     ['#partner', '5', 'Partner'],
     ['#partner .etichetta', '5a', 'L’etichetta «Partner»'],
@@ -237,7 +241,9 @@
     ['#domande .faq > details:nth-of-type(6)', '6h', '«Venite voi a fare le riprese?»', { dentro: true }],
     ['#domande .faq > details:nth-of-type(7)', '6i', '«In che zona lavorate?»', { dentro: true }],
     ['#domande .faq > details:nth-of-type(8)', '6j', '«Cosa devo fare io per avere il Virtual Assistant?»', { dentro: true }],
-    ['#domande .faq > details:nth-of-type(9)', '6k', '«Che differenza c’è tra abbonamenti e servizi?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(9)', '6k', '«Che differenza c’è tra abbonamenti e servizi?» (r5: risposta con la consulenza gratis con un abbonamento o un servizio)', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(10)', '6l', 'r5: «La consulenza è gratis?» (dalla landing r47)', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(11)', '6m', 'r5: «C’è un vincolo di durata?» (dalla landing r47)', { dentro: true }],
 
     ['#contatti', '7', 'Contatti'],
     ['#contatti .etichetta', '7a', 'L’etichetta «Contatti»'],
@@ -251,7 +257,9 @@
 
     ['#piede', '8', 'Il piede'],
     ['#piede .piede-marchio', '8a', 'Il marchio grande «Veniello·studio» (il puntino resta arancio, fermo)'],
-    ['#piede .piede-riga', '8b', 'La riga «Siti, Google, social e video · … · Niente cookie»']
+    ['#titolare', '8b', 'r5: «Veniello Studio di Giuseppe Fusciello · [via, CAP e città] · P. IVA [numero] · email» (i segnaposto arancio li riempie Giuseppe)'],
+    ['#piede .piede-leg-riga', '8c', 'r5: «© 2026 Veniello Studio · Montecatini Terme · Valdinievole · Privacy»'],
+    ['#piede .piede-leg-riga a', '8d', 'r5: il link «Privacy» (apre privacy.html)']
   ];
   var TABELLA = TABELLA_ORA();
 
