@@ -4,28 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Prova · Creazione Contenuti r1</title>
+<title>Prova · Creazione Contenuti r2</title>
 <style>
-/* Prototipo a sé (21/11): la scena di «Creazione Contenuti» per la sezione Servizi della home, al telefono.
-   Dalla bozza al reel finito sul profilo del Jué. Tutto con «cc-». Animazioni solo transform, opacity, clip-path
-   (Web Animations API, una sola linea del tempo di 12 s che si ripete). */
+/* Prototipo r2 (21/11): la scena di «Creazione Contenuti», tutta disegnata. Bicchiere e bottiglia a linee → la scritta →
+   de-zoom sul profilo Instagram disegnato → il video vero (colori originali) nell'ultimo quadrato → il profilo vero del Jué.
+   Animazioni: transform, opacity, clip-path, stroke-dashoffset (Web Animations API, un giro di 10 s che si ripete). */
 @font-face{font-family:'Inter';src:url(fonts/inter.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:'News';src:url(fonts/Newsreader-italic.woff2) format('woff2');font-weight:200 800;font-style:italic;font-display:swap}
-@font-face{font-family:'Geist Mono';src:url(fonts/GeistMono-400.woff2) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
 :root{--bg:#100F09;--av:#F5F4EF;--av2:rgba(245,244,239,.62);--rec:#FF5A1F}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--av)}
 body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:24px}
 .colonna{width:100%;max-width:560px;margin:0 auto}
 
-/* il riquadro dei Servizi (.m della home): 4:5, scuro, il filo di 1 px */
+/* il riquadro dei Servizi (.m della home) */
 .cc{position:relative;aspect-ratio:4/5;margin:0 -8px;border-radius:14px;overflow:hidden;isolation:isolate;container-type:inline-size;
   background:linear-gradient(180deg,#1A1912 0%,#13120C 60%);box-shadow:inset 0 0 0 1px rgba(245,244,239,.085);display:flex;flex-direction:column}
 .cc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:9;box-shadow:inset 0 0 0 1px rgba(245,244,239,.09)}
 .cc p{margin:0}
-.cc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* 1 · la frase in alto, come «Completamente personalizzabile●» del Sito Web */
+/* la frase in alto, come nel Sito Web */
 .cc-testa{flex:none;padding:20px 20px 0;position:relative;z-index:2}
 .cc-battute{display:grid}
 .cc-battuta{grid-area:1/1;font-weight:560;font-size:clamp(22px,7.3cqi,30px);line-height:1.08;letter-spacing:-.036em;color:var(--av2)}
@@ -33,51 +31,48 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
 .cc-battuta + .cc-battuta{opacity:0}
 .cc-pt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--rec);margin-left:.05em}
 
-/* 2 · la scena: un palco di 340 × 360 px rimpicciolito o ingrandito dallo script, appoggiato in basso */
+/* la scena: palco 340 × 360 adattato dallo script, appoggiato in basso */
 .cc-scena{position:relative;flex:1 1 auto;min-height:0;overflow:hidden}
 .cc-palco{position:absolute;left:0;top:0;width:340px;height:360px;transform-origin:0 0}
 .cc-giro{position:absolute;inset:0}
-.cc-palco *{position:absolute}
-.cc-palco img,.cc-palco video{display:block;max-width:none}
+.cc-ab{position:absolute}
 
-/* etichetta di lavorazione (01 · Bozza …) */
-.cc-tag{left:85.6px;top:12px;font:400 8.5px/1 'Geist Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--av2);white-space:nowrap;opacity:0}
-.cc-tag b{position:static;font-weight:400;color:var(--rec)}
+/* il tratto: crema sottile, accenti arancio; si disegna con stroke-dashoffset (pathLength = 1) */
+.cc svg{display:block;overflow:visible}
+.tr{fill:none;stroke:rgba(245,244,239,.82);stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 2;stroke-dashoffset:1.05}
+.tr.fine{stroke:rgba(245,244,239,.36);stroke-width:.85}
+.tr.ar{stroke:var(--rec)}
+.tr.testo{stroke:rgba(245,244,239,.5);stroke-width:3}
+.tr.testo.f{stroke-width:1.6;stroke:rgba(245,244,239,.3)}
 
-/* la bozza: cinque gruppi di tratti, ognuno nel suo strato (si scopre con clip-path) */
-.cc-bozza{left:85.625px;top:34px;width:168.75px;height:300px}
-.cc-bozza > div{inset:0}
-.cc-bozza svg{inset:0;width:100%;height:100%;overflow:visible;fill:none;stroke:rgba(245,244,239,.8);stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
-.cc-bozza .fine{stroke:rgba(245,244,239,.34);stroke-width:.9}
-.cc-bozza .ar{stroke:var(--rec)}
-.cc-bozza > .cc-note{inset:auto;left:178px;top:0;height:300px;width:80px;font:400 7px/1 'Geist Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,244,239,.5)}
-.cc-note span{position:absolute;left:0;white-space:nowrap}
-.cc-note span::before{content:"";position:absolute;right:calc(100% + 4px);top:3px;width:12px;border-top:1px solid rgba(245,244,239,.3)}
+/* il foglio del disegno (diventa l'ultimo quadrato della griglia) */
+.cc-carta{left:85.625px;top:34px;width:168.75px;height:300px;transform-origin:50% 50%;clip-path:inset(0% 0% 0% 0% round 9px)}
+.cc-carta-fondo{position:absolute;inset:0;background:#17160F;opacity:0}
+.cc-carta svg{position:absolute;inset:0;width:100%;height:100%}
+.cc-titolo{position:absolute;left:15px;right:10px;bottom:46px;font-weight:650;font-size:24px;line-height:1.02;letter-spacing:-.04em;color:var(--av);margin:0}
+.cc-riga{display:block;overflow:hidden;padding:.06em 0 .1em;margin:-.06em 0 -.1em}
+.cc-riga > span{display:inline-block}
+.cc-c{display:inline-block;transform:translateY(110%)}
+.cc-jue{font-family:'News',Georgia,serif;font-style:italic;font-weight:400;font-size:1.3em;letter-spacing:-.015em;line-height:.8}
+.cc-dot{display:inline-block;width:.21em;height:.21em;border-radius:50%;background:var(--rec);margin-left:.03em;transform:scale(0)}
+.cc-carta svg.cc-sotto{position:absolute;inset:auto;left:45px;top:251px;width:46px;height:9px}
+/* il reel vero: stesso foglio, colori originali */
+.cc-reel{left:85.625px;top:34px;width:168.75px;height:300px;transform-origin:50% 50%;overflow:hidden;opacity:0}
+.cc-reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cc-reel .cc-ombra{position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55))}
+.cc-reel .cc-titolo{color:#fff}
+.cc-reel .cc-c,.cc-reel .cc-dot{transform:none}
 
-/* i pezzi grezzi e il reel */
-.cc-pezzo{left:10px;top:94px;width:320px;height:180px;border-radius:5px;overflow:hidden;opacity:0;background:#2a2a28}
-.cc-pezzo img{inset:0;width:100%;height:100%;object-fit:cover}
-.cc-taglio{top:150px;width:2px;height:68px;margin-left:-1px;border-radius:1px;background:var(--rec);opacity:0}
-.cc-reel{left:85.625px;top:34px;width:168.75px;height:300px;transform-origin:50% 50%;opacity:0;
-  clip-path:inset(0 -108.33% 0 -108.33% round 9px)}
-.cc-grezzo{left:-108.33%;top:0;width:316.66%;height:100%;object-fit:cover}
-.cc-finito{inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 100% 0 0)}
-.cc-riga{left:0;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--rec);box-shadow:0 0 10px rgba(255,90,31,.8);opacity:0}
-.cc-ombra{left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,rgba(16,15,9,0) 0%,rgba(16,15,9,.72) 100%);opacity:0}
-.cc-titolo{left:14px;right:12px;bottom:30px;font-weight:650;font-size:23px;line-height:1.02;letter-spacing:-.035em;color:#fff}
-.cc-titolo > span{position:relative;display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
-.cc-titolo > span > span{position:relative;display:block;transform:translateY(110%)}
-.cc-titolo em{position:relative;font-family:'News',Georgia,serif;font-style:italic;font-weight:400;font-size:1.12em;letter-spacing:-.01em}
-.cc-titolo i{position:relative;display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em;transform:scale(0)}
-.cc-avanza{left:10px;right:10px;top:9px;height:2px;border-radius:1px;background:rgba(255,255,255,.28);overflow:hidden;opacity:0}
-.cc-avanza i{inset:0;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
+/* la pagina Instagram disegnata */
+.cc-disegno{left:0;top:0;width:340px;height:360px}
+.cc-disegno svg{position:absolute;left:0;top:0;width:340px;height:360px}
+.cc-grigio{fill:#2A2922;opacity:0}
 
-/* il telefono con il profilo del Jué (colori del tema, niente blu di Instagram) */
-.cc-tel{left:70px;top:6px;width:200px;height:400px;border-radius:30px;background:#0A0906;opacity:0;transform-origin:50% 62%;
-  box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 4px #0D0C08,0 0 0 5px rgba(245,244,239,.07),0 30px 60px -24px rgba(0,0,0,.9)}
-.cc-schermo{inset:5px;border-radius:25px;overflow:hidden;background:#0B0A07;font-family:'Inter',sans-serif;color:var(--av)}
-.cc-schermo *{position:relative}
-.cc-schermo .cc-isola{position:absolute;top:4px;left:50%;width:52px;height:13px;margin-left:-26px;border-radius:99px;background:#000}
+/* il profilo vero del Jué (si scopre con un cerchio che parte dal reel) */
+.cc-tel{left:70px;top:6px;width:200px;height:400px;border-radius:30px;background:#0A0906;
+  box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 4px #0D0C08,0 0 0 5px rgba(245,244,239,.07);clip-path:circle(0px at 163.5px 297px)}
+.cc-schermo{position:absolute;inset:5px;border-radius:25px;overflow:hidden;background:#0B0A07;font-family:'Inter',sans-serif;color:var(--av)}
+.cc-isola{position:absolute;top:4px;left:50%;width:52px;height:13px;margin-left:-26px;border-radius:99px;background:#000}
 .cc-stato{display:flex;align-items:center;justify-content:space-between;height:18px;padding:3px 15px 0 20px;font:600 7.5px/1 'Inter',sans-serif}
 .cc-stato > span{display:flex;gap:3px;align-items:center}
 .cc-stato i{display:block;width:9px;height:5px;border-radius:1px;background:var(--av)}
@@ -88,13 +83,10 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
 .cc-barra .cc-dx{margin-left:auto;display:flex;gap:9px}
 .cc-barra .cc-dx svg{width:10px;height:10px;stroke-width:1.8}
 .cc-prof{display:flex;align-items:center;gap:12px;padding:4px 10px 0}
-.cc-av{flex:none;width:46px;height:46px;border-radius:50%;background:#000 url(media/jue-logo.png) 50% 54%/66% auto no-repeat;box-shadow:0 0 0 2px #0B0A07,0 0 0 3px rgba(245,244,239,.3)}
+.cc-av{flex:none;display:block;width:46px;height:46px;border-radius:50%;background:#000 url(media/jue-logo.png) 50% 54%/66% auto no-repeat;box-shadow:0 0 0 2px #0B0A07,0 0 0 3px var(--rec)}
 .cc-num{flex:1;display:flex;justify-content:space-between;text-align:center;padding-right:4px}
 .cc-num > span{display:block;font-size:6.5px;line-height:1.3;color:var(--av2)}
 .cc-num b{display:block;font-size:9px;line-height:1.15;font-weight:700;color:var(--av)}
-.cc-post{display:block;height:10.35px;overflow:hidden}
-.cc-post-in{display:block}
-.cc-post b{display:block}
 .cc-bio{padding:7px 10px 0;font-size:6.8px;line-height:1.38;color:var(--av2)}
 .cc-bio b{display:block;color:var(--av);font-weight:600;font-size:7.2px}
 .cc-btn{display:flex;gap:3px;padding:6px 10px 0}
@@ -104,24 +96,14 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
 .cc-schede span:first-child{color:var(--av);box-shadow:inset 0 -1px 0 var(--av)}
 .cc-schede svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .cc-griglia{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:1px}
-.cc-griglia > i{display:block;aspect-ratio:3/4;background:#25241E}
-.cc-griglia > i:nth-child(2n){background:#2B2A23}
-.cc-griglia > i:nth-child(3n+1){background:#211F19}
-.cc-griglia > i.r::after{content:"";position:absolute;right:4px;top:4px;width:6px;height:6px;border-radius:1.5px;box-shadow:inset 0 0 0 1px rgba(245,244,239,.28)}
-.cc-griglia > i.vuoto{background:transparent}
-.cc-vuoto-filo{position:absolute;inset:0;border-radius:2px;border:1px dashed rgba(245,244,239,.26)}
-.cc-vuoto-filo::after{content:"+";position:absolute;left:0;right:0;top:50%;margin-top:-6px;text-align:center;font:300 12px/12px 'Inter',sans-serif;color:rgba(245,244,239,.3)}
-.cc-mira{position:absolute;inset:-1px;border-radius:2px;box-shadow:inset 0 0 0 1.5px var(--rec);opacity:0}
-.cc-fondo{left:-20px;right:-20px;bottom:-1px;height:40px;background:linear-gradient(180deg,rgba(19,18,12,0),#13120C 85%);opacity:0}
-/* il lampo arancio quando il reel entra nel quadrato (posizione messa dallo script) */
-.cc-anello{border-radius:3px;box-shadow:0 0 0 1.5px var(--rec);opacity:0}
-
-@media (prefers-reduced-motion:reduce){.cc *{transition:none!important}}
+.cc-griglia > i{position:relative;display:block;aspect-ratio:3/4;background:#1E1D17;overflow:hidden}
+.cc-griglia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cc-fondo{left:-20px;right:-20px;bottom:-1px;height:36px;background:linear-gradient(180deg,rgba(19,18,12,0),#13120C 85%)}
 </style>
 </head>
 <body>
 <main class="colonna">
-  <div class="cc" id="cc" role="img" aria-label="Esempio: dalla bozza a matita al video girato, montato in verticale, con il colore sistemato e la scritta, fino al reel finito che entra nel profilo Instagram del Jué Club.">
+  <div class="cc" id="cc" role="img" aria-label="Esempio: un bicchiere e una bottiglia disegnati a linee, la scritta «Aperitivo al Jué», poi la vista si allarga su un profilo Instagram disegnato; nell'ultimo quadrato parte il video vero e il disegno diventa il profilo vero del Jué Club.">
     <div class="cc-testa" aria-hidden="true">
       <div class="cc-battute">
         <p class="cc-battuta" id="cc-f1">Dall’idea<br> al <em>video</em><i class="cc-pt"></i></p>
@@ -131,18 +113,38 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
     <div class="cc-scena" id="cc-scena" aria-hidden="true">
       <div class="cc-palco" id="cc-palco"><div class="cc-giro" id="cc-giro">
 
-        <!-- il telefono: profilo del Jué -->
-        <div class="cc-tel" id="cc-tel"><div class="cc-schermo">
+        <!-- 3 · il profilo disegnato (coordinate del palco; le misure sono quelle del profilo vero) -->
+        <div class="cc-ab cc-disegno" id="cc-disegno"><svg viewBox="0 0 340 360">
+          <g id="cc-d-griglia">
+            <rect class="cc-grigio" x="75" y="176" width="63" height="84"/><rect class="cc-grigio" x="139" y="176" width="63" height="84"/><rect class="cc-grigio" x="202" y="176" width="63" height="84"/>
+            <rect class="cc-grigio" x="75" y="261" width="63" height="84"/><rect class="cc-grigio" x="139" y="261" width="63" height="84"/>
+            <rect class="tr fine cel" pathLength="1" x="75" y="176" width="63" height="84"/><rect class="tr fine cel" pathLength="1" x="139" y="176" width="63" height="84"/><rect class="tr fine cel" pathLength="1" x="202" y="176" width="63" height="84"/>
+            <rect class="tr fine cel" pathLength="1" x="75" y="261" width="63" height="84"/><rect class="tr fine cel" pathLength="1" x="139" y="261" width="63" height="84"/><rect class="tr fine cel" pathLength="1" x="202" y="261" width="63" height="84"/>
+          </g>
+          <rect class="tr" id="cc-d-tel" pathLength="1" x="70" y="6" width="200" height="400" rx="30"/>
+          <g class="cc-d-testa">
+            <rect class="tr fine" pathLength="1" x="144" y="15" width="52" height="13" rx="6.5"/>
+            <path class="tr testo" pathLength="1" d="M85 39.5H150"/><path class="tr fine" pathLength="1" d="M154 38l2.5 2.5L159 38"/>
+            <rect class="tr fine" pathLength="1" x="236" y="35" width="9" height="9" rx="2.5"/><path class="tr fine" pathLength="1" d="M252 36.5h9M252 39.5h9M252 42.5h9"/>
+            <circle class="tr ar" pathLength="1" cx="108" cy="76" r="25" transform="rotate(-90 108 76)"/><circle class="tr fine" pathLength="1" cx="108" cy="76" r="21.5" transform="rotate(-90 108 76)"/>
+            <path class="tr testo" pathLength="1" d="M144.5 72.5H154.5"/><path class="tr testo f" pathLength="1" d="M143 81H156"/>
+            <path class="tr testo" pathLength="1" d="M184 72.5H202"/><path class="tr testo f" pathLength="1" d="M182 81H204"/>
+            <path class="tr testo" pathLength="1" d="M235 72.5H247"/><path class="tr testo f" pathLength="1" d="M232 81H250"/>
+            <path class="tr testo" pathLength="1" d="M85 107.5H113"/><path class="tr testo f" pathLength="1" d="M85 117.5H205"/>
+            <rect class="tr fine" pathLength="1" x="85" y="131" width="84" height="16" rx="5"/><rect class="tr fine" pathLength="1" x="172" y="131" width="84" height="16" rx="5"/>
+            <rect class="tr fine" pathLength="1" x="102" y="160" width="9" height="9" rx="1.5"/><rect class="tr fine" pathLength="1" x="165.5" y="160" width="9" height="9" rx="2.5"/><rect class="tr fine" pathLength="1" x="229" y="160" width="9" height="9" rx="2.5"/>
+            <path class="tr" pathLength="1" d="M75 174H138"/><path class="tr fine" pathLength="1" d="M138 174.5H265"/>
+          </g>
+        </svg></div>
+
+        <!-- 5 · il profilo vero -->
+        <div class="cc-ab cc-tel" id="cc-tel"><div class="cc-schermo">
           <i class="cc-isola"></i>
           <div class="cc-stato"><span>9:41</span><span><i></i><i></i><i></i></span></div>
           <div class="cc-barra"><span>jueclubmontecatini</span><svg viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></svg>
             <span class="cc-dx"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 7.5v9M7.5 12h9"/></svg><svg viewBox="0 0 24 24"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"/></svg></span></div>
           <div class="cc-prof"><i class="cc-av"></i>
-            <div class="cc-num">
-              <span><span class="cc-post"><span class="cc-post-in" id="cc-n"><b>47</b><b>48</b></span></span>post</span>
-              <span><b>2.100</b>follower</span>
-              <span><b>312</b>seguiti</span>
-            </div>
+            <div class="cc-num"><span><b>48</b>post</span><span><b>2.100</b>follower</span><span><b>312</b>seguiti</span></div>
           </div>
           <p class="cc-bio"><b>Jué Club</b>Cocktail bar · Bistrot · DJ set · Montecatini</p>
           <div class="cc-btn"><span>Modifica</span><span>Condividi profilo</span></div>
@@ -152,56 +154,45 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
             <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="10" r="3"/><path d="M6.5 19c1-2.6 3-3.9 5.5-3.9s4.5 1.3 5.5 3.9"/></svg></span>
           </div>
           <div class="cc-griglia">
-            <i class="r"></i><i></i><i class="r"></i>
-            <i></i><i class="r"></i><i class="vuoto" id="cc-cella"><i class="cc-vuoto-filo" id="cc-vuoto"></i><i class="cc-mira" id="cc-mira"></i></i>
+            <i><img src="media/g1.jpg" alt="" width="192" height="256" decoding="async"></i><i><img src="media/g2.jpg" alt="" width="192" height="256" decoding="async"></i><i><img src="media/g3.jpg" alt="" width="192" height="256" decoding="async"></i>
+            <i><img src="media/g4.jpg" alt="" width="192" height="256" decoding="async"></i><i><img src="media/g5.jpg" alt="" width="192" height="256" decoding="async"></i><i></i>
           </div>
         </div></div>
-        <i class="cc-fondo" id="cc-fondo"></i>
+        <i class="cc-ab cc-fondo" id="cc-fondo"></i>
 
-        <!-- la bozza -->
-        <div class="cc-bozza" id="cc-bozza">
-          <div id="cc-b-cornice"><svg viewBox="0 0 168.75 300"><rect x=".7" y=".7" width="167.35" height="298.6" rx="9" class="fine" stroke-dasharray="5 4" style="stroke:rgba(245,244,239,.5)"/></svg></div>
-          <div id="cc-b-bicchiere"><svg viewBox="0 0 168.75 300">
-            <path d="M57.5 121.5C58.6 160 59.8 200 61.2 231.2Q84.5 235.2 107.6 231C109 199 110 160 111.2 120.8"/>
-            <path d="M56.6 121.2Q84.3 114.2 111.8 120.6Q84.6 127.6 56.6 121.2"/>
-            <path class="fine" d="M62 176l22.5 22 22-22M62 198l22.5-22 22.5 22M63 218l21.5-20 21.5 20"/>
-            <path class="fine" d="M59 241Q84.5 246 110 240.5"/>
-          </svg></div>
-          <div id="cc-b-ghiaccio"><svg viewBox="0 0 168.75 300">
-            <path d="M66 136l17-4 4 17-17 4z"/><path d="M85 143l16 3-3 16-16-3z"/><path d="M70 158l15-1 1 15-15 1z"/>
-            <path d="M96.5 116.8A13.5 13.5 0 0 1 121.6 109.4"/><path d="M96.5 116.8L121.6 109.4"/><path class="fine" d="M101.5 114.6l4-6.4M108.2 112.6l1.6-7.2M114.2 110.8l-1-7"/>
-          </svg></div>
-          <div id="cc-b-versa"><svg viewBox="0 0 168.75 300">
-            <path d="M31 46l27-12 7 24-17 9z"/><path d="M45 61l-6 13 9 4 6-12"/>
-            <path class="fine" d="M51 79C60 90 68 101 74 116" stroke-dasharray="3 3"/>
-            <path class="ar" d="M76 104l-1.5 12.5-10-6.5"/>
-          </svg></div>
-          <div id="cc-b-testo"><svg viewBox="0 0 168.75 300">
-            <rect x="14.5" y="246" width="88" height="10" rx="5"/><rect x="14.5" y="261" width="58" height="10" rx="5"/>
-            <circle cx="78.5" cy="266" r="2.2" fill="#FF5A1F" stroke="none"/>
-          </svg></div>
-          <div class="cc-note" id="cc-note">
-            <span style="top:42px">versa</span><span style="top:136px">ghiaccio</span><span style="top:108px">lime</span><span style="top:255px">titolo</span>
-          </div>
+        <!-- 1-2 · il foglio: bicchiere e bottiglia a linee, poi la scritta -->
+        <div class="cc-ab cc-carta" id="cc-carta">
+          <i class="cc-carta-fondo" id="cc-carta-fondo"></i>
+          <svg viewBox="0 0 168.75 300">
+            <rect class="tr fine" id="cc-cornice" pathLength="1" x=".7" y=".7" width="167.35" height="298.6" rx="9" style="stroke:rgba(245,244,239,.42)"/>
+            <path class="tr fine cc-suolo" pathLength="1" d="M18 197.5H152"/>
+            <g class="cc-bic">
+              <path class="tr" pathLength="1" d="M33.5 96.5C34.4 128 35.4 160 36.6 190.4Q56 194 75.4 190.2C76.6 160 77.6 128 78.5 96"/>
+              <path class="tr" pathLength="1" d="M32.6 96.3Q55.8 90.4 79 95.7Q56 101.6 32.6 96.3"/>
+              <path class="tr fine" pathLength="1" d="M37 146l19 18 19-18M37 164l19-18 19 18M38 181l18-16 18 16"/>
+            </g>
+            <g class="cc-ghi">
+              <path class="tr" pathLength="1" d="M41 108l14-3.4 3.4 14-14 3.4z"/><path class="tr" pathLength="1" d="M58 114l13 2.6-2.6 13-13-2.6z"/><path class="tr" pathLength="1" d="M44 128l12.5-.8.8 12.5-12.5.8z"/>
+              <path class="tr ar" pathLength="1" d="M70.5 93.5A12 12 0 0 1 93 86.8L70.5 93.5"/><path class="tr ar" pathLength="1" d="M75 91.6l3.4-5.6M80.8 89.9l1.4-6.4M86.2 88.3l-.8-6.2"/>
+            </g>
+            <g class="cc-bot">
+              <path class="tr" pathLength="1" d="M112 60.5h14v-8h-14z"/>
+              <path class="tr" pathLength="1" d="M113.5 60.5v14c0 4-12.5 7-12.5 14v100.5q0 3 3 3h30q3 0 3-3V88.5c0-7-12.5-10-12.5-14v-14"/>
+              <path class="tr ar" pathLength="1" d="M106 128h26v38h-26z"/>
+              <path class="tr fine" pathLength="1" d="M111 138h16M113 146h12M110 156h18"/>
+              <path class="tr fine" pathLength="1" d="M131 96v24M131 174v12"/>
+            </g>
+          </svg>
+          <p class="cc-titolo" id="cc-titolo"><span class="cc-riga"><span data-s>Aperitivo</span></span><span class="cc-riga"><span data-s>al </span><span class="cc-jue" data-s>Jué</span><i class="cc-dot" id="cc-dot"></i></span></p>
+          <svg class="cc-sotto" viewBox="0 0 52 10" preserveAspectRatio="none"><path class="tr ar" id="cc-sotto" pathLength="1" d="M1 7C14 3.4 30 2.6 51 4.6" style="stroke-width:1.6"/></svg>
         </div>
 
-        <!-- i pezzi grezzi, i tagli, il reel -->
-        <div class="cc-pezzo" id="cc-pb"><img src="media/grezzo-b.jpg" alt="" width="480" height="270" decoding="async"></div>
-        <div class="cc-pezzo" id="cc-pc"><img src="media/grezzo-c.jpg" alt="" width="480" height="270" decoding="async"></div>
-        <i class="cc-taglio" id="cc-t1" style="left:118px"></i><i class="cc-taglio" id="cc-t2" style="left:222px"></i>
-        <div class="cc-reel" id="cc-reel">
-          <img class="cc-grezzo" src="media/grezzo-a.jpg" alt="" width="960" height="540" decoding="async">
-          <video class="cc-finito" id="cc-video" muted playsinline preload="none" poster="media/reel.jpg" data-src="media/reel.mp4"></video>
-          <i class="cc-riga" id="cc-riga"></i>
-          <i class="cc-ombra" id="cc-ombra"></i>
-          <p class="cc-titolo"><span><span id="cc-l1">Aperitivo</span></span><span><span id="cc-l2">al <em>Jué</em><i id="cc-pt"></i></span></span></p>
-          <span class="cc-avanza" id="cc-avanza"><i id="cc-avanza-i"></i></span>
+        <!-- 4 · il video vero, con i suoi colori -->
+        <div class="cc-ab cc-reel" id="cc-reel">
+          <video id="cc-video" muted playsinline preload="none" poster="media/reel.jpg" data-src="media/reel.mp4"></video>
+          <i class="cc-ombra"></i>
+          <p class="cc-titolo"><span class="cc-riga"><span class="cc-c">Aperitivo</span></span><span class="cc-riga"><span class="cc-c">al <span class="cc-jue">Jué</span></span><i class="cc-dot"></i></span></p>
         </div>
-        <i class="cc-anello" id="cc-anello"></i>
-
-        <p class="cc-tag" id="cc-tag1"><b>01</b> · Bozza</p>
-        <p class="cc-tag" id="cc-tag2"><b>02</b> · Riprese</p>
-        <p class="cc-tag" id="cc-tag3"><b>03</b> · Montaggio</p>
       </div></div>
     </div>
   </div>
@@ -209,14 +200,11 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
 <script>
 (function () {
   'use strict';
-  var L = 12;                         // durata del giro, in secondi
-  var FERMO = 10.8;                   // il fotogramma per «Riduci movimento»
-  var PLAY = 6.85;                    // quando il video finito parte
+  var L = 10, FERMO = 9.2, PLAY = 5.75;
   var $ = function (id) { return document.getElementById(id); };
   var cc = $('cc'), scena = $('cc-scena'), palco = $('cc-palco'), video = $('cc-video');
-  if (!cc.animate) return;            // senza Web Animations resta la bozza ferma
+  if (!cc.animate) return;
 
-  // ── il palco 340 × 360 si adatta alla scena, appoggiato in basso e centrato ──
   function adatta() {
     var w = scena.clientWidth, h = scena.clientHeight, k = Math.min(w / 340, h / 360);
     palco.style.transform = 'translate(' + ((w - 340 * k) / 2).toFixed(2) + 'px,' + (h - 360 * k).toFixed(2) + 'px) scale(' + k.toFixed(4) + ')';
@@ -224,121 +212,75 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
   adatta();
   if (window.ResizeObserver) new ResizeObserver(adatta).observe(scena); else addEventListener('resize', adatta);
 
-  // ── le curve ──
-  var FUORI = 'cubic-bezier(.22,.61,.36,1)', MORBIDA = 'cubic-bezier(.65,0,.35,1)', ARRIVO = 'cubic-bezier(.2,.75,.2,1)', LIN = 'linear';
-
-  // una traccia: [[secondo, valore, curva verso il prossimo], ...] su UNA proprietà, lunga quanto il giro
+  var FUORI = 'cubic-bezier(.22,.61,.36,1)', MORBIDA = 'cubic-bezier(.65,0,.35,1)', TRATTO = 'cubic-bezier(.45,.05,.25,1)',
+      TIPO = 'cubic-bezier(.16,1,.3,1)', POP = 'cubic-bezier(.34,1.5,.64,1)';
   var giri = [];
   function T(el, prop, tappe) {
     if (typeof el === 'string') el = $(el);
     var kf = [], i, s;
     if (tappe[0][0] > 0) { s = {}; s[prop] = tappe[0][1]; s.offset = 0; kf.push(s); }
-    for (i = 0; i < tappe.length; i++) {
-      s = {}; s[prop] = tappe[i][1]; s.offset = Math.min(1, tappe[i][0] / L); s.easing = tappe[i][2] || 'linear'; kf.push(s);
-    }
+    for (i = 0; i < tappe.length; i++) { s = {}; s[prop] = tappe[i][1]; s.offset = Math.min(1, tappe[i][0] / L); s.easing = tappe[i][2] || 'linear'; kf.push(s); }
     if (tappe[tappe.length - 1][0] < L) { s = {}; s[prop] = tappe[tappe.length - 1][1]; s.offset = 1; kf.push(s); }
     var a = el.animate(kf, { duration: L * 1000, iterations: Infinity, fill: 'both' });
     a.pause(); giri.push(a); return a;
   }
-  function tr(x, y, s, r) { return 'translate(' + x + 'px,' + y + 'px) rotate(' + (r || 0) + 'deg) scale(' + s + ')'; }
-
-  // ── posizioni del reel (centro del 9:16 grande = 170, 184 nel palco; 168,75 × 300) ──
-  var CX = 170, CY = 184, RW = 168.75, LARGO = 534.4;   // larghezza del 16:9 a piena altezza
-  function reel(cx, cy, k, r) { return tr(+(cx - CX).toFixed(2), +(cy - CY).toFixed(2), +k.toFixed(4), r); }
-  // il quadrato vuoto, misurato nel palco (offset: non risente delle trasformazioni)
-  function dentro(el) { var x = 0, y = 0; while (el && el !== palco) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return { x: x, y: y }; }
-  var cella = $('cc-cella'), p = dentro(cella), cw = cella.offsetWidth, ch = cella.offsetHeight;
-  var ccx = p.x + cw / 2, ccy = p.y + ch / 2, kc = cw / RW;                          // il reel ritagliato 3:4 copre la cella
-  var an = $('cc-anello'); an.style.left = p.x + 'px'; an.style.top = p.y + 'px'; an.style.width = cw + 'px'; an.style.height = ch + 'px';
-
-  var kS = 144 / LARGO, kR = 104 / LARGO, kW = 320 / LARGO;   // sparsi, in fila, largo
-  var INS_L = 'inset(0% -108.33% 0% -108.33% round 9px)', INS_V = 'inset(0% 0% 0% 0% round 9px)', INS_Q = 'inset(12.5% 0% 12.5% 0% round 6px)';
-
-  // ── 0 · tutto il palco: entra e alla fine sfuma ──
-  T('cc-giro', 'opacity', [[0, 0, FUORI], [.25, 1], [11.45, 1, MORBIDA], [11.95, 0]]);
-
-  // ── la frase ──
-  T('cc-f1', 'opacity', [[0, 1], [7.95, 1, FUORI], [8.3, 0], [11.55, 0, FUORI], [11.95, 1]]);
-  T('cc-f1', 'transform', [[0, 'translateY(0px)'], [7.95, 'translateY(0px)', FUORI], [8.35, 'translateY(-8px)'], [11.5, 'translateY(10px)', FUORI], [11.95, 'translateY(0px)']]);
-  T('cc-f2', 'opacity', [[0, 0], [8.1, 0, FUORI], [8.5, 1], [11.4, 1, FUORI], [11.7, 0]]);
-  T('cc-f2', 'transform', [[0, 'translateY(10px)'], [8.1, 'translateY(10px)', FUORI], [8.6, 'translateY(0px)'], [11.4, 'translateY(0px)', FUORI], [11.75, 'translateY(-8px)']]);
-
-  // ── le etichette ──
-  function tag(id, a, b) {
-    T(id, 'opacity', [[a, 0, FUORI], [a + .3, 1], [b, 1, FUORI], [b + .25, 0]]);
-    T(id, 'transform', [[a, 'translateY(5px)', FUORI], [a + .35, 'translateY(0px)'], [b, 'translateY(0px)', FUORI], [b + .25, 'translateY(-5px)']]);
+  // disegna un tratto (o tutti i tratti dentro un gruppo, uno dopo l'altro)
+  function disegna(el, t0, dur, passo) {
+    if (typeof el === 'string') el = document.querySelector(el);
+    var tr = el.classList && el.classList.contains('tr') ? [el] : Array.prototype.slice.call(el.querySelectorAll('.tr'));
+    tr.forEach(function (p, i) { var a = t0 + i * (passo || 0); T(p, 'strokeDashoffset', [[a, 1.05, TRATTO], [a + dur, 0]]); T(p, 'opacity', [[a, 0], [a + .02, 1]]); });
   }
-  tag('cc-tag1', .3, 2.25); tag('cc-tag2', 2.45, 3.95); tag('cc-tag3', 4.15, 7.85);
 
-  // ── 1 · la bozza: ogni gruppo si scopre come tracciato a matita ──
-  var NO_GIU = 'inset(0% 0% 100% 0%)', NO_DX = 'inset(0% 100% 0% 0%)', TUTTO = 'inset(0% 0% 0% 0%)';
-  T('cc-b-cornice', 'clipPath', [[.35, 'inset(0% 100% 100% 0%)', FUORI], [1.0, TUTTO]]);
-  T('cc-b-bicchiere', 'clipPath', [[.8, NO_GIU, MORBIDA], [1.4, TUTTO]]);
-  T('cc-b-ghiaccio', 'clipPath', [[1.15, NO_DX, MORBIDA], [1.6, TUTTO]]);
-  T('cc-b-versa', 'clipPath', [[1.35, NO_GIU, MORBIDA], [1.8, TUTTO]]);
-  T('cc-b-testo', 'clipPath', [[1.6, NO_DX, MORBIDA], [2.05, TUTTO]]);
-  T('cc-note', 'opacity', [[1.7, 0, FUORI], [2.1, 1], [2.35, 1, MORBIDA], [2.7, 0]]);
-  ['cc-b-bicchiere', 'cc-b-ghiaccio', 'cc-b-versa', 'cc-b-testo'].forEach(function (id) {
-    T(id, 'opacity', [[2.35, 1, MORBIDA], [2.7, 0]]);
+  // ── 0 · il giro entra e alla fine sfuma ──
+  T('cc-giro', 'opacity', [[0, 0, FUORI], [.2, 1], [9.5, 1, MORBIDA], [9.95, 0]]);
+  T('cc-f1', 'opacity', [[3.7, 1, FUORI], [4.0, 0], [9.6, 0, FUORI], [9.95, 1]]);
+  T('cc-f1', 'transform', [[3.7, 'translateY(0px)', FUORI], [4.05, 'translateY(-8px)'], [9.55, 'translateY(10px)', FUORI], [9.95, 'translateY(0px)']]);
+  T('cc-f2', 'opacity', [[3.85, 0, FUORI], [4.25, 1], [9.45, 1, FUORI], [9.75, 0]]);
+  T('cc-f2', 'transform', [[3.85, 'translateY(10px)', FUORI], [4.35, 'translateY(0px)'], [9.45, 'translateY(0px)', FUORI], [9.8, 'translateY(-8px)']]);
+
+  // ── 1 · bicchiere e bottiglia si disegnano (0,2 – 1,9 s) ──
+  disegna('#cc-cornice', .15, .7);
+  disegna('.cc-bic', .45, .6, .12);
+  disegna('.cc-bot', .7, .6, .1);
+  disegna('.cc-suolo', 1.1, .5);
+  disegna('.cc-ghi', 1.05, .4, .07);
+
+  // ── 2 · la scritta: lettere che salgono, «Jué» in corsivo, la sottolineatura arancio e il punto (2,0 – 3,3 s) ──
+  var n = 0;
+  Array.prototype.forEach.call(document.querySelectorAll('#cc-titolo [data-s]'), function (sp) {
+    var testo = sp.textContent; sp.textContent = '';
+    testo.split('').forEach(function (ch) {
+      var c = document.createElement('span'); c.className = 'cc-c'; c.textContent = ch === ' ' ? ' ' : ch; sp.appendChild(c);
+      var a = 2.0 + n * .04 + (sp.classList.contains('cc-jue') ? .12 : 0); n++;
+      T(c, 'transform', [[a, 'translateY(130%)', TIPO], [a + .65, 'translateY(0%)']]); T(c, 'opacity', [[a, 0], [a + .12, 1]]);
+    });
   });
-  // la cornice resta come guida del 9:16, poi il reel la riempie
-  T('cc-b-cornice', 'opacity', [[2.35, 1, MORBIDA], [2.7, .45], [5.45, .45, MORBIDA], [5.9, 0]]);
+  disegna('#cc-sotto', 2.85, .45);
+  T('cc-dot', 'transform', [[3.05, 'scale(0)', POP], [3.35, 'scale(1)']]);
 
-  // ── 2 · le riprese: tre pezzi grezzi, storti, cadono sparsi; poi si mettono in fila ──
-  function pezzo(id, t0, sx, sy, sr, fx) {
-    var ks = 144 / 320, kr = 104 / 320, kw = 320 / 320 * .32;
-    T(id, 'opacity', [[t0, 0, FUORI], [t0 + .35, 1], [4.4, 1, MORBIDA], [4.7, 0]]);
-    T(id, 'transform', [
-      [t0, tr(sx - 170, sy - 184 + 26, ks * .9, sr * 1.6), ARRIVO], [t0 + .55, tr(sx - 170, sy - 184, ks, sr)],
-      [3.3, tr(sx - 170, sy - 184, ks, sr), MORBIDA], [3.88, tr(fx - 170, 0, kr, 0)],
-      [4.15, tr(fx - 170, 0, kr, 0), MORBIDA], [4.75, tr((fx - 170) * .35, 0, kw, 0)]
-    ]);
-  }
-  pezzo('cc-pb', 2.45, 96, 112, -6, 66);
-  pezzo('cc-pc', 2.69, 112, 252, 3.5, 274);
-  T('cc-t1', 'opacity', [[3.75, 0, FUORI], [3.9, 1], [4.1, 1, FUORI], [4.25, 0]]);
-  T('cc-t2', 'opacity', [[3.8, 0, FUORI], [3.95, 1], [4.1, 1, FUORI], [4.25, 0]]);
-  T('cc-t1', 'transform', [[3.75, 'scaleY(.2)', ARRIVO], [3.95, 'scaleY(1)']]);
-  T('cc-t2', 'transform', [[3.8, 'scaleY(.2)', ARRIVO], [4.0, 'scaleY(1)']]);
+  // ── 3 · de-zoom: il foglio diventa l'ultimo quadrato, il profilo si disegna intorno (3,7 – 5,5 s) ──
+  var CX = 170, CY = 184, RW = 168.75, cx = 233.5, cy = 303, kc = 63 / RW;
+  var dz = 'translate(' + (cx - CX) + 'px,' + (cy - CY) + 'px) scale(' + kc.toFixed(4) + ')';
+  var VIA = 'inset(0% 0% 0% 0% round 9px)', Q = 'inset(12.5% 0% 12.5% 0% round 4px)';
+  T('cc-carta', 'transform', [[3.7, 'translate(0px,0px) scale(1)', MORBIDA], [4.65, dz]]);
+  T('cc-carta', 'clipPath', [[3.7, VIA, MORBIDA], [4.65, Q]]);
+  T('cc-carta-fondo', 'opacity', [[3.7, 0, MORBIDA], [4.4, 1]]);
+  T('cc-cornice', 'opacity', [[4.2, 1], [4.6, 0]]);
+  disegna('#cc-d-tel', 3.8, 1.0);
+  disegna('#cc-d-griglia', 4.35, .45, .06);
+  Array.prototype.forEach.call(document.querySelectorAll('.cc-grigio'), function (r, i) { T(r, 'opacity', [[4.7 + i * .06, 0, FUORI], [5.05 + i * .06, 1]]); });
+  disegna('.cc-d-testa', 4.75, .4, .035);
 
-  // ── 3 · il montaggio: il pezzo centrale si allarga, si taglia in verticale, riempie la cornice ──
-  T('cc-reel', 'opacity', [[2.57, 0, FUORI], [2.92, 1]]);
-  T('cc-reel', 'transform', [
-    [2.57, reel(234, 186 + 26, kS * .9, 8), ARRIVO], [3.17, reel(234, 186, kS, 5)],
-    [3.25, reel(234, 186, kS, 5), MORBIDA], [3.85, reel(170, 184, kR, 0)],
-    [4.15, reel(170, 184, kR, 0), MORBIDA], [4.75, reel(170, 184, kW, 0)],
-    [5.4, reel(170, 184, kW, 0), MORBIDA], [6.0, reel(170, 184, 1, 0)],
-    [8.0, reel(170, 184, 1, 0), MORBIDA], [8.95, reel(ccx, ccy - 16, kc * 1.2, 0)],
-    [9.2, reel(ccx, ccy - 16, kc * 1.2, 0), 'cubic-bezier(.5,0,.75,0)'], [9.52, reel(ccx, ccy, kc * .965, 0), FUORI],
-    [9.72, reel(ccx, ccy, kc, 0)]
-  ]);
-  T('cc-reel', 'clipPath', [[4.85, INS_L, MORBIDA], [5.35, INS_V], [8.0, INS_V, MORBIDA], [8.95, INS_Q]]);
+  // ── 4 · il video vero sale nell'ultimo quadrato grigio (5,7 – 6,2 s) ──
+  T('cc-reel', 'transform', [[0, dz]]);
+  T('cc-reel', 'opacity', [[5.65, 0], [5.7, 1]]);
+  T('cc-reel', 'clipPath', [[5.7, 'inset(87.5% 0% 12.5% 0% round 4px)', MORBIDA], [6.2, Q]]);
 
-  // il colore: una riga arancio passa e lascia dietro il reel caldo
-  T('cc-video', 'clipPath', [[6.15, NO_DX, MORBIDA], [6.85, TUTTO]]);
-  T('cc-riga', 'transform', [[6.15, 'translateX(0px)', MORBIDA], [6.85, 'translateX(' + RW + 'px)']]);
-  T('cc-riga', 'opacity', [[6.05, 0], [6.15, 1], [6.8, 1], [6.95, 0]]);
-  // la scritta
-  T('cc-ombra', 'opacity', [[6.95, 0, FUORI], [7.4, 1]]);
-  T('cc-l1', 'transform', [[7.0, 'translateY(110%)', FUORI], [7.5, 'translateY(0%)']]);
-  T('cc-l2', 'transform', [[7.12, 'translateY(110%)', FUORI], [7.62, 'translateY(0%)']]);
-  T('cc-pt', 'transform', [[7.55, 'scale(0)', 'cubic-bezier(.34,1.4,.64,1)'], [7.8, 'scale(1)']]);
-  T('cc-avanza', 'opacity', [[6.85, 0, FUORI], [7.1, 1], [8.0, 1, FUORI], [8.4, 0]]);
-  T('cc-avanza-i', 'transform', [[6.85, 'scaleX(0)'], [11.9, 'scaleX(1)']]);
+  // ── 5 · il disegno diventa il profilo vero: un cerchio che parte dal reel (6,6 – 7,5 s) ──
+  T('cc-tel', 'clipPath', [[6.6, 'circle(0px at 163.5px 297px)', 'cubic-bezier(.55,0,.25,1)'], [7.5, 'circle(420px at 163.5px 297px)']]);
+  T('cc-disegno', 'opacity', [[7.3, 1], [7.6, 0]]);
 
-  // ── 4 · si allarga la vista: il telefono con il profilo, il reel sospeso sopra l'ultimo quadrato ──
-  T('cc-tel', 'opacity', [[8.0, 0, FUORI], [8.45, 1]]);
-  T('cc-tel', 'transform', [[8.0, 'scale(1.6)', FUORI], [8.95, 'scale(1)']]);
-  T('cc-fondo', 'opacity', [[8.2, 0], [8.7, 1]]);
-  T('cc-mira', 'opacity', [[8.75, 0, FUORI], [9.0, 1], [9.4, 1], [9.55, 0]]);
-  T('cc-vuoto', 'opacity', [[9.35, 1], [9.5, 0]]);
-  // ── 5 · entra: lampo arancio e i post passano da 47 a 48 ──
-  T('cc-anello', 'opacity', [[9.5, 0, LIN], [9.58, 1, FUORI], [10.25, 0]]);
-  T('cc-anello', 'transform', [[9.5, 'scale(1)', FUORI], [10.25, 'scale(1.16)']]);
-  var due = $('cc-n');
-  T(due, 'transform', [[9.55, 'translateY(0px)', FUORI], [9.9, 'translateY(-10.35px)']]);
-
-  // ── il video finito: parte dopo il colore, si riavvolge a ogni giro ──
+  // ── il video: parte quando entra, si riavvolge a ogni giro ──
   var caricato = false;
   function carica() { if (!caricato) { caricato = true; video.src = video.getAttribute('data-src'); video.preload = 'auto'; video.load(); } }
   var rif = giri[0], gira = false, prima = 0, raf = 0;
@@ -356,13 +298,8 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
     video.pause(); try { video.currentTime = 0; } catch (e) {}
     prima = 0; raf = requestAnimationFrame(passo);
   }
-  function ferma() {
-    if (!gira) return; gira = false; cancelAnimationFrame(raf);
-    giri.forEach(function (a) { a.pause(); }); video.pause();
-  }
-  function fermoFinale() {
-    ferma(); giri.forEach(function (a) { a.currentTime = FERMO * 1000; a.pause(); });
-  }
+  function ferma() { if (!gira) return; gira = false; cancelAnimationFrame(raf); giri.forEach(function (a) { a.pause(); }); video.pause(); }
+  function fermoFinale() { ferma(); giri.forEach(function (a) { a.currentTime = FERMO * 1000; a.pause(); }); }
 
   var riduci = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var visibile = false;
@@ -376,10 +313,6 @@ body{font:400 17px/1.55 'Inter',-apple-system,system-ui,sans-serif;-webkit-font-
     new IntersectionObserver(function (v) { visibile = v[0].isIntersecting; decidi(); }, { threshold: .4 }).observe(cc);
   } else { visibile = true; decidi(); }
   if (riduci.matches) fermoFinale();
-
-  // per le prove: ?t=8.5 mostra quel secondo fermo
-  var q = /[?&]t=([\d.]+)/.exec(location.search);
-  if (q) { riduci = { matches: true }; FERMO = parseFloat(q[1]); fermoFinale(); }
   window.ccVai = function (s) { FERMO = s; fermoFinale(); };
 })();
 </script>
