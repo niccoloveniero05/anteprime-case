@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
 <script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('vola')}else document.documentElement.classList.add('fermo')}catch(e){}</script>
+<!-- Home 2026 r8 (21/11/2026): r7 + ritocchi di Niccolò al computer (Come funziona, etichette, nota 3z, Dettagli degli abbonamenti) e, ovunque, via «Esempio · WhatsApp», «Vedi tutti i prezzi →», telefoni disegnati come l’iPhone 17. Fonte: home-2026/strumenti/costruisci-r8.py -->
 <!-- Home 2026 r7 (21/11/2026): r6 + da computer la stessa scena di Creazione Contenuti del telefono (telefono disegnato), margine sotto il telefono. Fonte: home-2026/strumenti/costruisci-r7.py -->
 <!-- Home 2026 r6 (21/11/2026): r5 + la scena nuova di Creazione Contenuti (dalla bozza a linee al profilo Instagram del Jué; telefono disegnato al telefono, portatile disegnato da computer) al posto del portatile col montaggio. Fonte: home-2026/strumenti/costruisci-r6.py -->
 <!-- Home 2026 r5 (21/11/2026): r4 + testi legali e promesse allineati alla landing r47 (consulenza, domande, piede, privacy). Fonte: home-2026/strumenti/costruisci-r5.py -->
@@ -1268,17 +1269,21 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   #t-come,#t-servizi,#t-abb{max-width:15em;font-size:clamp(48px,4.4vw,66px);line-height:1.02;letter-spacing:-.045em}
   #t-servizi{max-width:13em}
   #servizi > .wrap > .sotto,#abbonamenti > .wrap > .sotto{max-width:34em}
+  #servizi > .wrap > .etichetta::after,#abbonamenti > .wrap > .etichetta::after{display:none}   /* r8: via l'angolino da computer (al telefono è lo stesso elemento: resta) */
 
   /* ── 2 · Come funziona (al posto di «Qui la musica non si ferma mai») ── */
   #come .wrap{display:flex;flex-direction:column;align-items:center}
   #come .etichetta{margin-bottom:var(--s3)}
-  #come .wrap > .sotto{order:5;margin:var(--s3) auto 0;max-width:40em;font-size:14px;line-height:1.55;color:var(--av3)}
-  #come .rotaia{order:2;align-self:stretch;margin:var(--s5) 0 0}
-  #come .passi{order:3;align-self:stretch;margin-top:var(--s4);text-align:left}
-  #come .come-azione{order:4;display:block;margin-top:var(--s5)}
-  #come .come-azione .pill{height:52px;padding:0 26px}
+  #come .wrap > .sotto{display:none}   /* r8 (21/11, Niccolò): via 2i, non è vera (le anteprime gratis sono solo di siti e landing page) */
+  /* r8 (21/11, Niccolò): la riga 2c centrata con TRE punti sopra il centro delle tre colonne dei passi; la linea comincia sul
+     primo punto e finisce sull'ultimo (i margini della riga sono mezza colonna: (100% - 2 spazi) / 6); più spazio tra le fasi.
+     La pallina (script «Corsa») va dal primo punto alla fine della riga, cioè all'ultimo punto, e lì si ferma */
+  #come{--g:clamp(96px,9.5vw,140px)}
+  #come .rotaia{order:2;align-self:stretch;margin:var(--s5) calc((100% - 2 * var(--g)) / 6) 0}
+  #come .stazione,#come .stazione.s0,#come .stazione.s1,#come .stazione.s2{left:calc(var(--s) * 50%);transform:translateX(-50%);align-items:center}
+  #come .passi{order:3;align-self:stretch;gap:var(--g);margin-top:var(--s3);text-align:center}
+  #come .passo p{margin-left:auto;margin-right:auto}
   .passo .n{display:none}
-  .passo-ico{display:block;width:32px;height:32px;fill:none;stroke:var(--av);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
   .passo h3{margin-top:var(--s3);font:650 20px/1.25 var(--sans);letter-spacing:-.022em}
   .passo .gratis{margin-top:6px}
   .passo p{margin-top:var(--s1);font-size:15.5px;line-height:1.55;color:var(--av2)}
@@ -1314,7 +1319,8 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   #servizi .pacchetto:not(.speciale) > .sotto{grid-column:2;grid-row:3;margin-top:var(--s2);max-width:20em;font:400 clamp(17px,1.35vw,19px)/1.5 var(--sans);color:var(--av2)}
   #servizi .pacchetto:not(.speciale) > .dettagli{grid-column:2;grid-row:4;margin-top:var(--s3)}
   #servizi .pacchetto .voci li{font-size:15px}
-  #servizi .nota{margin-top:var(--s5);text-align:center}
+  #contatti .pillole > .pill-scura[href^="tel:"]{display:none}   /* r8 (21/11, Niccolò): da computer niente «Chiama» (7e); il numero resta in 7f */
+  #servizi .nota{display:none}   /* r8 (21/11, Niccolò: «le scritte a 3664 px»): via la nota 3z da computer (al telefono resta) */
 
   /* ── 4 · Abbonamenti: «Oppure scegli uno dei nostri abbonamenti.», tre schede corte, un solo pulsante ── */
   #abbonamenti .abb-piani{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:var(--s5)}
@@ -1330,7 +1336,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   #abbonamenti .abb-desc{min-height:0;margin-top:12px;font-size:15px;line-height:1.55}
   #abbonamenti .abb-prezzo{margin-top:auto;padding-top:22px}
   #abbonamenti .abb-prezzo b{font-size:34px}
-  #abbonamenti .abb-btn,#abbonamenti .abb-dett{display:none}
+  #abbonamenti .abb-btn{display:none}   /* r8: torna «Dettagli +» col pannello (come la landing r47); «Contattaci →» sta nel pannello */
   #abbonamenti .abb-scopri{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;margin:var(--s5) auto 0;padding:0 28px;border-radius:999px;
     background:var(--av);color:#100F09;font:650 16px/1 var(--sans);letter-spacing:-.01em;transition:transform .2s var(--ease),filter .2s ease}
   #abbonamenti .abb-scopri .i{width:14px;height:14px;transition:transform .25s var(--ease)}
@@ -1399,14 +1405,14 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .cc-grigio{fill:#2A2922;opacity:0}
 
 /* il profilo vero del Jué: tutto dentro il riquadro, centrato; si scopre con un cerchio che parte dal reel */
-.cc-tel{left:82px;top:4px;width:176px;height:352px;border-radius:28px;background:#0A0906;
-  box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 4px #0D0C08,0 0 0 5px rgba(245,244,239,.07);clip-path:circle(0px at 50% 50%)}
-.cc-schermo{position:absolute;inset:5px;border-radius:23px;overflow:hidden;background:#0B0A07;font-family:var(--sans);color:var(--av);text-align:left}
-.cc-isola{position:absolute;top:5px;left:50%;width:50px;height:13px;margin-left:-25px;border-radius:99px;background:#000}
-.cc-barra{margin-top:28px;padding:0 11px;height:14px;display:flex;align-items:center;justify-content:flex-start;gap:3px;font:700 8.5px/1 var(--sans);letter-spacing:-.01em}
+.cc-tel{left:86px;top:4px;width:168px;height:352px;border-radius:21px;background:#0A0906;   /* r8: forma dell'iPhone 17 (0,478; angoli 12,5 %; cornice 3 %) */
+  box-shadow:inset 0 0 0 1px rgba(245,244,239,.2),0 0 0 1px rgba(245,244,239,.1);clip-path:circle(0px at 50% 50%)}
+.cc-schermo{position:absolute;inset:5px;border-radius:16px;overflow:hidden;background:#0B0A07;font-family:var(--sans);color:var(--av);text-align:left}
+.cc-isola{position:absolute;top:5px;left:50%;width:44px;height:12px;margin-left:-22px;border-radius:99px;background:#000}
+.cc-barra{margin-top:28px;padding:0 10px;height:14px;display:flex;align-items:center;justify-content:flex-start;gap:3px;font:700 8.5px/1 var(--sans);letter-spacing:-.01em}
 .cc-barra svg{width:8px;height:8px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.cc-prof{display:flex;align-items:center;gap:11px;margin-top:15px;padding:0 11px}
-.cc-av{flex:none;display:block;width:60px;height:60px;border-radius:50%;background:#000 url(img/jue-logo.png) 50% 54%/66% auto no-repeat;box-shadow:0 0 0 2px #0B0A07,0 0 0 3.5px var(--rec)}
+.cc-prof{display:flex;align-items:center;gap:10px;margin-top:15px;padding:0 10px}
+.cc-av{flex:none;display:block;width:56px;height:56px;border-radius:50%;background:#000 url(img/jue-logo.png) 50% 54%/66% auto no-repeat;box-shadow:0 0 0 2px #0B0A07,0 0 0 3.5px var(--rec)}
 .cc-chi{min-width:0}
 .cc p.cc-nome{margin:0;font:600 9px/1 var(--sans)}
 .cc p.cc-bio{margin:5px 0 0;font-size:6.8px;line-height:1.45;color:var(--av2)}
@@ -1418,12 +1424,24 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .cc-griglia{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:1px}
 .cc-griglia > i{position:relative;display:block;aspect-ratio:3/4;background:#2A2922}
 .cc-griglia > i:first-child{background:#0B0A07}
-.cc-casa{position:absolute;left:50%;bottom:7px;width:54px;height:3px;margin-left:-27px;border-radius:2px;background:rgba(245,244,239,.55)}
+.cc-casa{position:absolute;left:50%;bottom:7px;width:50px;height:3px;margin-left:-25px;border-radius:2px;background:rgba(245,244,239,.55)}
 /* il reel vero: il ritaglio 3:4 sta fuori, il cerchio che lo scopre dentro */
 .cc-reel-in{position:absolute;inset:0;clip-path:circle(0px at 50% 50%)}
 /* r7 (21/11): da computer la STESSA scena del telefono (telefono disegnato), centrata nel riquadro incassato della scheda.
    Il palco è alto 372 invece di 360: il telefono (alto 352 + il filo) resta dentro il riquadro con un po' di margine sotto. */
 /* ===== FINE 3d · CREAZIONE CONTENUTI ===== */
+/* ── r8 (21/11, Niccolò: «questa non è la forma dell'iPhone 17»): il telefono arancio del Sito Web con la forma dell'iPhone
+   17 Pro, come quello di Creazione Contenuti. Larghezza:altezza 0,478 (71,5 × 149,6 mm); tutto in proporzione alla larghezza
+   (--sa-tw): angoli 12,5 %, cornice (metallo + vetro nero) 3 %, metallo sottile 1,2 %, Dynamic Island 28 % dello schermo,
+   tasti laterali sottili. Prima: 0,462, angoli 38 px (a pillola), cornice 13 px ── */
+.sa-tel{--sa-th:min(calc(100cqh - 44px), 600px, calc((100cqw - 40px) / .478));--sa-tw:calc(var(--sa-th) * .478);width:var(--sa-tw);border-radius:calc(var(--sa-tw) * .125)}
+.slot-sito-anteprima .sa-tel{--sa-th:min(calc(100cqh - 34px), 600px, calc((100cqw - 40px) / .478))}
+.sa-tel::before{inset:0;border-width:max(1.5px, calc(var(--sa-tw) * .012));border-radius:inherit}
+.sa-schermo{inset:calc(var(--sa-tw) * .03);border-radius:calc(var(--sa-tw) * .095)}
+.sa-isola{top:calc(var(--sa-tw) * .055);width:calc(var(--sa-tw) * .263);height:calc(var(--sa-tw) * .078);margin-left:calc(var(--sa-tw) * -.1315)}
+.sa-tel::after{left:calc(var(--sa-tw) * -.018);width:calc(var(--sa-tw) * .014);border-radius:9px;
+  box-shadow:0 calc(var(--sa-th) * .075) 0 #9A421A,0 calc(var(--sa-th) * .15) 0 #9A421A,
+    calc(var(--sa-tw) * 1.022) calc(var(--sa-th) * .09) 0 #8A3A14,calc(var(--sa-tw) * 1.022) calc(var(--sa-th) * .33) 0 #7C3311}
 </style>
 </head>
 <body>
@@ -1485,11 +1503,10 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
         <span class="stazione s2" style="--s:2"><i></i><span>Online</span></span>
       </div>
       <ol class="passi" id="passi">
-        <li class="passo"><svg class="passo-ico" data-pc viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 7.5h20a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H14l-6 4.5v-4.5H6a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2z"/><path d="M10 13h12M10 17h8"/></svg><span class="n" aria-hidden="true">01</span><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></li>
-        <li class="passo"><svg class="passo-ico" data-pc viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="9.5" y="3.5" width="13" height="25" rx="2.5"/><path d="M14 7h4"/><rect x="12.5" y="10.5" width="7" height="6" rx=".5"/><path d="M12.5 20h7M12.5 23h4.5"/></svg><span class="n" aria-hidden="true">02</span><h3>Ti prepariamo l’anteprima</h3><span class="gratis">Gratis</span><p>Con foto e informazioni vere della tua attività. Ti arriva un link da aprire sul&nbsp;telefono.</p></li>
-        <li class="passo"><svg class="passo-ico" data-pc viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5"/><path d="M4.5 16h23M16 4.5c3.2 3.1 4.8 7 4.8 11.5S19.2 24.4 16 27.5M16 4.5c-3.2 3.1-4.8 7-4.8 11.5s1.6 8.4 4.8 11.5"/></svg><span class="n" aria-hidden="true">03</span><h3>Se ti piace, va online</h3><p>Sul tuo dominio, insieme a Google e ai social. Da lì in poi ti&nbsp;trovano.</p></li>
+        <li class="passo"><span class="n" aria-hidden="true">01</span><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></li>
+        <li class="passo"><span class="n" aria-hidden="true">02</span><h3>Ti prepariamo l’anteprima</h3><span class="gratis">Gratis</span><p>Con foto e informazioni vere della tua attività. Ti arriva un link da aprire sul&nbsp;telefono.</p></li>
+        <li class="passo"><span class="n" aria-hidden="true">03</span><h3>Se ti piace, va online</h3><p>Sul tuo dominio, insieme a Google e ai social. Da lì in poi ti&nbsp;trovano.</p></li>
       </ol>
-      <p class="come-azione" data-pc><a class="pill pill-chiara" id="come-scrivi" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%E2%80%99anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici su WhatsApp</a></p>
     </div>
   </section>
   <!-- 3 · Servizi: i tre pacchetti (senza la Campagna 360°, doppione di Enterprise) -->
@@ -1721,7 +1738,6 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
         </div>
       </div>
       <!-- ============ FINE CHAT-VA · HTML 1 ============ -->
-            <span class="chip">Esempio · WhatsApp</span>
           </div>
           <h3 class="t2" id="t-va">Virtual Assistant<i class="pt" aria-hidden="true"></i><span class="sr">.</span></h3>
           <p class="sotto">Risponde ai tuoi clienti su WhatsApp, anche quando non&nbsp;puoi.</p>
@@ -1738,11 +1754,11 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   <!-- 4 · Abbonamenti (r2, 21/11): testi della landing r40. Telefono (sotto 1024 px), decisione di Niccolò del 21/11: gli
        abbonamenti restano scritti, i dettagli stanno solo nella landing. Schede «a cassette» che scorrendo si impilano (come i
        servizi della landing r40): a sinistra etichetta, nome, frase e prezzo, a destra la figura del piano; sotto la pila un
-       solo pulsante «Scopri gli abbonamenti →» verso la landing; niente note. Computer: come la r1 (figure, «Dettagli +» che
+       solo pulsante «Vedi tutti i prezzi →» (r8; era «Scopri gli abbonamenti →») verso la landing; niente note. Computer: come la r1 (figure, «Dettagli +» che
        apre il pannello da destra, «Contattaci →») e sotto le colonne due note. Elenchi «Comprende» e pulsanti WhatsApp
        restano nel codice: da computer li usa il pannello dei Dettagli.
        r3 (21/11), SOLO COMPUTER: titolo «Oppure scegli uno dei nostri abbonamenti.» (si accende scorrendo), tre schede corte
-       (figura, etichetta, nome, frase, prezzo), un solo pulsante «Scopri gli abbonamenti →» che apre la landing nella stessa
+       (figura, etichetta, nome, frase, prezzo), un solo pulsante «Vedi tutti i prezzi →» (r8; era «Scopri gli abbonamenti →») che apre la landing nella stessa
        scheda; niente pannello Dettagli né «Contattaci». Le due note restano, piccole, sotto il pulsante.
        r4 (21/11), SOLO TELEFONO: ogni scheda si tocca (pulsante .abb-tocca su tutta la scheda, «+» che diventa «−» accanto al
        prezzo): sotto il prezzo si apre la tendina con quattro voci essenziali del «Comprende» e un pulsante pieno «Scrivici»
@@ -1838,7 +1854,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
         </article>
       </div>
       <!-- il pulsante verso la landing degli abbonamenti, nella stessa scheda (telefono e, dalla r3, computer). Al lancio: /abbonamenti/ -->
-      <a class="abb-scopri" id="abb-scopri" href="https://niccoloveniero05.github.io/anteprime-case/veniello-abbonamenti-r3-b5802d/">Scopri gli abbonamenti<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
+      <a class="abb-scopri" id="abb-scopri" href="https://niccoloveniero05.github.io/anteprime-case/veniello-abbonamenti-r3-b5802d/">Vedi tutti i prezzi<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
       <!-- r5 (21/11, Niccolò, landing r46-r47): la consulenza è gratis con un abbonamento O con un servizio, altrimenti 70 €.
            La prima nota (con l’asterisco) si vede al telefono e da computer; la seconda solo da computer -->
       <div class="abb-note">
@@ -3287,9 +3303,9 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
       if (W >= 600) {
         // blocco largo (computer): computer e telefono affiancati, il telefono poggia sulla stessa riga del computer
         var r = 780 / 1280, f = .86, padX = Math.max(32, W * .07), padY = Math.max(28, H * .11), gap = Math.max(22, W * .035);
-        dw = Math.min((W - 2 * padX - gap) / (1 + f * r * .462), (H - 2 * padY) / f / r - 20, 860);
+        dw = Math.min((W - 2 * padX - gap) / (1 + f * r * .478), (H - 2 * padY) / f / r - 20, 860);
         db = Math.max(16, Math.min(24, dw * .026));
-        var dh = mac(dw, db).h, ph = f * dh, pw = ph * .462, gw = dw + gap + pw;
+        var dh = mac(dw, db).h, ph = f * dh, pw = ph * .478, gw = dw + gap + pw;
         dl = (W - gw) / 2; dt = (H - dh) / 2;
         fs = ph / th; fx = dl + dw + gap + pw / 2 - W / 2; fy = dt + dh - ph / 2 - H / 2;
       } else {
