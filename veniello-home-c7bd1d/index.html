@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
 <script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){if(!matchMedia('(min-width:1024px)').matches)document.documentElement.classList.add('vola')}else document.documentElement.classList.add('fermo')}catch(e){}</script>
+<!-- Home 2026 r4 (21/11/2026): r3 + richieste di Niccolò del 21/11 al TELEFONO (apertura a sinistra, scala di Crescita quando la scheda è ferma, tendine degli abbonamenti). Fonte: home-2026/strumenti/costruisci-r4.py -->
 <!-- Home 2026 r3 (21/11/2026): versione da COMPUTER (da 1024 px) come spotify.com/premium: apertura col logo animato (pallino arancio grande, luce che si muove, V scura), Come funziona e Servizi coi titoli che si accendono, servizi in schede scure che si impilano, abbonamenti corti con un solo pulsante. Telefono come la r2 (salvo montaggio semplificato e scala che si forma). Fonte: home-2026/strumenti/costruisci-r3.py -->
 <title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
 <meta name="description" content="Veniello Studio gestisce ogni mese Instagram, TikTok, scheda Google e video per ogni attività della Valdinievole: negozi, ristoranti, saloni, studi, artigiani e strutture. Vedi il tuo sito prima di pagare.">
@@ -874,6 +875,14 @@ html{scrollbar-gutter:stable}
 .eroe-pl{display:block;flex:none;width:.21em;height:.21em;margin-left:.045em;border-radius:50%;background:var(--rec)}
 .eroe-frase{margin:clamp(8px,2svh,24px) auto 0}
 .eroe-sotto{margin:var(--s3) auto 0;max-width:21em;font:400 19px/1.45 var(--sans);letter-spacing:-.012em;color:var(--av2);text-wrap:balance}
+/* r4 (21/11, Niccolò) · TELEFONO: il titolo (1c) e la sottofrase (1d) a sinistra, al margine della pagina come le altre
+   sezioni; la V grande col pallino resta al centro. La sottofrase è più lunga (3 righe a 390 px). La variante r4-centro
+   rimette al centro solo il titolo (strumenti/costruisci-r4-centro.py) */
+@media (max-width:1023px){
+  .eroe-frase,.eroe-sotto{align-self:stretch;text-align:left}
+  .eroe-frase{margin-left:0;margin-right:0}
+  .eroe-sotto{margin-left:0;margin-right:0;max-width:none;text-wrap:pretty}
+}
 @media (min-width:1024px){
   .eroe{min-height:max(640px,100svh);padding-bottom:56px}
   .eroe-logo{--b:min(27svh,19vw,260px)}
@@ -881,10 +890,11 @@ html{scrollbar-gutter:stable}
   .eroe-sotto{font-size:22px;max-width:24em}
 }
 /* il volo (script «Volo»): due copie fisse della V e del pallino (#volo-v, #volo-pl), sopra la testata, vanno dal centro
-   dell'apertura al marchio della testata. Finché volano, la V e il pallino della testata non si vedono (lo spazio resta);
+   dell'apertura al marchio della testata. r4: la V della testata si vede da subito (la V che vola le arriva sopra e poi
+   sparisce); il pallino della testata invece non si vede finché quello che vola non arriva (lo spazio resta);
    quelli dell'apertura nemmeno (al loro posto ci sono le copie, nello stesso punto). Solo transform e opacity */
 .volo{position:fixed;left:0;top:0;z-index:51;margin:0!important;transform-origin:0 0;pointer-events:none}
-html.vola #marchio-testata .vv,html.vola #marchio-testata .pl{opacity:0}
+html.vola #marchio-testata .pl{opacity:0}   /* r4 (21/11, Niccolò: «sennò uno apre e legge "eniello"»): la V della testata si vede da subito; il pallino arriva in volo come prima */
 html.vola-on .eroe-logo > .eroe-v,html.vola-on .eroe-logo > .eroe-pl{visibility:hidden}
 html:not(.vola-on) .volo{display:none}
 
@@ -980,6 +990,7 @@ html.corsa .corsa-palla{display:block}
 .abb-piani{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;margin-top:var(--s5)}   /* minmax(0,1fr): sotto i 375 px le schede non escono dalla colonna */
 .abb-piano{position:relative;border-radius:16px;padding:22px 20px 22px;background:#1C1B14}
 .abb-fig,.abb-dett,.abb-desc,.abb-pc,.abb-opz-slot{display:none}
+.abb-tocca,.abb-segno,.abb-tendina{display:none}   /* r4: la tendina c'è solo al telefono (più giù) */
 .abb-testa{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;margin-top:10px}   /* se non ci sta, l'etichetta va sotto il nome */
 .abb-piano h3{font:700 34px/1.1 var(--sans);letter-spacing:-.035em;color:var(--abb-c,var(--av))}
 #abb-presenza{--abb-c:#F5F4EF}
@@ -1020,12 +1031,17 @@ html.corsa .corsa-palla{display:block}
 .abb-scopri{display:none}
 @media (max-width:1023px){
   .abb-piani{display:block;margin:var(--s5) calc(var(--pan) - var(--lato)) 0}
-  .abb-piano{position:sticky;top:calc(var(--testata) + env(safe-area-inset-top) + 14px + var(--n,0) * 12px);margin:0 0 14px;
+  /* r4: il fondo della scheda (::before) e il velo che la scurisce (::after) coprono solo il «corpo» della scheda (--corpo,
+     l'altezza di tutte le schede chiuse, la mette lo script «Pila e tendine»); la tendina aperta ha il suo fondo, attaccato
+     sotto, così quando la scheda dopo le sale sopra la tendina può sparire (opacità) senza spuntare sotto la pila */
+  .abb-piano{--abb-pl:18px;--abb-pr:12px;--abb-pb:20px;position:sticky;top:calc(var(--testata) + env(safe-area-inset-top) + 14px + var(--n,0) * 12px);margin:0 0 14px;
     display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:10px;align-items:start;
-    padding:20px 12px 20px 18px;border-radius:20px;background:#1C1B14;box-shadow:inset 0 0 0 1px rgba(245,244,239,.06),0 -18px 40px -24px rgba(0,0,0,.8);
+    padding:20px var(--abb-pr) var(--abb-pb) var(--abb-pl);border-radius:20px;background:none;box-shadow:0 -18px 40px -24px rgba(0,0,0,.8);
     transform-origin:50% 0}
+  .abb-piano::before{content:"";position:absolute;left:0;right:0;top:0;height:var(--corpo,100%);z-index:-1;border-radius:inherit;background:#1C1B14;
+    box-shadow:inset 0 0 0 1px rgba(245,244,239,.06);pointer-events:none}
   .abb-piano:last-child{margin-bottom:0}
-  .abb-piano::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#0B0A06;opacity:var(--p,0);pointer-events:none}
+  .abb-piano::after{content:"";position:absolute;left:0;right:0;top:0;height:var(--corpo,100%);border-radius:inherit;background:#0B0A06;opacity:var(--p,0);pointer-events:none}
   html:not(.fermo) .abb-piano{will-change:transform}
   .abb-testa{grid-column:1;grid-row:1;display:flex;flex-direction:column-reverse;align-items:flex-start;gap:7px;margin:0}
   .abb-piano h3{font:700 clamp(26px,7.6vw,32px)/1.05 var(--sans);letter-spacing:-.035em}
@@ -1058,10 +1074,34 @@ html.corsa .corsa-palla{display:block}
   .abb-scopri:hover{filter:brightness(1.06)}
   .abb-scopri:active{transform:scale(.98)}
   #abbonamenti .abb-note{display:none}   /* niente note al telefono (id: vince sulla regola comune più sotto) */
+  /* r4 (21/11, Niccolò) · la tendina. Tutta la scheda è un pulsante (.abb-tocca, sopra al corpo, trasparente); accanto al
+     prezzo il «+» del sito («Scopri i dettagli +») che diventa «−». Sotto il prezzo si apre la tendina: quattro voci e il
+     pulsante pieno «Scrivici», del colore del piano. Apertura e chiusura: altezza, come le tendine del sito (script) */
+  .abb-tocca{display:block;position:absolute;left:0;right:0;top:0;height:var(--corpo,100%);z-index:3;margin:0;padding:0;border:0;border-radius:20px;
+    background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+  .abb-tocca:focus-visible{outline:2px solid var(--av);outline-offset:-2px}
+  .abb-segno{display:block;grid-column:1;grid-row:3;justify-self:end;align-self:end;margin:0 2px 4px 0;color:var(--av)}
+  .abb-piano.aperta .abb-segno{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1.5 7h11' fill='none' stroke='%23000' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E")}
+  .abb-tendina{display:block;grid-column:1 / -1;grid-row:4;position:relative;min-width:0;isolation:isolate}
+  .abb-tendina[hidden]{display:none}
+  .abb-tendina::before{content:"";position:absolute;z-index:-1;left:calc(-1 * var(--abb-pl));right:calc(-1 * var(--abb-pr));top:0;bottom:calc(-1 * var(--abb-pb));
+    border-radius:0 0 20px 20px;background:#1C1B14;pointer-events:none;
+    box-shadow:inset 1px 0 0 rgba(245,244,239,.06),inset -1px 0 0 rgba(245,244,239,.06),inset 0 -1px 0 rgba(245,244,239,.06)}
+  .abb-tendina-in{overflow:hidden}
+  .abb-essenziali{display:grid;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid var(--filo2)}
+  .abb-essenziali li{position:relative;padding-left:20px;font:400 15.5px/1.4 var(--sans);letter-spacing:-.005em;color:var(--av)}
+  .abb-essenziali li::before{content:"";position:absolute;left:5px;top:.62em;width:4px;height:4px;border-radius:50%;background:var(--abb-c,var(--av))}
+  .abb-scrivici{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:50px;margin-top:20px;padding:0 22px;border-radius:999px;
+    background:var(--abb-c,var(--av));color:#100F09;font:650 16px/1 var(--sans);letter-spacing:-.01em;-webkit-tap-highlight-color:transparent;transition:transform .2s var(--ease),filter .2s ease}
+  .abb-scrivici .i{width:18px;height:18px}
+  .abb-scrivici:active{transform:scale(.98)}
+  .abb-scrivici:focus-visible{outline:2px solid var(--abb-c,var(--av));outline-offset:3px}
+  /* le voci entrano una dopo l'altra, come nelle tendine dei servizi (.dettagli.apre) */
+  .abb-tendina.apre li,.abb-tendina.apre .abb-scrivici{animation:voce .5s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--n,0) * 50ms + 60ms)}
 }
 @media (min-width:600px) and (max-width:1023px){
   .abb-piani{max-width:600px;margin-left:auto;margin-right:auto}
-  .abb-piano{padding:26px 18px 26px 24px;column-gap:18px}
+  .abb-piano{--abb-pl:24px;--abb-pr:18px;--abb-pb:26px;padding:26px var(--abb-pr) var(--abb-pb) var(--abb-pl);column-gap:18px}
   .abb-scopri{max-width:600px;margin-left:auto;margin-right:auto}
 }
 /* le due note sotto gli abbonamenti, SOLO DA COMPUTER (come la landing r40, .note-piani): grigio chiaro, piccole */
@@ -1386,7 +1426,9 @@ html.corsa .corsa-palla{display:block}
     <div class="wrap eroe-testo">
       <h1 class="eroe-logo" id="t-eroe"><span class="sr">Veniello Studio</span><span class="eroe-v" id="eroe-v" aria-hidden="true">V</span><i class="eroe-pl" id="eroe-pl" aria-hidden="true"></i></h1>
       <p class="t-sez eroe-frase">Fatti trovare.<br>Fatti <em>scegliere</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></p>
-      <p class="eroe-sotto">Veniello Studio porta la tua attività online e la fa&nbsp;crescere.</p>
+      <!-- r4 (21/11, Niccolò): al telefono la sottofrase è più lunga (3 righe a 390 px) e sta a sinistra, al margine della pagina,
+           come il titolo qui sopra. Da computer resta quella della r3 (il computer per ora non si tocca) -->
+      <p class="eroe-sotto"><span class="solo-tel">Veniello Studio porta la tua attività online e la fa crescere: sito, Google, social e video, tutto da un solo&nbsp;studio.</span><span class="solo-pc" data-pc>Veniello Studio porta la tua attività online e la fa&nbsp;crescere.</span></p>
     </div>
   </section>
 
@@ -1618,7 +1660,10 @@ html.corsa .corsa-palla{display:block}
        restano nel codice: da computer li usa il pannello dei Dettagli.
        r3 (21/11), SOLO COMPUTER: titolo «Oppure scegli uno dei nostri abbonamenti.» (si accende scorrendo), tre schede corte
        (figura, etichetta, nome, frase, prezzo), un solo pulsante «Scopri gli abbonamenti →» che apre la landing nella stessa
-       scheda; niente pannello Dettagli né «Contattaci». Le due note restano, piccole, sotto il pulsante -->
+       scheda; niente pannello Dettagli né «Contattaci». Le due note restano, piccole, sotto il pulsante.
+       r4 (21/11), SOLO TELEFONO: ogni scheda si tocca (pulsante .abb-tocca su tutta la scheda, «+» che diventa «−» accanto al
+       prezzo): sotto il prezzo si apre la tendina con quattro voci essenziali del «Comprende» e un pulsante pieno «Scrivici»
+       (WhatsApp col messaggio del piano). Una sola aperta alla volta. Da computer i pezzi nuovi non ci sono (display:none) -->
   <section class="sez abb" id="abbonamenti" aria-labelledby="t-abb">
     <div class="wrap">
       <span class="etichetta">Abbonamenti</span>
@@ -1630,6 +1675,12 @@ html.corsa .corsa-palla{display:block}
           <div class="abb-testa"><h3>Presenza</h3><span class="abb-badge">Per iniziare</span></div>
           <p class="abb-desc">Per farti trovare: la tua pagina, Google e i social pronti a lavorare.</p>
           <p class="abb-prezzo"><b>430&nbsp;€</b><span class="abb-al"><span class="abb-m">/ mese</span><span class="abb-pc">al mese</span></span></p>
+          <!-- r4 (21/11, Niccolò) · solo telefono: toccando la scheda si apre la tendina con l’essenziale e «Scrivici» (script «Pila e tendine») -->
+          <button class="abb-tocca" type="button" aria-expanded="false" aria-controls="abb-tendina-presenza"><span class="sr">Cosa comprende Presenza</span></button><i class="piu abb-segno" aria-hidden="true"></i>
+          <div class="abb-tendina" id="abb-tendina-presenza" hidden><div class="abb-tendina-in">
+            <ul class="abb-essenziali"><li style="--n:0">Landing page</li><li style="--n:1">Scheda Google</li><li style="--n:2">Account social</li><li style="--n:3">4 post carosello al mese</li></ul>
+            <a class="abb-scrivici" style="--n:4" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%E2%80%99abbonamento%20Presenza" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
+          </div></div>
           <div class="abb-comprende">
             <p class="abb-titoletto">Comprende</p>
             <ul class="abb-lista">
@@ -1648,6 +1699,12 @@ html.corsa .corsa-palla{display:block}
           <div class="abb-testa"><h3>Crescita</h3><span class="abb-badge abb-ar">Consigliato</span></div>
           <p class="abb-desc">Per crescere ogni mese: contenuti originali, video con l’IA e risultati misurati.</p>
           <p class="abb-prezzo" id="abb-crescita-prezzo"><b>850&nbsp;€</b><span class="abb-al"><span class="abb-m">/ mese</span><span class="abb-pc">al mese</span></span><b class="abb-piu-sito" id="abb-crescita-piu" aria-hidden="true">+&nbsp;405&nbsp;€</b></p>
+          <!-- r4 (21/11, Niccolò) · solo telefono: toccando la scheda si apre la tendina con l’essenziale e «Scrivici» (script «Pila e tendine») -->
+          <button class="abb-tocca" type="button" aria-expanded="false" aria-controls="abb-tendina-crescita"><span class="sr">Cosa comprende Crescita</span></button><i class="piu abb-segno" aria-hidden="true"></i>
+          <div class="abb-tendina" id="abb-tendina-crescita" hidden><div class="abb-tendina-in">
+            <ul class="abb-essenziali"><li style="--n:0">Crescita social e report mensile</li><li style="--n:1">Riprese dal vivo ed editing</li><li style="--n:2">Reel e stories</li><li style="--n:3">1 reel con l’IA a settimana</li></ul>
+            <a class="abb-scrivici" style="--n:4" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%E2%80%99abbonamento%20Crescita" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
+          </div></div>
           <div class="abb-opz-slot" id="abb-opz-slot"><div>
             <button class="abb-opzione" id="abb-crescita-sito" type="button" aria-pressed="false" tabindex="-1">
               <span class="abb-opz-in"><span class="abb-opz-segno" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
@@ -1674,6 +1731,12 @@ html.corsa .corsa-palla{display:block}
           <div class="abb-testa"><h3>Enterprise</h3><span class="abb-badge">Il più completo</span></div>
           <p class="abb-desc">Tutto il marketing della tua attività, gestito da noi a 360°.</p>
           <p class="abb-prezzo"><b>2.600&nbsp;€</b><span class="abb-al"><span class="abb-m">/ mese</span><span class="abb-pc">al mese</span></span></p>
+          <!-- r4 (21/11, Niccolò) · solo telefono: toccando la scheda si apre la tendina con l’essenziale e «Scrivici» (script «Pila e tendine») -->
+          <button class="abb-tocca" type="button" aria-expanded="false" aria-controls="abb-tendina-enterprise"><span class="sr">Cosa comprende Enterprise</span></button><i class="piu abb-segno" aria-hidden="true"></i>
+          <div class="abb-tendina" id="abb-tendina-enterprise" hidden><div class="abb-tendina-in">
+            <ul class="abb-essenziali"><li style="--n:0">Sito web o <span class="nw">e-commerce</span></li><li style="--n:1">Social gestiti a 360°</li><li style="--n:2">3 reel con l’IA a settimana</li><li style="--n:3">Google Ads e report mensile</li></ul>
+            <a class="abb-scrivici" style="--n:4" href="https://wa.me/393520338377?text=Ciao%2C%20mi%20interessa%20l%E2%80%99abbonamento%20Enterprise" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
+          </div></div>
           <div class="abb-comprende">
             <p class="abb-titoletto">Comprende</p>
             <ul class="abb-lista">
@@ -1831,6 +1894,11 @@ html.corsa .corsa-palla{display:block}
    ?volo=js) le muove questo script a ogni fotogramma. Si rimisura al cambio di misura della finestra, dell'apertura e del
    marchio della testata, e quando i font sono caricati. Con «Riduci movimento»: niente volo, testata completa da subito e
    V grande ferma nell'apertura. Solo transform e opacity.
+   r4 (21/11, Niccolò: «la V su 0a mettila, sennò uno apre e legge "eniello"»): la V della TESTATA si vede da subito e
+   resta ferma. La V che vola fa lo stesso percorso e arriva esattamente sopra di lei; appena arrivata sparisce del tutto
+   (opacità 0 e visibility:hidden), un poco prima della fine del percorso (SPEGNI_V, quando manca meno di mezzo pixel),
+   così non c'è mai un fotogramma con le due V una sull'altra a bordi più spessi. Tornando su riappare e rifà il percorso
+   al contrario. Il pallino come prima: quello della testata compare quando arriva quello che vola.
    r3 (21/11): SOLO SOTTO I 1024 PX. Da computer niente volo: la testata ha il marchio completo da subito (lo script toglie
    «vola»/«vola-on» e svuota le animazioni); se la finestra passa da una misura all'altra si rifà tutto ===== */
 (function(){
@@ -1844,7 +1912,7 @@ html.corsa .corsa-palla{display:block}
   try {
     var forzaJS = /[?&]volo=js(?:&|$)/.test(location.search);
     var conCSS = !forzaJS && !!(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()') && CSS.supports('animation-range: 0px 1px'));
-    var FINE_V = .5, INIZIO_P = .08, FINE_P = .6, N = 64;
+    var FINE_V = .5, INIZIO_P = .08, FINE_P = .6, N = 64, SPEGNI_V = .985;   /* r4: la V che vola si spegne al 98,5 % del suo percorso */
     var fv = hv.cloneNode(true), fp = hp.cloneNode(true);
     fv.id = 'volo-v'; fp.id = 'volo-pl'; fv.classList.add('volo'); fp.classList.add('volo');
     document.body.appendChild(fv); document.body.appendChild(fp);
@@ -1877,6 +1945,8 @@ html.corsa .corsa-palla{display:block}
     M = { v: o(a, A, 0, Math.round(Hh * FINE_V), true, dyV), p: o(b, B, Math.round(Hh * INIZIO_P), Math.round(Hh * FINE_P), false), Hh: Hh };
   }
   function morbida(p){ return .5 - .5 * Math.cos(Math.PI * c01(p)); }
+  /* r4: a che punto dello scorrimento si spegne la V che vola (SPEGNI_V del percorso, in px interi) */
+  function spegniV(){ return Math.round(M.v.s1 * SPEGNI_V); }
   /* dove sta la copia a scorrimento s (in px dello schermo): [x, y, scala] dell'angolo in alto a sinistra.
      y: prima del via segue la pagina (y0 − s); poi una curva di Hermite che parte alla velocità della pagina e arriva
      ferma su Y (pendenza limitata a −3 perché non salga oltre la testata e torni giù).
@@ -1904,9 +1974,12 @@ html.corsa .corsa-palla{display:block}
     var g = '-' + gen;
     t += kf('volo-v' + g, M.v) + kf('volo-p' + g, M.p);
     t += '@keyframes volo-via' + g + '{from{opacity:1}to{opacity:0}}@keyframes volo-in' + g + '{from{opacity:0}to{opacity:1}}';
-    t += una('#volo-v', 'volo-v' + g + ' 1ms linear both,volo-via' + g + ' 1ms steps(1,jump-end) both', M.v.s1);
+    t += '@keyframes volo-spegni' + g + '{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}';
+    /* r4: la V che vola ha due fasce: il percorso (0 → s1) e lo spegnimento (scatta a SPEGNI_V · s1); la V della testata non
+       ha animazioni (si vede sempre) */
+    t += '#volo-v{animation:volo-v' + g + ' 1ms linear both,volo-spegni' + g + ' 1ms steps(1,jump-end) both;animation-timeline:' + TL + ',' + TL +
+         ';animation-range:0px ' + M.v.s1 + 'px,0px ' + spegniV() + 'px}';
     t += una('#volo-pl', 'volo-p' + g + ' 1ms linear both,volo-via' + g + ' 1ms steps(1,jump-end) both', M.p.s1);
-    t += una('#marchio-testata .vv', 'volo-in' + g + ' 1ms steps(1,jump-end) both', M.v.s1);
     t += una('#marchio-testata .pl', 'volo-in' + g + ' 1ms steps(1,jump-end) both', M.p.s1);
     stile.textContent = t;
   }
@@ -1917,7 +1990,7 @@ html.corsa .corsa-palla{display:block}
     var s = window.scrollY || 0;
     scrivi('tv', tr(pos(M.v, s)), function(v){ fv.style.transform = v; });
     scrivi('tp', tr(pos(M.p, s)), function(v){ fp.style.transform = v; });
-    scrivi('av', s >= M.v.s1, function(x){ fv.style.opacity = x ? '0' : '1'; tv.style.opacity = x ? '1' : '0'; });
+    scrivi('av', s >= spegniV(), function(x){ fv.style.opacity = x ? '0' : '1'; fv.style.visibility = x ? 'hidden' : ''; });   /* r4: la V della testata non si tocca */
     scrivi('ap', s >= M.p.s1, function(x){ fp.style.opacity = x ? '0' : '1'; tp.style.opacity = x ? '1' : '0'; });
   }
   function chiedi(){ if (!raf) raf = requestAnimationFrame(disegna); }
@@ -1925,7 +1998,7 @@ html.corsa .corsa-palla{display:block}
     rq = 0;
     if (daPC.matches) {   /* r3: da computer niente volo, marchio completo nella testata */
       M = null; stile.textContent = ''; ultimo = {};
-      fv.style.transform = fp.style.transform = fv.style.opacity = fp.style.opacity = tv.style.opacity = tp.style.opacity = '';
+      fv.style.transform = fp.style.transform = fv.style.opacity = fp.style.opacity = tv.style.opacity = tp.style.opacity = fv.style.visibility = '';
       html.classList.remove('vola-on', 'vola'); return;
     }
     misura();
@@ -1942,7 +2015,7 @@ html.corsa .corsa-palla{display:block}
   addEventListener('load', chiediRifai);
   rifai();
   /* per gli strumenti di prova */
-  window.VOLO = { modo: conCSS ? 'css' : 'js', misure: function(){ return M; }, pos: function(q, s){ return M ? pos(M[q], s) : null; }, rifai: rifai };
+  window.VOLO = { modo: conCSS ? 'css' : 'js', misure: function(){ return M; }, pos: function(q, s){ return M ? pos(M[q], s) : null; }, rifai: rifai, spegniV: function(){ return M ? spegniV() : null; } };
 })();
 </script>
 <script>
@@ -2000,43 +2073,180 @@ html.corsa .corsa-palla{display:block}
 })();
 </script>
 <script>
-/* ===== Pila (r2, solo telefono): gli abbonamenti «a cassette», come i servizi della landing r40 ==========================
-   Le schede sono sticky in alto (CSS); mentre la successiva sale sopra, quella sotto si rimpicciolisce fino al 94 % e si
-   scurisce (velo ::after fino al 55 %). Legato alla posizione di scorrimento. Le schede hanno tutte l'altezza della più alta.
-   Da computer niente; con «Riduci movimento» restano solo le schede che si fermano in alto (sticky), senza rimpicciolire ===== */
+/* ===== Pila e tendine (r4, 21/11; la «Pila» è della r2), solo telefono: gli abbonamenti «a cassette» ======================
+   PILA (come la r2/r3): le schede sono sticky in alto (CSS); mentre la successiva sale sopra, quella sotto si rimpicciolisce
+   fino al 94 % e si scurisce (velo ::after fino al 55 %). Legato alla posizione di scorrimento. Le schede chiuse sono tutte
+   alte uguali (--corpo): r4, l'altezza si pareggia con la figura a destra (min-height), così la tendina si aggiunge sotto
+   senza cambiare il corpo della scheda.
+   TENDINE (r4, Niccolò 21/11): toccando una scheda (pulsante .abb-tocca, aria-expanded/aria-controls) sotto il prezzo si apre
+   la tendina; toccandone un'altra la prima si chiude; toccando la stessa si chiude. Apertura e chiusura morbide come le
+   tendine del sito («Scopri i dettagli»: altezza, 460 ms ad aprire e 340 a chiudere, cubic-bezier(.16,1,.3,1), voci che
+   entrano una dopo l'altra); con «Riduci movimento» istantanee. Come resta a posto la pila:
+   1. si spingono giù le schede successive: la tendina sta dentro la scheda, quindi le schede dopo scendono quanto è alta;
+      se al tocco la scheda dopo copriva già una parte di quella aperta (cioè la scheda aperta era ferma in alto e si era già
+      scorso oltre), la scheda dopo prende in più un margine sopra (k) pari a quanto si era scorso: la tendina appena aperta
+      si vede tutta, con la scheda dopo a 14 px sotto, come quando la scheda si era appena fermata;
+   2. scorrendo, la scheda dopo sale e copre la tendina dal basso; negli ultimi 90 px prima che la tendina possa spuntare
+      sotto la scheda dopo (che è più bassa) la tendina sfuma (solo opacità) e sparisce del tutto. Da lì la pila è quella di sempre: corpo uguale,
+      velo e rimpicciolimento uguali. Tornando su la tendina ricompare;
+   3. il contenitore della pila è più alto della tendina: perché la scheda aperta non venga spinta su prima delle altre alla
+      fine della pila, finché la tendina è sparita la si riporta giù (translateY) dove starebbe da chiusa;
+   4. chiudendo, la tendina e il margine k tornano a zero con la stessa curva: la pila torna quella di prima.
+   Durante l'animazione l'ancoraggio dello scorrimento del browser è spento (Chrome sposterebbe la pagina).
+   Da computer niente (le tendine non ci sono). Con «Riduci movimento»: niente rimpicciolire né scurire, tendine istantanee;
+   la tendina coperta sparisce lo stesso (opacità legata allo scorrimento, niente movimento) ===== */
 (function(){
   'use strict';
-  var carte = [].slice.call(document.querySelectorAll('#abb-piani > .abb-piano')); if (carte.length < 2 || !window.matchMedia) return;
+  var piani = document.getElementById('abb-piani');
+  var carte = [].slice.call(document.querySelectorAll('#abb-piani > .abb-piano')); if (!piani || carte.length < 2 || !window.matchMedia) return;
   var fermo = matchMedia('(prefers-reduced-motion: reduce)'), tel = matchMedia('(max-width:1023px)');
-  var cime = [], alte = [], ultimo = [], inCoda = false;
-  /* al telefono le schede sono tutte alte quanto la più alta: una scheda più alta di quella che le sale sopra spunterebbe sotto */
+  var GAP = 14, CURVA = 'cubic-bezier(.16,1,.3,1)', APRI = 460, CHIUDI = 340, SFUMA = 90;   /* SFUMA: px di scorrimento in cui la tendina coperta sfuma */
+  var tocchi = carte.map(function(c){ return c.querySelector('.abb-tocca'); });
+  var tende = carte.map(function(c){ return c.querySelector('.abb-tendina'); });
+  var interni = tende.map(function(t){ return t && t.querySelector('.abb-tendina-in'); });
+  var figure = carte.map(function(c){ return c.querySelector('.abb-fig'); });
+  var cime = [], ultimo = [], ultimoD = [], ultimaO = [], inCoda = false, H = 0, aperta = -1, anim = [], giro = 0;
+  function px(v){ return parseFloat(v) || 0; }
+  function clamp(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+  /* al telefono il corpo delle schede (senza tendina) è alto quanto il più alto: una scheda più alta di quella che le sale
+     sopra spunterebbe sotto. r4: si pareggia con la min-height della figura (occupa le righe 1-3), non della scheda */
   function misura(){
-    carte.forEach(function(c){ c.style.minHeight = ''; });
-    if (tel.matches) { var mx = 0; carte.forEach(function(c){ mx = Math.max(mx, c.offsetHeight); }); carte.forEach(function(c){ c.style.minHeight = mx + 'px'; }); }
-    carte.forEach(function(c, i){ cime[i] = parseFloat(getComputedStyle(c).top) || 0; alte[i] = c.offsetHeight || 1; });
+    figure.forEach(function(f){ if (f) f.style.minHeight = ''; });
+    piani.style.removeProperty('--corpo'); H = 0;
+    if (tel.matches) {
+      carte.forEach(function(c, i){ var t = tende[i]; H = Math.max(H, c.offsetHeight - (t && !t.hidden ? t.offsetHeight : 0)); });
+      carte.forEach(function(c, i){
+        var f = figure[i]; if (!f) return;
+        var cs = getComputedStyle(c), fs = getComputedStyle(f);
+        f.style.minHeight = (H - px(cs.paddingTop) - px(cs.paddingBottom) - px(fs.marginTop) - px(fs.marginBottom)) + 'px';
+      });
+      piani.style.setProperty('--corpo', H + 'px');
+    }
+    carte.forEach(function(c, i){ cime[i] = px(getComputedStyle(c).top); });
   }
+
   function pila(){
     inCoda = false;
-    var spento = fermo.matches || !tel.matches;
-    for (var i = 0; i < carte.length; i++) {
-      var p = 0, dopo = carte[i + 1];
-      if (!spento && dopo) p = Math.max(0, Math.min(1, 1 - (dopo.getBoundingClientRect().top - cime[i]) / alte[i]));
-      p = Math.round(p * 1000) / 1000;
-      if (p !== ultimo[i]) { ultimo[i] = p; carte[i].style.transform = p ? 'scale(' + (1 - p * .06).toFixed(4) + ')' : ''; if (p) carte[i].style.setProperty('--p', (p * .55).toFixed(3)); else carte[i].style.removeProperty('--p'); }
+    var n = carte.length, telefono = tel.matches, spento = fermo.matches || !telefono;
+    var tops = carte.map(function(c, i){ return c.getBoundingClientRect().top - (ultimoD[i] || 0); });   // senza il nostro translateY
+    var fondo = piani.getBoundingClientRect().bottom;
+    for (var i = 0; i < n; i++) {
+      var p = 0, d = 0, o = 1;
+      if (telefono && i + 1 < n) {
+        if (!spento) p = clamp(1 - (tops[i + 1] - cime[i]) / (H || 1));
+        if (i === aperta && tende[i] && !tende[i].hidden) {
+          /* d: alla fine della pila il contenitore spingerebbe su la scheda aperta (è più alta) prima delle altre; la si tiene
+             dove starebbe da chiusa. Allora la scheda dopo le sta già sopra a 12-14 px e la tendina è sparita */
+          if (tops[i] < cime[i] - .5) d = Math.max(0, Math.min(cime[i], fondo - H - GAP) - tops[i]);
+          var alta = carte[i].offsetHeight, fine = Math.max(tende[i].offsetTop, alta - H), inizio = Math.min(alta, fine + SFUMA), rel = tops[i + 1] - (tops[i] + d);
+          o = inizio > fine ? clamp((rel - fine) / (inizio - fine)) : (rel >= inizio ? 1 : 0);
+        }
+      }
+      p = Math.round(p * 1000) / 1000; d = Math.round(d * 10) / 10; o = Math.round(o * 1000) / 1000;
+      if (p !== ultimo[i] || d !== (ultimoD[i] || 0)) {
+        ultimo[i] = p; ultimoD[i] = d;
+        carte[i].style.transform = ((d ? 'translateY(' + d + 'px) ' : '') + (p ? 'scale(' + (1 - p * .06).toFixed(4) + ')' : '')).trim();
+        if (p) carte[i].style.setProperty('--p', (p * .55).toFixed(3)); else carte[i].style.removeProperty('--p');
+      }
+      if (tende[i] && o !== ultimaO[i]) {
+        ultimaO[i] = o;
+        tende[i].style.opacity = o < 1 ? String(o) : '';
+        tende[i].style.visibility = o <= 0 ? 'hidden' : '';   /* sparita: niente tocchi né lettori di schermo */
+      }
     }
   }
   function chiedi(){ if (!inCoda) { inCoda = true; requestAnimationFrame(pila); } }
   function rifai(){ misura(); pila(); }
+
+  /* ── tendine ── */
+  function segna(i, si){
+    carte[i].classList.toggle('aperta', si);
+    if (tocchi[i]) tocchi[i].setAttribute('aria-expanded', String(si));
+  }
+  function pulisci(){   /* stato fermo, senza animazioni in corso */
+    giro++;
+    anim.forEach(function(a){ a.cancel(); }); anim = [];
+    carte.forEach(function(c, j){ if (interni[j]) interni[j].style.height = ''; });
+    document.documentElement.style.overflowAnchor = '';
+  }
+  function chiudiTutto(){   /* passando al computer: tutto chiuso, subito */
+    pulisci();
+    carte.forEach(function(c, j){ segna(j, false); if (tende[j]) { tende[j].hidden = true; tende[j].classList.remove('apre'); } c.style.marginTop = ''; });
+    aperta = -1;
+  }
+  function cambia(i){
+    if (!tel.matches || !tende[i]) return;
+    var apre = aperta === i ? -1 : i;
+    var subito = fermo.matches || !document.documentElement.animate;
+    /* 1. come sono adesso (anche a metà di un'animazione) */
+    var prima = carte.map(function(c, j){
+      var t = tende[j];
+      return { h: t && !t.hidden ? px(getComputedStyle(interni[j]).height) : 0, mt: j ? Math.max(GAP, px(getComputedStyle(c).marginTop)) : 0 };
+    });
+    pulisci();
+    /* 2. come saranno alla fine (una sola aperta, o nessuna): si misura la pagina già nello stato finale */
+    carte.forEach(function(c, j){
+      c.style.marginTop = '';
+      if (j === apre || !tende[j]) return;
+      segna(j, false); tende[j].hidden = true; tende[j].classList.remove('apre');
+    });
+    var alto = 0, k = 0;
+    if (apre >= 0) {
+      segna(apre, true); tende[apre].hidden = false; tende[apre].style.opacity = ''; tende[apre].style.visibility = ''; ultimaO[apre] = 1;
+      alto = interni[apre].offsetHeight;
+      if (apre + 1 < carte.length) {
+        var g = piani.getBoundingClientRect().top;   /* dove sarebbe la scheda aperta senza sticky */
+        for (var j = 0; j < apre; j++) g += carte[j].offsetHeight + GAP;
+        k = Math.max(0, Math.round(cime[apre] - g));
+        if (k) carte[apre + 1].style.marginTop = (GAP + k) + 'px';
+      }
+    }
+    aperta = apre;
+    if (subito) { pila(); return; }
+    /* 3. dal prima al dopo, con la curva delle tendine del sito */
+    var opz = { duration: apre >= 0 ? APRI : CHIUDI, easing: CURVA };
+    document.documentElement.style.overflowAnchor = 'none';
+    carte.forEach(function(c, j){   /* quelle che si chiudono (anche se erano a metà) */
+      if (j === apre || !tende[j] || prima[j].h <= .5) return;
+      tende[j].hidden = false; interni[j].style.height = '0px';
+      var ac = interni[j].animate({ height: [prima[j].h + 'px', '0px'] }, opz);
+      ac.onfinish = function(){ if (aperta !== j) tende[j].hidden = true; interni[j].style.height = ''; };
+      anim.push(ac);
+    });
+    if (apre >= 0) {
+      tende[apre].classList.remove('apre'); void tende[apre].offsetWidth; tende[apre].classList.add('apre');
+      anim.push(interni[apre].animate({ height: [prima[apre].h + 'px', alto + 'px'] }, opz));
+    }
+    carte.forEach(function(c, j){
+      if (!j) return;
+      var mt = Math.max(GAP, px(getComputedStyle(c).marginTop));
+      if (Math.abs(mt - prima[j].mt) > .5) anim.push(c.animate({ marginTop: [prima[j].mt + 'px', mt + 'px'] }, opz));
+    });
+    var mio = giro;
+    (function passo(){
+      if (mio !== giro) return;
+      pila();
+      if (anim.some(function(a){ return a.playState === 'running' || a.playState === 'pending'; })) requestAnimationFrame(passo);
+      else { document.documentElement.style.overflowAnchor = ''; anim = []; pila(); }
+    })();
+  }
+  tocchi.forEach(function(b, i){ if (b) b.addEventListener('click', function(){ cambia(i); }); });
+
   addEventListener('scroll', chiedi, { passive: true });
   var rq = 0; function chiediRifai(){ if (!rq) rq = requestAnimationFrame(function(){ rq = 0; rifai(); }); }
   addEventListener('resize', chiediRifai);
-  if (tel.addEventListener) tel.addEventListener('change', chiediRifai);
+  function cambioMisura(){ if (!tel.matches) chiudiTutto(); chiediRifai(); }
+  if (tel.addEventListener) tel.addEventListener('change', cambioMisura); else if (tel.addListener) tel.addListener(cambioMisura);
   /* si osserva la larghezza della pila (non l'altezza delle schede: cambiandola qui si rientrerebbe in un giro) */
   var largo0 = 0;
-  if ('ResizeObserver' in window) new ResizeObserver(function(es){ var w = Math.round(es[0].contentRect.width); if (w !== largo0) { largo0 = w; chiediRifai(); } }).observe(carte[0].parentNode);
+  if ('ResizeObserver' in window) new ResizeObserver(function(es){ var w = Math.round(es[0].contentRect.width); if (w !== largo0) { largo0 = w; chiediRifai(); } }).observe(piani);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(rifai);
   rifai();
-  window.PILA = { stato: function(){ return carte.map(function(c){ var r = c.getBoundingClientRect(); return { id: c.id, top: Math.round(r.top), alta: Math.round(r.height), trasf: c.style.transform || '', p: c.style.getPropertyValue('--p') || '0' }; }); } };
+  window.PILA = {
+    stato: function(){ return carte.map(function(c, i){ var r = c.getBoundingClientRect(); return { id: c.id, top: Math.round(r.top * 10) / 10, alta: c.offsetHeight, corpo: H, trasf: c.style.transform || '', p: c.style.getPropertyValue('--p') || '0', aperta: i === aperta, o: tende[i] ? (tende[i].hidden ? null : +(tende[i].style.opacity || 1)) : null, vis: tende[i] ? tende[i].style.visibility : '', mt: c.style.marginTop || '' }; }); },
+    cambia: cambia, aperta: function(){ return aperta; }
+  };
 })();
 </script>
 <script>
@@ -2292,17 +2502,50 @@ html.corsa .corsa-palla{display:block}
   })();
 
   /* r3 (21/11, Niccolò): al telefono la scala di Crescita si forma da sola, come nella landing: i due blocchi vengono
-     appoggiati (CSS, abb-poggia) quando la figura si vede almeno per il 60 %, una volta sola; poi resta formata.
-     Con «Riduci movimento» è già formata e ferma (CSS). Da computer resta col mouse sopra (qui sopra) */
+     appoggiati (CSS, abb-poggia), una volta sola; poi resta formata. Con «Riduci movimento» è già formata e ferma (CSS).
+     Da computer resta col mouse sopra (qui sopra).
+     r4 (21/11, Niccolò: «vedo solo la fine»): nella r3 partiva quando la figura si vedeva per il 60 %, cioè mentre la scheda
+     saliva ancora dal fondo dello schermo; ora parte solo quando la figura si vede davvero ed è ferma:
+     · la figura è tutta dentro lo schermo (sotto la testata, sopra il fondo);
+     · la scheda dopo (Enterprise) non copre la parte della figura dove cadono i blocchi (il 72 % alto del disegno);
+     · la scheda di Crescita è ferma: o è ferma al suo posto nella pila (sticky), oppure la pagina si è fermata con la cima
+       della figura sopra il 75 % dell'altezza dello schermo (chi si ferma con Crescita a metà schermo);
+     e tutto questo resta vero per 150 ms (se nel frattempo la scheda si muove, i 150 ms ripartono) */
   (function(){
     var f = document.getElementById('abb-fig-scala'); if (!f || !window.matchMedia) return;
-    var tel = matchMedia('(max-width:1023px)');
-    if (!('IntersectionObserver' in window)) { f.classList.add('caduta'); return; }
-    var vista = false;
-    function forse(){ if (vista && tel.matches && !f.classList.contains('caduta')) { f.classList.add('caduta'); io.disconnect(); } }
-    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ vista = e.isIntersecting && e.intersectionRatio >= .6; }); forse(); }, { threshold: [0, .6, 1] });
-    io.observe(f);
-    if (tel.addEventListener) tel.addEventListener('change', forse); else if (tel.addListener) tel.addListener(forse);
+    var tel = matchMedia('(max-width:1023px)'), carta = f.closest('.abb-piano'), dopo = carta && carta.nextElementSibling;
+    var testata = document.getElementById('testata'), timer = 0, dove = 0, inCoda = false, finito = false;
+    var ATTESA = 150, CADONO = .72, CIMA = .75;
+    /* 0 = no; 1 = si vede e la cima è sopra il 75 % (va bene se non si muove); 2 = si vede ed è ferma nella pila */
+    function giusta(){
+      if (!tel.matches || fermo.matches) return 0;
+      var r = f.getBoundingClientRect(), vh = innerHeight, sopra = testata ? testata.getBoundingClientRect().bottom : 0;
+      if (r.height < 20) return 0;
+      if (r.top < sopra - 1 || r.bottom > vh + 1) return 0;
+      if (dopo && dopo.getBoundingClientRect().top < r.top + r.height * CADONO) return 0;
+      if (Math.abs(carta.getBoundingClientRect().top - (parseFloat(getComputedStyle(carta).top) || 0)) < 1.5) return 2;
+      return r.top <= vh * CIMA ? 1 : 0;
+    }
+    function forma(){ finito = true; f.classList.add('caduta'); removeEventListener('scroll', chiedi); removeEventListener('resize', chiedi); }
+    function arma(){ dove = carta.getBoundingClientRect().top; timer = setTimeout(scatta, ATTESA); }
+    function scatta(){
+      timer = 0; if (finito) return;
+      var g = giusta();
+      if (g === 2 || (g === 1 && Math.abs(carta.getBoundingClientRect().top - dove) < 1)) forma(); else guarda();
+    }
+    function guarda(){
+      inCoda = false; if (finito) return;
+      var g = giusta();
+      if (!g) { if (timer) { clearTimeout(timer); timer = 0; } return; }
+      if (g === 1 && timer && Math.abs(carta.getBoundingClientRect().top - dove) >= 1) { clearTimeout(timer); timer = 0; }   /* si muove: si riparte */
+      if (!timer) arma();
+    }
+    function chiedi(){ if (!inCoda) { inCoda = true; requestAnimationFrame(guarda); } }
+    if (f.classList.contains('caduta')) return;
+    addEventListener('scroll', chiedi, { passive: true }); addEventListener('resize', chiedi);
+    if (tel.addEventListener) tel.addEventListener('change', chiedi); else if (tel.addListener) tel.addListener(chiedi);
+    chiedi();
+    window.SCALA = { giusta: giusta, formata: function(){ return finito || f.classList.contains('caduta'); } };
   })();
 })();
 </script>

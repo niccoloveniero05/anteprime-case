@@ -42,7 +42,8 @@
        copertoDa un cerchio: la lettera non si vede quando quel cerchio copre tutta la parte;
        riq       [sinistra, su, destra, giù] in frazioni del riquadro: dove sta davvero il disegno (la V grande) o dove il
                  pannello si vede ancora (i pannelli del Virtual Assistant e della Campagna sfumano nel fondo: sotto c'è il titolo). */
-  /* r3 (21/11): due tabelle. TABELLA_TEL = quella della r2, identica (sotto i 1024 px la pagina è la r2); TABELLA_PC = le
+  /* r4 (21/11): al telefono tre righe nuove (4p il «+», 4q la tendina, 4r «Scrivici»); il resto come la r3.
+     r3 (21/11): due tabelle. TABELLA_TEL = quella della r2, identica (sotto i 1024 px la pagina è la r2); TABELLA_PC = le
      sezioni del computer rinumerate (da 1024 px). Si sceglie all'avvio; se la finestra passa la soglia si rifà (in fondo) */
   function TABELLA_ORA() {
     var pc = false; try { pc = matchMedia('(min-width:1024px)').matches; } catch (e) {}
@@ -57,8 +58,8 @@
     ['#inizio', '1', 'L’apertura', { riq: [0, 0.11, 1, 1] }],   /* sotto la testata, non sopra il menu */
     ['#volo-v, #eroe-v', '1a', 'La V grande del marchio: scorrendo vola nella V della testata (0a)', { riq: [0.12, 0.2, 0.95, 0.92] }],
     ['#volo-pl, #eroe-pl', '1b', 'Il pallino arancio: scorrendo vola tra «Veniello» e «studio» nella testata (0a)'],
-    ['#inizio .eroe-frase', '1c', '«Fatti trovare. Fatti scegliere.»'],
-    ['#inizio .eroe-sotto', '1d', '«Veniello Studio porta la tua attività online e la fa crescere.»'],
+    ['#inizio .eroe-frase', '1c', '«Fatti trovare. Fatti scegliere.» (r4: a sinistra; nella variante r4-centro al centro)'],
+    ['#inizio .eroe-sotto', '1d', '«Veniello Studio porta la tua attività online e la fa crescere: sito, Google, social e video, tutto da un solo studio.» (r4: a sinistra, 3 righe a 390 px)'],
 
     ['#come', '2', 'Come funziona'],
     ['#come .etichetta', '2a', 'L’etichetta «Come funziona»'],
@@ -111,6 +112,9 @@
     ['#abbonamenti .abb-dett', '4m', '«Dettagli +» (computer): apre il pannello'],
     ['.abb-pannello', '4n', 'Il pannello dei Dettagli (computer)', { resta: true }],
     ['#abbonamenti .abb-desc', '4o', 'La frase sotto il nome'],
+    ['#abbonamenti .abb-segno', '4p', 'r4, telefono: il «+» accanto al prezzo (diventa «−»): tutta la scheda si tocca e apre la tendina'],
+    ['#abbonamenti .abb-essenziali', '4q', 'r4, telefono: la tendina aperta, con le quattro voci essenziali del piano'],
+    ['#abbonamenti .abb-scrivici', '4r', 'r4, telefono: «Scrivici» nella tendina (apre WhatsApp col messaggio del piano)'],
 
     ['#partner', '5', 'Partner'],
     ['#partner .etichetta', '5a', 'L’etichetta «Partner»'],
