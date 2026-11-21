@@ -14,7 +14,7 @@
   var TEMA = [
     ['#F5F4EF', 1, 'testo (bianco caldo)'], ['#F5F4EF', .62, 'testo 2 (grigio)'], ['#F5F4EF', .42, 'testo 3 (grigio chiaro)'],
     ['#FF5A1F', 1, 'arancio Veniello'], ['#FFB08F', 1, 'arancio chiaro'], ['#100F09', 1, 'fondo pagina'],
-    ['#ECEBE5', 1, 'pulsante chiaro'], ['#1A1913', 1, 'superficie'], ['#18170F', 1, 'fondo schede servizi'], ['#1C1B14', 1, 'fondo schede abbonamenti (telefono)'], ['#15140F', 1, 'fondo pannello Dettagli'], ['#39FF14', 1, 'verde delle prove']
+    ['#ECEBE5', 1, 'pulsante chiaro'], ['#1A1913', 1, 'superficie'], ['#18170F', 1, 'fondo schede servizi'], ['#1C1B14', 1, 'fondo schede abbonamenti (telefono)'], ['#15140F', 1, 'fondo pannello Dettagli'], ['#211B15', 1, 'scheda Creazione Contenuti (computer)'], ['#191C18', 1, 'scheda Sito Web (computer)'], ['#1D1A20', 1, 'scheda Virtual Assistant (computer)'], ['#39FF14', 1, 'verde delle prove']
   ];
 
   function hex2(n) { return ('0' + Math.round(n).toString(16)).slice(-2).toUpperCase(); }

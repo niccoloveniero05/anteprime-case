@@ -42,7 +42,13 @@
        copertoDa un cerchio: la lettera non si vede quando quel cerchio copre tutta la parte;
        riq       [sinistra, su, destra, giù] in frazioni del riquadro: dove sta davvero il disegno (la V grande) o dove il
                  pannello si vede ancora (i pannelli del Virtual Assistant e della Campagna sfumano nel fondo: sotto c'è il titolo). */
-  var TABELLA = [
+  /* r3 (21/11): due tabelle. TABELLA_TEL = quella della r2, identica (sotto i 1024 px la pagina è la r2); TABELLA_PC = le
+     sezioni del computer rinumerate (da 1024 px). Si sceglie all'avvio; se la finestra passa la soglia si rifà (in fondo) */
+  function TABELLA_ORA() {
+    var pc = false; try { pc = matchMedia('(min-width:1024px)').matches; } catch (e) {}
+    return pc ? TABELLA_PC : TABELLA_TEL;
+  }
+  var TABELLA_TEL = [
     ['#testata', '0', 'La testata fissa in alto'],
     ['#marchio-testata', '0a', 'Il marchio «Veniello·studio» piccolo nella testata (V e pallino arrivano dall’apertura)'],
     ['#testata nav', '0b', 'Il menu (Come funziona, Servizi, Abbonamenti, Partner, Domande): solo da computer'],
@@ -142,6 +148,108 @@
     ['#piede .piede-marchio', '8a', 'Il marchio grande «Veniello·studio» (il puntino resta arancio, fermo)'],
     ['#piede .piede-riga', '8b', 'La riga «Siti, Google, social e video · … · Niente cookie»']
   ];
+  var TABELLA_PC = [
+    ['#testata', '0', 'La testata fissa in alto'],
+    ['#marchio-testata', '0a', 'Il marchio «Veniello·studio» completo (da computer è fermo: niente V che vola)'],
+    ['#testata nav', '0b', 'Il menu (Come funziona, Servizi, Abbonamenti, Partner, Domande)'],
+    ['#testata-scrivi', '0c', 'Il pulsante «Scrivici» della testata'],
+
+    ['#inizio', '1', 'L’apertura (come la testata di Spotify)', { riq: [0, 0.11, 1, 1] }],
+    ['#inizio .eroe-frase', '1a', '«Fatti trovare. Fatti scegliere.»'],
+    ['#inizio .eroe-sotto', '1b', '«Veniello Studio porta la tua attività online e la fa crescere.»'],
+    ['#cerchio-pc .cerchio-disco', '1c', 'Il logo animato: il pallino arancio del marchio in grande, con la luce morbida che si muove dentro; scorrendo si sposta e si rimpicciolisce', { cerchio: true }],
+    ['#cerchio-pc .cerchio-v', '1d', 'La V del marchio, scura, sopra il cerchio (come le barre nere di Spotify)', { riq: [0.2, 0.18, 0.8, 0.82] }],
+
+    ['#come', '2', 'Come funziona (al posto di «Qui la musica non si ferma mai»)'],
+    ['#come .etichetta', '2a', 'L’etichetta «Come funziona»'],
+    ['#t-come', '2b', 'Il titolo «Prima lo vedi. Poi decidi.»: si accende parola per parola scorrendo (da grigio a bianco)'],
+    ['#rotaia', '2c', 'La riga dei tre punti (Ci scrivi · Anteprima · Online), ci corre la pallina (2d)'],
+    ['#corsa-palla', '2d', 'La pallina che corre sulla riga (2c) scorrendo e si ferma in fondo a destra'],
+    ['#come .passo:nth-child(1)', '2e', 'Passo «Ci scrivi»: icona a linee, titolo, frase'],
+    ['#come .passo:nth-child(2)', '2f', 'Passo «Ti prepariamo l’anteprima» (Gratis)'],
+    ['#come .passo:nth-child(3)', '2g', 'Passo «Se ti piace, va online»'],
+    ['#come-scrivi', '2h', 'Il pulsante «Scrivici su WhatsApp»'],
+    ['#come .wrap > .sotto', '2i', 'La frase piccola sotto il pulsante («Il sito e il Virtual Assistant li vedi prima in anteprima…»)'],
+
+    ['#servizi > .wrap > .etichetta, #t-servizi, #servizi > .wrap > .sotto', '3', 'Servizi (al posto di «Pensato per i tuoi gusti»)', { riq: [-0.05, 0, 1, 1] }],
+    ['#servizi > .wrap > .etichetta', '3a', 'L’etichetta «Servizi»'],
+    ['#t-servizi', '3b', 'Il titolo «Tutto quello che serve per farti scegliere.»: si accende parola per parola scorrendo'],
+    ['#servizi > .wrap > .sotto', '3c', '«Prendi solo quello che ti serve…»'],
+    ['#contenuti', '3d', 'Scheda Creazione Contenuti (fondo bruno scuro): si ferma in alto e la successiva le sale sopra', { resta: true }],
+    ['#montaggio', '3e', 'Il riquadro incassato: lo spot nel programma di montaggio (la linea arancio segue il video)', { resta: true }],
+    ['#t-contenuti', '3f', 'Il titolo «Creazione Contenuti.»'],
+    ['#contenuti > .sotto', '3g', '«Video, foto e stories per i tuoi social, anche con l’IA.»'],
+    ['#contenuti > .dettagli', '3h', '«Scopri i dettagli +» (e l’elenco che si apre)'],
+    ['#sito', '3i', 'Scheda Sito Web (fondo verde quasi nero)', { resta: true }],
+    ['#sito .m-sito', '3j', 'Il riquadro incassato: l’anteprima animata del sito', { resta: true }],
+    ['#sito .sa-tel', '3k', 'L’anteprima: il telefono col mini-sito', { resta: true }],
+    ['#sito .sa-frase', '3l', 'L’anteprima: la frase («Completamente personalizzabile» → «E su tutti i tuoi dispositivi»)', { gruppo: 'frasi-sito' }],
+    ['#sito .sa-pc', '3m', 'L’anteprima: il computer (compare alla fine)'],
+    ['#t-sito', '3n', 'Il titolo «Sito Web.»'],
+    ['#sito > .sotto', '3o', '«Chi sei, cosa fai e un tasto per chiamarti.»'],
+    ['#sito > .dettagli', '3p', '«Scopri i dettagli +» (e l’elenco che si apre)'],
+    ['#va', '3q', 'Scheda Virtual Assistant (fondo prugna quasi nero)', { resta: true }],
+    ['#va .m-va', '3r', 'Il riquadro incassato: la chat di WhatsApp', { resta: true }],
+    ['#va .m-va .chat-testa', '3s', 'La testa della chat «AnomiaLabs · online»'],
+    ['#va .m-va .chat-flusso .chat-m', '3t', 'I messaggi della chat'],
+    ['#va .m-va .chat-rie', '3u', 'Il riquadro «Riepilogo per il titolare»'],
+    ['#va .m-va > .chip', '3v', 'L’etichetta «Esempio · WhatsApp»'],
+    ['#t-va', '3w', 'Il titolo «Virtual Assistant.»'],
+    ['#va > .sotto', '3x', '«Risponde ai tuoi clienti su WhatsApp, anche quando non puoi.»'],
+    ['#va > .dettagli', '3y', '«Scopri i dettagli +» (e l’elenco che si apre)'],
+    ['#servizi .nota', '3z', 'La nota «Siti, video e grafiche: lavori veri…»'],
+
+    ['#abbonamenti', '4', 'Abbonamenti'],
+    ['#abbonamenti > .wrap > .etichetta', '4a', 'L’etichetta «Abbonamenti»'],
+    ['#t-abb', '4b', 'Il titolo «Oppure scegli uno dei nostri abbonamenti.»: si accende parola per parola scorrendo'],
+    ['#abbonamenti > .wrap > .sotto', '4c', 'La frase breve sotto il titolo'],
+    ['#abb-presenza', '4d', 'Scheda Presenza (430 € al mese)', { resta: true }],
+    ['#abb-crescita', '4e', 'Scheda Crescita (850 € al mese, Consigliato)', { resta: true }],
+    ['#abb-enterprise', '4f', 'Scheda Enterprise (2.600 € al mese, Il più completo)', { resta: true }],
+    ['#abbonamenti .abb-fig', '4g', 'Le figure: blocco, scala (si forma col mouse sopra), sfera col nucleo arancio che gira'],
+    ['#abbonamenti .abb-testa', '4h', 'L’etichetta («Per iniziare / Consigliato / Il più completo») e il nome'],
+    ['#abbonamenti .abb-desc', '4i', 'La frase sotto il nome'],
+    ['#abbonamenti .abb-prezzo', '4j', 'Il prezzo'],
+    ['#abb-scopri', '4k', 'Il pulsante «Scopri gli abbonamenti →»: apre la landing nella stessa scheda'],
+    ['#abbonamenti .abb-note', '4l', 'Le due note piccole (consulenza gratis solo con un abbonamento, altrimenti 70 €; anteprima gratis di siti e landing page)'],
+
+    ['#partner', '5', 'Partner'],
+    ['#partner .etichetta', '5a', 'L’etichetta «Partner»'],
+    ['#t-partner', '5b', 'Il titolo «Chi ha scelto Veniello·studio.»'],
+    ['#partner .wrap > .sotto', '5c', '«Le attività con cui lavoriamo ogni mese.»'],
+    ['#partner .carosello > .card:nth-child(1)', '5d', 'Card Jué Club', { resta: true }],
+    ['#partner .carosello > .card:nth-child(2)', '5e', 'Card Elena Baldi Wedding Planner', { resta: true }],
+    ['#partner .carosello > .card:nth-child(3)', '5f', 'Card GB Oro', { resta: true }],
+    ['#partner .card-tua', '5g', 'Card arancio «La tua attività, qui.»', { resta: true }],
+
+    ['#domande', '6', 'Le domande'],
+    ['#domande .etichetta', '6a', 'L’etichetta «Domande»'],
+    ['#t-domande', '6b', 'Il titolo «Le domande che ci fanno tutti.»'],
+    ['#domande .faq > details:nth-of-type(1)', '6c', '«L’anteprima è davvero gratis?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(2)', '6d', '«Ci sono altre spese oltre al prezzo?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(3)', '6e', '«Il sito resta mio?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(4)', '6f', '«Quanto costa?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(5)', '6g', '«Le foto da dove le prendete?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(6)', '6h', '«Venite voi a fare le riprese?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(7)', '6i', '«In che zona lavorate?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(8)', '6j', '«Cosa devo fare io per avere il Virtual Assistant?»', { dentro: true }],
+    ['#domande .faq > details:nth-of-type(9)', '6k', '«Che differenza c’è tra abbonamenti e servizi?»', { dentro: true }],
+
+    ['#contatti', '7', 'Contatti'],
+    ['#contatti .etichetta', '7a', 'L’etichetta «Contatti»'],
+    ['#t-contatti', '7b', 'Il titolo «Vuoi vedere il tuo sito?»'],
+    ['#contatti .sotto', '7c', '«Scrivici su WhatsApp il nome della tua attività…»'],
+    ['#contatti .pillole > .pill-chiara', '7d', 'Il pulsante «Scrivici su WhatsApp»'],
+    ['#contatti .pillole > .pill-scura', '7e', 'Il pulsante «Chiama»'],
+    ['#contatti .recapito:nth-child(1)', '7f', 'Il riquadro del telefono (Giuseppe Fusciello)'],
+    ['#contatti .recapito:nth-child(2)', '7g', 'Il riquadro dell’email'],
+    ['#contatti .recapito:nth-child(3)', '7h', 'Il riquadro «Dove»'],
+
+    ['#piede', '8', 'Il piede'],
+    ['#piede .piede-marchio', '8a', 'Il marchio grande «Veniello·studio» (il puntino resta arancio, fermo)'],
+    ['#piede .piede-riga', '8b', 'La riga «Siti, Google, social e video · … · Niente cookie»']
+  ];
+  var TABELLA = TABELLA_ORA();
 
   var ATTESA_LENTA = 150;     /* ogni quanto si ricontrolla se un elemento è nascosto (ms) */
   var ATTESA_CERCA = 1000;    /* ogni quanto si ricercano gli elementi (il sito ne crea o ne copia alcuni da sé) */
@@ -474,6 +582,23 @@
     },
     mancanti: function () { return voci.filter(function (v) { return !v.els.length; }).map(function (v) { return v.et + ' ' + v.sel; }); }
   };
+
+  /* r3: da 1024 px la tabella è quella del computer (sezioni rinumerate): se la finestra passa la soglia si rifà tutto */
+  try {
+    var sogliaEt = matchMedia('(min-width:1024px)');
+    var rifaiEt = function () {
+      if (!host) return;
+      var nuova = TABELLA_ORA(); if (nuova === TABELLA) return;
+      if (host.parentNode) host.parentNode.removeChild(host);
+      host = null; voci = []; blocchi = {}; avvisati = {}; TABELLA = nuova; window.ETICHETTE.tabella = TABELLA;
+      crea(); cerca();
+      voci.forEach(function (v) { if (v.macro) { var m = misura(v, false); v.vicino = !!m; } });
+      voci.forEach(function (v) { if (!v.macro) { var b = blocchi[v.num]; v.vicino = !!(b && b.vicino); } });
+      lenta();
+      if (!acceso) host.style.setProperty('display', 'none', 'important');
+    };
+    if (sogliaEt.addEventListener) sogliaEt.addEventListener('change', rifaiEt); else if (sogliaEt.addListener) sogliaEt.addListener(rifaiEt);
+  } catch (e) {}
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', avvia);
   else avvia();

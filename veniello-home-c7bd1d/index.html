@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
-<script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('vola');else document.documentElement.classList.add('fermo')}catch(e){}</script>
-<!-- Home 2026 r2 (21/11/2026): apertura con la V e il pallino che volano nel marchio della testata; al telefono Come funziona a riquadri, montaggio video, abbonamenti «a cassette» e niente pallina; computer come la r1 (salvo apertura); testi della landing r40. Fonte: home-2026/strumenti/costruisci-r2.py -->
+<script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){if(!matchMedia('(min-width:1024px)').matches)document.documentElement.classList.add('vola')}else document.documentElement.classList.add('fermo')}catch(e){}</script>
+<!-- Home 2026 r3 (21/11/2026): versione da COMPUTER (da 1024 px) come spotify.com/premium: apertura col logo animato (pallino arancio grande, luce che si muove, V scura), Come funziona e Servizi coi titoli che si accendono, servizi in schede scure che si impilano, abbonamenti corti con un solo pulsante. Telefono come la r2 (salvo montaggio semplificato e scala che si forma). Fonte: home-2026/strumenti/costruisci-r3.py -->
 <title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
 <meta name="description" content="Veniello Studio gestisce ogni mese Instagram, TikTok, scheda Google e video per ogni attività della Valdinievole: negozi, ristoranti, saloni, studi, artigiani e strutture. Vedi il tuo sito prima di pagare.">
 <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
@@ -929,66 +929,41 @@ html:not(.corsa) .stazione{--on:1}
   .passo p{font-size:16px;line-height:1.6;max-width:24em}
 }
 
-/* ── 3d · Creazione Contenuti, solo telefono: il video dello spot dentro un programma di montaggio (disegnato, senza marchi
-   veri) nello schermo di un portatile. Si anima solo la linea di riproduzione arancio (transform), che segue il tempo del
-   video. Le misure interne sono in «punti di disegno» (--u = 1/342 della larghezza del programma), così a 360, 390 e sul
-   tablet il disegno è lo stesso, più grande o più piccolo. Da computer resta il riquadro della r1 col video ── */
+/* ── 3d · Creazione Contenuti: il video dello spot dentro un programma di montaggio (disegnato, senza marchi veri) nello
+   schermo di un portatile. r3 (21/11, Niccolò: «conta il video»): solo il visore grande col video e sotto due righe, la
+   traccia video (le clip, un po' più spessa) e l'audio (solo le onde del volume); via barra col nome del file, Esporta,
+   Media, Proprietà, codici di tempo, righello, tasti, nomi e traccia dei titoli, A2. Si anima solo la linea di riproduzione
+   arancio (transform), che segue il tempo del video. Le misure interne sono in «punti di disegno» (--u = 1/342 della
+   larghezza del programma). Telefono: il portatile sta in un riquadro come quello del Sito Web (stesso fondo, stessi angoli,
+   stesso filo in alto e a sinistra che sfuma: #servizi .m). Computer (r3): nel riquadro incassato della scheda (pc.css) ── */
 .mont{display:none}
+.mont-pc{max-width:560px;margin:0 auto}
+.mont-schermo{position:relative;padding:2.4% 2.4% 3%;border-radius:12px 12px 4px 4px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.14),0 40px 60px -40px rgba(0,0,0,.9)}
+.mont-schermo::before{content:"";position:absolute;left:50%;top:1%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(245,244,239,.14)}   /* la fotocamera */
+.mont-base{position:relative;height:10px;margin:0 -2.6%;border-radius:2px 2px 12px 12px / 2px 2px 9px 9px;background:linear-gradient(180deg,#3A392F 0%,#24231B 45%,#141309 100%);box-shadow:0 14px 24px -10px rgba(0,0,0,.8)}
+.mont-base::before{content:"";position:absolute;left:41%;right:41%;top:0;height:3px;border-radius:0 0 5px 5px;background:#141309}
+.mont-app{--u:calc(100cqw / 342);container-type:inline-size;position:relative;aspect-ratio:342 / 236;overflow:hidden;border-radius:3px;background:#121109;
+  display:grid;grid-template-rows:minmax(0,1fr) auto;-webkit-user-select:none;user-select:none}
 @media (max-width:1023px){
   #contenuti > .m-video{display:none}
-  .mont{display:block;position:relative;margin:0 calc(var(--pan) - var(--lato));padding:6px 0 0}
-  .mont-pc{max-width:560px;margin:0 auto}
-  .mont-schermo{position:relative;padding:2.4% 2.4% 3%;border-radius:12px 12px 4px 4px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.14),0 40px 60px -40px rgba(0,0,0,.9)}
-  .mont-schermo::before{content:"";position:absolute;left:50%;top:1%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(245,244,239,.14)}   /* la fotocamera */
-  .mont-base{position:relative;height:10px;margin:0 -2.6%;border-radius:2px 2px 12px 12px / 2px 2px 9px 9px;background:linear-gradient(180deg,#3A392F 0%,#24231B 45%,#141309 100%);box-shadow:0 14px 24px -10px rgba(0,0,0,.8)}
-  .mont-base::before{content:"";position:absolute;left:41%;right:41%;top:0;height:3px;border-radius:0 0 5px 5px;background:#141309}
-  .mont-app{--u:calc(100cqw / 342);container-type:inline-size;position:relative;aspect-ratio:342 / 236;overflow:hidden;border-radius:3px;background:#121109;
-    font-family:var(--mono);color:rgba(245,244,239,.6);display:grid;grid-template-rows:auto 1fr auto auto;-webkit-user-select:none;user-select:none}
+  .mont{display:block;position:relative;margin:0 calc(var(--pan) - var(--lato));padding:clamp(30px,9vw,48px) clamp(16px,5vw,28px) clamp(34px,10vw,52px);
+    border-radius:14px;isolation:isolate;background:linear-gradient(155deg,#1C1B14 0%,#15140E 40%,rgba(16,15,9,0) 85%)}
+  .mont::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:5;border:1px solid rgba(245,244,239,.2);border-right:0;border-bottom:0;
+    -webkit-mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%)}
 }
 .mont-app *{box-sizing:border-box}
-.mont-barra{display:flex;align-items:center;gap:calc(6 * var(--u));height:calc(15 * var(--u));padding:0 calc(7 * var(--u));background:#1B1A13;border-bottom:1px solid rgba(245,244,239,.07)}
-.mont-luci{display:flex;gap:calc(3.5 * var(--u))}
-.mont-luci i{display:block;width:calc(4.5 * var(--u));height:calc(4.5 * var(--u));border-radius:50%;background:rgba(245,244,239,.2)}
-.mont-file{flex:1;text-align:center;font-size:calc(7 * var(--u));letter-spacing:.02em;color:rgba(245,244,239,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mont-esporta{padding:calc(2 * var(--u)) calc(6 * var(--u));border-radius:calc(3 * var(--u));font-size:calc(6.5 * var(--u));color:#100F09;background:#FFB08F}
-.mont-centro{display:grid;grid-template-columns:calc(64 * var(--u)) 1fr calc(64 * var(--u));gap:1px;min-height:0;background:rgba(245,244,239,.06)}
-.mont-pann{background:#15140E;padding:calc(6 * var(--u));min-width:0;overflow:hidden}
-.mont-pann > b{display:block;font-weight:400;font-size:calc(6 * var(--u));letter-spacing:.1em;text-transform:uppercase;color:rgba(245,244,239,.4);margin-bottom:calc(5 * var(--u))}
-.mont-media{display:grid;grid-template-columns:1fr 1fr 1fr;gap:calc(3 * var(--u))}
-.mont-media i{display:block;aspect-ratio:9 / 16;border-radius:calc(1.5 * var(--u));background:url(img/montaggio-clip.jpg) 0 0 / 800% 100% no-repeat #222;box-shadow:inset 0 0 0 1px rgba(245,244,239,.08)}
-.mont-media i.su{box-shadow:inset 0 0 0 1px #FFB08F}
-.mont-prop p{display:flex;justify-content:space-between;align-items:center;gap:calc(4 * var(--u));margin:0 0 calc(4.5 * var(--u));font-size:calc(5.6 * var(--u));color:rgba(245,244,239,.5);white-space:nowrap}
-.mont-prop p span{color:rgba(245,244,239,.78)}
-.mont-prop s{display:block;position:relative;height:1px;margin:calc(-2 * var(--u)) 0 calc(5 * var(--u));background:rgba(245,244,239,.14);text-decoration:none}
-.mont-prop s::after{content:"";position:absolute;top:calc(-1.5 * var(--u));left:var(--v,50%);width:calc(3.5 * var(--u));height:calc(3.5 * var(--u));margin-left:calc(-1.75 * var(--u));border-radius:50%;background:rgba(245,244,239,.7)}
-.mont-visore{position:relative;display:flex;justify-content:center;align-items:center;min-width:0;min-height:0;padding:calc(5 * var(--u)) 0;background:#060504}
+.mont-visore{position:relative;display:flex;justify-content:center;align-items:center;min-width:0;min-height:0;padding:calc(7 * var(--u)) 0;background:#060504}
 .mont-visore video,.mont-visore img{display:block;height:100%;width:auto;max-width:none;aspect-ratio:9 / 16;object-fit:cover;background:#000}
-.mont-visore::after{content:"";position:absolute;inset:calc(5 * var(--u)) 0;pointer-events:none;background:linear-gradient(90deg,transparent calc(50% - .5px),rgba(245,244,239,.05) 0,rgba(245,244,239,.05) calc(50% + .5px),transparent 0)}
-.mont-trasporto{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:calc(15 * var(--u));padding:0 calc(8 * var(--u));background:#15140E;border-top:1px solid rgba(245,244,239,.06);border-bottom:1px solid rgba(245,244,239,.06);font-size:calc(7 * var(--u))}
-.mont-tc{color:#F5F4EF;font-variant-numeric:tabular-nums;letter-spacing:.04em}
-.mont-tasti{display:flex;align-items:center;gap:calc(7 * var(--u))}
-.mont-tasti i{display:block;width:0;height:0;border-style:solid;border-width:calc(3 * var(--u)) 0 calc(3 * var(--u)) calc(5 * var(--u));border-color:transparent transparent transparent rgba(245,244,239,.8)}
-.mont-tasti i.ind{transform:scaleX(-1)}
-.mont-tasti i.ind,.mont-tasti i.ava{border-left-color:rgba(245,244,239,.4)}
-.mont-durata{text-align:right;color:rgba(245,244,239,.45);font-variant-numeric:tabular-nums}
-.mont-linea{display:grid;grid-template-columns:calc(22 * var(--u)) 1fr;height:calc(72 * var(--u));background:#100F0A}
-.mont-teste{display:grid;grid-template-rows:calc(11 * var(--u)) calc(11 * var(--u)) calc(16 * var(--u)) calc(15 * var(--u)) calc(11 * var(--u));row-gap:calc(2 * var(--u));padding-bottom:calc(2 * var(--u));background:#15140E;border-right:1px solid rgba(245,244,239,.07)}
-.mont-teste span{display:flex;align-items:center;justify-content:center;font-size:calc(6 * var(--u));color:rgba(245,244,239,.5)}
-.mont-tracce{position:relative;display:grid;grid-template-rows:calc(11 * var(--u)) calc(11 * var(--u)) calc(16 * var(--u)) calc(15 * var(--u)) calc(11 * var(--u));row-gap:calc(2 * var(--u));margin:0 calc(6 * var(--u)) 0 calc(3 * var(--u));min-width:0}
-.mont-righello{position:relative;border-bottom:1px solid rgba(245,244,239,.1);background:repeating-linear-gradient(90deg,rgba(245,244,239,.22) 0 1px,transparent 1px calc(100% / 49.333)) 0 100% / 100% 35% no-repeat}
-.mont-righello span{position:absolute;top:calc(1 * var(--u));font-size:calc(5.4 * var(--u));color:rgba(245,244,239,.42);transform:translateX(calc(2 * var(--u)))}
-.mont-righello span::before{content:"";position:absolute;left:calc(-2 * var(--u));top:0;width:1px;height:calc(9 * var(--u));background:rgba(245,244,239,.3)}
+.mont-linea{position:relative;padding:calc(10 * var(--u)) calc(9 * var(--u)) calc(9 * var(--u));background:#100F0A;border-top:1px solid rgba(245,244,239,.07)}
+.mont-tracce{position:relative;display:grid;grid-template-rows:calc(19 * var(--u)) calc(14 * var(--u));row-gap:calc(5 * var(--u));min-width:0}
 .mont-traccia{position:relative}
-.mont-clip{position:absolute;top:0;bottom:0;left:var(--a);width:calc(var(--l) - 1px);overflow:hidden;border-radius:calc(1.5 * var(--u));font-style:normal;font-size:calc(5.4 * var(--u));line-height:1;white-space:nowrap}
+.mont-clip{position:absolute;top:0;bottom:0;left:var(--a);width:calc(var(--l) - 1px);overflow:hidden;border-radius:calc(1.5 * var(--u));font-style:normal}
 .mont-v1 .mont-clip{background:#3A3A2E linear-gradient(180deg,rgba(245,244,239,.08),rgba(245,244,239,0));box-shadow:inset 0 0 0 1px rgba(245,244,239,.16)}
-.mont-v1 .mont-clip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(9 * var(--u));background:url(img/montaggio-clip.jpg) var(--f,0%) 0 / 800% 100% no-repeat;border-right:1px solid rgba(0,0,0,.4)}
-.mont-v2 .mont-clip{display:flex;align-items:center;padding-left:calc(3 * var(--u));background:rgba(255,176,143,.3);box-shadow:inset 0 0 0 1px rgba(255,176,143,.55);color:#FFD9C7}
-.mont-a1 .mont-clip{background:#24301F;box-shadow:inset 0 0 0 1px rgba(160,190,140,.28)}
+.mont-v1 .mont-clip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(11 * var(--u));background:url(img/montaggio-clip.jpg) var(--f,0%) 0 / 800% 100% no-repeat;border-right:1px solid rgba(0,0,0,.4)}
 .mont-a1 svg{position:absolute;inset:0;width:100%;height:100%}
 .mont-a1 path{fill:none;stroke:rgba(190,215,170,.62);stroke-width:1;vector-effect:non-scaling-stroke}
-.mont-a2 .mont-clip{background:#2C2617;box-shadow:inset 0 0 0 1px rgba(255,176,143,.25)}
-.mont-testina{position:absolute;left:0;top:0;bottom:0;width:1px;margin-left:-.5px;background:#FF5A1F;transform:translate3d(0,0,0);will-change:transform;z-index:2}
-.mont-testina::before{content:"";position:absolute;left:calc(-3.5 * var(--u));top:0;width:calc(7 * var(--u));height:calc(8 * var(--u));background:#FF5A1F;clip-path:polygon(0 0,100% 0,100% 55%,50% 100%,0 55%)}
+.mont-testina{position:absolute;left:0;top:calc(-8 * var(--u));bottom:calc(-3 * var(--u));width:1px;margin-left:-.5px;background:#FF5A1F;transform:translate3d(0,0,0);will-change:transform;z-index:2}
+.mont-testina::before{content:"";position:absolute;left:calc(-3.5 * var(--u));top:0;width:calc(7 * var(--u));height:calc(7 * var(--u));background:#FF5A1F;clip-path:polygon(0 0,100% 0,100% 55%,50% 100%,0 55%)}
 html.fermo .mont-testina{will-change:auto}
 
 /* ── la corsa della pallina (script «Corsa»), r2: SOLO DA COMPUTER e SOLO SULLA RIGA 2d (Niccolò 21/11: «su pc lascia solo
@@ -1066,7 +1041,13 @@ html.corsa .corsa-palla{display:block}
   .abb-svg{display:block;width:100%;max-width:170px;height:auto;aspect-ratio:1}
   .abb-svg .f{fill:#100F09;stroke:rgba(245,244,239,.4);stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke}
   .abb-svg .f.t{fill:#17160F}
-  .abb-scala .abb-pezzo{opacity:1;transform:none}          /* la scala già formata (da computer si forma col mouse sopra) */
+  .abb-scala .abb-pezzo{opacity:1;transform:none}          /* senza script o con «Riduci movimento»: la scala già formata */
+  /* r3 (21/11, Niccolò): al telefono la scala si forma come nella landing r40 (.fig-scala): i due blocchi vengono appoggiati uno
+     dopo l'altro, scendono piano da 34 unità sopra e rallentano fino a fermarsi, senza rimbalzo (1 s ciascuno, il secondo dopo
+     0,5 s, cubic-bezier(.22,.75,.3,1)). Parte una volta sola, quando la figura si vede (script «Scala»), e resta formata */
+  html.js:not(.fermo) .abb-scala:not(.caduta) .abb-pezzo{opacity:0;transform:translateY(-34px)}
+  html.js:not(.fermo) .abb-scala.caduta .abb-pezzo{animation:abb-poggia 1s cubic-bezier(.22,.75,.3,1) both}
+  html.js:not(.fermo) .abb-scala.caduta .abb-p3{animation-delay:.5s}
   .abb-sfera .f{fill-opacity:.42}
   .abb-nucleo{fill:var(--rec)}
   .abb-nucleo-alone{fill:var(--rec);opacity:.16}
@@ -1196,6 +1177,174 @@ html.corsa .corsa-palla{display:block}
   .abb-scala.caduta .abb-pezzo{animation:none!important;opacity:1;transform:none}
   .abb-piano{will-change:auto}
 }
+/* =============================================================================================
+   r3 (21/11/2026) · Lo sfondo dell'apertura (telefono e computer). Niccolò, con la foto della pagina NC di VSLinear 0.1:
+   «su pc la versione prima aveva già quello sfondo quando aprivi» → è la «macchia» originale della pagina di partenza
+   (shader WebGL, script «Macchia»: stessi colori, stessa grana), rallentata fino a muoversi quasi senza che si veda.
+   Sta dietro all'apertura; in fondo sfuma nel nero della pagina (maschera ferma), così non c'è una riga dove finisce.
+   Senza WebGL (classe «senza-gl»): l'immagine ferma presa dalla macchia stessa, orizzontale da computer, verticale al
+   telefono. Da computer lo scorrimento la fa scendere di poco (script «Cerchio»)
+   ============================================================================================= */
+.eroe{isolation:isolate}
+.eroe-fondo{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:#100F09;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,0) 100%)}
+.macchia{position:absolute;left:0;top:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.4s cubic-bezier(.2,.7,.2,1)}
+.macchia.pronto{opacity:1}
+.eroe-fondo.senza-gl{background:#100F09 url(img/macchia-alto.jpg) 50% 50% / cover no-repeat}
+@media (min-aspect-ratio:1/1){.eroe-fondo.senza-gl{background-image:url(img/macchia-largo.jpg)}}
+@media (min-width:1024px){
+  html:not(.fermo) .macchia{will-change:transform}
+}
+@media (prefers-reduced-motion:reduce){.macchia{transition:none}}
+/* =============================================================================================
+   HOME 2026 r3 (21/11/2026) · VERSIONE DA COMPUTER come spotify.com/premium. Fonte: home-2026/strumenti/pezzi-r3/pc.css
+   (lo innesta costruisci-r3.py dopo nuovo.css). TUTTO vale solo da 1024 px: sotto, la pagina è la r2 identica.
+   Gli elementi nuovi hanno l'attributo data-pc e sotto i 1024 px non ci sono (display:none).
+   1 apertura: frase a sinistra, a destra il logo animato (pallino arancio grande con la luce che si muove e la V scura);
+   2 Come funziona: titolo al centro che si accende parola per parola, riga con la pallina, passi in colonna con
+   l'icona a linee, «Scrivici su WhatsApp»; 3 Servizi: schede larghe scure che si impilano come quelle di Spotify
+   (misurate sul video del 21/11: la nuova sale a misura piena, quella sotto resta ferma in alto e si rimpicciolisce
+   attorno al centro, niente scurimento); 4 Abbonamenti: tre schede corte e un solo pulsante verso la landing.
+   Si anima solo con transform e opacity; con «Riduci movimento» tutto fermo.
+   ============================================================================================= */
+[data-pc]{display:none}
+@media (min-width:1024px){
+  .solo-tel{display:none}
+  .solo-pc{display:inline}
+
+  /* ── 0 · testata: il marchio completo da subito (niente volo da computer; lo script «Volo» toglie anche le classi) ── */
+  html.vola #marchio-testata .vv,html.vola #marchio-testata .pl{opacity:1}
+
+  /* ── 1 · Apertura come la testata di Spotify ── */
+  .eroe{overflow:hidden;text-align:left;justify-content:center;min-height:max(680px,100svh);padding:calc(var(--testata) + 24px) 0 clamp(96px,14svh,150px)}
+  .eroe-testo{position:relative;z-index:1;align-items:flex-start}
+  .eroe-logo{position:absolute;width:1px;height:1px;overflow:hidden}   /* il titolo «Veniello Studio» resta per i lettori di schermo */
+  .eroe-logo .eroe-v,.eroe-logo .eroe-pl{display:none}
+  .eroe-frase{margin:0;max-width:none;font-size:clamp(54px,4.7vw,78px);line-height:1;letter-spacing:-.045em;text-wrap:nowrap}
+  .eroe-sotto{margin:clamp(24px,3.2svh,36px) 0 0;max-width:19em;font-size:clamp(20px,1.6vw,24px);line-height:1.4;text-align:left;text-wrap:balance}
+  /* il logo animato: il pallino del marchio in grande (#FF5A1F), dentro una luce morbida che gira piano (due macchie
+     sfumate che si spostano, solo transform), sopra la V del marchio scura. Lo sposta e lo rimpicciolisce lo script
+     «Cerchio», legato allo scorrimento (transform). Con «Riduci movimento» è fermo */
+  .cerchio-pc{display:block;position:absolute;z-index:0;left:calc(var(--cx) - var(--d) / 2);top:calc(var(--cy) - var(--d) / 2);width:var(--d);height:var(--d);
+    --d:min(82svh,55vw,880px);--cx:74vw;--cy:56%;transform-origin:50% 50%;pointer-events:none;-webkit-user-select:none;user-select:none}
+  html:not(.fermo) .cerchio-pc{will-change:transform}
+  /* (r3, sfondo nuovo con lo sfumato arancio) il cerchio resta staccato dal fondo: un alone nero intorno (come un'ombra
+     portata su tutti i lati) e la luce dentro più contenuta */
+  .cerchio-pc::before{content:"";position:absolute;inset:-9%;border-radius:50%;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(10,9,5,.82) 80%,rgba(10,9,5,.42) 89%,rgba(10,9,5,0) 100%)}
+  .cerchio-disco{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#FF5A1F;clip-path:circle(50% at 50% 50%);isolation:isolate}
+  .cerchio-disco i{position:absolute;display:block;border-radius:50%;pointer-events:none}
+  .cerchio-luce{left:-6%;top:-10%;width:78%;height:78%;background:radial-gradient(closest-side,rgba(255,222,200,.5),rgba(255,186,148,.24) 46%,rgba(255,150,100,0) 100%);
+    animation:cerchio-luce 30s ease-in-out infinite alternate}
+  .cerchio-luce2{right:-14%;top:30%;width:62%;height:62%;background:radial-gradient(closest-side,rgba(255,176,143,.34),rgba(255,176,143,0) 100%);
+    animation:cerchio-luce2 36s ease-in-out infinite alternate}
+  .cerchio-ombra{left:22%;bottom:-34%;width:92%;height:92%;background:radial-gradient(closest-side,rgba(150,36,4,.42),rgba(150,36,4,0) 100%);
+    animation:cerchio-ombra 42s ease-in-out infinite alternate}
+  html:not(.fermo) .cerchio-disco i{will-change:transform}
+  .cerchio-v{position:absolute;left:50%;top:50%;font:italic 400 calc(var(--d) * .86)/1 'Instrument Serif',serif;letter-spacing:0;color:#100F09;
+    -webkit-text-stroke:.05em currentColor;paint-order:stroke fill;white-space:nowrap;transform:translate(-53%,-47%)}
+
+  /* ── titoli che si accendono parola per parola (script «Accendi»): le parole vanno da grigio scuro a bianco, legate allo
+     scorrimento come «Qui la musica non si ferma mai» di Spotify. Si muove solo l'opacità (niente spostamenti). Prima che
+     lo script le prepari, e con «Riduci movimento», i titoli sono bianchi e fermi ── */
+  .accende,.accende em{color:var(--av)}
+  .accende .pa{opacity:var(--o,.22)}
+  .accende .pt{opacity:var(--o,.22)}
+
+  /* ── titoli delle sezioni come Spotify (Come funziona, Servizi, Abbonamenti): al centro e più grandi ── */
+  #come .wrap,#servizi > .wrap > .etichetta,#servizi > .wrap > .t-sez,#servizi > .wrap > .sotto,
+  #abbonamenti > .wrap > .etichetta,#abbonamenti > .wrap > .t-sez,#abbonamenti > .wrap > .sotto{text-align:center;margin-left:auto;margin-right:auto}
+  #t-come,#t-servizi,#t-abb{max-width:15em;font-size:clamp(48px,4.4vw,66px);line-height:1.02;letter-spacing:-.045em}
+  #t-servizi{max-width:13em}
+  #servizi > .wrap > .sotto,#abbonamenti > .wrap > .sotto{max-width:34em}
+
+  /* ── 2 · Come funziona (al posto di «Qui la musica non si ferma mai») ── */
+  #come .wrap{display:flex;flex-direction:column;align-items:center}
+  #come .etichetta{margin-bottom:var(--s3)}
+  #come .wrap > .sotto{order:5;margin:var(--s3) auto 0;max-width:40em;font-size:14px;line-height:1.55;color:var(--av3)}
+  #come .rotaia{order:2;align-self:stretch;margin:var(--s5) 0 0}
+  #come .passi{order:3;align-self:stretch;margin-top:var(--s4);text-align:left}
+  #come .come-azione{order:4;display:block;margin-top:var(--s5)}
+  #come .come-azione .pill{height:52px;padding:0 26px}
+  .passo .n{display:none}
+  .passo-ico{display:block;width:32px;height:32px;fill:none;stroke:var(--av);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+  .passo h3{margin-top:var(--s3);font:650 20px/1.25 var(--sans);letter-spacing:-.022em}
+  .passo .gratis{margin-top:6px}
+  .passo p{margin-top:var(--s1);font-size:15.5px;line-height:1.55;color:var(--av2)}
+
+  /* ── 3 · Servizi (al posto di «Pensato per i tuoi gusti»): schede larghe che si impilano come le schede colorate di
+     Spotify, ma scure (Niccolò 21/11): ognuna col suo fondo pieno, poco diverso dalle altre e dal fondo della pagina,
+     bordo netto e angoli tondi. Sticky tutte alla stessa altezza; la nuova sale sopra a misura piena, quella sotto
+     resta ferma e si rimpicciolisce attorno al centro (script «Pila PC»). Dentro: a sinistra il riquadro incassato col
+     lavoro (montaggio / anteprima del sito / chat), a destra titolo, frase e «Scopri i dettagli» ── */
+  #servizi{--pila-h:clamp(440px,62vh,560px);--pila-gap:28px;--pila-top:calc(var(--testata) + (100vh - var(--testata) - var(--pila-h)) * .36)}
+  #servizi .pacchetti{display:block;max-width:none;margin-top:var(--s5);padding:0}
+  #servizi .pacchetto:not(.speciale){position:sticky;top:var(--pila-top);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:1fr auto auto auto 1fr;
+    column-gap:clamp(36px,4.4vw,64px);min-height:var(--pila-h);margin:0 0 var(--pila-gap);padding:clamp(20px,1.8vw,26px) clamp(36px,4vw,60px) clamp(20px,1.8vw,26px) clamp(20px,1.8vw,26px);
+    border:0;border-radius:22px;background:var(--fondo-scheda);box-shadow:inset 0 0 0 1px rgba(245,244,239,.11);transform-origin:50% 50%}
+  #servizi .pacchetto:not(.speciale):first-child{padding-top:clamp(20px,1.8vw,26px);border-top:0}
+  #servizi .pacchetto:last-child{margin-bottom:0}
+  #servizi .pacchetto + .pacchetto:not(.speciale)::before{display:none}
+  html:not(.fermo) #servizi .pacchetto{will-change:transform}
+  #contenuti{--fondo-scheda:#211B15}   /* bruno scuro */
+  #sito{--fondo-scheda:#191C18}        /* verde quasi nero */
+  #va{--fondo-scheda:#1D1A20}          /* prugna quasi nera */
+  /* il riquadro incassato (a sinistra): più scuro della scheda, con l'ombra dentro e il filo chiaro in alto a sinistra */
+  #servizi .pacchetto:not(.speciale) > .m,#servizi .pacchetto > .mont{grid-column:1;grid-row:1 / 6;align-self:stretch;aspect-ratio:auto;min-height:0;margin:0;border-radius:14px;
+    background:linear-gradient(160deg,rgba(0,0,0,.36),rgba(0,0,0,.2));box-shadow:inset 0 2px 18px rgba(0,0,0,.5),inset 0 0 0 1px rgba(245,244,239,.07)}
+  #servizi .pacchetto:not(.speciale) > .m::after{border-color:rgba(245,244,239,.16)}
+  #contenuti > .m-video{display:none}
+  /* Creazione Contenuti: il montaggio della r2 (portatile col programma di montaggio) dentro il riquadro */
+  #servizi .mont{display:flex;align-items:center;justify-content:center;position:relative;padding:clamp(14px,1.5vw,22px)}
+  #servizi .mont-pc{width:100%;max-width:640px;margin:0 auto}
+  #servizi .mont-schermo{position:relative;padding:2.4% 2.4% 3%;border-radius:12px 12px 4px 4px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.14),0 40px 60px -40px rgba(0,0,0,.9)}
+  #servizi .mont-schermo::before{content:"";position:absolute;left:50%;top:1%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(245,244,239,.14)}
+  #servizi .mont-base{position:relative;height:10px;margin:0 -2.6%;border-radius:2px 2px 12px 12px / 2px 2px 9px 9px;background:linear-gradient(180deg,#3A392F 0%,#24231B 45%,#141309 100%);box-shadow:0 14px 24px -10px rgba(0,0,0,.8)}
+  #servizi .mont-base::before{content:"";position:absolute;left:41%;right:41%;top:0;height:3px;border-radius:0 0 5px 5px;background:#141309}
+  #servizi .mont-app{--u:calc(100cqw / 342);container-type:inline-size;position:relative;aspect-ratio:342 / 236;overflow:hidden;border-radius:3px;background:#121109;
+    font-family:var(--mono);color:rgba(245,244,239,.6);display:grid;grid-template-rows:auto 1fr auto auto;-webkit-user-select:none;user-select:none}
+  /* Sito Web e Virtual Assistant: il riquadro della r2 con dentro l'anteprima del sito e la chat */
+  #servizi .m-va{background:linear-gradient(160deg,rgba(0,0,0,.36),rgba(0,0,0,.2))}
+  #servizi .m-va > .chat{left:50%;right:auto;width:min(400px,74%);transform:translateX(-50%)}
+  /* a destra: titolo, frase, «Scopri i dettagli» */
+  #servizi .pacchetto:not(.speciale) > .t2{grid-column:2;grid-row:2;margin-top:0;font:600 clamp(34px,3.1vw,46px)/1.04 var(--sans);letter-spacing:-.04em}
+  #servizi .pacchetto:not(.speciale) > .sotto{grid-column:2;grid-row:3;margin-top:var(--s2);max-width:20em;font:400 clamp(17px,1.35vw,19px)/1.5 var(--sans);color:var(--av2)}
+  #servizi .pacchetto:not(.speciale) > .dettagli{grid-column:2;grid-row:4;margin-top:var(--s3)}
+  #servizi .pacchetto .voci li{font-size:15px}
+  #servizi .nota{margin-top:var(--s5);text-align:center}
+
+  /* ── 4 · Abbonamenti: «Oppure scegli uno dei nostri abbonamenti.», tre schede corte, un solo pulsante ── */
+  #abbonamenti .abb-piani{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:var(--s5)}
+  #abbonamenti .abb-piano,#abbonamenti .abb-piano:first-child,#abbonamenti .abb-piano:last-child{display:flex;flex-direction:column;padding:22px 26px 28px;border-radius:22px;background:#1A1913;box-shadow:inset 0 0 0 1px rgba(245,244,239,.11)}
+  #abbonamenti .abb-piano + .abb-piano::before{display:none}
+  #abbonamenti .abb-fig{display:flex;align-items:center;justify-content:center;order:0;height:clamp(150px,13vw,180px);margin:0 -10px 22px;border-radius:14px;
+    background:linear-gradient(160deg,rgba(0,0,0,.34),rgba(0,0,0,.16));box-shadow:inset 0 2px 16px rgba(0,0,0,.45),inset 0 0 0 1px rgba(245,244,239,.06)}
+  #abbonamenti .abb-svg{height:88%;width:auto;margin:0}
+  #abbonamenti .abb-svg .f{fill:#13120C}
+  #abbonamenti .abb-svg .f.t{fill:#1A1912}
+  #abbonamenti .abb-testa{gap:14px}
+  #abbonamenti .abb-piano h3{font:650 30px/1.05 var(--sans);letter-spacing:-.035em;color:var(--abb-c,var(--av))}
+  #abbonamenti .abb-desc{min-height:0;margin-top:12px;font-size:15px;line-height:1.55}
+  #abbonamenti .abb-prezzo{margin-top:auto;padding-top:22px}
+  #abbonamenti .abb-prezzo b{font-size:34px}
+  #abbonamenti .abb-btn,#abbonamenti .abb-dett{display:none}
+  #abbonamenti .abb-scopri{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;margin:var(--s5) auto 0;padding:0 28px;border-radius:999px;
+    background:var(--av);color:#100F09;font:650 16px/1 var(--sans);letter-spacing:-.01em;transition:transform .2s var(--ease),filter .2s ease}
+  #abbonamenti .abb-scopri .i{width:14px;height:14px;transition:transform .25s var(--ease)}
+  #abbonamenti .abb-scopri:hover{filter:brightness(1.06)}
+  #abbonamenti .abb-scopri:hover .i{transform:translateX(3px)}
+  #abbonamenti .abb-scopri:active{transform:scale(.98)}
+  #abbonamenti > .wrap{display:flex;flex-direction:column}
+  #abbonamenti .abb-note{margin:var(--s3) auto 0;max-width:46em;text-align:center}
+  #abbonamenti .abb-note p{font-size:13.5px;color:var(--av3)}
+}
+@keyframes cerchio-luce{0%{transform:translate3d(0,0,0) scale(1)}35%{transform:translate3d(18%,9%,0) scale(1.07)}70%{transform:translate3d(6%,24%,0) scale(.96)}100%{transform:translate3d(22%,18%,0) scale(1.03)}}
+@keyframes cerchio-luce2{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(-28%,-14%,0)}100%{transform:translate3d(-12%,14%,0)}}
+@keyframes cerchio-ombra{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(-16%,-8%,0)}100%{transform:translate3d(5%,-16%,0)}}
+@media (min-width:1024px) and (prefers-reduced-motion:reduce){
+  .cerchio-disco i{animation:none!important}
+  #servizi .pacchetto{will-change:auto}
+}
 </style>
 </head>
 <body>
@@ -1222,8 +1371,18 @@ html.corsa .corsa-palla{display:block}
 <main id="contenuto">
 
   <!-- 1 · Apertura (r2, 21/11): al centro la V grande del marchio col pallino arancio accanto; sotto la frase e la sottofrase.
-       Scorrendo, la V e il pallino volano nel marchio della testata (script «Volo»). Con «Riduci movimento» restano qui, fermi -->
+       Scorrendo, la V e il pallino volano nel marchio della testata (script «Volo»). Con «Riduci movimento» restano qui, fermi.
+       r3 (21/11), SOLO COMPUTER (da 1024 px): niente V che vola (la testata ha il marchio completo da subito); a sinistra frase
+       e sottofrase, a destra in sottofondo il logo animato: il pallino arancio del marchio in grande, con una luce morbida
+       che si muove piano dentro, e la V del marchio scura sopra (come le barre nere del cerchio di Spotify). Scorrendo il
+       cerchio si sposta e si rimpicciolisce (script «Cerchio»). Sotto i 1024 px il cerchio non c'è (display:none) -->
   <section class="eroe" id="inizio" aria-labelledby="t-eroe">
+    <!-- r3 (21/11, Niccolò, telefono e computer): lo sfondo dell'apertura è la «macchia» originale della pagina di partenza
+         (VSLinear NB/NC: shader WebGL, stessi colori e stessa grana), rallentata fino a muoversi quasi senza che si veda
+         (script «Macchia»). Si ferma fuori schermo e a scheda nascosta; con «Riduci movimento» un fotogramma fermo; senza
+         WebGL un'immagine ferma presa dalla macchia stessa (img/macchia-largo.jpg, img/macchia-alto.jpg) -->
+    <div class="eroe-fondo" id="eroe-fondo" aria-hidden="true"><canvas class="macchia"></canvas></div>
+    <div class="cerchio-pc" id="cerchio-pc" data-pc aria-hidden="true"><div class="cerchio-disco"><i class="cerchio-luce"></i><i class="cerchio-luce2"></i><i class="cerchio-ombra"></i></div><span class="cerchio-v">V</span></div>
     <div class="wrap eroe-testo">
       <h1 class="eroe-logo" id="t-eroe"><span class="sr">Veniello Studio</span><span class="eroe-v" id="eroe-v" aria-hidden="true">V</span><i class="eroe-pl" id="eroe-pl" aria-hidden="true"></i></h1>
       <p class="t-sez eroe-frase">Fatti trovare.<br>Fatti <em>scegliere</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></p>
@@ -1232,7 +1391,10 @@ html.corsa .corsa-palla{display:block}
   </section>
 
   <!-- 2 · Come funziona. Telefono (sotto 1024 px): i tre passi sono riquadri che scorrono di lato (come VSLinear NB, 2c).
-       Computer: come la r1, la riga dei tre punti (2d, dove parte la pallina) e tre colonne di testo -->
+       Computer (r3, come «Qui la musica non si ferma mai» di Spotify): titolo al centro che si accende parola per parola
+       scorrendo (script «Accendi»), la riga dei tre punti con la pallina che si ferma a destra, i tre passi in colonna (icona
+       a linee, titolo in grassetto, frase breve), il pulsante «Scrivici su WhatsApp» e sotto, piccola, la frase breve.
+       Le icone e il pulsante sono solo da computer (display:none sotto i 1024 px) -->
   <section class="sez come" id="come" aria-labelledby="t-come">
     <div class="wrap">
       <span class="etichetta">Come funziona</span>
@@ -1245,10 +1407,11 @@ html.corsa .corsa-palla{display:block}
         <span class="stazione s2" style="--s:2"><i></i><span>Online</span></span>
       </div>
       <ol class="passi" id="passi">
-        <li class="passo"><span class="n" aria-hidden="true">01</span><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></li>
-        <li class="passo"><span class="n" aria-hidden="true">02</span><h3>Ti prepariamo l’anteprima</h3><span class="gratis">Gratis</span><p>Con foto e informazioni vere della tua attività. Ti arriva un link da aprire sul&nbsp;telefono.</p></li>
-        <li class="passo"><span class="n" aria-hidden="true">03</span><h3>Se ti piace, va online</h3><p>Sul tuo dominio, insieme a Google e ai social. Da lì in poi ti&nbsp;trovano.</p></li>
+        <li class="passo"><svg class="passo-ico" data-pc viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M6 7.5h20a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H14l-6 4.5v-4.5H6a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2z"/><path d="M10 13h12M10 17h8"/></svg><span class="n" aria-hidden="true">01</span><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></li>
+        <li class="passo"><svg class="passo-ico" data-pc viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="9.5" y="3.5" width="13" height="25" rx="2.5"/><path d="M14 7h4"/><rect x="12.5" y="10.5" width="7" height="6" rx=".5"/><path d="M12.5 20h7M12.5 23h4.5"/></svg><span class="n" aria-hidden="true">02</span><h3>Ti prepariamo l’anteprima</h3><span class="gratis">Gratis</span><p>Con foto e informazioni vere della tua attività. Ti arriva un link da aprire sul&nbsp;telefono.</p></li>
+        <li class="passo"><svg class="passo-ico" data-pc viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="11.5"/><path d="M4.5 16h23M16 4.5c3.2 3.1 4.8 7 4.8 11.5S19.2 24.4 16 27.5M16 4.5c-3.2 3.1-4.8 7-4.8 11.5s1.6 8.4 4.8 11.5"/></svg><span class="n" aria-hidden="true">03</span><h3>Se ti piace, va online</h3><p>Sul tuo dominio, insieme a Google e ai social. Da lì in poi ti&nbsp;trovano.</p></li>
       </ol>
+      <p class="come-azione" data-pc><a class="pill pill-chiara" id="come-scrivi" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20un%E2%80%99anteprima%20gratis%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici su WhatsApp</a></p>
     </div>
   </section>
   <!-- 3 · Servizi: i tre pacchetti (senza la Campagna 360°, doppione di Enterprise) -->
@@ -1260,28 +1423,21 @@ html.corsa .corsa-palla{display:block}
       <ul class="pacchetti">
         <li class="pacchetto" id="contenuti">
           <div class="m pannello m-video"><video src="video/spot-una-volta.mp4" muted playsinline preload="none" aria-label="Lo spot Jué × Bombay Sapphire: il Bombay &amp; Tonic e la bottiglietta in omaggio"></video><img class="ferma" src="img/spot-una-volta.jpg" alt="" width="540" height="960" loading="lazy"></div>
-          <!-- 3d (r2, solo telefono): lo spot dentro un programma di montaggio (disegnato, senza marchi veri) nello schermo di
-               un portatile. Clip della traccia V1 = i tagli veri dello spot; la linea arancio segue il tempo del video
-               (script «Montaggio»). Con «Riduci movimento» il video non si carica: resta la foto e la linea ferma -->
+          <!-- 3d (r3, 21/11, telefono e computer): lo spot dentro un programma di montaggio (disegnato, senza marchi veri) nello
+               schermo di un portatile, semplificato su richiesta di Niccolò («conta il video»): solo il visore grande col video
+               e sotto due righe, la traccia video (le clip = i tagli veri dello spot, un po' più spessa) e l'audio (solo le
+               onde del volume); la linea arancio segue il tempo del video (script «Montaggio»). Telefono: il portatile sta in un
+               riquadro come quello del Sito Web (stesso fondo, stessi angoli, stesso filo che sfuma). Computer: nel riquadro
+               incassato della scheda. Con «Riduci movimento» il video non si carica: resta la foto e la linea ferma -->
           <div class="mont" id="montaggio" role="img" aria-label="Lo spot Jué Club montato in un programma di montaggio video, sullo schermo di un portatile">
             <div class="mont-pc">
               <div class="mont-schermo">
                 <div class="mont-app">
-                  <div class="mont-barra"><span class="mont-luci"><i></i><i></i><i></i></span><span class="mont-file">spot-jue-club_v3 · 9:16 · 24 fps</span><span class="mont-esporta">Esporta</span></div>
-                  <div class="mont-centro">
-                    <div class="mont-pann"><b>Media</b><div class="mont-media"><i style="background-position:0% 0"></i><i class="su" style="background-position:28.571% 0"></i><i style="background-position:42.857% 0"></i><i style="background-position:57.143% 0"></i><i style="background-position:85.714% 0"></i><i style="background-position:100% 0"></i></div></div>
-                    <div class="mont-visore"><video data-src="video/spot-una-volta.mp4" muted loop playsinline preload="none" poster="img/spot-una-volta.jpg"></video></div>
-                    <div class="mont-pann mont-prop"><b>Proprietà</b><p>Scala<span>100%</span></p><s style="--v:62%"></s><p>Posizione<span>0 · 0</span></p><s style="--v:50%"></s><p>Rotazione<span>0°</span></p><s style="--v:50%"></s><p>Opacità<span>100%</span></p><s style="--v:100%"></s><p>Velocità<span>1×</span></p><s style="--v:34%"></s></div>
-                  </div>
-                  <div class="mont-trasporto"><span class="mont-tc" id="mont-tc">00:00:00:00</span><span class="mont-tasti"><i class="ind"></i><i></i><i class="ava"></i></span><span class="mont-durata">00:00:12:08</span></div>
+                  <div class="mont-visore"><video data-src="video/spot-una-volta.mp4" muted loop playsinline preload="none" poster="img/spot-una-volta.jpg"></video></div>
                   <div class="mont-linea">
-                    <div class="mont-teste"><span></span><span>V2</span><span>V1</span><span>A1</span><span>A2</span></div>
                     <div class="mont-tracce" id="mont-tracce">
-                      <div class="mont-righello"><span style="left:0.00%">00:00</span><span style="left:16.22%">00:02</span><span style="left:32.43%">00:04</span><span style="left:48.65%">00:06</span><span style="left:64.87%">00:08</span><span style="left:81.08%">00:10</span></div>
-                      <div class="mont-traccia mont-v2"><i class="mont-clip" style="--a:23.31%;--l:14.53%">Titolo</i><i class="mont-clip" style="--a:81.76%;--l:18.24%">Logo</i></div>
                       <div class="mont-traccia mont-v1"><i class="mont-clip" style="--a:0.00%;--l:11.82%;--f:0.000%"></i><i class="mont-clip" style="--a:11.82%;--l:11.49%;--f:14.286%"></i><i class="mont-clip" style="--a:23.31%;--l:14.53%;--f:28.571%"></i><i class="mont-clip" style="--a:37.84%;--l:8.78%;--f:42.857%"></i><i class="mont-clip" style="--a:46.62%;--l:6.08%;--f:57.143%"></i><i class="mont-clip" style="--a:52.70%;--l:10.81%;--f:71.429%"></i><i class="mont-clip" style="--a:63.51%;--l:18.24%;--f:85.714%"></i><i class="mont-clip" style="--a:81.76%;--l:18.24%;--f:100.000%"></i></div>
-                      <div class="mont-traccia mont-a1"><i class="mont-clip" style="--a:0%;--l:100%"><svg viewBox="0 0 300 20" preserveAspectRatio="none" focusable="false"><path d="M1 8.2V11.8M3 5.9V14.1M5 7.4V12.6M7 7.7V12.3M9 6.2V13.8M11 6.2V13.8M13 5.6V14.4M15 6.1V13.9M17 7.3V12.7M19 6.9V13.1M21 5.1V14.9M23 7.0V13.0M25 4.3V15.7M27 7.3V12.7M29 6.7V13.3M31 6.0V14.0M33 5.6V14.4M35 4.1V15.9M37 5.4V14.6M39 5.3V14.7M41 6.9V13.1M43 5.4V14.6M45 7.1V12.9M47 2.7V17.3M49 6.2V13.8M51 4.8V15.2M53 7.2V12.8M55 5.4V14.6M57 4.1V15.9M59 3.9V16.1M61 3.0V17.0M63 6.2V13.8M65 6.8V13.2M67 6.3V13.7M69 2.2V17.8M71 6.7V13.3M73 1.9V18.1M75 5.5V14.5M77 7.0V13.0M79 6.1V13.9M81 2.5V17.5M83 2.4V17.6M85 3.8V16.2M87 3.4V16.6M89 6.1V13.9M91 4.2V15.8M93 5.4V14.6M95 0.8V19.2M97 5.8V14.2M99 3.3V16.7M101 5.5V14.5M103 3.4V16.6M105 4.3V15.7M107 1.2V18.8M109 1.6V18.4M111 5.4V14.6M113 5.6V14.4M115 4.2V15.8M117 1.1V18.9M119 5.5V14.5M121 0.8V19.2M123 5.0V15.0M125 6.5V13.5M127 6.3V13.7M129 0.8V19.2M131 2.8V17.2M133 1.8V18.2M135 2.6V17.4M137 5.8V14.2M139 4.8V15.2M141 3.3V16.7M143 0.8V19.2M145 6.3V13.7M147 2.2V17.8M149 5.0V15.0M151 3.5V16.5M153 5.8V14.2M155 0.8V19.2M157 2.5V17.5M159 4.0V16.0M161 5.0V15.0M163 3.9V16.1M165 2.1V17.9M167 3.7V16.3M169 0.8V19.2M171 6.5V13.5M173 5.8V14.2M175 5.8V14.2M177 1.1V18.9M179 4.8V15.2M181 1.1V18.9M183 3.8V16.2M185 6.7V13.3M187 5.7V14.3M189 3.2V16.8M191 1.2V18.8M193 4.7V15.3M195 2.8V17.2M197 6.4V13.6M199 4.6V15.4M201 6.8V13.2M203 0.9V19.1M205 4.9V15.1M207 3.7V16.3M209 6.3V13.7M211 5.2V14.8M213 3.7V16.3M215 3.8V16.2M217 2.5V17.5M219 5.7V14.3M221 6.4V13.6M223 7.0V13.0M225 3.0V17.0M227 6.3V13.7M229 2.7V17.3M231 6.4V13.6M233 6.4V13.6M235 5.4V14.6M237 4.9V15.1M239 3.6V16.4M241 4.9V15.1M243 5.4V14.6M245 6.2V13.8M247 5.2V14.8M249 6.5V13.5M251 3.5V16.5M253 6.9V13.1M255 5.4V14.6M257 6.0V14.0M259 6.6V13.4M261 4.5V15.5M263 5.7V14.3M265 5.4V14.6M267 6.0V14.0M269 6.5V13.5M271 6.2V13.8M273 4.6V15.4M275 6.6V13.4M277 5.6V14.4M279 6.8V13.2M281 7.6V12.4M283 4.9V15.1M285 6.8V13.2M287 5.4V14.6M289 7.0V13.0M291 7.5V12.5M293 6.7V13.3M295 5.4V14.6M297 6.5V13.5M299 6.2V13.8"/></svg></i></div>
-                      <div class="mont-traccia mont-a2"><i class="mont-clip" style="--a:11.82%;--l:9.5%"></i><i class="mont-clip" style="--a:37.84%;--l:8.78%"></i><i class="mont-clip" style="--a:63.51%;--l:6.2%"></i></div>
+                      <div class="mont-traccia mont-a1"><svg viewBox="0 0 300 20" preserveAspectRatio="none" focusable="false"><path d="M1 8.2V11.8M3 5.9V14.1M5 7.4V12.6M7 7.7V12.3M9 6.2V13.8M11 6.2V13.8M13 5.6V14.4M15 6.1V13.9M17 7.3V12.7M19 6.9V13.1M21 5.1V14.9M23 7.0V13.0M25 4.3V15.7M27 7.3V12.7M29 6.7V13.3M31 6.0V14.0M33 5.6V14.4M35 4.1V15.9M37 5.4V14.6M39 5.3V14.7M41 6.9V13.1M43 5.4V14.6M45 7.1V12.9M47 2.7V17.3M49 6.2V13.8M51 4.8V15.2M53 7.2V12.8M55 5.4V14.6M57 4.1V15.9M59 3.9V16.1M61 3.0V17.0M63 6.2V13.8M65 6.8V13.2M67 6.3V13.7M69 2.2V17.8M71 6.7V13.3M73 1.9V18.1M75 5.5V14.5M77 7.0V13.0M79 6.1V13.9M81 2.5V17.5M83 2.4V17.6M85 3.8V16.2M87 3.4V16.6M89 6.1V13.9M91 4.2V15.8M93 5.4V14.6M95 0.8V19.2M97 5.8V14.2M99 3.3V16.7M101 5.5V14.5M103 3.4V16.6M105 4.3V15.7M107 1.2V18.8M109 1.6V18.4M111 5.4V14.6M113 5.6V14.4M115 4.2V15.8M117 1.1V18.9M119 5.5V14.5M121 0.8V19.2M123 5.0V15.0M125 6.5V13.5M127 6.3V13.7M129 0.8V19.2M131 2.8V17.2M133 1.8V18.2M135 2.6V17.4M137 5.8V14.2M139 4.8V15.2M141 3.3V16.7M143 0.8V19.2M145 6.3V13.7M147 2.2V17.8M149 5.0V15.0M151 3.5V16.5M153 5.8V14.2M155 0.8V19.2M157 2.5V17.5M159 4.0V16.0M161 5.0V15.0M163 3.9V16.1M165 2.1V17.9M167 3.7V16.3M169 0.8V19.2M171 6.5V13.5M173 5.8V14.2M175 5.8V14.2M177 1.1V18.9M179 4.8V15.2M181 1.1V18.9M183 3.8V16.2M185 6.7V13.3M187 5.7V14.3M189 3.2V16.8M191 1.2V18.8M193 4.7V15.3M195 2.8V17.2M197 6.4V13.6M199 4.6V15.4M201 6.8V13.2M203 0.9V19.1M205 4.9V15.1M207 3.7V16.3M209 6.3V13.7M211 5.2V14.8M213 3.7V16.3M215 3.8V16.2M217 2.5V17.5M219 5.7V14.3M221 6.4V13.6M223 7.0V13.0M225 3.0V17.0M227 6.3V13.7M229 2.7V17.3M231 6.4V13.6M233 6.4V13.6M235 5.4V14.6M237 4.9V15.1M239 3.6V16.4M241 4.9V15.1M243 5.4V14.6M245 6.2V13.8M247 5.2V14.8M249 6.5V13.5M251 3.5V16.5M253 6.9V13.1M255 5.4V14.6M257 6.0V14.0M259 6.6V13.4M261 4.5V15.5M263 5.7V14.3M265 5.4V14.6M267 6.0V14.0M269 6.5V13.5M271 6.2V13.8M273 4.6V15.4M275 6.6V13.4M277 5.6V14.4M279 6.8V13.2M281 7.6V12.4M283 4.9V15.1M285 6.8V13.2M287 5.4V14.6M289 7.0V13.0M291 7.5V12.5M293 6.7V13.3M295 5.4V14.6M297 6.5V13.5M299 6.2V13.8"/></svg></div>
                       <i class="mont-testina" id="mont-testina"></i>
                     </div>
                   </div>
@@ -1459,11 +1615,14 @@ html.corsa .corsa-palla{display:block}
        servizi della landing r40): a sinistra etichetta, nome, frase e prezzo, a destra la figura del piano; sotto la pila un
        solo pulsante «Scopri gli abbonamenti →» verso la landing; niente note. Computer: come la r1 (figure, «Dettagli +» che
        apre il pannello da destra, «Contattaci →») e sotto le colonne due note. Elenchi «Comprende» e pulsanti WhatsApp
-       restano nel codice: da computer li usa il pannello dei Dettagli -->
+       restano nel codice: da computer li usa il pannello dei Dettagli.
+       r3 (21/11), SOLO COMPUTER: titolo «Oppure scegli uno dei nostri abbonamenti.» (si accende scorrendo), tre schede corte
+       (figura, etichetta, nome, frase, prezzo), un solo pulsante «Scopri gli abbonamenti →» che apre la landing nella stessa
+       scheda; niente pannello Dettagli né «Contattaci». Le due note restano, piccole, sotto il pulsante -->
   <section class="sez abb" id="abbonamenti" aria-labelledby="t-abb">
     <div class="wrap">
       <span class="etichetta">Abbonamenti</span>
-      <h2 class="t-sez" id="t-abb">Scegli come <em>crescere</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></h2>
+      <h2 class="t-sez" id="t-abb"><span class="solo-tel">Scegli come <em>crescere</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></span><span class="solo-pc" data-pc>Oppure scegli uno dei nostri <em>abbonamenti</em><i class="pt" aria-hidden="true"></i><span class="sr">.</span></span></h2>
       <p class="sotto">Per chi vuole un lavoro continuo, ogni mese. Si parte da una consulenza per studiare il piano di&nbsp;crescita.</p>
       <div class="abb-piani" id="abb-piani">
         <article class="abb-piano" id="abb-presenza" style="--n:0">
@@ -1532,9 +1691,9 @@ html.corsa .corsa-palla{display:block}
           <button class="abb-dett" type="button" aria-haspopup="dialog">Dettagli<i class="abb-piu" aria-hidden="true"></i></button>
         </article>
       </div>
-      <!-- solo telefono: il pulsante verso la landing degli abbonamenti, nella stessa scheda. Al lancio: /abbonamenti/ -->
+      <!-- il pulsante verso la landing degli abbonamenti, nella stessa scheda (telefono e, dalla r3, computer). Al lancio: /abbonamenti/ -->
       <a class="abb-scopri" id="abb-scopri" href="https://niccoloveniero05.github.io/anteprime-case/veniello-abbonamenti-r3-b5802d/">Scopri gli abbonamenti<svg class="i" aria-hidden="true"><use href="#i-dx"/></svg></a>
-      <!-- solo computer: le due note (come la landing r40) -->
+      <!-- solo computer: le due note (come la landing r40; la consulenza è gratis solo con un abbonamento) -->
       <div class="abb-note">
         <p>La consulenza di partenza è gratis se scegli un abbonamento; altrimenti costa 70&nbsp;€.</p>
         <p>L’anteprima di siti web e landing page è gratis.</p>
@@ -1671,13 +1830,16 @@ html.corsa .corsa-palla{display:block}
    scroll()) con i fotogrammi calcolati qui: le muove il browser insieme allo scorrimento, senza ritardo. Altrove (o con
    ?volo=js) le muove questo script a ogni fotogramma. Si rimisura al cambio di misura della finestra, dell'apertura e del
    marchio della testata, e quando i font sono caricati. Con «Riduci movimento»: niente volo, testata completa da subito e
-   V grande ferma nell'apertura. Solo transform e opacity ===== */
+   V grande ferma nell'apertura. Solo transform e opacity.
+   r3 (21/11): SOLO SOTTO I 1024 PX. Da computer niente volo: la testata ha il marchio completo da subito (lo script toglie
+   «vola»/«vola-on» e svuota le animazioni); se la finestra passa da una misura all'altra si rifà tutto ===== */
 (function(){
   'use strict';
   var html = document.documentElement;
   var eroe = document.getElementById('inizio'), hv = document.getElementById('eroe-v'), hp = document.getElementById('eroe-pl');
   var mt = document.getElementById('marchio-testata'), tv = mt && mt.querySelector('.vv'), tp = mt && mt.querySelector('.pl');
   var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var daPC = window.matchMedia ? matchMedia('(min-width:1024px)') : { matches: false };
   if (ridotto || !eroe || !hv || !hp || !tv || !tp || !('requestAnimationFrame' in window)) { html.classList.remove('vola'); return; }
   try {
     var forzaJS = /[?&]volo=js(?:&|$)/.test(location.search);
@@ -1760,7 +1922,13 @@ html.corsa .corsa-palla{display:block}
   }
   function chiedi(){ if (!raf) raf = requestAnimationFrame(disegna); }
   function rifai(){
-    rq = 0; misura();
+    rq = 0;
+    if (daPC.matches) {   /* r3: da computer niente volo, marchio completo nella testata */
+      M = null; stile.textContent = ''; ultimo = {};
+      fv.style.transform = fp.style.transform = fv.style.opacity = fp.style.opacity = tv.style.opacity = tp.style.opacity = '';
+      html.classList.remove('vola-on', 'vola'); return;
+    }
+    misura();
     if (!M) { html.classList.remove('vola-on', 'vola'); stile.textContent = ''; return; }   /* niente volo: testata completa */
     if (conCSS) scriviCSS(); else { ultimo = {}; disegna(); }
     html.classList.add('vola', 'vola-on');
@@ -1768,6 +1936,7 @@ html.corsa .corsa-palla{display:block}
   function chiediRifai(){ if (!rq) rq = requestAnimationFrame(rifai); }
   if (!conCSS) addEventListener('scroll', chiedi, { passive: true });
   addEventListener('resize', chiediRifai);
+  if (daPC.addEventListener) daPC.addEventListener('change', chiediRifai); else if (daPC.addListener) daPC.addListener(chiediRifai);
   if ('ResizeObserver' in window) { var ro = new ResizeObserver(chiediRifai); ro.observe(eroe); ro.observe(mt); ro.observe(hv); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(chiediRifai);
   addEventListener('load', chiediRifai);
@@ -1781,14 +1950,16 @@ html.corsa .corsa-palla{display:block}
    Il video parte muto quando il programma si vede almeno per un terzo, ricomincia da capo ogni volta che torna a vedersi
    e alla fine riparte dall'inizio; fuori schermo, da computer o con la pagina nascosta si ferma. La linea di riproduzione
    arancio (#mont-testina) e il codice di tempo seguono il tempo vero del video a ogni fotogramma (solo transform).
-   Con «Riduci movimento» il video non si carica: resta la foto (l'ultimo fotogramma) con la linea ferma lì ===== */
+   Con «Riduci movimento» il video non si carica: resta la foto (l'ultimo fotogramma) con la linea ferma lì.
+   r3 (21/11): anche da computer, dentro la scheda di Creazione Contenuti; quando la scheda è coperta da quella che le sale
+   sopra (classe «coperta», script «Pila PC») conta come fuori schermo: si ferma e quando torna a vedersi riparte da capo ===== */
 (function(){
   'use strict';
   var box = document.getElementById('montaggio'); if (!box) return;
   var v = box.querySelector('video'), testina = document.getElementById('mont-testina'), tc = document.getElementById('mont-tc'), tracce = document.getElementById('mont-tracce');
   if (!v || !testina || !tracce) return;
   var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var tel = matchMedia('(max-width:1023px)');
+  var tel = matchMedia('all');   /* r3: telefono e computer (nella r2 solo sotto i 1024 px) */
   var DUR = 12.333, FERMO = 11.2, W = 0, raf = 0, vede = false, fuori = true, uX = '', uT = '', guasto = false;
   function due(n){ return (n < 10 ? '0' : '') + n; }
   function tempo(t){ var f = Math.floor(t * 24 + 1e-4), s = Math.floor(f / 24); return '00:00:' + due(s) + ':' + due(f % 24); }
@@ -1813,8 +1984,10 @@ html.corsa .corsa-palla{display:block}
   v.addEventListener('pause', function(){ metti(v.currentTime); });
   /* se il video non si può leggere resta la foto (l'ultimo fotogramma): la linea va lì */
   v.addEventListener('error', function(){ guasto = true; metti(FERMO); });
+  function coperta(){ var c = box.closest('.pacchetto'); return !!(c && c.classList.contains('coperta')); }
   function scegli(){
-    if (vede && tel.matches && !document.hidden) {
+    if (coperta()) fuori = true;
+    if (vede && tel.matches && !document.hidden && !coperta()) {
       if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.getAttribute('data-src'); }
       if (fuori && !guasto) { fuori = false; try { v.currentTime = 0; } catch (x) {} metti(0); }
       if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
@@ -1822,6 +1995,7 @@ html.corsa .corsa-palla{display:block}
   }
   if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ var e = es[es.length - 1]; vede = e.isIntersecting && e.intersectionRatio >= .33; if (!e.isIntersecting) fuori = true; scegli(); }, { threshold: [0, .33, .66, 1] }).observe(box);
   document.addEventListener('visibilitychange', scegli);
+  document.addEventListener('pila-pc', scegli);
   if (tel.addEventListener) tel.addEventListener('change', scegli); else if (tel.addListener) tel.addListener(scegli);
 })();
 </script>
@@ -2116,6 +2290,326 @@ html.corsa .corsa-palla{display:block}
     var f = document.getElementById('abb-fig-scala'); if (!f) return;
     f.closest('.abb-fig').addEventListener('pointerenter', function(){ f.classList.add('caduta'); });
   })();
+
+  /* r3 (21/11, Niccolò): al telefono la scala di Crescita si forma da sola, come nella landing: i due blocchi vengono
+     appoggiati (CSS, abb-poggia) quando la figura si vede almeno per il 60 %, una volta sola; poi resta formata.
+     Con «Riduci movimento» è già formata e ferma (CSS). Da computer resta col mouse sopra (qui sopra) */
+  (function(){
+    var f = document.getElementById('abb-fig-scala'); if (!f || !window.matchMedia) return;
+    var tel = matchMedia('(max-width:1023px)');
+    if (!('IntersectionObserver' in window)) { f.classList.add('caduta'); return; }
+    var vista = false;
+    function forse(){ if (vista && tel.matches && !f.classList.contains('caduta')) { f.classList.add('caduta'); io.disconnect(); } }
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ vista = e.isIntersecting && e.intersectionRatio >= .6; }); forse(); }, { threshold: [0, .6, 1] });
+    io.observe(f);
+    if (tel.addEventListener) tel.addEventListener('change', forse); else if (tel.addListener) tel.addListener(forse);
+  })();
+})();
+</script>
+<script>
+/* ===== Macchia (r3, 21/11) ===================================================================================================
+   Lo sfondo dell'apertura (telefono e computer): è la «macchia» originale della pagina di partenza (VSLinear NB/NC, «shader»
+   scelto da Niccolò il 18/10), con lo stesso codice di colori e grana: tre macchie di luce (arancio, brace, ambra) che si
+   muovono su percorsi diversi e si deformano come un liquido, sul nero caldo del marchio; la grana da pellicola è ferma
+   (legata ai pixel). Due passaggi: la luce a metà risoluzione, poi colori e grana a piena misura. Dietro i testi
+   dell'apertura la luce non supera la brace (zona più scura), così si leggono.
+   Cambiato rispetto all'originale (Niccolò 21/11: «quasi impercettibile»): il tempo scorre al 20 % e i percorsi delle luci
+   sono larghi la metà (le luci si spostano di pochi px al secondo); niente luci che si spengono scorrendo (l'apertura qui
+   scorre via normalmente: in fondo sfuma nel nero con la maschera CSS di .eroe-fondo); 20 fotogrammi al secondo e pausa
+   mentre si scorre.
+   Si ferma quando l'apertura non si vede e a scheda nascosta; con «Riduci movimento» disegna un solo fotogramma fermo.
+   Senza WebGL (o se il contesto si perde): un'immagine ferma presa dalla macchia stessa (classe «senza-gl», CSS) ===== */
+(function(){
+  'use strict';
+  var cop = document.getElementById('inizio'), fondo = document.getElementById('eroe-fondo'), cv = fondo && fondo.querySelector('.macchia');
+  if (!cv || !cop) return;
+  var wrap = cop.querySelector('.eroe-testo'), html = document.documentElement;
+  var T0 = 18, VEL = .2, AMP = .5, PASSO = 50;   /* tempo iniziale, velocità del tempo, ampiezza dei percorsi, ms tra due fotogrammi */
+  var mq = null; try { mq = matchMedia('(prefers-reduced-motion: reduce)'); } catch (e) {}
+  var fermo = !!(mq && mq.matches);
+  function pos(el){ var x = 0, y = 0; while (el) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return [x, y]; }
+  function ripiego(){ fondo.classList.add('senza-gl'); cv.style.display = 'none'; }
+  var gl = null;
+  try { gl = cv.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'low-power' }); } catch (e) {}
+  if (!gl || /[?&]macchia=0(?:&|$)/.test(location.search)) { ripiego(); return; }
+
+  var VS = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+  /* rumore simplex 3D (Ian McEwan, Stefan Gustavson, Ashima Arts: webgl-noise, licenza MIT) */
+  var SIMPLEX = [
+    'vec3 m289(vec3 x){return x-floor(x*(1./289.))*289.;}',
+    'vec4 m289(vec4 x){return x-floor(x*(1./289.))*289.;}',
+    'vec4 perm(vec4 x){return m289(((x*34.)+10.)*x);}',
+    'float sn(vec3 v){',
+    ' const vec2 C=vec2(1./6.,1./3.);const vec4 D=vec4(0.,.5,1.,2.);',
+    ' vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);',
+    ' vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);',
+    ' vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;',
+    ' i=m289(i);',
+    ' vec4 p=perm(perm(perm(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));',
+    ' vec3 ns=.142857142857*D.wyz-D.xzx;',
+    ' vec4 j=p-49.*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.*x_);',
+    ' vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.-abs(x)-abs(y);',
+    ' vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);',
+    ' vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;vec4 sh=-step(h,vec4(0.));',
+    ' vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;',
+    ' vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);',
+    ' vec4 nr=1.79284291400159-.85373472095314*vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3));',
+    ' p0*=nr.x;p1*=nr.y;p2*=nr.z;p3*=nr.w;',
+    ' vec4 m=max(.5-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);m=m*m;',
+    ' return 105.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));',
+    '}'].join('\n');
+  /* passaggio 1, la luce (metà risoluzione): R = calore 0..1, G = tono (0 brace rossa, 1 ambra) — identico all'originale */
+  var FS1 = ['precision highp float;',
+    'uniform vec2 uR;uniform float uT,uZ;uniform vec2 uC[3];uniform vec2 uA[3];',
+    SIMPLEX,
+    'void main(){',
+    ' vec2 p=(gl_FragCoord.xy-.5*uR)/sqrt(uR.x*uR.y);float t=uT;const float TAU=6.2831853;',
+    ' p+=.21*vec2(sn(vec3(1.25*p,.045*t)),sn(vec3(1.25*p+vec2(5.2,1.3),.045*t+7.1)));',
+    ' p+=.06*vec2(sn(vec3(2.8*p+vec2(1.7,9.2),.08*t+2.3)),sn(vec3(2.8*p+vec2(8.3,2.8),.08*t+4.9)));',
+    ' vec2 c1=uC[0]+uA[0]*vec2(sin(TAU*t/27.),cos(TAU*t/35.));',
+    ' vec2 c2=uC[1]+uA[1]*vec2(sin(TAU*t/39.+1.7),cos(TAU*t/31.+.4));',
+    ' vec2 c3=uC[2]+uA[2]*vec2(sin(TAU*t/47.+3.1),cos(TAU*t/43.+2.2));',
+    ' vec2 d1=p-c1,d2=p-c2,d3=p-c3;',
+    ' float b1=exp(-dot(d1,d1)/(.095*uZ)),b2=exp(-dot(d2,d2)/(.12*uZ)),b3=exp(-dot(d3,d3)/(.065*uZ));',
+    ' float f=b1+.42*b2+.7*b3;',
+    ' gl_FragColor=vec4(1.-exp(-1.45*f),(.55*b1+b3)/(b1+b2+b3+1e-4),0.,1.);',
+    '}'].join('\n');
+  /* passaggio 2, colori e grana (piena misura) — identico all'originale; la luce resta sempre accesa (uV.x = 1, uK = 1) */
+  var FS2 = ['precision highp float;',
+    'uniform sampler2D uL;uniform vec2 uR,uV;uniform vec4 uB;uniform float uK;',
+    'float h12(vec2 c){vec3 q=fract(vec3(c.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}',
+    'void main(){',
+    ' vec2 fc=gl_FragCoord.xy;vec4 L=texture2D(uL,fc/uR);float h=L.r,tn=L.g;',
+    ' vec2 b=abs(fc-uB.xy)/uB.zw;b*=b;b*=b;float e=sqrt(sqrt(b.x+b.y));',
+    ' h=mix(h,.42*(1.-exp(-h/.42)),1.-smoothstep(.72,1.32,e));',
+    ' h*=uV.x*smoothstep(0.,max(uV.y,1e-3),fc.y);',
+    ' float n1=h12(fc),n2=h12(fc+vec2(47.3,11.9)),n3=h12(fc+vec2(13.1,71.7));',
+    ' h=clamp(h+(n1-.5)*uK*.085*(.2+3.2*h*(1.-h)),0.,1.);',
+    ' vec3 c=mix(vec3(.063,.059,.035),mix(vec3(.25,.066,.03),vec3(.27,.1,.04),tn),smoothstep(0.,.38,h));',
+    ' c=mix(c,mix(vec3(.6,.15,.05),vec3(.7,.25,.07),tn),smoothstep(.3,.72,h));',
+    ' c=mix(c,mix(vec3(.8,.27,.1),vec3(.84,.35,.12),tn),smoothstep(.66,1.,h));',
+    ' float l=dot(c,vec3(.299,.587,.114));',
+    ' c+=(n2+n3-1.)*uK*(.022+.15*l*(1.-l));',
+    ' gl_FragColor=vec4(c,1.);',
+    '}'].join('\n');
+  /* dove stanno le luci (come l'originale): computer calore in basso a destra, brace in alto a sinistra, ambra in alto a
+     destra; telefono calore in basso, brace a sinistra, ambra in alto a destra. Il centro resta scuro. Percorsi: metà */
+  var LARGO = { c: [[.8, .84], [.08, .2], [.97, .1]], a: [[.2, .1], [.2, .12], [.13, .09]], z: 1 };
+  var ALTO = { c: [[.66, .88], [0, .5], [1, .07]], a: [[.24, .07], [.1, .14], [.1, .06]], z: 1.7 };
+
+  var P1, P2, U1, U2, tex, fbo, fw = 0, fh = 0, perso = false;
+  function sh(tipo, src){ var s = gl.createShader(tipo); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS) && !gl.isContextLost()) throw new Error(gl.getShaderInfoLog(s)); return s; }
+  function prog(fs, nomi){ var p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+    gl.bindAttribLocation(p, 0, 'a'); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS) && !gl.isContextLost()) throw new Error(gl.getProgramInfoLog(p));
+    var u = {}; nomi.forEach(function(n){ u[n] = gl.getUniformLocation(p, n); }); return [p, u]; }
+  function prepara(){
+    var a = prog(FS1, ['uR', 'uT', 'uZ', 'uC', 'uA']), b = prog(FS2, ['uL', 'uR', 'uV', 'uB', 'uK']); P1 = a[0]; U1 = a[1]; P2 = b[0]; U2 = b[1];
+    var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    gl.disable(gl.DEPTH_TEST); gl.disable(gl.BLEND);
+    tex = gl.createTexture(); fbo = gl.createFramebuffer(); fw = fh = 0;
+  }
+  function buffer(w, h){ if (w === fw && h === fh) return; fw = w; fh = h;
+    gl.bindTexture(gl.TEXTURE_2D, tex); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    var ok = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE; gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    if (!ok && !gl.isContextLost()) throw new Error('framebuffer');
+  }
+  try { prepara(); } catch (e) { ripiego(); return; }
+
+  /* misure: canvas a 1 px CSS (al massimo ~1,6 milioni di pixel), luce a metà; zona del testo dal layout (offset*) */
+  var W = 0, H = 0, S = 1, Z = 1, C = new Float32Array(6), A = new Float32Array(6), box = [0, 0, 1, 1];
+  function misura(){
+    var w = cop.clientWidth, h = cop.clientHeight; if (!w || !h) return false;
+    var k = Math.min(1, Math.sqrt(1.6e6 / (w * h))), pw = Math.max(2, Math.round(w * k)), ph = Math.max(2, Math.round(h * k));
+    if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
+    try { buffer(Math.ceil(pw / 2), Math.ceil(ph / 2)); } catch (e) { perso = true; ripiego(); return false; }
+    W = w; H = h; S = Math.sqrt(w * h);
+    var L = w >= h ? LARGO : ALTO; Z = L.z;
+    for (var i = 0; i < 3; i++) { C[2 * i] = (L.c[i][0] - .5) * w / S; C[2 * i + 1] = (.5 - L.c[i][1]) * h / S; A[2 * i] = L.a[i][0] * AMP; A[2 * i + 1] = L.a[i][1] * AMP; }
+    var o = pos(cop), x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    [].forEach.call(wrap ? wrap.children : [], function(el){ if (el.offsetWidth < 2) return; var q = pos(el);
+      x0 = Math.min(x0, q[0] - o[0]); y0 = Math.min(y0, q[1] - o[1]); x1 = Math.max(x1, q[0] - o[0] + el.offsetWidth); y1 = Math.max(y1, q[1] - o[1] + el.offsetHeight); });
+    if (x1 < x0) { x0 = .2 * w; x1 = .8 * w; y0 = .25 * h; y1 = .75 * h; }
+    var pad = Math.min(w, h) * .04; box = [(x0 + x1) / 2, (y0 + y1) / 2, (x1 - x0) / 2 + pad, (y1 - y0) / 2 + pad];
+    return true;
+  }
+  var tt = T0, pronto = false;
+  function disegna(){
+    if (perso || !W) return;
+    var kx = cv.width / W, ky = cv.height / H;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.viewport(0, 0, fw, fh); gl.useProgram(P1);
+    gl.uniform2f(U1.uR, fw, fh); gl.uniform1f(U1.uT, tt); gl.uniform1f(U1.uZ, Z); gl.uniform2fv(U1.uC, C); gl.uniform2fv(U1.uA, A);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, cv.width, cv.height); gl.useProgram(P2);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(U2.uL, 0);
+    gl.uniform2f(U2.uR, cv.width, cv.height); gl.uniform2f(U2.uV, 1, 0);
+    gl.uniform4f(U2.uB, box[0] * kx, (H - box[1]) * ky, box[2] * kx, box[3] * ky);
+    gl.uniform1f(U2.uK, 1);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (!pronto) { pronto = true; requestAnimationFrame(function(){ cv.classList.add('pronto'); }); }
+  }
+  /* il ciclo: 20 fotogrammi al secondo (la luce è lentissima); si ferma fuori schermo, a scheda nascosta e mentre si scorre
+     (fino a 220 ms dopo l'ultimo scorrimento: la luce si sposta di pochi px al secondo, la pausa non si vede, e così il
+     telefono durante il trascinamento e il volo della V non lavora per lo sfondo) */
+  var raf = 0, ultimo = 0, inVista = true, scorre = false, tScorre = 0;
+  function serve(){ return !fermo && !perso && !document.hidden && inVista && !scorre; }
+  addEventListener('scroll', function(){ scorre = true; clearTimeout(tScorre); tScorre = setTimeout(function(){ scorre = false; sveglia(); }, 220); }, { passive: true });
+  function ciclo(ora){
+    raf = 0; if (!serve()) { ultimo = 0; return; }
+    if (ultimo && ora - ultimo < PASSO - 4) { raf = requestAnimationFrame(ciclo); return; }
+    var dt = ultimo ? Math.min(.1, (ora - ultimo) / 1000) : 0; ultimo = ora;
+    tt += dt * VEL; disegna(); raf = requestAnimationFrame(ciclo);
+  }
+  function sveglia(){ if (!raf && serve()) { ultimo = 0; raf = requestAnimationFrame(ciclo); } }
+  misura(); disegna(); sveglia();
+  if (window.ResizeObserver) { var ro = new ResizeObserver(function(){ if (misura()) disegna(); }); ro.observe(cop); if (wrap) ro.observe(wrap); }
+  else addEventListener('resize', function(){ if (misura()) disegna(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (misura()) disegna(); });
+  if (window.IntersectionObserver) new IntersectionObserver(function(es){ inVista = es[es.length - 1].isIntersecting; sveglia(); }).observe(cop);
+  document.addEventListener('visibilitychange', sveglia);
+  if (mq) { var cambia = function(){ fermo = mq.matches; if (fermo) disegna(); else sveglia(); }; if (mq.addEventListener) mq.addEventListener('change', cambia); else if (mq.addListener) mq.addListener(cambia); }
+  cv.addEventListener('webglcontextlost', function(e){ e.preventDefault(); perso = true; if (raf) { cancelAnimationFrame(raf); raf = 0; } });
+  cv.addEventListener('webglcontextrestored', function(){ perso = false; try { prepara(); fw = fh = 0; misura(); disegna(); sveglia(); } catch (x) { ripiego(); } });
+  /* per gli strumenti di prova */
+  window.MACCHIA = { stato: function(){ return { gl: !perso, gira: !!raf, inVista: inVista, t: tt, fermo: fermo, w: cv.width, h: cv.height }; }, tempo: function(t){ tt = t; disegna(); } };
+})();
+</script>
+<script>
+/* ===== r3 (21/11/2026) · SCRIPT DEL COMPUTER (da 1024 px): Cerchio, Accendi, Pila PC =====================================
+   Valgono solo da 1024 px in su (condizione sulla larghezza, rifatta se la finestra cambia misura); sotto i 1024 px non
+   toccano niente e la pagina è la r2. Si anima solo con transform e opacity, niente cattura dello scorrimento.
+   Con «Riduci movimento»: cerchio fermo, titoli bianchi, schede che si fermano in alto senza rimpicciolire ===== */
+(function(){
+  'use strict';
+  if (!window.matchMedia || !('requestAnimationFrame' in window)) return;
+  var daPC = matchMedia('(min-width:1024px)'), ridotto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function c01(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function ascolta(mq, f){ if (mq.addEventListener) mq.addEventListener('change', f); else if (mq.addListener) mq.addListener(f); }
+
+  /* ── Cerchio: scorrendo l'apertura il logo animato si sposta (verso il centro, e sale un po' più piano della pagina) e si
+     rimpicciolisce fino al 60 %. Legato alla posizione: tornando su torna com'era. Rimpicciolendo resta sopra il bordo in
+     fondo all'apertura (niente taglio dritto sul cerchio) ── */
+  var cer = document.getElementById('cerchio-pc'), eroe = document.getElementById('inizio'), fondo = eroe && eroe.querySelector('.eroe-fondo .macchia');
+  var C = null;
+  function misuraCerchio(){ C = (cer && eroe && daPC.matches && !ridotto) ? { h: eroe.offsetHeight || 1, w: innerWidth } : null; if (!C) { if (cer) cer.style.transform = ''; if (fondo) fondo.style.transform = ''; } }
+  function cerchio(){
+    if (!C) return;
+    var p = c01((window.scrollY || 0) / C.h), e = p * (2 - p);                 /* lineare nello scorrimento, morbida in fondo */
+    var t = 'translate3d(' + (-.12 * C.w * e).toFixed(2) + 'px,' + (.12 * C.h * p).toFixed(2) + 'px,0) scale(' + (1 - .4 * e).toFixed(4) + ')';
+    if (t !== cer._t) { cer._t = t; cer.style.transform = t; }
+    /* lo sfondo (la macchia) scende piano: lo scorrimento lo sposta di poco */
+    if (fondo) { var g = 'translate3d(0,' + (.16 * C.h * p).toFixed(2) + 'px,0)'; if (g !== fondo._t) { fondo._t = g; fondo.style.transform = g; } }
+  }
+
+
+  /* ── Accendi: i titoli di Come funziona, Servizi e Abbonamenti si accendono parola per parola (da grigio scuro a bianco)
+     mentre salgono nello schermo, come i titoli di Spotify. Ogni parola ha la sua opacità, legata alla posizione del
+     titolo: comincia quando il titolo è all'85 % dell'altezza dello schermo e finisce quando è al 45 %; tornando su si
+     spegne di nuovo. Le parole si avvolgono in <span class="pa"> solo da computer (al telefono il titolo resta com'è) ── */
+  var titoli = [].slice.call(document.querySelectorAll('#t-come, #t-servizi, #t-abb'));
+  var parole = [];
+  function avvolgi(h){
+    if (h._parole) return h._parole;
+    var lista = [], testi = [], w = document.createTreeWalker(h, NodeFilter.SHOW_TEXT, null, false), n;
+    while ((n = w.nextNode())) { if (!n.parentNode.closest('.sr, .solo-tel')) testi.push(n); }
+    testi.forEach(function(t){
+      var pezzi = t.nodeValue.split(/(\s+)/), f = document.createDocumentFragment();
+      pezzi.forEach(function(s){
+        if (!s) return;
+        if (/^\s+$/.test(s)) { f.appendChild(document.createTextNode(s)); return; }
+        var sp = document.createElement('span'); sp.className = 'pa'; sp.textContent = s; f.appendChild(sp); lista.push(sp);
+      });
+      t.parentNode.replaceChild(f, t);
+    });
+    /* il punto arancio finale va con l'ultima parola */
+    var pt = [].filter.call(h.querySelectorAll('.pt'), function(x){ return !x.closest('.solo-tel'); })[0];
+    if (pt && lista.length) lista[lista.length - 1]._pt = pt;
+    h._parole = lista; return lista;
+  }
+  function preparaTitoli(){
+    parole = [];
+    titoli.forEach(function(h){
+      if (daPC.matches && !ridotto) { var l = avvolgi(h); h.classList.add('accende'); parole.push({ h: h, l: l }); }
+      else h.classList.remove('accende');
+    });
+  }
+  function accendi(){
+    var H = innerHeight;
+    parole.forEach(function(q){
+      var r = q.h.getBoundingClientRect(), y = r.top + r.height / 2, n = q.l.length;
+      var P = c01((H * .85 - y) / (H * .4));
+      q.l.forEach(function(sp, i){
+        var o = (.22 + .78 * c01((P * (n + 1.5) - i) / 1.5)).toFixed(3);
+        if (sp._o !== o) { sp._o = o; sp.style.setProperty('--o', o); if (sp._pt) sp._pt.style.setProperty('--o', o); }
+      });
+    });
+  }
+
+  /* ── Pila PC: le schede dei servizi (misure prese dal video di Spotify del 21/11, fotogrammi 15,6-22 s):
+     · tutte sticky alla stessa altezza (CSS); la nuova sale dal basso a misura piena, senza dissolvenza;
+     · quella sotto resta ferma e si rimpicciolisce attorno al suo centro mentre la nuova le sale sopra, come su Spotify:
+       quando arriva la seconda scheda la prima è al 94,9 % (curva 1 − (1 − p)^1,7: veloce all'inizio, poi rallenta);
+       quando arriva la terza la seconda è al 92,2 % (curva 1 − (1 − p)^2) e la prima scende ancora (resta sempre più
+       piccola di quella davanti, così non spunta); niente scurimento (Spotify non scurisce);
+     · finché la nuova sale, della scheda sotto si vede la striscia in alto; quando la nuova arriva la copre tutta;
+     · dopo l'ultima scheda la pila se ne va insieme alla pagina.
+     Le schede sono tutte alte uguali (la più alta: conta anche «Scopri i dettagli» aperto), così quella sotto non spunta.
+     Q = di quante schede la pila è già salita oltre la linea in alto; la scheda j è arrivata per la frazione p_j = Q − (j−1) ── */
+  var ul = document.querySelector('#servizi .pacchetti'), carte = ul ? [].slice.call(ul.querySelectorAll(':scope > .pacchetto:not(.speciale)')) : [];
+  var P = null;
+  function misuraPila(){
+    carte.forEach(function(c){ c.style.minHeight = ''; c.style.top = ''; });
+    if (!daPC.matches || carte.length < 2) { P = null; carte.forEach(function(c){ c.style.transform = ''; c.classList.remove('coperta'); c._s = c._cop = undefined; }); return; }
+    var mx = 0; carte.forEach(function(c){ mx = Math.max(mx, c.offsetHeight); });
+    carte.forEach(function(c){ c.style.minHeight = mx + 'px'; });
+    var cs = getComputedStyle(carte[0]), ideale = parseFloat(cs.top) || 0, gap = parseFloat(cs.marginBottom) || 0;
+    var testata = (document.getElementById('testata') || {}).offsetHeight || 64;
+    /* se la scheda (per esempio coi dettagli aperti) non ci sta sotto la linea ideale, sale: resta tutta nello schermo */
+    var cima = Math.round(Math.max(testata + 12, Math.min(ideale, innerHeight - mx - 16)));
+    if (cima !== Math.round(ideale)) carte.forEach(function(c){ c.style.top = cima + 'px'; });
+    P = { cima: cima, passo: mx + gap, h: mx };
+  }
+  var K = [0, .051, .078], E = [1, 1.7, 2];   /* per la scheda che arriva (la 2ª, la 3ª e le seguenti): quanto rimpicciolisce le schede sotto e con che curva */
+  function f(p, j){ return K[Math.min(j, 2)] * (1 - Math.pow(1 - p, E[Math.min(j, 2)])); }
+  function pila(){
+    if (!P) return;
+    var Q = (P.cima - ul.getBoundingClientRect().top) / P.passo, cambiata = false;
+    for (var i = 0; i < carte.length; i++) {
+      var q = 0; for (var j = i + 1; j < carte.length; j++) q += f(c01(Q - (j - 1)), j);
+      var s = ridotto ? 1 : 1 - q, c = carte[i], t = s < .99995 ? 'scale(' + s.toFixed(5) + ')' : '';
+      if (c._s !== t) { c._s = t; c.style.transform = t; }
+      var cop = i < carte.length - 1 && Q - i >= 1;                            /* la scheda dopo è arrivata: questa non si vede */
+      if (c._cop !== cop) { c._cop = cop; c.classList.toggle('coperta', cop); cambiata = true; }
+    }
+    if (cambiata) document.dispatchEvent(new Event('pila-pc'));
+  }
+
+  var raf = 0, rq = 0;
+  function disegna(){ raf = 0; cerchio(); accendi(); pila(); }
+  function chiedi(){ if (!raf) raf = requestAnimationFrame(disegna); }
+  function rifai(){ rq = 0; misuraCerchio(); preparaTitoli(); misuraPila(); if (!daPC.matches) { parole = []; document.dispatchEvent(new Event('pila-pc')); } disegna(); }
+  function chiediRifai(){ if (!rq) rq = requestAnimationFrame(rifai); }
+  addEventListener('scroll', chiedi, { passive: true });
+  addEventListener('resize', chiediRifai);
+  ascolta(daPC, chiediRifai);
+  /* «Scopri i dettagli» cambia l'altezza della scheda: si rimisura (anche durante l'apertura morbida) */
+  carte.forEach(function(c){ var d = c.querySelector('.dettagli'); if (d) d.addEventListener('toggle', function(){ chiediRifai(); setTimeout(chiediRifai, 520); }); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(chiediRifai);
+  addEventListener('load', chiediRifai);
+  rifai();
+  /* per gli strumenti di prova */
+  window.PC3 = {
+    pila: function(){ return P ? { cima: P.cima, passo: P.passo, h: P.h, Q: (P.cima - ul.getBoundingClientRect().top) / P.passo,
+      carte: carte.map(function(c){ var r = c.getBoundingClientRect(); return { id: c.id, top: +r.top.toFixed(1), left: +r.left.toFixed(1), w: +r.width.toFixed(1), h: +r.height.toFixed(1), s: c._s || '', coperta: c.classList.contains('coperta') }; }) } : null; },
+    parole: function(){ return parole.map(function(q){ return { id: q.h.id, o: q.l.map(function(s){ return +(s._o || 1); }) }; }); },
+    cerchio: function(){ if (!cer) return null; var r = cer.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, d: r.width, t: cer.style.transform }; },
+    rifai: rifai
+  };
 })();
 </script>
 <!-- CHAT-VA · JS dalla D (unico cambio: data-basso, vedi _lavoro/n/costruisci.py) -->
