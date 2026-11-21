@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#100F09">
 <meta name="format-detection" content="telephone=no">
 <script>document.documentElement.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){if(!matchMedia('(min-width:1024px)').matches)document.documentElement.classList.add('vola')}else document.documentElement.classList.add('fermo')}catch(e){}</script>
+<!-- Home 2026 r6 (21/11/2026): r5 + la scena nuova di Creazione Contenuti (dalla bozza a linee al profilo Instagram del Jué; telefono disegnato al telefono, portatile disegnato da computer) al posto del portatile col montaggio. Fonte: home-2026/strumenti/costruisci-r6.py -->
 <!-- Home 2026 r5 (21/11/2026): r4 + testi legali e promesse allineati alla landing r47 (consulenza, domande, piede, privacy). Fonte: home-2026/strumenti/costruisci-r5.py -->
 <!-- Home 2026 r4 (21/11/2026): r3 + richieste di Niccolò del 21/11 al TELEFONO (apertura a sinistra, scala di Crescita quando la scheda è ferma, tendine degli abbonamenti). Fonte: home-2026/strumenti/costruisci-r4.py -->
 <!-- Home 2026 r3 (21/11/2026): versione da COMPUTER (da 1024 px) come spotify.com/premium: apertura col logo animato (pallino arancio grande, luce che si muove, V scura), Come funziona e Servizi coi titoli che si accendono, servizi in schede scure che si impilano, abbonamenti corti con un solo pulsante. Telefono come la r2 (salvo montaggio semplificato e scala che si forma). Fonte: home-2026/strumenti/costruisci-r3.py -->
@@ -940,42 +941,11 @@ html:not(.corsa) .stazione{--on:1}
   .passo p{font-size:16px;line-height:1.6;max-width:24em}
 }
 
-/* ── 3d · Creazione Contenuti: il video dello spot dentro un programma di montaggio (disegnato, senza marchi veri) nello
-   schermo di un portatile. r3 (21/11, Niccolò: «conta il video»): solo il visore grande col video e sotto due righe, la
-   traccia video (le clip, un po' più spessa) e l'audio (solo le onde del volume); via barra col nome del file, Esporta,
-   Media, Proprietà, codici di tempo, righello, tasti, nomi e traccia dei titoli, A2. Si anima solo la linea di riproduzione
-   arancio (transform), che segue il tempo del video. Le misure interne sono in «punti di disegno» (--u = 1/342 della
-   larghezza del programma). Telefono: il portatile sta in un riquadro come quello del Sito Web (stesso fondo, stessi angoli,
-   stesso filo in alto e a sinistra che sfuma: #servizi .m). Computer (r3): nel riquadro incassato della scheda (pc.css) ── */
-.mont{display:none}
-.mont-pc{max-width:560px;margin:0 auto}
-.mont-schermo{position:relative;padding:2.4% 2.4% 3%;border-radius:12px 12px 4px 4px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.14),0 40px 60px -40px rgba(0,0,0,.9)}
-.mont-schermo::before{content:"";position:absolute;left:50%;top:1%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(245,244,239,.14)}   /* la fotocamera */
-.mont-base{position:relative;height:10px;margin:0 -2.6%;border-radius:2px 2px 12px 12px / 2px 2px 9px 9px;background:linear-gradient(180deg,#3A392F 0%,#24231B 45%,#141309 100%);box-shadow:0 14px 24px -10px rgba(0,0,0,.8)}
-.mont-base::before{content:"";position:absolute;left:41%;right:41%;top:0;height:3px;border-radius:0 0 5px 5px;background:#141309}
-.mont-app{--u:calc(100cqw / 342);container-type:inline-size;position:relative;aspect-ratio:342 / 236;overflow:hidden;border-radius:3px;background:#121109;
-  display:grid;grid-template-rows:minmax(0,1fr) auto;-webkit-user-select:none;user-select:none}
+/* ── 3d · Creazione Contenuti: dalla r6 il portatile col programma di montaggio non c'è più (né al telefono né da computer):
+   al suo posto la scena di contenuti-scena.css (dal prototipo prove/contenuti-r5) ── */
 @media (max-width:1023px){
   #contenuti > .m-video{display:none}
-  .mont{display:block;position:relative;margin:0 calc(var(--pan) - var(--lato));padding:clamp(30px,9vw,48px) clamp(16px,5vw,28px) clamp(34px,10vw,52px);
-    border-radius:14px;isolation:isolate;background:linear-gradient(155deg,#1C1B14 0%,#15140E 40%,rgba(16,15,9,0) 85%)}
-  .mont::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:5;border:1px solid rgba(245,244,239,.2);border-right:0;border-bottom:0;
-    -webkit-mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(125% 115% at 0 0,#000 35%,rgba(0,0,0,0) 100%)}
 }
-.mont-app *{box-sizing:border-box}
-.mont-visore{position:relative;display:flex;justify-content:center;align-items:center;min-width:0;min-height:0;padding:calc(7 * var(--u)) 0;background:#060504}
-.mont-visore video,.mont-visore img{display:block;height:100%;width:auto;max-width:none;aspect-ratio:9 / 16;object-fit:cover;background:#000}
-.mont-linea{position:relative;padding:calc(10 * var(--u)) calc(9 * var(--u)) calc(9 * var(--u));background:#100F0A;border-top:1px solid rgba(245,244,239,.07)}
-.mont-tracce{position:relative;display:grid;grid-template-rows:calc(19 * var(--u)) calc(14 * var(--u));row-gap:calc(5 * var(--u));min-width:0}
-.mont-traccia{position:relative}
-.mont-clip{position:absolute;top:0;bottom:0;left:var(--a);width:calc(var(--l) - 1px);overflow:hidden;border-radius:calc(1.5 * var(--u));font-style:normal}
-.mont-v1 .mont-clip{background:#3A3A2E linear-gradient(180deg,rgba(245,244,239,.08),rgba(245,244,239,0));box-shadow:inset 0 0 0 1px rgba(245,244,239,.16)}
-.mont-v1 .mont-clip::before{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(11 * var(--u));background:url(img/montaggio-clip.jpg) var(--f,0%) 0 / 800% 100% no-repeat;border-right:1px solid rgba(0,0,0,.4)}
-.mont-a1 svg{position:absolute;inset:0;width:100%;height:100%}
-.mont-a1 path{fill:none;stroke:rgba(190,215,170,.62);stroke-width:1;vector-effect:non-scaling-stroke}
-.mont-testina{position:absolute;left:0;top:calc(-8 * var(--u));bottom:calc(-3 * var(--u));width:1px;margin-left:-.5px;background:#FF5A1F;transform:translate3d(0,0,0);will-change:transform;z-index:2}
-.mont-testina::before{content:"";position:absolute;left:calc(-3.5 * var(--u));top:0;width:calc(7 * var(--u));height:calc(7 * var(--u));background:#FF5A1F;clip-path:polygon(0 0,100% 0,100% 55%,50% 100%,0 55%)}
-html.fermo .mont-testina{will-change:auto}
 
 /* ── la corsa della pallina (script «Corsa»), r2: SOLO DA COMPUTER e SOLO SULLA RIGA 2d (Niccolò 21/11: «su pc lascia solo
    quella orizzontale iniziale, resto togli tutto»). La pallina sta dentro la riga e si ferma in fondo a destra; niente
@@ -1345,19 +1315,11 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   #sito{--fondo-scheda:#191C18}        /* verde quasi nero */
   #va{--fondo-scheda:#1D1A20}          /* prugna quasi nera */
   /* il riquadro incassato (a sinistra): più scuro della scheda, con l'ombra dentro e il filo chiaro in alto a sinistra */
-  #servizi .pacchetto:not(.speciale) > .m,#servizi .pacchetto > .mont{grid-column:1;grid-row:1 / 6;align-self:stretch;aspect-ratio:auto;min-height:0;margin:0;border-radius:14px;
+  #servizi .pacchetto:not(.speciale) > .m{grid-column:1;grid-row:1 / 6;align-self:stretch;aspect-ratio:auto;min-height:0;margin:0;border-radius:14px;
     background:linear-gradient(160deg,rgba(0,0,0,.36),rgba(0,0,0,.2));box-shadow:inset 0 2px 18px rgba(0,0,0,.5),inset 0 0 0 1px rgba(245,244,239,.07)}
   #servizi .pacchetto:not(.speciale) > .m::after{border-color:rgba(245,244,239,.16)}
   #contenuti > .m-video{display:none}
-  /* Creazione Contenuti: il montaggio della r2 (portatile col programma di montaggio) dentro il riquadro */
-  #servizi .mont{display:flex;align-items:center;justify-content:center;position:relative;padding:clamp(14px,1.5vw,22px)}
-  #servizi .mont-pc{width:100%;max-width:640px;margin:0 auto}
-  #servizi .mont-schermo{position:relative;padding:2.4% 2.4% 3%;border-radius:12px 12px 4px 4px;background:#0A0906;box-shadow:inset 0 0 0 1px rgba(245,244,239,.14),0 40px 60px -40px rgba(0,0,0,.9)}
-  #servizi .mont-schermo::before{content:"";position:absolute;left:50%;top:1%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(245,244,239,.14)}
-  #servizi .mont-base{position:relative;height:10px;margin:0 -2.6%;border-radius:2px 2px 12px 12px / 2px 2px 9px 9px;background:linear-gradient(180deg,#3A392F 0%,#24231B 45%,#141309 100%);box-shadow:0 14px 24px -10px rgba(0,0,0,.8)}
-  #servizi .mont-base::before{content:"";position:absolute;left:41%;right:41%;top:0;height:3px;border-radius:0 0 5px 5px;background:#141309}
-  #servizi .mont-app{--u:calc(100cqw / 342);container-type:inline-size;position:relative;aspect-ratio:342 / 236;overflow:hidden;border-radius:3px;background:#121109;
-    font-family:var(--mono);color:rgba(245,244,239,.6);display:grid;grid-template-rows:auto 1fr auto auto;-webkit-user-select:none;user-select:none}
+  /* Creazione Contenuti (r6): nel riquadro la scena di contenuti-scena.css (portatile disegnato con instagram.com) */
   /* Sito Web e Virtual Assistant: il riquadro della r2 con dentro l'anteprima del sito e la chat */
   #servizi .m-va{background:linear-gradient(160deg,rgba(0,0,0,.36),rgba(0,0,0,.2))}
   #servizi .m-va > .chat{left:50%;right:auto;width:min(400px,74%);transform:translateX(-50%)}
@@ -1400,6 +1362,108 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   .cerchio-disco i{animation:none!important}
   #servizi .pacchetto{will-change:auto}
 }
+/* ===== 3d · CREAZIONE CONTENUTI (r6, 21/11): «dall'idea al video, dritto sul tuo profilo» ======================
+   Sostituisce il portatile col programma di montaggio, al telefono (telefono disegnato) e da computer (portatile disegnato
+   con instagram.com da computer, nel riquadro incassato della scheda). Dal prototipo prove/contenuti-r5 (r4 approvata il 21/11). Una volta sola: bicchiere e bottiglia a linee, la scritta «Aperitivo al
+   Jué●», de-zoom sul profilo Instagram disegnato (il foglio diventa il PRIMO quadrato), poi profilo e reel diventano veri insieme
+   (cerchio dal primo quadrato) e resta fermo lì; il video del reel continua a girare. Script «CONTENUTI · JS». ===== */
+/* il riquadro: è il .m della home (lo stesso del Sito Web, col filo che sfuma); dentro, la scena riempie tutto */
+.cc{position:absolute;inset:0;display:flex;flex-direction:column;container-type:inline-size;text-align:left;color:var(--av)}
+.cc p{margin:0}
+
+/* la frase in alto, come nel Sito Web */
+.cc-testa{flex:none;padding:20px 20px 0;position:relative;z-index:2}
+.cc-battute{display:grid}
+.cc-battuta{grid-area:1/1;font-weight:560;font-size:clamp(22px,7.3cqi,30px);line-height:1.08;letter-spacing:-.036em;color:var(--av2)}
+.cc-battuta em{font-style:normal;font-weight:600;color:var(--av);letter-spacing:-.03em}
+.cc-battuta + .cc-battuta{opacity:0}
+.cc-pt{display:inline-block;width:.19em;height:.19em;border-radius:50%;background:var(--rec);margin-left:.05em}
+
+/* la scena: palco 340 × 360 adattato dallo script, appoggiato in basso */
+.cc-scena{position:relative;flex:1 1 auto;min-height:0;overflow:hidden}
+.cc-palco{position:absolute;left:0;top:0;width:340px;height:360px;transform-origin:0 0}
+.cc-giro{position:absolute;inset:0}
+.cc-ab{position:absolute}
+
+/* il tratto: crema sottile, accenti arancio; si disegna con stroke-dashoffset (pathLength = 1) */
+.cc svg{display:block;overflow:visible}
+.cc-tr{fill:none;stroke:rgba(245,244,239,.82);stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 2;stroke-dashoffset:1.05}
+.cc-tr.cc-fine{stroke:rgba(245,244,239,.36);stroke-width:.85}
+.cc-tr.cc-ar{stroke:var(--rec)}
+.cc-tr.cc-testo{stroke:rgba(245,244,239,.5);stroke-width:3}
+.cc-tr.cc-testo.cc-f{stroke-width:1.6;stroke:rgba(245,244,239,.3)}
+
+/* il foglio del disegno (diventa l'ultimo quadrato della griglia) */
+.cc-carta{left:85.625px;top:34px;width:168.75px;height:300px;transform-origin:50% 50%;clip-path:inset(0% 0% 0% 0% round 9px)}
+.cc-carta-fondo{position:absolute;inset:0;background:#17160F;opacity:0}
+.cc-carta svg{position:absolute;inset:0;width:100%;height:100%}
+.cc-titolo{position:absolute;left:15px;right:10px;bottom:46px;font-weight:650;font-size:24px;line-height:1.02;letter-spacing:-.04em;color:var(--av);margin:0}
+.cc-riga{display:block;overflow:hidden;padding:.06em 0 .1em;margin:-.06em 0 -.1em}
+.cc-riga > span{display:inline-block}
+.cc-c{display:inline-block;transform:translateY(110%)}
+.cc-jue{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.3em;letter-spacing:-.015em;line-height:.8}
+.cc-dot{display:inline-block;width:.21em;height:.21em;border-radius:50%;background:var(--rec);margin-left:.03em;transform:scale(0)}
+.cc-carta svg.cc-sotto{position:absolute;inset:auto;left:45px;top:251px;width:46px;height:9px}
+/* il reel vero: stesso foglio, colori originali */
+.cc-reel{left:85.625px;top:34px;width:168.75px;height:300px;transform-origin:50% 50%;clip-path:inset(12.5% 0% 12.5% 0% round 4px)}
+.cc-reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cc-reel .cc-ombra{position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55))}
+.cc-reel .cc-titolo{color:#fff}
+.cc-reel .cc-c,.cc-reel .cc-dot{transform:none}
+
+/* la pagina Instagram disegnata (lo script la costruisce sulle misure del profilo vero) */
+.cc-disegno{left:0;top:0;width:100%;height:100%}
+.cc-disegno svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.cc-grigio{fill:#2A2922;opacity:0}
+
+/* il profilo vero del Jué: tutto dentro il riquadro, centrato; si scopre con un cerchio che parte dal reel */
+.cc-tel{left:82px;top:4px;width:176px;height:352px;border-radius:28px;background:#0A0906;
+  box-shadow:inset 0 0 0 1px rgba(245,244,239,.16),0 0 0 4px #0D0C08,0 0 0 5px rgba(245,244,239,.07);clip-path:circle(0px at 50% 50%)}
+.cc-schermo{position:absolute;inset:5px;border-radius:23px;overflow:hidden;background:#0B0A07;font-family:var(--sans);color:var(--av);text-align:left}
+.cc-isola{position:absolute;top:5px;left:50%;width:50px;height:13px;margin-left:-25px;border-radius:99px;background:#000}
+.cc-barra{margin-top:28px;padding:0 11px;height:14px;display:flex;align-items:center;justify-content:flex-start;gap:3px;font:700 8.5px/1 var(--sans);letter-spacing:-.01em}
+.cc-barra svg{width:8px;height:8px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cc-prof{display:flex;align-items:center;gap:11px;margin-top:15px;padding:0 11px}
+.cc-av{flex:none;display:block;width:60px;height:60px;border-radius:50%;background:#000 url(img/jue-logo.png) 50% 54%/66% auto no-repeat;box-shadow:0 0 0 2px #0B0A07,0 0 0 3.5px var(--rec)}
+.cc-chi{min-width:0}
+.cc p.cc-nome{margin:0;font:600 9px/1 var(--sans)}
+.cc p.cc-bio{margin:5px 0 0;font-size:6.8px;line-height:1.45;color:var(--av2)}
+.cc-nome span,.cc-bio span{display:inline-block}
+.cc-schede{display:flex;margin-top:20px;border-bottom:1px solid rgba(245,244,239,.1)}
+.cc-schede span{flex:1;height:22px;display:grid;place-content:center;color:rgba(245,244,239,.42)}
+.cc-schede span:first-child{color:var(--av);box-shadow:inset 0 -1px 0 var(--av)}
+.cc-schede svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cc-griglia{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:1px}
+.cc-griglia > i{position:relative;display:block;aspect-ratio:3/4;background:#2A2922}
+.cc-griglia > i:first-child{background:#0B0A07}
+.cc-casa{position:absolute;left:50%;bottom:7px;width:54px;height:3px;margin-left:-27px;border-radius:2px;background:rgba(245,244,239,.55)}
+/* il reel vero: il ritaglio 3:4 sta fuori, il cerchio che lo scopre dentro */
+.cc-reel-in{position:absolute;inset:0;clip-path:circle(0px at 50% 50%)}
+/* ── da computer (da 1024 px): un portatile disegnato con instagram.com da computer ── */
+.cc-nav,.cc-base{display:none}
+@media (min-width:1024px){
+  .cc-palco{width:520px;height:350px}
+  .cc-carta,.cc-reel{left:175.625px;top:44px}
+  .cc-tel{left:40px;top:28px;width:440px;height:284px;border-radius:12px}
+  .cc-schermo{inset:6px;border-radius:4px;display:grid;grid-template-columns:44px minmax(0,1fr) 68px 176px minmax(0,1fr);grid-template-rows:16px auto auto 12px auto auto 1fr;align-content:start}
+  .cc-isola,.cc-casa{display:none}
+  .cc-nav{grid-column:1;grid-row:1 / -1;display:flex;flex-direction:column;align-items:center;gap:14px;padding:15px 0 12px;border-right:1px solid rgba(245,244,239,.1)}
+  .cc-nav > i{display:block;width:11px;height:11px;color:var(--av)}
+  .cc-nav svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .cc-nav > .cc-nav-av{margin-top:auto;border-radius:50%;background:#000 url(img/jue-logo.png) 50% 54%/70% auto no-repeat;box-shadow:0 0 0 1px rgba(245,244,239,.4)}
+  .cc-barra{grid-column:4;grid-row:2;margin:0;padding:0;height:auto;align-self:end;font-size:10.5px}
+  .cc-prof{display:contents}
+  .cc-av{grid-column:3;grid-row:2 / 4;align-self:center;width:54px;height:54px}
+  .cc-chi{grid-column:4;grid-row:3;margin-top:6px}
+  .cc p.cc-nome{font-size:8.5px}
+  .cc p.cc-bio{font-size:7.2px}
+  .cc-schede{grid-column:3 / 5;grid-row:5;margin-top:0}
+  .cc-griglia{grid-column:3 / 5;grid-row:6}
+  .cc-griglia > i{aspect-ratio:1 / 1}
+  .cc-base{display:block;position:absolute;left:-28px;right:-28px;top:100%;height:12px;border-radius:2px 2px 12px 12px / 2px 2px 9px 9px;
+    background:linear-gradient(180deg,#3A392F 0%,#24231B 45%,#141309 100%)}
+}
+/* ===== FINE 3d · CREAZIONE CONTENUTI ===== */
 </style>
 </head>
 <body>
@@ -1480,27 +1544,83 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
       <ul class="pacchetti">
         <li class="pacchetto" id="contenuti">
           <div class="m pannello m-video"><video src="video/spot-una-volta.mp4" muted playsinline preload="none" aria-label="Lo spot Jué × Bombay Sapphire: il Bombay &amp; Tonic e la bottiglietta in omaggio"></video><img class="ferma" src="img/spot-una-volta.jpg" alt="" width="540" height="960" loading="lazy"></div>
-          <!-- 3d (r3, 21/11, telefono e computer): lo spot dentro un programma di montaggio (disegnato, senza marchi veri) nello
-               schermo di un portatile, semplificato su richiesta di Niccolò («conta il video»): solo il visore grande col video
-               e sotto due righe, la traccia video (le clip = i tagli veri dello spot, un po' più spessa) e l'audio (solo le
-               onde del volume); la linea arancio segue il tempo del video (script «Montaggio»). Telefono: il portatile sta in un
-               riquadro come quello del Sito Web (stesso fondo, stessi angoli, stesso filo che sfuma). Computer: nel riquadro
-               incassato della scheda. Con «Riduci movimento» il video non si carica: resta la foto e la linea ferma -->
-          <div class="mont" id="montaggio" role="img" aria-label="Lo spot Jué Club montato in un programma di montaggio video, sullo schermo di un portatile">
-            <div class="mont-pc">
-              <div class="mont-schermo">
-                <div class="mont-app">
-                  <div class="mont-visore"><video data-src="video/spot-una-volta.mp4" muted loop playsinline preload="none" poster="img/spot-una-volta.jpg"></video></div>
-                  <div class="mont-linea">
-                    <div class="mont-tracce" id="mont-tracce">
-                      <div class="mont-traccia mont-v1"><i class="mont-clip" style="--a:0.00%;--l:11.82%;--f:0.000%"></i><i class="mont-clip" style="--a:11.82%;--l:11.49%;--f:14.286%"></i><i class="mont-clip" style="--a:23.31%;--l:14.53%;--f:28.571%"></i><i class="mont-clip" style="--a:37.84%;--l:8.78%;--f:42.857%"></i><i class="mont-clip" style="--a:46.62%;--l:6.08%;--f:57.143%"></i><i class="mont-clip" style="--a:52.70%;--l:10.81%;--f:71.429%"></i><i class="mont-clip" style="--a:63.51%;--l:18.24%;--f:85.714%"></i><i class="mont-clip" style="--a:81.76%;--l:18.24%;--f:100.000%"></i></div>
-                      <div class="mont-traccia mont-a1"><svg viewBox="0 0 300 20" preserveAspectRatio="none" focusable="false"><path d="M1 8.2V11.8M3 5.9V14.1M5 7.4V12.6M7 7.7V12.3M9 6.2V13.8M11 6.2V13.8M13 5.6V14.4M15 6.1V13.9M17 7.3V12.7M19 6.9V13.1M21 5.1V14.9M23 7.0V13.0M25 4.3V15.7M27 7.3V12.7M29 6.7V13.3M31 6.0V14.0M33 5.6V14.4M35 4.1V15.9M37 5.4V14.6M39 5.3V14.7M41 6.9V13.1M43 5.4V14.6M45 7.1V12.9M47 2.7V17.3M49 6.2V13.8M51 4.8V15.2M53 7.2V12.8M55 5.4V14.6M57 4.1V15.9M59 3.9V16.1M61 3.0V17.0M63 6.2V13.8M65 6.8V13.2M67 6.3V13.7M69 2.2V17.8M71 6.7V13.3M73 1.9V18.1M75 5.5V14.5M77 7.0V13.0M79 6.1V13.9M81 2.5V17.5M83 2.4V17.6M85 3.8V16.2M87 3.4V16.6M89 6.1V13.9M91 4.2V15.8M93 5.4V14.6M95 0.8V19.2M97 5.8V14.2M99 3.3V16.7M101 5.5V14.5M103 3.4V16.6M105 4.3V15.7M107 1.2V18.8M109 1.6V18.4M111 5.4V14.6M113 5.6V14.4M115 4.2V15.8M117 1.1V18.9M119 5.5V14.5M121 0.8V19.2M123 5.0V15.0M125 6.5V13.5M127 6.3V13.7M129 0.8V19.2M131 2.8V17.2M133 1.8V18.2M135 2.6V17.4M137 5.8V14.2M139 4.8V15.2M141 3.3V16.7M143 0.8V19.2M145 6.3V13.7M147 2.2V17.8M149 5.0V15.0M151 3.5V16.5M153 5.8V14.2M155 0.8V19.2M157 2.5V17.5M159 4.0V16.0M161 5.0V15.0M163 3.9V16.1M165 2.1V17.9M167 3.7V16.3M169 0.8V19.2M171 6.5V13.5M173 5.8V14.2M175 5.8V14.2M177 1.1V18.9M179 4.8V15.2M181 1.1V18.9M183 3.8V16.2M185 6.7V13.3M187 5.7V14.3M189 3.2V16.8M191 1.2V18.8M193 4.7V15.3M195 2.8V17.2M197 6.4V13.6M199 4.6V15.4M201 6.8V13.2M203 0.9V19.1M205 4.9V15.1M207 3.7V16.3M209 6.3V13.7M211 5.2V14.8M213 3.7V16.3M215 3.8V16.2M217 2.5V17.5M219 5.7V14.3M221 6.4V13.6M223 7.0V13.0M225 3.0V17.0M227 6.3V13.7M229 2.7V17.3M231 6.4V13.6M233 6.4V13.6M235 5.4V14.6M237 4.9V15.1M239 3.6V16.4M241 4.9V15.1M243 5.4V14.6M245 6.2V13.8M247 5.2V14.8M249 6.5V13.5M251 3.5V16.5M253 6.9V13.1M255 5.4V14.6M257 6.0V14.0M259 6.6V13.4M261 4.5V15.5M263 5.7V14.3M265 5.4V14.6M267 6.0V14.0M269 6.5V13.5M271 6.2V13.8M273 4.6V15.4M275 6.6V13.4M277 5.6V14.4M279 6.8V13.2M281 7.6V12.4M283 4.9V15.1M285 6.8V13.2M287 5.4V14.6M289 7.0V13.0M291 7.5V12.5M293 6.7V13.3M295 5.4V14.6M297 6.5V13.5M299 6.2V13.8"/></svg></div>
-                      <i class="mont-testina" id="mont-testina"></i>
-                    </div>
-                  </div>
+          <!-- 3d (r6): la scena di Creazione Contenuti (pezzi-r6/contenuti-scena.html, dal prototipo prove/contenuti-r5), telefono
+               e computer. Il riquadro è il .m della home (da computer il riquadro incassato della scheda) -->
+          <div class="m pannello m-cc" id="contenuti-scena">
+          <div class="cc" id="cc" role="img" aria-label="Esempio: un bicchiere e una bottiglia disegnati a linee, la scritta «Aperitivo al Jué», poi la vista si allarga su un profilo Instagram disegnato; il disegno diventa il primo post e alla fine profilo e reel diventano quelli veri del Jué Club.">
+              <div class="cc-testa" aria-hidden="true">
+                <div class="cc-battute">
+                  <p class="cc-battuta" id="cc-f1">Dall’idea<br> al <em>video</em><i class="cc-pt"></i></p>
+                  <p class="cc-battuta" id="cc-f2">Dritto sul tuo<br> <em>profilo</em><i class="cc-pt"></i></p>
                 </div>
               </div>
-              <div class="mont-base"></div>
+              <div class="cc-scena" id="cc-scena" aria-hidden="true">
+                <div class="cc-palco" id="cc-palco"><div class="cc-giro" id="cc-giro">
+          
+                  <!-- 3 · il profilo disegnato: i tratti li crea lo script sulle misure del profilo vero -->
+                  <div class="cc-ab cc-disegno" id="cc-disegno"><svg viewBox="0 0 340 360" id="cc-d-svg"><g id="cc-d-griglia"></g><g id="cc-d-telg"></g><g id="cc-d-testa"></g></svg></div>
+          
+                  <!-- 5 · il profilo vero: nome, foto, «Jué Club», la riga del locale, le schede e la griglia grigia; il primo quadrato è il reel -->
+                  <div class="cc-ab cc-tel" id="cc-tel"><div class="cc-schermo">
+                    <i class="cc-isola" id="cc-isola"></i>
+                    <div class="cc-nav" id="cc-nav">
+                      <i><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></i>
+                      <i><svg viewBox="0 0 24 24"><path d="M3.5 10.2 12 3l8.5 7.2V21h-5.6v-6.2H9.1V21H3.5z"/></svg></i>
+                      <i><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="M15.6 15.6 21 21"/></svg></i>
+                      <i><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M2.5 8h19M8.5 2.5l3 5.5M14.5 2.5l3 5.5"/></svg></i>
+                      <i><svg viewBox="0 0 24 24"><path d="M16.8 3.6c-1.9 0-3.6 1-4.8 2.6-1.2-1.6-2.9-2.6-4.8-2.6C4.1 3.6 1.9 6.1 1.9 9.2c0 4.9 6.5 9.5 10.1 11.7 3.6-2.2 10.1-6.8 10.1-11.7 0-3.1-2.2-5.6-5.3-5.6z"/></svg></i>
+                      <i><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 7.5v9M7.5 12h9"/></svg></i>
+                      <i class="cc-nav-av"></i>
+                    </div>
+                    <div class="cc-barra"><span id="cc-m-nick">jueclubmontecatini</span><svg viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></svg></div>
+                    <div class="cc-prof"><i class="cc-av" id="cc-m-av"></i>
+                      <div class="cc-chi"><p class="cc-nome"><span id="cc-m-nome">Jué Club</span></p>
+                      <p class="cc-bio"><span id="cc-m-bio">Cocktail bar · Bistrot</span><br><span id="cc-m-bio2">DJ set · Montecatini</span></p></div>
+                    </div>
+                    <div class="cc-schede" id="cc-m-schede">
+                      <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M2.5 8h19M8.5 2.5l3 5.5M14.5 2.5l3 5.5"/></svg></span>
+                      <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="10" r="3"/><path d="M6.5 19c1-2.6 3-3.9 5.5-3.9s4.5 1.3 5.5 3.9"/></svg></span>
+                    </div>
+                    <div class="cc-griglia" id="cc-m-griglia"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    <i class="cc-casa" id="cc-casa"></i>
+                  </div><i class="cc-base" id="cc-base"></i></div>
+          
+                  <!-- 1-2 · il foglio: bicchiere e bottiglia a linee, poi la scritta -->
+                  <div class="cc-ab cc-carta" id="cc-carta">
+                    <i class="cc-carta-fondo" id="cc-carta-fondo"></i>
+                    <svg viewBox="0 0 168.75 300">
+                      <rect class="cc-tr cc-fine" id="cc-cornice" pathLength="1" x=".7" y=".7" width="167.35" height="298.6" rx="9" style="stroke:rgba(245,244,239,.42)"/>
+                      <path class="cc-tr cc-fine cc-suolo" pathLength="1" d="M18 197.5H152"/>
+                      <g class="cc-bic">
+                        <path class="cc-tr" pathLength="1" d="M33.5 96.5C34.4 128 35.4 160 36.6 190.4Q56 194 75.4 190.2C76.6 160 77.6 128 78.5 96"/>
+                        <path class="cc-tr" pathLength="1" d="M32.6 96.3Q55.8 90.4 79 95.7Q56 101.6 32.6 96.3"/>
+                        <path class="cc-tr cc-fine" pathLength="1" d="M37 146l19 18 19-18M37 164l19-18 19 18M38 181l18-16 18 16"/>
+                      </g>
+                      <g class="cc-ghi">
+                        <path class="cc-tr" pathLength="1" d="M41 108l14-3.4 3.4 14-14 3.4z"/><path class="cc-tr" pathLength="1" d="M58 114l13 2.6-2.6 13-13-2.6z"/><path class="cc-tr" pathLength="1" d="M44 128l12.5-.8.8 12.5-12.5.8z"/>
+                        <path class="cc-tr cc-ar" pathLength="1" d="M70.5 93.5A12 12 0 0 1 93 86.8L70.5 93.5"/><path class="cc-tr cc-ar" pathLength="1" d="M75 91.6l3.4-5.6M80.8 89.9l1.4-6.4M86.2 88.3l-.8-6.2"/>
+                      </g>
+                      <g class="cc-bot">
+                        <path class="cc-tr" pathLength="1" d="M112 60.5h14v-8h-14z"/>
+                        <path class="cc-tr" pathLength="1" d="M113.5 60.5v14c0 4-12.5 7-12.5 14v100.5q0 3 3 3h30q3 0 3-3V88.5c0-7-12.5-10-12.5-14v-14"/>
+                        <path class="cc-tr cc-ar" pathLength="1" d="M106 128h26v38h-26z"/>
+                        <path class="cc-tr cc-fine" pathLength="1" d="M111 138h16M113 146h12M110 156h18"/>
+                        <path class="cc-tr cc-fine" pathLength="1" d="M131 96v24M131 174v12"/>
+                      </g>
+                    </svg>
+                    <p class="cc-titolo" id="cc-titolo"><span class="cc-riga"><span data-s>Aperitivo</span></span><span class="cc-riga"><span data-s>al </span><span class="cc-jue" data-s>Jué</span><i class="cc-dot" id="cc-dot"></i></span></p>
+                    <svg class="cc-sotto" viewBox="0 0 52 10" preserveAspectRatio="none"><path class="cc-tr cc-ar" id="cc-sotto" pathLength="1" d="M1 7C14 3.4 30 2.6 51 4.6" style="stroke-width:1.6"/></svg>
+                  </div>
+          
+                  <!-- 4 · il video vero, con i suoi colori -->
+                  <div class="cc-ab cc-reel" id="cc-reel"><div class="cc-reel-in" id="cc-reel-in">
+                    <video id="cc-video" muted loop playsinline preload="none" poster="cc/reel.jpg" data-src="cc/reel.mp4"></video>
+                    <i class="cc-ombra"></i>
+                    <p class="cc-titolo"><span class="cc-riga"><span class="cc-c">Aperitivo</span></span><span class="cc-riga"><span class="cc-c">al <span class="cc-jue">Jué</span></span><i class="cc-dot"></i></span></p>
+                  </div></div>
+                </div></div>
+              </div>
             </div>
           </div>
           <h3 class="t2" id="t-contenuti">Creazione Contenuti<i class="pt" aria-hidden="true"></i><span class="sr">.</span></h3>
@@ -2037,60 +2157,6 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   rifai();
   /* per gli strumenti di prova */
   window.VOLO = { modo: conCSS ? 'css' : 'js', misure: function(){ return M; }, pos: function(q, s){ return M ? pos(M[q], s) : null; }, rifai: rifai, spegniV: function(){ return M ? spegniV() : null; } };
-})();
-</script>
-<script>
-/* ===== Montaggio (r2, solo telefono): il video di Creazione Contenuti nel programma di montaggio =========================
-   Il video parte muto quando il programma si vede almeno per un terzo, ricomincia da capo ogni volta che torna a vedersi
-   e alla fine riparte dall'inizio; fuori schermo, da computer o con la pagina nascosta si ferma. La linea di riproduzione
-   arancio (#mont-testina) e il codice di tempo seguono il tempo vero del video a ogni fotogramma (solo transform).
-   Con «Riduci movimento» il video non si carica: resta la foto (l'ultimo fotogramma) con la linea ferma lì.
-   r3 (21/11): anche da computer, dentro la scheda di Creazione Contenuti; quando la scheda è coperta da quella che le sale
-   sopra (classe «coperta», script «Pila PC») conta come fuori schermo: si ferma e quando torna a vedersi riparte da capo ===== */
-(function(){
-  'use strict';
-  var box = document.getElementById('montaggio'); if (!box) return;
-  var v = box.querySelector('video'), testina = document.getElementById('mont-testina'), tc = document.getElementById('mont-tc'), tracce = document.getElementById('mont-tracce');
-  if (!v || !testina || !tracce) return;
-  var ridotto = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var tel = matchMedia('all');   /* r3: telefono e computer (nella r2 solo sotto i 1024 px) */
-  var DUR = 12.333, FERMO = 11.2, W = 0, raf = 0, vede = false, fuori = true, uX = '', uT = '', guasto = false;
-  function due(n){ return (n < 10 ? '0' : '') + n; }
-  function tempo(t){ var f = Math.floor(t * 24 + 1e-4), s = Math.floor(f / 24); return '00:00:' + due(s) + ':' + due(f % 24); }
-  function durata(){ return v.duration && isFinite(v.duration) ? v.duration : DUR; }
-  function metti(t){
-    var x = (c01(t / durata()) * W).toFixed(2);
-    if (x !== uX) { uX = x; testina.style.transform = 'translate3d(' + x + 'px,0,0)'; }
-    var c = tempo(t); if (c !== uT) { uT = c; if (tc) tc.textContent = c; }
-  }
-  function c01(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
-  function ora(){ return ridotto || guasto || !v.getAttribute('src') ? FERMO : v.currentTime; }
-  function larghezza(){ W = tracce.clientWidth; uX = ''; metti(ora()); }
-  if ('ResizeObserver' in window) new ResizeObserver(larghezza).observe(tracce); else addEventListener('resize', larghezza);
-  larghezza();
-  window.MONTAGGIO = { stato: function(){ var r = testina.getBoundingClientRect(), q = tracce.getBoundingClientRect();
-    return { t: v.currentTime, d: durata(), x: r.left + r.width / 2 - q.left, W: W, atteso: c01(v.currentTime / durata()) * W, src: !!v.getAttribute('src'), fermo: v.paused, tc: tc ? tc.textContent : '' }; } };
-  if (ridotto) return;
-  v.muted = true; v.loop = true;
-  function giro(){ raf = 0; metti(v.currentTime); if (!v.paused) raf = requestAnimationFrame(giro); }
-  v.addEventListener('playing', function(){ if (!raf) raf = requestAnimationFrame(giro); });
-  v.addEventListener('seeked', function(){ metti(v.currentTime); });
-  v.addEventListener('pause', function(){ metti(v.currentTime); });
-  /* se il video non si può leggere resta la foto (l'ultimo fotogramma): la linea va lì */
-  v.addEventListener('error', function(){ guasto = true; metti(FERMO); });
-  function coperta(){ var c = box.closest('.pacchetto'); return !!(c && c.classList.contains('coperta')); }
-  function scegli(){
-    if (coperta()) fuori = true;
-    if (vede && tel.matches && !document.hidden && !coperta()) {
-      if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.getAttribute('data-src'); }
-      if (fuori && !guasto) { fuori = false; try { v.currentTime = 0; } catch (x) {} metti(0); }
-      if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-    } else if (!v.paused) v.pause();
-  }
-  if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ var e = es[es.length - 1]; vede = e.isIntersecting && e.intersectionRatio >= .33; if (!e.isIntersecting) fuori = true; scegli(); }, { threshold: [0, .33, .66, 1] }).observe(box);
-  document.addEventListener('visibilitychange', scegli);
-  document.addEventListener('pila-pc', scegli);
-  if (tel.addEventListener) tel.addEventListener('change', scegli); else if (tel.addListener) tel.addListener(scegli);
 })();
 </script>
 <script>
@@ -2874,6 +2940,217 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
     cerchio: function(){ if (!cer) return null; var r = cer.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, d: r.width, t: cer.style.transform }; },
     rifai: rifai
   };
+})();
+</script>
+<script>
+/* ===== CONTENUTI · JS (r6, 21/11): la scena di Creazione Contenuti, telefono e computer (dal prototipo prove/contenuti-r5) ===
+   Si prepara quando il riquadro arriva a 600 px dallo schermo, parte UNA volta la
+   prima volta che si vede per il 40 %, fuori schermo si ferma e riprende da dove era; alla fine resta sul profilo vero e il
+   video del reel gira in loop. Web Animations: transform, opacity, clip-path, stroke-dashoffset. «Riduci movimento»: subito
+   il fotogramma finale, video fermo. Per le prove: CONTENUTI(secondi) mostra quel momento fermo. ===== */
+(function () {
+  'use strict';
+  var radice = document.getElementById('cc'); if (!radice) return;
+  function corpo() {
+  /* r5 (21/11): la stessa scena al telefono (telefono disegnato) e da computer, da 1024 px (portatile disegnato con
+     instagram.com da computer: colonna del menu a sinistra, foto grande con nome accanto, griglia a quadrati).
+     Il disegno del profilo è ricavato dalle misure del profilo vero, quindi vale per tutti e due. Una volta sola. */
+  var L = 8.4, FERMO = 8.4, PLAY = 7.25;
+  var $ = function (id) { return document.getElementById(id); };
+  var cc = $('cc'), scena = $('cc-scena'), palco = $('cc-palco'), video = $('cc-video');
+  if (!cc.animate) return;
+
+  // ── il palco (telefono 340 × 360, computer 520 × 350) si adatta alla scena, appoggiato in basso e centrato ──
+  function adatta() {
+    var PW = palco.offsetWidth, PH = palco.offsetHeight, w = scena.clientWidth, h = scena.clientHeight, k = Math.min(w / PW, h / PH);
+    palco.style.transform = 'translate(' + ((w - PW * k) / 2).toFixed(2) + 'px,' + (h - PH * k).toFixed(2) + 'px) scale(' + k.toFixed(4) + ')';
+  }
+  adatta();
+  if (window.ResizeObserver) new ResizeObserver(adatta).observe(scena); else addEventListener('resize', adatta);
+
+  var FUORI = 'cubic-bezier(.22,.61,.36,1)', MORBIDA = 'cubic-bezier(.65,0,.35,1)', TRATTO = 'cubic-bezier(.45,.05,.25,1)',
+      TIPO = 'cubic-bezier(.16,1,.3,1)', POP = 'cubic-bezier(.34,1.5,.64,1)', CER = 'cubic-bezier(.55,0,.25,1)';
+  var giri = [];
+  function T(el, prop, tappe) {
+    if (typeof el === 'string') el = $(el);
+    var kf = [], i, s;
+    if (tappe[0][0] > 0) { s = {}; s[prop] = tappe[0][1]; s.offset = 0; kf.push(s); }
+    for (i = 0; i < tappe.length; i++) { s = {}; s[prop] = tappe[i][1]; s.offset = Math.min(1, tappe[i][0] / L); s.easing = tappe[i][2] || 'linear'; kf.push(s); }
+    if (tappe[tappe.length - 1][0] < L) { s = {}; s[prop] = tappe[tappe.length - 1][1]; s.offset = 1; kf.push(s); }
+    var a = el.animate(kf, { duration: L * 1000, iterations: 1, fill: 'both' });
+    a.pause(); giri.push(a); return a;
+  }
+  // disegna un tratto (o tutti i tratti dentro un gruppo, uno dopo l'altro)
+  function disegna(el, t0, dur, passo) {
+    if (typeof el === 'string') el = document.querySelector(el);
+    var tr = el.classList && el.classList.contains('cc-tr') ? [el] : Array.prototype.slice.call(el.querySelectorAll('.cc-tr'));
+    tr.forEach(function (p, i) { var a = t0 + i * (passo || 0); T(p, 'strokeDashoffset', [[a, 1.05, TRATTO], [a + dur, 0]]); T(p, 'opacity', [[a, 0], [a + .02, 1]]); });
+  }
+  // misure nel palco (offset: non risentono delle trasformazioni); null se l'elemento è nascosto
+  function M(el) { if (typeof el === 'string') el = $(el); if (!el || !el.offsetWidth) return null; var x = 0, y = 0, e = el; while (e && e !== palco) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; } return { x: x, y: y, w: el.offsetWidth, h: el.offsetHeight }; }
+  var NS = 'http://www.w3.org/2000/svg';
+  function tratto(g, tag, att, cls) {
+    var e = document.createElementNS(NS, tag), k; for (k in att) e.setAttribute(k, att[k]);
+    e.setAttribute('class', cls); if (/\bcc-tr\b/.test(cls)) e.setAttribute('pathLength', '1'); g.appendChild(e); return e;
+  }
+  function riga(g, r, cls) { if (r) tratto(g, 'path', { d: 'M' + r.x + ' ' + (r.y + r.h / 2) + 'H' + (r.x + r.w) }, cls); }
+  function quadro(g, r, rx, cls) { if (r) tratto(g, 'rect', { x: r.x, y: r.y, width: r.w, height: r.h, rx: rx }, cls); }
+
+  // ── tutte le tracce: si rifanno da capo se la pagina passa i 1024 px (telefono ↔ computer) ──
+  var lettere = false;
+  function costruisci() {
+    giri.forEach(function (a) { a.cancel(); }); giri.length = 0;
+    ['cc-d-griglia', 'cc-d-telg', 'cc-d-testa'].forEach(function (id) { var g = $(id); while (g.firstChild) g.removeChild(g.firstChild); });
+    $('cc-d-svg').setAttribute('viewBox', '0 0 ' + palco.offsetWidth + ' ' + palco.offsetHeight);
+    adatta();
+
+    // 0 · entrata e frase
+    T('cc-giro', 'opacity', [[0, 0, FUORI], [.2, 1]]);
+    T('cc-f1', 'opacity', [[3.7, 1, FUORI], [4.0, 0]]);
+    T('cc-f1', 'transform', [[3.7, 'translateY(0px)', FUORI], [4.05, 'translateY(-8px)']]);
+    T('cc-f2', 'opacity', [[3.85, 0, FUORI], [4.25, 1]]);
+    T('cc-f2', 'transform', [[3.85, 'translateY(10px)', FUORI], [4.35, 'translateY(0px)']]);
+
+    // 1 · bicchiere e bottiglia si disegnano (0,2 – 1,9 s)
+    disegna('#cc-cornice', .15, .7);
+    disegna('.cc-bic', .45, .6, .12);
+    disegna('.cc-bot', .7, .6, .1);
+    disegna('.cc-suolo', 1.1, .5);
+    disegna('.cc-ghi', 1.05, .4, .07);
+
+    // 2 · la scritta: lettere che salgono, «Jué» in corsivo, la sottolineatura arancio e il punto (2,0 – 3,35 s)
+    if (!lettere) {
+      lettere = true;
+      Array.prototype.forEach.call(document.querySelectorAll('#cc-titolo [data-s]'), function (sp) {
+        var testo = sp.textContent; sp.textContent = '';
+        testo.split('').forEach(function (ch) { var c = document.createElement('span'); c.className = 'cc-c'; c.textContent = ch === ' ' ? ' ' : ch; sp.appendChild(c); });
+      });
+    }
+    var n = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('#cc-titolo [data-s]'), function (sp) {
+      Array.prototype.forEach.call(sp.children, function (c) {
+        var a = 2.0 + n * .04 + (sp.classList.contains('cc-jue') ? .12 : 0); n++;
+        T(c, 'transform', [[a, 'translateY(130%)', TIPO], [a + .65, 'translateY(0%)']]); T(c, 'opacity', [[a, 0], [a + .12, 1]]);
+      });
+    });
+    disegna('#cc-sotto', 2.85, .45);
+    T('cc-dot', 'transform', [[3.05, 'scale(0)', POP], [3.35, 'scale(1)']]);
+
+    // 3 · il profilo disegnato, sulle misure di quello vero
+    var gG = $('cc-d-griglia'), gT = $('cc-d-telg'), gH = $('cc-d-testa'), r;
+    var tel = M('cc-tel'), rTel = parseFloat(getComputedStyle($('cc-tel')).borderTopLeftRadius) || 0;
+    quadro(gT, tel, rTel, 'cc-tr');
+    r = M('cc-base'); if (r) tratto(gT, 'path', { d: 'M' + r.x + ' ' + r.y + 'H' + (r.x + r.w) + 'v' + (r.h - 4) + 'q0 4 -4 4H' + (r.x + 4) + 'q-4 0 -4 -4z' }, 'cc-tr');
+    r = M('cc-isola'); quadro(gH, r, r ? r.h / 2 : 0, 'cc-tr cc-fine');
+    r = M('cc-nav');
+    if (r) {
+      tratto(gH, 'path', { d: 'M' + (r.x + r.w) + ' ' + r.y + 'V' + (r.y + r.h) }, 'cc-tr cc-fine');
+      Array.prototype.forEach.call($('cc-nav').children, function (ic) { var q = M(ic); if (!q) return;
+        if (ic.classList.contains('cc-nav-av')) tratto(gH, 'circle', { cx: q.x + q.w / 2, cy: q.y + q.h / 2, r: q.w / 2 }, 'cc-tr cc-fine');
+        else quadro(gH, q, 2.5, 'cc-tr cc-fine'); });
+    }
+    r = M('cc-m-nick'); if (r) {
+      riga(gH, { x: r.x + 1, y: r.y, w: r.w - 2, h: r.h }, 'cc-tr cc-testo');
+      tratto(gH, 'path', { d: 'M' + (r.x + r.w + 4) + ' ' + (r.y + r.h / 2 - 1.5) + 'l2.5 2.5l2.5-2.5' }, 'cc-tr cc-fine');
+    }
+    r = M('cc-m-av'); var acx = r.x + r.w / 2, acy = r.y + r.h / 2, ruota = 'rotate(-90 ' + acx + ' ' + acy + ')';
+    tratto(gH, 'circle', { cx: acx, cy: acy, r: r.w / 2 + 3, transform: ruota }, 'cc-tr cc-ar');
+    tratto(gH, 'circle', { cx: acx, cy: acy, r: r.w / 2 - 1, transform: ruota }, 'cc-tr cc-fine');
+    riga(gH, M('cc-m-nome'), 'cc-tr cc-testo');
+    riga(gH, M('cc-m-bio'), 'cc-tr cc-testo cc-f');
+    riga(gH, M('cc-m-bio2'), 'cc-tr cc-testo cc-f');
+    Array.prototype.forEach.call($('cc-m-schede').children, function (sp, k) {
+      var q = M(sp), x = q.x + q.w / 2, y = q.y + q.h / 2;
+      tratto(gH, 'rect', { x: x - 4.5, y: y - 4.5, width: 9, height: 9, rx: k ? 2.5 : 1.5 }, 'cc-tr cc-fine');
+    });
+    r = M('cc-m-schede'); var c0 = M($('cc-m-schede').children[0]);
+    tratto(gH, 'path', { d: 'M' + r.x + ' ' + (r.y + r.h - .5) + 'H' + (c0.x + c0.w) }, 'cc-tr');
+    tratto(gH, 'path', { d: 'M' + (c0.x + c0.w) + ' ' + (r.y + r.h) + 'H' + (r.x + r.w) }, 'cc-tr cc-fine');
+    var celle = Array.prototype.map.call($('cc-m-griglia').children, M);
+    celle.forEach(function (q, k) { if (k) tratto(gG, 'rect', { x: q.x, y: q.y, width: q.w, height: q.h }, 'cc-grigio'); });
+    celle.forEach(function (q) { tratto(gG, 'rect', { x: q.x, y: q.y, width: q.w, height: q.h }, 'cc-tr cc-fine'); });
+    r = M('cc-casa'); if (r) tratto(gH, 'path', { d: 'M' + r.x + ' ' + (r.y + 1.5) + 'H' + (r.x + r.w) }, 'cc-tr cc-fine');
+
+    // il foglio (9:16) diventa il primo quadrato: si rimpicciolisce e si taglia come la cella (3:4 al telefono, quadrato da computer)
+    var carta = $('cc-carta'), RW = carta.offsetWidth, RH = carta.offsetHeight, CX = carta.offsetLeft + RW / 2, CY = carta.offsetTop + RH / 2;
+    // al telefono (3:4) il taglio è al centro; da computer (quadrato) si tiene la parte bassa, così la scritta resta intera
+    // (su Instagram si sceglie la parte del reel da mostrare nella griglia)
+    var P = celle[0], cx = P.x + P.w / 2, cy = P.y + P.h / 2, kc = P.w / RW, Hv = P.h / P.w * RW, su = (RH - Hv) * (Hv / RH < .7 ? .76 : .5);
+    var giu = RH - Hv - su, sposta = (su + Hv / 2 - RH / 2) * kc, centro = ((su + Hv / 2) / RH * 100).toFixed(2) + '%';
+    var dz = 'translate(' + (cx - CX).toFixed(2) + 'px,' + (cy - CY - sposta).toFixed(2) + 'px) scale(' + kc.toFixed(4) + ')';
+    var VIA = 'inset(0% 0% 0% 0% round 9px)', Q = 'inset(' + (su / RH * 100).toFixed(3) + '% 0% ' + (giu / RH * 100).toFixed(3) + '% 0% round 4px)';
+    T('cc-carta', 'transform', [[3.7, 'translate(0px,0px) scale(1)', MORBIDA], [4.65, dz]]);
+    T('cc-carta', 'clipPath', [[3.7, VIA, MORBIDA], [4.65, Q]]);
+    T('cc-carta-fondo', 'opacity', [[3.7, 0, MORBIDA], [4.4, 1]]);
+    T('cc-cornice', 'opacity', [[4.2, 1], [4.6, 0]]);
+    disegna('#cc-d-telg', 3.8, 1.0, .25);
+    disegna('#cc-d-griglia', 4.35, .45, .06);
+    Array.prototype.forEach.call(document.querySelectorAll('.cc-grigio'), function (q, k) { T(q, 'opacity', [[4.7 + k * .06, 0, FUORI], [5.05 + k * .06, 1]]); });
+    disegna('#cc-d-testa', 4.8, .5, Math.min(.06, 1.3 / Math.max(1, gH.children.length)));
+
+    // 4 · profilo E reel diventano veri INSIEME: un solo cerchio che parte dal primo quadrato (7,3 – 8,1 s)
+    var R0 = 7.3, R1 = 8.1, RAGGIO = Math.ceil(Math.hypot(palco.offsetWidth, palco.offsetHeight));
+    var ox = (cx - tel.x).toFixed(1) + 'px ' + (cy - tel.y).toFixed(1) + 'px';
+    $('cc-reel').style.clipPath = Q;
+    T('cc-reel', 'transform', [[0, dz]]);
+    T('cc-tel', 'clipPath', [[R0, 'circle(0px at ' + ox + ')', CER], [R1, 'circle(' + RAGGIO + 'px at ' + ox + ')']]);
+    T('cc-reel-in', 'clipPath', [[R0, 'circle(0px at 50% ' + centro + ')', CER], [R1, 'circle(' + (RAGGIO / kc).toFixed(0) + 'px at 50% ' + centro + ')']]);
+    T('cc-disegno', 'opacity', [[7.95, 1], [8.15, 0]]);
+    T('cc-carta', 'opacity', [[7.95, 1], [8.15, 0]]);
+  }
+  costruisci();
+
+  // ── una volta sola: parte la prima volta che il riquadro si vede, si ferma fuori schermo e riprende da dove era;
+  //    alla fine resta sul vero (fill: both) e il video del reel continua a girare in loop ──
+  var caricato = false;
+  function carica() { if (!caricato) { caricato = true; video.src = video.getAttribute('data-src'); video.preload = 'auto'; video.load(); } }
+  var gira = false, raf = 0, finito = false;
+  function ora() { return giri.length ? (giri[0].currentTime || 0) / 1000 : 0; }
+  function suona() { var pr = video.play(); if (pr && pr.catch) pr.catch(function () {}); }
+  function passo() {
+    if (ora() >= PLAY && video.paused) suona();
+    if (ora() >= L) { finito = true; gira = false; return; }
+    if (gira) raf = requestAnimationFrame(passo);
+  }
+  function parti() {
+    carica();
+    if (finito) { suona(); return; }
+    if (gira) return; gira = true;
+    giri.forEach(function (a) { a.play(); });
+    raf = requestAnimationFrame(passo);
+  }
+  function ferma() { video.pause(); if (!gira) return; gira = false; cancelAnimationFrame(raf); giri.forEach(function (a) { a.pause(); }); }
+  function fermoFinale() { ferma(); finito = true; giri.forEach(function (a) { a.currentTime = FERMO * 1000; a.pause(); }); }
+
+  var riduci = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  var visibile = false;
+  function decidi() {
+    if (riduci.matches) { fermoFinale(); return; }
+    if (visibile && !document.hidden) parti(); else ferma();
+  }
+  // telefono ↔ computer: le misure cambiano, si rifà tutto; se il giro era partito si va subito alla fine
+  var soglia = window.matchMedia ? matchMedia('(min-width:1024px)') : null;
+  function cambiaSoglia() {
+    if (!cc.offsetWidth) return;
+    var t = ora(), partito = gira || finito || t > 0;
+    ferma(); costruisci();
+    if (partito) fermoFinale(); else decidi();
+  }
+  if (soglia) { if (soglia.addEventListener) soglia.addEventListener('change', cambiaSoglia); else if (soglia.addListener) soglia.addListener(cambiaSoglia); }
+  if (riduci.addEventListener) riduci.addEventListener('change', decidi);
+  document.addEventListener('visibilitychange', decidi);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (v) { visibile = v[v.length - 1].isIntersecting; decidi(); }, { threshold: .4 }).observe(cc);
+  } else { visibile = true; decidi(); }
+  if (riduci.matches) fermoFinale();
+  window.CONTENUTI = function (s) { ferma(); giri.forEach(function (a) { a.currentTime = s * 1000; a.pause(); }); };
+  }
+  if (!('IntersectionObserver' in window)) { if (radice.offsetWidth) corpo(); return; }
+  var pronto = new IntersectionObserver(function (v) {
+    if (!v[v.length - 1].isIntersecting || !radice.offsetWidth) return;
+    pronto.disconnect(); corpo();
+  }, { rootMargin: '600px 0px' });
+  pronto.observe(radice);
 })();
 </script>
 <!-- CHAT-VA · JS dalla D (unico cambio: data-basso, vedi _lavoro/n/costruisci.py) -->
