@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bozza home Veniello Studio</title>
+<style>
+:root{--bg:#0b0b0c;--l:#2a2a2e;--box:#17171a;--t:#8a8a92;--v:#39FF14}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:#cfcfd4;font:14px/1.4 system-ui,sans-serif}
+section{position:relative;border-bottom:1px dashed var(--l);padding:56px 20px}
+.in{max-width:1100px;margin:0 auto}
+.tag{position:absolute;left:6px;top:6px;z-index:5;font:600 11px/1 ui-monospace,monospace;background:var(--v);color:#000;padding:4px 6px;border-radius:3px}
+.box{background:var(--box);border:1px dashed #3a3a40;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--t);text-align:center;padding:12px;font-size:13px}
+.ln{height:12px;border-radius:6px;background:#26262b;margin:10px 0}
+.ln.t{height:26px;background:#34343a;width:80%}
+.ln.s{width:60%}
+.ln.m{width:90%}
+.lnk{display:inline-block;margin-top:14px;color:var(--t);border-bottom:1px solid var(--t)}
+.gap{height:var(--g,0)}
+.srv{display:grid;gap:28px}
+.srv .box{aspect-ratio:4/3}
+.cols3{display:grid;gap:14px}
+.cols3 .box{height:150px}
+.faq .ln.t{height:22px;width:70%;margin:0}
+.faq div.r{border-top:1px solid var(--l);padding:18px 0;display:flex;justify-content:space-between;align-items:center}
+.btn{display:inline-block;height:44px;width:190px;border-radius:22px;background:#2f2f36;margin-top:18px;line-height:44px;text-align:center;color:var(--t);font-size:13px}
+#hero{min-height:100vh;display:flex;align-items:center}
+#hero .in{width:100%;display:grid;gap:30px}
+#hero .box{height:46vh}
+#righello{position:fixed;left:0;right:0;top:50%;border-top:1px solid rgba(57,255,20,.8);z-index:99;pointer-events:none}
+#righello span{position:absolute;left:6px;top:3px;font:500 11px ui-monospace,monospace;color:var(--v)}
+.note{color:var(--t);font-size:12px;margin-top:18px}
+@media(min-width:800px){
+ section{padding:96px 48px}
+ .srv{grid-template-columns:1fr 1fr;align-items:center;gap:64px}
+ .srv.inv .box{order:2}
+ .cols3{grid-template-columns:repeat(3,1fr)}
+ #hero .in{grid-template-columns:1fr 1fr;align-items:center}
+ #hero .box{height:60vh}
+}
+</style></head><body>
+
+<section id="hero"><span class="tag" data-n="1">1 · Apertura</span><div class="in">
+ <div><div class="ln t" style="height:44px;width:70%"></div><div class="ln t" style="height:44px;width:50%"></div><div class="ln m" style="margin-top:26px"></div><div class="ln s"></div><div class="btn">Pulsante principale</div></div>
+ <div class="box">V grande animata + pallino<br>(si rimpicciolisce con lo scorrimento)</div>
+</div></section>
+
+<section><span class="tag" data-n="2">2 · I 3 passi</span><div class="in">
+ <div class="ln t" style="width:40%"></div><div class="gap" style="--g:20px"></div>
+ <div class="cols3"><div class="box">Passo 1<br>numero + 2 righe</div><div class="box">Passo 2<br>numero + 2 righe</div><div class="box">Passo 3<br>numero + 2 righe</div></div>
+</div></section>
+
+<section><span class="tag" data-n="3">3 · Servizio: sito web</span><div class="in srv">
+ <div class="box">Immagine / animazione:<br>il sito che si costruisce</div>
+ <div><div class="ln t"></div><div class="ln t" style="width:55%"></div><div class="gap" style="--g:14px"></div><div class="ln m"></div><div class="ln m"></div><div class="ln s"></div><span class="lnk">Scopri come →</span></div>
+</div></section>
+
+<section><span class="tag" data-n="4">4 · Servizio: contenuti</span><div class="in srv inv">
+ <div class="box">Immagine / animazione:<br>dal video grezzo al profilo</div>
+ <div><div class="ln t"></div><div class="ln t" style="width:55%"></div><div class="gap" style="--g:14px"></div><div class="ln m"></div><div class="ln m"></div><div class="ln s"></div><span class="lnk">Scopri come →</span></div>
+</div></section>
+
+<section><span class="tag" data-n="5">5 · Servizio: Virtual Assistant</span><div class="in srv">
+ <div class="box">Immagine / animazione:<br>la chat che risponde</div>
+ <div><div class="ln t"></div><div class="ln t" style="width:55%"></div><div class="gap" style="--g:14px"></div><div class="ln m"></div><div class="ln m"></div><div class="ln s"></div><span class="lnk">Scopri come →</span></div>
+</div></section>
+
+<section><span class="tag" data-n="6">6 · Il caso Jué Club</span><div class="in">
+ <div class="ln t" style="width:45%"></div><div class="gap" style="--g:18px"></div>
+ <div class="srv"><div class="box" style="aspect-ratio:16/10">Reel + profilo Instagram del Jué Club</div>
+ <div><div class="ln m"></div><div class="ln m"></div><div class="ln s"></div><div class="gap" style="--g:20px"></div><div class="cols3" style="grid-template-columns:repeat(3,1fr)"><div class="box" style="height:90px">numero</div><div class="box" style="height:90px">numero</div><div class="box" style="height:90px">numero</div></div><p class="note">I numeri vanno solo se veri.</p></div></div>
+</div></section>
+
+<section><span class="tag" data-n="7">7 · Chi c'è dietro</span><div class="in srv">
+ <div class="box" style="aspect-ratio:1/1;max-width:340px">Foto (tua o di Giuseppe)</div>
+ <div><div class="ln t" style="width:60%"></div><div class="ln m"></div><div class="ln m"></div><div class="ln s"></div></div>
+</div></section>
+
+<section><span class="tag" data-n="8">8 · Pacchetti (una riga)</span><div class="in" style="text-align:center">
+ <div class="ln t" style="margin:0 auto 14px;width:55%"></div><div class="ln s" style="margin:0 auto"></div><div class="btn">Vedi i prezzi</div>
+</div></section>
+
+<section class="faq"><span class="tag" data-n="9">9 · Domande frequenti</span><div class="in">
+ <div class="ln t" style="width:35%;margin-bottom:24px"></div>
+ <div class="r"><div class="ln t"></div><span>+</span></div><div class="r"><div class="ln t"></div><span>+</span></div><div class="r"><div class="ln t"></div><span>+</span></div><div class="r"><div class="ln t"></div><span>+</span></div>
+</div></section>
+
+<section><span class="tag" data-n="10">10 · Contatti</span><div class="in" style="text-align:center">
+ <div class="ln t" style="margin:0 auto 14px;width:50%"></div><div class="ln s" style="margin:0 auto"></div><div class="btn">Scrivici su WhatsApp</div>
+</div></section>
+
+<section style="padding-bottom:40px"><span class="tag" data-n="11">11 · Nota + marchio in fondo</span><div class="in">
+ <div class="ln m" style="width:50%"></div><div class="ln s"></div>
+ <div class="box" style="height:120px;margin-top:30px">Marchio Veniello grande + dati legali</div>
+</div></section>
+
+<div id="righello"><span></span></div>
+<script>
+if(/[?&]etichette=0/.test(location.search)){document.querySelectorAll('.tag,#righello').forEach(e=>e.remove())}
+function m(){document.querySelectorAll('.tag').forEach(t=>{t.textContent=t.dataset.n+' · '+t.textContent.split(' · ').slice(1).join(' · ').replace(/ · \d+ px$/,'')+' · '+t.parentElement.offsetHeight+' px'});var r=document.querySelector('#righello span');if(r)r.textContent=Math.round(scrollY+innerHeight/2)+' px'}
+addEventListener('scroll',m,{passive:true});addEventListener('resize',m);m();
+</script></body></html>
