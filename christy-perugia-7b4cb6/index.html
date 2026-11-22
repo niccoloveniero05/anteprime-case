@@ -103,16 +103,16 @@ section{position:relative}
 @media (max-width:860px){.negozio{grid-template-columns:1fr;gap:48px}.negozio .cornice{order:2}}
 
 /* 2. la collezione */
-.collezione-foto{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.categorie{margin-top:60px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
 .foto{margin:0}
 .foto .cornice{aspect-ratio:4/5}
 .foto img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 @media (hover:hover){.foto:hover img{transform:scale(1.03)}}
-.foto.due{margin-top:110px}
-.foto.due img{object-position:50% 30%}
+.categorie .foto:nth-child(even){margin-top:56px}
+.categorie .foto:nth-child(2) img{object-position:50% 30%}
 .foto figcaption{margin-top:14px;display:flex;align-items:baseline;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--grigio)}
 .foto figcaption b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:17px;letter-spacing:0;color:var(--oro-testo)}
-@media (max-width:760px){.collezione-foto{grid-template-columns:1fr;gap:36px;margin-top:40px}.foto.due{margin-top:0}}
+@media (max-width:760px){.categorie{grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}.categorie .foto:nth-child(even){margin-top:32px}.foto figcaption{font-size:11px;letter-spacing:.16em;gap:8px}}
 .etichette{margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .etichetta{position:relative;background:var(--crema);border-radius:3px;padding:30px 28px 28px}
 .etichetta::after{content:"";position:absolute;inset:7px;border:1px dashed rgba(125,95,36,.38);border-radius:2px;pointer-events:none}
@@ -248,14 +248,16 @@ section{position:relative}
         <h2>Capi per <em>l'autunno e l'inverno.</em></h2>
         <p>Toni naturali, tessuti caldi e qualche tocco di colore: la collezione di questa stagione, in negozio.</p>
       </div>
-      <div class="collezione-foto">
-        <figure class="foto uno"><div class="cornice"><img src="img/manichini.webp" alt="Cappotto in pelliccia sintetica, maglia color cipria e giacca grigia sui manichini" width="990" height="1104" loading="lazy"></div><figcaption><b>01</b> Capispalla</figcaption></figure>
-        <figure class="foto due"><div class="cornice"><img src="img/giacca-foulard.webp" alt="Giacca in denim blu con foulard di seta rosso e crema" width="990" height="1802" loading="lazy"></div><figcaption><b>02</b> Giacche e foulard</figcaption></figure>
+      <div class="categorie">
+        <figure class="foto"><div class="cornice"><img src="img/manichini.webp" alt="Cappotto in pelliccia sintetica, maglia color cipria e giacca grigia sui manichini" width="1300" height="1450" loading="lazy"></div><figcaption><b>01</b> Capispalla</figcaption></figure>
+        <figure class="foto"><div class="cornice"><img src="img/giacca-foulard.webp" alt="Giacca in denim blu con foulard di seta rosso e crema" width="1200" height="2184" loading="lazy"></div><figcaption><b>02</b> Giacche e foulard</figcaption></figure>
+        <figure class="foto"><div class="cornice"><img src="img/maglieria.webp" alt="Maglioni piegati sugli scaffali, nei toni del beige e del grigio" width="720" height="900" loading="lazy"></div><figcaption><b>03</b> Maglieria</figcaption></figure>
+        <figure class="foto"><div class="cornice"><img src="img/borse.webp" alt="Borse in pelle nera sullo scaffale del negozio" width="680" height="848" loading="lazy"></div><figcaption><b>04</b> Borse</figcaption></figure>
       </div>
       <div class="etichette">
-        <div class="etichetta"><span class="n">i.</span><strong>Donna</strong><span>Cappotti, maglieria, pantaloni</span></div>
-        <div class="etichetta"><span class="n">ii.</span><strong>Uomo</strong><span>Giacche, capispalla, maglieria</span></div>
-        <div class="etichetta"><span class="n">iii.</span><strong>Accessori</strong><span>Borse e foulard</span></div>
+        <div class="etichetta"><span class="n">I.</span><strong>Donna</strong><span>Cappotti, maglieria, pantaloni</span></div>
+        <div class="etichetta"><span class="n">II.</span><strong>Uomo</strong><span>Giacche, capispalla, maglieria</span></div>
+        <div class="etichetta"><span class="n">III.</span><strong>Accessori</strong><span>Borse e foulard</span></div>
       </div>
     </div>
   </section>
