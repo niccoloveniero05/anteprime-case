@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Christy Perugia · Abbigliamento uomo e donna Made in Italy</title>
+<meta name="description" content="Abbigliamento uomo e donna Made in Italy in Corso Vannucci 105, nel centro di Perugia.">
+<meta property="og:title" content="Christy Perugia">
+<meta property="og:description" content="Abbigliamento uomo e donna Made in Italy · Corso Vannucci 105, Perugia">
+<meta property="og:image" content="img/anteprima-link.jpg">
+<meta name="theme-color" content="#12110f">
+<link rel="icon" href="favicon.ico?v=1">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nero:#12110f; --nero2:#1c1a17; --crema:#f3eee5; --crema2:#ebe4d8;
+  --oro:#cfa046; --oro-testo:#7d5f24; --inchiostro:#24211d; --grigio:#6d665c;
+  --bordo:rgba(36,33,29,.14); --bordo-scuro:rgba(243,238,229,.16);
+  --m:max(24px, env(safe-area-inset-left)); --larg:1120px;
+  --serif:"Cormorant Garamond", Georgia, serif; --sans:"Jost", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-weight:300;color:var(--inchiostro);background:var(--crema);line-height:1.6;font-size:17px;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.contenitore{width:100%;max-width:calc(var(--larg) + 2*var(--m));margin:0 auto;padding:0 var(--m)}
+.occhiello{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.28em;text-transform:uppercase}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;letter-spacing:-.005em}
+h2{font-size:clamp(38px,7vw,64px)}
+h2 em{font-style:italic;color:var(--oro-testo)}
+.scuro h2 em{color:var(--oro)}
+
+/* testata */
+.testata{position:sticky;top:0;z-index:20;background:var(--nero);border-bottom:1px solid var(--bordo-scuro)}
+.testata .contenitore{display:flex;align-items:center;justify-content:space-between;height:60px}
+.testata img{width:96px}
+.testata nav{display:flex;gap:22px}
+.testata nav a{color:var(--crema);text-decoration:none;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:400;padding:12px 0}
+.testata nav a:hover{color:var(--oro)}
+@media (max-width:560px){.testata nav .solo-pc{display:none}}
+
+/* copertina */
+.copertina{background:var(--nero);color:var(--crema);text-align:center;position:relative;overflow:hidden}
+.copertina .contenitore{min-height:calc(100svh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:56px;padding-bottom:72px}
+.copertina::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 42%,rgba(207,160,70,.13),transparent 70%);pointer-events:none}
+.copertina .logo{width:min(78vw,540px);position:relative}
+.copertina .righe{margin-top:34px;position:relative}
+.copertina .righe p:first-child{font-size:13px;letter-spacing:.34em;text-transform:uppercase;font-weight:400}
+.copertina .righe p+p{margin-top:10px;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--oro)}
+.pulsanti{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:38px;position:relative}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 26px;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s,border-color .25s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-oro{background:var(--oro);color:var(--nero)}
+.btn-oro:hover{background:#ddb35e}
+.btn-linea{border:1px solid rgba(243,238,229,.4);color:var(--crema)}
+.btn-linea:hover{border-color:var(--oro);color:var(--oro)}
+.btn-scuro{background:var(--nero);color:var(--crema)}
+.btn-scuro:hover{background:#2b2823}
+.copertina .indirizzo{margin-top:34px;font-size:14px;letter-spacing:.06em;color:rgba(243,238,229,.7);position:relative}
+
+/* entrata della copertina: una volta sola */
+.entra{opacity:0;transform:translateY(14px);animation:entra 1s cubic-bezier(.2,.7,.2,1) forwards}
+.entra.d1{animation-delay:.15s}.entra.d2{animation-delay:.35s}.entra.d3{animation-delay:.55s}
+@keyframes entra{to{opacity:1;transform:none}}
+
+/* fascia black friday */
+.fascia{background:var(--oro);color:var(--nero);text-align:center;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:13px var(--m)}
+
+/* sezioni */
+section{position:relative}
+.sezione{padding:110px 0}
+.scuro{background:var(--nero);color:var(--crema)}
+.testa{max-width:640px}
+.testa .occhiello{color:var(--oro-testo);margin-bottom:18px;display:block}
+.scuro .testa .occhiello{color:var(--oro)}
+.testa p{margin-top:20px;color:var(--grigio);font-size:18px}
+.scuro .testa p{color:rgba(243,238,229,.72)}
+
+/* collezione */
+.galleria{margin-top:56px;display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.foto{margin:0}
+.foto .cornice{overflow:hidden;border-radius:4px;background:var(--crema2)}
+.foto img{width:100%;height:100%;object-fit:cover}
+.foto figcaption{margin-top:12px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--grigio)}
+.f1{grid-column:1/6;grid-row:1/3}.f1 .cornice{aspect-ratio:360/455}
+.f2{grid-column:6/10}.f2 .cornice{aspect-ratio:361/275}
+.f3{grid-column:10/13;align-self:end}.f3 .cornice{aspect-ratio:1/1}
+.f4{grid-column:6/13}.f4 .cornice{aspect-ratio:360/150}
+.f4 img{object-position:50% 40%}
+@media (max-width:760px){
+  .galleria{grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+  .f1{grid-column:1/3;grid-row:auto}.f1 .cornice{aspect-ratio:4/4.4}
+  .f2{grid-column:1/2}.f2 .cornice{aspect-ratio:3/4}
+  .f3{grid-column:2/3;align-self:start}.f3 .cornice{aspect-ratio:3/4}
+  .f4{grid-column:1/3}.f4 .cornice{aspect-ratio:360/180}
+}
+.tre{margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--bordo)}
+.tre div{padding:28px 28px 0 0}
+.tre div+div{padding-left:28px;border-left:1px solid var(--bordo)}
+.tre strong{display:block;font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.15}
+.tre span{display:block;margin-top:6px;color:var(--grigio);font-size:15px}
+@media (max-width:760px){.tre{grid-template-columns:1fr;margin-top:56px}.tre div,.tre div+div{padding:22px 0;border-left:0;border-bottom:1px solid var(--bordo)}}
+
+/* vetrina / black friday */
+.vetrina{display:grid;grid-template-columns:1.05fr 1fr;gap:72px;align-items:center}
+.vetrina .cornice{border-radius:4px;overflow:hidden;aspect-ratio:640/528}
+.vetrina .cornice img{width:100%;height:100%;object-fit:cover}
+.scuro .testa .sconto,.testa .sconto{font-family:var(--serif);font-size:clamp(64px,12vw,128px);line-height:.95;color:var(--oro);margin-top:6px}
+.testa .sconto small{display:block;font-family:var(--sans);font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:rgba(243,238,229,.72);margin-bottom:14px;font-weight:400}
+@media (max-width:860px){.vetrina{grid-template-columns:1fr;gap:44px}}
+
+/* nuova sede */
+.sede{text-align:center}
+.sede .testa{margin:0 auto;max-width:920px}
+.numero{font-family:var(--serif);font-size:clamp(120px,26vw,250px);line-height:.8;color:var(--inchiostro);margin:30px 0 40px;font-weight:400}
+.numero span{color:var(--oro-testo);font-style:italic}
+
+/* visita */
+.visita{display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:stretch}
+.righe-info{margin-top:38px;border-top:1px solid var(--bordo-scuro)}
+.righe-info div{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid var(--bordo-scuro);font-size:16px}
+.righe-info dt{color:rgba(243,238,229,.6);font-size:12px;letter-spacing:.22em;text-transform:uppercase;padding-top:3px;flex:none}
+.righe-info dd{text-align:right}
+.righe-info a{text-decoration:none;border-bottom:1px solid rgba(207,160,70,.5)}
+.righe-info a:hover{color:var(--oro)}
+.mappa{border-radius:4px;overflow:hidden;min-height:380px;background:var(--nero2);border:1px solid var(--bordo-scuro)}
+.mappa iframe{width:100%;height:100%;min-height:380px;border:0;filter:grayscale(1) contrast(.95) brightness(.92)}
+.visita .pulsanti{justify-content:flex-start;margin-top:34px}
+@media (max-width:860px){.visita{grid-template-columns:1fr;gap:44px}}
+
+/* piede */
+.piede{background:var(--nero);color:rgba(243,238,229,.6);border-top:1px solid var(--bordo-scuro);padding:56px 0 calc(40px + env(safe-area-inset-bottom));font-size:14px}
+.piede .contenitore{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.piede img{width:120px}
+.piede a{text-decoration:none}
+.piede a:hover{color:var(--oro)}
+
+/* la cucitura: un filo d'oro che cuce le sezioni mentre si scorre */
+.cucitura{position:absolute;left:max(9px, calc((100vw - var(--larg))/2 - 44px));width:14px;pointer-events:none;z-index:5}
+.cucitura svg{position:absolute;inset:0;width:14px;height:100%;overflow:visible}
+.cucitura .filo{position:absolute;inset:0;clip-path:inset(0 0 100% 0)}
+.cucitura .ago{position:absolute;left:3px;top:0;width:8px;height:8px;border-radius:50%;background:var(--oro);box-shadow:0 0 0 4px rgba(207,160,70,.18);will-change:transform}
+.punto{position:absolute;left:0;width:14px;height:14px;transform:scale(.4);opacity:0;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s}
+.punto::before,.punto::after{content:"";position:absolute;left:6px;top:-1px;width:2px;height:16px;background:var(--oro);border-radius:1px}
+.punto::before{transform:rotate(45deg)}.punto::after{transform:rotate(-45deg)}
+.punto.acceso{transform:none;opacity:1}
+@media (max-width:760px){.cucitura{left:6px}}
+
+@media (prefers-reduced-motion:reduce){
+  .entra{animation:none;opacity:1;transform:none}
+  .cucitura .filo{clip-path:none}.cucitura .ago{display:none}
+  .punto{transform:none;opacity:1;transition:none}
+}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="testata">
+  <div class="contenitore">
+    <a href="#top" aria-label="Christy Perugia, torna su"><img src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664"></a>
+    <nav>
+      <a href="#collezione" class="solo-pc">Collezione</a>
+      <a href="#sede" class="solo-pc">Il negozio</a>
+      <a href="#visita">Vieni a trovarci</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="copertina">
+    <div class="contenitore">
+      <img class="logo entra" src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664" fetchpriority="high">
+      <div class="righe entra d1">
+        <p>Abbigliamento uomo e donna</p>
+        <p>Made in Italy</p>
+      </div>
+      <div class="pulsanti entra d2">
+        <a class="btn btn-oro" href="https://www.google.com/maps/search/?api=1&query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          Come arrivare</a>
+        <a class="btn btn-linea" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
+          Instagram</a>
+      </div>
+      <p class="indirizzo entra d3">Corso Vannucci 105 · Perugia</p>
+    </div>
+  </section>
+
+  <div class="fascia">Black Friday in negozio · dal 20% al 30%</div>
+
+  <section class="sezione" id="collezione">
+    <div class="contenitore">
+      <div class="testa" data-punto>
+        <span class="occhiello">La collezione</span>
+        <h2>Uomo e donna.<br><em>Made in Italy.</em></h2>
+        <p>Capispalla, giacche, maglieria e accessori, nel centro storico di Perugia.</p>
+      </div>
+      <div class="galleria">
+        <figure class="foto f1"><div class="cornice"><img src="img/giacca-foulard.webp" alt="Giacca in denim blu con foulard stampato" width="360" height="455" loading="lazy"></div><figcaption>Giacche e foulard</figcaption></figure>
+        <figure class="foto f2"><div class="cornice"><img src="img/capispalla.webp" alt="Cappotto in pelliccia sintetica e giacca color cammello sui manichini" width="361" height="275" loading="lazy"></div><figcaption>Capispalla</figcaption></figure>
+        <figure class="foto f3"><div class="cornice"><img src="img/camicie.webp" alt="Giacca con foulard arancio sul manichino" width="360" height="180" loading="lazy"></div><figcaption>Accessori</figcaption></figure>
+        <figure class="foto f4"><div class="cornice"><img src="img/maglieria.webp" alt="Capi in toni naturali appesi in negozio" width="360" height="201" loading="lazy"></div><figcaption>In negozio</figcaption></figure>
+      </div>
+      <div class="tre">
+        <div><strong>Uomo</strong><span>Giacche, capispalla, maglieria</span></div>
+        <div><strong>Donna</strong><span>Cappotti, maglie, pantaloni</span></div>
+        <div><strong>Made in Italy</strong><span>Capi prodotti in Italia</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sezione scuro">
+    <div class="contenitore vetrina">
+      <div class="cornice"><img src="img/vetrina.webp" alt="La vetrina di Christy Perugia in Corso Vannucci con gli sconti del Black Friday" width="640" height="528" loading="lazy"></div>
+      <div class="testa" data-punto>
+        <span class="occhiello">In vetrina adesso</span>
+        <h2>Black <em>Friday</em></h2>
+        <p class="sconto"><small>Sconti in negozio</small>20–30%</p>
+        <p>Passa in Corso Vannucci 105 o scrivici su Instagram per sapere se il tuo capo è ancora disponibile.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sezione sede" id="sede">
+    <div class="contenitore">
+      <div class="testa" data-punto>
+        <span class="occhiello">Il negozio</span>
+        <h2>Ci siamo spostati <em>di pochi passi.</em></h2>
+      </div>
+      <p class="numero">1<span>0</span>5</p>
+      <p class="occhiello" style="color:var(--grigio)">Corso Vannucci · Perugia</p>
+    </div>
+  </section>
+
+  <section class="sezione scuro" id="visita">
+    <div class="contenitore visita">
+      <div>
+        <div class="testa" data-punto>
+          <span class="occhiello">Vieni a trovarci</span>
+          <h2>Nel cuore di <em>Perugia.</em></h2>
+        </div>
+        <dl class="righe-info">
+          <div><dt>Indirizzo</dt><dd>Corso Vannucci 105<br>06121 Perugia</dd></div>
+          <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">@christy_perugia</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:cristinagiorgetti68@gmail.com">cristinagiorgetti68@gmail.com</a></dd></div>
+        </dl>
+        <div class="pulsanti">
+          <a class="btn btn-oro" href="https://www.google.com/maps/search/?api=1&query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Apri in Maps</a>
+          <a class="btn btn-linea" href="https://ig.me/m/christy_perugia" target="_blank" rel="noopener">Scrivici</a>
+        </div>
+      </div>
+      <div class="mappa">
+        <iframe title="Mappa: Corso Vannucci 105, Perugia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Corso+Vannucci+105,+06121+Perugia&z=17&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="piede">
+  <div class="contenitore">
+    <img src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664" loading="lazy">
+    <span>Abbigliamento uomo e donna Made in Italy · Corso Vannucci 105, Perugia</span>
+    <a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<div class="cucitura" aria-hidden="true">
+  <div class="filo"><svg preserveAspectRatio="none"><line x1="7" y1="0" x2="7" y2="100%" stroke="#cfa046" stroke-width="1.5" stroke-dasharray="7 6" stroke-linecap="round"/></svg></div>
+  <div class="ago"></div>
+</div>
+
+<script>
+(function(){
+  var cuc=document.querySelector('.cucitura'), filo=cuc.querySelector('.filo'), ago=cuc.querySelector('.ago');
+  var inizio=document.getElementById('collezione'), fine=document.querySelector('.piede');
+  var fermo=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var top=0,alt=0,punti=[];
+  function misura(){
+    var y=scrollY;
+    top=inizio.getBoundingClientRect().top+y+40;
+    alt=Math.max(0,fine.getBoundingClientRect().top+y-top-40);
+    cuc.style.top=top+'px'; cuc.style.height=alt+'px';
+    punti.forEach(function(p){p.el.remove()}); punti=[];
+    document.querySelectorAll('[data-punto]').forEach(function(t){
+      var h=t.querySelector('h2'), r=h.getBoundingClientRect();
+      var pos=Math.round(r.top+y-top+Math.min(r.height,60)/2-7);
+      if(pos<0||pos>alt)return;
+      var el=document.createElement('span'); el.className='punto'; el.style.top=pos+'px';
+      cuc.appendChild(el); punti.push({el:el,pos:pos});
+    });
+    aggiorna();
+  }
+  var chiesto=false;
+  function aggiorna(){
+    chiesto=false;
+    var punta=Math.round(Math.min(alt,Math.max(0,scrollY+innerHeight*0.62-top)));
+    if(!fermo){
+      filo.style.clipPath='inset(0 0 '+(alt-punta)+'px 0)';
+      ago.style.transform='translateY('+(punta-4)+'px)';
+      ago.style.opacity=(punta>0&&punta<alt)?1:0;
+    }
+    punti.forEach(function(p){p.el.classList.toggle('acceso',fermo||punta>=p.pos)});
+  }
+  addEventListener('scroll',function(){if(!chiesto){chiesto=true;requestAnimationFrame(aggiorna)}},{passive:true});
+  addEventListener('resize',misura);
+  addEventListener('load',misura);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(misura);
+  misura();
+})();
+</script>
+</body>
+</html>
