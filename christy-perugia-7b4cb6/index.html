@@ -5,370 +5,390 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Christy Perugia · Abbigliamento uomo e donna Made in Italy</title>
-<meta name="description" content="Abbigliamento uomo e donna Made in Italy in Corso Vannucci 105, nel centro di Perugia.">
+<meta name="description" content="Abbigliamento uomo e donna Made in Italy in Corso Vannucci 105, nel centro storico di Perugia.">
 <meta property="og:title" content="Christy Perugia">
 <meta property="og:description" content="Abbigliamento uomo e donna Made in Italy · Corso Vannucci 105, Perugia">
-<meta property="og:image" content="img/anteprima-link.jpg">
-<meta name="theme-color" content="#12110f">
-<link rel="icon" href="favicon.ico?v=1">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=1">
+<meta property="og:image" content="https://niccoloveniero05.github.io/anteprime-case/christy-perugia-7b4cb6/img/anteprima-link.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#151310">
+<link rel="icon" href="favicon.ico?v=2">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/apertura-1200.webp" imagesrcset="img/apertura-800.webp 800w, img/apertura-1200.webp 1200w" imagesizes="(min-width: 900px) 48vw, 100vw">
 <style>
 :root{
-  --nero:#12110f; --nero2:#1c1a17; --crema:#f3eee5; --crema2:#ebe4d8; --crema3:#e3dacb;
-  --oro:#cfa046; --oro-testo:#7d5f24; --inchiostro:#24211d; --grigio:#6d665c;
-  --bordo:rgba(36,33,29,.14); --bordo-scuro:rgba(243,238,229,.16);
-  --m:max(24px, env(safe-area-inset-left)); --larg:1120px;
-  --serif:"Cormorant Garamond", Georgia, serif; --sans:"Jost", system-ui, sans-serif;
+  --fondo:#f5f2ec; --fondo2:#ebe6dd; --testo:#171512; --testo2:#5f5850; --linea:rgba(23,21,18,.14);
+  --scuro:#151310; --crema:#f5f2ec; --crema2:rgba(245,242,236,.72); --linea-scura:rgba(245,242,236,.16);
+  --oro:#cfa046; --oro-testo:#7d5f22;
+  --m:max(22px, env(safe-area-inset-left), env(safe-area-inset-right)); --larg:1200px; --testata:64px;
+  --serif:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
+  --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --curva:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font-family:var(--sans);font-weight:300;color:var(--inchiostro);background:var(--crema);line-height:1.6;font-size:17px;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:var(--testata)}
+body{font-family:var(--sans);font-size:16px;line-height:1.6;font-weight:400;color:var(--testo);background:var(--fondo);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%;height:auto}
-a{color:inherit}
-.contenitore{width:100%;max-width:calc(var(--larg) + 2*var(--m));margin:0 auto;padding:0 var(--m)}
-.occhiello{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.28em;text-transform:uppercase}
-h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08;letter-spacing:-.005em}
-h2{font-size:clamp(38px,7vw,62px)}
-h2 em{font-style:italic;color:var(--oro-testo)}
-.scuro h2 em{color:var(--oro)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+.contenitore{width:100%;max-width:calc(var(--larg) + 2*var(--m));margin:0 auto;padding-left:var(--m);padding-right:var(--m)}
+.occhiello{display:block;font-size:11px;line-height:1.4;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--testo2)}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+h1 em,h2 em{font-style:italic}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
 
-/* testata: il logo sta tutto dentro la barra */
-.testata{position:sticky;top:0;z-index:20;background:var(--nero);border-bottom:1px solid var(--bordo-scuro)}
-.testata .contenitore{display:flex;align-items:center;justify-content:space-between;height:68px}
-.testata .marchio{display:flex;align-items:center;height:68px}
-.testata .marchio img{height:54px;width:auto}
-.testata nav{display:flex;align-items:center;gap:22px}
-.testata nav a{color:var(--crema);text-decoration:none;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:400;padding:12px 0}
-.testata nav a:hover{color:var(--oro)}
-.testata nav .ig{display:flex;padding:10px;margin-right:-10px}
-.testata nav .ig svg{width:20px;height:20px}
-@media (max-width:560px){.testata nav .solo-pc{display:none}.testata nav{gap:12px}}
+/* fascia in cima: la notizia di adesso */
+.avviso{background:var(--scuro);color:var(--crema)}
+.avviso a{display:flex;flex-wrap:wrap;justify-content:center;column-gap:10px;min-height:38px;align-items:center;padding:9px var(--m);font-size:11px;line-height:1.4;letter-spacing:.14em;text-transform:uppercase;font-weight:500;text-align:center}
+.avviso .oro{color:var(--oro)}
 
-/* copertina */
-.copertina{background:var(--nero);color:var(--crema);text-align:center;position:relative;overflow:hidden}
-.copertina .contenitore{min-height:calc(100svh - 68px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:72px;padding-bottom:96px;position:relative}
-.copertina::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 42%,rgba(207,160,70,.13),transparent 70%);pointer-events:none}
-.copertina .bordo{position:absolute;inset:22px;border:1px solid rgba(207,160,70,.32);pointer-events:none}
-.copertina .bordo::after{content:"";position:absolute;inset:7px;border:1px dashed rgba(207,160,70,.28)}
-.copertina .angolo{position:absolute;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(243,238,229,.55);background:var(--nero);padding:0 12px;font-weight:400;white-space:nowrap}
-.copertina .angolo.su{top:16px;left:50%;transform:translateX(-50%)}
-.copertina .angolo.giu{bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px}
-.copertina .angolo.giu i{display:block;width:1px;height:18px;background:var(--oro)}
-@media (max-width:560px){.copertina .bordo{inset:12px}.copertina .angolo.su{top:6px}.copertina .angolo.giu{bottom:6px}}
-.copertina .logo{width:min(76vw,520px);position:relative}
-.copertina .righe{margin-top:34px;position:relative}
-.copertina .righe p:first-child{font-size:13px;letter-spacing:.34em;text-transform:uppercase;font-weight:400}
-.copertina .righe p+p{margin-top:10px;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--oro)}
-.pulsanti{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:38px;position:relative}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 26px;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s,border-color .25s}
-.btn svg{width:18px;height:18px;flex:none}
-.btn-oro{background:var(--oro);color:var(--nero)}
-.btn-oro:hover{background:#ddb35e}
-.btn-linea{border:1px solid rgba(243,238,229,.4);color:var(--crema)}
-.btn-linea:hover{border-color:var(--oro);color:var(--oro)}
-.btn-linea-scura{border:1px solid rgba(36,33,29,.35);color:var(--inchiostro)}
-.btn-linea-scura:hover{border-color:var(--oro-testo);color:var(--oro-testo)}
+/* testata */
+.testata{position:sticky;top:0;z-index:40;background:var(--fondo);transition:box-shadow .3s ease}
+.testata.staccata{box-shadow:0 1px 0 var(--linea)}
+.testata .contenitore{height:var(--testata);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.marchio{display:block;flex:none;padding:4px 0}
+.marchio img{height:46px;width:auto}
+.voci{display:none}
+.apri-menu{display:flex;align-items:center;gap:12px;height:44px;margin-right:-4px;padding:0 4px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.apri-menu i,.chiudi-menu i{display:block;position:relative;width:22px;height:9px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor}
 
-.entra{opacity:0;transform:translateY(14px);animation:entra 1s cubic-bezier(.2,.7,.2,1) forwards}
-.entra.d1{animation-delay:.15s}.entra.d2{animation-delay:.35s}
-@keyframes entra{to{opacity:1;transform:none}}
+/* menu a tutto schermo sul telefono */
+.menu{position:fixed;inset:0;z-index:60;background:var(--fondo);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
+.menu.aperto{opacity:1;visibility:visible;transition:opacity .3s ease}
+.menu-testa{height:calc(var(--testata) + var(--su,0px));padding-top:var(--su,0px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--linea)}
+.chiudi-menu{display:flex;align-items:center;gap:12px;height:44px;margin-right:-4px;padding:0 4px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.chiudi-menu i{border:0;width:18px;height:18px}
+.chiudi-menu i::before,.chiudi-menu i::after{content:"";position:absolute;left:-2px;right:-2px;top:8px;height:1.5px;background:currentColor;transform:rotate(45deg)}
+.chiudi-menu i::after{transform:rotate(-45deg)}
+.menu-voci{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:24px;padding-bottom:24px}
+.menu-voci a{display:block;font-family:var(--serif);font-size:clamp(34px,10vw,44px);line-height:1.1;padding:14px 0;border-bottom:1px solid var(--linea);opacity:0;transform:translateY(10px);transition:opacity .45s var(--curva),transform .45s var(--curva)}
+.menu-voci a:first-child{border-top:1px solid var(--linea)}
+.menu.aperto .menu-voci a{opacity:1;transform:none}
+.menu.aperto .menu-voci a:nth-child(2){transition-delay:.04s}
+.menu.aperto .menu-voci a:nth-child(3){transition-delay:.08s}
+.menu.aperto .menu-voci a:nth-child(4){transition-delay:.12s}
+.menu-piede{padding-bottom:calc(28px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--testo2)}
+.menu-piede a{color:var(--testo);border-bottom:1px solid var(--linea)}
+html.menu-aperto{overflow:hidden}
 
-/* fascia black friday */
-.fascia{background:var(--oro);color:var(--nero);padding:5px 0}
-.fascia div{border-top:1px dashed rgba(18,17,15,.38);border-bottom:1px dashed rgba(18,17,15,.38);text-align:center;font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:10px var(--m)}
+/* apertura */
+.apertura{display:grid;grid-template-areas:"foto" "azioni"}
+.apertura-foto{grid-area:foto;position:relative;aspect-ratio:1200/1496;background:#ddd8ce;overflow:hidden}
+.apertura-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.apertura-foto::after{content:"";position:absolute;left:0;right:0;top:0;height:46%;background:linear-gradient(rgba(245,242,236,.5),rgba(245,242,236,0));pointer-events:none}
+.js .apertura-foto img{opacity:0;transform:scale(1.035);transition:opacity .9s ease,transform 1.8s var(--curva)}
+.js .apertura-foto.pronta img{opacity:1;transform:none}
+.apertura-titolo{grid-area:foto;align-self:start;position:relative;z-index:1;padding:26px var(--m) 0}
+.apertura-titolo .occhiello{color:var(--testo)}
+.apertura h1{margin-top:12px;font-size:clamp(40px,12vw,64px)}
+.apertura-sotto{display:none}
+.apertura-azioni{grid-area:azioni;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px var(--m) 0}
+
+/* pulsanti */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border:1px solid var(--testo);font-size:12px;line-height:1;letter-spacing:.16em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+.btn svg{width:16px;height:16px;flex:none}
+.btn-pieno{background:var(--testo);color:var(--fondo)}
+.btn-vuoto{color:var(--testo)}
+@media (hover:hover){
+  .btn-pieno:hover{background:#000;border-color:#000}
+  .btn-vuoto:hover{background:var(--testo);color:var(--fondo)}
+}
+.apertura-azioni .btn,.azioni .btn{padding:0 12px}
+.scuro .btn{border-color:var(--crema)}
+.scuro .btn-pieno{background:var(--crema);color:var(--scuro)}
+.scuro .btn-vuoto{color:var(--crema)}
+@media (hover:hover){
+  .scuro .btn-pieno:hover{background:#fff;border-color:#fff}
+  .scuro .btn-vuoto:hover{background:var(--crema);color:var(--scuro)}
+}
+.link-freccia{display:inline-flex;align-items:center;gap:10px;padding:12px 0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-bottom:1px solid var(--testo)}
+.link-freccia svg{width:16px;height:16px;transition:transform .3s var(--curva)}
+@media (hover:hover){.link-freccia:hover svg{transform:translateX(4px)}}
 
 /* sezioni */
-section{position:relative}
-.sezione{padding:112px 0}
-.scuro{background:var(--nero);color:var(--crema)}
-.tinta{background:var(--crema2)}
-.testa{max-width:620px}
-.testa .occhiello{color:var(--oro-testo);margin-bottom:18px;display:block}
-.scuro .testa .occhiello{color:var(--oro)}
-.testa p{margin-top:20px;color:var(--grigio);font-size:18px}
-.scuro .testa p{color:rgba(243,238,229,.72)}
-.cornice{overflow:hidden;border-radius:4px;background:var(--crema3)}
-.cornice img{width:100%;height:100%;object-fit:cover}
+.sezione{padding:84px 0}
+.scuro{background:var(--scuro);color:var(--crema)}
+.scuro .occhiello{color:var(--oro)}
+.tinta{background:var(--fondo2)}
+.testa{max-width:640px}
+.testa h2{margin-top:16px;font-size:clamp(34px,8.8vw,60px)}
+.testa p{margin-top:18px;color:var(--testo2);max-width:50ch}
+.scuro .testa p{color:var(--crema2)}
 
-/* 1. il negozio */
-.negozio{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.negozio .cornice{aspect-ratio:1147/1256}
-.nota{position:relative;margin-top:36px;background:var(--crema2);border-radius:3px;padding:24px 26px}
-.nota::after{content:"";position:absolute;inset:7px;border:1px dashed rgba(125,95,36,.38);border-radius:2px;pointer-events:none}
-.nota .occhiello{display:block;color:var(--oro-testo);font-size:11px}
-.nota p{margin-top:8px;font-size:16px;color:var(--inchiostro)}
-@media (max-width:860px){.negozio{grid-template-columns:1fr;gap:48px}.negozio .cornice{order:2}}
+/* il negozio */
+.negozio-griglia{display:grid;gap:44px}
+.nota{margin-top:32px;padding-top:20px;border-top:1px solid var(--linea);max-width:46ch}
+.nota p{margin-top:8px;color:var(--testo)}
+.negozio-foto{margin:0 calc(-1 * var(--m));background:#d7d2c8}
+.negozio-foto img{width:100%}
 
-/* 2. la collezione */
-.categorie{margin-top:60px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
-.foto{margin:0}
-.foto .cornice{aspect-ratio:4/5}
-.foto img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
-@media (hover:hover){.foto:hover img{transform:scale(1.03)}}
-.categorie .foto:nth-child(even){margin-top:56px}
-.categorie .foto:nth-child(2) img{object-position:50% 30%}
-.foto figcaption{margin-top:14px;display:flex;align-items:baseline;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--grigio)}
-.foto figcaption b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:17px;letter-spacing:0;color:var(--oro-testo)}
-@media (max-width:760px){.categorie{grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}.categorie .foto:nth-child(even){margin-top:32px}.foto figcaption{font-size:11px;letter-spacing:.16em;gap:8px}}
-.etichette{margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.etichetta{position:relative;background:var(--crema);border-radius:3px;padding:30px 28px 28px}
-.etichetta::after{content:"";position:absolute;inset:7px;border:1px dashed rgba(125,95,36,.38);border-radius:2px;pointer-events:none}
-.etichetta .n{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--oro-testo)}
-.etichetta strong{display:block;margin-top:6px;font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.15}
-.etichetta span{display:block;margin-top:6px;color:var(--grigio);font-size:15px}
-@media (max-width:760px){.etichette{grid-template-columns:1fr;margin-top:48px;gap:12px}.etichetta{padding:24px 24px 22px}}
+/* la collezione */
+.categorie{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;column-gap:12px;row-gap:30px}
+.categorie figure{margin:0}
+.categorie .cornice{aspect-ratio:4/5;overflow:hidden;background:#d7d2c8}
+.categorie img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--curva)}
+@media (hover:hover){.categorie figure:hover img{transform:scale(1.035)}}
+.categorie figcaption{margin-top:14px;font-size:11px;line-height:1.35;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+.categorie figcaption b{display:block;margin-bottom:4px;font-family:var(--serif);font-weight:400;font-size:16px;line-height:1.2;letter-spacing:.06em;color:var(--oro-testo)}
+.collezione-piede{margin-top:40px}
 
-/* 3. black friday: il cartellino */
-.promo{display:grid;grid-template-columns:.8fr 1fr;gap:80px;align-items:center}
-.appeso{display:flex;justify-content:center;padding:30px 0}
-.cartellino{position:relative;width:250px;background:var(--crema);color:var(--nero);text-align:center;padding:66px 22px 34px;transform:rotate(-4deg);box-shadow:0 22px 50px rgba(0,0,0,.45);
-  clip-path:polygon(24% 0,76% 0,100% 15%,100% 100%,0 100%,0 15%)}
-.cartellino::before{content:"";position:absolute;left:50%;top:20px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--nero);box-shadow:0 0 0 3px var(--oro)}
-.cartellino::after{content:"";position:absolute;inset:9px;border:1px dashed rgba(125,95,36,.45);clip-path:polygon(23% 0,77% 0,100% 14%,100% 100%,0 100%,0 14%)}
-.cartellino small{display:block;font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;color:var(--oro-testo)}
-.cartellino span{display:block;margin-top:14px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--grigio)}
-.cartellino strong{display:block;font-family:var(--serif);font-weight:500;font-size:54px;line-height:1;margin-top:4px;white-space:nowrap}
-.cartellino em{display:block;margin-top:14px;font-family:var(--serif);font-size:18px;color:var(--grigio)}
-.promo .elenco{margin-top:30px;border-top:1px solid var(--bordo-scuro)}
-.promo .elenco li{list-style:none;display:flex;gap:14px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--bordo-scuro);color:rgba(243,238,229,.85);font-size:16px}
-.promo .elenco li b{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--oro);font-size:17px;min-width:22px}
-@media (max-width:860px){.promo{grid-template-columns:1fr;gap:40px}.cartellino{width:220px;padding:60px 18px 30px}.cartellino strong{font-size:46px}}
+/* black friday */
+.promo-griglia{display:grid;gap:8px}
+.cifre{font-family:var(--serif);font-weight:400;font-optical-sizing:none;font-variation-settings:"opsz" 30;line-height:.9;letter-spacing:-.03em;font-size:clamp(78px,22vw,120px);margin-top:20px;white-space:nowrap}
+.cifre span{font-style:italic;color:var(--oro)}
+.promo-testo p{margin-top:22px;color:var(--crema2);max-width:36ch;font-size:17px}
+.promo-testo .btn{margin-top:32px}
 
-/* 4. vieni a trovarci */
-.visita{display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:stretch}
-.righe-info{margin-top:38px;border-top:1px solid var(--bordo)}
-.righe-info div{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid var(--bordo);font-size:16px}
-.righe-info dt{color:var(--grigio);font-size:12px;letter-spacing:.22em;text-transform:uppercase;padding-top:3px;flex:none}
-.righe-info dd{text-align:right}
-.righe-info dd small{display:block;color:var(--grigio);font-size:13px}
-.righe-info a{text-decoration:none;border-bottom:1px solid rgba(125,95,36,.5)}
-.righe-info a:hover{color:var(--oro-testo)}
-.mappa{border-radius:4px;overflow:hidden;min-height:400px;background:var(--crema3);border:1px solid var(--bordo)}
-.mappa iframe{width:100%;height:100%;min-height:400px;border:0;filter:grayscale(1) contrast(.95)}
-.visita .pulsanti{justify-content:flex-start;margin-top:34px}
-@media (max-width:860px){.visita{grid-template-columns:1fr;gap:44px}}
+/* vieni a trovarci */
+.visita-griglia{display:grid;gap:44px}
+.contatti{margin-top:34px;border-top:1px solid var(--linea)}
+.contatti div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--linea)}
+.contatti dt{flex:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--testo2)}
+.contatti dd{text-align:right;min-width:0;overflow-wrap:anywhere}
+.contatti a{border-bottom:1px solid var(--linea);transition:border-color .2s}
+@media (hover:hover){.contatti a:hover{border-color:var(--testo)}}
+.azioni{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
+#visita{padding-bottom:0}
+.mappa{margin:0 calc(-1 * var(--m));height:340px;background:#dcd8d0}
+.mappa iframe{display:block;width:100%;height:100%;border:0;filter:grayscale(1) contrast(.92) brightness(1.03)}
 
 /* piede */
-.piede{background:var(--nero);color:rgba(243,238,229,.62);padding:72px 0 calc(36px + env(safe-area-inset-bottom));font-size:15px}
-.piede .colonne{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
-.piede img{width:150px}
-.piede .motto{margin-top:18px;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--oro)}
-.piede h3{font-family:var(--sans);font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--crema);margin-bottom:14px}
-.piede ul{list-style:none}
-.piede li+li{margin-top:6px}
-.piede a{text-decoration:none}
-.piede a:hover{color:var(--oro)}
-.piede .fondo{margin-top:56px;padding-top:22px;border-top:1px dashed rgba(207,160,70,.3);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(243,238,229,.45)}
-@media (max-width:760px){.piede .colonne{grid-template-columns:1fr;gap:34px}}
+.piede{padding:72px 0 calc(32px + env(safe-area-inset-bottom));text-align:center}
+.piede img{width:150px;margin:0 auto}
+.piede-motto{margin-top:18px;font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.3;color:var(--crema)}
+.piede-link{margin-top:34px;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 28px}
+.piede-link a{display:inline-block;padding:10px 0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--crema)}
+@media (hover:hover){.piede-link a:hover{color:var(--oro)}}
+.piede-fondo{margin-top:40px;padding-top:24px;border-top:1px solid var(--linea-scura);display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgba(245,242,236,.5)}
 
-/* la cucitura: un filo d'oro che cuce le sezioni mentre si scorre */
-.cucitura{position:absolute;left:max(9px, calc((100vw - var(--larg))/2 - 44px));width:14px;pointer-events:none;z-index:5}
-.cucitura svg{position:absolute;inset:0;width:14px;height:100%;overflow:visible}
-.cucitura .filo{position:absolute;inset:0;clip-path:inset(0 0 100% 0)}
-.cucitura .ago{position:absolute;left:3px;top:0;width:8px;height:8px;border-radius:50%;background:var(--oro);box-shadow:0 0 0 4px rgba(207,160,70,.18);will-change:transform}
-.punto{position:absolute;left:0;width:14px;height:14px;transform:scale(.4);opacity:0;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s}
-.punto::before,.punto::after{content:"";position:absolute;left:6px;top:-1px;width:2px;height:16px;background:var(--oro);border-radius:1px}
-.punto::before{transform:rotate(45deg)}.punto::after{transform:rotate(-45deg)}
-.punto.acceso{transform:none;opacity:1}
-@media (max-width:760px){.cucitura{left:5px}}
+/* computer */
+@media (min-width:900px){
+  :root{--testata:78px}
+  body{font-size:17px}
+  .marchio img{height:56px}
+  .apri-menu{display:none}
+  .voci{display:flex;align-items:center;gap:34px}
+  .voci a{position:relative;padding:12px 0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+  .voci a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--curva)}
+  .voci a:hover::after{transform:scaleX(1)}
+  .voci .ig{display:flex;padding:10px;margin:0 -10px 0 -6px}
+  .voci .ig svg{width:19px;height:19px}
+  .voci .ig::after{display:none}
+
+  .apertura{max-width:calc(var(--larg) + 2*var(--m));margin:0 auto;padding:clamp(28px,5vh,56px) var(--m) clamp(72px,11vh,128px);grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);grid-template-rows:1fr auto;grid-template-areas:"titolo foto" "azioni foto";column-gap:clamp(48px,6vw,104px)}
+  .apertura-foto{aspect-ratio:auto;height:clamp(540px,calc(100svh - var(--testata) - 38px - 96px),780px)}
+  .apertura-foto::after{display:none}
+  .apertura-titolo{grid-area:titolo;align-self:end;padding:0}
+  .apertura-titolo .occhiello{color:var(--testo2)}
+  .apertura h1{margin-top:22px;font-size:clamp(56px,5.2vw,78px)}
+  .apertura-sotto{display:block;margin-top:28px;max-width:32ch;font-size:18px;color:var(--testo2)}
+  .apertura-azioni{grid-area:azioni;align-self:start;display:flex;gap:12px;padding:40px 0 0}
+  .apertura-azioni .btn,.azioni .btn{padding:0 28px}
+
+  .sezione{padding:136px 0}
+  .testa p{font-size:18px}
+  .negozio-griglia{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,7vw,112px);align-items:center}
+  .negozio-foto{order:-1;margin:0}
+  .categorie{margin-top:64px;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:20px}
+  .collezione-testa{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+  .collezione-testa .link-freccia{flex:none;margin-bottom:6px}
+  .collezione-piede{display:none}
+  .promo-griglia{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:end;column-gap:64px}
+  .promo-griglia .occhiello{grid-column:1/-1}
+  .cifre{margin-top:28px;font-size:clamp(120px,11.5vw,168px)}
+  .promo-testo{padding-bottom:18px}
+  .promo-testo p{margin-top:0}
+  .visita-griglia{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(48px,6vw,96px);align-items:stretch}
+  .azioni{display:flex;gap:12px;margin-top:36px}
+  #visita{padding-bottom:136px}
+  .mappa{margin:0;height:auto;min-height:520px}
+  .piede{padding-top:96px}
+  .piede-fondo{flex-direction:row;justify-content:space-between}
+}
+@media (max-width:899px){.solo-pc{display:none!important}}
 
 @media (prefers-reduced-motion:reduce){
-  .entra{animation:none;opacity:1;transform:none}
-  .cucitura .filo{clip-path:none}.cucitura .ago{display:none}
-  .punto{transform:none;opacity:1;transition:none}
-  .foto img{transition:none}
+  html{scroll-behavior:auto}
+  .js .apertura-foto img{transition:none;transform:none;opacity:1}
+  .menu,.menu.aperto,.menu-voci a{transition:none}
+  .categorie img,.link-freccia svg,.voci a::after{transition:none}
 }
-:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
 </style>
 </head>
 <body>
 
+<div class="avviso"><a href="#black-friday"><span class="oro">Black Friday</span><span>dal 20% al 30% in negozio</span></a></div>
+
 <header class="testata">
   <div class="contenitore">
-    <a class="marchio" href="#top" aria-label="Christy Perugia, torna su"><img src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664"></a>
-    <nav>
-      <a href="#negozio" class="solo-pc">Il negozio</a>
-      <a href="#collezione" class="solo-pc">Collezione</a>
-      <a href="#visita">Vieni a trovarci</a>
-      <a class="ig" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener" aria-label="Instagram di Christy Perugia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+    <a class="marchio" href="#top" aria-label="Christy Perugia, torna all'inizio"><img src="img/logo-scuro.webp" alt="Christy Perugia" width="936" height="664"></a>
+    <nav class="voci" aria-label="Sezioni">
+      <a href="#negozio">Il negozio</a>
+      <a href="#collezione">Collezione</a>
+      <a href="#black-friday">Black Friday</a>
+      <a href="#visita">Dove siamo</a>
+      <a class="ig" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener" aria-label="Instagram di Christy Perugia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
     </nav>
+    <button class="apri-menu" type="button" aria-controls="menu" aria-expanded="false">Menu <i aria-hidden="true"></i></button>
   </div>
 </header>
 
+<div class="menu" id="menu" aria-hidden="true" inert>
+  <div class="contenitore menu-testa">
+    <a class="marchio" href="#top" aria-label="Christy Perugia, torna all'inizio"><img src="img/logo-scuro.webp" alt="Christy Perugia" width="936" height="664"></a>
+    <button class="chiudi-menu" type="button">Chiudi <i aria-hidden="true"></i></button>
+  </div>
+  <nav class="contenitore menu-voci" aria-label="Menu">
+    <a href="#negozio">Il negozio</a>
+    <a href="#collezione">La collezione</a>
+    <a href="#black-friday">Black Friday</a>
+    <a href="#visita">Vieni a trovarci</a>
+  </nav>
+  <div class="contenitore menu-piede">
+    <span>Corso Vannucci 105, Perugia</span>
+    <a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</div>
+
 <main id="top">
-  <section class="copertina">
-    <div class="bordo" aria-hidden="true"></div>
-    <span class="angolo su" aria-hidden="true">Perugia · Centro storico</span>
-    <div class="contenitore">
-      <img class="logo entra" src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664" fetchpriority="high">
-      <div class="righe entra d1">
-        <p>Abbigliamento uomo e donna</p>
-        <p>Made in Italy</p>
-      </div>
-      <div class="pulsanti entra d2">
-        <a class="btn btn-oro" href="https://www.google.com/maps/search/?api=1&query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-          Come arrivare</a>
-        <a class="btn btn-linea" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
-          Instagram</a>
-      </div>
+
+  <section class="apertura">
+    <div class="apertura-foto">
+      <img src="img/apertura-1200.webp" srcset="img/apertura-800.webp 800w, img/apertura-1200.webp 1200w" sizes="(min-width: 900px) 48vw, 100vw" alt="La vetrina di Christy: un cappotto teddy color cammello e un trench grigio sui manichini, un cappotto beige appeso dietro" width="1200" height="1496" fetchpriority="high">
     </div>
-    <span class="angolo giu" aria-hidden="true"><i></i>Corso Vannucci 105</span>
+    <div class="apertura-titolo">
+      <p class="occhiello">Abbigliamento · Perugia</p>
+      <h1>Uomo e donna,<br><em>Made in Italy.</em></h1>
+      <p class="apertura-sotto">In Corso Vannucci 105, a Perugia.</p>
+    </div>
+    <div class="apertura-azioni">
+      <a class="btn btn-pieno" href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Come arrivare</a>
+      <a class="btn btn-vuoto" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Instagram</a>
+    </div>
   </section>
 
-  <div class="fascia"><div>Black Friday in negozio · dal 20% al 30%</div></div>
-
-  <!-- 1. chi siamo e com'è il negozio -->
   <section class="sezione" id="negozio">
-    <div class="contenitore negozio">
-      <div class="cornice"><img src="img/negozio.webp" alt="L'interno di Christy Perugia: capi appesi, maglieria sugli scaffali e una poltrona d'argento" width="1147" height="1256" loading="lazy"></div>
-      <div>
-        <div class="testa" data-punto>
-          <span class="occhiello">Il negozio</span>
-          <h2>Uomo e donna,<br><em>Made in Italy.</em></h2>
-          <p>Un negozio di abbigliamento in Corso Vannucci, nel centro storico di Perugia. Capispalla, maglieria, giacche, borse e accessori, da vedere e provare con calma.</p>
-        </div>
+    <div class="contenitore negozio-griglia">
+      <div class="testa">
+        <span class="occhiello">Il negozio</span>
+        <h2>Sul Corso,<br><em>nel centro di Perugia.</em></h2>
+        <p>Abbigliamento da uomo e da donna Made in Italy: capispalla, giacche, maglieria, borse e accessori.</p>
         <div class="nota">
           <span class="occhiello">Nuova sede</span>
           <p>Da gennaio 2026 siamo al numero 105 di Corso Vannucci, a pochi passi da prima.</p>
         </div>
       </div>
+      <figure class="negozio-foto"><img src="img/negozio.webp" alt="L'interno di Christy Perugia: capi appesi, maglieria sugli scaffali e una poltrona d'argento" width="1500" height="1643" loading="lazy"></figure>
     </div>
   </section>
 
-  <!-- 2. cosa si trova -->
   <section class="sezione tinta" id="collezione">
     <div class="contenitore">
-      <div class="testa" data-punto>
-        <span class="occhiello">La collezione</span>
-        <h2>Capi per <em>l'autunno e l'inverno.</em></h2>
-        <p>Toni naturali, tessuti caldi e qualche tocco di colore: la collezione di questa stagione, in negozio.</p>
-      </div>
-      <div class="categorie">
-        <figure class="foto"><div class="cornice"><img src="img/manichini.webp" alt="Cappotto in pelliccia sintetica, maglia color cipria e giacca grigia sui manichini" width="1300" height="1450" loading="lazy"></div><figcaption><b>01</b> Capispalla</figcaption></figure>
-        <figure class="foto"><div class="cornice"><img src="img/giacca-foulard.webp" alt="Giacca in denim blu con foulard di seta rosso e crema" width="1200" height="2184" loading="lazy"></div><figcaption><b>02</b> Giacche e foulard</figcaption></figure>
-        <figure class="foto"><div class="cornice"><img src="img/maglieria.webp" alt="Maglioni piegati sugli scaffali, nei toni del beige e del grigio" width="720" height="900" loading="lazy"></div><figcaption><b>03</b> Maglieria</figcaption></figure>
-        <figure class="foto"><div class="cornice"><img src="img/borse.webp" alt="Borse in pelle nera sullo scaffale del negozio" width="680" height="848" loading="lazy"></div><figcaption><b>04</b> Borse</figcaption></figure>
-      </div>
-      <div class="etichette">
-        <div class="etichetta"><span class="n">I.</span><strong>Donna</strong><span>Cappotti, maglieria, pantaloni</span></div>
-        <div class="etichetta"><span class="n">II.</span><strong>Uomo</strong><span>Giacche, capispalla, maglieria</span></div>
-        <div class="etichetta"><span class="n">III.</span><strong>Accessori</strong><span>Borse e foulard</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. la promozione di adesso -->
-  <section class="sezione scuro" id="promo">
-    <div class="contenitore promo">
-      <div class="appeso">
-        <div class="cartellino" aria-hidden="true"><small>Black Friday</small><span>sconti dal</span><strong>20–30%</strong><em>in negozio</em></div>
-      </div>
-      <div class="testa" data-punto>
-        <span class="occhiello">Adesso in negozio</span>
-        <h2>Black <em>Friday</em></h2>
-        <p>Sconti dal 20% al 30% sui capi in negozio.</p>
-        <ul class="elenco">
-          <li><b>1</b>Vieni in Corso Vannucci 105</li>
-          <li><b>2</b>Oppure scrivici su Instagram il capo che ti piace</li>
-          <li><b>3</b>Ti diciamo se c'è ancora la tua taglia</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. dove siamo -->
-  <section class="sezione" id="visita">
-    <div class="contenitore visita">
-      <div>
-        <div class="testa" data-punto>
-          <span class="occhiello">Vieni a trovarci</span>
-          <h2>Nel cuore di <em>Perugia.</em></h2>
-          <p>Sulla via principale del centro, tra Piazza IV Novembre e Piazza Italia.</p>
+      <div class="collezione-testa">
+        <div class="testa">
+          <span class="occhiello">La collezione</span>
+          <h2>Per l'autunno <em>e l'inverno.</em></h2>
         </div>
-        <dl class="righe-info">
-          <div><dt>Indirizzo</dt><dd>Corso Vannucci 105<br>06121 Perugia</dd></div>
+        <a class="link-freccia solo-pc" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Le novità su Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <ul class="categorie">
+        <li><figure><div class="cornice"><img src="img/capispalla.webp" alt="Cappotti e giacche nei toni del grigio e del panna appesi in negozio" width="800" height="1000" loading="lazy"></div><figcaption><b>I</b>Capispalla</figcaption></figure></li>
+        <li><figure><div class="cornice"><img src="img/giacca-foulard.webp" alt="Giacca blu con un foulard rosso e crema annodato sulla gruccia" width="800" height="1000" loading="lazy"></div><figcaption><b>II</b>Giacche e foulard</figcaption></figure></li>
+        <li><figure><div class="cornice"><img src="img/maglieria.webp" alt="Maglioni piegati sugli scaffali, nei toni del beige e del grigio" width="720" height="900" loading="lazy"></div><figcaption><b>III</b>Maglieria</figcaption></figure></li>
+        <li><figure><div class="cornice"><img src="img/borse.webp" alt="Borse nere sullo scaffale del negozio" width="680" height="848" loading="lazy"></div><figcaption><b>IV</b>Borse</figcaption></figure></li>
+      </ul>
+      <div class="collezione-piede">
+        <a class="link-freccia" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Le novità su Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sezione scuro" id="black-friday">
+    <div class="contenitore promo-griglia">
+      <span class="occhiello">Black Friday · in negozio</span>
+      <p class="cifre" aria-hidden="true">20–30<span>%</span></p>
+      <div class="promo-testo">
+        <p>Sconti dal 20% al 30%. Ti aspettiamo in Corso Vannucci 105.</p>
+        <a class="btn btn-pieno" href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Come arrivare</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sezione" id="visita">
+    <div class="contenitore visita-griglia">
+      <div>
+        <div class="testa">
+          <span class="occhiello">Vieni a trovarci</span>
+          <h2>Corso Vannucci 105, <em>Perugia.</em></h2>
+          <p>Sulla via principale del centro storico, tra Piazza IV Novembre e Piazza Italia.</p>
+        </div>
+        <dl class="contatti">
           <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">@christy_perugia</a></dd></div>
           <div><dt>Email</dt><dd><a href="mailto:cristinagiorgetti68@gmail.com">cristinagiorgetti68@gmail.com</a></dd></div>
         </dl>
-        <div class="pulsanti">
-          <a class="btn btn-oro" href="https://www.google.com/maps/search/?api=1&query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Apri in Maps</a>
-          <a class="btn btn-linea-scura" href="https://ig.me/m/christy_perugia" target="_blank" rel="noopener">Scrivici</a>
+        <div class="azioni">
+          <a class="btn btn-pieno" href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Apri in Maps</a>
+          <a class="btn btn-vuoto" href="https://ig.me/m/christy_perugia" target="_blank" rel="noopener">Scrivici</a>
         </div>
       </div>
       <div class="mappa">
-        <iframe title="Mappa: Corso Vannucci 105, Perugia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Corso+Vannucci+105,+06121+Perugia&z=17&output=embed"></iframe>
+        <iframe title="Mappa: Corso Vannucci 105, Perugia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Corso+Vannucci+105,+06121+Perugia&amp;z=17&amp;output=embed"></iframe>
       </div>
     </div>
   </section>
+
 </main>
 
-<footer class="piede">
+<footer class="piede scuro">
   <div class="contenitore">
-    <div class="colonne">
-      <div>
-        <img src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664" loading="lazy">
-        <p class="motto">Abbigliamento uomo e donna, Made in Italy.</p>
-      </div>
-      <div>
-        <h3>Il negozio</h3>
-        <ul><li>Corso Vannucci 105</li><li>06121 Perugia</li><li><a href="https://www.google.com/maps/search/?api=1&query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Come arrivare</a></li></ul>
-      </div>
-      <div>
-        <h3>Contatti</h3>
-        <ul><li><a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://ig.me/m/christy_perugia" target="_blank" rel="noopener">Scrivici un messaggio</a></li><li><a href="mailto:cristinagiorgetti68@gmail.com">Email</a></li></ul>
-      </div>
-    </div>
-    <div class="fondo"><span>© 2026 Christy Perugia</span><span>Corso Vannucci 105 · Perugia</span></div>
+    <img src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664" loading="lazy">
+    <p class="piede-motto">Abbigliamento uomo e donna,<br>Made in Italy.</p>
+    <nav class="piede-link" aria-label="Contatti">
+      <a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:cristinagiorgetti68@gmail.com">Email</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Come arrivare</a>
+    </nav>
+    <div class="piede-fondo"><span>Corso Vannucci 105 · 06121 Perugia</span><span>© 2026 Christy Perugia</span></div>
   </div>
 </footer>
 
-<div class="cucitura" aria-hidden="true">
-  <div class="filo"><svg preserveAspectRatio="none"><line x1="7" y1="0" x2="7" y2="100%" stroke="#cfa046" stroke-width="1.5" stroke-dasharray="7 6" stroke-linecap="round"/></svg></div>
-  <div class="ago"></div>
-</div>
-
 <script>
 (function(){
-  var cuc=document.querySelector('.cucitura'), filo=cuc.querySelector('.filo'), ago=cuc.querySelector('.ago');
-  var inizio=document.getElementById('negozio'), fine=document.querySelector('.piede');
-  var fermo=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var top=0,alt=0,punti=[];
-  function misura(){
-    var y=scrollY;
-    top=inizio.getBoundingClientRect().top+y+40;
-    alt=Math.max(0,fine.getBoundingClientRect().top+y-top-40);
-    cuc.style.top=top+'px'; cuc.style.height=alt+'px';
-    punti.forEach(function(p){p.el.remove()}); punti=[];
-    document.querySelectorAll('[data-punto]').forEach(function(t){
-      var h=t.querySelector('h2'), r=h.getBoundingClientRect();
-      var pos=Math.round(r.top+y-top+Math.min(r.height,60)/2-7);
-      if(pos<0||pos>alt)return;
-      var el=document.createElement('span'); el.className='punto'; el.style.top=pos+'px';
-      cuc.appendChild(el); punti.push({el:el,pos:pos});
-    });
-    aggiorna();
+  var d=document, html=d.documentElement;
+  html.classList.add('js');
+
+  // la testata prende una riga sottile appena la pagina scorre
+  var testata=d.querySelector('.testata'), avviso=d.querySelector('.avviso');
+  function riga(){testata.classList.toggle('staccata', scrollY > avviso.offsetHeight + 1)}
+  addEventListener('scroll', riga, {passive:true}); riga();
+
+  // menu del telefono
+  var menu=d.getElementById('menu'), apri=d.querySelector('.apri-menu'), chiudi=menu.querySelector('.chiudi-menu');
+  function apriMenu(){
+    menu.style.setProperty('--su', Math.max(0, Math.round(testata.getBoundingClientRect().top)) + 'px');
+    menu.removeAttribute('inert'); menu.setAttribute('aria-hidden','false'); menu.classList.add('aperto');
+    apri.setAttribute('aria-expanded','true'); html.classList.add('menu-aperto');
+    setTimeout(function(){chiudi.focus({preventScroll:true})}, 60);
   }
-  var chiesto=false;
-  function aggiorna(){
-    chiesto=false;
-    var punta=Math.round(Math.min(alt,Math.max(0,scrollY+innerHeight*0.62-top)));
-    if(!fermo){
-      filo.style.clipPath='inset(0 0 '+(alt-punta)+'px 0)';
-      ago.style.transform='translateY('+(punta-4)+'px)';
-      ago.style.opacity=(punta>0&&punta<alt)?1:0;
-    }
-    punti.forEach(function(p){p.el.classList.toggle('acceso',fermo||punta>=p.pos)});
+  function chiudiMenu(rimettiFuoco){
+    menu.classList.remove('aperto'); menu.setAttribute('aria-hidden','true'); menu.setAttribute('inert','');
+    apri.setAttribute('aria-expanded','false'); html.classList.remove('menu-aperto');
+    if(rimettiFuoco) apri.focus({preventScroll:true});
   }
-  addEventListener('scroll',function(){if(!chiesto){chiesto=true;requestAnimationFrame(aggiorna)}},{passive:true});
-  addEventListener('resize',misura);
-  addEventListener('load',misura);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(misura);
-  misura();
+  apri.addEventListener('click', apriMenu);
+  chiudi.addEventListener('click', function(){chiudiMenu(true)});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click', function(){chiudiMenu(false)})});
+  d.addEventListener('keydown', function(e){if(e.key==='Escape' && menu.classList.contains('aperto')) chiudiMenu(true)});
+  matchMedia('(min-width: 900px)').addEventListener('change', function(e){if(e.matches) chiudiMenu(false)});
+
+  // la foto della vetrina compare morbida appena è pronta
+  var cornice=d.querySelector('.apertura-foto'), foto=cornice.querySelector('img');
+  function pronta(){cornice.classList.add('pronta')}
+  if(foto.complete) pronta(); else {foto.addEventListener('load', pronta); foto.addEventListener('error', pronta)}
 })();
 </script>
 </body>
