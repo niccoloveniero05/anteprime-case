@@ -38,7 +38,7 @@ section{position:relative;border-bottom:1px dashed var(--l);padding:56px 20px}
  #hero .in{grid-template-columns:1fr 1fr;align-items:center}
  #hero .box{height:60vh}
 }
-</style><style>
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:28px 20px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}.pj{flex:0 0 76vw;max-width:340px;scroll-snap-align:start}.pjimg{aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--box);border:1px dashed #3a3a40;display:flex;align-items:center;justify-content:center;color:var(--t);font-size:13px}.pjimg img{width:100%;height:100%;object-fit:cover;display:block}.pj h3{margin-top:14px}.pjc{color:#9a9aa2;font-size:14px;margin-top:4px}.pjf{color:#77777f;font-size:13px;margin-top:6px}@media(min-width:800px){.rail{padding:40px max(48px,calc((100vw - 1100px)/2)) 6px}.pj{flex-basis:320px}}</style><style>
 h1{font-size:44px;line-height:1.05;color:#fff;font-weight:700;letter-spacing:-.02em}
 h2{font-size:30px;line-height:1.1;color:#fff;font-weight:650;letter-spacing:-.01em;max-width:18em}
 h3{font-size:17px;color:#fff;margin:6px 0}
@@ -84,10 +84,15 @@ details p{color:#9a9aa2;font-size:15px;line-height:1.5;margin-top:10px;max-width
  <div><h2>Risponde per te anche quando non ci sei o sei&nbsp;occupato.</h2><p class="p">Un assistente che risponde ai tuoi clienti su WhatsApp, anche quando non puoi, con le informazioni della tua attività. L’anteprima è gratis: se non ti convince, non paghi&nbsp;niente.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#a-va">Scopri come →</a></div>
 </div></section>
 
-<section><span class="tag" data-n="6">6 · Il caso Jué Club</span><div class="in srv">
- <div class="box" style="aspect-ratio:16/10">Reel + profilo Instagram del Jué Club<br>(già fatti)</div>
- <div><h2>Un lavoro vero: il Jué&nbsp;Club.</h2><p class="p">Il Jué Club è un cocktail bar di Montecatini Terme. Gli abbiamo rifatto il profilo Instagram e girato i reel: questo è il&nbsp;risultato.</p></div>
-</div></section>
+<section style="padding-left:0;padding-right:0"><span class="tag" data-n="6">6 · I nostri progetti (si scorre di lato)</span>
+ <div class="in" style="padding:0 20px"><h2>I nostri progetti.</h2></div>
+ <div class="rail">
+  <div class="pj"><div class="pjimg"><img src="img/jue-bancone.jpg" alt="" loading="lazy"></div><h3>Jué Club</h3><p class="pjc">Cocktail bar · Montecatini Terme</p><p class="pjf">Sito, video delle serate, social</p></div>
+  <div class="pj"><div class="pjimg"><img src="img/elena-dettagli.jpg" alt="" loading="lazy"></div><h3>Elena Baldi Wedding Planner</h3><p class="pjc">Matrimoni · Montecatini Terme</p><p class="pjf">Social e video</p></div>
+  <div class="pj"><div class="pjimg"><img src="img/gb-catenina.jpg" alt="" loading="lazy"></div><h3>GB Oro</h3><p class="pjc">Compro oro · Città di Castello, Umbertide</p><p class="pjf">Instagram, TikTok, reel</p></div>
+  <div class="pj"><div class="pjimg"><span>Prossimo progetto</span></div><h3>Il prossimo?</h3><p class="pjc">Un posto per un nuovo progetto</p></div>
+ </div>
+</section>
 
 <section><span class="tag" data-n="7">7 · Pacchetti (una riga)</span><div class="in" style="text-align:center">
  <h2>Tre pacchetti, da 430 € al&nbsp;mese.</h2><p class="p" style="margin:0 auto">Dal minimo per farti trovare al pacchetto completo. Dettagli e prezzi nella pagina&nbsp;dedicata.</p><a class="btn" href="https://www.veniellostudio.it/abbonamenti/">Vedi i prezzi</a>
