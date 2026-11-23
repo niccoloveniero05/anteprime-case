@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Christy Perugia · Abbigliamento uomo e donna Made in Italy</title>
-<meta name="description" content="Abbigliamento uomo e donna Made in Italy in Corso Vannucci 105, nel centro storico di Perugia.">
+<meta name="description" content="Abbigliamento uomo e donna Made in Italy: acquista online o in Corso Vannucci 105, nel centro storico di Perugia.">
 <meta property="og:title" content="Christy Perugia">
-<meta property="og:description" content="Abbigliamento uomo e donna Made in Italy · Corso Vannucci 105, Perugia">
+<meta property="og:description" content="Abbigliamento uomo e donna Made in Italy · Negozio online e in Corso Vannucci 105, Perugia">
 <meta property="og:image" content="https://niccoloveniero05.github.io/anteprime-case/christy-perugia-7b4cb6/img/anteprima-link.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -18,235 +18,42 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/apertura-1200.webp" imagesrcset="img/apertura-800.webp 800w, img/apertura-1200.webp 1200w" imagesizes="(min-width: 900px) 48vw, 100vw">
-<style>
-:root{
-  --fondo:#f5f2ec; --fondo2:#ebe6dd; --testo:#171512; --testo2:#5f5850; --linea:rgba(23,21,18,.14);
-  --scuro:#151310; --crema:#f5f2ec; --crema2:rgba(245,242,236,.72); --linea-scura:rgba(245,242,236,.16);
-  --oro:#cfa046; --oro-testo:#7d5f22;
-  --m:max(22px, env(safe-area-inset-left), env(safe-area-inset-right)); --larg:1200px; --testata:64px;
-  --serif:"Bodoni Moda","Bodoni 72",Didot,Georgia,serif;
-  --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --curva:cubic-bezier(.2,.7,.2,1);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:var(--testata)}
-body{font-family:var(--sans);font-size:16px;line-height:1.6;font-weight:400;color:var(--testo);background:var(--fondo);-webkit-font-smoothing:antialiased}
-img{display:block;max-width:100%;height:auto}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-ul{list-style:none}
-.contenitore{width:100%;max-width:calc(var(--larg) + 2*var(--m));margin:0 auto;padding-left:var(--m);padding-right:var(--m)}
-.occhiello{display:block;font-size:11px;line-height:1.4;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--testo2)}
-h1,h2{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
-h1 em,h2 em{font-style:italic}
-:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
-
-/* fascia in cima: la notizia di adesso */
-.avviso{background:var(--scuro);color:var(--crema)}
-.avviso a{display:flex;flex-wrap:wrap;justify-content:center;column-gap:10px;min-height:38px;align-items:center;padding:9px var(--m);font-size:11px;line-height:1.4;letter-spacing:.14em;text-transform:uppercase;font-weight:500;text-align:center}
-.avviso .oro{color:var(--oro)}
-
-/* testata */
-.testata{position:sticky;top:0;z-index:40;background:var(--fondo);transition:box-shadow .3s ease}
-.testata.staccata{box-shadow:0 1px 0 var(--linea)}
-.testata .contenitore{height:var(--testata);display:flex;align-items:center;justify-content:space-between;gap:24px}
-.marchio{display:block;flex:none;padding:4px 0}
-.marchio img{height:46px;width:auto}
-.voci{display:none}
-.apri-menu{display:flex;align-items:center;gap:12px;height:44px;margin-right:-4px;padding:0 4px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
-.apri-menu i,.chiudi-menu i{display:block;position:relative;width:22px;height:9px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor}
-
-/* menu a tutto schermo sul telefono */
-.menu{position:fixed;inset:0;z-index:60;background:var(--fondo);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
-.menu.aperto{opacity:1;visibility:visible;transition:opacity .3s ease}
-.menu-testa{height:calc(var(--testata) + var(--su,0px));padding-top:var(--su,0px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--linea)}
-.chiudi-menu{display:flex;align-items:center;gap:12px;height:44px;margin-right:-4px;padding:0 4px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
-.chiudi-menu i{border:0;width:18px;height:18px}
-.chiudi-menu i::before,.chiudi-menu i::after{content:"";position:absolute;left:-2px;right:-2px;top:8px;height:1.5px;background:currentColor;transform:rotate(45deg)}
-.chiudi-menu i::after{transform:rotate(-45deg)}
-.menu-voci{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:24px;padding-bottom:24px}
-.menu-voci a{display:block;font-family:var(--serif);font-size:clamp(34px,10vw,44px);line-height:1.1;padding:14px 0;border-bottom:1px solid var(--linea);opacity:0;transform:translateY(10px);transition:opacity .45s var(--curva),transform .45s var(--curva)}
-.menu-voci a:first-child{border-top:1px solid var(--linea)}
-.menu.aperto .menu-voci a{opacity:1;transform:none}
-.menu.aperto .menu-voci a:nth-child(2){transition-delay:.04s}
-.menu.aperto .menu-voci a:nth-child(3){transition-delay:.08s}
-.menu.aperto .menu-voci a:nth-child(4){transition-delay:.12s}
-.menu-piede{padding-bottom:calc(28px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--testo2)}
-.menu-piede a{color:var(--testo);border-bottom:1px solid var(--linea)}
-html.menu-aperto{overflow:hidden}
-
-/* apertura */
-.apertura{display:grid;grid-template-areas:"foto" "azioni"}
-.apertura-foto{grid-area:foto;position:relative;aspect-ratio:1200/1496;background:#ddd8ce;overflow:hidden}
-.apertura-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
-.apertura-foto::after{content:"";position:absolute;left:0;right:0;top:0;height:46%;background:linear-gradient(rgba(245,242,236,.5),rgba(245,242,236,0));pointer-events:none}
-.js .apertura-foto img{opacity:0;transform:scale(1.035);transition:opacity .9s ease,transform 1.8s var(--curva)}
-.js .apertura-foto.pronta img{opacity:1;transform:none}
-.apertura-titolo{grid-area:foto;align-self:start;position:relative;z-index:1;padding:26px var(--m) 0}
-.apertura-titolo .occhiello{color:var(--testo)}
-.apertura h1{margin-top:12px;font-size:clamp(40px,12vw,64px)}
-.apertura-sotto{display:none}
-.apertura-azioni{grid-area:azioni;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px var(--m) 0}
-
-/* pulsanti */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border:1px solid var(--testo);font-size:12px;line-height:1;letter-spacing:.16em;text-transform:uppercase;font-weight:500;white-space:nowrap;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
-.btn svg{width:16px;height:16px;flex:none}
-.btn-pieno{background:var(--testo);color:var(--fondo)}
-.btn-vuoto{color:var(--testo)}
-@media (hover:hover){
-  .btn-pieno:hover{background:#000;border-color:#000}
-  .btn-vuoto:hover{background:var(--testo);color:var(--fondo)}
-}
-.apertura-azioni .btn,.azioni .btn{padding:0 12px}
-.scuro .btn{border-color:var(--crema)}
-.scuro .btn-pieno{background:var(--crema);color:var(--scuro)}
-.scuro .btn-vuoto{color:var(--crema)}
-@media (hover:hover){
-  .scuro .btn-pieno:hover{background:#fff;border-color:#fff}
-  .scuro .btn-vuoto:hover{background:var(--crema);color:var(--scuro)}
-}
-.link-freccia{display:inline-flex;align-items:center;gap:10px;padding:12px 0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-bottom:1px solid var(--testo)}
-.link-freccia svg{width:16px;height:16px;transition:transform .3s var(--curva)}
-@media (hover:hover){.link-freccia:hover svg{transform:translateX(4px)}}
-
-/* sezioni */
-.sezione{padding:84px 0}
-.scuro{background:var(--scuro);color:var(--crema)}
-.scuro .occhiello{color:var(--oro)}
-.tinta{background:var(--fondo2)}
-.testa{max-width:640px}
-.testa h2{margin-top:16px;font-size:clamp(34px,8.8vw,60px)}
-.testa p{margin-top:18px;color:var(--testo2);max-width:50ch}
-.scuro .testa p{color:var(--crema2)}
-
-/* il negozio */
-.negozio-griglia{display:grid;gap:44px}
-.nota{margin-top:32px;padding-top:20px;border-top:1px solid var(--linea);max-width:46ch}
-.nota p{margin-top:8px;color:var(--testo)}
-.negozio-foto{margin:0 calc(-1 * var(--m));background:#d7d2c8}
-.negozio-foto img{width:100%}
-
-/* la collezione */
-.categorie{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;column-gap:12px;row-gap:30px}
-.categorie figure{margin:0}
-.categorie .cornice{aspect-ratio:4/5;overflow:hidden;background:#d7d2c8}
-.categorie img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--curva)}
-@media (hover:hover){.categorie figure:hover img{transform:scale(1.035)}}
-.categorie figcaption{margin-top:14px;font-size:11px;line-height:1.35;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
-.categorie figcaption b{display:block;margin-bottom:4px;font-family:var(--serif);font-weight:400;font-size:16px;line-height:1.2;letter-spacing:.06em;color:var(--oro-testo)}
-.collezione-piede{margin-top:40px}
-
-/* black friday */
-.promo-griglia{display:grid;gap:8px}
-.cifre{font-family:var(--serif);font-weight:400;font-optical-sizing:none;font-variation-settings:"opsz" 30;line-height:.9;letter-spacing:-.03em;font-size:clamp(78px,22vw,120px);margin-top:20px;white-space:nowrap}
-.cifre span{font-style:italic;color:var(--oro)}
-.promo-testo p{margin-top:22px;color:var(--crema2);max-width:36ch;font-size:17px}
-.promo-testo .btn{margin-top:32px}
-
-/* vieni a trovarci */
-.visita-griglia{display:grid;gap:44px}
-.contatti{margin-top:34px;border-top:1px solid var(--linea)}
-.contatti div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--linea)}
-.contatti dt{flex:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--testo2)}
-.contatti dd{text-align:right;min-width:0;overflow-wrap:anywhere}
-.contatti a{border-bottom:1px solid var(--linea);transition:border-color .2s}
-@media (hover:hover){.contatti a:hover{border-color:var(--testo)}}
-.azioni{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:30px}
-#visita{padding-bottom:0}
-.mappa{margin:0 calc(-1 * var(--m));height:340px;background:#dcd8d0}
-.mappa iframe{display:block;width:100%;height:100%;border:0;filter:grayscale(1) contrast(.92) brightness(1.03)}
-
-/* piede */
-.piede{padding:72px 0 calc(32px + env(safe-area-inset-bottom));text-align:center}
-.piede img{width:150px;margin:0 auto}
-.piede-motto{margin-top:18px;font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.3;color:var(--crema)}
-.piede-link{margin-top:34px;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 28px}
-.piede-link a{display:inline-block;padding:10px 0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--crema)}
-@media (hover:hover){.piede-link a:hover{color:var(--oro)}}
-.piede-fondo{margin-top:40px;padding-top:24px;border-top:1px solid var(--linea-scura);display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgba(245,242,236,.5)}
-
-/* computer */
-@media (min-width:900px){
-  :root{--testata:78px}
-  body{font-size:17px}
-  .marchio img{height:56px}
-  .apri-menu{display:none}
-  .voci{display:flex;align-items:center;gap:34px}
-  .voci a{position:relative;padding:12px 0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
-  .voci a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--curva)}
-  .voci a:hover::after{transform:scaleX(1)}
-  .voci .ig{display:flex;padding:10px;margin:0 -10px 0 -6px}
-  .voci .ig svg{width:19px;height:19px}
-  .voci .ig::after{display:none}
-
-  .apertura{max-width:calc(var(--larg) + 2*var(--m));margin:0 auto;padding:clamp(28px,5vh,56px) var(--m) clamp(72px,11vh,128px);grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);grid-template-rows:1fr auto;grid-template-areas:"titolo foto" "azioni foto";column-gap:clamp(48px,6vw,104px)}
-  .apertura-foto{aspect-ratio:auto;height:clamp(540px,calc(100svh - var(--testata) - 38px - 96px),780px)}
-  .apertura-foto::after{display:none}
-  .apertura-titolo{grid-area:titolo;align-self:end;padding:0}
-  .apertura-titolo .occhiello{color:var(--testo2)}
-  .apertura h1{margin-top:22px;font-size:clamp(56px,5.2vw,78px)}
-  .apertura-sotto{display:block;margin-top:28px;max-width:32ch;font-size:18px;color:var(--testo2)}
-  .apertura-azioni{grid-area:azioni;align-self:start;display:flex;gap:12px;padding:40px 0 0}
-  .apertura-azioni .btn,.azioni .btn{padding:0 28px}
-
-  .sezione{padding:136px 0}
-  .testa p{font-size:18px}
-  .negozio-griglia{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,7vw,112px);align-items:center}
-  .negozio-foto{order:-1;margin:0}
-  .categorie{margin-top:64px;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:20px}
-  .collezione-testa{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
-  .collezione-testa .link-freccia{flex:none;margin-bottom:6px}
-  .collezione-piede{display:none}
-  .promo-griglia{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:end;column-gap:64px}
-  .promo-griglia .occhiello{grid-column:1/-1}
-  .cifre{margin-top:28px;font-size:clamp(120px,11.5vw,168px)}
-  .promo-testo{padding-bottom:18px}
-  .promo-testo p{margin-top:0}
-  .visita-griglia{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(48px,6vw,96px);align-items:stretch}
-  .azioni{display:flex;gap:12px;margin-top:36px}
-  #visita{padding-bottom:136px}
-  .mappa{margin:0;height:auto;min-height:520px}
-  .piede{padding-top:96px}
-  .piede-fondo{flex-direction:row;justify-content:space-between}
-}
-@media (max-width:899px){.solo-pc{display:none!important}}
-
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .js .apertura-foto img{transition:none;transform:none;opacity:1}
-  .menu,.menu.aperto,.menu-voci a{transition:none}
-  .categorie img,.link-freccia svg,.voci a::after{transition:none}
-}
-</style>
+<link rel="stylesheet" href="stile.css?v=5">
 </head>
 <body>
 
-<div class="avviso"><a href="#black-friday"><span class="oro">Black Friday</span><span>dal 20% al 30% in negozio</span></a></div>
+<div class="avviso"><a href="negozio.html?filtro=sconti"><span class="oro">Black Friday</span><span>fino al −30% online e in negozio</span></a></div>
 
 <header class="testata">
   <div class="contenitore">
-    <a class="marchio" href="#top" aria-label="Christy Perugia, torna all'inizio"><img src="img/logo-scuro.webp" alt="Christy Perugia" width="936" height="664"></a>
+    <a class="marchio" href="index.html" aria-label="Christy Perugia, home"><img src="img/logo-scuro.webp" alt="Christy Perugia" width="936" height="664"></a>
     <nav class="voci" aria-label="Sezioni">
-      <a href="#negozio">Il negozio</a>
-      <a href="#collezione">Collezione</a>
-      <a href="#black-friday">Black Friday</a>
-      <a href="#visita">Dove siamo</a>
-      <a class="ig" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener" aria-label="Instagram di Christy Perugia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+      <a href="negozio.html?filtro=donna">Donna</a>
+      <a href="negozio.html?filtro=uomo">Uomo</a>
+      <a href="negozio.html?filtro=accessori">Accessori</a>
+      <a href="negozio.html?filtro=sconti">Black Friday</a>
+      <a href="index.html#negozio">Il negozio</a>
     </nav>
     <button class="apri-menu" type="button" aria-controls="menu" aria-expanded="false">Menu <i aria-hidden="true"></i></button>
+    <div class="icone">
+      <a class="icona ig" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener" aria-label="Instagram di Christy Perugia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
+      <a class="icona apri-borsa" href="cassa.html" aria-label="Borsa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span class="conta" aria-hidden="true">0</span></a>
+    </div>
   </div>
 </header>
 
 <div class="menu" id="menu" aria-hidden="true" inert>
   <div class="contenitore menu-testa">
-    <a class="marchio" href="#top" aria-label="Christy Perugia, torna all'inizio"><img src="img/logo-scuro.webp" alt="Christy Perugia" width="936" height="664"></a>
+    <a class="marchio" href="index.html" aria-label="Christy Perugia, home"><img src="img/logo-scuro.webp" alt="Christy Perugia" width="936" height="664"></a>
     <button class="chiudi-menu" type="button">Chiudi <i aria-hidden="true"></i></button>
   </div>
   <nav class="contenitore menu-voci" aria-label="Menu">
-    <a href="#negozio">Il negozio</a>
-    <a href="#collezione">La collezione</a>
-    <a href="#black-friday">Black Friday</a>
-    <a href="#visita">Vieni a trovarci</a>
+    <a href="negozio.html">Tutti i capi</a>
+    <a href="negozio.html?filtro=donna">Donna</a>
+    <a href="negozio.html?filtro=uomo">Uomo</a>
+    <a href="negozio.html?filtro=accessori">Accessori</a>
+    <a href="negozio.html?filtro=sconti">Black Friday</a>
+    <a href="index.html#visita">Vieni a trovarci</a>
   </nav>
   <div class="contenitore menu-piede">
     <span>Corso Vannucci 105, Perugia</span>
@@ -258,16 +65,52 @@ html.menu-aperto{overflow:hidden}
 
   <section class="apertura">
     <div class="apertura-foto">
-      <img src="img/apertura-1200.webp" srcset="img/apertura-800.webp 800w, img/apertura-1200.webp 1200w" sizes="(min-width: 900px) 48vw, 100vw" alt="La vetrina di Christy: un cappotto teddy color cammello e un trench grigio sui manichini, un cappotto beige appeso dietro" width="1200" height="1496" fetchpriority="high">
+      <img src="img/apertura-1200.webp" srcset="img/apertura-800.webp 800w, img/apertura-1200.webp 1200w" sizes="(min-width: 900px) 48vw, 100vw" alt="La vetrina di Christy: un cappotto teddy color cammello e una giacca grigia sui manichini" width="1200" height="1496" fetchpriority="high">
     </div>
     <div class="apertura-titolo">
-      <p class="occhiello">Abbigliamento · Perugia</p>
+      <p class="occhiello">Collezione autunno-inverno</p>
       <h1>Uomo e donna,<br><em>Made in Italy.</em></h1>
-      <p class="apertura-sotto">In Corso Vannucci 105, a Perugia.</p>
+      <p class="apertura-sotto">Online e in Corso Vannucci 105, a Perugia.</p>
     </div>
     <div class="apertura-azioni">
-      <a class="btn btn-pieno" href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Come arrivare</a>
-      <a class="btn btn-vuoto" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn-pieno" href="negozio.html">Acquista ora</a>
+      <a class="btn btn-vuoto" href="negozio.html?filtro=sconti">Black Friday</a>
+    </div>
+  </section>
+
+  <section class="vantaggi" aria-label="Servizi">
+    <ul class="contenitore">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2.5 6h11v10h-11zM13.5 9.5h4l3 3.5V16h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><p><b>Spedizione gratuita</b><span>da 150 € in tutta Italia</span></p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 9h11a5 5 0 0 1 0 10H8"/><path d="M8 5 4 9l4 4"/></svg><p><b>Reso in 14 giorni</b><span>gratuito e senza domande</span></p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 9.5 5 4h14l1.5 5.5M4.5 9.5V20h15V9.5"/><path d="M3.5 9.5a2.8 2.8 0 0 0 5.5 0 2.8 2.8 0 0 0 6 0 2.8 2.8 0 0 0 5.5 0M10 20v-5h4v5"/></svg><p><b>Ritiro in negozio</b><span>gratis in Corso Vannucci</span></p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><p><b>Pagamenti sicuri</b><span>carte, PayPal e Apple Pay</span></p></li>
+    </ul>
+  </section>
+
+  <section class="sezione" id="novita">
+    <div class="contenitore">
+      <div class="evidenza-testa">
+        <div class="testa">
+          <span class="occhiello">In evidenza</span>
+          <h2>Per l'autunno <em>e l'inverno.</em></h2>
+        </div>
+        <a class="link-freccia solo-pc" href="negozio.html">Vedi tutti i capi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <ul class="prodotti">
+        <li class="capo" data-cat="donna" data-sconto="30" data-prezzo="202.3" data-ordine="0"><a href="capo-teddy-cammello.html"><div class="cornice"><img src="img/capi/teddy-cammello-450.webp" srcset="img/capi/teddy-cammello-450.webp 450w, img/capi/teddy-cammello.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Cappotto teddy, cammello" width="450" height="563" loading="lazy"><span class="bollino">−30%</span></div><span class="capo-cat">Donna</span><h3>Cappotto teddy</h3><p class="prezzo"><s>289,00 €</s><span class="giu">202,30 €</span></p></a></li><li class="capo" data-cat="uomo" data-sconto="0" data-prezzo="359" data-ordine="1"><a href="capo-giacca-camoscio.html"><div class="cornice"><img src="img/capi/giacca-camoscio-450.webp" srcset="img/capi/giacca-camoscio-450.webp 450w, img/capi/giacca-camoscio.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Giacca in suede, cammello" width="450" height="563" loading="lazy"></div><span class="capo-cat">Uomo</span><h3>Giacca in suede</h3><p class="prezzo">359,00 €</p></a></li><li class="capo" data-cat="donna" data-sconto="0" data-prezzo="219" data-ordine="2"><a href="capo-piumino-bianco.html"><div class="cornice"><img src="img/capi/piumino-bianco-450.webp" srcset="img/capi/piumino-bianco-450.webp 450w, img/capi/piumino-bianco.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Piumino corto, avorio" width="450" height="563" loading="lazy"></div><span class="capo-cat">Donna</span><h3>Piumino corto</h3><p class="prezzo">219,00 €</p></a></li><li class="capo" data-cat="accessori" data-sconto="20" data-prezzo="151.2" data-ordine="3"><a href="capo-borsa-nera.html"><div class="cornice"><img src="img/capi/borsa-nera-450.webp" srcset="img/capi/borsa-nera-450.webp 450w, img/capi/borsa-nera.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Bauletto in pelle, nero" width="450" height="563" loading="lazy"><span class="bollino">−20%</span></div><span class="capo-cat">Accessori</span><h3>Bauletto in pelle</h3><p class="prezzo"><s>189,00 €</s><span class="giu">151,20 €</span></p></a></li><li class="capo" data-cat="donna" data-sconto="0" data-prezzo="149" data-ordine="4"><a href="capo-giacca-denim.html"><div class="cornice"><img src="img/capi/giacca-denim-450.webp" srcset="img/capi/giacca-denim-450.webp 450w, img/capi/giacca-denim.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Giacca in denim con cappuccio, blu notte" width="450" height="563" loading="lazy"></div><span class="capo-cat">Donna</span><h3>Giacca in denim con cappuccio</h3><p class="prezzo">149,00 €</p></a></li><li class="capo" data-cat="uomo" data-sconto="20" data-prezzo="111.2" data-ordine="5"><a href="capo-maglione-grigio.html"><div class="cornice"><img src="img/capi/maglione-grigio-450.webp" srcset="img/capi/maglione-grigio-450.webp 450w, img/capi/maglione-grigio.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Maglione a coste, grigio melange" width="450" height="563" loading="lazy"><span class="bollino">−20%</span></div><span class="capo-cat">Uomo</span><h3>Maglione a coste</h3><p class="prezzo"><s>139,00 €</s><span class="giu">111,20 €</span></p></a></li><li class="capo" data-cat="accessori" data-sconto="0" data-prezzo="49" data-ordine="6"><a href="capo-foulard-paisley.html"><div class="cornice"><img src="img/capi/foulard-paisley-450.webp" srcset="img/capi/foulard-paisley-450.webp 450w, img/capi/foulard-paisley.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Foulard in seta, rosso e crema" width="450" height="563" loading="lazy"></div><span class="capo-cat">Accessori</span><h3>Foulard in seta</h3><p class="prezzo">49,00 €</p></a></li><li class="capo" data-cat="donna" data-sconto="20" data-prezzo="207.2" data-ordine="7"><a href="capo-giacca-grigia.html"><div class="cornice"><img src="img/capi/giacca-grigia-450.webp" srcset="img/capi/giacca-grigia-450.webp 450w, img/capi/giacca-grigia.webp 900w" sizes="(min-width: 900px) 25vw, 50vw" alt="Giacca sahariana in lana, grigio perla" width="450" height="563" loading="lazy"><span class="bollino">−20%</span></div><span class="capo-cat">Donna</span><h3>Giacca sahariana in lana</h3><p class="prezzo"><s>259,00 €</s><span class="giu">207,20 €</span></p></a></li>
+      </ul>
+      <div class="evidenza-piede"><a class="btn btn-vuoto" href="negozio.html">Vedi tutti i capi</a></div>
+    </div>
+  </section>
+
+  <section class="sezione scuro" id="black-friday">
+    <div class="contenitore promo-griglia">
+      <span class="occhiello">Black Friday · online e in negozio</span>
+      <p class="cifre" aria-hidden="true">20–30<span>%</span></p>
+      <div class="promo-testo">
+        <p>Sconti dal 20% al 30% su una selezione di capi, fino al 30 novembre.</p>
+        <a class="btn btn-pieno" href="negozio.html?filtro=sconti">Vedi i capi in sconto</a>
+      </div>
     </div>
   </section>
 
@@ -278,53 +121,21 @@ html.menu-aperto{overflow:hidden}
         <h2>Sul Corso,<br><em>nel centro di Perugia.</em></h2>
         <p>Abbigliamento da uomo e da donna Made in Italy: capispalla, giacche, maglieria, borse e accessori.</p>
         <div class="nota">
-          <span class="occhiello">Nuova sede</span>
-          <p>Da gennaio 2026 siamo al numero 105 di Corso Vannucci, a pochi passi da prima.</p>
+          <span class="occhiello">Ritiro in negozio</span>
+          <p>Ordini online e ritiri gratis in Corso Vannucci 105, dove puoi anche provare e cambiare taglia.</p>
         </div>
       </div>
       <figure class="negozio-foto"><img src="img/negozio.webp" alt="L'interno di Christy Perugia: capi appesi, maglieria sugli scaffali e una poltrona d'argento" width="1500" height="1643" loading="lazy"></figure>
     </div>
   </section>
 
-  <section class="sezione tinta" id="collezione">
-    <div class="contenitore">
-      <div class="collezione-testa">
-        <div class="testa">
-          <span class="occhiello">La collezione</span>
-          <h2>Per l'autunno <em>e l'inverno.</em></h2>
-        </div>
-        <a class="link-freccia solo-pc" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Le novità su Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <ul class="categorie">
-        <li><figure><div class="cornice"><img src="img/capispalla.webp" alt="Cappotti e giacche nei toni del grigio e del panna appesi in negozio" width="800" height="1000" loading="lazy"></div><figcaption><b>I</b>Capispalla</figcaption></figure></li>
-        <li><figure><div class="cornice"><img src="img/giacca-foulard.webp" alt="Giacca blu con un foulard rosso e crema annodato sulla gruccia" width="800" height="1000" loading="lazy"></div><figcaption><b>II</b>Giacche e foulard</figcaption></figure></li>
-        <li><figure><div class="cornice"><img src="img/maglieria.webp" alt="Maglioni piegati sugli scaffali, nei toni del beige e del grigio" width="720" height="900" loading="lazy"></div><figcaption><b>III</b>Maglieria</figcaption></figure></li>
-        <li><figure><div class="cornice"><img src="img/borse.webp" alt="Borse nere sullo scaffale del negozio" width="680" height="848" loading="lazy"></div><figcaption><b>IV</b>Borse</figcaption></figure></li>
-      </ul>
-      <div class="collezione-piede">
-        <a class="link-freccia" href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Le novità su Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sezione scuro" id="black-friday">
-    <div class="contenitore promo-griglia">
-      <span class="occhiello">Black Friday · in negozio</span>
-      <p class="cifre" aria-hidden="true">20–30<span>%</span></p>
-      <div class="promo-testo">
-        <p>Sconti dal 20% al 30%. Ti aspettiamo in Corso Vannucci 105.</p>
-        <a class="btn btn-pieno" href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Come arrivare</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sezione" id="visita">
+  <section class="sezione tinta" id="visita">
     <div class="contenitore visita-griglia">
       <div>
         <div class="testa">
           <span class="occhiello">Vieni a trovarci</span>
           <h2>Corso Vannucci 105, <em>Perugia.</em></h2>
-          <p>Sulla via principale del centro storico, tra Piazza IV Novembre e Piazza Italia.</p>
+          <p>Sulla via principale del centro storico, tra Piazza IV Novembre e Piazza Italia. Da gennaio 2026 siamo al numero 105, a pochi passi da prima.</p>
         </div>
         <dl class="contatti">
           <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">@christy_perugia</a></dd></div>
@@ -347,7 +158,8 @@ html.menu-aperto{overflow:hidden}
   <div class="contenitore">
     <img src="img/logo-chiaro.webp" alt="Christy Perugia" width="936" height="664" loading="lazy">
     <p class="piede-motto">Abbigliamento uomo e donna,<br>Made in Italy.</p>
-    <nav class="piede-link" aria-label="Contatti">
+    <nav class="piede-link" aria-label="Collegamenti">
+      <a href="negozio.html">Negozio online</a>
       <a href="https://www.instagram.com/christy_perugia/" target="_blank" rel="noopener">Instagram</a>
       <a href="mailto:cristinagiorgetti68@gmail.com">Email</a>
       <a href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Vannucci+105+Perugia" target="_blank" rel="noopener">Come arrivare</a>
@@ -356,40 +168,19 @@ html.menu-aperto{overflow:hidden}
   </div>
 </footer>
 
-<script>
-(function(){
-  var d=document, html=d.documentElement;
-  html.classList.add('js');
+<div class="velo" aria-hidden="true"></div>
+<aside class="borsa" role="dialog" aria-modal="true" aria-label="La tua borsa" aria-hidden="true" inert>
+  <div class="borsa-testa"><h2>Borsa <span>(0)</span></h2><button class="chiudi-menu chiudi-borsa" type="button">Chiudi <i aria-hidden="true"></i></button></div>
+  <div class="borsa-soglia"></div>
+  <div class="borsa-righe"></div>
+  <div class="borsa-piede" hidden>
+    <div class="totale"><span>Subtotale</span><span></span></div>
+    <small>Spedizione calcolata alla cassa · IVA inclusa</small>
+    <a class="btn btn-pieno" href="cassa.html">Vai alla cassa</a>
+  </div>
+</aside>
 
-  // la testata prende una riga sottile appena la pagina scorre
-  var testata=d.querySelector('.testata'), avviso=d.querySelector('.avviso');
-  function riga(){testata.classList.toggle('staccata', scrollY > avviso.offsetHeight + 1)}
-  addEventListener('scroll', riga, {passive:true}); riga();
-
-  // menu del telefono
-  var menu=d.getElementById('menu'), apri=d.querySelector('.apri-menu'), chiudi=menu.querySelector('.chiudi-menu');
-  function apriMenu(){
-    menu.style.setProperty('--su', Math.max(0, Math.round(testata.getBoundingClientRect().top)) + 'px');
-    menu.removeAttribute('inert'); menu.setAttribute('aria-hidden','false'); menu.classList.add('aperto');
-    apri.setAttribute('aria-expanded','true'); html.classList.add('menu-aperto');
-    setTimeout(function(){chiudi.focus({preventScroll:true})}, 60);
-  }
-  function chiudiMenu(rimettiFuoco){
-    menu.classList.remove('aperto'); menu.setAttribute('aria-hidden','true'); menu.setAttribute('inert','');
-    apri.setAttribute('aria-expanded','false'); html.classList.remove('menu-aperto');
-    if(rimettiFuoco) apri.focus({preventScroll:true});
-  }
-  apri.addEventListener('click', apriMenu);
-  chiudi.addEventListener('click', function(){chiudiMenu(true)});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click', function(){chiudiMenu(false)})});
-  d.addEventListener('keydown', function(e){if(e.key==='Escape' && menu.classList.contains('aperto')) chiudiMenu(true)});
-  matchMedia('(min-width: 900px)').addEventListener('change', function(e){if(e.matches) chiudiMenu(false)});
-
-  // la foto della vetrina compare morbida appena è pronta
-  var cornice=d.querySelector('.apertura-foto'), foto=cornice.querySelector('img');
-  function pronta(){cornice.classList.add('pronta')}
-  if(foto.complete) pronta(); else {foto.addEventListener('load', pronta); foto.addEventListener('error', pronta)}
-})();
-</script>
+<script src="dati.js?v=5"></script>
+<script src="negozio.js?v=5"></script>
 </body>
 </html>
