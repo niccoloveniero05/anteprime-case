@@ -1233,75 +1233,52 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   </section>
 
 <style>
-/* Sezione 2 · Come si parte: il numero gigante resta fermo e cambia 1 → 2 → 3 mentre scorri */
-.passi{position:relative;display:block!important;padding:0!important;overflow:visible!important;margin:0!important;width:auto!important;max-width:none!important;border-top:var(--linea-sezione)}
-.passi-pista{height:340svh}
-.passi-fermo{position:sticky;top:0;height:100svh;overflow:hidden}
-.passi-in{position:relative;height:100%;max-width:var(--max);margin:0 auto;padding:calc(var(--testata) + 28px) var(--lato) 0}
-.passi-ey{font:400 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
-.passi-cont{position:absolute;right:var(--lato);top:calc(var(--testata) + 28px);font:400 12px/1 var(--mono);letter-spacing:.12em;color:var(--av3)}
-.passi-cont b{font-weight:400;color:var(--av)}
-.passi-num{position:absolute;left:calc(var(--lato) - .06em);top:calc(var(--testata) + 104px);font:300 min(112vw,58svh)/.8 var(--serif);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px rgba(245,244,239,.26);pointer-events:none}
-.passi-num span{position:absolute;left:0;top:0;opacity:0;transform:translateY(12%) scale(.96);transition:opacity .7s var(--ease),transform .9s var(--ease)}
-.passi-num span.su{transform:translateY(-12%) scale(.96)}
-.passi-num span.on{opacity:1;transform:none}
-.passi-testi{position:absolute;left:var(--lato);right:var(--lato);bottom:calc(64px + env(safe-area-inset-bottom))}
-.passi-t{position:absolute;left:0;right:0;bottom:44px;opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .7s var(--ease)}
-.passi-t.su{transform:translateY(-24px)}
-.passi-t.on{opacity:1;transform:none;transition-delay:.12s}
-.passi-t h3{font:560 clamp(38px,10.4vw,46px)/1.02 var(--sans);letter-spacing:-.04em;color:var(--av);text-wrap:balance}
-.passi-t h3 em{font:italic 400 1.1em/1 var(--serif);letter-spacing:-.02em;color:var(--rec)}
-.passi-t p{font:400 18px/1.45 var(--sans);letter-spacing:-.012em;color:var(--av2);margin-top:14px;max-width:24em}
-.passi-bar{position:absolute;left:0;right:0;bottom:0;display:flex;gap:6px}
-.passi-bar span{flex:1;height:3px;border-radius:2px;background:var(--filo2);overflow:hidden}
-.passi-bar i{display:block;height:100%;width:100%;background:var(--av);transform-origin:left;transform:scaleX(0)}
+/* Sezione 2 · Come si parte: caselle che scorrono di lato + linea che si riempie in arancione */
+.passi{position:relative;display:block!important;overflow:visible!important;margin:0!important;width:auto!important;max-width:none!important;padding:var(--s6) 0!important;border-top:var(--linea-sezione)}
+.passi-testa{max-width:var(--max);margin:0 auto;padding:0 var(--lato)}
+.passi-testa h2{font-family:var(--sans);font-weight:560;font-size:clamp(36px,10.4vw,44px);line-height:1.04;letter-spacing:-.04em;color:var(--av)}
+.passi-testa h2 .pt{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
+.passi-testa p{font:400 18px/1.45 var(--sans);letter-spacing:-.012em;color:var(--av2);margin-top:14px;max-width:24em}
+.passi-fila{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--lato);padding:32px var(--lato) 4px;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+.passi-fila::-webkit-scrollbar{display:none}
+.passi-c{flex:0 0 78%;max-width:360px;min-height:220px;scroll-snap-align:start;background:var(--bg3);border:1px solid var(--filo);border-radius:18px;padding:26px 24px 30px;display:flex;flex-direction:column}
+.passi-c h3{font:560 26px/1.1 var(--sans);letter-spacing:-.03em;color:var(--av)}
+.passi-c p{font:400 17px/1.5 var(--sans);letter-spacing:-.01em;color:var(--av2);margin-top:14px}
+.passi-linea{max-width:var(--max);margin:26px auto 0;padding:0 var(--lato)}
+.passi-linea div{height:3px;border-radius:2px;background:#2E2D27;overflow:hidden}
+.passi-linea i{display:block;height:100%;width:100%;background:var(--rec);transform-origin:left;transform:scaleX(.3);transition:transform .12s linear}
+.passi-linea[hidden]{display:none}
 @media (min-width:900px){
-  .passi-num{left:auto;right:calc(50% + 20px);top:calc(50% - min(46vw,78svh)*.29);transform:none;font-size:min(46vw,78svh)}
-  .passi-num span{right:0;left:auto}
-  .passi-testi{left:calc(50% + 40px);right:var(--lato);top:50%;bottom:auto;transform:translateY(-50%);height:260px}
-  .passi-t{top:0;bottom:auto}
-  .passi-bar{bottom:0}
-  .passi-t h3{font-size:clamp(46px,4.3vw,58px)}
-  .passi-t p{font-size:20px}
+  .passi-testa h2{font-size:clamp(46px,4.3vw,58px)}
+  .passi-testa p{font-size:20px}
+  .passi-fila{padding-left:max(var(--lato),calc((100% - var(--max))/2 + var(--lato)));padding-right:max(var(--lato),calc((100% - var(--max))/2 + var(--lato)));scroll-padding-left:max(var(--lato),calc((100% - var(--max))/2 + var(--lato)))}
+  .passi-c{flex:1 0 300px;max-width:none;min-height:220px;padding:30px 28px 34px}
 }
-/* Chi ha chiesto meno movimento: niente cambi animati */
-@media (prefers-reduced-motion:reduce){.passi-num span,.passi-t{transition:none}}
 </style>
-<section class="passi" id="come" aria-labelledby="t-passi"><span class="tag" data-n="2">2 · I 3 passi (numero gigante)</span>
- <div class="passi-pista">
-  <div class="passi-fermo">
-   <div class="passi-in">
-    <h2 class="passi-ey" id="t-passi">Come si parte</h2>
-    <p class="passi-cont" aria-hidden="true"><b class="passi-n">01</b> / 03</p>
-    <div class="passi-num" aria-hidden="true"><span class="on">1</span><span>2</span><span>3</span></div>
-    <div class="passi-testi">
-     <div class="passi-t on"><h3>Ci <em>scrivi</em>.</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></div>
-     <div class="passi-t"><h3>Vediamo cosa ti <em>serve</em>.</h3><p>Capiamo insieme da dove conviene partire per farti trovare e&nbsp;scegliere.</p></div>
-     <div class="passi-t"><h3>Scegli e si <em>parte</em>.</h3><p>Un abbonamento o un servizio singolo, come&nbsp;preferisci.</p></div>
-     <div class="passi-bar" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span></div>
-    </div>
-   </div>
-  </div>
+<section class="passi" id="come" aria-labelledby="t-passi"><span class="tag" data-n="2">2 · I 3 passi (caselle di lato)</span>
+ <div class="passi-testa"><h2 id="t-passi">Come si parte<i class="pt" aria-hidden="true"></i></h2><p>Tre passi, uguali per tutti i&nbsp;servizi.</p></div>
+ <div class="passi-fila" tabindex="0" aria-label="I tre passi, scorri di lato">
+  <article class="passi-c"><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></article>
+  <article class="passi-c"><h3>Vediamo cosa ti serve</h3><p>Capiamo insieme da dove conviene partire per farti trovare e&nbsp;scegliere.</p></article>
+  <article class="passi-c"><h3>Scegli e si parte</h3><p>Un abbonamento o un servizio singolo, come&nbsp;preferisci.</p></article>
  </div>
+ <div class="passi-linea" aria-hidden="true"><div><i></i></div></div>
 </section>
 <script>
 (function(){
   "use strict";
-  var sez=document.getElementById("come"); if(!sez) return;
-  var pista=sez.querySelector(".passi-pista"), num=sez.querySelectorAll(".passi-num span"),
-      testi=sez.querySelectorAll(".passi-t"), barre=sez.querySelectorAll(".passi-bar i"),
-      cont=sez.querySelector(".passi-n"), ora=-1, pronto=false;
-  function metti(lista,i){for(var k=0;k<lista.length;k++){lista[k].classList.toggle("on",k===i);lista[k].classList.toggle("su",k<i)}}
+  var fila=document.querySelector("#come .passi-fila"), linea=document.querySelector("#come .passi-linea"), riemp=linea&&linea.querySelector("i"), pronto=false;
+  if(!fila||!riemp) return;
   function giro(){
     pronto=false;
-    var r=pista.getBoundingClientRect(), corsa=pista.offsetHeight-innerHeight;
-    var p=corsa>0?Math.min(1,Math.max(0,-r.top/corsa)):0, x=p*3;
-    var i=Math.min(2,Math.floor(x));
-    for(var k=0;k<3;k++){barre[k].style.transform="scaleX("+Math.min(1,Math.max(0,x-k)).toFixed(3)+")"}
-    if(i!==ora){ora=i;metti(num,i);metti(testi,i);cont.textContent="0"+(i+1)}
+    var tot=fila.scrollWidth, vis=fila.clientWidth;
+    // niente da scorrere (computer largo): la linea non serve
+    linea.hidden = tot-vis < 4;
+    var q=tot>0?Math.min(1,(fila.scrollLeft+vis)/tot):1;
+    riemp.style.transform="scaleX("+q.toFixed(3)+")";
   }
   function chiedi(){if(!pronto){pronto=true;requestAnimationFrame(giro)}}
-  addEventListener("scroll",chiedi,{passive:true});addEventListener("resize",chiedi);giro();
+  fila.addEventListener("scroll",chiedi,{passive:true});addEventListener("resize",chiedi);addEventListener("load",chiedi);giro();
 })();
 </script>
 <div class="bz">
