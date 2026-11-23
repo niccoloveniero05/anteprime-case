@@ -14,14 +14,14 @@ h2 i{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:va
 .c{background:var(--bg3);border:1px solid var(--filo2);border-radius:28px;padding:30px 26px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
   transform-origin:50% 100%;transform:rotateX(-100deg);opacity:0;backface-visibility:hidden;will-change:transform}
 .c h3{font:560 24px/1.08 Inter;letter-spacing:-.03em}.c p{font-size:15.5px;line-height:1.45;color:var(--av2);margin-top:10px;max-width:22em}
-.c1{grid-column:1/-1;min-height:240px}.c1 h3{font-size:38px}.c1 p{font-size:18px}
-.c2{min-height:190px}.c3{min-height:140px}
-@media (max-width:699px){.g{grid-template-columns:1fr}.c1,.c2,.c3{grid-column:1}.c2 h3{font-size:22px}.c3 h3{font-size:19px}}.c3 h3{font-size:19px}.c3 p{font-size:14px}
+.c1{min-height:240px}.c1 h3{font-size:38px}.c1 p{font-size:18px}
+.c2{min-height:240px}.c3{grid-column:1/-1;min-height:150px}
+@media (max-width:699px){.g{grid-template-columns:1fr}.c1,.c2,.c3{grid-column:1}.c2{min-height:190px}.c3{min-height:140px}.c2 h3{font-size:22px}.c3 h3{font-size:19px}}.c3 h3{font-size:19px}.c3 p{font-size:14px}
 .on .c{animation:dado .95s cubic-bezier(.2,.8,.2,1) forwards}
 .on .c2{animation-delay:.7s}.on .c3{animation-delay:1.4s}
 @keyframes dado{0%{transform:rotateX(-100deg);opacity:0}15%{opacity:1}70%{transform:rotateX(6deg)}100%{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.c{transform:none;opacity:1}.on .c{animation:none}}
-@media (min-width:900px){.in{padding:0 40px}.c{padding:44px}.c1{min-height:300px}.c1 h3{font-size:56px}.c1 p{font-size:20px}.c2,.c3{min-height:260px}.c2 h3{font-size:32px}.c2 p{font-size:18px}.c3 h3{font-size:24px}.c3 p{font-size:16px}}
+@media (min-width:900px){.in{padding:0 40px}.c{padding:44px}.c1{min-height:310px}.c1 h3{font-size:56px}.c1 p{font-size:20px}.c2{min-height:310px}.c3{min-height:230px}.c2 h3{font-size:32px}.c2 p{font-size:18px}.c3 h3{font-size:30px}.c3 p{font-size:18px}}
 button{margin-top:24px;background:none;color:var(--av);border:1px solid var(--filo2);border-radius:99px;padding:10px 18px;font:500 14px Inter;cursor:pointer}
 </style></head><body>
 <div class="sp">↓ scorri: il dado parte quando arrivi ai 3 passi</div>
