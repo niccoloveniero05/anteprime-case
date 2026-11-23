@@ -1233,54 +1233,49 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   </section>
 
 <style>
-/* Sezione 2 · Come si parte: caselle che scorrono di lato + linea che si riempie in arancione */
+/* Sezione 2 · Come si parte: un riquadro largo quanto il sito, diviso in 3 parti di grandezza diversa (1 grande sopra, 2 media e 3 piccola sotto) */
 .passi{position:relative;display:block!important;overflow:visible!important;margin:0!important;width:auto!important;max-width:none!important;padding:var(--s6) 0!important;border-top:var(--linea-sezione)}
-.passi-testa{max-width:var(--max);margin:0 auto;padding:0 var(--lato)}
-.passi-testa h2{font-family:var(--sans);font-weight:560;font-size:clamp(36px,10.4vw,44px);line-height:1.04;letter-spacing:-.04em;color:var(--av)}
-.passi-testa h2 .pt{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
-.passi-testa p{font:400 18px/1.45 var(--sans);letter-spacing:-.012em;color:var(--av2);margin-top:14px;max-width:24em}
-.passi-fila{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--lato);padding:32px var(--lato) 4px;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
-.passi-fila::-webkit-scrollbar{display:none}
-.passi-c{flex:0 0 78%;max-width:360px;min-height:220px;scroll-snap-align:start;background:var(--bg3);border:1px solid var(--filo);border-radius:18px;padding:26px 24px 30px;display:flex;flex-direction:column}
-.passi-c h3{font:560 26px/1.1 var(--sans);letter-spacing:-.03em;color:var(--av)}
-.passi-c p{font:400 17px/1.5 var(--sans);letter-spacing:-.01em;color:var(--av2);margin-top:14px}
-.passi-linea{max-width:var(--max);margin:26px auto 0;padding:0 var(--lato)}
-.passi-linea div{height:3px;border-radius:2px;background:#2E2D27;overflow:hidden}
-.passi-linea i{display:block;height:100%;width:100%;background:var(--rec);transform-origin:left;transform:scaleX(.3);transition:transform .12s linear}
-.passi-linea[hidden]{display:none}
+.passi-in{max-width:var(--max);margin:0 auto;padding:0 var(--lato)}
+.passi-in h2{font-family:var(--sans);font-weight:560;font-size:clamp(36px,10.4vw,44px);line-height:1.04;letter-spacing:-.04em;color:var(--av)}
+.passi-in h2 .pt{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
+.passi-sotto{font:400 18px/1.45 var(--sans);letter-spacing:-.012em;color:var(--av2);margin-top:14px;max-width:24em}
+.passi-box{margin-top:32px;display:grid;grid-template-columns:3fr 2fr;background:var(--bg3);border:1px solid var(--filo2);border-radius:20px;overflow:hidden}
+.passi-p{padding:24px 20px 26px;display:flex;flex-direction:column}
+.passi-p h3{font-family:var(--sans);font-weight:560;color:var(--av);letter-spacing:-.03em;text-wrap:balance}
+.passi-p p{font-family:var(--sans);font-weight:400;color:var(--av2);letter-spacing:-.01em;margin-top:10px}
+.passi-1{grid-column:1/-1;border-bottom:1px solid var(--filo2);padding:30px 24px 34px;min-height:220px;justify-content:flex-end}
+.passi-1 h3{font-size:36px;line-height:1.04}
+.passi-1 p{font-size:18px;line-height:1.45;max-width:22em}
+.passi-2{border-right:1px solid var(--filo2);min-height:200px}
+.passi-2 h3{font-size:23px;line-height:1.08}
+.passi-2 p{font-size:15.5px;line-height:1.45}
+.passi-3 h3{font-size:18px;line-height:1.12}
+.passi-3 p{font-size:14px;line-height:1.45}
 @media (min-width:900px){
-  .passi-testa h2{font-size:clamp(46px,4.3vw,58px)}
-  .passi-testa p{font-size:20px}
-  .passi-fila{padding-left:max(var(--lato),calc((100% - var(--max))/2 + var(--lato)));padding-right:max(var(--lato),calc((100% - var(--max))/2 + var(--lato)));scroll-padding-left:max(var(--lato),calc((100% - var(--max))/2 + var(--lato)))}
-  .passi-c{flex:1 0 300px;max-width:none;min-height:220px;padding:30px 28px 34px}
+  .passi-in h2{font-size:clamp(46px,4.3vw,58px)}
+  .passi-sotto{font-size:20px}
+  .passi-box{margin-top:44px;border-radius:24px}
+  .passi-1{padding:44px 44px 46px;min-height:300px}
+  .passi-1 h3{font-size:clamp(46px,4.3vw,58px)}
+  .passi-1 p{font-size:20px}
+  .passi-2,.passi-3{padding:34px 36px 38px;min-height:240px}
+  .passi-2 h3{font-size:32px}
+  .passi-2 p{font-size:18px}
+  .passi-3 h3{font-size:24px}
+  .passi-3 p{font-size:16px}
 }
 </style>
-<section class="passi" id="come" aria-labelledby="t-passi"><span class="tag" data-n="2">2 · I 3 passi (caselle di lato)</span>
- <div class="passi-testa"><h2 id="t-passi">Come si parte<i class="pt" aria-hidden="true"></i></h2><p>Tre passi, uguali per tutti i&nbsp;servizi.</p></div>
- <div class="passi-fila" tabindex="0" aria-label="I tre passi, scorri di lato">
-  <article class="passi-c"><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></article>
-  <article class="passi-c"><h3>Vediamo cosa ti serve</h3><p>Capiamo insieme da dove conviene partire per farti trovare e&nbsp;scegliere.</p></article>
-  <article class="passi-c"><h3>Scegli e si parte</h3><p>Un abbonamento o un servizio singolo, come&nbsp;preferisci.</p></article>
+<section class="passi" id="come" aria-labelledby="t-passi"><span class="tag" data-n="2">2 · I 3 passi (riquadro diviso in 3)</span>
+ <div class="passi-in">
+  <h2 id="t-passi">Come si parte<i class="pt" aria-hidden="true"></i></h2>
+  <p class="passi-sotto">Tre passi, uguali per tutti i&nbsp;servizi.</p>
+  <div class="passi-box">
+   <article class="passi-p passi-1"><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></article>
+   <article class="passi-p passi-2"><h3>Vediamo cosa ti serve</h3><p>Capiamo insieme da dove conviene partire per farti trovare e&nbsp;scegliere.</p></article>
+   <article class="passi-p passi-3"><h3>Scegli e si parte</h3><p>Un abbonamento o un servizio singolo, come&nbsp;preferisci.</p></article>
+  </div>
  </div>
- <div class="passi-linea" aria-hidden="true"><div><i></i></div></div>
 </section>
-<script>
-(function(){
-  "use strict";
-  var fila=document.querySelector("#come .passi-fila"), linea=document.querySelector("#come .passi-linea"), riemp=linea&&linea.querySelector("i"), pronto=false;
-  if(!fila||!riemp) return;
-  function giro(){
-    pronto=false;
-    var tot=fila.scrollWidth, vis=fila.clientWidth;
-    // niente da scorrere (computer largo): la linea non serve
-    linea.hidden = tot-vis < 4;
-    var q=tot>0?Math.min(1,(fila.scrollLeft+vis)/tot):1;
-    riemp.style.transform="scaleX("+q.toFixed(3)+")";
-  }
-  function chiedi(){if(!pronto){pronto=true;requestAnimationFrame(giro)}}
-  fila.addEventListener("scroll",chiedi,{passive:true});addEventListener("resize",chiedi);addEventListener("load",chiedi);giro();
-})();
-</script>
 <div class="bz">
 <section><span class="tag" data-n="3">3 · Servizio: sito web</span><div class="in srv">
  <div class="box">Animazione del sito<br>(già fatta)</div>
