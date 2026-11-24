@@ -1464,6 +1464,14 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 </style><style>
 /* COMPUTER: niente riga tra l apertura e «Come si parte» */
 @media(min-width:900px){section.pr#come{border-top:0}.eroe-fondo{-webkit-mask-image:linear-gradient(180deg,#000 45%,rgba(0,0,0,.55) 72%,rgba(0,0,0,.18) 88%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(180deg,#000 45%,rgba(0,0,0,.55) 72%,rgba(0,0,0,.18) 88%,rgba(0,0,0,0) 100%)}}
+</style><style>
+/* COMPUTER: nota con l asterisco più su e a destra, sotto il bordo della casella */
+@media(min-width:1024px){
+ .bz .pila{padding-bottom:22px}
+ .bz section.n5b{padding-left:0;padding-right:0}
+ .bz section.n5b .in{max-width:min(1400px,100%);padding:0 var(--lato)}
+ .bz section.n5b .nota{margin-left:auto;max-width:760px;text-align:right;text-wrap:balance}
+}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -1479,7 +1487,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 <header class="testata" id="testata">
   <div class="testata-in">
     <a class="marchio" id="marchio-testata" href="#inizio" aria-label="Veniello Studio, torna all’inizio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><i class="pl" aria-hidden="true"></i><span aria-hidden="true">studio</span></a>
-    <nav aria-label="Menu principale"><a href="#come">Come funziona</a><a href="#servizi">Servizi</a><a href="#abbonamenti">Abbonamenti</a><a href="#partner">Partner</a><a href="#domande">Domande</a></nav>
+    <nav aria-label="Menu principale"><a href="#come">Come funziona</a><a href="#servizi">Servizi</a><a href="#progetti">Progetti</a><a href="#abbonamenti">Abbonamenti</a><a href="#domande">Domande</a></nav>
     <a class="pill pill-chiara pill-piccola" id="testata-scrivi" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20per%20la%20mia%20attivit%C3%A0" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Scrivici</a>
   </div>
 </header>
@@ -1542,7 +1550,7 @@ if(!('IntersectionObserver' in window)){g.classList.add('on');return}
 new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('on');o.disconnect()}},{threshold:.3}).observe(g)})();
 </script>
 <div class="bz">
-<div class="pila">
+<div class="pila" id="servizi">
 <section class="cas cas-sito"><div class="in srv">
  <div class="m pannello m-sito"><div class="slot-sito-anteprima" data-slot="sito-anteprima">
 <div class="sa">
@@ -1751,7 +1759,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  <p class="nota">* Una volta pubblicato, il sito è di tua proprietà. I costi per mantenerlo attivo, come il dominio e lo spazio online, sono a tuo carico e te li comunichiamo in anticipo, nel preventivo. Se in futuro vuoi aggiornarlo o modificarlo, ci&nbsp;scrivi.</p>
 </div></section>
 
-<section style="padding-left:0;padding-right:0">
+<section id="progetti" style="padding-left:0;padding-right:0">
  <div class="in rh" style="padding:0 20px"><h2>I nostri progetti.</h2><div class="fr"><button type="button" aria-label="Progetti precedenti" data-d="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button><button type="button" aria-label="Progetti successivi" data-d="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button></div></div>
  <div class="rail">
   <a class="pj card" href="https://jueclub.it" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img class="pj-foto" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" loading="lazy"></div><div class="card-nome"><h3>Jué Club</h3></div><div class="card-piede"><p class="card-lavori">Sito &amp; Gestione Social</p><p class="card-luogo">Montecatini Terme</p></div></a>
@@ -1763,7 +1771,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  </div>
 </section>
 
-<section class="pr7"><div class="in" style="text-align:center">
+<section class="pr7" id="abbonamenti"><div class="in" style="text-align:center">
  <h2 class="t7">3 abbonamenti a partire&nbsp;da<br class="solo-pc7"> 430&nbsp;€ al&nbsp;mese.</h2><p class="p p7">Da chi deve ancora iniziare a chi vuole una soluzione a&nbsp;360°.<br>Dettagli e prezzi nella pagina&nbsp;dedicata.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/">Vedi i prezzi →</a>
 </div></section>
 
@@ -1777,7 +1785,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  </dl>
 </div></section>
 
-<section class="faq"><div class="in">
+<section class="faq" id="domande"><div class="in">
  <h2>Domande</h2>
  <details><summary>Come si parte?<span>+</span></summary><p>Scrivici su WhatsApp o chiamaci: ci racconti la tua attività e capiamo insieme da dove conviene partire. Poi scegli l’abbonamento o il servizio e si parte.</p></details>
  <details><summary>L’anteprima del sito è gratuita?<span>+</span></summary><p>Sì, e vale anche per la landing page e per l’e-commerce. Li prepariamo, li guardi con calma sul telefono e decidi. Se non ti convincono, non paghi niente e non ti impegni.</p></details>
