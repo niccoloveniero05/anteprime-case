@@ -1367,6 +1367,15 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
  .bz .rail .card.pj{flex-basis:calc((min(100vw,var(--max)) - 2 * var(--lato) - 3 * 16px) / 4);aspect-ratio:4/5.2}
  .bz .rail .card .card-nome h3{font-size:30px}
 }
+</style><style>
+/* PROGETTI: nome in alto a sinistra, lavori in basso a sinistra, luogo in basso a destra */
+.bz .rail .card::before{background:
+  radial-gradient(150% 60% at 0% 0%,rgba(8,7,4,.9) 0%,rgba(8,7,4,.7) 26%,rgba(8,7,4,.3) 52%,rgba(8,7,4,0) 80%),
+  linear-gradient(0deg,rgba(8,7,4,.86) 0%,rgba(8,7,4,.5) 22%,rgba(8,7,4,0) 44%)}
+.bz .rail .card .card-nome{left:var(--s3);right:var(--s3);text-align:left}
+.bz .rail .card .card-piede{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.bz .rail .card .card-lavori{margin:0;flex:1 1 auto;min-width:0;font:450 16px/1.35 var(--sans);color:var(--av);text-wrap:pretty}
+.bz .rail .card .card-luogo{margin:0;flex:0 1 auto;max-width:38%;text-align:right;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.82);text-shadow:0 1px 10px rgba(8,7,4,.8)}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -1593,7 +1602,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
                   </div>
           
                                     <div class="cc-ab cc-reel" id="cc-reel"><div class="cc-reel-in" id="cc-reel-in">
-                    <video id="cc-video" muted loop playsinline preload="none" poster="cc/reel.jpg" data-src="cc/reel.mp4"></video>
+                    <video id="cc-video" muted playsinline preload="none" poster="cc/reel.jpg" data-src="cc/reel.mp4"></video>
                     <i class="cc-ombra"></i>
                     <p class="cc-titolo"><span class="cc-riga"><span class="cc-c">Aperitivo</span></span><span class="cc-riga"><span class="cc-c">al <span class="cc-jue">Jué</span></span><i class="cc-dot"></i></span></p>
                   </div></div>
@@ -1657,12 +1666,12 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 <section style="padding-left:0;padding-right:0"><span class="tag" data-n="6">6 · I nostri progetti (si scorre di lato)</span>
  <div class="in rh" style="padding:0 20px"><h2>I nostri progetti.</h2><div class="fr"><button type="button" aria-label="Progetti precedenti" data-d="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button><button type="button" aria-label="Progetti successivi" data-d="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button></div></div>
  <div class="rail">
-  <a class="pj card" href="https://jueclub.it" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img class="pj-foto" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" loading="lazy"></div><div class="card-nome"><h3>Jué Club</h3><p>Cocktail bar · Montecatini Terme</p></div><div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Sito e Gestione Social</p></div></a>
-  <a class="pj card" href="https://www.instagram.com/azianoparfums.com/" target="_blank" rel="noopener" aria-label="Aziano Parfums"><div class="pjimg card-fondo azi"><svg viewBox="0 0 30 38" aria-hidden="true"><rect x="10" y="1" width="10" height="7" fill="#c9a46a"/><rect x="1.5" y="10.5" width="27" height="26" rx="2" fill="none" stroke="#c9a46a"/><path d="M8.6 31 15 15.5 21.4 31M11 25.6h8" fill="none" stroke="#f1eadf" stroke-width="1.2"/></svg><div><div class="azb">AZIANO</div><div class="azs">PARFUMS</div></div></div><div class="card-nome"><h3>Aziano Parfums</h3><p>Profumi · Stati Uniti</p></div><div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>E-commerce</p></div></a>
-  <a class="pj card" href="https://cashthehouse.com" target="_blank" rel="noopener" aria-label="Cash the House"><div class="pjimg card-fondo cth"><b class="cthl">CASH THE HOUSE<i>.</i></b><span class="cths">Cash Buyer in New Jersey.<br>Sell Your House As-Is.</span></div><div class="card-nome"><h3>Cash the House</h3><p>Acquisto case · New Jersey</p></div><div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Landing page</p></div></a>
-  <div class="pj card" data-anima><div class="pjimg card-fondo"><img src="img/gb-gioielli-3.jpg" alt="" loading="lazy"></div><div class="card-nome"><h3>GB Gioielli</h3><p>Gioielleria · Città di Castello</p></div><div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>E-commerce</p></div></div>
-  <a class="pj card" href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img src="img/elena-dettagli.jpg" alt="" loading="lazy"></div><div class="card-nome"><h3>Elena Baldi<br><em>Wedding Planner</em></h3><p>Matrimoni · Montecatini Terme</p></div><div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Social e video</p></div></a>
-  <a class="pj card" href="https://mattiamalpeli.com" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img src="img/malpeli-3.jpg" alt="" loading="lazy"></div><div class="card-nome"><h3>Mattia Malpeli</h3><p>Ristrutturazioni e investimenti</p></div><div class="card-piede"><p class="card-lavori"><small>Cosa facciamo</small>Sito personale in tre lingue</p></div></a>
+  <a class="pj card" href="https://jueclub.it" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img class="pj-foto" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" loading="lazy"></div><div class="card-nome"><h3>Jué Club</h3></div><div class="card-piede"><p class="card-lavori">Sito e Gestione Social</p><p class="card-luogo">Montecatini Terme</p></div></a>
+  <a class="pj card" href="https://www.instagram.com/azianoparfums.com/" target="_blank" rel="noopener" aria-label="Aziano Parfums"><div class="pjimg card-fondo azi"><svg viewBox="0 0 30 38" aria-hidden="true"><rect x="10" y="1" width="10" height="7" fill="#c9a46a"/><rect x="1.5" y="10.5" width="27" height="26" rx="2" fill="none" stroke="#c9a46a"/><path d="M8.6 31 15 15.5 21.4 31M11 25.6h8" fill="none" stroke="#f1eadf" stroke-width="1.2"/></svg><div><div class="azb">AZIANO</div><div class="azs">PARFUMS</div></div></div><div class="card-nome"><h3>Aziano Parfums</h3></div><div class="card-piede"><p class="card-lavori">E-commerce</p><p class="card-luogo">Stati Uniti</p></div></a>
+  <a class="pj card" href="https://cashthehouse.com" target="_blank" rel="noopener" aria-label="Cash the House"><div class="pjimg card-fondo cth"><b class="cthl">CASH THE HOUSE<i>.</i></b><span class="cths">Cash Buyer in New Jersey.<br>Sell Your House As-Is.</span></div><div class="card-nome"><h3>Cash the House</h3></div><div class="card-piede"><p class="card-lavori">Landing page</p><p class="card-luogo">New Jersey</p></div></a>
+  <div class="pj card" data-anima><div class="pjimg card-fondo"><img src="img/gb-gioielli-4.jpg" alt="" loading="lazy"></div><div class="card-nome"><h3>GB Gioielli</h3></div><div class="card-piede"><p class="card-lavori">E-commerce</p><p class="card-luogo">Città di Castello</p></div></div>
+  <a class="pj card" href="https://www.elenabaldiwp.it/" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img src="img/elena-dettagli.jpg" alt="" loading="lazy"></div><div class="card-nome"><h3>Elena Baldi<br><em>Wedding Planner</em></h3></div><div class="card-piede"><p class="card-lavori">Social e video</p><p class="card-luogo">Montecatini Terme</p></div></a>
+  <a class="pj card" href="https://mattiamalpeli.com" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img src="img/malpeli-4.jpg" alt="" loading="lazy"></div><div class="card-nome"><h3>Mattia Malpeli</h3></div><div class="card-piede"><p class="card-lavori">Sito personale in tre lingue</p><p class="card-luogo">Italia e Spagna</p></div></a>
  </div>
 </section>
 
@@ -3406,6 +3415,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
       return giri.length ? (giri[0].currentTime || 0) / 1e3 : 0;
     }
     function suona() {
+      if (video.ended) return;
       var pr = video.play();
       if (pr && pr.catch) pr.catch(function() {
       });
