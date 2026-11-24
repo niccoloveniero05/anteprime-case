@@ -4061,5 +4061,24 @@ document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("
   [].forEach.call(v, function(x){ io.observe(x); });
 })();
 </script>
+<script>
+/* Reel del Jué: nell ultimo tratto rallenta piano fino a fermarsi (niente stop secco) */
+(function(){
+  var v=document.getElementById("cc-video"); if(!v) return;
+  var CODA=1.5, MIN=0.22, raf=0;
+  function passo(){
+    if(v.paused||v.ended){ raf=0; return; }
+    var d=v.duration, t=v.currentTime;
+    if(isFinite(d)&&d>0){
+      var resto=d-t;
+      var r = resto>=CODA ? 1 : MIN + (1-MIN)*Math.pow(Math.max(0,resto)/CODA, 0.9);
+      if(Math.abs(v.playbackRate-r)>0.01) v.playbackRate=r;
+    }
+    raf=requestAnimationFrame(passo);
+  }
+  v.addEventListener("play",function(){ if(!raf) raf=requestAnimationFrame(passo); });
+  v.addEventListener("ended",function(){ v.playbackRate=1; });
+})();
+</script>
 </body>
 </html>
