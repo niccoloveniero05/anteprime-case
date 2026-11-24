@@ -1,0 +1,43 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Prova · I 3 passi a righe</title>
+<style>
+@font-face{font-family:Inter;src:url(fonts/inter.woff2);font-weight:100 900}
+@font-face{font-family:GM;src:url(fonts/GeistMono-400.woff2)}
+:root{--bg:#100F09;--av:#F5F4EF;--av2:rgba(245,244,239,.62);--av3:rgba(245,244,239,.42);--filo2:rgba(245,244,239,.2);--rec:#FF5A1F;--max:1180px;--lato:20px}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--av);font-family:Inter,system-ui,sans-serif}
+.sp{height:70svh;display:grid;place-items:center;color:var(--av2);font-size:14px;text-align:center;padding:0 20px}
+.passi{padding:96px 0}
+.in{max-width:var(--max);margin:0 auto;padding:0 var(--lato)}
+h2{font:560 clamp(36px,10.4vw,56px)/1.04 Inter;letter-spacing:-.04em}
+h2 i{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
+.sotto{font-size:18px;color:var(--av2);margin:14px 0 40px}
+.p{border-top:1px solid var(--filo2);padding:34px 0 40px;display:grid;grid-template-columns:64px 1fr;column-gap:16px;row-gap:18px;align-items:center;
+  transform-origin:50% 100%;transform:perspective(1100px) rotateX(-90deg);opacity:0;backface-visibility:hidden}
+.p:last-of-type{border-bottom:1px solid var(--filo2)}
+.n{font:400 44px/1 GM,monospace;letter-spacing:-.04em;color:var(--rec)}
+.p h3{font:560 clamp(26px,7.4vw,34px)/1.08 Inter;letter-spacing:-.03em}
+.p p{grid-column:1/-1;font-size:17px;line-height:1.5;color:var(--av2);max-width:30em}
+.on .p{animation:dado .95s cubic-bezier(.2,.8,.2,1) forwards}
+.on .p2{animation-delay:.6s}.on .p3{animation-delay:1.2s}
+@keyframes dado{0%{transform:perspective(1100px) rotateX(-90deg);opacity:0}15%{opacity:1}70%{transform:perspective(1100px) rotateX(5deg)}100%{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.p{transform:none;opacity:1}.on .p{animation:none}}
+@media (min-width:900px){
+ .in{padding:0 40px}
+ .p{grid-template-columns:90px 1.1fr 1fr;column-gap:40px;padding:48px 0 52px}
+ .p p{grid-column:auto;font-size:19px}
+ .n{font-size:56px}.p h3{font-size:clamp(30px,3.2vw,40px)}}
+button{margin-top:28px;background:none;color:var(--av);border:1px solid var(--filo2);border-radius:99px;padding:10px 18px;font:500 14px Inter;cursor:pointer}
+</style></head><body>
+<div class="sp">↓ scorri: le righe si girano una dopo l'altra quando arrivi ai 3 passi</div>
+<section class="passi"><div class="in"><h2>Come si parte<i></i></h2><p class="sotto">Tre passi, uguali per tutti i servizi.</p>
+<div id="g">
+<article class="p p1"><span class="n">01</span><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></article>
+<article class="p p2"><span class="n">02</span><h3>Vediamo cosa ti serve</h3><p>Capiamo insieme da dove conviene&nbsp;partire.</p></article>
+<article class="p p3"><span class="n">03</span><h3>Scegli e si parte</h3><p>Abbonamento o servizio&nbsp;singolo.</p></article>
+</div><button id="r">↻ Rivedi il movimento</button></div></section>
+<div class="sp"></div>
+<script>
+var g=document.getElementById('g');
+new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('on');o.disconnect()}},{threshold:.3}).observe(g);
+document.getElementById('r').onclick=function(){g.classList.remove('on');void g.offsetWidth;g.classList.add('on')};
+</script></body></html>
