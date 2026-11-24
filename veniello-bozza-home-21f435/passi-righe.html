@@ -1227,6 +1227,17 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .chat.anima .va-luna .vl-e2{animation:vl-occhio .4s cubic-bezier(.3,1.25,.5,1) calc(var(--t7) + 2.65s) forwards}
 .chat.anima .va-luna .vl-o{animation:vl-traccia .8s cubic-bezier(.45,0,.2,1) calc(var(--t7) + 3s) forwards}
 @media (prefers-reduced-motion:reduce){.va-luna{display:none}}
+
+/* dopo la luna: sale, si rimpicciolisce, sotto compare «AI Assistant» */
+.va-luna{container-type:size}
+.va-luna svg{transform-origin:50% 50%}
+.va-luna .vl-scritta{position:absolute;left:0;right:0;top:calc(50% - 2cqw + min(56cqw,220px) * .3);margin:0;text-align:center;font:560 min(8.4cqw,30px)/1 var(--sans,Inter,sans-serif);letter-spacing:-.03em;color:#F5F4EF;opacity:0}
+.va-luna .vl-i{position:relative;display:inline-block}
+.va-luna .vl-i i{position:absolute;left:50%;top:-.12em;width:.2em;height:.2em;margin-left:-.1em;border-radius:50%;background:#FF5A1F}
+@keyframes vl-su{to{transform:translateY(-20%) scale(.82)}}
+@keyframes vl-scrivi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.chat.anima .va-luna svg{animation:vl-su .8s cubic-bezier(.45,0,.2,1) calc(var(--t7) + 4.1s) forwards}
+.chat.anima .va-luna .vl-scritta{animation:vl-scrivi .6s cubic-bezier(.22,.61,.36,1) calc(var(--t7) + 4.6s) forwards}
 </style><style>.bz .pjimg video{width:100%;height:100%;object-fit:cover;display:block}</style><style>.bz .pjimg{aspect-ratio:1/1}</style><style>
 .bz .ct{display:grid;gap:36px}
 .bz .ct .p{margin-top:14px}
@@ -3491,6 +3502,8 @@ document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("
       while (e && e !== t) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; }
       if (e !== t || !t.offsetWidth) return;
       var lr = l.getBoundingClientRect(), tr = t.getBoundingClientRect(), sr = svg.getBoundingClientRect();
+      var m = new DOMMatrix(getComputedStyle(svg).transform), sk = m.a || 1, cx = sr.left + sr.width / 2 - m.e, cy = sr.top + sr.height / 2 - m.f;
+      sr = { left: cx - sr.width / sk / 2, top: cy - sr.height / sk / 2, width: sr.width / sk, height: sr.height / sk };
       var k = tr.width / t.offsetWidth;
       var x0 = tr.left - lr.left + (x + p.offsetWidth / 2) * k, y0 = tr.top - lr.top + (y + p.offsetHeight / 2) * k;
       var x1 = sr.left - lr.left + (178.4 - 84) / 182 * sr.width, y1 = sr.top - lr.top + (100.4 - 88) / 182 * sr.height;
