@@ -1376,6 +1376,16 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .bz .rail .card .card-piede{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
 .bz .rail .card .card-lavori{margin:0;flex:1 1 auto;min-width:0;font:450 16px/1.35 var(--sans);color:var(--av);text-wrap:pretty}
 .bz .rail .card .card-luogo{margin:0;flex:0 1 auto;max-width:38%;text-align:right;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(245,244,239,.82);text-shadow:0 1px 10px rgba(8,7,4,.8)}
+</style><style>
+/* CONTENUTI: dopo il reel il profilo si riempie con 5 post veri del Jué, uno alla volta */
+.cc-griglia > i::after{content:"";position:absolute;inset:0;background:50% 50%/cover no-repeat;opacity:0;transform:scale(.9);transition:opacity .45s ease,transform .6s cubic-bezier(.34,1.4,.64,1)}
+.cc-griglia > i:nth-child(2)::after{background-image:url(cc/post-oldfashioned.jpg);transition-delay:.2s}
+.cc-griglia > i:nth-child(3)::after{background-image:url(cc/post-dj_pioneer.jpg);transition-delay:.45s}
+.cc-griglia > i:nth-child(4)::after{background-image:url(cc/post-pizza.jpg);transition-delay:.7s}
+.cc-griglia > i:nth-child(5)::after{background-image:url(cc/post-neon.jpg);transition-delay:.95s}
+.cc-griglia > i:nth-child(6)::after{background-image:url(cc/post-aperitivo.jpg);transition-delay:1.2s}
+.cc.pieno .cc-griglia > i::after{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.cc-griglia > i::after{transition:none}}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -3424,6 +3434,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
       if (ora() >= PLAY && video.paused) suona();
       if (ora() >= L) {
         finito = true;
+        cc.classList.add("pieno");
         gira = false;
         return;
       }
@@ -3454,6 +3465,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
     function fermoFinale() {
       ferma();
       finito = true;
+        cc.classList.add("pieno");
       giri.forEach(function(a) {
         a.currentTime = FERMO * 1e3;
         a.pause();
