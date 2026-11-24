@@ -1336,6 +1336,15 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
  .bz .cas .p{max-width:30em}
  .bz .cas-cont{--fondo-scheda:#241714}
 }
+</style><style>
+/* TELEFONO: luce leggerissima dall'alto a destra nei riquadri delle anteprime, nel colore della casella del computer */
+@media(max-width:1023px){
+ .bz .cas .m::before{content:"";position:absolute;inset:0;z-index:4;border-radius:inherit;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(130% 95% at 100% 0%,rgba(var(--luce),.13) 0%,rgba(var(--luce),.05) 35%,rgba(var(--luce),0) 65%)}
+ .bz .cas-sito{--luce:140,185,130}
+ .bz .cas-cont{--luce:255,110,65}
+ .bz .cas-va{--luce:175,135,225}
+}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
