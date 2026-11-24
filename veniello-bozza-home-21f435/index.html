@@ -1227,7 +1227,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .chat.anima .va-luna .vl-e2{animation:vl-occhio .4s cubic-bezier(.3,1.25,.5,1) calc(var(--t7) + 2.65s) forwards}
 .chat.anima .va-luna .vl-o{animation:vl-traccia .8s cubic-bezier(.45,0,.2,1) calc(var(--t7) + 3s) forwards}
 @media (prefers-reduced-motion:reduce){.va-luna{display:none}}
-</style></head>
+</style><style>.bz .pjimg video{width:100%;height:100%;object-fit:cover;display:block}</style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1515,7 +1515,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 <section style="padding-left:0;padding-right:0"><span class="tag" data-n="6">6 · I nostri progetti (si scorre di lato)</span>
  <div class="in rh" style="padding:0 20px"><h2>I nostri progetti.</h2><div class="fr"><button type="button" aria-label="Progetti precedenti" data-d="-1">&lt;</button><button type="button" aria-label="Progetti successivi" data-d="1">&gt;</button></div></div>
  <div class="rail">
-  <div class="pj"><div class="pjimg" style="position:relative"><img src="img/jue-bancone.jpg" alt="" loading="lazy"><span style="position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.7);color:#cfcfd4;padding:6px 10px;border-radius:8px;font-size:12px">▶ qui il reel del Jué (già fatto)</span></div><h3>Jué Club</h3><p class="pjc">Cocktail bar · Montecatini Terme</p><p class="pjf">Sito, video delle serate, social</p></div>
+  <div class="pj"><div class="pjimg"><video class="pj-video" src="video/spot-una-volta.mp4" poster="img/spot-una-volta.jpg" muted loop playsinline preload="none" aria-label="Lo spot Jué × Bombay Sapphire: il Bombay &amp; Tonic e la bottiglietta in omaggio"></video></div><h3>Jué Club</h3><p class="pjc">Cocktail bar · Montecatini Terme</p><p class="pjf">Sito, video delle serate, social</p></div>
   <div class="pj"><div class="pjimg"><img src="img/elena-dettagli.jpg" alt="" loading="lazy"></div><h3>Elena Baldi Wedding Planner</h3><p class="pjc">Matrimoni · Montecatini Terme</p><p class="pjf">Social e video</p></div>
   <a class="pj pjx" href="https://mattiamalpeli.com" target="_blank" rel="noopener"><div class="pjimg"><img src="img/malpeli.png" alt="" loading="lazy"></div><h3>Mattia Malpeli</h3><p class="pjc">Ristrutturazioni e investimenti</p><p class="pjf">Sito personale in tre lingue</p></a>
   <a class="pj pjx" href="https://cashthehouse.com" target="_blank" rel="noopener" aria-label="Cash the House"><div class="pjimg cth"><b class="cthl">CASH THE HOUSE<i>.</i></b><span class="cths">Cash Buyer in New Jersey.<br>Sell Your House As-Is.</span></div></a>
@@ -3783,6 +3783,22 @@ document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(misura);
     if (window.ResizeObserver) new ResizeObserver(misura).observe(c); else addEventListener("resize", misura);
   });
+})();
+</script>
+<script>
+/* Video delle schede progetti: parte quando la scheda si vede, si ferma quando esce */
+(function(){
+  var v = document.querySelectorAll(".pj-video");
+  if (!v.length) return;
+  var ridotto = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (ridotto || !("IntersectionObserver" in window)) return;
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (e.isIntersecting) { var p = e.target.play(); if (p && p.catch) p.catch(function(){}); }
+      else e.target.pause();
+    });
+  }, { threshold: 0.5 });
+  [].forEach.call(v, function(x){ io.observe(x); });
 })();
 </script>
 </body>
