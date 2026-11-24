@@ -1131,8 +1131,6 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .bz #hero{min-height:100vh;display:flex;align-items:center}
 .bz #hero .in{width:100%;display:grid;gap:30px}
 .bz #hero .box{height:46vh}
-#righello{position:fixed;left:0;right:0;top:50%;border-top:1px solid rgba(57,255,20,.8);z-index:99;pointer-events:none}
-#righello span{position:absolute;left:6px;top:3px;font:500 11px ui-monospace,monospace;color:var(--v)}
 .bz .note{color:var(--t);font-size:12px;margin-top:18px}
 @media(min-width:800px){.bz section{padding:96px 48px}
 .bz .srv{grid-template-columns:1fr 1fr;align-items:center;gap:64px}
@@ -1409,7 +1407,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 
 <main id="contenuto">
 
-    <section class="eroe" id="inizio" aria-labelledby="t-eroe"><span class="tag" data-n="1">1 · Apertura (come il sito online)</span>
+    <section class="eroe" id="inizio" aria-labelledby="t-eroe">
         <div class="eroe-fondo" id="eroe-fondo" aria-hidden="true"><canvas class="macchia"></canvas></div>
     <div class="wrap eroe-testo">
       <h1 class="eroe-logo" id="t-eroe"><span class="sr">Veniello Studio</span><span class="eroe-v" id="eroe-v" aria-hidden="true">V</span><i class="eroe-pl" id="eroe-pl" aria-hidden="true"></i></h1>
@@ -1447,7 +1445,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
  .pr-p p{grid-column:auto;font-size:16px;line-height:1.6}
  .pr-p h3{font:500 30px/1.2 var(--sans);letter-spacing:-.02em;white-space:nowrap}}
 </style>
-<section class="pr" id="come" aria-labelledby="t-pr"><span class="tag" data-n="2">2 · I 3 passi (righe numerate)</span>
+<section class="pr" id="come" aria-labelledby="t-pr">
  <div class="pr-in">
   <h2 class="pr-t" id="t-pr">Come si <em>parte</em><i aria-hidden="true"></i></h2>
   <p class="pr-s">Tre passi, uguali per tutti i&nbsp;servizi.</p>
@@ -1465,7 +1463,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 </script>
 <div class="bz">
 <div class="pila">
-<section class="cas cas-sito"><span class="tag" data-n="3">3 · Servizio: sito web</span><div class="in srv">
+<section class="cas cas-sito"><div class="in srv">
  <div class="m pannello m-sito"><div class="slot-sito-anteprima" data-slot="sito-anteprima">
 <div class="sa">
   <div class="sa-testa">
@@ -1555,7 +1553,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  <div><p class="lab">Sito web</p><h2>Un sito che porta clienti, non solo&nbsp;vetrina.</h2><p class="p">Progettato per la tua attività e completamente personalizzabile. Bastano foto e informazioni.<br>Al resto pensiamo&nbsp;noi.*</p><p class="p mini">L’anteprima è gratuita: se non ti convince, non paghi&nbsp;niente.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#a-sito">Scopri come →</a></div>
 </div></section>
 
-<section class="cas cas-cont"><span class="tag" data-n="4">4 · Servizio: contenuti</span><div class="in srv inv">
+<section class="cas cas-cont"><div class="in srv inv">
                      <div class="m pannello m-cc" id="contenuti-scena">
           <div class="cc" id="cc" role="img" aria-label="Esempio: un bicchiere e una bottiglia disegnati a linee, la scritta «Aperitivo al Jué», poi la vista si allarga su un profilo Instagram disegnato; il disegno diventa il primo post e alla fine profilo e reel diventano quelli veri del Jué Club.">
               <div class="cc-testa" aria-hidden="true">
@@ -1623,7 +1621,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  <div><p class="lab">Creazione di contenuti</p><h2>Dalle riprese ai profili&nbsp;social.</h2><p class="p">Giri tu, o ti aiutiamo a girare.</p><p class="p">Noi montiamo, scriviamo i testi e pubblichiamo reel e grafiche sui tuoi social, con lo stile della tua&nbsp;attività.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#abbonamenti">Scopri come →</a></div>
 </div></section>
 
-<section class="cas cas-va"><span class="tag" data-n="5">5 · Servizio: Virtual Assistant</span><div class="in srv">
+<section class="cas cas-va"><div class="in srv">
            <div class="m pannello m-va">
       <div class="chat" data-largo="360" data-basso="1" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede ad AnomiaLabs se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
         <div class="va-luna" aria-hidden="true"><svg viewBox="84 88 182 182">
@@ -1669,11 +1667,11 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 </div></section>
 </div>
 
-<section class="n5b" style="padding-top:0;padding-bottom:40px;border-bottom:0"><span class="tag" data-n="5b">5b · Nota * (dopo i servizi)</span><div class="in">
+<section class="n5b" style="padding-top:0;padding-bottom:40px;border-bottom:0"><div class="in">
  <p class="nota">* Una volta pubblicato, il sito è di tua proprietà. I costi per mantenerlo attivo, come il dominio e lo spazio online, sono a tuo carico e te li comunichiamo in anticipo, nel preventivo. Se in futuro vuoi aggiornarlo o modificarlo, ci&nbsp;scrivi.</p>
 </div></section>
 
-<section style="padding-left:0;padding-right:0"><span class="tag" data-n="6">6 · I nostri progetti (si scorre di lato)</span>
+<section style="padding-left:0;padding-right:0">
  <div class="in rh" style="padding:0 20px"><h2>I nostri progetti.</h2><div class="fr"><button type="button" aria-label="Progetti precedenti" data-d="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button><button type="button" aria-label="Progetti successivi" data-d="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button></div></div>
  <div class="rail">
   <a class="pj card" href="https://jueclub.it" target="_blank" rel="noopener" data-anima><div class="pjimg card-fondo"><img class="pj-foto" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" loading="lazy"></div><div class="card-nome"><h3>Jué Club</h3></div><div class="card-piede"><p class="card-lavori">Sito &amp; Gestione Social</p><p class="card-luogo">Montecatini Terme</p></div></a>
@@ -1685,11 +1683,11 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  </div>
 </section>
 
-<section class="pr7"><span class="tag" data-n="7">7 · Pacchetti (una riga)</span><div class="in" style="text-align:center">
+<section class="pr7"><div class="in" style="text-align:center">
  <h2 style="margin:0 auto">3 pacchetti, a partire da 430 € al&nbsp;mese.</h2><p class="p" style="margin:14px auto 0">Da chi deve ancora iniziare a chi vuole una soluzione a&nbsp;360°.<br>Dettagli e prezzi nella pagina&nbsp;dedicata.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/">Vedi i prezzi →</a>
 </div></section>
 
-<section><span class="tag" data-n="8">8 · Contatti</span><div class="in ct">
+<section><div class="in ct">
  <div><h2>Raccontaci la tua&nbsp;attività.</h2><p class="p">Ti rispondiamo su WhatsApp in&nbsp;giornata.</p><a class="lnk" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20per%20la%20mia%20attivit%C3%A0">Scrivici su WhatsApp →</a></div>
  <dl class="ct-dati">
   <dt>Referente</dt><dd>Giuseppe Fusciello</dd>
@@ -1699,7 +1697,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  </dl>
 </div></section>
 
-<section class="faq"><span class="tag" data-n="9">9 · Domande frequenti</span><div class="in">
+<section class="faq"><div class="in">
  <h2>Domande</h2>
  <details><summary>Come si parte?<span>+</span></summary><p>Scrivici su WhatsApp o chiamaci: ci racconti la tua attività e capiamo insieme da dove conviene partire. Poi scegli l’abbonamento o il servizio e si parte.</p></details>
  <details><summary>L’anteprima del sito è gratuita?<span>+</span></summary><p>Sì, e vale anche per la landing page e per l’e-commerce. Li prepariamo, li guardi con calma sul telefono e decidi. Se non ti convincono, non paghi niente e non ti impegni.</p></details>
@@ -1713,17 +1711,16 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 
 </div>
 </main>
-<footer class="piede" id="piede" style="position:relative"><span class="tag" data-n="10">10 · Nota + marchio + dati legali</span>
+<footer class="piede" id="piede" style="position:relative">
   <div class="wrap"><p class="nota piede-nota">Il profilo Instagram e il reel sono lavori veri fatti per il Jué Club di Montecatini Terme. La chat del Virtual Assistant è un&nbsp;esempio.</p></div>
   <div class="wrap">
     <p class="marchio piede-marchio" role="img" aria-label="Veniello Studio"><span class="vv" aria-hidden="true">V</span><span aria-hidden="true">eniello</span><i class="pl" id="piede-pl" aria-hidden="true"></i><span aria-hidden="true">studio</span></p>
     <div class="piede-legale">
-      <p class="titolare" id="titolare">Veniello Studio di Giuseppe Fusciello <!-- DA COMPLETARE: via, CAP, città e P. IVA di Giuseppe --> · <a href="mailto:giuseppe@veniellostudio.it">giuseppe@veniellostudio.it</a></p>
+      <p class="titolare" id="titolare">Veniello Studio di Giuseppe Fusciello · <span class="da-inserire">[Via e numero] · [CAP] [Città] · P.&nbsp;IVA [in arrivo]</span> · <a href="mailto:giuseppe@veniellostudio.it">giuseppe@veniellostudio.it</a></p>
       <p class="piede-leg-riga"><span>©&nbsp;<span id="anno">2026</span> Veniello Studio</span><span>Montecatini Terme · Valdinievole</span><a href="https://www.veniellostudio.it/privacy.html">Privacy</a></p>
     </div>
   </div>
 </footer>
-<div id="righello"><span></span></div>
 <script>
 (function() {
   "use strict";
@@ -3930,9 +3927,6 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 })();
 </script>
 <script>
-if(/[?&]etichette=0/.test(location.search)){document.querySelectorAll('.tag,#righello').forEach(e=>e.remove())}
-function m(){document.querySelectorAll('.tag').forEach(t=>{t.textContent=t.dataset.n+' · '+t.textContent.split(' · ').slice(1).join(' · ').replace(/ · \d+ px$/,'')+' · '+t.parentElement.offsetHeight+' px'});var r=document.querySelector('#righello span');if(r)r.textContent=Math.round(scrollY+innerHeight/2)+' px'}
-addEventListener('scroll',m,{passive:true});addEventListener('resize',m);m();
 document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("click",function(){var r=document.querySelector(".rail"),c=r.querySelector(".pj"),g=parseFloat(getComputedStyle(r).columnGap)||32;r.scrollBy({left:(+b.dataset.d)*((c?c.offsetWidth:400)+g),behavior:"smooth"})})});
 </script>
 <script>
