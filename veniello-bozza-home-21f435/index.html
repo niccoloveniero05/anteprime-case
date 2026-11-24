@@ -1472,6 +1472,10 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
  .bz section.n5b .in{max-width:min(1400px,100%);padding:0 var(--lato)}
  .bz section.n5b .nota{margin-left:auto;max-width:760px;text-align:right;text-wrap:balance}
 }
+</style><style>
+/* Reel del Jué: scritta e ombra spariscono prima che il video si fermi */
+.cc-reel .cc-titolo,.cc-reel .cc-ombra{transition:opacity .7s ease}
+.cc-reel.senza-titolo .cc-titolo,.cc-reel.senza-titolo .cc-ombra{opacity:0}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -3510,7 +3514,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
       return giri.length ? (giri[0].currentTime || 0) / 1e3 : 0;
     }
     function suona() {
-      if (video.ended) return;
+      if (video.ended || video.dataset.fermo) return;
       var pr = video.play();
       if (pr && pr.catch) pr.catch(function() {
       });
@@ -4062,22 +4066,19 @@ document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("
 })();
 </script>
 <script>
-/* Reel del Jué: nell ultimo tratto rallenta piano fino a fermarsi (niente stop secco) */
+/* Reel del Jué: la scritta sparisce verso la fine, il video si ferma su un fotogramma nitido (n. 130) */
 (function(){
-  var v=document.getElementById("cc-video"); if(!v) return;
-  var CODA=1.5, MIN=0.22, raf=0;
+  var v=document.getElementById("cc-video"), reel=document.getElementById("cc-reel"); if(!v||!reel) return;
+  var VIA=4.5, FERMA=5.40, NITIDO=5.43, raf=0;
   function passo(){
+    var t=v.currentTime;
+    if(t>=VIA) reel.classList.add("senza-titolo");
+    if(t>=FERMA){ v.pause(); v.dataset.fermo="1"; v.currentTime=NITIDO; raf=0; return; }
     if(v.paused||v.ended){ raf=0; return; }
-    var d=v.duration, t=v.currentTime;
-    if(isFinite(d)&&d>0){
-      var resto=d-t;
-      var r = resto>=CODA ? 1 : MIN + (1-MIN)*Math.pow(Math.max(0,resto)/CODA, 0.9);
-      if(Math.abs(v.playbackRate-r)>0.01) v.playbackRate=r;
-    }
     raf=requestAnimationFrame(passo);
   }
   v.addEventListener("play",function(){ if(!raf) raf=requestAnimationFrame(passo); });
-  v.addEventListener("ended",function(){ v.playbackRate=1; });
+  v.addEventListener("ended",function(){ reel.classList.add("senza-titolo"); v.dataset.fermo="1"; });
 })();
 </script>
 </body>
