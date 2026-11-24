@@ -1320,7 +1320,22 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
  .bz h2{font-size:min(7.6vw,31px);line-height:1.08}
  .bz .pjimg .pj-video{display:none}
 }
-@media(min-width:900px){ .bz .pjimg .pj-foto{display:none} }
+
+</style><style>
+/* COMPUTER 2: caselle più grandi, contenuti rosso-arancio, frecce dei progetti */
+@media(min-width:900px){
+ .bz .rh{max-width:calc(var(--max));margin:0 auto}
+ .bz .fr{display:flex;gap:10px}
+ .bz .fr button{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--filo2);background:rgba(245,244,239,.04);color:var(--av);cursor:pointer;transition:background-color .2s ease}
+ .bz .fr button:hover{background:rgba(245,244,239,.1)}
+ .bz .fr svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+}
+@media(min-width:1024px){
+ .bz .pila{--pila-h:clamp(480px,66vh,600px);max-width:min(1400px,100%)}
+ .bz .cas > .in.srv{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+ .bz .cas .p{max-width:30em}
+ .bz .cas-cont{--fondo-scheda:#241714}
+}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -1609,9 +1624,9 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 </div></section>
 
 <section style="padding-left:0;padding-right:0"><span class="tag" data-n="6">6 · I nostri progetti (si scorre di lato)</span>
- <div class="in rh" style="padding:0 20px"><h2>I nostri progetti.</h2></div>
+ <div class="in rh" style="padding:0 20px"><h2>I nostri progetti.</h2><div class="fr"><button type="button" aria-label="Progetti precedenti" data-d="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button><button type="button" aria-label="Progetti successivi" data-d="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button></div></div>
  <div class="rail">
-  <a class="pj pjx" href="https://jueclub.it" target="_blank" rel="noopener"><div class="pjimg"><img class="pj-foto" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" loading="lazy"><video class="pj-video" src="video/spot-una-volta.mp4" poster="img/spot-una-volta.jpg" muted loop playsinline preload="none" aria-label="Lo spot Jué × Bombay Sapphire: il Bombay &amp; Tonic e la bottiglietta in omaggio"></video></div><h3>Jué Club</h3><p class="pjc">Cocktail bar · Montecatini Terme</p><p class="pjf">Sito, video delle serate, social</p></a>
+  <a class="pj pjx" href="https://jueclub.it" target="_blank" rel="noopener"><div class="pjimg"><img class="pj-foto" src="img/jue-bancone.jpg" alt="Il bancone del Jué Club" loading="lazy"></div><h3>Jué Club</h3><p class="pjc">Cocktail bar · Montecatini Terme</p><p class="pjf">Sito, video delle serate, social</p></a>
   <a class="pj pjx" href="https://www.instagram.com/azianoparfums.com/" target="_blank" rel="noopener" aria-label="Aziano Parfums"><div class="pjimg azi"><svg viewBox="0 0 30 38" aria-hidden="true"><rect x="10" y="1" width="10" height="7" fill="#c9a46a"/><rect x="1.5" y="10.5" width="27" height="26" rx="2" fill="none" stroke="#c9a46a"/><path d="M8.6 31 15 15.5 21.4 31M11 25.6h8" fill="none" stroke="#f1eadf" stroke-width="1.2"/></svg><div><div class="azb">AZIANO</div><div class="azs">PARFUMS</div></div></div><h3>Aziano Parfums</h3><p class="pjc">Profumi · Stati Uniti</p><p class="pjf">E-commerce</p></a>
   <a class="pj pjx" href="https://cashthehouse.com" target="_blank" rel="noopener" aria-label="Cash the House"><div class="pjimg cth"><b class="cthl">CASH THE HOUSE<i>.</i></b><span class="cths">Cash Buyer in New Jersey.<br>Sell Your House As-Is.</span></div><h3>Cash the House</h3><p class="pjc">Acquisto case · New Jersey</p><p class="pjf">Landing page</p></a>
   <div class="pj"><div class="pjimg"><img src="img/gb-gioielli-2.jpg" alt="" loading="lazy"></div><h3>GB Gioielli</h3><p class="pjc">Gioielleria · Città di Castello</p><p class="pjf">E-commerce</p></div>
@@ -3865,7 +3880,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 if(/[?&]etichette=0/.test(location.search)){document.querySelectorAll('.tag,#righello').forEach(e=>e.remove())}
 function m(){document.querySelectorAll('.tag').forEach(t=>{t.textContent=t.dataset.n+' · '+t.textContent.split(' · ').slice(1).join(' · ').replace(/ · \d+ px$/,'')+' · '+t.parentElement.offsetHeight+' px'});var r=document.querySelector('#righello span');if(r)r.textContent=Math.round(scrollY+innerHeight/2)+' px'}
 addEventListener('scroll',m,{passive:true});addEventListener('resize',m);m();
-document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("click",function(){var r=document.querySelector(".rail");r.scrollBy({left:(+b.dataset.d)*340,behavior:"smooth"})})});
+document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("click",function(){var r=document.querySelector(".rail"),c=r.querySelector(".pj"),g=parseFloat(getComputedStyle(r).columnGap)||32;r.scrollBy({left:(+b.dataset.d)*((c?c.offsetWidth:400)+g),behavior:"smooth"})})});
 </script>
 <script>
 /* Posizioni del puntino: da dove sta nel riepilogo alla punta dell'arco arancione */
