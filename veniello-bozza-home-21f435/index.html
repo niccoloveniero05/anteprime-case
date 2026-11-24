@@ -1247,6 +1247,42 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .bz .ct-dati dd{margin:0;font-size:17px;color:#e8e8ea}
 .bz .ct-dati a{color:#e8e8ea;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#6a6a72}
 @media(min-width:900px){.bz .ct{grid-template-columns:1.2fr 1fr;gap:64px;align-items:start}.bz .ct-dati{padding:0 0 0 40px;border-top:0;border-left:1px solid #2a2a2f}}
+</style><style>
+/* TIPOGRAFIA COME LA LANDING (sezioni 3-10): stessi caratteri, grandezze e colori del sito online */
+.bz{font:400 17px/1.55 var(--sans);letter-spacing:-.006em;color:var(--av)}
+.bz section{padding:var(--s5) var(--lato);border-bottom:var(--linea-sezione)}
+.bz .in{max-width:var(--max)}
+.bz h2{font-family:var(--sans);font-weight:560;font-size:clamp(34px,9.6vw,44px);line-height:1.04;letter-spacing:-.04em;color:var(--av);max-width:13em;text-wrap:balance}
+.bz .lab{font:400 11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3);margin-bottom:var(--s2)}
+.bz .p{color:var(--av2);font-size:17px;line-height:1.55;margin-top:var(--s3);max-width:32em;text-wrap:pretty}
+.bz .p + .p{margin-top:var(--s2)}
+.bz a.lnk{display:inline-block;margin-top:var(--s3);font:500 16px/1.4 var(--sans);color:var(--av);border-bottom:1px solid var(--filo2);padding-bottom:3px}
+.bz .srv{gap:var(--s4)}
+.bz .nota{font-size:15px;line-height:1.55;color:var(--av3);max-width:40em;text-wrap:pretty}
+.bz .pj h3{margin:var(--s2) 0 0;font:440 24px/1.1 var(--serif);letter-spacing:-.02em;color:var(--av)}
+.bz .pjc{margin-top:8px;font:400 11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
+.bz .pjf{margin-top:6px;font:450 15px/1.4 var(--sans);color:var(--av2)}
+.bz .ct-dati dt{font:400 11px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av3)}
+.bz .ct-dati dd{font:450 17px/1.4 var(--sans);color:var(--av)}
+.bz .ct-dati a{color:var(--av);text-decoration-color:var(--filo2)}
+.bz .ct-dati{border-color:var(--filo)}
+.bz .faq h2{margin-bottom:var(--s4)}
+.bz details{border-top:1px solid var(--filo);padding:0}
+.bz details:last-of-type{border-bottom:1px solid var(--filo)}
+.bz summary{min-height:64px;padding:16px 0;align-items:center;font:450 17px/1.35 var(--sans);color:var(--av);text-wrap:pretty}
+.bz summary span{color:var(--av3);font-weight:400}
+.bz details p{margin:0;padding:0 var(--s4) var(--s3) 0;color:var(--av2);font-size:16px;line-height:1.55;max-width:38em;text-wrap:pretty}
+.bz .pjimg:not(.cth):not(.azi){border:0}
+@media(max-width:899px){.bz{--bg:#100F09}}
+.bz .srv.inv{font-size:17px;line-height:1.55;font-weight:400;color:var(--av);padding:0}
+.bz .rh{padding:0 var(--lato)!important}
+.bz .rail{padding-left:var(--lato);padding-right:var(--lato);scroll-padding:0 var(--lato)}
+@media(min-width:800px){.bz .rail{padding-left:max(var(--lato),calc((100vw - var(--max))/2 + var(--lato)));padding-right:var(--lato);scroll-padding-left:max(var(--lato),calc((100vw - var(--max))/2 + var(--lato)))}}
+@media(min-width:900px){
+ .bz section{padding:var(--s6) var(--lato)}
+ .bz h2{font-size:clamp(46px,4.3vw,58px)}
+ .bz .srv{gap:var(--s5)}
+}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -1412,7 +1448,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
   </div>
 </div>
 </div></div>
- <div><p class="lab">Sito web</p><h2>Un sito che porta clienti, non solo&nbsp;vetrina.</h2><p class="p">Progettato per la tua attività e completamente personalizzabile. Bastano foto e informazioni. Al resto pensiamo&nbsp;noi.* L’anteprima è gratuita: se non ti convince, non paghi&nbsp;niente.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#a-sito">Scopri come →</a></div>
+ <div><p class="lab">Sito web</p><h2>Un sito che porta clienti, non solo&nbsp;vetrina.</h2><p class="p">Progettato per la tua attività e completamente personalizzabile. Bastano foto e informazioni. Al resto pensiamo&nbsp;noi.*</p><p class="p">L’anteprima è gratuita: se non ti convince, non paghi&nbsp;niente.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#a-sito">Scopri come →</a></div>
 </div></section>
 
 <section><span class="tag" data-n="4">4 · Servizio: contenuti</span><div class="in srv inv">
@@ -1480,7 +1516,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
               </div>
             </div>
           </div>
- <div><p class="lab">Creazione di contenuti</p><h2>Dalle riprese ai profili&nbsp;social.</h2><p class="p">Giri tu, o ti aiutiamo a girare. Noi montiamo, scriviamo i testi e pubblichiamo reel e grafiche sui tuoi social, con lo stile della tua&nbsp;attività.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#abbonamenti">Scopri come →</a></div>
+ <div><p class="lab">Creazione di contenuti</p><h2>Dalle riprese ai profili&nbsp;social.</h2><p class="p">Giri tu, o ti aiutiamo a girare.</p><p class="p">Noi montiamo, scriviamo i testi e pubblichiamo reel e grafiche sui tuoi social, con lo stile della tua&nbsp;attività.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#abbonamenti">Scopri come →</a></div>
 </div></section>
 
 <section><span class="tag" data-n="5">5 · Servizio: Virtual Assistant</span><div class="in srv">
@@ -1525,7 +1561,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
         </div>
       </div>
                 </div>
- <div><p class="lab">Virtual Assistant</p><h2>Risponde per te anche quando non ci&nbsp;sei.</h2><p class="p">Un assistente che risponde ai tuoi clienti su WhatsApp, anche quando non puoi, completamente personalizzabile per la tua attività. La demo è gratuita: se non ti convince, non paghi&nbsp;niente.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#a-va">Scopri come →</a></div>
+ <div><p class="lab">Virtual Assistant</p><h2>Risponde per te anche quando non ci&nbsp;sei.</h2><p class="p">Un assistente che risponde ai tuoi clienti su WhatsApp, anche quando non puoi, completamente personalizzabile per la tua attività.</p><p class="p">La demo è gratuita: se non ti convince, non paghi&nbsp;niente.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#a-va">Scopri come →</a></div>
 </div></section>
 
 <section style="padding-top:0;padding-bottom:40px;border-bottom:0"><span class="tag" data-n="5b">5b · Nota * (dopo i servizi)</span><div class="in">
