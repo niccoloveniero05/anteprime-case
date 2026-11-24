@@ -1109,7 +1109,7 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   box-shadow:0 calc(var(--sa-th) * .075) 0 #9A421A,0 calc(var(--sa-th) * .15) 0 #9A421A,
     calc(var(--sa-tw) * 1.022) calc(var(--sa-th) * .09) 0 #8A3A14,calc(var(--sa-tw) * 1.022) calc(var(--sa-th) * .33) 0 #7C3311}
 .bz{--bg:#0b0b0c;--l:#2a2a2e;--box:#17171a;--t:#8a8a92;--v:#39FF14}
-.bz *{box-sizing:border-box;margin:0}
+.bz *{box-sizing:border-box}.bz *:where(:not(.m *)){margin:0}
 .bz{background:var(--bg);color:#cfcfd4;font:14px/1.4 system-ui,sans-serif}
 .bz section{position:relative;border-bottom:1px dashed var(--l);padding:56px 20px}
 .bz .in{max-width:1100px;margin:0 auto}
