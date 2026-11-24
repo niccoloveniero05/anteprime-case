@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Veniello Studio">
 <meta property="og:title" content="Veniello Studio · Montecatini Terme">
-<meta property="og:description" content="Fatti trovare. Fatti scegliere. Siti, Google, social e video per le attività della Valdinievole.">
+<meta property="og:description" content="Siti con anteprima gratuita, scheda Google, social, video con l’IA e Virtual Assistant su WhatsApp per le attività della Valdinievole. Abbonamenti da 430 € al mese.">
 <meta property="og:image" content="https://www.veniellostudio.it/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,8 +27,13 @@ try {
 } catch (e) {
 }
 </script>
-<meta name="robots" content="noindex"><link rel="icon" href="img/favicon-32.png"><title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
-<meta name="description" content="Veniello Studio gestisce ogni mese Instagram, TikTok, scheda Google e video per ogni attività della Valdinievole: negozi, ristoranti, saloni, studi, artigiani e strutture. Vedi il tuo sito prima di pagare.">
+<meta name="robots" content="noindex"><title>Veniello Studio · Siti, Google, social e video a Montecatini Terme</title>
+<meta name="description" content="Siti con anteprima gratuita, scheda Google, social, video con l’IA e Virtual Assistant su WhatsApp per le attività della Valdinievole. Abbonamenti da 430 € al mese.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="img/favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <script>
 (function() {
   var f = location.protocol === "file:";
@@ -1476,6 +1481,55 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 /* Reel del Jué: scritta e ombra spariscono prima che il video si fermi */
 .cc-reel .cc-titolo,.cc-reel .cc-ombra{transition:opacity .7s ease}
 .cc-reel.senza-titolo .cc-titolo,.cc-reel.senza-titolo .cc-ombra{opacity:0}
+</style><style>
+/* CASELLA «SITO WEB» (punto 7): il finto sito ora è la home nuova. Slogan come l'apertura della bozza
+   (Inter 560, «Fatti trovare.» grigio, «scegliere» bianco, puntino arancione) all'inizio e alla fine;
+   in mezzo le variazioni di prima (colori, titolo con le grazie, pulsanti, disposizione, menu, schede). */
+.sa-schermo{--sa-fs-nu:40px;--sa-y1-nu:98px;--sa-y2-nu:140px}
+.sa-schermo[data-cop="colonne"]{--sa-fs-nu:27px;--sa-y1-nu:138px;--sa-y2-nu:166px}
+.sa-schermo[data-cop="foto"]{--sa-fs-nu:37px;--sa-y1-nu:225px;--sa-y2-nu:264px}
+.sa-h-nuovo{opacity:0}
+.sa-h-nuovo > span{font-family:'sa-inter',-apple-system,system-ui,sans-serif;font-weight:560;letter-spacing:-.04em;font-size:var(--sa-fs-nu);color:var(--sa-hf2)}
+.sa-h-nuovo .sa-r1{top:var(--sa-y1-nu)}
+.sa-h-nuovo .sa-r2{top:var(--sa-y2-nu)}
+.sa-h-nuovo em{font-style:normal;font-weight:600;letter-spacing:-.034em;color:var(--sa-hf);transition-property:color}
+.sa-h-nuovo .sa-ptt{width:.19em;height:.19em;margin-left:.05em}
+.sa-schermo[data-tit="nuovo"] .sa-h-serif{opacity:0}
+.sa-schermo[data-tit="nuovo"] .sa-h-nuovo{opacity:1}
+.sa-lab b{font:560 27px/1 'sa-inter',-apple-system,system-ui,sans-serif;letter-spacing:-.04em}
+.sa-md-h{font:560 72px/1.04 'sa-inter',-apple-system,system-ui,sans-serif;letter-spacing:-.04em;color:rgba(245,244,239,.62)}
+.sa-md-h em{font-style:normal;font-weight:600;letter-spacing:-.034em;color:#F5F4EF}
+.sa-md-h i{width:.19em;height:.19em;margin-left:.05em}
+.sa-md-lab b{font:560 34px/1.04 'sa-inter',-apple-system,system-ui,sans-serif;letter-spacing:-.04em;color:#F5F4EF}
+.sa-gb img{object-position:50% 85%}
+
+/* TESTATA (punto 11): al telefono «Scrivici» a 24 px dal bordo destro, come il logo dal sinistro */
+.testata-in{padding-right:var(--lato)}
+
+/* TITOLI DI SEZIONE (punto 13): tutti della stessa grandezza. Telefono min(7.6vw,31px), computer clamp(34px,3.1vw,46px) */
+.bz h2,#t-pr{font-size:min(7.6vw,31px)}
+@media(min-width:900px){.bz h2,.bz .cas h2,#t-pr{font-size:clamp(34px,3.1vw,46px)}}
+
+/* PROGETTI 6 in fila (punto 14, da 1400 px): il lavoro su tutta la riga in basso a sinistra,
+   il luogo su una riga sua sotto, a destra, in maiuscoletto mono, mai sotto 11 px */
+@media(min-width:1400px){
+ .bz .rail .card .card-piede{display:flex;flex-direction:column;align-items:stretch;gap:6px}
+ .bz .rail .card .card-lavori{flex:none;width:100%}
+ .bz .rail .card .card-luogo{flex:none;align-self:flex-end;width:auto;max-width:100%;text-align:right;font-size:11px;letter-spacing:.12em}
+}
+
+/* AREA TOCCABILE (punto 19): al telefono i link di testo si toccano su almeno 44 px di altezza.
+   Uno strato invisibile più alto del link, centrato: il testo e la riga sotto non si spostano. */
+@media(max-width:899px){
+ .bz a.lnk,.bz .ct-dati a,.piede .titolare a,.piede-leg-riga a{position:relative}
+ .bz a.lnk::before,.bz .ct-dati a::before,.piede .titolare a::before,.piede-leg-riga a::before{content:"";position:absolute;left:0;right:0;top:50%;height:44px;margin-top:-22px}
+}
+</style><style>
+/* Progetti 6 in fila: fondo più scuro in basso, così il testo non tocca le scritte dentro le foto (Malpeli) */
+@media(min-width:1400px){.bz .rail .card::before{background:radial-gradient(150% 60% at 0% 0%,rgba(8,7,4,.9) 0%,rgba(8,7,4,.7) 26%,rgba(8,7,4,.3) 52%,rgba(8,7,4,0) 80%),linear-gradient(0deg,rgba(8,7,4,.95) 0%,rgba(8,7,4,.8) 30%,rgba(8,7,4,.35) 48%,rgba(8,7,4,0) 62%)}}
+</style><style>
+/* Malpeli 6 in fila: foto spostata un po in alto, così la frase della foto non tocca il testo della scheda */
+@media(min-width:1400px){.bz .rail .card[href*="malpeli"] img{translate:0 -11%}}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
@@ -1574,22 +1628,22 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
           <div class="sa-md">
             <div class="sa-md-testata">
               <span class="sa-logo"><span class="sa-v">V</span><span>eniello</span><i class="sa-lp"></i><span>studio</span></span>
-              <span class="sa-md-nav"><span>Lavori</span><span>Servizi</span><span>Come funziona</span><span>Contatti</span></span>
+              <span class="sa-md-nav"><span>Come funziona</span><span>Servizi</span><span>Progetti</span><span>Abbonamenti</span><span>Domande</span></span>
               <span class="sa-md-pill">Scrivici</span>
             </div>
             <div class="sa-md-cop">
               <p class="sa-md-mono">Social · Google · Video · Siti</p>
               <p class="sa-md-h">Fatti trovare.<br>Fatti <em>scegliere</em><i></i></p>
-              <p class="sa-md-intro">Instagram, TikTok, scheda Google e video, ogni mese.</p>
+              <p class="sa-md-intro">Sito, Google, social e video, tutto da un solo studio.</p>
               <span class="sa-md-btn">Chiedi l’anteprima gratuita</span>
             </div>
             <div class="sa-md-fascia"><span>Siti</span><span>·</span><span>Google</span><span>·</span><span>Social</span><span>·</span><span>Video</span></div>
             <div class="sa-md-lavori">
-              <p class="sa-md-lab"><b>Il nostro <em>lavoro</em>.</b><span>2026</span></p>
+              <p class="sa-md-lab"><b>I nostri progetti.</b><span>2026</span></p>
               <div class="sa-md-schede">
                 <span class="sa-md-scheda"><img src="sa/img/jue.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"><b>Jué Club</b></span>
                 <span class="sa-md-scheda"><img src="sa/img/elena.jpg" alt="" width="480" height="720" loading="lazy" decoding="async"><b>Elena Baldi</b></span>
-                <span class="sa-md-scheda"><img src="sa/img/gb.jpg" alt="" width="480" height="854" loading="lazy" decoding="async"><b>GB Oro</b></span>
+                <span class="sa-md-scheda sa-gb"><img src="img/gb-gioielli-4.jpg" alt="" width="780" height="976" loading="lazy" decoding="async"><b>GB Gioielli</b></span>
               </div>
             </div>
           </div>
@@ -1598,7 +1652,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 
             <div class="sa-coppia">
         <div class="sa-tel">
-          <div class="sa-schermo" data-tema="scuro" data-tit="serif" data-cop="centro" data-btn="pillola" data-menu="pill" data-schede="griglia" data-vivo="1">
+          <div class="sa-schermo" data-tema="scuro" data-tit="nuovo" data-cop="centro" data-btn="pillola" data-menu="pill" data-schede="griglia" data-vivo="1">
             <div class="sa-stato"><span>9:41</span><span>
               <svg class="sa-st-campo" viewBox="0 0 20 12"><rect x="0" y="8" width="3.4" height="4" rx="1"/><rect x="5.4" y="5.5" width="3.4" height="6.5" rx="1"/><rect x="10.8" y="3" width="3.4" height="9" rx="1"/><rect x="16.2" y="0" width="3.4" height="12" rx="1"/></svg>
               <svg class="sa-st-wifi" viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.8 10.8 0 0 0 8 .4 10.8 10.8 0 0 0 .5 3.4l1.2 1.3A9 9 0 0 1 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.2-1.3A7.2 7.2 0 0 0 8 4a7.2 7.2 0 0 0-4.9 1.9l1.2 1.3c1-.9 2.3-1.4 3.7-1.4zM8 9.4 10.4 7A3.5 3.5 0 0 0 8 7.6 3.5 3.5 0 0 0 5.6 7z"/></svg>
@@ -1610,7 +1664,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
                   <span class="sa-logo"><span class="sa-v">V</span><span>eniello</span><i class="sa-lp"></i><span>studio</span></span>
                   <span class="sa-pill">Scrivici</span>
                   <span class="sa-burger"><i></i><i></i></span>
-                  <span class="sa-nav"><span>Lavori</span><span>Servizi</span><span>Contatti</span></span>
+                  <span class="sa-nav"><span>Come funziona</span><span>Servizi</span></span>
                   <span class="sa-sw"><i class="sa-sw-m"><svg class="sa-sw-luna" viewBox="0 0 24 24"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg><svg class="sa-sw-sole" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.6"/><path d="M12 1.8v2.9M12 19.3v2.9M1.8 12h2.9M19.3 12h2.9M4.8 4.8l2 2M17.2 17.2l2 2M4.8 19.2l2-2M17.2 6.8l2-2"/></svg></i></span>
                 </div>
                                 <div class="sa-cop">
@@ -1619,16 +1673,17 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
                   <p class="sa-mono">Social · Google · Video · Siti</p>
                   <p class="sa-h sa-h-serif"><span class="sa-r1">Fatti trovare.</span><span class="sa-r2">Fatti <em>scegliere</em><i class="sa-ptt"></i></span></p>
                   <p class="sa-h sa-h-sans"><span class="sa-r1">Fatti trovare.</span><span class="sa-r2">Fatti scegliere<i class="sa-ptt"></i></span></p>
-                  <p class="sa-intro"><span class="sa-i1">Instagram, TikTok, scheda Google e</span><span class="sa-i2">video, ogni mese.</span></p>
+                  <p class="sa-h sa-h-nuovo"><span class="sa-r1">Fatti trovare.</span><span class="sa-r2">Fatti <em>scegliere</em><i class="sa-ptt"></i></span></p>
+                  <p class="sa-intro"><span class="sa-i1">Sito, Google, social e video,</span><span class="sa-i2">tutto da un solo studio.</span></p>
                   <span class="sa-btn">Chiedi l’anteprima gratuita</span>
                 </div>
                 <div class="sa-fascia"><div class="sa-fascia-in"><span>Siti · Google · Social · Video ·</span><span>Siti · Google · Social · Video ·</span><span>Siti · Google · Social · Video ·</span><span>Siti · Google · Social · Video ·</span></div></div>
                                 <div class="sa-lavori">
-                  <p class="sa-lab"><b>Il nostro <em>lavoro</em>.</b><span>2026</span></p>
+                  <p class="sa-lab"><b>I nostri progetti.</b><span>2026</span></p>
                   <div class="sa-schede">
                     <span class="sa-scheda"><span class="sa-sc-img"><img src="sa/img/jue.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></span><b>Jué Club</b><small>Cocktail bar</small></span>
                     <span class="sa-scheda"><span class="sa-sc-img"><img src="sa/img/elena.jpg" alt="" width="480" height="720" loading="lazy" decoding="async"></span><b>Elena Baldi</b><small>Wedding planner</small></span>
-                    <span class="sa-scheda"><span class="sa-sc-img"><img src="sa/img/gb.jpg" alt="" width="480" height="854" loading="lazy" decoding="async"></span><b>GB Oro</b><small>Oreficeria</small></span>
+                    <span class="sa-scheda sa-gb"><span class="sa-sc-img"><img src="img/gb-gioielli-4.jpg" alt="" width="780" height="976" loading="lazy" decoding="async"></span><b>GB Gioielli</b><small>Gioielleria</small></span>
                   </div>
                 </div>
               </div>
@@ -1710,7 +1765,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
               </div>
             </div>
           </div>
- <div><p class="lab">Creazione di contenuti</p><h2>Dalle riprese ai profili&nbsp;social.</h2><p class="p">Giri tu, o ti aiutiamo a girare.</p><p class="p">Noi montiamo, scriviamo i testi e pubblichiamo reel e grafiche sui tuoi social, con lo stile della tua&nbsp;attività.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#abbonamenti">Scopri come →</a></div>
+ <div><p class="lab">Creazione di contenuti</p><h2>Dalle riprese ai profili&nbsp;social.</h2><p class="p">Giri tu, o ti aiutiamo a girare.</p><p class="p">Noi montiamo, scriviamo i testi e pubblichiamo reel e grafiche sui tuoi social, con lo stile della tua&nbsp;attività.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#p-crescita">Scopri come →</a></div>
 </div></section>
 
 <section class="cas cas-va"><div class="in srv">
@@ -1779,7 +1834,7 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
  <h2 class="t7">3 abbonamenti a partire&nbsp;da<br class="solo-pc7"> 430&nbsp;€ al&nbsp;mese.</h2><p class="p p7">Da chi deve ancora iniziare a chi vuole una soluzione a&nbsp;360°.<br>Dettagli e prezzi nella pagina&nbsp;dedicata.</p><a class="lnk" href="https://www.veniellostudio.it/abbonamenti/#abbonamenti">Vedi i prezzi →</a>
 </div></section>
 
-<section><div class="in ct">
+<section id="contatti"><div class="in ct">
  <div><h2>Raccontaci la tua&nbsp;attività.</h2><p class="p">Ti rispondiamo su WhatsApp in&nbsp;giornata.</p><a class="lnk" href="https://wa.me/393520338377?text=Ciao%2C%20vorrei%20informazioni%20per%20la%20mia%20attivit%C3%A0">Scrivici su WhatsApp →</a></div>
  <dl class="ct-dati">
   <dt>Referente</dt><dd>Giuseppe Fusciello</dd>
@@ -1791,12 +1846,12 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 
 <section class="faq" id="domande"><div class="in">
  <h2>Domande</h2>
- <details><summary>Come si parte?<span>+</span></summary><p>Scrivici su WhatsApp o chiamaci: ci racconti la tua attività e capiamo insieme da dove conviene partire. Poi scegli l’abbonamento o il servizio e si parte.</p></details>
+ <details><summary>Come si parte?<span>+</span></summary><p>Scrivici su WhatsApp o chiamaci: ci racconti la tua attività e, con una consulenza gratuita, capiamo insieme da dove conviene partire. Poi scegli l’abbonamento o il servizio e si parte.</p></details>
  <details><summary>L’anteprima del sito è gratuita?<span>+</span></summary><p>Sì, e vale anche per la landing page e per l’e-commerce. Li prepariamo, li guardi con calma sul telefono e decidi. Se non ti convincono, non paghi niente e non ti impegni.</p></details>
  <details><summary>La consulenza è gratuita?<span>+</span></summary><p>Sì, sempre e senza impegno: ci racconti la tua attività e capiamo insieme da dove&nbsp;partire.</p></details>
  <details><summary>C’è un vincolo di durata?<span>+</span></summary><p>No. Gli abbonamenti si disdicono di mese in mese, quando vuoi: basta un messaggio su WhatsApp e l’abbonamento finisce alla fine del mese già pagato.</p></details>
  <details><summary>Che differenza c’è tra abbonamenti e servizi?<span>+</span></summary><p>Gli abbonamenti si pagano ogni mese e comprendono il lavoro continuo: social, contenuti, report. I servizi sono lavori singoli, come un sito o un video, e si pagano una volta sola.</p></details>
- <details><summary>Ci sono altre spese?<span>+</span></summary><p>I prezzi sono finali: non c’è IVA da aggiungere e il bollo sulle fatture lo paghiamo noi. Il sito o l’e-commerce lo prepariamo e lo mettiamo online noi; i costi per tenerlo attivo sono tuoi: il dominio (per esempio latuaattivita.it, intestato a te, circa 10–15 € l’anno), lo spazio dove sta il sito e, per l’e-commerce, la piattaforma e le commissioni sui pagamenti. Te li diciamo prima, nel preventivo. Con Google Ads, il budget della pubblicità lo paghi direttamente a Google.</p></details>
+ <details><summary>Ci sono altre spese?<span>+</span></summary><p>I prezzi sono finali: non c’è IVA da aggiungere e il bollo sulle fatture lo paghiamo noi. Il sito o l’e-commerce lo prepariamo e lo mettiamo online noi; i costi per tenerlo attivo sono tuoi: il dominio (per esempio latuaattivita.it, intestato a te, circa 10–15&nbsp;€ l’anno), lo spazio dove sta il sito e, per l’e-commerce, la piattaforma e le commissioni sui pagamenti. Te li diciamo prima, nel preventivo. Con Google Ads, il budget della pubblicità lo paghi direttamente a Google.</p></details>
 </div></section>
 
 
@@ -3839,15 +3894,15 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 <script>
 (function() {
   "use strict";
-  var INIZIO = { tema: "scuro", tit: "serif", cop: "centro", btn: "pillola", menu: "pill", schede: "griglia", vivo: "1" };
+  var INIZIO = { tema: "scuro", tit: "nuovo", cop: "centro", btn: "pillola", menu: "pill", schede: "griglia", vivo: "1" };
   var PASSI = [
     [1100, { tema: "chiaro", vivo: "0" }],
-    [2100, { tit: "sans", btn: "quadro" }],
+    [2100, { tit: "serif", btn: "quadro" }],
     [3100, { cop: "colonne", menu: "nav" }],
     [4100, { tema: "scuro", menu: "burger" }],
     [5100, { cop: "foto", btn: "contorno" }],
     [6100, { schede: "lista" }],
-    [7100, { tema: "scuro", tit: "serif", cop: "centro", btn: "pillola", menu: "pill", schede: "griglia", vivo: "0" }]
+    [7100, { tema: "scuro", tit: "nuovo", cop: "centro", btn: "pillola", menu: "pill", schede: "griglia", vivo: "0" }]
   ];
   var FINE = 8150;
   var FINALE = {};
@@ -4079,6 +4134,29 @@ document.querySelectorAll(".fr button").forEach(function(b){b.addEventListener("
   }
   v.addEventListener("play",function(){ if(!raf) raf=requestAnimationFrame(passo); });
   v.addEventListener("ended",function(){ reel.classList.add("senza-titolo"); v.dataset.fermo="1"; });
+})();
+</script>
+<script data-goatcounter="https://veniellostudio.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  var coda=[];
+  function pronto(){return window.goatcounter&&window.goatcounter.count}
+  function manda(){if(!pronto())return;while(coda.length){try{window.goatcounter.count(coda.shift())}catch(x){}}}
+  function conta(path,titolo){coda.push({path:path,title:titolo||path,event:true});manda()}
+  var giri=0,attesa=setInterval(function(){manda();if(pronto()||++giri>60)clearInterval(attesa)},250);
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href^="tel:"]');if(!a)return;
+    var dove=(a.closest('section,header,footer')||{}).id||'pagina';
+    if(a.getAttribute('href').indexOf('tel:')===0){conta('clic/telefono-'+dove,'Telefono ('+dove+')');return}
+    var t='';try{t=decodeURIComponent((a.getAttribute('href').split('text=')[1]||'')).replace(/\s+/g,' ').trim()}catch(x){}
+    conta('clic/'+(t||'whatsapp'),t||'WhatsApp');
+  },true);
+  if(!('IntersectionObserver' in window))return;
+  var viste={};
+  var o=new IntersectionObserver(function(v){v.forEach(function(r){
+    if(r.isIntersecting&&!viste[r.target.id]){viste[r.target.id]=1;conta('sezione/'+r.target.id,'Sezione '+r.target.id);o.unobserve(r.target)}
+  })},{threshold:.2});
+  ['inizio','come','servizi','progetti','abbonamenti','partner','domande','contatti'].forEach(function(id){var x=document.getElementById(id);if(x)o.observe(x)});
 })();
 </script>
 </body>
