@@ -1238,49 +1238,50 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
   </section>
 
 <style>
-/* Sezione 2 · Come si parte: un riquadro largo quanto il sito, diviso in 3 parti di grandezza diversa (1 grande sopra, 2 media e 3 piccola sotto) */
-.passi{position:relative;display:block!important;overflow:visible!important;margin:0!important;width:auto!important;max-width:none!important;padding:var(--s6) 0!important;border-top:var(--linea-sezione)}
-.passi-in{max-width:var(--max);margin:0 auto;padding:0 var(--lato)}
-.passi-in h2{font-family:var(--sans);font-weight:560;font-size:clamp(36px,10.4vw,44px);line-height:1.04;letter-spacing:-.04em;color:var(--av)}
-.passi-in h2 .pt{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
-.passi-sotto{font:400 18px/1.45 var(--sans);letter-spacing:-.012em;color:var(--av2);margin-top:14px;max-width:24em}
-.passi-box{margin-top:32px;display:grid;grid-template-columns:3fr 2fr;background:var(--bg3);border:1px solid var(--filo2);border-radius:20px;overflow:hidden}
-.passi-p{padding:24px 20px 26px;display:flex;flex-direction:column}
-.passi-p h3{font-family:var(--sans);font-weight:560;color:var(--av);letter-spacing:-.03em;text-wrap:balance}
-.passi-p p{font-family:var(--sans);font-weight:400;color:var(--av2);letter-spacing:-.01em;margin-top:10px}
-.passi-1{grid-column:1/-1;border-bottom:1px solid var(--filo2);padding:30px 24px 34px;min-height:220px;justify-content:flex-end}
-.passi-1 h3{font-size:36px;line-height:1.04}
-.passi-1 p{font-size:18px;line-height:1.45;max-width:22em}
-.passi-2{border-right:1px solid var(--filo2);min-height:200px}
-.passi-2 h3{font-size:23px;line-height:1.08}
-.passi-2 p{font-size:15.5px;line-height:1.45}
-.passi-3 h3{font-size:18px;line-height:1.12}
-.passi-3 p{font-size:14px;line-height:1.45}
+/* Sezione 2 · Come si parte: tre punti a righe, numeri grandi, righe arancioni 1/3 2/3 intera */
+.pr{position:relative;padding:var(--s6) 0;border-top:var(--linea-sezione)}
+.pr-in{max-width:var(--max);margin:0 auto;padding:0 var(--lato)}
+.pr-t{font:560 clamp(36px,10.4vw,44px)/1.04 var(--sans);letter-spacing:-.04em;color:var(--av2);max-width:13em;text-wrap:balance}
+.pr-t em{font-style:normal;font-weight:600;color:var(--av);letter-spacing:-.034em}
+.pr-t i{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
+.pr-s{color:var(--av2);font-size:17px;line-height:1.55;margin-top:20px;max-width:32em}
+.pr-g{margin-top:40px}
+.pr-p{position:relative;padding:34px 0 40px;display:grid;grid-template-columns:34px 1fr;column-gap:16px;row-gap:16px;align-items:center;transform:translateY(14px);opacity:0}
+.pr-p::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--filo2)}
+.pr-p::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:var(--w);background:rgba(255,90,31,.6);transform:scaleX(0);transform-origin:left}
+.pr-p.pr-1{--w:33.333%;padding-top:0}.pr-p.pr-2{--w:66.666%}.pr-p.pr-3{--w:100%}
+.pr-n{font:400 56px/.9 'Unica One',var(--sans);letter-spacing:-.01em;color:var(--av)}
+.pr-p h3{font:450 clamp(24px,7.4vw,30px)/1.12 var(--serif);white-space:nowrap;letter-spacing:-.012em;color:var(--av)}
+.pr-p p{grid-column:1/-1;font-size:17px;line-height:1.55;color:var(--av2);max-width:30em;text-wrap:pretty}
+.pr-g.on .pr-p{animation:pr-sale 1.1s cubic-bezier(.22,.61,.36,1) forwards}
+.pr-g.on .pr-p::after{animation:pr-riga 1.3s cubic-bezier(.22,.61,.36,1) forwards}
+.pr-g.on .pr-2,.pr-g.on .pr-2::after{animation-delay:.55s}.pr-g.on .pr-3,.pr-g.on .pr-3::after{animation-delay:1.1s}
+@keyframes pr-sale{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+@keyframes pr-riga{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.pr-p{transform:none;opacity:1}.pr-p::after{transform:none}.pr-g.on .pr-p,.pr-g.on .pr-p::after{animation:none}}
 @media (min-width:900px){
-  .passi-in h2{font-size:clamp(46px,4.3vw,58px)}
-  .passi-sotto{font-size:20px}
-  .passi-box{margin-top:44px;border-radius:24px}
-  .passi-1{padding:44px 44px 46px;min-height:300px}
-  .passi-1 h3{font-size:clamp(46px,4.3vw,58px)}
-  .passi-1 p{font-size:20px}
-  .passi-2,.passi-3{padding:34px 36px 38px;min-height:240px}
-  .passi-2 h3{font-size:32px}
-  .passi-2 p{font-size:18px}
-  .passi-3 h3{font-size:24px}
-  .passi-3 p{font-size:16px}
-}
+ .pr-t{font-size:clamp(46px,4.3vw,58px)}
+ .pr-g{margin-top:64px}
+ .pr-p{grid-template-columns:70px 1.1fr 1fr;column-gap:40px;padding:48px 0 52px}
+ .pr-p p{grid-column:auto;font-size:16px;line-height:1.6}
+ .pr-p h3{font:500 30px/1.2 var(--sans);letter-spacing:-.02em;white-space:nowrap}}
 </style>
-<section class="passi" id="come" aria-labelledby="t-passi"><span class="tag" data-n="2">2 · I 3 passi (riquadro diviso in 3)</span>
- <div class="passi-in">
-  <h2 id="t-passi">Come si parte<i class="pt" aria-hidden="true"></i></h2>
-  <p class="passi-sotto">Tre passi, uguali per tutti i&nbsp;servizi.</p>
-  <div class="passi-box">
-   <article class="passi-p passi-1"><h3>Ci scrivi</h3><p>Su WhatsApp o per telefono. Ci racconti la tua attività in due&nbsp;minuti.</p></article>
-   <article class="passi-p passi-2"><h3>Vediamo cosa ti serve</h3><p>Capiamo insieme da dove conviene partire per farti trovare e&nbsp;scegliere.</p></article>
-   <article class="passi-p passi-3"><h3>Scegli e si parte</h3><p>Un abbonamento o un servizio singolo, come&nbsp;preferisci.</p></article>
+<section class="pr" id="come" aria-labelledby="t-pr"><span class="tag" data-n="2">2 · I 3 passi (righe numerate)</span>
+ <div class="pr-in">
+  <h2 class="pr-t" id="t-pr">Come si <em>parte</em><i aria-hidden="true"></i></h2>
+  <p class="pr-s">Tre passi, uguali per tutti i&nbsp;servizi.</p>
+  <div class="pr-g" id="pr-g">
+   <article class="pr-p pr-1"><span class="pr-n">1</span><h3>Ci contatti</h3><p>Per WhatsApp o telefono, e ci racconti la tua attività in 2&nbsp;minuti.</p></article>
+   <article class="pr-p pr-2"><span class="pr-n">2</span><h3>Capiamo cosa ti serve</h3><p>Insieme decidiamo come&nbsp;partire.</p></article>
+   <article class="pr-p pr-3"><span class="pr-n">3</span><h3>Scegli</h3><p>Un abbonamento o un servizio. Al resto pensiamo&nbsp;noi.</p></article>
   </div>
  </div>
 </section>
+<script>
+(function(){var g=document.getElementById('pr-g');if(!g)return;
+if(!('IntersectionObserver' in window)){g.classList.add('on');return}
+new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('on');o.disconnect()}},{threshold:.3}).observe(g)})();
+</script>
 <div class="bz">
 <section><span class="tag" data-n="3">3 · Servizio: sito web</span><div class="in srv">
  <div class="box">Animazione del sito<br>(già fatta)</div>
