@@ -1,35 +1,44 @@
 <!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Prova · I 3 passi a righe</title>
 <style>
 @font-face{font-family:Inter;src:url(fonts/inter.woff2);font-weight:100 900}
-@font-face{font-family:GM;src:url(fonts/GeistMono-400.woff2)}
-:root{--bg:#100F09;--av:#F5F4EF;--av2:rgba(245,244,239,.62);--av3:rgba(245,244,239,.42);--filo2:rgba(245,244,239,.2);--rec:#FF5A1F;--max:1180px;--lato:20px}
+@font-face{font-family:News;src:url(fonts/Newsreader.woff2);font-weight:200 800}
+@font-face{font-family:Unica;src:url(fonts/UnicaOne-400.woff2);font-weight:400}
+:root{--bg:#100F09;--av:#F5F4EF;--av2:rgba(245,244,239,.62);--filo2:rgba(245,244,239,.2);--rec:#FF5A1F;--max:1180px;--lato:20px;--sans:Inter,system-ui,sans-serif;--serif:News,Georgia,serif}
 *{box-sizing:border-box;margin:0}
-body{background:var(--bg);color:var(--av);font-family:Inter,system-ui,sans-serif}
+body{background:var(--bg);color:var(--av);font:400 17px/1.55 var(--sans);letter-spacing:-.006em;-webkit-font-smoothing:antialiased}
 .sp{height:70svh;display:grid;place-items:center;color:var(--av2);font-size:14px;text-align:center;padding:0 20px}
 .passi{padding:96px 0}
 .in{max-width:var(--max);margin:0 auto;padding:0 var(--lato)}
-h2{font:560 clamp(36px,10.4vw,56px)/1.04 Inter;letter-spacing:-.04em}
-h2 i{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
-.sotto{font-size:18px;color:var(--av2);margin:14px 0 40px}
-.p{border-top:1px solid var(--filo2);padding:34px 0 40px;display:grid;grid-template-columns:34px 1fr;column-gap:14px;row-gap:18px;align-items:center;
-  transform:translateY(14px);opacity:0}
-.p:last-of-type{border-bottom:1px solid var(--filo2)}
-.n{font:400 40px/1 GM,monospace;color:var(--av)}
-.p h3{font:560 clamp(19px,6vw,34px)/1.1 Inter;white-space:nowrap;letter-spacing:-.03em}
-.p p{grid-column:1/-1;font-size:17px;line-height:1.5;color:var(--av2);max-width:30em}
+/* titolo e sottotitolo: come la landing online */
+.t-sez{font:560 clamp(36px,10.4vw,44px)/1.04 var(--sans);letter-spacing:-.04em;color:var(--av2);max-width:13em;text-wrap:balance}
+.t-sez em{font-style:normal;font-weight:600;color:var(--av);letter-spacing:-.034em}
+.t-sez i{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:var(--rec);margin-left:.04em}
+.sotto{color:var(--av2);font-size:17px;line-height:1.55;margin-top:20px;max-width:32em}
+#g{margin-top:44px}
+/* i tre punti */
+.p{position:relative;padding:34px 0 40px;display:grid;grid-template-columns:34px 1fr;column-gap:16px;row-gap:16px;align-items:center;transform:translateY(14px);opacity:0}
+.p::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--filo2)}
+.p::after{content:"";position:absolute;left:0;top:-.5px;height:2px;width:var(--w);background:var(--rec);transform:scaleX(0);transform-origin:left}
+.p1{--w:33.333%}.p2{--w:66.666%}.p3{--w:100%}
+.n{font:400 56px/.9 Unica,var(--sans);letter-spacing:-.01em;color:var(--av)}
+.p h3{font:450 clamp(21px,6.1vw,24px)/1.15 var(--serif);white-space:nowrap;letter-spacing:-.012em;color:var(--av)}
+.p p{grid-column:1/-1;font-size:17px;line-height:1.55;color:var(--av2);max-width:30em;text-wrap:pretty}
 .on .p{animation:sale 1.1s cubic-bezier(.22,.61,.36,1) forwards}
-.on .p2{animation-delay:.55s}.on .p3{animation-delay:1.1s}
+.on .p::after{animation:riga 1.3s cubic-bezier(.22,.61,.36,1) forwards}
+.on .p2,.on .p2::after{animation-delay:.55s}.on .p3,.on .p3::after{animation-delay:1.1s}
 @keyframes sale{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
-@media (prefers-reduced-motion:reduce){.p{transform:none;opacity:1}.on .p{animation:none}}
+@keyframes riga{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.p{transform:none;opacity:1}.p::after{transform:none}.on .p,.on .p::after{animation:none}}
 @media (min-width:900px){
  .in{padding:0 40px}
- .p{grid-template-columns:50px 1.1fr 1fr;column-gap:40px;padding:48px 0 52px}
- .p p{grid-column:auto;font-size:19px}
- .n{font-size:50px}.p h3{font-size:clamp(28px,2.8vw,36px)}}
+ .t-sez{font-size:clamp(46px,4.3vw,58px)}
+ .p{grid-template-columns:70px 1.1fr 1fr;column-gap:40px;padding:48px 0 52px}
+ .p p{grid-column:auto;font-size:16px;line-height:1.6}
+ .p h3{font:500 22px/1.3 var(--sans);letter-spacing:-.02em;white-space:nowrap}}
 button{margin-top:28px;background:none;color:var(--av);border:1px solid var(--filo2);border-radius:99px;padding:10px 18px;font:500 14px Inter;cursor:pointer}
 </style></head><body>
 <div class="sp">↓ scorri: le righe compaiono una dopo l'altra quando arrivi ai 3 passi</div>
-<section class="passi"><div class="in"><h2>Come si parte<i></i></h2><p class="sotto">Tre passi, uguali per tutti i servizi.</p>
+<section class="passi"><div class="in"><h2 class="t-sez">Come si <em>parte</em><i></i></h2><p class="sotto">Tre passi, uguali per tutti i servizi.</p>
 <div id="g">
 <article class="p p1"><span class="n">1</span><h3>Ci contatti</h3><p>Per WhatsApp o telefono, e ci racconti la tua attività in 2&nbsp;minuti.</p></article>
 <article class="p p2"><span class="n">2</span><h3>Capiamo cosa ti serve</h3><p>Insieme decidiamo come&nbsp;partire.</p></article>
