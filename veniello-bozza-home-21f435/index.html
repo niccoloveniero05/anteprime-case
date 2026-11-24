@@ -1205,7 +1205,23 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .bz{font:14px/1.4 system-ui,sans-serif}
 .eroe{position:relative}
 </style>
-<style>.bz .sa-tel{margin:auto}.bz .srv .m{margin:0;aspect-ratio:4/5;width:100%}@media(min-width:900px){.bz .srv .m{aspect-ratio:1/1}}@media(min-width:1024px){.bz .m-va{background:#100F09}.bz .m-va > .chat{left:50%;right:auto;width:min(420px,70%);transform:translateX(-50%)}}</style></head>
+<style>.bz .sa-tel{margin:auto}.bz .srv .m{margin:0;aspect-ratio:4/5;width:100%}@media(min-width:900px){.bz .srv .m{aspect-ratio:1/1}}@media(min-width:1024px){.bz .m-va{background:#100F09}.bz .m-va > .chat{left:50%;right:auto;width:min(420px,70%);transform:translateX(-50%)}}</style><style>
+/* Virtual Assistant: finale con la mezzaluna disegnata (al posto del riepilogo ingrandito) */
+.va-luna{position:absolute;inset:0;z-index:2;display:grid;place-items:center;pointer-events:none}
+.va-luna svg{width:min(56%,220px);height:auto;overflow:visible;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-top:-4%}
+.va-luna .vl-b{stroke:rgba(245,244,239,.82);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:1}
+.va-luna .vl-o{stroke:#FF5A1F;stroke-width:2.55;stroke-dasharray:1;stroke-dashoffset:1}
+.va-luna .vl-e{fill:rgba(245,244,239,.92);transform-box:fill-box;transform-origin:center;transform:scale(0)}
+@keyframes vl-traccia{to{stroke-dashoffset:0}}
+@keyframes vl-occhio{0%{transform:scale(0)}65%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes vl-sfuma{to{opacity:0}}
+.chat.anima .chat-tela{animation:vl-sfuma .7s ease calc(var(--t7) + .4s) forwards}
+.chat.anima .va-luna .vl-b{animation:vl-traccia 1.3s cubic-bezier(.45,0,.2,1) calc(var(--t7) + .9s) forwards}
+.chat.anima .va-luna .vl-e1{animation:vl-occhio .4s cubic-bezier(.3,1.25,.5,1) calc(var(--t7) + 2.1s) forwards}
+.chat.anima .va-luna .vl-e2{animation:vl-occhio .4s cubic-bezier(.3,1.25,.5,1) calc(var(--t7) + 2.25s) forwards}
+.chat.anima .va-luna .vl-o{animation:vl-traccia .8s cubic-bezier(.45,0,.2,1) calc(var(--t7) + 2.6s) forwards}
+@media (prefers-reduced-motion:reduce){.va-luna{display:none}}
+</style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1443,7 +1459,12 @@ new IntersectionObserver(function(e,o){if(e[0].isIntersecting){g.classList.add('
 
 <section><span class="tag" data-n="5">5 · Servizio: Virtual Assistant</span><div class="in srv">
            <div class="m pannello m-va">
-      <div class="chat" data-finale="1.2" data-largo="360" data-basso="1" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede ad AnomiaLabs se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
+      <div class="chat" data-largo="360" data-basso="1" role="img" aria-label="Esempio di chat su WhatsApp: alle 23:47 una cliente chiede ad AnomiaLabs se domenica è aperta, per vedere le fedi; l’assistente risponde subito che domenica è chiuso e propone martedì alle 16; lei accetta e al titolare arriva il riepilogo dell’appuntamento.">
+        <div class="va-luna" aria-hidden="true"><svg viewBox="84 88 182 182">
+<path class="vl-b" pathLength="1" d="M170 100A80 80 0 1 0 250 180A60.4 60.4 0 1 1 170 100Z"/>
+<circle class="vl-e vl-e1" cx="190" cy="170" r="8"/><circle class="vl-e vl-e2" cx="222" cy="146" r="8"/>
+<path class="vl-o" pathLength="1" d="M178.4 100.4A80 80 0 0 1 249.6 171.6"/>
+</svg></div>
         <div class="chat-tela" aria-hidden="true">
           <div class="chat-stato">
             <span class="chat-ora">23:4<span class="chat-cifra"><b>7</b><b>8</b></span></span>
