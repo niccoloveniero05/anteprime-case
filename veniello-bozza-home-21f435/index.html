@@ -1384,6 +1384,30 @@ sup.ast{font-size:.7em;line-height:0;color:var(--rec)}
 .cc-griglia > i:nth-child(6)::after{background-image:url(cc/post-luci.jpg);transition-delay:1.2s}
 .cc.pieno .cc-griglia > i::after{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.cc-griglia > i::after{transition:none}}
+</style><style>
+/* PROGETTI al computer: tutte le schede visibili, niente frecce (6 in fila, 3+3 sugli schermi più stretti) */
+@media(min-width:900px){
+ .bz .fr{display:none!important}
+ .bz .rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;overflow:visible;scroll-snap-type:none;padding:40px var(--lato) 6px;max-width:calc(var(--max) + 2 * var(--lato));margin:0 auto}
+ .bz .rail .card.pj{flex:none;width:auto;max-width:none}
+}
+@media(min-width:1400px){
+ .bz .rail{grid-template-columns:repeat(6,minmax(0,1fr));max-width:none;padding-left:var(--lato);padding-right:var(--lato)}
+ .bz .rail .card .card-nome{left:18px;right:18px;top:18px}
+ .bz .rail .card .card-piede{left:18px;right:18px;bottom:18px}
+ .bz .rail .card .card-nome h3{font-size:clamp(21px,1.65vw,30px)}
+ .bz .rail .card .card-lavori{font-size:clamp(13.5px,1.05vw,16px)}
+ .bz .rail .card .card-luogo{font-size:clamp(9.5px,.72vw,11px)}
+}
+</style><style>
+/* i loghi nelle schede si rimpiccioliscono con la scheda */
+.bz .rail .card{container-type:inline-size}
+.bz .rail .card .cthl{font-size:min(34px,10.9cqi)}
+.bz .rail .card .cths{font-size:min(15px,4.8cqi)}
+.bz .rail .card .azb{font-size:min(25px,8cqi)}
+.bz .rail .card .azs{font-size:min(10px,3.2cqi)}
+.bz .rail .card .azi svg{width:min(46px,14.7cqi);height:auto}
+@media(min-width:1400px){.bz .rail .card .card-luogo{flex:0 0 auto;width:min-content;max-width:none;letter-spacing:.07em}.bz .rail .card .card-lavori{flex:1 1 auto}}
 </style></head>
 <body>
 <a class="salta" href="#contenuto">Vai al contenuto</a>
