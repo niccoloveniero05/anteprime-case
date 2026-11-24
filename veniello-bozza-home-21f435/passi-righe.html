@@ -17,8 +17,9 @@ body{background:var(--bg);color:var(--av);font:400 17px/1.55 var(--sans);letter-
 #g{margin-top:44px}
 /* i tre punti */
 .p{position:relative;padding:34px 0 40px;display:grid;grid-template-columns:34px 1fr;column-gap:16px;row-gap:16px;align-items:center;transform:translateY(14px);opacity:0}
-.p::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--filo2)}
-.p::after{content:"";position:absolute;left:0;top:-.5px;height:2px;width:var(--w);background:var(--rec);transform:scaleX(0);transform-origin:left}
+.p::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--filo2)}
+.p1{border-top:1px solid var(--filo2)}
+.p::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:var(--w);background:rgba(255,90,31,.6);transform:scaleX(0);transform-origin:left}
 .p1{--w:33.333%}.p2{--w:66.666%}.p3{--w:100%}
 .n{font:400 56px/.9 Unica,var(--sans);letter-spacing:-.01em;color:var(--av)}
 .p h3{font:450 clamp(21px,6.1vw,24px)/1.15 var(--serif);white-space:nowrap;letter-spacing:-.012em;color:var(--av)}
