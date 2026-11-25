@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>NERO · Autista privato NCC con Mercedes Viano</title>
-<meta name="description" content="Noleggio con conducente con Mercedes Viano nero: corse in città, aeroporti e viaggi lunghi in tutta Italia. Prezzo fisso, su prenotazione.">
+<title>NERO · Noleggio con conducente a Perugia</title>
+<meta name="description" content="Noleggio con conducente a Perugia: corse in città, aeroporti e viaggi lunghi in tutta Italia. Prezzo fisso, su prenotazione.">
 <meta name="theme-color" content="#0a0a0b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,9 +87,10 @@ h2 em{font-style:italic;color:var(--oro2)}
 /* il Viano */
 .viano{background:var(--fondo2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
 .viano .griglia{display:grid;grid-template-columns:1.05fr 1fr;gap:70px;align-items:center}
-.sagoma{position:relative;border-radius:22px;background:radial-gradient(70% 60% at 50% 70%,rgba(201,169,110,.10),transparent 70%),#0d0d0f;border:1px solid var(--linea);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.sagoma img{width:86%;max-width:none}
-.sagoma .nota{position:absolute;left:18px;bottom:14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5d5a54}
+.sagoma{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--linea);aspect-ratio:4/3;background:#0d0d0f}
+.sagoma img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.sagoma::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,0) 55%,rgba(10,10,11,.75));pointer-events:none}
+.sagoma figcaption{position:absolute;left:16px;right:16px;bottom:12px;z-index:1;font-size:11px;letter-spacing:.04em;color:#a8a39a}
 .numeri{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--linea)}
 .numeri div{padding:22px 0}
 .numeri b{display:block;font-family:var(--serif);font-size:52px;font-weight:500;line-height:1;color:var(--oro2)}
@@ -155,7 +156,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 <header id="testata">
   <div class="wrap testata">
-    <a class="marchio" href="#"><b>NERO</b><span>Autista privato · NCC</span></a>
+    <a class="marchio" href="#"><b>NERO</b><span>Noleggio con conducente · Perugia</span></a>
     <a class="btn btn-oro" href="#prenota">Prenota</a>
   </div>
 </header>
@@ -164,9 +165,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <section class="apertura">
     <div class="fari" aria-hidden="true"><i></i><i></i></div>
     <div class="wrap">
-      <div class="occhiello">Noleggio con conducente · Mercedes Viano</div>
+      <div class="occhiello">Noleggio con conducente · Perugia</div>
       <h1>Corse in città.<br><em>Viaggi in tutta Italia.</em></h1>
-      <p class="intro">Autista privato con un Mercedes Viano nero. Ti porto a cena in centro, alla stazione, in aeroporto o in un'altra regione, con un prezzo fisso detto prima di partire.</p>
+      <p class="intro">Autista privato a Perugia. Ti porto a cena in centro, alla stazione, in aeroporto o in un'altra regione, con un prezzo fisso detto prima di partire.</p>
       <div class="azioni">
         <a class="btn btn-oro" href="#prenota">Chiedi il prezzo</a>
         <a class="btn btn-vuoto js-chiama" href="#prenota">Chiama</a>
@@ -230,10 +231,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
   <section class="viano" id="auto">
     <div class="wrap griglia">
-      <div class="sagoma">
-        <img src="img/viano.svg" alt="Disegno di profilo di un Mercedes Viano nero" width="900" height="380">
-        <div class="nota">Qui la foto vera dell'auto</div>
-      </div>
+      <figure class="sagoma">
+        <img src="img/viano-nero.jpg" alt="Mercedes classe V nera, vista di tre quarti" width="1400" height="900" loading="lazy">
+        <figcaption>Foto di prova: Ethan Llamas, CC BY-SA 4.0, Wikimedia Commons</figcaption>
+      </figure>
       <div>
         <div class="occhiello">L'auto</div>
         <h2>Mercedes Viano,<br><em>nero.</em></h2>
@@ -284,7 +285,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 <footer>
   <div class="wrap">
-    <div><b style="letter-spacing:.3em;color:var(--testo)">NERO</b> · Autista privato NCC</div>
+    <div><b style="letter-spacing:.3em;color:var(--testo)">NERO</b> · Noleggio con conducente · Perugia</div>
     <div>Autorizzazione NCC n. — · P. IVA —</div>
   </div>
 </footer>
