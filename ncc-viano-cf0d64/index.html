@@ -193,7 +193,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </defs>
           <path class="base" d="M60 250 H200 V170 H340 V240 H480 V150 H560 Q600 150 630 140 C740 105 840 118 940 106 S1110 72 1170 62"/>
           <path class="oro" d="M60 250 H200 V170 H340 V240 H480 V150 H560 Q600 150 630 140 C740 105 840 118 940 106 S1110 72 1170 62"/>
-          <g class="faro"><circle r="16" fill="rgba(240,217,166,.18)"/><circle r="5" fill="#fff4dc"/></g>
+          <g class="faro">
+            <ellipse cx="6" cy="0" rx="46" ry="21" fill="rgba(240,217,166,.07)"/>
+            <ellipse cx="44" cy="0" rx="16" ry="13" fill="rgba(255,244,220,.10)"/>
+            <rect x="-32" y="-14" width="64" height="28" rx="10" fill="#101013" stroke="#c9a96e" stroke-width="1.5"/>
+            <rect x="12" y="-17.5" width="6" height="4" rx="1.5" fill="#101013" stroke="#c9a96e" stroke-width="1"/>
+            <rect x="12" y="13.5" width="6" height="4" rx="1.5" fill="#101013" stroke="#c9a96e" stroke-width="1"/>
+            <path d="M9 -10.5 L22 -8 Q25 0 22 8 L9 10.5 Z" fill="#30303a"/>
+            <path d="M-29 -9.5 L-25 -9.5 L-25 9.5 L-29 9.5 Z" fill="#26262d"/>
+            <rect x="-23" y="-10.5" width="30" height="21" rx="3" fill="#0a0a0c" stroke="#2c2c33" stroke-width="1"/>
+            <rect x="-14" y="-6" width="13" height="12" rx="2" fill="#23232a"/>
+            <path d="M-23 -10.5 L7 -10.5 M-23 10.5 L7 10.5" stroke="#c9a96e" stroke-opacity=".35" stroke-width=".8"/>
+            <ellipse cx="30" cy="-8" rx="2.4" ry="3" fill="#fff4dc"/>
+            <ellipse cx="30" cy="8" rx="2.4" ry="3" fill="#fff4dc"/>
+            <rect x="-32.5" y="-10" width="2.4" height="6" rx="1" fill="#8a3a30"/>
+            <rect x="-32.5" y="4" width="2.4" height="6" rx="1" fill="#8a3a30"/>
+          </g>
         </svg>
         <svg class="vert" viewBox="0 0 320 760" aria-hidden="true">
           <defs>
@@ -201,7 +216,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </defs>
           <path class="base" d="M40 20 V80 H110 V140 H50 V200 H120 V260 Q120 300 110 330 C80 430 100 520 90 610 S80 700 70 745"/>
           <path class="oro2" d="M40 20 V80 H110 V140 H50 V200 H120 V260 Q120 300 110 330 C80 430 100 520 90 610 S80 700 70 745"/>
-          <g class="faro"><circle r="16" fill="rgba(240,217,166,.18)"/><circle r="5" fill="#fff4dc"/></g>
+          <g class="faro">
+            <ellipse cx="6" cy="0" rx="46" ry="21" fill="rgba(240,217,166,.07)"/>
+            <ellipse cx="44" cy="0" rx="16" ry="13" fill="rgba(255,244,220,.10)"/>
+            <rect x="-32" y="-14" width="64" height="28" rx="10" fill="#101013" stroke="#c9a96e" stroke-width="1.5"/>
+            <rect x="12" y="-17.5" width="6" height="4" rx="1.5" fill="#101013" stroke="#c9a96e" stroke-width="1"/>
+            <rect x="12" y="13.5" width="6" height="4" rx="1.5" fill="#101013" stroke="#c9a96e" stroke-width="1"/>
+            <path d="M9 -10.5 L22 -8 Q25 0 22 8 L9 10.5 Z" fill="#30303a"/>
+            <path d="M-29 -9.5 L-25 -9.5 L-25 9.5 L-29 9.5 Z" fill="#26262d"/>
+            <rect x="-23" y="-10.5" width="30" height="21" rx="3" fill="#0a0a0c" stroke="#2c2c33" stroke-width="1"/>
+            <rect x="-14" y="-6" width="13" height="12" rx="2" fill="#23232a"/>
+            <path d="M-23 -10.5 L7 -10.5 M-23 10.5 L7 10.5" stroke="#c9a96e" stroke-opacity=".35" stroke-width=".8"/>
+            <ellipse cx="30" cy="-8" rx="2.4" ry="3" fill="#fff4dc"/>
+            <ellipse cx="30" cy="8" rx="2.4" ry="3" fill="#fff4dc"/>
+            <rect x="-32.5" y="-10" width="2.4" height="6" rx="1" fill="#8a3a30"/>
+            <rect x="-32.5" y="4" width="2.4" height="6" rx="1" fill="#8a3a30"/>
+          </g>
         </svg>
         <div class="tappa" data-t="0"><b>Sotto casa</b><small>Si parte</small></div>
         <div class="tappa" data-t=".257"><b>Cena in centro</b><small>Città</small></div>
@@ -327,7 +357,9 @@ var NUMERO = "";
     if (p === ultimo) return; ultimo = p;
     oro.style.strokeDashoffset = L*(1-p);
     var q = oro.getPointAtLength(L*p);
-    faro.setAttribute('transform','translate('+q.x.toFixed(1)+' '+q.y.toFixed(1)+')');
+    var a = oro.getPointAtLength(Math.max(0, L*p-16)), b = oro.getPointAtLength(Math.min(L, L*p+16));
+    var ang = Math.atan2(b.y-a.y, b.x-a.x)*180/Math.PI;
+    faro.setAttribute('transform','translate('+q.x.toFixed(1)+' '+q.y.toFixed(1)+') rotate('+ang.toFixed(1)+') scale('+(svg.classList.contains('orizz') ? 1.35 : 1)+')');
     faro.style.opacity = p>0 ? 1 : 0;
     tappe.forEach(function(t){ t.classList.toggle('vista', p >= parseFloat(t.dataset.t)-.01); });
   }
