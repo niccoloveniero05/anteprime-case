@@ -80,13 +80,9 @@ h2 em{font-style:italic;color:var(--oro2)}
 .tappa.vista::after{background:var(--oro)}
 
 /* due modi di viaggiare */
-.due{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:70px}
-.modo{background:var(--scheda);border:1px solid var(--linea);border-radius:22px;padding:40px 36px}
-.modo h3{font-family:var(--serif);font-weight:500;font-size:36px;line-height:1.1}
-.modo .quanto{color:var(--oro);font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
-.modo ul{list-style:none;margin-top:26px}
-.modo li{padding:14px 0;border-top:1px solid var(--linea);display:flex;justify-content:space-between;gap:16px}
-.modo li span{color:var(--tenue);font-size:14px;text-align:right}
+.percorso{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start;margin-top:70px;background:var(--scheda);border:1px solid var(--linea);border-radius:28px;padding:52px}
+.percorso h3{font-family:var(--serif);font-weight:500;font-size:clamp(34px,4vw,48px);line-height:1.05;margin-top:12px}
+.percorso .sottomodo{color:var(--tenue);margin-top:14px;max-width:360px}
 
 /* il Viano */
 .viano{background:var(--fondo2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
@@ -110,20 +106,16 @@ h2 em{font-style:italic;color:var(--oro2)}
 .passo p{color:var(--tenue)}
 
 /* prenota */
-.prenota .scatola{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;background:var(--scheda);border:1px solid var(--linea);border-radius:28px;padding:56px}
+.prenota .scatola{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;background:var(--scheda);border:1px solid var(--linea);border-radius:28px;padding:56px}
 form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--tenue)}
 label.tutta{grid-column:1/-1}
 input,select,textarea{font:inherit;font-size:16px;letter-spacing:0;text-transform:none;color:var(--testo);background:#0d0d0f;border:1px solid #2e2e34;border-radius:12px;padding:13px 14px;min-height:50px;width:100%;color-scheme:dark}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--oro)}
 textarea{min-height:90px;resize:vertical}
-.segmenti{grid-column:1/-1;display:flex;gap:8px}
-.segmenti label{flex:1;flex-direction:row;align-items:center;justify-content:center;min-height:48px;border:1px solid #2e2e34;border-radius:12px;cursor:pointer;letter-spacing:.06em}
-.segmenti input{position:absolute;opacity:0;width:1px;height:1px}
-.segmenti label:has(input:checked){border-color:var(--oro);color:var(--oro2)}
 form .btn{grid-column:1/-1;margin-top:8px;border:0;cursor:pointer;min-height:54px}
 .piccolo{font-size:13px;color:var(--tenue);margin-top:18px}
-.contatti{margin-top:34px;display:grid;gap:10px}
+.contatti{display:grid;gap:10px}
 .contatti a{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--linea)}
 .contatti a span{color:var(--tenue)}
 
@@ -138,10 +130,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   .tela .orizz{display:none} .tela .vert{display:block;max-width:320px}
   .tappa{transform:translate(0,-50%);padding:0 0 0 34px;text-align:left}
   .tappa::after{left:0;top:50%;bottom:auto;margin:-3.5px 0 0 -3.5px}
-  .due,.viano .griglia,.passi,.prenota .scatola{grid-template-columns:1fr}
+  .percorso,.viano .griglia,.passi,.prenota .scatola{grid-template-columns:1fr}
   .viano .griglia{gap:40px}
   .prenota .scatola{padding:34px 22px;gap:36px;border-radius:22px}
-  .modo{padding:30px 24px}
+  .percorso{padding:32px 22px;gap:26px;border-radius:22px}
   .fari{right:8%;left:8%;bottom:auto;top:20%;width:auto}
   .apertura{padding-bottom:110px}
   .fisso{display:flex;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:15;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s,transform .3s}
@@ -150,7 +142,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   footer{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
 }
 @media (max-width:520px){
-  form{grid-template-columns:1fr}
+  .percorso{padding:28px 18px}
   .numeri b{font-size:42px}
   .marchio span{display:none}
 }
@@ -217,27 +209,21 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <div class="tappa" data-t=".98"><b>Un'altra regione</b><small>Viaggio lungo</small></div>
       </div>
 
-      <div class="due">
-        <div class="modo">
-          <div class="occhiello">Corse brevi</div>
-          <h3>In città</h3>
-          <ul>
-            <li>Cene e serate <span>andata e ritorno</span></li>
-            <li>Stazione e aeroporto <span>con l'orario del treno o del volo</span></li>
-            <li>Matrimoni ed eventi <span>anche più corse</span></li>
-            <li>Appuntamenti di lavoro <span>ti aspetto fuori</span></li>
-          </ul>
+      <div class="percorso" id="prenota">
+        <div class="percorso-testo">
+          <div class="occhiello">Prenota</div>
+          <h3>Seleziona percorso</h3>
+          <p class="sottomodo">Corsa in città o viaggio lungo, non cambia: dimmi da dove parti e dove vai, ti rispondo con il prezzo.</p>
         </div>
-        <div class="modo">
-          <div class="occhiello">Tratte lunghe</div>
-          <h3>Fuori città</h3>
-          <ul>
-            <li>Aeroporti lontani <span>Milano, Roma, Bologna, Pisa</span></li>
-            <li>Viaggi di lavoro <span>soste quando servono</span></li>
-            <li>Mare, montagna, città d'arte <span>con tutti i bagagli</span></li>
-            <li>Estero <span>su richiesta</span></li>
-          </ul>
-        </div>
+        <form class="richiesta" id="modulo">
+          <label class="tutta">Indirizzo di partenza<input name="da" required placeholder="Via, numero, città" autocomplete="street-address"></label>
+          <label class="tutta">Destinazione<input name="a" required placeholder="Indirizzo, luogo o città"></label>
+          <label>Persone<select name="persone"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></label>
+          <label>Bagagli<select name="bagagli"><option>Nessuno</option><option selected>1-2</option><option>3-4</option><option>5 o più</option></select></label>
+          <label>Giorno<input type="date" name="giorno" required></label>
+          <label>Fascia oraria<select name="fascia" required><option value="" selected disabled>Scegli</option><option>6-9</option><option>9-12</option><option>12-15</option><option>15-18</option><option>18-21</option><option>21-24</option><option>Notte (0-6)</option></select></label>
+          <button class="btn btn-oro" type="submit">Chiedi il prezzo</button>
+        </form>
       </div>
     </div>
   </section>
@@ -278,32 +264,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     </div>
   </section>
 
-  <section class="prenota" id="prenota">
+  <section class="prenota" id="contatti">
     <div class="wrap">
       <div class="scatola">
         <div>
-          <div class="occhiello">Prenota</div>
-          <h2>Dove andiamo?</h2>
-          <p class="sotto">Compila e premi il pulsante: si apre WhatsApp con il messaggio già scritto. Rispondo con il prezzo.</p>
-          <div class="contatti">
-            <a class="js-chiama" href="#prenota">Telefono <span>da inserire</span></a>
-            <a href="#prenota">WhatsApp <span>da inserire</span></a>
-          </div>
+          <div class="occhiello">Contatti</div>
+          <h2>Preferisci <em>chiamare?</em></h2>
+          <p class="sotto">Rispondo al telefono e su WhatsApp. Per una corsa all'ultimo momento chiama: ti dico subito se sono libero.</p>
         </div>
-        <form id="modulo">
-          <div class="segmenti">
-            <label><input type="radio" name="tipo" value="Solo andata" checked>Solo andata</label>
-            <label><input type="radio" name="tipo" value="Andata e ritorno">Andata e ritorno</label>
-          </div>
-          <label class="tutta">Partenza<input name="da" required placeholder="Indirizzo, hotel, stazione…" autocomplete="street-address"></label>
-          <label class="tutta">Arrivo<input name="a" required placeholder="Città, aeroporto, indirizzo…"></label>
-          <label>Giorno<input type="date" name="giorno" required></label>
-          <label>Ora<input type="time" name="ora" required></label>
-          <label>Passeggeri<select name="persone"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></label>
-          <label>Valigie<select name="valigie"><option>Nessuna</option><option selected>1-2</option><option>3-4</option><option>5 o più</option></select></label>
-          <label class="tutta">Note<textarea name="note" placeholder="Numero del volo, seggiolino per bambini, soste…"></textarea></label>
-          <button class="btn btn-oro" type="submit">Chiedi il prezzo su WhatsApp</button>
-        </form>
+        <div class="contatti">
+          <a class="js-chiama" href="#contatti">Telefono <span>da inserire</span></a>
+          <a class="js-wa" href="#contatti">WhatsApp <span>da inserire</span></a>
+        </div>
       </div>
       <p class="piccolo">Servizio di noleggio con conducente: si viaggia solo su prenotazione.</p>
     </div>
@@ -384,22 +356,24 @@ var NUMERO = "";
   /* Chiama: se c'è il numero apre il telefono */
   if (NUMERO) [].forEach.call(document.querySelectorAll('.js-chiama'), function(a){ a.href = 'tel:+'+NUMERO; });
 
-  /* modulo → messaggio WhatsApp già scritto */
+  /* modulo "Seleziona percorso": messaggio WhatsApp già scritto */
   var oggi = new Date(); oggi.setMinutes(oggi.getMinutes()-oggi.getTimezoneOffset());
-  document.querySelector('input[name=giorno]').min = oggi.toISOString().slice(0,10);
-  document.getElementById('modulo').addEventListener('submit', function(e){
+  var modulo = document.getElementById('modulo');
+  modulo.giorno.min = oggi.toISOString().slice(0,10);
+  modulo.addEventListener('submit', function(e){
     e.preventDefault();
-    var f = new FormData(this);
+    var f = new FormData(modulo);
     var g = f.get('giorno') ? f.get('giorno').split('-').reverse().join('/') : '';
-    var testo = 'Buongiorno, vorrei un prezzo per una corsa.\n'
-      + '• ' + f.get('tipo') + '\n'
-      + '• Da: ' + f.get('da') + '\n'
-      + '• A: ' + f.get('a') + '\n'
-      + '• Giorno: ' + g + ' alle ' + f.get('ora') + '\n'
-      + '• Passeggeri: ' + f.get('persone') + ' · Valigie: ' + f.get('valigie')
-      + (f.get('note') ? '\n• Note: ' + f.get('note') : '');
-    location.href = 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(testo);
+    var righe = [
+      'Buongiorno, vorrei un prezzo per una corsa.',
+      '• Partenza: ' + f.get('da'),
+      '• Destinazione: ' + f.get('a'),
+      '• Persone: ' + f.get('persone') + ' · Bagagli: ' + f.get('bagagli'),
+      '• Giorno: ' + g + ' · Fascia oraria: ' + f.get('fascia')
+    ];
+    location.href = 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(righe.join(String.fromCharCode(10)));
   });
+  if (NUMERO) [].forEach.call(document.querySelectorAll('.js-wa'), function(x){ x.href = 'https://wa.me/'+NUMERO; });
 })();
 </script>
 </body>
