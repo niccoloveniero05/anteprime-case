@@ -63,17 +63,19 @@ img{display:block;max-width:100%}
 </head>
 <body>
 <div class="col">
-  <div class="nota">Anteprima · non pubblicato · primi 5 dei 9 post</div>
+  <div class="nota">Anteprima · non pubblicato · i primi 9 post, pensati per trovare case da vendere</div>
   <div class="barra"><b>immobiliarebellafante</b><span>☰</span></div>
   <div class="prof">
     <div class="av"><img src="img/profilo.jpg" alt=""></div>
-    <div class="num"><div><b id="npost">5</b><span>post</span></div><div><b>1</b><span>follower</span></div><div><b>0</b><span>seguiti</span></div></div>
+    <div class="num"><div><b id="npost">9</b><span>post</span></div><div><b>1</b><span>follower</span></div><div><b>0</b><span>seguiti</span></div></div>
   </div>
   <div class="bio">
     <div class="nome">Bellafante Immobiliare</div>
     <div class="cat">Agenzia immobiliare</div>
-    Case, ville e immobili di pregio a Perugia e in Umbria.<br>
-    Corso Cavour 23, Perugia · Valutazione gratuita
+    Cerchiamo case a Perugia per i nostri clienti.<br>
+    Valutazione gratuita: scrivi VALUTAZIONE su WhatsApp ↓<br>
+    Corso Cavour 23, Perugia<br>
+    <span style="color:#e0f1ff">wa.me/393497898778</span>
   </div>
   <div class="btn"><span>Messaggio</span><span>Chiama</span><span>Indicazioni</span></div>
   <div class="tab"><span class="on">POST</span><span>REEL</span><span>TAG</span></div>
@@ -98,37 +100,52 @@ img{display:block;max-width:100%}
 <script>
 // ordine nella griglia: in alto a sinistra l'ultimo pubblicato
 var POST = [
+  { id: 'p2', n: 8, titolo: 'Nuovo in agenzia',
+    did: 'Nuova in agenzia. [zona], Perugia.\nPer visitarla scrivi VISITA su WhatsApp al 349 789 8778.\n',
+    hash: '#perugia #casainvendita #umbria',
+    nb: 'Ultimo da pubblicare: aspetta l\'annuncio di lunedì (zona, metri, locali, piano, prezzo). Foto loro del 28/11, solo raddrizzate e schiarite, targa sfocata.' },
+  { id: 'p9', n: 1, titolo: 'Hai una casa nel centro storico?',
+    did: 'Hai una casa nel centro storico di Perugia? Abbiamo chi la cerca.\nScrivi VALUTAZIONE su WhatsApp al 349 789 8778.\n',
+    hash: '#perugia #centrostorico #vendocasa',
+    nb: 'Immagine singola, pensata anche come pubblicità. Disegno a china fatto con GPT dalla foto vera del terrazzo di Via Bontempi (San Domenico).' },
+  { id: 'p8', n: 7, titolo: 'Centro storico con terrazzo',
+    did: 'Il centro storico, dal tuo terrazzo. Via Bontempi, a due passi da Corso Vannucci.\nPer visitarla scrivi VISITA su WhatsApp al 349 789 8778.\n',
+    hash: '#perugia #centrostorico #casainvendita',
+    nb: 'Annuncio vero del sito nuovo. L\'ultima slide parla a chi vende: «La presentiamo così». Sul sito il prezzo non c\'è e i metri non tornano (190 m² nei dati, circa 260 nel testo): nel post niente metri e «prezzo su richiesta».' },
+  { id: 'p7', n: 5, titolo: 'Documenti per vendere',
+    did: 'Salvalo: ti servirà il giorno che vendi.\nScrivi VALUTAZIONE su WhatsApp al 349 789 8778: ti diciamo cosa manca.\n',
+    hash: '#vendocasa #perugia #casa',
+    nb: 'Lista generale, valida in tutta Italia: se vuole, Massimiliano la rilegge.' },
   { id: 'p3', n: 5, titolo: 'Compratori dall\'estero',
-    did: '7 compratori su 10 arrivano da lontano.\nLa tua casa è pronta per loro? Scrivici in direct.\n\nFonte: Borsa Immobiliare dell\'Umbria, novembre 2026.\n',
+    did: '7 compratori su 10 arrivano da lontano. La tua casa è pronta per loro?\nScrivi VALUTAZIONE su WhatsApp al 349 789 8778.\n\nFonte: Borsa Immobiliare dell\'Umbria, novembre 2026.\n',
     hash: '#umbria #casedipregio #perugia',
     nb: 'Richiesto da Massimiliano il 27/11. Da chiedergli: pubblicate gli annunci anche in inglese o su portali esteri? Se no, la slide 3 si ammorbidisce.' },
   { id: 'p5', n: 5, titolo: 'Quanto vale la tua casa?',
-    did: 'Due case nella stessa via possono valere cifre molto diverse.\nScrivi VALUTAZIONE in direct o su WhatsApp al 349 789 8778.\n',
+    did: 'Due case nella stessa via possono valere cifre molto diverse.\nScrivi VALUTAZIONE su WhatsApp al 349 789 8778.\n',
     hash: '#perugia #valutazioneimmobiliare #vendocasa',
-    nb: 'Da confermare con l\'agenzia: la valutazione è davvero gratuita e senza impegno.' },
-  { id: 'p2', n: 8, titolo: 'Nuovo in agenzia',
-    did: 'Nuova in agenzia. [zona], Perugia.\nScrivi VISITA in direct e ti richiamiamo.\n',
-    hash: '#perugia #casainvendita #umbria',
-    nb: 'Le foto sono le loro del 28/11: solo raddrizzate e schiarite, niente IA. Zona, metri, locali, piano e prezzo arrivano con l\'annuncio di lunedì. Targa dell\'auto sfocata.' },
+    nb: 'Da confermare con l\'agenzia: la valutazione è gratuita e senza impegno.' },
+  { id: 'p6', n: 4, titolo: 'Cerchiamo case',
+    did: 'Abbiamo i compratori. Ci manca la tua casa.\nScrivi VALUTAZIONE su WhatsApp al 349 789 8778.\n',
+    hash: '#perugia #vendocasa #immobiliareperugia',
+    nb: 'Il post che converte di più. Da chiedere a Massimiliano 2-3 richieste vere dei suoi clienti (zona, tipo, budget): con quelle la slide 2 diventa concreta.' },
   { id: 'p4', n: 8, titolo: '5 errori',
-    did: 'Il primo costa più di tutti gli altri.\nSalva il post e scrivi VALUTAZIONE in direct.\n',
+    did: 'Il primo costa più di tutti gli altri.\nSalva il post. E se vuoi vendere, scrivi VALUTAZIONE su WhatsApp al 349 789 8778.\n',
     hash: '#vendocasa #perugia #consigliimmobiliari',
     nb: 'Disegni fatti con l\'IA (GPT): sono illustrazioni, non case vere.' },
   { id: 'p1', n: 5, titolo: 'Chi siamo',
-    did: 'Perugia, strada per strada.\nPassa in Corso Cavour 23 o scrivici in direct: la valutazione è gratuita.\n',
+    did: 'Perugia, strada per strada.\nVuoi vendere? Scrivi VALUTAZIONE su WhatsApp al 349 789 8778.\n',
     hash: '#perugia #immobiliare #umbria',
-    nb: 'Da fissare in alto sul profilo. Foto: loro annunci (Via Bartolo, Piazza Italia, Filosofi, Magione, Corso Bersaglieri).' }
+    nb: 'Da fissare in alto sul profilo. Foto dei loro annunci (Via Bartolo, Piazza Italia, Filosofi, Magione, Corso Bersaglieri).' }
 ];
 var CAR = '<svg class="car" viewBox="0 0 24 24" fill="#fff"><path d="M19 2H9a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1h1a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zm-3 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1zm4-4a1 1 0 0 1-1 1h-1V9a3 3 0 0 0-3-3H8V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1z"/></svg>';
 var g = document.getElementById('griglia');
 var html = '';
-for (var i = 0; i < 4; i++) html += '<div class="vuoto">post ' + (9 - i) + '<br>da fare</div>';
 POST.forEach(function (p, k) {
   html += '<button data-k="' + k + '" aria-label="' + p.titolo + '"><img src="img/' + p.id + '-1.jpg" alt="">' + CAR + '</button>';
 });
 g.innerHTML = html;
 document.getElementById('ordine').innerHTML =
-  '<b>Ordine di pubblicazione consigliato</b> (dal primo all\'ultimo): Chi siamo → 5 errori → Nuovo in agenzia (quando arrivano i dati) → Quanto vale → Compratori dall\'estero. Così la griglia alterna foto e disegni. Tocca un post per scorrerlo e leggere la descrizione.';
+  "<b>Ordine di pubblicazione</b> (dal primo all'ultimo): Chi siamo → 5 errori → Cerchiamo case → Quanto vale → Compratori dall'estero → Documenti → Centro storico con terrazzo → Hai una casa nel centro storico? → Nuovo in agenzia (dopo l'annuncio di lunedì). La griglia alterna foto e disegni. <b>Ogni post chiude con lo stesso invito</b>: scrivere VALUTAZIONE su WhatsApp (VISITA per chi compra). Tocca un post per scorrerlo e leggere descrizione e note.";
 
 var vis = document.getElementById('vis'), sc = document.getElementById('scorri'), pal = document.getElementById('pal'), cnt = document.getElementById('cnt'), did = document.getElementById('did');
 var att = null;
