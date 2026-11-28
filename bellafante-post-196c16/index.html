@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<title>Bellafante · primi post Instagram (anteprima)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:#000;color:#f5f5f5;font:400 14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+.col{max-width:470px;margin:0 auto;min-height:100vh;background:#000}
+.nota{background:#760214;color:#fff;font:600 12px/1.35 inherit;padding:9px 14px;text-align:center;letter-spacing:.02em}
+.barra{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 6px}
+.barra b{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.prof{display:flex;align-items:center;gap:22px;padding:10px 16px 0}
+.av{width:86px;height:86px;border-radius:50%;overflow:hidden;flex:none;border:1px solid #262626}
+.num{display:flex;gap:22px;flex:1;justify-content:space-around;text-align:center}
+.num b{display:block;font-size:17px;font-weight:700}
+.num span{font-size:13px;color:#f5f5f5}
+.bio{padding:12px 16px 4px;font-size:14px;line-height:1.38}
+.bio .nome{font-weight:600}
+.bio .cat{color:#a8a8a8}
+.btn{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:12px 16px}
+.btn span{background:#262626;border-radius:8px;text-align:center;font-weight:600;font-size:14px;padding:8px 0}
+.tab{display:flex;justify-content:space-around;border-bottom:1px solid #262626;margin-top:6px}
+.tab span{padding:12px 0;width:33%;text-align:center;color:#a8a8a8;font-size:12px;font-weight:600;letter-spacing:.06em}
+.tab span.on{color:#fff;border-bottom:1px solid #fff}
+.griglia{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.griglia button{position:relative;aspect-ratio:3/4;overflow:hidden;background:#111}
+.griglia img{width:100%;height:100%;object-fit:cover}
+.griglia .car{position:absolute;right:6px;top:6px;width:18px;height:18px}
+.griglia .vuoto{aspect-ratio:3/4;background:#0d0d0d;display:flex;align-items:center;justify-content:center;color:#555;font-size:12px;text-align:center;padding:8px}
+.ordine{padding:18px 16px 40px;color:#bdbdbd;font-size:13px;line-height:1.5}
+.ordine b{color:#fff}
+
+/* visore del post */
+.vis{position:fixed;inset:0;background:#000;z-index:50;display:none;overflow-y:auto}
+.vis.on{display:block}
+.vis .in{max-width:470px;margin:0 auto}
+.vis .hd{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.vis .hd .mini{width:32px;height:32px;border-radius:50%;overflow:hidden;border:1px solid #262626}
+.vis .hd b{font-size:14px;font-weight:600;flex:1}
+.vis .x{font-size:28px;line-height:1;padding:4px 8px}
+.scorri{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;background:#111}
+.scorri::-webkit-scrollbar{display:none}
+.scorri img{flex:none;width:100%;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:start}
+.cnt{position:absolute;right:12px;top:12px;background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:600;border-radius:12px;padding:4px 9px}
+.pal{display:flex;justify-content:center;gap:4px;padding:12px 0 4px}
+.pal i{width:6px;height:6px;border-radius:50%;background:#555}
+.pal i.on{background:#0095f6}
+.freccia{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);color:#000;font-size:17px;font-weight:700;display:none;align-items:center;justify-content:center}
+@media (hover:hover){.freccia{display:flex}}
+.freccia.sx{left:10px}.freccia.dx{right:10px}
+.did{padding:10px 14px 60px;font-size:14px;line-height:1.45;white-space:pre-line}
+.did b{font-weight:600}
+.did .hash{color:#e0f1ff}
+.did .nb{display:block;margin-top:14px;padding:10px 12px;border-left:3px solid #760214;background:#141414;color:#cfcfcf;font-size:13px;white-space:normal}
+</style>
+</head>
+<body>
+<div class="col">
+  <div class="nota">Anteprima · non pubblicato · primi 5 dei 9 post</div>
+  <div class="barra"><b>immobiliarebellafante</b><span>☰</span></div>
+  <div class="prof">
+    <div class="av"><img src="img/profilo.jpg" alt=""></div>
+    <div class="num"><div><b id="npost">5</b><span>post</span></div><div><b>1</b><span>follower</span></div><div><b>0</b><span>seguiti</span></div></div>
+  </div>
+  <div class="bio">
+    <div class="nome">Bellafante Immobiliare</div>
+    <div class="cat">Agenzia immobiliare</div>
+    Case, ville e immobili di pregio a Perugia e in Umbria.<br>
+    Corso Cavour 23, Perugia · Valutazione gratuita
+  </div>
+  <div class="btn"><span>Messaggio</span><span>Chiama</span><span>Indicazioni</span></div>
+  <div class="tab"><span class="on">POST</span><span>REEL</span><span>TAG</span></div>
+  <div class="griglia" id="griglia"></div>
+  <div class="ordine" id="ordine"></div>
+</div>
+
+<div class="vis" id="vis">
+  <div class="in">
+    <div class="hd"><div class="mini"><img src="img/profilo.jpg" alt=""></div><b>immobiliarebellafante</b><button class="x" id="chiudi" aria-label="Chiudi">×</button></div>
+    <div style="position:relative">
+      <div class="scorri" id="scorri"></div>
+      <div class="cnt" id="cnt"></div>
+      <button class="freccia sx" id="sx" aria-label="Indietro">‹</button>
+      <button class="freccia dx" id="dx" aria-label="Avanti">›</button>
+    </div>
+    <div class="pal" id="pal"></div>
+    <div class="did" id="did"></div>
+  </div>
+</div>
+
+<script>
+// ordine nella griglia: in alto a sinistra l'ultimo pubblicato
+var POST = [
+  { id: 'p3', n: 5, titolo: 'Compratori dall\'estero',
+    did: '7 compratori su 10 arrivano da lontano.\nLa tua casa è pronta per loro? Scrivici in direct.\n\nFonte: Borsa Immobiliare dell\'Umbria, novembre 2026.\n',
+    hash: '#umbria #casedipregio #perugia',
+    nb: 'Richiesto da Massimiliano il 27/11. Da chiedergli: pubblicate gli annunci anche in inglese o su portali esteri? Se no, la slide 3 si ammorbidisce.' },
+  { id: 'p5', n: 5, titolo: 'Quanto vale la tua casa?',
+    did: 'Due case nella stessa via possono valere cifre molto diverse.\nScrivi VALUTAZIONE in direct o su WhatsApp al 349 789 8778.\n',
+    hash: '#perugia #valutazioneimmobiliare #vendocasa',
+    nb: 'Da confermare con l\'agenzia: la valutazione è davvero gratuita e senza impegno.' },
+  { id: 'p2', n: 8, titolo: 'Nuovo in agenzia',
+    did: 'Nuova in agenzia. [zona], Perugia.\nScrivi VISITA in direct e ti richiamiamo.\n',
+    hash: '#perugia #casainvendita #umbria',
+    nb: 'Le foto sono le loro del 28/11: solo raddrizzate e schiarite, niente IA. Zona, metri, locali, piano e prezzo arrivano con l\'annuncio di lunedì. Targa dell\'auto sfocata.' },
+  { id: 'p4', n: 8, titolo: '5 errori',
+    did: 'Il primo costa più di tutti gli altri.\nSalva il post e scrivi VALUTAZIONE in direct.\n',
+    hash: '#vendocasa #perugia #consigliimmobiliari',
+    nb: 'Disegni fatti con l\'IA (GPT): sono illustrazioni, non case vere.' },
+  { id: 'p1', n: 5, titolo: 'Chi siamo',
+    did: 'Perugia, strada per strada.\nPassa in Corso Cavour 23 o scrivici in direct: la valutazione è gratuita.\n',
+    hash: '#perugia #immobiliare #umbria',
+    nb: 'Da fissare in alto sul profilo. Foto: loro annunci (Via Bartolo, Piazza Italia, Filosofi, Magione, Corso Bersaglieri).' }
+];
+var CAR = '<svg class="car" viewBox="0 0 24 24" fill="#fff"><path d="M19 2H9a3 3 0 0 0-3 3v1H5a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1h1a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zm-3 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1zm4-4a1 1 0 0 1-1 1h-1V9a3 3 0 0 0-3-3H8V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1z"/></svg>';
+var g = document.getElementById('griglia');
+var html = '';
+for (var i = 0; i < 4; i++) html += '<div class="vuoto">post ' + (9 - i) + '<br>da fare</div>';
+POST.forEach(function (p, k) {
+  html += '<button data-k="' + k + '" aria-label="' + p.titolo + '"><img src="img/' + p.id + '-1.jpg" alt="">' + CAR + '</button>';
+});
+g.innerHTML = html;
+document.getElementById('ordine').innerHTML =
+  '<b>Ordine di pubblicazione consigliato</b> (dal primo all\'ultimo): Chi siamo → 5 errori → Nuovo in agenzia (quando arrivano i dati) → Quanto vale → Compratori dall\'estero. Così la griglia alterna foto e disegni. Tocca un post per scorrerlo e leggere la descrizione.';
+
+var vis = document.getElementById('vis'), sc = document.getElementById('scorri'), pal = document.getElementById('pal'), cnt = document.getElementById('cnt'), did = document.getElementById('did');
+var att = null;
+function apri(k) {
+  att = POST[k];
+  var s = '', d = '';
+  for (var i = 1; i <= att.n; i++) { s += '<img src="img/' + att.id + '-' + i + '.jpg" alt="">'; d += '<i></i>'; }
+  sc.innerHTML = s; pal.innerHTML = d;
+  did.innerHTML = '<b>immobiliarebellafante</b> ' + att.did.replace(/</g, '&lt;') + '<span class="hash">' + att.hash + '</span><span class="nb">' + att.nb + '</span>';
+  vis.classList.add('on'); document.body.style.overflow = 'hidden';
+  sc.scrollLeft = 0; segna();
+}
+function segna() {
+  var i = Math.round(sc.scrollLeft / sc.clientWidth);
+  cnt.textContent = (i + 1) + '/' + att.n;
+  [].forEach.call(pal.children, function (el, j) { el.className = j === i ? 'on' : ''; });
+}
+sc.addEventListener('scroll', function () { window.requestAnimationFrame(segna); });
+g.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) apri(+b.dataset.k); });
+document.getElementById('chiudi').onclick = function () { vis.classList.remove('on'); document.body.style.overflow = ''; };
+document.getElementById('sx').onclick = function () { sc.scrollBy({ left: -sc.clientWidth, behavior: 'smooth' }); };
+document.getElementById('dx').onclick = function () { sc.scrollBy({ left: sc.clientWidth, behavior: 'smooth' }); };
+document.addEventListener('keydown', function (e) {
+  if (!vis.classList.contains('on')) return;
+  if (e.key === 'Escape') document.getElementById('chiudi').click();
+  if (e.key === 'ArrowRight') document.getElementById('dx').click();
+  if (e.key === 'ArrowLeft') document.getElementById('sx').click();
+});
+</script>
+</body>
+</html>
